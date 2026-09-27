@@ -13,15 +13,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/vendor/highlight.css" />
-    <link rel="stylesheet" href="./assets/style.css?v=floating-toc-1" />
+    <link rel="stylesheet" href="./assets/style.css?v=global-search-1" />
     <script defer src="./assets/vendor/marked.min.js"></script>
     <script defer src="./assets/vendor/purify.min.js"></script>
     <script defer src="./assets/vendor/mermaid.min.js"></script>
     <script defer src="./assets/vendor/highlight.min.js"></script>
     <script defer src="./assets/ai-map-data.js"></script>
     <script defer src="./assets/ai-map-data.en.js"></script>
-    <script defer src="./assets/i18n.js"></script>
-    <script defer src="./assets/app.js?v=floating-toc-1"></script>
+    <script defer src="./assets/i18n.js?v=global-search-1"></script>
+    <script defer src="./assets/search.js?v=global-search-1"></script>
+    <script defer src="./assets/app.js?v=global-search-1"></script>
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
@@ -37,6 +38,30 @@
       </button>
       <a class="brand" href="#content/ai/00-overview.md">Jeongsu Tech</a
       ><span class="brand-note">AI · Git Study Notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="./assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
       <div class="header-actions">
         <button
           id="tocBtn"
@@ -55,19 +80,7 @@
       </div>
     </header>
     <aside id="sidebar" aria-label="문서 탐색">
-      <div class="document-search">
-        <img src="./assets/icons/search.svg" alt="" /><input
-          id="documentSearch"
-          type="search"
-          autocomplete="off"
-          aria-label="문서 검색"
-          placeholder="문서 검색"
-        /><kbd aria-hidden="true">Ctrl K</kbd>
-      </div>
       <nav id="tree" aria-label="문서 트리"></nav>
-      <p id="documentEmpty" class="empty-note" hidden data-i18n="noDocs">
-        일치하는 문서가 없습니다.
-      </p>
     </aside>
     <aside id="tocPanel" aria-labelledby="tocTitle">
       <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
