@@ -92,8 +92,7 @@ let currentPath = "",
   renderTask = Promise.resolve();
 let drawer = null,
   drawerOpener = null,
-  scrollFrame = 0,
-  savedSearchGroups = null;
+  scrollFrame = 0;
 const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const route = () => {
   let value;
@@ -123,6 +122,8 @@ function applyLanguage() {
     .forEach((el) => el.setAttribute("aria-pressed", String(el.dataset.language === language)));
   $("documentSearch").placeholder = t("searchDocs");
   $("documentSearch").setAttribute("aria-label", t("searchDocs"));
+  $("searchPanel").setAttribute("aria-label", t("searchResults"));
+  $("searchResults").setAttribute("aria-label", t("searchResults"));
   $("sidebar").setAttribute("aria-label", t("documentExplorer"));
   $("tree").setAttribute("aria-label", t("documentTree"));
   $("toc").setAttribute("aria-label", t("internalToc"));
@@ -181,34 +182,6 @@ function buildTree() {
         storage.set("jt-group-" + btn.parentElement.dataset.group, open ? "open" : "closed");
       }),
     );
-  filterDocuments();
-}
-function filterDocuments() {
-  const q = $("documentSearch").value.trim().toLowerCase();
-  const groups = [...$("tree").querySelectorAll(".tree-group")];
-  if (q && !savedSearchGroups)
-    savedSearchGroups = groups.map((group) => !group.classList.contains("closed"));
-  let count = 0;
-  groups.forEach((group, index) => {
-    let found = 0;
-    group.querySelectorAll(".tree-link").forEach((link) => {
-      const match = !q || link.textContent.toLowerCase().includes(q);
-      link.hidden = !match;
-      if (match) found++;
-    });
-    group.hidden = !found;
-    count += found;
-    if (q && found) {
-      group.classList.remove("closed");
-      group.querySelector("button").setAttribute("aria-expanded", "true");
-    } else if (!q && savedSearchGroups) {
-      const open = savedSearchGroups[index] || !!group.querySelector('[aria-current="page"]');
-      group.classList.toggle("closed", !open);
-      group.querySelector("button").setAttribute("aria-expanded", String(open));
-    }
-  });
-  if (!q) savedSearchGroups = null;
-  $("documentEmpty").hidden = count > 0;
 }
 function updateTree(path) {
   const groupIndex = titleFor(path)[2];
@@ -242,6 +215,7 @@ function closeDrawer(restore = true) {
   if (restore && oldOpener) oldOpener.focus();
 }
 function toggleDrawer(which) {
+  closeSiteSearch();
   if (drawer === which) {
     closeDrawer();
     return;
@@ -537,7 +511,8 @@ function updatePosition() {
   });
   let active = headings[0];
   for (const h of headings) {
-    if (h.getBoundingClientRect().top <= 125) active = h;
+    if (h.getBoundingClientRect().top <= $("topbar").getBoundingClientRect().bottom + 67)
+      active = h;
     else break;
   }
   if (ratio >= 0.999) active = headings.at(-1);
@@ -757,10 +732,256 @@ async function loadDocument({ force = false, preserve = false } = {}) {
     refreshNavigation();
   }
 }
+const searchIndexes = new Map();
+let searchVersion = 0,
+  searchTimer,
+  restoringSearchFocus = false;
+function closeSiteSearch(restore = false) {
+  if (restore) {
+    restoringSearchFocus = true;
+    $("documentSearch").focus({ preventScroll: true });
+    restoringSearchFocus = false;
+  }
+  searchVersion++;
+  clearTimeout(searchTimer);
+  $("searchPanel").hidden = true;
+  $("documentSearch").setAttribute("aria-expanded", "false");
+}
+function searchBlocks(markdown) {
+  const template = document.createElement("template");
+  template.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+  const blocks = [];
+  function walk(node) {
+    if (node.nodeType === 1 && node.matches("h2,h3")) {
+      blocks.push({ level: Number(node.tagName.slice(1)), text: node.textContent });
+    } else if (node.nodeType === 1 && node.querySelector("h2,h3")) {
+      node.childNodes.forEach(walk);
+    } else if (node.textContent.trim()) {
+      blocks.push({ text: node.textContent });
+    }
+  }
+  template.content.childNodes.forEach(walk);
+  return blocks;
+}
+function catalogSearchEntries(locale) {
+  const data = locale === "en" ? window.AI_MAP_DATA_EN : window.AI_MAP_DATA;
+  const copy = window.UI_TEXT[locale],
+    entries = [];
+  const addExternal = (title, text, url, context) => {
+    const href = safeUrl(url);
+    if (href !== "#") entries.push({ title, text, href, context, external: true });
+  };
+  DOCS.forEach((group, gi) =>
+    group.items.forEach(([, path], i) => {
+      if (path.startsWith("@"))
+        entries.push({
+          title: copy.titles[gi][i],
+          text: "",
+          href: routeUrl(path),
+          context: copy.groups[gi],
+        });
+    }),
+  );
+  data.tools.forEach((tool) => {
+    const category = data.categories.find((c) => c.id === tool.category)?.label || "AI Map";
+    const text = [
+      tool.name,
+      tool.publisher,
+      tool.description,
+      category,
+      ...(tool.platforms || []),
+      ...(tool.plans || []),
+    ].join(" · ");
+    const seen = new Set();
+    [
+      [tool.webUrl, copy.web],
+      [tool.downloadUrl, copy.download],
+      [tool.sourceUrl, copy.official],
+    ].forEach(([url, label]) => {
+      if (url && !seen.has(safeUrl(url))) {
+        seen.add(safeUrl(url));
+        addExternal(tool.name + " · " + label, text + " " + url, url, "AI Map · " + category);
+      }
+    });
+  });
+  let section = 0;
+  data.guides.forEach((guide) => {
+    entries.push({
+      title: guide.title,
+      text: guide.summary,
+      href: routeUrl("@ai-map:guides", "section-" + section++),
+      context: copy.guides,
+    });
+    guide.sections.forEach((step) => {
+      entries.push({
+        title: step.heading,
+        text: step.body,
+        href: routeUrl("@ai-map:guides", "section-" + section++),
+        context: copy.guides + " · " + guide.title,
+      });
+      (step.tools || []).forEach((tool) =>
+        addExternal(
+          tool.name,
+          step.body + " " + tool.url,
+          tool.url,
+          guide.title + " · " + step.heading,
+        ),
+      );
+    });
+  });
+  data.news.forEach((item) =>
+    addExternal(
+      item.title,
+      item.summary + " " + item.source + " " + item.url,
+      item.url,
+      copy.news + " · " + item.date,
+    ),
+  );
+  return entries;
+}
+function searchIndex(locale) {
+  if (searchIndexes.has(locale)) return searchIndexes.get(locale);
+  const copy = window.UI_TEXT[locale];
+  const docs = DOCS.flatMap((group, gi) =>
+    group.items.map(([, path], i) => ({ path, title: copy.titles[gi][i], group: copy.groups[gi] })),
+  ).filter((doc) => doc.path.startsWith("content/"));
+  const promise = (async () => {
+    const results = new Array(docs.length);
+    let cursor = 0,
+      failures = 0;
+    await Promise.all(
+      Array.from({ length: 4 }, async () => {
+        while (cursor < docs.length) {
+          const index = cursor++,
+            doc = docs[index];
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 12000);
+          try {
+            const file = locale === "en" ? doc.path.replace(/^content\//, "content/en/") : doc.path;
+            const response = await fetch("./" + file, { signal: controller.signal });
+            if (!response.ok) throw new Error("Search document unavailable");
+            results[index] = DocumentSearch.sections(doc, searchBlocks(await response.text()));
+          } catch {
+            failures++;
+            results[index] = [{ ...doc, text: "", context: doc.group, href: routeUrl(doc.path) }];
+          } finally {
+            clearTimeout(timeout);
+          }
+        }
+      }),
+    );
+    return {
+      entries: DocumentSearch.prepare([...results.flat(), ...catalogSearchEntries(locale)]),
+      failures,
+    };
+  })();
+  searchIndexes.set(locale, promise);
+  return promise;
+}
+async function searchDocuments() {
+  clearTimeout(searchTimer);
+  const version = ++searchVersion,
+    locale = language,
+    query = $("documentSearch").value.trim();
+  $("searchPanel").hidden = false;
+  $("documentSearch").setAttribute("aria-expanded", "true");
+  $("searchResults").replaceChildren();
+  $("retrySearch").hidden = true;
+  $("searchStatus").textContent = t(query ? "searchLoading" : "searchHint");
+  if (!query) return;
+  const { entries, failures } = await searchIndex(locale);
+  if (version !== searchVersion || locale !== language) return;
+  const matches = DocumentSearch.find(entries, query);
+  $("searchStatus").textContent =
+    (matches.length ? matches.length + " " + t("searchCount") : t("noDocs")) +
+    (failures ? " · " + t("searchPartial") : "");
+  $("retrySearch").hidden = !failures;
+  $("searchResults").innerHTML = matches.length
+    ? "<ul>" +
+      matches
+        .map(
+          (entry) =>
+            '<li><a class="search-result" href="' +
+            escapeHtml(entry.href) +
+            '"' +
+            (entry.external ? ' target="_blank" rel="noopener noreferrer"' : "") +
+            '><span class="search-context">' +
+            escapeHtml(entry.context) +
+            "</span><strong>" +
+            escapeHtml(entry.title) +
+            (entry.external ? icon("external-link") : "") +
+            '</strong><span class="search-snippet">' +
+            escapeHtml(entry.snippet) +
+            "</span></a></li>",
+        )
+        .join("") +
+      "</ul>"
+    : "";
+}
+$("documentSearch").addEventListener("focus", () => {
+  closeDrawer(false);
+  if (!restoringSearchFocus) searchDocuments();
+});
+$("documentSearch").addEventListener("input", (event) => {
+  searchVersion++;
+  clearTimeout(searchTimer);
+  $("searchResults").replaceChildren();
+  if (!event.isComposing) searchTimer = setTimeout(searchDocuments, 120);
+});
+$("documentSearch").addEventListener("keydown", (event) => {
+  if (event.isComposing || $("searchPanel").hidden) return;
+  const links = $("searchResults").querySelectorAll("a");
+  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+    event.preventDefault();
+    (event.key === "ArrowDown" ? links[0] : links[links.length - 1])?.focus();
+  } else if (event.key === "Enter" && links.length) {
+    event.preventDefault();
+    links[0].click();
+  }
+});
+$("searchResults").addEventListener("keydown", (event) => {
+  if (!["ArrowDown", "ArrowUp"].includes(event.key)) return;
+  const links = [...$("searchResults").querySelectorAll("a")],
+    at = links.indexOf(document.activeElement);
+  if (at < 0) return;
+  event.preventDefault();
+  const next = at + (event.key === "ArrowDown" ? 1 : -1);
+  if (next < 0) $("documentSearch").focus();
+  else links[Math.min(next, links.length - 1)]?.focus();
+});
+$("searchResults").addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  closeSiteSearch(true);
+  if (
+    href.startsWith("#") &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.shiftKey &&
+    !event.altKey
+  ) {
+    event.preventDefault();
+    history.pushState(null, "", href);
+    loadDocument().then(() => {
+      if (location.hash === href)
+        (document.getElementById(route().section) || $("main")).focus({ preventScroll: true });
+    });
+  }
+});
+$("retrySearch").onclick = () => {
+  searchIndexes.delete(language);
+  searchDocuments();
+};
+document.addEventListener("pointerdown", (event) => {
+  if (!$("siteSearch").contains(event.target)) closeSiteSearch();
+});
+$("siteSearch").addEventListener("focusout", (event) => {
+  if (event.relatedTarget && !$("siteSearch").contains(event.relatedTarget)) closeSiteSearch();
+});
 $("menuBtn").onclick = () => toggleDrawer("sidebar");
 $("tocBtn").onclick = () => toggleDrawer("tocPanel");
 $("overlay").onclick = () => closeDrawer();
-$("documentSearch").addEventListener("input", filterDocuments);
 $("tree").addEventListener("click", (event) => {
   const link = event.target.closest(".tree-link");
   if (link) {
@@ -796,10 +1017,15 @@ $("readingTicks").addEventListener("keydown", (event) => {
 window.addEventListener("keydown", (event) => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
     event.preventDefault();
-    if (matchMedia("(max-width:759px)").matches && drawer !== "sidebar") toggleDrawer("sidebar");
+    closeDrawer(false);
     $("documentSearch").focus();
+    searchDocuments();
   }
-  if (event.key === "Escape") closeDrawer();
+  if (event.key === "Escape") {
+    if (!$("searchPanel").hidden) {
+      closeSiteSearch(true);
+    } else closeDrawer();
+  }
   if (event.key === "Tab" && drawer) {
     const panel = $(drawer);
     const stops = [...panel.querySelectorAll("a,button,input")].filter(
@@ -825,6 +1051,7 @@ document.querySelectorAll("[data-language]").forEach(
       if (btn.dataset.language === language) return;
       language = btn.dataset.language;
       storage.set("jt-language", language);
+      closeSiteSearch();
       applyLanguage();
       buildTree();
       loadDocument({ force: true, preserve: true });

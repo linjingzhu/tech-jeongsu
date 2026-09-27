@@ -173,7 +173,74 @@ img {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+}
+#siteSearch {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(260px, 34vw, 440px);
+}
+#searchPanel {
+  position: fixed;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100dvh - var(--top) - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px #18213124;
+}
+#searchStatus {
+  margin: 4px 8px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+#retrySearch {
+  margin: 0 8px 12px;
+}
+#searchResults ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#searchResults li + li {
+  border-top: 1px solid var(--line);
+}
+.search-result {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  color: var(--text);
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.search-result:hover,
+.search-result:focus-visible {
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+.search-result strong {
+  font-size: 14px;
+}
+.search-result strong img {
+  width: 13px;
+  height: 13px;
+  margin-left: 6px;
+}
+.search-context {
+  color: var(--muted);
+  font-size: 11px;
+}
+.search-snippet {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #526078;
 }
 .document-search > img {
   position: absolute;
@@ -1009,7 +1076,7 @@ footer {
     padding: 10px;
   }
   .document-search input {
-    font-size: 14px;
+    font-size: 16px;
   }
   #pageNav {
     gap: 16px;
@@ -1075,5 +1142,30 @@ html {
   }
   .diagram {
     padding: 18px 8px;
+  }
+}
+/* Small headers use a second centered row so search stays directly available. */
+@media (max-width: 1299px) {
+  .brand-note {
+    display: none;
+  }
+}
+@media (max-width: 1099px) {
+  :root {
+    --top: 108px;
+  }
+  #topbar {
+    padding-bottom: 50px;
+  }
+  #siteSearch {
+    bottom: 10px;
+    width: min(560px, calc(100% - 32px));
+  }
+  #searchPanel {
+    top: calc(100% + 18px);
+  }
+  #content h2,
+  #content h3 {
+    scroll-margin-top: calc(var(--top) + 24px);
   }
 }
