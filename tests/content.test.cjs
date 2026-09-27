@@ -67,7 +67,7 @@ test("catalog translations preserve identity, links, chronological data and sche
 test("all local entry-point assets exist and both locales expose the same interface strings", () => {
   const html = read("index.html");
   for (const [, asset] of html.matchAll(/(?:src|href)="\.\/([^"#]+)"/g))
-    assert.ok(fs.existsSync(path.join(root, asset)), asset);
+    assert.ok(fs.existsSync(path.join(root, asset.split("?")[0])), asset);
   assert.deepEqual(Object.keys(ui.en), Object.keys(ui.ko));
   assert.ok(!html.includes("repo-link"));
 });

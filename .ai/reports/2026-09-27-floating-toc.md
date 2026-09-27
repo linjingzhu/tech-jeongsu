@@ -18,4 +18,6 @@ The right reading ticks are centered vertically in the viewport. Hover and focus
 
 ## NOT VERIFIED
 
+Deployment follow-up: Pages deployment succeeded and a direct public HTTP read returned the new CSS, but existing browser sessions retained the previous unversioned assets (max-age=600). Added matching version query parameters to the changed stylesheet and application script so normal page reloads select the new pair. The local asset check ignores URL query parameters when resolving filesystem paths.
+
 Safari/Firefox and screen-reader sessions were not repeated for this change. Full content re-audit was unnecessary: this change affects layout and controls only.

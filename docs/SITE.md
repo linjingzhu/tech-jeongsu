@@ -25,3 +25,5 @@ AI Map 원본은 `assets/ai-map-data.js`, 영문은 `assets/ai-map-data.en.js`�
 자동 검증: `node --test tests/content.test.cjs`. 모든 문서의 한·영 대응, AI Map 항목 보존, 로컬 자산, Mermaid 연결을 확인합니다. 화면 변경 후에는 별도로 데스크톱·태블릿·모바일에서 메뉴, 목차, 검색, 언어 전환을 확인합니다.
 
 실행 라이브러리는 버전을 고정해 `assets/vendor/`에 보관합니다. 폰트는 Google Fonts의 Noto Sans KR와 JetBrains Mono를 사용하며 시스템 폰트를 대체 글꼴로 둡니다.
+
+사이트 스타일이나 동작 파일을 배포할 때는 `index.html`의 해당 자산 URL에 붙은 `v` 값도 갱신합니다. GitHub Pages의 캐시가 이전 CSS와 JavaScript를 유지하는 동안에도 같은 배포의 파일을 불러오기 위한 표시입니다.
