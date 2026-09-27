@@ -38,7 +38,7 @@ window.UI_TEXT = {
     guidesIntro: "실제 작업 흐름 안에서 어떤 도구를 어디에 쓰는지 살펴봅니다.",
     news: "AI 소식",
     newsIntro: "AI Map에 기록된 뉴스와 학습 리소스입니다.",
-    groups: ["AI 사용방법", "GIT 사용방법", "AI Map", "Product Owner"],
+    groups: ["AI 사용방법", "GIT 사용방법", "AI Map", "제품 기획과 운영"],
     titles: [
       [
         "AI 개발 운영 개요",
@@ -127,7 +127,7 @@ window.UI_TEXT = {
     guidesIntro: "Learn which tools to use at each step of a real workflow.",
     news: "AI news",
     newsIntro: "News and learning resources collected in AI Map.",
-    groups: ["Using AI", "Using Git", "AI Map", "Product Owner"],
+    groups: ["Using AI", "Using Git", "AI Map", "Product Planning & Operations"],
     titles: [
       [
         "AI development overview",
