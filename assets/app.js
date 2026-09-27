@@ -25,6 +25,21 @@ const DOCS = [
       ["Build Directory와 Worktree 용량","content/git/09-build-directory.md"],
       ["실전 작업 흐름 모음","content/git/10-practical-workflows.md"]
     ]
+  },
+  {
+    title: "Product Owner",
+    items: [
+      ["Product Owner 전체 개요","content/po/00-overview.md"],
+      ["PO의 자격과 핵심 역량","content/po/01-qualification.md"],
+      ["PO · PM · Project Manager 차이","content/po/02-role-comparison.md"],
+      ["PO가 알아야 할 지식 지도","content/po/03-knowledge-map.md"],
+      ["문제 발견 · 전략 · Roadmap","content/po/04-discovery-strategy.md"],
+      ["Backlog · 우선순위 · 요구사항","content/po/05-backlog-prioritization.md"],
+      ["Delivery Work Process","content/po/06-delivery-workflow.md"],
+      ["협업 · 회의 · 산출물","content/po/07-collaboration-artifacts.md"],
+      ["성과 측정 · 의사결정 · Metrics","content/po/08-metrics-decisions.md"],
+      ["AI 시대의 Product Owner","content/po/09-ai-product-owner.md"]
+    ]
   }
 ];
 
@@ -36,7 +51,7 @@ const overlay = document.getElementById("overlay");
 
 function buildTree(){
   tree.innerHTML="";
-  DOCS.forEach((group,gi)=>{
+  DOCS.forEach((group)=>{
     const wrap=document.createElement("div");
     wrap.className="tree-group";
     const btn=document.createElement("button");
