@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jeongsu Tech Notes</title>
+  <meta name="description" content="AI 개발 운영과 Git을 실제 개발 흐름 중심으로 정리한 기술 블로그" />
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">JT</div>
+      <div>
+        <strong>Jeongsu Tech</strong>
+        <small>AI · Git Study Notes</small>
+      </div>
+    </div>
+    <div class="tree-title">CONTENTS</div>
+    <nav id="tree" aria-label="문서 트리"></nav>
+  </aside>
+
+  <header id="topbar">
+    <button id="menuBtn" aria-label="메뉴 열기">☰</button>
+    <div id="breadcrumb">Home</div>
+    <a class="repo-link" href="https://github.com/linjingzhu/tech-jeongsu" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </header>
+
+  <main id="main">
+    <article id="content">
+      <div class="loading">문서를 불러오는 중…</div>
+    </article>
+    <footer>
+      <span>Jeongsu Tech Notes</span>
+      <span>Repository-first knowledge base</span>
+    </footer>
+  </main>
+
+  <div id="overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>
