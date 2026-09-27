@@ -43,7 +43,7 @@ const DOCS = [
     ],
   },
   {
-    title: "Product Owner",
+    title: "제품 기획과 운영",
     items: [
       ["Product Owner 전체 개요", "content/po/00-overview.md"],
       ["PO의 자격과 핵심 역량", "content/po/01-qualification.md"],
