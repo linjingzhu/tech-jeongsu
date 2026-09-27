@@ -843,6 +843,11 @@ window.addEventListener("resize", () => {
   refreshNavigation();
 });
 new ResizeObserver(() => refreshNavigation()).observe($("main"));
+// Reserve the floating card's actual width without coupling it to heading lengths.
+new ResizeObserver(([entry]) => {
+  const width = entry.borderBoxSize[0]?.inlineSize || $("tocPanel").getBoundingClientRect().width;
+  document.documentElement.style.setProperty("--toc-space", Math.ceil(width + 32) + "px");
+}).observe($("tocPanel"));
 document.querySelector(".skip-link").addEventListener("click", (event) => {
   event.preventDefault();
   $("main").focus();
