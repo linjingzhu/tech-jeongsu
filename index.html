@@ -1,46 +1,88 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jeongsu Tech Notes</title>
-  <meta name="description" content="AI 개발 운영과 Git을 실제 개발 흐름 중심으로 정리한 기술 블로그" />
-  <link rel="stylesheet" href="./assets/style.css" />
-</head>
-<body>
-  <aside id="sidebar">
-    <div class="brand">
-      <div class="brand-mark">JT</div>
-      <div>
-        <strong>Jeongsu Tech</strong>
-        <small>AI · Git Study Notes</small>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Jeongsu Tech Notes</title>
+    <meta name="description" content="AI, Git, Product Owner와 AI 도구를 정리한 기술 문서" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <script defer src="./assets/vendor/marked.min.js"></script>
+    <script defer src="./assets/vendor/purify.min.js"></script>
+    <script defer src="./assets/vendor/mermaid.min.js"></script>
+    <script defer src="./assets/vendor/highlight.min.js"></script>
+    <script defer src="./assets/ai-map-data.js"></script>
+    <script defer src="./assets/ai-map-data.en.js"></script>
+    <script defer src="./assets/i18n.js"></script>
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="./assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="#content/ai/00-overview.md">Jeongsu Tech</a
+      ><span class="brand-note">AI · Git Study Notes</span>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="./assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
       </div>
-    </div>
-    <div class="tree-title">CONTENTS</div>
-    <nav id="tree" aria-label="문서 트리"></nav>
-  </aside>
-
-  <header id="topbar">
-    <button id="menuBtn" aria-label="메뉴 열기">☰</button>
-    <div id="breadcrumb">Home</div>
-    <a class="repo-link" href="https://github.com/linjingzhu/tech-jeongsu" target="_blank" rel="noreferrer">GitHub ↗</a>
-  </header>
-
-  <main id="main">
-    <article id="content">
-      <div class="loading">문서를 불러오는 중…</div>
-    </article>
-    <footer>
-      <span>Jeongsu Tech Notes</span>
-      <span>Repository-first knowledge base</span>
-    </footer>
-  </main>
-
-  <div id="overlay"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script src="./assets/ai-map-data.js"></script>
-  <script src="./assets/app.js"></script>
-</body>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <div class="document-search">
+        <img src="./assets/icons/search.svg" alt="" /><input
+          id="documentSearch"
+          type="search"
+          autocomplete="off"
+          aria-label="문서 검색"
+          placeholder="문서 검색"
+        /><kbd aria-hidden="true">Ctrl K</kbd>
+      </div>
+      <nav id="tree" aria-label="문서 트리"></nav>
+      <p id="documentEmpty" class="empty-note" hidden data-i18n="noDocs">
+        일치하는 문서가 없습니다.
+      </p>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"></div>
+      <article id="content" aria-busy="true">
+        <p class="loading" role="status">문서를 불러오는 중…</p>
+      </article>
+      <nav id="pageNav" aria-label="이전·다음 문서"></nav>
+      <footer><span>Jeongsu Tech Notes</span><span>Repository-first knowledge base</span></footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
 </html>

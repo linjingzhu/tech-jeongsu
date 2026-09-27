@@ -1,3 +1,9 @@
+# Jeongsu Tech
+
+AI · Git · Product Owner · AI Map 기술 문서 사이트입니다. [사이트 열기](https://linjingzhu.github.io/tech-jeongsu/) · [콘텐츠와 배포 안내](docs/SITE.md)
+
+아래는 이 저장소에 포함된 개발 규칙 템플릿의 원래 안내입니다.
+
 # ai-dev-rule
 
 A methodology for running AI agents as engineers on a real codebase: what a
