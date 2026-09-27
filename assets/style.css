@@ -7,7 +7,6 @@
   --accent: #315ae7;
   --accent-soft: #e9efff;
   --sidebar: 270px;
-  --toc: 170px;
   --top: 64px;
   --rail: 80px;
   --body-font: "Noto Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -280,14 +279,17 @@ input::placeholder {
 }
 #tocPanel {
   position: fixed;
-  left: var(--sidebar);
-  top: var(--top);
-  width: var(--toc);
-  bottom: 0;
-  padding: 27px 20px;
+  left: calc(var(--sidebar) + 16px);
+  top: calc(var(--top) + 20px);
+  width: max-content;
+  max-width: min(480px, calc(100vw - var(--sidebar) - var(--rail) - 440px));
+  max-height: calc(100dvh - var(--top) - 40px);
+  padding: 20px;
   background: var(--bg);
-  border-right: 1px solid var(--line);
-  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px #1821310a;
+  overflow: auto;
   scrollbar-width: thin;
   z-index: 20;
 }
@@ -298,6 +300,8 @@ input::placeholder {
 }
 #toc {
   border-left: 1px solid var(--line);
+  width: max-content;
+  min-width: 100%;
 }
 .toc-link {
   position: relative;
@@ -306,6 +310,8 @@ input::placeholder {
   font-size: 12px;
   line-height: 1.7;
   color: #738095;
+  white-space: nowrap;
+  font-weight: 500;
 }
 .toc-link.level-3 {
   font-size: 11px;
@@ -313,7 +319,6 @@ input::placeholder {
 }
 .toc-link.active {
   color: var(--accent);
-  font-weight: 600;
 }
 .toc-link.active:before {
   content: "";
@@ -330,7 +335,7 @@ input::placeholder {
   color: var(--accent);
 }
 #main {
-  margin-left: calc(var(--sidebar) + var(--toc));
+  margin-left: calc(var(--sidebar) + var(--toc-space, 220px));
   margin-right: var(--rail);
   padding: calc(var(--top) + 28px) 48px 0;
   min-height: 100vh;
@@ -616,18 +621,14 @@ footer {
 }
 #readingNav {
   position: fixed;
-  top: calc(var(--top) + 28px);
+  top: 50%;
+  transform: translateY(-50%);
   right: 16px;
   width: 42px;
   z-index: 15;
   border-radius: 6px;
   padding: 12px 5px;
   background: transparent;
-  transition: background 0.2s;
-}
-#readingNav:hover,
-#readingNav:focus-within {
-  background: #edf2fa;
 }
 #readingTicks {
   display: flex;
@@ -809,7 +810,6 @@ footer {
 @media (min-width: 1600px) {
   :root {
     --sidebar: 290px;
-    --toc: 190px;
     --rail: 130px;
   }
   #main {
@@ -823,7 +823,6 @@ footer {
 @media (max-width: 1199px) {
   :root {
     --sidebar: 240px;
-    --toc: 150px;
     --rail: 50px;
   }
   #main {
@@ -852,7 +851,6 @@ footer {
 @media (max-width: 999px) {
   :root {
     --sidebar: 250px;
-    --toc: 0px;
     --rail: 46px;
   }
   #tocBtn {
@@ -860,11 +858,11 @@ footer {
   }
   #tocPanel {
     left: auto;
-    right: 0;
-    top: var(--top);
-    width: 260px;
-    border-left: 1px solid var(--line);
-    transform: translateX(100%);
+    right: 16px;
+    top: calc(var(--top) + 12px);
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - var(--top) - 24px);
+    transform: translateY(-8px);
     visibility: hidden;
     z-index: 45;
     transition:
@@ -879,6 +877,7 @@ footer {
     display: block;
   }
   #main {
+    margin-left: var(--sidebar);
     padding-left: 28px;
   }
   #content h1 {
@@ -970,7 +969,6 @@ footer {
   }
   #readingNav {
     right: 2px;
-    top: calc(var(--top) + 34px);
     width: 25px;
     padding: 8px 3px;
   }
