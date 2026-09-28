@@ -23,7 +23,7 @@ const routes = (() => {
   vm.createContext(context);
   vm.runInContext(
     read("assets/app.js").split("const $ =")[0] +
-      ";globalThis.__routes = { DOCS, SITE_PAGES, pageHref };",
+      ";globalThis.__routes = { DOCS, SITE_PAGES, pageHref, groupIcons };",
     context,
   );
   return context.__routes;
@@ -40,7 +40,7 @@ const marked = (() => {
   return context.module.exports;
 })();
 const template = read("tools/site/template.html");
-const { DOCS, SITE_PAGES, pageHref } = routes;
+const { DOCS, SITE_PAGES, pageHref, groupIcons } = routes;
 const LANGS = ["ko", "en"];
 
 const escapeHtml = (value) =>
@@ -100,7 +100,6 @@ function description(markdown) {
 function treeHtml(lang, activePath, root) {
   const ui = UI[lang];
   const activeGroup = DOCS.findIndex((g) => g.items.some(([, p]) => p === activePath));
-  const icons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase"];
   return DOCS.map((group, g) => {
     const expanded = g === activeGroup;
     const links = group.items
@@ -115,7 +114,7 @@ function treeHtml(lang, activePath, root) {
     return (
       `<div class="tree-group${expanded ? "" : " closed"}" data-group="${g}">` +
       `<button aria-expanded="${expanded}" aria-controls="group-${g}">` +
-      `<img src="${root}assets/icons/${icons[g]}.svg" alt="" aria-hidden="true">` +
+      `<img src="${root}assets/icons/${groupIcons[g]}.svg" alt="" aria-hidden="true">` +
       `<span>${escapeHtml(ui.groups[g])}</span>` +
       `<img class="chevron" src="${root}assets/icons/chevron-down.svg" alt=""></button>` +
       `<div class="tree-items" id="group-${g}">${links}</div></div>`

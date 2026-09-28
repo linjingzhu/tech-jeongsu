@@ -116,6 +116,8 @@ function pagePath(path) {
 function pageHref(path, lang) {
   return (lang === "en" ? "en/" : "") + pagePath(path);
 }
+// One icon per DOCS group, in the same order.
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase"];
 
 const $ = (id) => document.getElementById(id);
 const escapeHtml = (value) =>
@@ -146,7 +148,6 @@ const ROOT = new URL(
 const asset = (rel) => new URL(rel, ROOT).pathname;
 const DOC_PATH = document.querySelector('meta[name="doc-path"]')?.content ?? "";
 const allPaths = DOCS.flatMap((g) => g.items.map((item) => item[1]));
-const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase"];
 const icon = (name) =>
   '<img src="' + asset("assets/icons/" + name + ".svg") + '" alt="" aria-hidden="true">';
 let currentPath = "",
