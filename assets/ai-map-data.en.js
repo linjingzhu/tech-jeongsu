@@ -2148,6 +2148,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "01. Sketch concepts",
           "body": "First define the medium and the impression you want to convey. Create variations on the same theme with different colors, compositions, and styles, then compare directions. Focus on choosing a visual direction that fits the purpose rather than polishing details at this stage.",
+          "summary": "Compare color and composition, then choose a direction.",
+          "output": "Selected concept",
           "tools": [
             {
               "name": "Midjourney",
@@ -2162,6 +2164,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "02. Refine the selected concept",
           "body": "Refine shapes and backgrounds around your chosen direction, and create the variations you need. Check whether key elements remain visible at small sizes, text is accurate, and colors and mood remain consistent across designs.",
+          "summary": "Refine shapes, backgrounds, and text.",
+          "output": "Final image",
           "tools": [
             {
               "name": "Adobe Firefly",
@@ -2176,6 +2180,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "03. Complete your brand materials",
           "body": "Place the chosen images into their actual sizes for banners, thumbnails, business cards, and other uses. Adjust spacing around titles and logos, and check final resolution and export formats. Completing one design before adapting it to other media makes consistency easier to maintain.",
+          "summary": "Adapt the image to real sizes and export.",
+          "output": "Design files for each medium",
           "tools": [
             {
               "name": "Canva Magic Design",
@@ -2183,7 +2189,8 @@ window.AI_MAP_DATA_EN = {
             }
           ]
         }
-      ]
+      ],
+      "finish": "Done · brand assets ready to use"
     },
     {
       "id": "coding-workflow",
@@ -2194,6 +2201,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "01. Define the scope",
           "body": "Write down whose problem you will solve and what users should be able to do on the first screen. Clearly defining one core feature and its success criteria at the start makes the implementation easier to evaluate.",
+          "summary": "Define the user, core feature, and success criteria.",
+          "output": "Feature list",
           "tools": [
             {
               "name": "ChatGPT",
@@ -2208,6 +2217,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "02. Build a working prototype",
           "body": "Implement the main screens and user flow first. Refine requirements by directly testing actions such as clicking buttons and entering information. Validate the core flow before trying to finalize every aspect of design and functionality at once.",
+          "summary": "Build main screens and test the user journey.",
+          "output": "Working prototype",
           "tools": [
             {
               "name": "v0",
@@ -2226,6 +2237,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "03. Complete the features in real code",
           "body": "Implement features and fix errors based on the requirements confirmed in the prototype. Review changes and keep checking that the product behaves as intended with real data and exceptional conditions throughout development.",
+          "summary": "Finish features and edge cases in real code.",
+          "output": "Tested application",
           "tools": [
             {
               "name": "Claude Code",
@@ -2244,6 +2257,8 @@ window.AI_MAP_DATA_EN = {
         {
           "heading": "04. Connect the data and tools you need",
           "body": "For features requiring external materials or systems, clearly identify what to connect before adding them. Explore approaches such as MCP for connecting agents and tools, and check the permissions and scope each connection requires.",
+          "summary": "Connect the required data and tools.",
+          "output": "Data and tool integrations",
           "tools": [
             {
               "name": "Model Context Protocol",
@@ -2251,7 +2266,8 @@ window.AI_MAP_DATA_EN = {
             }
           ]
         }
-      ]
+      ],
+      "finish": "Done · app with core features and integrations"
     }
   ],
   "news": [

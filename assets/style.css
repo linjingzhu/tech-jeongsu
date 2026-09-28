@@ -855,6 +855,42 @@ footer {
 .ai-map-guide-step h3 {
   font-size: 16px !important;
 }
+.ai-map-flow {
+  margin: 10px 0 12px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+}
+.ai-map-flow p {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.ai-map-flow .ai-map-flow-output {
+  margin-top: 6px !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: baseline;
+  font-size: 13px;
+}
+.ai-map-flow-output span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.ai-map-flow-finish {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 20px 0 0 !important;
+  font-weight: 600;
+  color: var(--accent);
+}
+.ai-map-flow-finish img {
+  width: 18px;
+  flex: none;
+}
 .ai-map-news {
   padding: 23px 0;
   border-bottom: 1px solid var(--line);

@@ -312,7 +312,17 @@ function renderMap(path) {
                 (s) =>
                   '<section class="ai-map-guide-step"><h3>' +
                   escapeHtml(s.heading) +
-                  "</h3><p>" +
+                  "</h3>" +
+                  (s.summary
+                    ? '<div class="ai-map-flow"><p>' +
+                      escapeHtml(s.summary) +
+                      '</p><p class="ai-map-flow-output"><span>' +
+                      t("output") +
+                      "</span><strong>" +
+                      escapeHtml(s.output) +
+                      "</strong></p></div>"
+                    : "") +
+                  "<p>" +
                   escapeHtml(s.body) +
                   "</p>" +
                   (s.tools?.length
@@ -323,6 +333,9 @@ function renderMap(path) {
                   "</section>",
               )
               .join("") +
+            (g.finish
+              ? '<p class="ai-map-flow-finish">' + icon("check") + escapeHtml(g.finish) + "</p>"
+              : "") +
             "</article>",
         )
         .join("") +
@@ -808,14 +821,14 @@ function catalogSearchEntries(locale) {
   data.guides.forEach((guide) => {
     entries.push({
       title: guide.title,
-      text: guide.summary,
+      text: [guide.summary, guide.finish].filter(Boolean).join(" "),
       href: routeUrl("@ai-map:guides", "section-" + section++),
       context: copy.guides,
     });
     guide.sections.forEach((step) => {
       entries.push({
         title: step.heading,
-        text: step.body,
+        text: [step.summary, step.output, step.body].filter(Boolean).join(" "),
         href: routeUrl("@ai-map:guides", "section-" + section++),
         context: copy.guides + " · " + guide.title,
       });
