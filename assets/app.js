@@ -57,6 +57,37 @@ const DOCS = [
       ["AI 시대의 Product Owner", "content/po/09-ai-product-owner.md"],
     ],
   },
+  {
+    title: "Marketing",
+    items: [
+      ["Marketing 전체 개요", "content/marketing/00-overview.md"],
+      ["시장·고객 리서치 · Segmentation", "content/marketing/01-customer-research.md"],
+      ["Positioning · Messaging · Brand", "content/marketing/02-positioning-messaging.md"],
+      ["Go-to-Market · Launch · PLG/SLG", "content/marketing/03-go-to-market.md"],
+      ["채널 · Content · Paid · Lifecycle", "content/marketing/04-channels.md"],
+      ["AI 검색 · GEO/AEO", "content/marketing/05-ai-search-geo.md"],
+      ["측정 · Attribution · Privacy", "content/marketing/06-measurement-privacy.md"],
+      ["Marketing Metrics · Unit Economics", "content/marketing/07-metrics.md"],
+      ["AI 활용 Workflow · 리스크", "content/marketing/08-ai-workflows.md"],
+      ["법 · 윤리 · 광고 표시", "content/marketing/09-legal-ethics.md"],
+    ],
+  },
+  {
+    title: "Platform 배포와 서비스",
+    items: [
+      ["Platform 배포 전체 개요", "content/platform/00-overview.md"],
+      ["배포 대상 · Static · Serverless", "content/platform/01-deployment-targets.md"],
+      ["Cloud · Kubernetes · 국내 Cloud", "content/platform/02-cloud-kubernetes.md"],
+      ["CI/CD · OIDC · GitOps", "content/platform/03-ci-cd-pipeline.md"],
+      ["Canary · Blue-Green · Flag · Rollback", "content/platform/04-release-strategies.md"],
+      ["App Store · Google Play", "content/platform/05-mobile-app-stores.md"],
+      ["Domain · DNS · TLS · CDN", "content/platform/06-domain-dns-tls-cdn.md"],
+      ["SLO · On-call · Postmortem", "content/platform/07-observability-incident.md"],
+      ["Secret · SBOM · SLSA", "content/platform/08-security-supply-chain.md"],
+      ["FinOps · Platform Engineering", "content/platform/09-finops-platform-engineering.md"],
+      ["작은 팀 실전 가이드", "content/platform/10-small-team-playbook.md"],
+    ],
+  },
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -82,7 +113,7 @@ const storage = {
 let language = storage.get("jt-language", "ko") === "en" ? "en" : "ko";
 const t = (key) => window.UI_TEXT[language][key];
 const allPaths = DOCS.flatMap((g) => g.items.map((item) => item[1]));
-const groupIcons = ["book", "cube", "layout-grid", "users"];
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload"];
 const icon = (name) => '<img src="./assets/icons/' + name + '.svg" alt="" aria-hidden="true">';
 let currentPath = "",
   loadVersion = 0,
