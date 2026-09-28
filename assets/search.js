@@ -1,14 +1,15 @@
 (function (root) {
   const normalize = (value) => String(value ?? "").normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim();
-  function sections(doc, blocks) {
-    const entries = [{ ...doc, href: "#" + doc.path, context: doc.group, text: "" }];
+  const hashLink = (path, section) => "#" + path + (section ? "::" + section : "");
+  function sections(doc, blocks, link = hashLink) {
+    const entries = [{ ...doc, href: link(doc.path, ""), context: doc.group, text: "" }];
     let current = entries[0], section = 0;
     for (const block of blocks) {
       if (block.level === 2 || block.level === 3) {
         current = {
           title: block.text,
           context: doc.group + " · " + doc.title,
-          href: "#" + doc.path + "::section-" + section++,
+          href: link(doc.path, "section-" + section++),
           text: "",
         };
         entries.push(current);

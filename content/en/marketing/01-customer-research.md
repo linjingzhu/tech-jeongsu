@@ -68,6 +68,20 @@ Persona
 
 In B2B, a single purchase often involves users, decision makers, budget approvers, and security or legal reviewers. Personas are only useful when split by these roles.
 
+### Example: ICP for the Incident-Monitoring Tool
+
+Written for this track's example product, the ICP looks like this. The conditions are **pre-research hypotheses (assumptions)** to be corrected with interviews and paid-conversion data.
+
+| Item | Condition (assumption) |
+|---|---|
+| Industry | SaaS companies, startups, and agencies that run their own web or app services |
+| Size | 1–5 developers, no dedicated SRE or operations team |
+| Tech stack | Deploys to a public cloud, Git-based CI/CD, logs already collected in one place |
+| Trigger events | First paying customer, refunds or churn caused by an incident, rising deploy frequency, being on call alone |
+| Exclusions | Organizations that already have a dedicated operations team and a large observability platform contract, or that allow only on-premises installs (an early product cannot serve them) |
+
+Trigger events tell you **when to reach out**; exclusions tell you **whom not to spend budget on**. Without both, an ICP becomes a wish list.
+
 ## The Buying Journey Is Not a Straight Line
 
 Think with Google's "Messy Middle" research (2020) described the middle of the buying process as **a loop in which exploration and evaluation repeat**.

@@ -57,9 +57,15 @@ flowchart LR
 
 비교 지표 예: Error Rate, p95 Latency, Crash Rate, 핵심 전환율. 자동화할 때는 **통과 기준을 배포 전에** 정해 둔다.
 
+Traffic을 나누는 방법은 Platform마다 다르다.
+
+- **Cloud Run**: Revision별 Traffic 비율을 지정한다. 예: `gcloud run services update-traffic SERVICE --to-revisions REVISION=5`로 새 Revision에 5%.
+- **Kubernetes**: 기본 Deployment는 Pod 수 비율로만 나뉜다. **Argo Rollouts**(`setWeight` 단계)나 **Flagger**가 Service Mesh · Ingress · Gateway API의 가중치를 바꾸고, 지표 분석 결과로 자동 승격 또는 Rollback한다.
+- **Load Balancer / CDN / DNS**: 두 Target 또는 Origin에 가중치를 주는 Weighted Routing으로 나눈다. DNS 가중치는 Resolver Cache(TTL) 때문에 비율이 정확하지 않다.
+
 ## Feature Flag
 
-Martin Fowler는 Release Toggle을 "기능 **Release**와 코드 **Deployment**를 분리"하는 가장 흔한 방법으로 설명한다.
+martinfowler.com에 실린 Pete Hodgson의 글 "Feature Toggles"는 Release Toggle을 "기능 **Release**와 코드 **Deployment**를 분리"하는 가장 흔한 방법으로 설명한다.
 
 | Flag 종류 | 수명 | 예 |
 |---|---|---|
@@ -106,3 +112,6 @@ Flag Off      코드는 두고 기능만 끈다. 가장 빠르다.
 - [Parallel Change](https://martinfowler.com/bliki/ParallelChange.html) — martinfowler.com, 접근일 2026-09-28
 - [Canarying Releases](https://sre.google/workbook/canarying-releases/) — Google SRE Workbook, 접근일 2026-09-28
 - [OpenFeature becomes a CNCF incubating project](https://www.cncf.io/blog/2023/12/19/openfeature-becomes-a-cncf-incubating-project/) — CNCF, 2023-12-19, 접근일 2026-09-28
+- [Rollbacks, gradual rollouts, and traffic migration](https://docs.cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration) — Google Cloud Docs, 접근일 2026-09-28
+- [Canary Deployment Strategy](https://argo-rollouts.readthedocs.io/en/stable/features/canary/) — Argo Rollouts Docs, 접근일 2026-09-28
+- [Flagger](https://fluxcd.io/flagger/) — Flux, 접근일 2026-09-28

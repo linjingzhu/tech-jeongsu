@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Cloud and Kubernetes: AWS · Google Cloud · Azure · Korean Clouds | Jeongsu Tech Notes</title>
+    <meta name="description" content="The three major clouds use different service names, but they offer parts of the same shape that solve the same problems. Learn the mapping before memorizi…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/02-cloud-kubernetes/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/02-cloud-kubernetes/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="Cloud and Kubernetes: AWS · Google Cloud · Azure · Korean Clouds | Jeongsu Tech Notes" />
+    <meta property="og:description" content="The three major clouds use different service names, but they offer parts of the same shape that solve the same problems. Learn the mapping before memorizi…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/02-cloud-kubernetes.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link active" aria-current="page" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Cloud · Kubernetes · Korean Clouds</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Cloud and Kubernetes: AWS · Google Cloud · Azure · Korean Clouds</h1>
+<p>The three major clouds use different service names, but they offer <strong>parts of the same shape that solve the same problems</strong>. Learn the mapping before memorizing names.</p>
+<h2>Big Three Mapping</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>AWS</th>
+<th>Google Cloud</th>
+<th>Azure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VM</td>
+<td>Amazon EC2</td>
+<td>Compute Engine</td>
+<td>Azure Virtual Machines</td>
+</tr>
+<tr>
+<td>Managed Kubernetes</td>
+<td>Amazon EKS</td>
+<td>GKE</td>
+<td>AKS</td>
+</tr>
+<tr>
+<td>Serverless Container</td>
+<td>Amazon ECS (Express Mode, Fargate)</td>
+<td>Cloud Run</td>
+<td>Azure Container Apps</td>
+</tr>
+<tr>
+<td>Functions</td>
+<td>AWS Lambda</td>
+<td>Cloud Run functions</td>
+<td>Azure Functions</td>
+</tr>
+<tr>
+<td>Object Storage</td>
+<td>Amazon S3</td>
+<td>Cloud Storage</td>
+<td>Azure Blob Storage</td>
+</tr>
+<tr>
+<td>Seoul region</td>
+<td>ap-northeast-2</td>
+<td>asia-northeast3</td>
+<td>Korea Central</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Google Cloud Functions was renamed <strong>Cloud Run functions</strong> and unified onto Cloud Run.</li>
+<li>All three clouds operate a Seoul region. For users in Korea, consider it first for latency and data location.</li>
+</ul>
+<h3>How to Choose</h3>
+<ul>
+<li><strong>Team skills</strong>: a cloud your team has already operated is the biggest discount. Relearning IAM, networking and the billing model costs more than it looks.</li>
+<li><strong>Required managed services</strong>: list the databases, queues, analytics and AI services you plan to use, and check which cloud offers them as managed services, including in the Seoul region.</li>
+<li><strong>Startup credits</strong>: AWS Activate, the Google for Startups Cloud Program and Microsoft for Startups offer credits. Terms and amounts change often, so check them when you apply, and decide based on <strong>the bill after the credits run out</strong>.</li>
+<li><strong>Region and compliance</strong>: check for a Seoul region, the certifications you need (CSAP for the Korean public sector, separate rules for finance), and conditions on transferring data abroad.</li>
+<li><strong>Egress and lock-in</strong>: data transfer out (egress) can become a large share of the bill depending on the architecture. The more single-cloud features you use, the higher the cost of moving, so keep portable layers such as containers, IaC and OpenTelemetry.</li>
+</ul>
+<h2>Design Criteria: Well-Architected</h2>
+<p>The AWS Well-Architected Framework reviews a design against six pillars.</p>
+<table>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operational Excellence</td>
+<td>Can we run, observe and improve it?</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Does it protect information, systems and assets?</td>
+</tr>
+<tr>
+<td>Reliability</td>
+<td>Does it recover from failures and handle changing demand?</td>
+</tr>
+<tr>
+<td>Performance Efficiency</td>
+<td>Does it use resources efficiently?</td>
+</tr>
+<tr>
+<td>Cost Optimization</td>
+<td>Is value per cost maximized?</td>
+</tr>
+<tr>
+<td>Sustainability</td>
+<td>Does it reduce energy and resource use?</td>
+</tr>
+</tbody></table>
+<p>The pillars involve <strong>trade-offs</strong>. Multi-region, for example, raises reliability but also raises cost and operational complexity. Google Cloud and Azure provide similar architecture frameworks.</p>
+<h2>Korean Clouds and the Public Sector</h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Verified facts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAVER Cloud</td>
+<td>Ncloud Kubernetes Service. CI/CD can be built with SourceCommit · SourceBuild · SourceDeploy · SourcePipeline</td>
+</tr>
+<tr>
+<td>NHN Cloud</td>
+<td>NHN Kubernetes Service (NKS) and a Deploy service. NHN Cloud for public institutions obtained CSAP certification in 2022-12 (per the company)</td>
+</tr>
+<tr>
+<td>KT Cloud</td>
+<td>Reported (2024-02) as one of the &quot;big three&quot; in the Korean public cloud market with NAVER Cloud and NHN Cloud. In 2026-03 it was reported to have obtained CSAP certification for its in-house &quot;kt cloud PLATFORM&quot; (OpenStack rebuilt on Kubernetes)</td>
+</tr>
+<tr>
+<td>KakaoCloud</td>
+<td>Run by Kakao Enterprise. Offers Kubernetes Engine, a managed Kubernetes service. Its predecessor, Kakao i Cloud, was reported in 2022-06 to have passed a CSAP follow-up audit with Kubernetes-based IaaS</td>
+</tr>
+</tbody></table>
+<p><strong>CSAP (Cloud Security Assurance Program)</strong> is a Korean certification, based on the Act on the Development of Cloud Computing and Protection of its Users, that certifies whether clouds supplied to public institutions meet information security criteria.</p>
+<ul>
+<li>Grading (high · medium · low) introduced in 2023-01: evaluation criteria differ by the using institution and the importance of the system</li>
+<li>Low grade: used for systems such as those handling public data without personal information</li>
+<li>According to press reports, Microsoft (2024-12), Google Cloud (2025-02) and AWS (2025-04) obtained the low grade</li>
+<li>On 2026-04-20 the Ministry of Science and ICT and the National Intelligence Service announced a reform that <strong>unifies public-cloud security verification under the NIS</strong> and abolishes CSAP. Press reports put the start at 2027-07. For public-sector deals, confirm with the buyer which rules apply at contract time.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+    R[Requirements] --&gt; P{Public-sector customer?}
+    P --&gt;|Yes| C[Check the required CSAP grade]
+    P --&gt;|No| G{Large share of overseas users?}
+    G --&gt;|Yes| H[Global cloud + consider multi-region]
+    G --&gt;|No| K[Seoul region: global or Korean cloud]
+</code></pre>
+<h2>Containers: Build Once, Deploy Many Times</h2>
+<p>A container image is an <strong>immutable artifact</strong> that bundles the runtime environment. Promoting the same image from Dev → Staging → Production reduces &quot;it worked on my machine&quot; problems.</p>
+<pre><code class="language-dockerfile">FROM node:22-slim
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+USER node
+CMD [&quot;node&quot;, &quot;server.js&quot;]
+</code></pre>
+<ul>
+<li>Do not ship development dependencies in the production image.</li>
+<li>Run as a non-root user.</li>
+<li>Deploying by <strong>digest</strong> (sha256) rather than tag prevents &quot;same name, different content&quot; accidents.</li>
+</ul>
+<p>Put a <code>.dockerignore</code> next to the Dockerfile.</p>
+<pre><code class="language-text">node_modules
+.env
+.git
+</code></pre>
+<p><code>COPY . .</code> copies the whole build context into the image. Without <code>.dockerignore</code>, a local <code>node_modules</code> overwrites the result of <code>npm ci</code> so the production image ships different dependencies, and secrets from <code>.env</code> and the <code>.git</code> history stay in an image layer. A smaller build context also builds faster.</p>
+<h2>Core Kubernetes Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pod</td>
+<td>The unit that runs containers</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Manages desired Pod count, version and rolling updates</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>Gives a group of Pods a stable internal address</td>
+</tr>
+<tr>
+<td>Ingress / Gateway API</td>
+<td>Connects external HTTP traffic to Services</td>
+</tr>
+<tr>
+<td>ConfigMap / Secret</td>
+<td>Injects configuration and sensitive data</td>
+</tr>
+<tr>
+<td>HorizontalPodAutoscaler</td>
+<td>Adjusts Pod count with load</td>
+</tr>
+</tbody></table>
+<h3>Minimal Manifest: Deployment + Service</h3>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: registry.example.com/web@sha256:&lt;digest&gt;
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz/ready
+              port: 8080
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz/live
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 8080
+</code></pre>
+<ul>
+<li><strong>readinessProbe</strong>: the Service sends traffic to the Pod only after it passes. Check readiness (database connection, warmed cache).</li>
+<li><strong>livenessProbe</strong>: the container is restarted when it fails. Check only whether the process is stuck. If it also checks an external database, every Pod restarts together during a database outage.</li>
+<li><strong>resources.requests</strong>: the scheduler uses these values to pick a node for the Pod.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Missing</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No readinessProbe</td>
+<td>The container counts as Ready as soon as it starts. Traffic reaches Pods that are still initializing, so errors spike on every rolling update</td>
+</tr>
+<tr>
+<td>No resources.requests</td>
+<td>The scheduler packs Pods onto one node without knowing what they need. When the node runs short, Pods using more than they requested are evicted first, and Pods that requested nothing (BestEffort) are first in line</td>
+</tr>
+<tr>
+<td>replicas: 1</td>
+<td>Whenever that Pod restarts, is evicted or its node is drained, nothing is left to serve traffic. A rollout also depends on a single new Pod&#39;s readiness, so an inaccurate probe means an outage</td>
+</tr>
+</tbody></table>
+<h2>Kubernetes Versions and Lifespan (as of 2026-09-28)</h2>
+<ul>
+<li>The latest minor is <strong>v1.37</strong> (released 2026-08-26). The project maintains release branches for the three most recent minors (1.37, 1.36, 1.35).</li>
+<li>Each minor receives patch support for <strong>about 14 months</strong>. In other words, <strong>upgrading at least once a year</strong> is part of the operating cost.</li>
+<li>Managed Kubernetes (EKS, GKE, AKS, NKS) publishes its own support calendar, so check the provider&#39;s documentation.</li>
+</ul>
+<h3>Ingress NGINX Retirement</h3>
+<p>In 2025-11 the Kubernetes project announced the retirement of the widely used <strong>Ingress NGINX</strong> controller. Best-effort maintenance ran until 2026-03; after that there are no releases, bug fixes or security fixes. The recommended path is migrating to the <strong>Gateway API</strong> or another ingress controller, and the conversion tool Ingress2Gateway 1.0 was released in 2026-03.</p>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad:  Two services and three developers, yet we build our own Kubernetes cluster
+      and run the same version for two years with no upgrade plan.
+Good: Start on serverless containers, and move to managed Kubernetes when services,
+      traffic and team size grow enough to need shared operations.
+</code></pre>
+<h2>Signals That You Need Kubernetes</h2>
+<ul>
+<li>Many independently deployed services need shared networking and security policies.</li>
+<li>Workloads such as batch, GPU or stateful services often exceed serverless limits.</li>
+<li>You have <strong>dedicated staff</strong> for cluster upgrades and incident response.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html">The pillars of the framework - AWS Well-Architected Framework</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions">Google Cloud Functions is now Cloud Run functions</a> — Google Cloud Blog, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html">AWS Regions and Availability Zones</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://www.ncloud.com/product/containers/nks">Kubernetes Service - NAVER Cloud Platform</a> — NAVER Cloud, accessed 2026-09-28</li>
+<li><a href="https://guide.ncloud-docs.com/docs/en/sourcedeploy-use-scenario">SourceDeploy: Create and manage deployment scenarios</a> — NAVER Cloud Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.nhncloud.com/ko/Container/NKS/ko/user-guide/">NHN Kubernetes Service (NKS) User Guide</a> — NHN Cloud Docs, accessed 2026-09-28</li>
+<li><a href="https://www.nhncloud.com/kr/certification?lang=ko">NHN Cloud Certifications</a> — NHN Cloud, accessed 2026-09-28</li>
+<li><a href="https://www.kisa.or.kr/1050603">Cloud Service Security Assurance Program (CSAP)</a> — KISA, accessed 2026-09-28</li>
+<li><a href="https://zdnet.co.kr/view/?no=20250401173707">After Google and MS, AWS also obtains CSAP low grade</a> — ZDNet Korea, 2025-04-01, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/releases/">Releases</a> — Kubernetes, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/blog/2026/08/26/kubernetes-v1-37-release/">Kubernetes v1.37 release</a> — Kubernetes Blog, 2026-08-26, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/">Ingress NGINX Retirement: What You Need to Know</a> — Kubernetes Blog, 2025-11-11, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/blog/2026/03/20/ingress2gateway-1-0-release/">Announcing Ingress2Gateway 1.0</a> — Kubernetes Blog, 2026-03-20, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Configure Liveness, Readiness and Startup Probes</a> — Kubernetes Docs, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">Resource Management for Pods and Containers</a> — Kubernetes Docs, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/">Node-pressure Eviction</a> — Kubernetes Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.docker.com/build/concepts/context/#dockerignore-files">Build context: .dockerignore files</a> — Docker Docs, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/startups/lp/aws-activate-credits">AWS Activate Credits</a> — AWS, accessed 2026-09-28</li>
+<li><a href="https://cloud.google.com/startup">Google for Startups Cloud Program</a> — Google Cloud, accessed 2026-09-28</li>
+<li><a href="https://www.microsoft.com/en-us/startups">Microsoft for Startups</a> — Microsoft, accessed 2026-09-28</li>
+<li><a href="https://zdnet.co.kr/view/?no=20240219151548">KT, NAVER and NHN in a heated race for public cloud</a> — ZDNet Korea, 2024-02-19, accessed 2026-09-28</li>
+<li><a href="https://view.asiae.co.kr/article/2026033010085798928">KT Cloud obtains CSAP for its own platform, targets the public market</a> — Asia Business Daily, 2026-03-30, accessed 2026-09-28</li>
+<li><a href="https://zdnet.co.kr/view/?no=20220630091430">Kakao Enterprise obtains CSAP with Kubernetes-based cloud</a> — ZDNet Korea, 2022-06-30, accessed 2026-09-28</li>
+<li><a href="https://docs.kakaocloud.com/en/service/container-pack/k8se">Kubernetes Engine</a> — KakaoCloud Docs, accessed 2026-09-28</li>
+<li><a href="https://zdnet.co.kr/view/?no=20260420130424">Public cloud certification unified under the NIS; CSAP dismantled after 10 years</a> — ZDNet Korea, 2026-04-20, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/01-deployment-targets/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Targets · Static · Serverless</span></a><a class="page-link next" href="../../../en/platform/03-ci-cd-pipeline/"><span><small>Next</small>CI/CD · OIDC · GitOps</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

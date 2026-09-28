@@ -57,9 +57,15 @@ flowchart LR
 
 Example comparison metrics: error rate, p95 latency, crash rate, key conversion rate. When automating, define **the pass criteria before the deploy**.
 
+How traffic is split depends on the platform.
+
+- **Cloud Run**: assign traffic percentages per revision, e.g. `gcloud run services update-traffic SERVICE --to-revisions REVISION=5` sends 5% to the new revision.
+- **Kubernetes**: a plain Deployment splits only by Pod count. **Argo Rollouts** (`setWeight` steps) or **Flagger** change weights in a service mesh, ingress or the Gateway API, and promote or roll back automatically based on metric analysis.
+- **Load balancer / CDN / DNS**: weighted routing between two targets or origins. DNS weights are imprecise because resolvers cache records (TTL).
+
 ## Feature Flag
 
-Martin Fowler's site describes release toggles as the most common way to "separate feature **release** from code **deployment**."
+Pete Hodgson's "Feature Toggles" article on martinfowler.com describes release toggles as the most common way to "separate feature **release** from code **deployment**."
 
 | Flag type | Lifespan | Example |
 |---|---|---|
@@ -106,3 +112,6 @@ A mobile binary that is already installed cannot be rolled back. That makes stor
 - [Parallel Change](https://martinfowler.com/bliki/ParallelChange.html) — martinfowler.com, accessed 2026-09-28
 - [Canarying Releases](https://sre.google/workbook/canarying-releases/) — Google SRE Workbook, accessed 2026-09-28
 - [OpenFeature becomes a CNCF incubating project](https://www.cncf.io/blog/2023/12/19/openfeature-becomes-a-cncf-incubating-project/) — CNCF, 2023-12-19, accessed 2026-09-28
+- [Rollbacks, gradual rollouts, and traffic migration](https://docs.cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration) — Google Cloud Docs, accessed 2026-09-28
+- [Canary Deployment Strategy](https://argo-rollouts.readthedocs.io/en/stable/features/canary/) — Argo Rollouts Docs, accessed 2026-09-28
+- [Flagger](https://fluxcd.io/flagger/) — Flux, accessed 2026-09-28

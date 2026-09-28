@@ -49,7 +49,7 @@ flowchart TD
 | Vercel | Hobby 플랜은 개인·비상업 용도 한정이며 상한 초과 구매 불가. Pro는 포함 Credit + 초과분 종량제. Functions는 Fluid compute의 Active CPU 과금(코드가 실제로 CPU를 쓰는 시간만 과금, 메모리는 별도) |
 | Netlify | 2025-09-04 이후 신규 계정은 Credit 기반 요금제. Production Deploy, Compute, Bandwidth, Web Request 등이 Credit을 소모. 이전 계정은 Legacy 플랜 유지 가능 |
 | Cloudflare | 신규 프로젝트는 Pages 대신 Workers 사용 권장(Pages는 계속 동작하나 새 기능은 Workers 중심). Workers는 Request + CPU Time 과금, Egress 과금 없음, Static Asset 요청은 무료·무제한 |
-| Heroku | 2026-02-06 Salesforce가 "Sustaining Engineering" 모델 전환 발표. 보안·안정성 유지는 계속하나 신규 기능 개발 중단, 신규 Enterprise 계약 중단 |
+| Heroku | 2026-02-06 Heroku(Salesforce)가 공식 Blog에서 "Sustaining Engineering" 모델 전환 발표. 보안·안정성 유지는 계속하나 신규 기능 개발 중단, 신규 Enterprise 계약 중단 |
 | AWS App Runner | 2026-04-30부터 신규 고객을 받지 않음. 기존 고객은 계속 사용 가능하나 신규 기능 계획 없음. AWS는 Amazon ECS Express Mode를 대안으로 권장 |
 
 > 교훈: Platform도 **수명 주기**가 있다. "지금 편한가"와 함께 "3년 뒤에도 이 Platform이 성장하고 있는가"를 확인한다.
@@ -97,6 +97,7 @@ Scale to Zero는 비용을 줄이지만, 첫 요청이 Instance 시작을 기다
 - [Netlify pricing update: Introducing credit-based plans](https://www.netlify.com/changelog/netlify-pricing-update-introducing-credit-based-plans/) — Netlify Changelog, 2025-09, 접근일 2026-09-28
 - [Migrate from Pages to Workers](https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/) — Cloudflare Docs, 접근일 2026-09-28
 - [Cloudflare Workers Pricing](https://developers.cloudflare.com/workers/platform/pricing/) — Cloudflare Docs, 접근일 2026-09-28
+- [An Update on Heroku](https://www.heroku.com/blog/an-update-on-heroku/) — Heroku Blog, 2026-02-06, 접근일 2026-09-28
 - [Salesforce Freezes Heroku Feature Development](https://devops.com/salesforce-freezes-heroku-feature-development-signals-long-term-shift/) — DevOps.com, 2026-02, 접근일 2026-09-28
 - [AWS App Runner availability change](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html) — AWS Docs, 접근일 2026-09-28
 - [Announcing Amazon ECS Express Mode](https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/) — AWS, 2025-11, 접근일 2026-09-28

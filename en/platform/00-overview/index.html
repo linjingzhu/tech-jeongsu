@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Platform Deployment &amp; Services Overview | Jeongsu Tech Notes</title>
+    <meta name="description" content="As of: 2026-09-28 There is a long distance between &quot;finishing&quot; code and users relying on it every day. This track maps the decisions that make up that dis…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/00-overview/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/00-overview/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="Platform Deployment &amp; Services Overview | Jeongsu Tech Notes" />
+    <meta property="og:description" content="As of: 2026-09-28 There is a long distance between &quot;finishing&quot; code and users relying on it every day. This track maps the decisions that make up that dis…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/00-overview.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link active" aria-current="page" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Platform Deployment Overview</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Platform Deployment &amp; Services Overview</h1>
+<p>As of: 2026-09-28</p>
+<p>There is a long distance between &quot;finishing&quot; code and users <strong>relying on it every day</strong>. This track maps the decisions that make up that distance.</p>
+<blockquote>
+<p>Deployment is the act of putting code into a runtime environment; a Service is the ongoing work of delivering that result at a promised level of quality.</p>
+</blockquote>
+<h2>Questions This Track Answers</h2>
+<ol>
+<li>Where will it run? (Static, PaaS, Container, Serverless, Cloud)</li>
+<li>How will it get there automatically? (CI/CD)</li>
+<li>How do we ship while reducing risk? (Canary, Feature Flag, Rollback)</li>
+<li>How does a mobile app pass store review and policy?</li>
+<li>By what address and path do users reach it? (Domain, DNS, TLS, CDN)</li>
+<li>How do we know it is working? (SLO, Observability, Incident)</li>
+<li>Can we prove what is inside and who built it? (Supply Chain)</li>
+<li>Who watches the cost, and who reduces it? (FinOps)</li>
+<li>How do many teams deploy along the same path? (Platform Engineering)</li>
+</ol>
+<h2>The Whole Flow</h2>
+<pre><code class="language-mermaid">flowchart LR
+    C[Code] --&gt; CI[CI Build / Test]
+    CI --&gt; A[Artifact]
+    A --&gt; CD[CD Deploy]
+    CD --&gt; T{Deployment target}
+    T --&gt; W[Web / API Platform]
+    T --&gt; S[App Store / Google Play]
+    W --&gt; E[Domain / TLS / CDN]
+    S --&gt; U[Users]
+    E --&gt; U
+    U --&gt; O[Observe / SLO]
+    O --&gt; I[Incident / Postmortem]
+    I --&gt; C
+    O --&gt; F[Cost / FinOps]
+    F --&gt; T
+</code></pre>
+<p>The key point is that the arrows return to Code. Deployment is not a one-time event but a <strong>loop of observing and improving</strong>.</p>
+<h2>Documents in This Track</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Document</th>
+<th>Core question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01</td>
+<td>Choosing a Deployment Target</td>
+<td>Which fits: Static, Edge, PaaS, or Serverless?</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Cloud and Kubernetes</td>
+<td>AWS / Google Cloud / Azure / Korean clouds and running containers</td>
+</tr>
+<tr>
+<td>03</td>
+<td>CI/CD Pipeline</td>
+<td>What do we automate from commit to production?</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Release Strategies</td>
+<td>Rolling, Blue-Green, Canary, Feature Flag, Rollback</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Mobile Store Distribution</td>
+<td>App Store and Google Play review, testing tracks, 2026 policies</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Domain · DNS · TLS · CDN</td>
+<td>A safe, fast path for users to reach you</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Observability and Incidents</td>
+<td>SLI/SLO, error budget, on-call, postmortem</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Security and Supply Chain</td>
+<td>Secrets, SBOM, SLSA, dependencies, regulation</td>
+</tr>
+<tr>
+<td>09</td>
+<td>FinOps and Platform Engineering</td>
+<td>Cost accountability and internal developer platforms</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Practical Guide for Small Teams</td>
+<td>The minimum setup for solo developers and small teams</td>
+</tr>
+</tbody></table>
+<h2>Seen as Layers</h2>
+<pre><code class="language-text">User experience    Store review, domain, response time, outage notices
+Operational quality  SLO, monitoring, on-call, postmortem
+Delivery flow      CI/CD, release strategy, rollback
+Runtime            Static / PaaS / Container / Serverless / Cloud
+Trust foundation   Secrets, SBOM, provenance, cost control
+</code></pre>
+<p>If a lower layer is shaky, effort in the upper layers collapses easily. Conversely, if the top layer (user experience) does not set goals, the lower layers tend to be over-engineered.</p>
+<h2>Reading Order by Role</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Suggested order</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Developer</td>
+<td>01 → 03 → 04 → 07 → 08</td>
+</tr>
+<tr>
+<td>PO / PM</td>
+<td>00 → 04 → 05 → 07 → 09</td>
+</tr>
+<tr>
+<td>Solo developer</td>
+<td>10 → 01 → 06 → 05</td>
+</tr>
+<tr>
+<td>Operations / Platform owner</td>
+<td>02 → 07 → 08 → 09</td>
+</tr>
+</tbody></table>
+<h2>How This Track Is Written</h2>
+<ul>
+<li>Time-sensitive information (policy deadlines, versions, pricing models) is written together with <strong>the date checked and the source</strong>.</li>
+<li>Exact prices change often, so they are left out; only <strong>the shape of the pricing model</strong> is described.</li>
+<li><strong>Decision criteria</strong> come before tool names. Tools change; the questions remain.</li>
+<li>The references at the end of each document favor official documentation and official blogs checked on 2026-09-28.</li>
+</ul>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad:  &quot;Let&#39;s just go with Kubernetes. We&#39;ll need it eventually anyway.&quot;
+Good: &quot;At our current traffic and team size we start on a PaaS,
+       but we build a container image so migrating later stays cheap.&quot;
+</code></pre>
+<pre><code class="language-text">Bad:  &quot;Deploy everything at once on Friday evening.&quot;
+Good: &quot;Small changes, often, to some users first, after checking how to roll back.&quot;
+</code></pre>
+<h2>One-Sentence Summary</h2>
+<p>A good deployment system creates <strong>a state where shipping often is not scary</strong>. Speed and stability do not take from each other; both come from the same habits (small changes, automation, observation, fast recovery).</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://dora.dev/guides/dora-metrics/">DORA&#39;s software delivery performance metrics</a> — DORA, accessed 2026-09-28</li>
+<li><a href="https://sre.google/sre-book/service-level-objectives/">Service Level Objectives (Site Reliability Engineering)</a> — Google SRE Book, accessed 2026-09-28</li>
+<li><a href="https://tag-app-delivery.cncf.io/whitepapers/platforms/">CNCF Platforms White Paper</a> — CNCF TAG App Delivery, published 2023-04, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/09-legal-ethics/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Law · Ethics · Ad Disclosure</span></a><a class="page-link next" href="../../../en/platform/01-deployment-targets/"><span><small>Next</small>Targets · Static · Serverless</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

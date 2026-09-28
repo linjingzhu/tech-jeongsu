@@ -64,6 +64,37 @@ Implications:
 - If the website and sales say different things, trust is lost
 - How AI answers summarize your product also becomes part of GTM (document 05)
 
+## Pricing · Packaging
+
+Pricing is not a single number; it is a decision about **what you charge for (the value metric)** and **where free ends (packaging)**.
+
+| Value metric | Advantage | Disadvantage | Applied to the incident-monitoring tool |
+|---|---|---|---|
+| Seat (number of users) | Easy for buyers to understand and forecast | Makes people hesitate to invite teammates, slowing spread | Small amounts for teams of 1–5; a poor fit if team invites are the core behavior |
+| Usage (log volume, events, alerts) | Price moves with value; customers can start small | Bills are hard to predict | Logs spike during incidents, so bills spike too and cause anxiety; a cap is needed |
+| Tier (bundles of features and limits) | Simple, with a clear upgrade path | A badly placed boundary leaks value or causes frustration | Split tiers by log retention, number of connected services, and team size |
+
+Place the free-plan boundary **after activation and before PQL**.
+
+```text
+Signup → Activation (first value experience)   ← free, and generously so, up to here
+       → PQL signals (team invites, repeated use, nearing limits)  ← paid boundary here
+       → Paid
+```
+
+- Block before activation and people leave before experiencing value.
+- Give everything free past the PQL signals and there is no reason to pay.
+
+Bad example:
+
+> The free plan blocks log integrations and only sends alerts. Signups leave without ever seeing the root-cause screen.
+
+Good example:
+
+> The free plan allows one connected service and 7-day retention, enough to experience the first root-cause investigation. The paid boundary sits where teams need more than 3 members, 30-day retention, or several connected services. (The numbers are assumptions, to be adjusted using the behavior of accounts that actually converted.)
+
+Treat a price change as a **Tier 1 launch** (table below). It needs existing-customer notices, sales and support scripts, and pricing pages that match the docs. If it raises a subscription price or converts free to paid, also check the E-Commerce Act's prior consent and notice requirements (document 09).
+
 ## Tiering Launches
 
 If every launch is the same size, the team burns out and customers become numb.
@@ -83,6 +114,15 @@ If every launch is the same size, the team burns out and customers become numb.
 - Sales and support briefing
 - Measurement plan (baseline, target, observation period)
 - Criteria for rollback or rescheduling
+
+A default schedule for Tier 1 and Tier 2 launches:
+
+```text
+T-4 weeks  Finalize positioning and message, finalize measurement plan (baseline, target)
+T-2 weeks  Brief sales and support; prepare docs, FAQ, and support scripts
+T-0        Launch, send through each channel
+T+14 days  Review results → expand / adjust / roll back
+```
 
 ## Bad Example / Good Example
 

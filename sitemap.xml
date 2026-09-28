@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/01-shared-repository/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/01-shared-repository/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/01-shared-repository/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/01-shared-repository/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/01-shared-repository/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/01-shared-repository/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/02-session-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/02-session-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/02-session-agent/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/02-session-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/02-session-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/02-session-agent/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/03-multi-agent/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/03-multi-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/03-multi-agent/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/04-self-improving/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/04-self-improving/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/04-self-improving/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/04-self-improving/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/04-self-improving/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/04-self-improving/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/05-git-operator/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/05-git-operator/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/05-git-operator/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/05-git-operator/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/05-git-operator/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/05-git-operator/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/01-repository-object/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/01-repository-object/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/01-repository-object/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/01-repository-object/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/01-repository-object/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/01-repository-object/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/02-head-checkout/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/02-head-checkout/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/02-head-checkout/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/02-head-checkout/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/02-head-checkout/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/02-head-checkout/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/03-worktree/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/03-worktree/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/03-worktree/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/03-worktree/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/03-worktree/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/03-worktree/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/04-remote-sync/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/04-remote-sync/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/04-remote-sync/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/04-remote-sync/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/04-remote-sync/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/04-remote-sync/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/05-recovery/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/05-recovery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/05-recovery/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/05-recovery/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/05-recovery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/05-recovery/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/06-history-operations/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/06-history-operations/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/06-history-operations/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/06-history-operations/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/06-history-operations/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/06-history-operations/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/07-collaboration-pr/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/07-collaboration-pr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/07-collaboration-pr/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/07-collaboration-pr/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/07-collaboration-pr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/07-collaboration-pr/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/08-actions-hook-cron/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/08-actions-hook-cron/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/08-actions-hook-cron/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/08-actions-hook-cron/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/08-actions-hook-cron/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/08-actions-hook-cron/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/09-build-directory/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/09-build-directory/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/09-build-directory/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/09-build-directory/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/09-build-directory/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/09-build-directory/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/10-practical-workflows/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/git/10-practical-workflows/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/10-practical-workflows/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai-map/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai-map/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai-map/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai-map/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai-map/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai-map/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/01-qualification/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/01-qualification/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/01-qualification/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/01-qualification/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/01-qualification/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/01-qualification/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/02-role-comparison/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/02-role-comparison/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/02-role-comparison/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/03-knowledge-map/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/03-knowledge-map/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/03-knowledge-map/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/03-knowledge-map/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/03-knowledge-map/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/03-knowledge-map/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/04-discovery-strategy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/04-discovery-strategy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/04-discovery-strategy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/04-discovery-strategy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/04-discovery-strategy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/04-discovery-strategy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/05-backlog-prioritization/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/05-backlog-prioritization/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/05-backlog-prioritization/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/05-backlog-prioritization/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/05-backlog-prioritization/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/05-backlog-prioritization/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/06-delivery-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/06-delivery-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/06-delivery-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/06-delivery-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/06-delivery-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/06-delivery-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/07-collaboration-artifacts/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/07-collaboration-artifacts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/07-collaboration-artifacts/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/07-collaboration-artifacts/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/07-collaboration-artifacts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/07-collaboration-artifacts/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/08-metrics-decisions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/08-metrics-decisions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/08-metrics-decisions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/08-metrics-decisions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/08-metrics-decisions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/08-metrics-decisions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/po/09-ai-product-owner/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/09-ai-product-owner/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/09-ai-product-owner/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/po/09-ai-product-owner/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/09-ai-product-owner/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/09-ai-product-owner/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/01-customer-research/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/01-customer-research/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/01-customer-research/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/01-customer-research/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/01-customer-research/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/01-customer-research/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/02-positioning-messaging/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/02-positioning-messaging/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/02-positioning-messaging/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/02-positioning-messaging/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/02-positioning-messaging/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/02-positioning-messaging/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/03-go-to-market/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/03-go-to-market/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/03-go-to-market/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/04-channels/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/04-channels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/04-channels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/06-measurement-privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/06-measurement-privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/06-measurement-privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/07-metrics/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/07-metrics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/07-metrics/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/07-metrics/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/07-metrics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/07-metrics/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/08-ai-workflows/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/08-ai-workflows/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/08-ai-workflows/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/08-ai-workflows/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/08-ai-workflows/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/08-ai-workflows/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/marketing/09-legal-ethics/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/09-legal-ethics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/09-legal-ethics/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/02-cloud-kubernetes/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/02-cloud-kubernetes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/02-cloud-kubernetes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/02-cloud-kubernetes/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03-ci-cd-pipeline/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03-ci-cd-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03-ci-cd-pipeline/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/04-release-strategies/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/04-release-strategies/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/04-release-strategies/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/05-mobile-app-stores/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/05-mobile-app-stores/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/05-mobile-app-stores/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/08-security-supply-chain/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/08-security-supply-chain/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/08-security-supply-chain/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/09-finops-platform-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/09-finops-platform-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/09-finops-platform-engineering/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/09-finops-platform-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/09-finops-platform-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/09-finops-platform-engineering/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/10-small-team-playbook/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/10-small-team-playbook/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/10-small-team-playbook/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/10-small-team-playbook/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/10-small-team-playbook/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/10-small-team-playbook/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/01-entity-choice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/01-entity-choice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/01-entity-choice/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/01-entity-choice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/01-entity-choice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/01-entity-choice/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/02-registration/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/02-registration/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/02-registration/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/02-registration/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/02-registration/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/02-registration/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/03-online-service-law/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/03-online-service-law/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/03-online-service-law/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/03-online-service-law/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/03-online-service-law/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/03-online-service-law/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/04-contracts-ip/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/04-contracts-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/04-contracts-ip/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/05-hiring-freelancers/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/05-hiring-freelancers/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/05-hiring-freelancers/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/05-hiring-freelancers/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/05-hiring-freelancers/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/05-hiring-freelancers/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/06-vat-invoices/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/06-vat-invoices/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/06-vat-invoices/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/07-income-tax-books/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/07-income-tax-books/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/07-income-tax-books/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/07-income-tax-books/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/07-income-tax-books/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/07-income-tax-books/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/08-tax-benefits-calendar/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/08-tax-benefits-calendar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/08-tax-benefits-calendar/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/08-tax-benefits-calendar/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/08-tax-benefits-calendar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/08-tax-benefits-calendar/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/business/09-startup-support/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/09-startup-support/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/09-startup-support/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/business/09-startup-support/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/09-startup-support/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/09-startup-support/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/about/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/about/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/about/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/contact/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/contact/"/>
+  </url>
+</urlset>

@@ -16,6 +16,14 @@
 - Google Cloud의 Cloud Functions는 **Cloud Run functions**로 이름이 바뀌고 Cloud Run 기반으로 통합되었다.
 - 세 Cloud 모두 서울 Region을 운영한다. 국내 사용자 대상이면 지연 시간과 데이터 위치 측면에서 먼저 검토한다.
 
+### 고르는 기준
+
+- **팀의 경험**: 이미 운영해 본 Cloud가 있다면 그것이 가장 큰 할인이다. IAM · Network · 과금 모델을 새로 배우는 비용은 생각보다 크다.
+- **필요한 Managed Service**: 쓰려는 DB, Queue, Data 분석, AI 서비스가 어느 Cloud에 Managed로 있는지, 서울 Region에서도 제공되는지 목록부터 만든다.
+- **Startup Credit**: AWS Activate, Google for Startups Cloud Program, Microsoft for Startups가 Credit을 준다. 조건과 금액은 자주 바뀌므로 신청 시점에 확인하고, **Credit이 끝난 뒤의 청구서**로 판단한다.
+- **Region과 Compliance**: 서울 Region 여부, 필요한 인증(공공은 CSAP, 금융권은 별도 기준), 데이터 국외 이전 조건을 확인한다.
+- **Egress와 Lock-in**: 밖으로 나가는 데이터 전송(Egress) 요금은 구조에 따라 청구서의 큰 부분이 된다. 한 Cloud 전용 기능을 많이 쓸수록 이전 비용이 커지므로 Container, IaC, OpenTelemetry처럼 옮길 수 있는 층을 남겨 둔다.
+
 ## 설계 기준: Well-Architected
 
 AWS Well-Architected Framework는 6개 Pillar로 설계를 점검한다.
@@ -37,13 +45,15 @@ Pillar 사이에는 **Trade-off**가 있다. 예를 들어 Multi-Region은 Relia
 |---|---|
 | 네이버클라우드 | Ncloud Kubernetes Service. SourceCommit · SourceBuild · SourceDeploy · SourcePipeline으로 CI/CD 구성 가능 |
 | NHN Cloud | NHN Kubernetes Service(NKS), Deploy 서비스. 2022-12 공공기관용 NHN Cloud CSAP 인증 취득(자사 안내) |
-| KT Cloud | 네이버클라우드·NHN Cloud와 함께 국내 공공 Cloud 시장의 주요 사업자로 보도됨 |
+| KT Cloud | 네이버클라우드·NHN Cloud와 함께 국내 공공 Cloud '빅3'로 보도(2024-02). 2026-03 자체 개발한 'kt cloud PLATFORM'(Kubernetes 기반으로 OpenStack 재구성)의 CSAP 인증 획득 보도 |
+| 카카오클라우드 | 카카오엔터프라이즈 운영. Managed Kubernetes인 Kubernetes Engine 제공. 전신 '카카오 i 클라우드'가 Kubernetes 기반 IaaS로 CSAP 사후심사를 통과했다고 2022-06 보도 |
 
 **CSAP(클라우드 서비스 보안인증)** 은 「클라우드컴퓨팅 발전 및 이용자 보호에 관한 법률」에 근거해 공공기관에 공급되는 Cloud의 정보보호 기준 준수를 인증하는 제도다.
 
 - 2023-01 등급제(상·중·하) 도입: 이용기관 특성과 시스템 중요도에 따라 평가 기준을 차등 적용
 - 하 등급: 개인정보가 없는 공개 공공 데이터를 다루는 시스템 등에 사용
 - 보도 기준 Microsoft(2024-12), Google Cloud(2025-02), AWS(2025-04)가 하 등급을 획득
+- 2026-04-20 과학기술정보통신부와 국가정보원은 공공 Cloud 보안 검증을 **국정원 단일 체계로 일원화**하고 CSAP를 폐지하는 개편을 발표했다. 보도 기준 시행은 2027-07이다. 공공 사업은 계약 시점에 적용되는 기준을 발주처와 확인한다.
 
 ```mermaid
 flowchart LR
@@ -72,6 +82,16 @@ CMD ["node", "server.js"]
 - root가 아닌 사용자로 실행한다.
 - Tag보다 **Digest**(sha256)로 배포하면 "같은 이름, 다른 내용" 사고를 막는다.
 
+Dockerfile 옆에 `.dockerignore`를 둔다.
+
+```text
+node_modules
+.env
+.git
+```
+
+`COPY . .`는 Build Context 전체를 Image에 넣는다. `.dockerignore`가 없으면 로컬 `node_modules`가 `npm ci` 결과를 덮어써 운영 Image에 다른 의존성이 들어가고, `.env`의 Secret과 `.git` 이력이 Image Layer에 그대로 남는다. Build Context가 작아져 Build도 빨라진다.
+
 ## Kubernetes 핵심 개념
 
 | 개념 | 역할 |
@@ -82,6 +102,68 @@ CMD ["node", "server.js"]
 | Ingress / Gateway API | 외부 HTTP Traffic을 Service로 연결 |
 | ConfigMap / Secret | 설정과 민감 정보 주입 |
 | HorizontalPodAutoscaler | 부하에 따라 Pod 수 조절 |
+
+### 최소 Manifest: Deployment + Service
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: registry.example.com/web@sha256:<digest>
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz/ready
+              port: 8080
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz/live
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 8080
+```
+
+- **readinessProbe**: 통과해야 Service가 이 Pod로 Traffic을 보낸다. 준비 상태(DB 연결, Cache 준비)를 본다.
+- **livenessProbe**: 실패하면 Container를 재시작한다. 프로세스가 멈췄는지만 본다. 외부 DB까지 검사하면 DB 장애 때 모든 Pod가 함께 재시작된다.
+- **resources.requests**: Scheduler가 이 값으로 Pod를 놓을 Node를 고른다.
+
+| 빠뜨린 것 | 일어나는 일 |
+|---|---|
+| readinessProbe 없음 | Container가 시작되자마자 Ready로 간주된다. 아직 초기화 중인 Pod로 Traffic이 가서 Rolling Update 때마다 Error가 튄다 |
+| resources.requests 없음 | Scheduler가 필요한 자원을 모른 채 한 Node에 Pod를 몰아넣는다. Node 자원이 부족해지면 사용량이 요청량을 넘는 Pod부터 Evict되는데, 요청량이 0인 Pod(BestEffort)가 가장 먼저 대상이 된다 |
+| replicas: 1 | 그 Pod가 재시작 · Evict되거나 Node를 비울(Drain) 때마다 받아 줄 Pod가 없다. Rollout도 새 Pod 하나의 Readiness에만 기대므로 Probe가 부정확하면 곧바로 중단이다 |
 
 ## Kubernetes 버전과 수명 (2026-09-28 기준)
 
@@ -123,3 +205,15 @@ Kubernetes 프로젝트는 널리 쓰이던 **Ingress NGINX** Controller의 은�
 - [Kubernetes v1.37 release](https://kubernetes.io/blog/2026/08/26/kubernetes-v1-37-release/) — Kubernetes Blog, 2026-08-26, 접근일 2026-09-28
 - [Ingress NGINX Retirement: What You Need to Know](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/) — Kubernetes Blog, 2025-11-11, 접근일 2026-09-28
 - [Announcing Ingress2Gateway 1.0](https://kubernetes.io/blog/2026/03/20/ingress2gateway-1-0-release/) — Kubernetes Blog, 2026-03-20, 접근일 2026-09-28
+- [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) — Kubernetes Docs, 접근일 2026-09-28
+- [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) — Kubernetes Docs, 접근일 2026-09-28
+- [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/) — Kubernetes Docs, 접근일 2026-09-28
+- [Build context: .dockerignore files](https://docs.docker.com/build/concepts/context/#dockerignore-files) — Docker Docs, 접근일 2026-09-28
+- [AWS Activate Credits](https://aws.amazon.com/startups/lp/aws-activate-credits) — AWS, 접근일 2026-09-28
+- [Google for Startups Cloud Program](https://cloud.google.com/startup) — Google Cloud, 접근일 2026-09-28
+- [Microsoft for Startups](https://www.microsoft.com/en-us/startups) — Microsoft, 접근일 2026-09-28
+- [KT·네이버·NHN, 공공 클라우드 '불꽃 경쟁'](https://zdnet.co.kr/view/?no=20240219151548) — ZDNet Korea, 2024-02-19, 접근일 2026-09-28
+- [KT클라우드, 자체 플랫폼 CSAP 인증 획득…공공시장 공략 본격화](https://view.asiae.co.kr/article/2026033010085798928) — 아시아경제, 2026-03-30, 접근일 2026-09-28
+- [카카오엔터프라이즈, 쿠버네티스 기반 클라우드로 CSAP 획득](https://zdnet.co.kr/view/?no=20220630091430) — ZDNet Korea, 2022-06-30, 접근일 2026-09-28
+- [Kubernetes Engine](https://docs.kakaocloud.com/en/service/container-pack/k8se) — KakaoCloud Docs, 접근일 2026-09-28
+- [공공클라우드 인증, 국정원으로 단일화...CSAP 10년만에 해체](https://zdnet.co.kr/view/?no=20260420130424) — ZDNet Korea, 2026-04-20, 접근일 2026-09-28

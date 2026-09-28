@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>PO · PM · Project Manager 차이 | Jeongsu Tech Notes</title>
+    <meta name="description" content="조직마다 명칭은 다르지만 책임의 중심을 구분하면 이해하기 쉽다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/po/02-role-comparison/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="PO · PM · Project Manager 차이 | Jeongsu Tech Notes" />
+    <meta property="og:description" content="조직마다 명칭은 다르지만 책임의 중심을 구분하면 이해하기 쉽다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/po/02-role-comparison/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/po/02-role-comparison.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group" data-group="3"><button aria-expanded="true" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link active" aria-current="page" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>제품 기획과 운영</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>PO · PM · Project Manager 차이</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>PO · PM · Project Manager 차이</h1>
+<p>조직마다 명칭은 다르지만 책임의 중심을 구분하면 이해하기 쉽다.</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>중심 질문</th>
+<th>주요 책임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Product Owner</td>
+<td>다음에 무엇을 만들 것인가?</td>
+<td>Backlog, 우선순위, 팀 의사결정</td>
+</tr>
+<tr>
+<td>Product Manager</td>
+<td>어떤 제품을 왜 만들 것인가?</td>
+<td>시장, 전략, Product Direction</td>
+</tr>
+<tr>
+<td>Project Manager</td>
+<td>어떻게 일정 안에 완료할 것인가?</td>
+<td>일정, 자원, 의존성, 실행 관리</td>
+</tr>
+<tr>
+<td>UX/Product Designer</td>
+<td>사용자가 어떻게 경험할 것인가?</td>
+<td>Workflow, Interaction, Usability</td>
+</tr>
+<tr>
+<td>Tech Lead</td>
+<td>기술적으로 어떻게 만들 것인가?</td>
+<td>Architecture, 구현 방향, 품질</td>
+</tr>
+</tbody></table>
+<pre><code class="language-mermaid">flowchart TD
+    PM[Product Manager&lt;br/&gt;시장·전략] --&gt; PO[Product Owner&lt;br/&gt;우선순위·실행]
+    PO --&gt; DEV[Development Team]
+    PO --&gt; UX[Product / UX Design]
+    PJ[Project Manager&lt;br/&gt;일정·조율] --&gt; DEV
+    TL[Tech Lead&lt;br/&gt;기술 방향] --&gt; DEV
+</code></pre>
+<h2>실제 조직에서는 겹친다</h2>
+<p>작은 팀에서는 한 사람이 PM + PO를 동시에 할 수 있다.</p>
+<pre><code class="language-text">Startup
+Founder / Product Lead
+├─ PM 역할
+├─ PO 역할
+└─ 일부 Project Management
+</code></pre>
+<p>큰 조직에서는 책임이 더 나뉜다.</p>
+<h2>역할을 구분하는 가장 쉬운 기준</h2>
+<h3>Product Manager</h3>
+<p>시장과 제품 전체를 본다.</p>
+<ul>
+<li>시장</li>
+<li>경쟁</li>
+<li>Positioning</li>
+<li>가격</li>
+<li>장기 전략</li>
+<li>Growth</li>
+</ul>
+<h3>Product Owner</h3>
+<p>개발팀 가까이에서 제품 결정을 구체화한다.</p>
+<ul>
+<li>Backlog</li>
+<li>Scope</li>
+<li>Acceptance</li>
+<li>Priority</li>
+<li>Release 단위</li>
+</ul>
+<h3>Project Manager</h3>
+<p>일이 계획대로 흘러가는지 관리한다.</p>
+<ul>
+<li>일정</li>
+<li>Resource</li>
+<li>Dependency</li>
+<li>Risk</li>
+<li>Communication Plan</li>
+</ul>
+<h2>가장 흔한 실패</h2>
+<p>PO가 Project Manager처럼 일정만 추적하면 제품 판단이 사라진다.</p>
+<p>반대로 전략만 말하고 개발팀의 세부 결정에 답하지 못하면 PO 역할이 비어 버린다.</p>
+<blockquote>
+<p>PO는 전략과 구현 사이를 연결하는 <strong>의사결정 인터페이스</strong>라고 볼 수 있다.</p>
+</blockquote>
+<h2>Product Manager의 실제 업무</h2>
+<p>PM은 사용자 문제와 사업 목표를 연결하고, 출시 이후에도 제품 방향을 조정한다. 일상 업무는 다음과 같이 구체화할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>업무</th>
+<th>실제 행동</th>
+<th>산출물 예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discovery</td>
+<td>인터뷰·사용 데이터·경쟁 제품에서 문제를 검증</td>
+<td>문제 정의, 조사 요약</td>
+</tr>
+<tr>
+<td>전략</td>
+<td>대상 사용자와 차별점, 성공 기준을 정리</td>
+<td>Product Brief, 전략 문서</td>
+</tr>
+<tr>
+<td>우선순위</td>
+<td>기회를 비교하고 팀·이해관계자와 선택을 조율</td>
+<td>Outcome 중심 Roadmap, 결정 기록</td>
+</tr>
+<tr>
+<td>성과 확인</td>
+<td>출시 후 사용과 결과를 검토해 다음 투자를 조정</td>
+<td>지표 검토, 실험 결과</td>
+</tr>
+</tbody></table>
+<p>책임의 구체적인 분담은 조직 규모와 팀 구성에 따라 달라진다. <a href="https://www.atlassian.com/agile/product-management/product-manager">Atlassian의 Product Manager 역할 설명</a>을 바탕으로 정리했다.</p>
+<h2>Project Manager의 실제 업무</h2>
+<p>Project Manager는 합의한 결과물을 전달할 수 있도록 실행 조건을 관리한다. 다음은 프로젝트 전반에서 사용하는 실무 예다.</p>
+<table>
+<thead>
+<tr>
+<th>업무</th>
+<th>실제 행동</th>
+<th>산출물 예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>범위·계획</td>
+<td>완료 조건을 합의하고 작업·일정·자원을 계획</td>
+<td>범위 정의, 일정표, 자원 계획</td>
+</tr>
+<tr>
+<td>의존성·위험</td>
+<td>선행 작업과 병목을 확인하고 대응 담당자를 지정</td>
+<td>의존성 목록, 위험·이슈 기록</td>
+</tr>
+<tr>
+<td>진행·변경</td>
+<td>계획 대비 상황과 변경 영향을 공유하고 승인을 조율</td>
+<td>상태 보고, 변경 기록</td>
+</tr>
+<tr>
+<td>종료</td>
+<td>인수·운영 이관·남은 책임을 확인하고 교훈을 정리</td>
+<td>인수 확인, 이관 문서, 회고</td>
+</tr>
+</tbody></table>
+<p>이 업무는 범위, 결과물, 위험, 팀 간 소통을 다루는 <a href="https://www.pmi.org/about/what-is-project-management">PMI의 프로젝트 관리 설명</a>을 실제 작업으로 풀어낸 것이다.</p>
+<h2>협업과 결정의 경계</h2>
+<p>제품 방향·가치 판단은 PM/PO가, 실행 가능성과 구현 방법은 개발팀이, 일정·자원·의존성 조율은 Project Manager가 중심이 되어 논의한다. 예를 들어 일정 지연이 예상되면 Project Manager가 영향을 드러내고, PM/PO가 가치에 따른 범위 선택을 개발팀과 협의한다. 직함만으로 승인 권한이 정해지지는 않으므로 조직별 결정권자를 명시해야 한다.</p>
+<p>Scrum에서 PO는 <strong>제품 가치 극대화와 효과적인 Product Backlog 관리에 대한 최종 책임</strong>을 진다. 단순한 Sprint 행정 담당자가 아니다. <strong>Sprint Backlog는 Developers가 만들고 관리하는 계획</strong>이며, 구현 방법 역시 Developers가 결정한다. PM과 Project Manager는 Scrum이 별도로 정의한 책임 역할이 아니다. <a href="https://scrumguides.org/scrum-guide.html">Scrum Guide</a>.</p>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../po/01-qualification/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>PO의 자격과 핵심 역량</span></a><a class="page-link next" href="../../po/03-knowledge-map/"><span><small>다음 문서</small>PO가 알아야 할 지식 지도</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

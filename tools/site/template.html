@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="{{lang}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>{{title}}</title>
+    <meta name="description" content="{{description}}" />
+    <meta name="robots" content="{{robots}}" />
+    <link rel="canonical" href="{{canonical}}" />
+{{alternates}}
+    <meta property="og:type" content="{{ogType}}" />
+    <meta property="og:site_name" content="{{siteName}}" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{description}}" />
+    <meta property="og:url" content="{{canonical}}" />
+    <meta property="og:locale" content="{{ogLocale}}" />
+    <meta name="site-root" content="{{root}}" />
+    <meta name="doc-path" content="{{docPath}}" />
+{{adsense}}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{root}}assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="{{root}}assets/style.css?v=site-pages-1" />
+    <script defer src="{{root}}assets/vendor/marked.min.js"></script>
+    <script defer src="{{root}}assets/vendor/purify.min.js"></script>
+    <script defer src="{{root}}assets/vendor/mermaid.min.js"></script>
+    <script defer src="{{root}}assets/vendor/highlight.min.js"></script>
+    <script defer src="{{root}}assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="{{root}}assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="{{root}}assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="{{root}}assets/search.js?v=site-pages-1"></script>
+    <script defer src="{{root}}assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">{{t:skip}}</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="{{t:openMenu}}"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="{{root}}assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="{{homeHref}}">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">{{t:tagline}}</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="{{root}}assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="{{t:searchDocs}}"
+            placeholder="{{t:searchDocs}}"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="{{t:searchResults}}">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            {{t:retry}}
+          </button>
+          <nav id="searchResults" aria-label="{{t:searchResults}}"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="{{t:openToc}}"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="{{root}}assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="{{koPressed}}">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="{{enPressed}}">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="{{t:documentExplorer}}">
+      <nav id="tree" aria-label="{{t:documentTree}}">{{tree}}</nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">{{t:onThisPage}}</h2>
+      <nav id="toc" aria-label="{{t:internalToc}}"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="{{t:currentDocument}}">{{breadcrumb}}</div>
+      <article id="content" aria-busy="{{busy}}" data-prerendered="{{prerendered}}">{{content}}</article>
+      <nav id="pageNav" aria-label="{{t:previous}} / {{t:next}}">{{pageNav}}</nav>
+      <footer class="site-footer">
+        <nav aria-label="{{t:siteInfo}}">{{footerLinks}}</nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="{{t:readingPosition}}"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

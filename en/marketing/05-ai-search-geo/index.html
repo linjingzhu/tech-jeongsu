@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>AI Search · Answer Engines · GEO/AEO | Jeongsu Tech Notes</title>
+    <meta name="description" content="The biggest change in search in 2024–2026 is the growing number of screens where an AI-generated summary appears before the list of links. The industry ca…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="AI Search · Answer Engines · GEO/AEO | Jeongsu Tech Notes" />
+    <meta property="og:description" content="The biggest change in search in 2024–2026 is the growing number of screens where an AI-generated summary appears before the list of links. The industry ca…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/marketing/05-ai-search-geo.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link active" aria-current="page" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Marketing</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>AI Search · GEO/AEO</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>AI Search · Answer Engines · GEO/AEO</h1>
+<p>The biggest change in search in 2024–2026 is the growing number of screens where <strong>an AI-generated summary appears before the list of links</strong>. The industry calls the response to this GEO (Generative Engine Optimization) or AEO (Answer Engine Optimization).</p>
+<h2>Current State (as of 2026-09-28, with source dates)</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Confirmed fact</th>
+<th>Source date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google AI Overviews</td>
+<td>Available in more than 200 countries and territories and more than 40 languages</td>
+<td>Google announcement, 2025-05</td>
+</tr>
+<tr>
+<td>Google AI Mode</td>
+<td>Five languages added, including Korean</td>
+<td>Google announcement, 2025-09</td>
+</tr>
+<tr>
+<td>Google AI Mode</td>
+<td>Google announced it passed 1 billion monthly users one year after launch</td>
+<td>Google I/O, 2026-05</td>
+</tr>
+<tr>
+<td>Search Console</td>
+<td>Reports for visibility in generative AI features introduced</td>
+<td>Announcement, 2026-06</td>
+</tr>
+<tr>
+<td>ChatGPT search</td>
+<td>Started providing answers with links to web sources</td>
+<td>OpenAI announcement, 2024-10</td>
+</tr>
+<tr>
+<td>ChatGPT ads</td>
+<td>Ad testing announced for US Free and Go users; later pilot expansion to countries including Korea reported</td>
+<td>Announced 2026-01, reported 2026-08</td>
+</tr>
+<tr>
+<td>Naver AI Briefing</td>
+<td>AI summary answers with source attribution introduced in integrated search</td>
+<td>Reported 2025-03</td>
+</tr>
+</tbody></table>
+<p>User and country counts are <strong>the providers&#39; own announcements</strong> and change often. Re-check the originals before planning.</p>
+<h2>Clicks Can Fall</h2>
+<p>Pew Research Center analyzed March 2025 browsing data from 900 US adults (published 2025-07-22). On Google search pages with an AI summary, users clicked a result link 8% of the time; on pages without one, 15% of the time. Clicks on source links inside the AI summary were very rare.</p>
+<p>This is <strong>the observation of a single study</strong> and may differ by industry and query type. The direction, however, is clear.</p>
+<ul>
+<li>The &quot;informational query → blog visit → conversion&quot; model may weaken</li>
+<li>The gap between impressions and clicks widens</li>
+<li><strong>Being mentioned or cited inside the answer</strong> becomes one of the goals in itself</li>
+</ul>
+<p>In 2024-02 Gartner <strong>predicted</strong> that &quot;by 2026, traditional search engine volume will drop 25%&quot;. It is a prediction, not a measurement.</p>
+<h2>What Google Officially Says</h2>
+<p>Google Search Central&#39;s guidance (the 2025-05 blog post and the 2026-05 optimization guide) can be summarized as follows.</p>
+<ul>
+<li>There are <strong>no additional technical requirements</strong> to appear in AI Overviews or AI Mode. A page that is indexed and eligible for a snippet is a candidate</li>
+<li>Existing SEO fundamentals remain the foundation</li>
+<li>New machine-readable files, AI-specific text files, or special schema are <strong>not needed</strong></li>
+<li>There is no need to force content into small chunks</li>
+<li><strong>Unique, experience-based (non-commodity) content</strong> matters, not common knowledge</li>
+<li>Google recommends prioritizing SEO fundamentals over &quot;AEO/GEO hacks&quot; (such as manufacturing mentions)</li>
+</ul>
+<p>Caution: this is guidance <strong>for Google Search</strong>. For other answer engines, check each provider&#39;s documentation separately.</p>
+<h2>ChatGPT Search and Crawlers</h2>
+<p>According to OpenAI&#39;s documentation, crawler roles are separated.</p>
+<table>
+<thead>
+<tr>
+<th>User-agent</th>
+<th>Role</th>
+<th>If blocked</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OAI-SearchBot</td>
+<td>Appearing in ChatGPT search results</td>
+<td>Hard to appear in ChatGPT search answers and snippets</td>
+</tr>
+<tr>
+<td>GPTBot</td>
+<td>Collection for training generative models</td>
+<td>Signals that you do not want content used for training</td>
+</tr>
+</tbody></table>
+<p>So it is possible to <strong>allow search visibility while refusing training collection</strong>. Decide robots.txt settings together with legal and content policy.</p>
+<h2>Practical Checklist</h2>
+<pre><code class="language-mermaid">flowchart LR
+    Q[Customer Questions] --&gt; C[Unique Content]
+    C --&gt; T[Technical Access]
+    T --&gt; E[Entity Consistency]
+    E --&gt; M[Measure Mentions]
+    M --&gt; Q
+</code></pre>
+<ol>
+<li><strong>Build a question list</strong>: Collect questions customers might ask AI from interviews, sales, and support records.</li>
+<li><strong>Create unique answers</strong>: Publish information only you know precisely, such as pricing, limits, comparisons, setup procedures, and real cases.</li>
+<li><strong>Make it accessible</strong>: Check indexing, crawler permissions, rendering, and page speed.</li>
+<li><strong>Stay consistent</strong>: Make sure product names, prices, and feature descriptions match across the website, docs, marketplaces, and review sites. AI answers combine many sources, so inconsistencies can turn into wrong answers.</li>
+<li><strong>Measure</strong>: Use Search Console&#39;s generative AI reports and a manual check that regularly asks AI services key questions and records mentions and accuracy.</li>
+</ol>
+<h2>Bad Example / Good Example</h2>
+<p>Bad example:</p>
+<blockquote>
+<p>Auto-generate 100 FAQ pages to rank well in AI, and ask community members to post praise for our product.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>For the real customer question &quot;What happens to my data when I move from my current tool?&quot;, write a document that states the migration steps, limits, and time required precisely, and make the numbers on the pricing page match the docs.</p>
+</blockquote>
+<p>The second action in the bad example is manufactured mention, which Google advises against; if it involves compensation, it also becomes an ad disclosure issue (document 09).</p>
+<h2>What Is Still Uncertain</h2>
+<ul>
+<li>Much of how AI answers select sources is not public</li>
+<li>Measurement tooling differs widely by service</li>
+<li>The format and rules for ads inside AI answers keep changing</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://blog.google/products-and-platforms/products/search/ai-overview-expansion-may-2025-update/">AI Overviews are now available in over 200 countries and territories — Google</a> (2025-05, accessed 2026-09-28)</li>
+<li><a href="https://blog.google/products/search/ai-mode-expands-more-languages/">AI Mode is now available in five new languages — Google</a> (2025-09, accessed 2026-09-28)</li>
+<li><a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search&#39;s I/O 2026 updates — Google</a> (2026-05, accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI Features and Your Website — Google Search Central</a> (accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">Top ways to ensure your content performs well in Google&#39;s AI experiences on Search — Google Search Central</a> (2025-05, accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2026/05/a-new-resource-for-optimizing">A new resource for optimizing for generative AI in Google Search — Google Search Central</a> (2026-05, accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Introducing Search Generative AI performance reports in Search Console — Google Search Central</a> (2026-06, accessed 2026-09-28)</li>
+<li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Google users are less likely to click on links when an AI summary appears — Pew Research Center</a> (2025-07-22, accessed 2026-09-28)</li>
+<li><a href="https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents">Gartner Predicts Search Engine Volume Will Drop 25% by 2026 — Gartner</a> (2024-02-19, accessed 2026-09-28)</li>
+<li><a href="https://openai.com/index/introducing-chatgpt-search/">Introducing ChatGPT search — OpenAI</a> (2024-10, accessed 2026-09-28)</li>
+<li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI Crawlers — OpenAI</a> (accessed 2026-09-28)</li>
+<li><a href="https://openai.com/index/testing-ads-in-chatgpt/">Testing ads in ChatGPT — OpenAI</a> (2026-01-16, accessed 2026-09-28)</li>
+<li><a href="https://zdnet.co.kr/view/?no=20260813204559">OpenAI ChatGPT ads pilot in five countries including Korea — ZDNet Korea</a> (2026-08-13, accessed 2026-09-28)</li>
+<li><a href="https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html">Naver introduces AI Briefing in search — NewDaily</a> (2025-03-24, accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/04-channels/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Channels · Content · Paid · Lifecycle</span></a><a class="page-link next" href="../../../en/marketing/06-measurement-privacy/"><span><small>Next</small>Measurement · Attribution · Privacy</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

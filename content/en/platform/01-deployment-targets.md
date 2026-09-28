@@ -49,7 +49,7 @@ flowchart TD
 | Vercel | The Hobby plan is for personal, non-commercial use only and cannot buy usage beyond its caps. Pro includes a credit plus pay-as-you-go overage. Functions use Fluid compute Active CPU pricing (billed only while code actually uses CPU; memory billed separately) |
 | Netlify | New accounts since 2025-09-04 use credit-based plans. Production deploys, compute, bandwidth, web requests and more consume credits. Earlier accounts may stay on legacy plans |
 | Cloudflare | New projects are advised to use Workers instead of Pages (Pages keeps working, but new features focus on Workers). Workers bills requests + CPU time, no egress charges, and static asset requests are free and unlimited |
-| Heroku | On 2026-02-06 Salesforce announced a move to a "sustaining engineering" model. Security and stability work continues, but new feature development and new Enterprise contracts stopped |
+| Heroku | On 2026-02-06 Heroku (Salesforce) announced on its official blog a move to a "sustaining engineering" model. Security and stability work continues, but new feature development and new Enterprise contracts stopped |
 | AWS App Runner | Closed to new customers from 2026-04-30. Existing customers can keep using it, with no new features planned. AWS recommends Amazon ECS Express Mode as the alternative |
 
 > Lesson: platforms have **lifecycles** too. Alongside "is it convenient now?", ask "will this platform still be growing in three years?"
@@ -97,6 +97,7 @@ Good: Before revenue starts, check plan terms, caps and how overage is billed.
 - [Netlify pricing update: Introducing credit-based plans](https://www.netlify.com/changelog/netlify-pricing-update-introducing-credit-based-plans/) — Netlify Changelog, 2025-09, accessed 2026-09-28
 - [Migrate from Pages to Workers](https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/) — Cloudflare Docs, accessed 2026-09-28
 - [Cloudflare Workers Pricing](https://developers.cloudflare.com/workers/platform/pricing/) — Cloudflare Docs, accessed 2026-09-28
+- [An Update on Heroku](https://www.heroku.com/blog/an-update-on-heroku/) — Heroku Blog, 2026-02-06, accessed 2026-09-28
 - [Salesforce Freezes Heroku Feature Development](https://devops.com/salesforce-freezes-heroku-feature-development-signals-long-term-shift/) — DevOps.com, 2026-02, accessed 2026-09-28
 - [AWS App Runner availability change](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html) — AWS Docs, accessed 2026-09-28
 - [Announcing Amazon ECS Express Mode](https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/) — AWS, 2025-11, accessed 2026-09-28

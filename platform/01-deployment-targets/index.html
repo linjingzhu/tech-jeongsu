@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>배포 대상 고르기: Static부터 Serverless까지 | Jeongsu Tech Notes</title>
+    <meta name="description" content="&quot;어디에 올릴까?&quot;는 기술 취향이 아니라 운영 부담을 누가 질 것인가에 대한 결정이다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="배포 대상 고르기: Static부터 Serverless까지 | Jeongsu Tech Notes" />
+    <meta property="og:description" content="&quot;어디에 올릴까?&quot;는 기술 취향이 아니라 운영 부담을 누가 질 것인가에 대한 결정이다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/platform/01-deployment-targets.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link active" aria-current="page" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Platform 배포와 서비스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>배포 대상 · Static · Serverless</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>배포 대상 고르기: Static부터 Serverless까지</h1>
+<p>&quot;어디에 올릴까?&quot;는 기술 취향이 아니라 <strong>운영 부담을 누가 질 것인가</strong>에 대한 결정이다.</p>
+<h2>추상화 사다리</h2>
+<pre><code class="language-mermaid">flowchart TD
+    V[VM / IaaS] --&gt; K[Container / Kubernetes]
+    K --&gt; P[PaaS / Managed Container]
+    P --&gt; F[Functions / FaaS]
+    F --&gt; S[Static / Edge Hosting]
+</code></pre>
+<ul>
+<li>아래로 내려갈수록 <strong>직접 관리할 것</strong>(OS, Patch, Scaling, Load Balancer)이 줄어든다.</li>
+<li>대신 <strong>제약</strong>(실행 시간, 언어, Network, 상태 저장 방식)이 늘어난다.</li>
+<li>좋은 선택은 &quot;가장 강력한 것&quot;이 아니라 <strong>요구사항을 만족하는 가장 아래 칸</strong>이다.</li>
+</ul>
+<h2>유형별 비교</h2>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>예시</th>
+<th>잘 맞는 경우</th>
+<th>주의점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static / Edge</td>
+<td>GitHub Pages, Cloudflare Workers Static Assets, Netlify, Vercel</td>
+<td>문서, Landing Page, SPA</td>
+<td>Server 로직은 없거나 Edge Function으로 제한</td>
+</tr>
+<tr>
+<td>PaaS</td>
+<td>Heroku, Azure App Service</td>
+<td>표준 Web App, 빠른 시작</td>
+<td>제공사 로드맵에 종속</td>
+</tr>
+<tr>
+<td>Managed / Serverless Container</td>
+<td>Google Cloud Run, Azure Container Apps, Amazon ECS Express Mode</td>
+<td>Container Image가 있는 API</td>
+<td>Cold Start, 요청 시간 제한</td>
+</tr>
+<tr>
+<td>Functions (FaaS)</td>
+<td>AWS Lambda, Cloud Run functions, Azure Functions</td>
+<td>Event 처리, 짧은 작업</td>
+<td>실행 시간·메모리 제한, 상태 없음</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Amazon EKS, GKE, AKS, 국내 NKS</td>
+<td>다수 Service, 전담 운영 인력</td>
+<td>학습·운영 비용이 크다</td>
+</tr>
+<tr>
+<td>VM</td>
+<td>Amazon EC2, Compute Engine, Azure VM</td>
+<td>특수 Software, 완전한 통제</td>
+<td>Patch와 장애 대응이 전부 내 몫</td>
+</tr>
+</tbody></table>
+<h2>선택 흐름</h2>
+<pre><code class="language-mermaid">flowchart TD
+    Q1{Server 로직이 필요한가?} --&gt;|아니오| ST[Static / Edge Hosting]
+    Q1 --&gt;|예| Q2{오래 실행되거나 상태를 가지는가?}
+    Q2 --&gt;|아니오, 요청·Event 단위| Q3{Container Image로 만들었는가?}
+    Q3 --&gt;|아니오| FN[Functions / FaaS]
+    Q3 --&gt;|예| SC[Serverless Container]
+    Q2 --&gt;|예| Q4{전담 Platform 인력이 있는가?}
+    Q4 --&gt;|아니오| PA[PaaS / Managed Container]
+    Q4 --&gt;|예| K8[Kubernetes]
+</code></pre>
+<h2>주요 Hosting Platform 현황 (2026-09-28 확인)</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>확인한 사실</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub Pages</td>
+<td>게시 사이트 최대 1 GB, 월 100 GB soft bandwidth limit, 시간당 10회 soft build limit (Custom GitHub Actions Workflow로 게시하면 build limit 미적용)</td>
+</tr>
+<tr>
+<td>Vercel</td>
+<td>Hobby 플랜은 개인·비상업 용도 한정이며 상한 초과 구매 불가. Pro는 포함 Credit + 초과분 종량제. Functions는 Fluid compute의 Active CPU 과금(코드가 실제로 CPU를 쓰는 시간만 과금, 메모리는 별도)</td>
+</tr>
+<tr>
+<td>Netlify</td>
+<td>2025-09-04 이후 신규 계정은 Credit 기반 요금제. Production Deploy, Compute, Bandwidth, Web Request 등이 Credit을 소모. 이전 계정은 Legacy 플랜 유지 가능</td>
+</tr>
+<tr>
+<td>Cloudflare</td>
+<td>신규 프로젝트는 Pages 대신 Workers 사용 권장(Pages는 계속 동작하나 새 기능은 Workers 중심). Workers는 Request + CPU Time 과금, Egress 과금 없음, Static Asset 요청은 무료·무제한</td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>2026-02-06 Heroku(Salesforce)가 공식 Blog에서 &quot;Sustaining Engineering&quot; 모델 전환 발표. 보안·안정성 유지는 계속하나 신규 기능 개발 중단, 신규 Enterprise 계약 중단</td>
+</tr>
+<tr>
+<td>AWS App Runner</td>
+<td>2026-04-30부터 신규 고객을 받지 않음. 기존 고객은 계속 사용 가능하나 신규 기능 계획 없음. AWS는 Amazon ECS Express Mode를 대안으로 권장</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>교훈: Platform도 <strong>수명 주기</strong>가 있다. &quot;지금 편한가&quot;와 함께 &quot;3년 뒤에도 이 Platform이 성장하고 있는가&quot;를 확인한다.</p>
+</blockquote>
+<h2>Serverless 과금 모델의 모양</h2>
+<p>정확한 단가는 바뀌지만 <strong>무엇에 돈을 내는지</strong>는 잘 바뀌지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>서비스</th>
+<th>과금 단위</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AWS Lambda</td>
+<td>요청 수 + 실행 시간(할당 메모리 × 시간, GB-second)</td>
+<td>2020-12부터 1ms 단위 과금</td>
+</tr>
+<tr>
+<td>Google Cloud Run</td>
+<td>Request-based(기본) 또는 Instance-based</td>
+<td>요청이 들쭉날쭉하면 Request-based, 꾸준하면 Instance-based 권장. 요청이 없으면 0으로 축소</td>
+</tr>
+<tr>
+<td>Azure Container Apps</td>
+<td>실행 중 자원 사용량</td>
+<td>KEDA 기반 Autoscale, 대부분 0까지 축소 가능, 0일 때 사용량 과금 없음</td>
+</tr>
+<tr>
+<td>Vercel Functions</td>
+<td>Active CPU + Provisioned Memory</td>
+<td>I/O 대기 시간에는 CPU 과금이 멈춘다</td>
+</tr>
+<tr>
+<td>Cloudflare Workers</td>
+<td>Request + CPU Time</td>
+<td>외부 호출을 기다리는 시간은 CPU Time에 포함되지 않음</td>
+</tr>
+</tbody></table>
+<p>Scale to Zero는 비용을 줄이지만, 첫 요청이 Instance 시작을 기다리는 <strong>Cold Start</strong>가 생길 수 있다. 응답 지연이 중요한 API라면 최소 Instance 설정 비용과 비교한다.</p>
+<h2>나쁜 예 / 좋은 예</h2>
+<pre><code class="language-text">나쁜 예: 사내 문서 사이트를 위해 VM을 띄우고 Nginx, 인증서, OS Patch를 직접 관리한다.
+좋은 예: 문서 사이트는 Static Hosting에 올리고, 운영 시간은 제품 기능에 쓴다.
+</code></pre>
+<pre><code class="language-text">나쁜 예: 상업 서비스를 비상업 전용 무료 플랜에 올려 두고 약관을 확인하지 않는다.
+좋은 예: 매출이 생기기 전에 플랜 약관, 상한, 초과 과금 방식을 확인한다.
+</code></pre>
+<h2>선택 Checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 상업적 사용이 허용되는 플랜인가?</li>
+<li><input disabled="" type="checkbox"> 과금 단위(요청, CPU 시간, Bandwidth, Credit) 중 내 Traffic에서 무엇이 커지는가?</li>
+<li><input disabled="" type="checkbox"> 제공사가 기능 동결이나 신규 고객 중단을 발표하지 않았는가?</li>
+<li><input disabled="" type="checkbox"> Container Image나 표준 Build 결과물로 남겨 <strong>이전 경로</strong>를 확보했는가?</li>
+<li><input disabled="" type="checkbox"> 사용자와 데이터가 있는 지역에 Region 또는 Edge가 있는가?</li>
+<li><input disabled="" type="checkbox"> 장애 시 Status Page와 지원 창구가 있는가?</li>
+</ul>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub Pages limits</a> — GitHub Docs, 접근일 2026-09-28</li>
+<li><a href="https://vercel.com/docs/plans/hobby">Vercel Hobby Plan</a> — Vercel Docs, 접근일 2026-09-28</li>
+<li><a href="https://vercel.com/docs/functions/usage-and-pricing">Fluid compute pricing</a> — Vercel Docs, 접근일 2026-09-28</li>
+<li><a href="https://www.netlify.com/changelog/netlify-pricing-update-introducing-credit-based-plans/">Netlify pricing update: Introducing credit-based plans</a> — Netlify Changelog, 2025-09, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/">Migrate from Pages to Workers</a> — Cloudflare Docs, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/workers/platform/pricing/">Cloudflare Workers Pricing</a> — Cloudflare Docs, 접근일 2026-09-28</li>
+<li><a href="https://www.heroku.com/blog/an-update-on-heroku/">An Update on Heroku</a> — Heroku Blog, 2026-02-06, 접근일 2026-09-28</li>
+<li><a href="https://devops.com/salesforce-freezes-heroku-feature-development-signals-long-term-shift/">Salesforce Freezes Heroku Feature Development</a> — DevOps.com, 2026-02, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html">AWS App Runner availability change</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/">Announcing Amazon ECS Express Mode</a> — AWS, 2025-11, 접근일 2026-09-28</li>
+<li><a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda Pricing</a> — AWS, 접근일 2026-09-28</li>
+<li><a href="https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/">New for AWS Lambda – 1ms Billing Granularity</a> — AWS News Blog, 2020-12, 접근일 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/run/docs/configuring/billing-settings">Cloud Run billing settings for services</a> — Google Cloud Docs, 접근일 2026-09-28</li>
+<li><a href="https://learn.microsoft.com/en-us/azure/container-apps/scale-app">Scaling in Azure Container Apps</a> — Microsoft Learn, 접근일 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../platform/00-overview/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>Platform 배포 전체 개요</span></a><a class="page-link next" href="../../platform/02-cloud-kubernetes/"><span><small>다음 문서</small>Cloud · Kubernetes · 국내 Cloud</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

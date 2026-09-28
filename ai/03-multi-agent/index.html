@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Multi-Agent 역할과 모델 라우팅 | Jeongsu Tech Notes</title>
+    <meta name="description" content="Agent 운영은 “어려운 일은 비싼 모델”만으로 끝나지 않는다. Role과 Difficulty를 분리하는 것이 핵심이다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/03-multi-agent/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="Multi-Agent 역할과 모델 라우팅 | Jeongsu Tech Notes" />
+    <meta property="og:description" content="Agent 운영은 “어려운 일은 비싼 모델”만으로 끝나지 않는다. Role과 Difficulty를 분리하는 것이 핵심이다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/ai/03-multi-agent/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/ai/03-multi-agent.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=site-pages-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=site-pages-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link active" aria-current="page" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>AI 사용방법</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Multi-Agent 역할과 모델 라우팅</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Multi-Agent 역할과 모델 라우팅</h1>
+<p>Agent 운영은 “어려운 일은 비싼 모델”만으로 끝나지 않는다. <strong>Role과 Difficulty를 분리</strong>하는 것이 핵심이다.</p>
+<h2>3축 모델</h2>
+<pre><code class="language-text">Task
+├─ Role        무엇을 하는가?
+├─ Difficulty  얼마나 어려운가?
+└─ Model       어느 수준의 모델을 쓸 것인가?
+</code></pre>
+<p>예:</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Role</th>
+<th>Difficulty</th>
+<th>Model Tier</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>파일 위치 찾기</td>
+<td>Researcher</td>
+<td>Easy</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Camera API 분석</td>
+<td>Researcher</td>
+<td>Normal</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td>SceneGraph 재설계</td>
+<td>Architect</td>
+<td>Difficult</td>
+<td>Deep reasoning</td>
+</tr>
+<tr>
+<td>문자열 수정</td>
+<td>Worker</td>
+<td>Easy</td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>일반 기능 구현</td>
+<td>Worker</td>
+<td>Normal</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td>구조 변경</td>
+<td>Worker</td>
+<td>Difficult</td>
+<td>Deep reasoning</td>
+</tr>
+</tbody></table>
+<p>Claude Code의 구체적인 모델 이름은 시점에 따라 달라질 수 있으므로, 정책에서는 <strong>Fast / Standard / Deep</strong> 같은 역할을 먼저 정의하고 현재 사용 가능한 Haiku / Sonnet / Opus 계열에 매핑하는 방식이 안전하다.</p>
+<h2>Manager와 Dispatcher</h2>
+<p>둘은 비슷하지만 질문이 다르다.</p>
+<h3>Dispatcher</h3>
+<blockquote>
+<p>“이 일을 누구에게 보낼 것인가?”</p>
+</blockquote>
+<ul>
+<li>요청 분류</li>
+<li>난이도 판정</li>
+<li>Role 선택</li>
+<li>Model 선택</li>
+</ul>
+<h3>Manager</h3>
+<blockquote>
+<p>“이 작업 전체를 어떻게 끝낼 것인가?”</p>
+</blockquote>
+<ul>
+<li>Task 분해</li>
+<li>의존성 관리</li>
+<li>Worker 배치</li>
+<li>Review 호출</li>
+<li>재작업 판단</li>
+<li>통합</li>
+</ul>
+<p>초기에는 <strong>Manager / Dispatcher를 한 역할로 합치는 것</strong>이 단순하다.</p>
+<h2>추천 역할 집합</h2>
+<h3>Control Plane</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>책임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manager / Dispatcher</td>
+<td>분석, 분배, 통합 판단</td>
+</tr>
+<tr>
+<td>Workspace Manager</td>
+<td>fetch, branch/worktree 생성·정리</td>
+</tr>
+<tr>
+<td>Integration Manager</td>
+<td>Worker 결과 통합, conflict 관리</td>
+</tr>
+</tbody></table>
+<h3>Development Plane</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>책임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Researcher / Explorer</td>
+<td>기존 코드·API 탐색</td>
+</tr>
+<tr>
+<td>Planner</td>
+<td>구현 순서와 위험 정리</td>
+</tr>
+<tr>
+<td>Architect</td>
+<td>구조·ownership·serialization 판단</td>
+</tr>
+<tr>
+<td>Worker / Implementer</td>
+<td>실제 구현</td>
+</tr>
+<tr>
+<td>Debugger</td>
+<td>오류·Crash·상태 문제 추적</td>
+</tr>
+<tr>
+<td>Refactorer</td>
+<td>기능 유지하며 구조 개선</td>
+</tr>
+</tbody></table>
+<h3>Assurance Plane</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>책임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Test Runner</td>
+<td>기존 테스트 실행</td>
+</tr>
+<tr>
+<td>Test Designer</td>
+<td>새로운 회귀·경계 테스트 설계</td>
+</tr>
+<tr>
+<td>Reviewer</td>
+<td>일반 코드 리뷰</td>
+</tr>
+<tr>
+<td>Adversarial Reviewer</td>
+<td>숨은 문제를 공격적으로 탐색</td>
+</tr>
+<tr>
+<td>QA Agent</td>
+<td>사용자 Workflow 기준 검증</td>
+</tr>
+</tbody></table>
+<h2>Workspace Manager</h2>
+<p>Git 작업 공간만 담당한다.</p>
+<pre><code class="language-mermaid">flowchart TD
+    U[새 작업 요청] --&gt; W[Workspace Manager]
+    W --&gt; F[git fetch origin]
+    F --&gt; B[feature branch 생성]
+    B --&gt; T[linked worktree 생성]
+    T --&gt; S[새 Development Session 시작]
+</code></pre>
+<p>Workspace Manager가 하지 않아야 할 것:</p>
+<ul>
+<li>Feature 코드 구현</li>
+<li>stable에 임의 Merge</li>
+<li>Force Push</li>
+<li>승인 없는 Branch 삭제</li>
+<li>다른 Worktree의 개발</li>
+</ul>
+<h2>Worker Branch를 임시로 만드는 패턴</h2>
+<p>큰 Feature 내부를 여러 Worker가 동시에 구현할 때:</p>
+<pre><code class="language-text">feature/camera-animation
+├─ worker/camera-animation/parser
+├─ worker/camera-animation/ui
+└─ worker/camera-animation/tests
+</code></pre>
+<p>각 Worker는 별도 Worktree에서 구현하고, 검증 후 Parent Branch에 통합한다.</p>
+<pre><code class="language-mermaid">flowchart LR
+    P[Parent Feature Branch] --&gt; W[Worker Branch]
+    W --&gt; B[Build / Test]
+    B --&gt; R[Reviewer]
+    R --&gt;|Pass| M[Merge to Parent]
+    M --&gt; D[Worker Worktree/Branch 삭제]
+    R --&gt;|Fail| W
+</code></pre>
+<h2>Escalation</h2>
+<p>난이도는 고정하지 않는다.</p>
+<pre><code class="language-text">Easy → Normal → Difficult
+</code></pre>
+<p>작업 중 serialization, cross-module dependency, ownership, threading 같은 예상 밖 영향이 발견되면 구현을 무리하게 계속하기보다 Manager에게 escalation한다.</p>
+<h2>최소 Agent 원칙</h2>
+<p>작은 작업까지 Researcher → Planner → Worker → Reviewer → QA를 전부 거치면 오히려 비효율적이다.</p>
+<blockquote>
+<p>작은 작업: Worker + Reviewer<br>일반 작업: Researcher(필요 시) + Worker + Reviewer<br>고위험 작업: Planner/Architect + Worker + 독립 Reviewer + Integration</p>
+</blockquote>
+<p><strong>Agent 수가 아니라 승인된 결과 대비 비용과 품질</strong>을 최적화한다.</p>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../ai/02-session-agent/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>Session · Agent · Subagent</span></a><a class="page-link next" href="../../ai/04-self-improving/"><span><small>다음 문서</small>스스로 개선되는 개발 프로세스</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>
