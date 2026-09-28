@@ -21,7 +21,7 @@ Early-stage tax benefits are decided by **when, where and in which industry you 
 | Capital region (excluding overcrowding control areas and depopulation areas) | 75% |
 | Capital-region overcrowding control area | 50% |
 
-- Guidance states that for youth founders from 2026-01-01, **reduced tax above KRW 500 million in total is not reduced**. Check the article for whether the cap is annual or for the whole period (needs verification).
+- Reduction cap: **in each tax year**, if the income tax or corporate tax reduced **exceeds KRW 500 million, the excess is not reduced** (Restriction of Special Taxation Act Article 6, article in force in 2026). The cap applies per tax year, not cumulatively over the whole period.
 - Non-youth founders and small (revenue-based) founders also have regional rates. The 2026 amendment changed the brackets, so **check the original article** (needs verification).
 - Startups founded on or before 2025-12-31 follow the previous rules (inside or outside the overcrowding control area).
 
@@ -30,7 +30,7 @@ Early-stage tax benefits are decided by **when, where and in which industry you 
 The following may not count as a "startup" for the reduction. Confirm details with the article and a tax accountant.
 
 - Converting a sole proprietorship into a corporation
-- Restarting the same kind of business after closing
+- Restarting the same kind of business after closing (Restriction of Special Taxation Act Article 6(10); closure steps are in document 02)
 - Succeeding to or acquiring an existing business
 - Only adding or changing an industry
 
@@ -59,23 +59,24 @@ Good example:
 
 ## Tax Calendar (December year-end, January to December periods)
 
-| Month | Individual general taxpayer | Corporation | Common (with staff or freelancers) |
-|---|---|---|---|
-| January | VAT final return (previous 2nd period) | VAT final return | Withholding tax, simplified statement (wages, previous second half) |
-| February | | | Withholding tax, prepare year-end settlement |
-| March | | Corporate tax return (March 31) | Payment statements (March 10) |
-| April | Pay VAT preliminary notice | VAT preliminary return or notice | Withholding tax |
-| May | Global income tax return (May 31) | | Withholding tax |
-| June | Global income tax for sincere-filing businesses (June 30) | | Withholding tax |
-| July | VAT final return (1st period) | VAT final return | Withholding tax, simplified statement (wages, first half) |
-| August | | Corporate tax interim prepayment (end of August) | Withholding tax |
-| September | | | Withholding tax |
-| October | Pay VAT preliminary notice | VAT preliminary return or notice | Withholding tax |
-| November | Global income tax interim prepayment (end of November) | | Withholding tax |
-| December | Review next year's plan | | Withholding tax |
+| Month | Individual general taxpayer | Individual simplified taxpayer | Corporation | Common (with staff or freelancers) |
+|---|---|---|---|---|
+| January | VAT final return (previous 2nd period) | VAT final return (previous January to December, January 25) | VAT final return | Withholding tax, simplified statement (wages, previous second half; payments through 2026) |
+| February | | | | Withholding tax, prepare year-end settlement |
+| March | | | Corporate tax return (March 31) | Payment statements (March 10) |
+| April | Pay VAT preliminary notice | | VAT preliminary return or notice | Withholding tax |
+| May | Global income tax return (May 31) | Global income tax return (May 31) | | Withholding tax |
+| June | Global income tax for sincere-filing businesses (June 30) | | | Withholding tax |
+| July | VAT final return (1st period) | Pay the preliminary assessment notice (July 25). **If you issued tax invoices in January to June, file a preliminary return by July 25** | VAT final return | Withholding tax, simplified statement (wages, first half; payments through 2026) |
+| August | | | Corporate tax interim prepayment (end of August) | Withholding tax |
+| September | | | | Withholding tax |
+| October | Pay VAT preliminary notice | | VAT preliminary return or notice | Withholding tax |
+| November | Global income tax interim prepayment (end of November) | Global income tax interim prepayment (end of November) | | Withholding tax |
+| December | Review next year's plan | Check next year's taxpayer type (whether a July 1 switch applies) | | Withholding tax |
 
 - Withholding tax is due by the 10th of the next month (January 10 and July 10 if approved for semiannual payment), and simplified statements for business income are monthly.
-- Simplified taxpayers file one VAT final return in January, and July is the preliminary assessment period.
+- The simplified taxpayer's preliminary return duty comes from VAT Act Article 66(3). A simplified taxpayer who issued no tax invoices only pays the amount noticed in July (document 06).
+- **Simplified payment statements for wage income become monthly for payments from 2027-01-01** (due by the end of the month after the payment month). The January and July half-year filings in the table apply to payments through 2026. The NTS says that during 2027 (through 2028 for small businesses), filing by the old half-year deadline waives the non-filing penalty.
 - If a deadline falls on a Saturday or holiday, it moves to the next business day. Check actual dates each year on the **NTS tax schedule**.
 
 ## When You Need a Tax Accountant
@@ -102,3 +103,6 @@ What is better delegated: corporate tax returns, applying reductions, global inc
 - [NTS - Tax schedule](https://www.nts.go.kr/nts/ad/taxSchdul/selectList.do?taxMonth=&mi=135747) (accessed 2026-09-28)
 - [NTS - VAT filing and payment deadlines](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2273&cntntsId=7694) (accessed 2026-09-28)
 - [NTS - Corporate tax interim prepayment](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6565&cntntsId=7991) (accessed 2026-09-28)
+- [NTS Call Center - Simplified taxation Q&A (preliminary return for invoice-issuing simplified taxpayers)](https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937) (accessed 2026-09-28)
+- [NTS - Simplified payment statement (wage income) deadline examples](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=40678&cntntsId=239032) (accessed 2026-09-28)
+- [NTS - Notice deferring monthly simplified payment statements for regular employees](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2207&bbsId=1011&nttSn=1330270) (accessed 2026-09-28)

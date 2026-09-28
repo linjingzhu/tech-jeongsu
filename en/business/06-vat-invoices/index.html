@@ -129,11 +129,12 @@
 </tr>
 <tr>
 <td>Simplified taxpayer</td>
-<td>January final return (once a year). July is the preliminary assessment period</td>
+<td>January final return (previous January to December). July: the tax office issues a preliminary assessment notice for January to June, payable by July 25. But <strong>a simplified taxpayer who issued tax invoices in January to June must file a preliminary return by July 25</strong> (VAT Act Article 66(3))</td>
 </tr>
 </tbody></table>
 <ul>
 <li>Instead of a preliminary return, individual general taxpayers receive a notice in April and October for <strong>50% of the tax paid in the previous period</strong> (NTS guide).</li>
+<li>With a simplified taxpayer&#39;s July preliminary return, the summary tables of tax invoices issued and received are filed too (NTS Call Center Q&amp;A). A business switching from simplified to general on July 1 also files and pays for January 1 to June 30 by July 25.</li>
 </ul>
 <pre><code class="language-mermaid">flowchart LR
     J[January final return] --&gt; A[April preliminary]
@@ -146,6 +147,7 @@
 <li>The common explanation is that app-store revenue is a <strong>supply of services</strong> and subject to VAT.</li>
 <li>According to press coverage of a Tax Tribunal case and tax professionals&#39; commentary, revenue was held to be reported as <strong>the gross payment before platform fees</strong>, with fees booked as expenses. This can differ by transaction structure, so confirm with a tax accountant (needs verification).</li>
 <li>Keep <strong>revenue by country</strong> separately from app-store and payment-processor settlement reports. The domestic or overseas split decides the rate.</li>
+<li><strong>Foreign-currency conversion</strong>: when payment is in a foreign currency, the tax base is <strong>the converted amount</strong> if you converted it to won before the time of supply, or the amount at <strong>the base or arbitrated exchange rate on the time of supply</strong> if you still hold or receive foreign currency after the time of supply (VAT Act Enforcement Decree Article 59). Confirm with a tax accountant what counts as the time of supply for app-store settlements (needs verification).</li>
 </ul>
 <h2>Zero Rate: Overseas Revenue</h2>
 <p>Zero rating applies a 0% rate. Output VAT is zero, but input VAT can still be credited and refunded.</p>
@@ -177,6 +179,58 @@
 <li>When filing at the zero rate, you may need to submit the <strong>statement of foreign-currency earnings and zero-rate evidence</strong> set by the NTS Commissioner.</li>
 <li>If zero-rated sales create a refund, you may be able to apply for an <strong>early refund</strong>.</li>
 <li>Simplified taxpayers are not set up to get input VAT refunded. If overseas revenue and purchases are large, consider general status (document 01).</li>
+</ul>
+<h3>Worked Example: One Tax Period for a Solo Developer (illustration only)</h3>
+<p>Assumes an individual general taxpayer in the 1st period of 2026 (January to June). The amounts are made up for illustration, and the treatment of app-store revenue depends on the &quot;needs verification&quot; point below.</p>
+<table>
+<thead>
+<tr>
+<th>Transaction</th>
+<th>Amount (supply value)</th>
+<th>Treatment</th>
+<th>Tax</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Contract development for a Korean B2B client (electronic tax invoice issued)</td>
+<td>KRW 20 million</td>
+<td>Taxed at 10%</td>
+<td>Output VAT KRW 2 million</td>
+</tr>
+<tr>
+<td>App-store sales to overseas consumers</td>
+<td>KRW 10 million</td>
+<td>Assumed zero-rated (needs verification)</td>
+<td>KRW 0</td>
+</tr>
+<tr>
+<td>App-store sales to domestic consumers (gross KRW 5.5 million, assumed VAT-inclusive)</td>
+<td>KRW 5 million</td>
+<td>Assumed taxed at 10% (needs verification)</td>
+<td>Output VAT KRW 0.5 million</td>
+</tr>
+<tr>
+<td>Development equipment bought from a Korean seller (tax invoice received)</td>
+<td>KRW 3 million</td>
+<td>Input VAT credit</td>
+<td>Input VAT KRW 0.3 million</td>
+</tr>
+<tr>
+<td>Overseas cloud invoice (assumed billed without VAT)</td>
+<td>Paid in foreign currency</td>
+<td>No input VAT to credit</td>
+<td>KRW 0</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">Output VAT = 2,000,000 + 0 + 500,000 = KRW 2,500,000
+Input VAT = KRW 300,000
+VAT payable = 2,500,000 - 300,000 = KRW 2,200,000 (before credits such as the e-filing credit)
+</code></pre>
+<ul>
+<li>With a larger overseas share and more equipment purchases, input VAT can exceed output VAT and produce a <strong>refund</strong>.</li>
+<li><strong>App-store revenue needs verification</strong>: whether overseas app stores (Google, Apple, etc.) collect and remit VAT from domestic consumers, and whether the developer supplies the consumer or the app-store operator, can change how the domestic share is taxed. No official interpretation was found, so confirm with a tax accountant before filing.</li>
+<li><strong>Proxy payment (daeri napbu) for services from foreign suppliers</strong>: when you receive services from a foreign corporation or non-resident with no domestic place of business, the recipient collects and pays the VAT. This <strong>does not apply when the service is used in a taxable business</strong> (VAT Act Article 52; services whose input VAT is non-creditable are still included). Overseas cloud used by a taxable developer for the business is usually outside proxy payment, but check if exempt business or personal use is mixed in.</li>
+<li>Overseas invoice costs give no VAT credit but are still expenses for income tax (document 07).</li>
 </ul>
 <p>Bad example:</p>
 <blockquote>
@@ -211,7 +265,63 @@
 <li>For individuals, the electronic duty starts <strong>from the start of the 2nd tax period (July 1) of the year after</strong> the threshold is reached.</li>
 <li>Rule: issue at each supply, dated at the time of supply.</li>
 <li>Exception: you can total one month of supplies per customer, date the invoice at month-end and <strong>issue it by the 10th of the next month</strong> (next business day if the 10th is a Saturday or holiday).</li>
-<li>Missing the issuing deadline or the NTS transmission deadline incurs penalty tax. Check the rates on the NTS &quot;benefits and penalties&quot; page.</li>
+<li>Missing the issuing deadline or the NTS transmission deadline incurs penalty tax. The main rates are in the table below.</li>
+</ul>
+<h3>Penalty Tax Rates</h3>
+<table>
+<thead>
+<tr>
+<th>Penalty</th>
+<th>Rate</th>
+<th>Basis</th>
+<th>Situation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Not registered</td>
+<td>1% of supply value from business start to the day before applying</td>
+<td>VAT Act Article 60(1)</td>
+<td>Contract revenue started in March but you applied for registration only in June</td>
+</tr>
+<tr>
+<td>Tax invoice not issued</td>
+<td>2% of supply value</td>
+<td>VAT Act Article 60(2)</td>
+<td>Past the issuing deadline and still not issued by that period&#39;s final return deadline</td>
+</tr>
+<tr>
+<td>Tax invoice issued late</td>
+<td>1% of supply value</td>
+<td>VAT Act Article 60(2)</td>
+<td>A March service was invoiced after April 10 but before July 25</td>
+</tr>
+<tr>
+<td>Electronic invoice transmitted late</td>
+<td>0.3% of supply value</td>
+<td>VAT Act Article 60(2)</td>
+<td>Missed the transmission deadline but transmitted by the final return deadline</td>
+</tr>
+<tr>
+<td>Electronic invoice not transmitted</td>
+<td>0.5% of supply value</td>
+<td>VAT Act Article 60(2)</td>
+<td>Still not transmitted to the NTS by the final return deadline</td>
+</tr>
+<tr>
+<td>Failure to file (general)</td>
+<td>20% of tax payable</td>
+<td>Framework Act on National Taxes Article 47-2</td>
+<td>You forgot the July final return (40% for fraudulent acts)</td>
+</tr>
+<tr>
+<td>Late payment</td>
+<td>Unpaid tax × days late × 0.022%</td>
+<td>Framework Act on National Taxes Article 47-4</td>
+<td>You filed but paid 30 days late (22/100,000 per day since 2022-02-15)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Confirm rates and how they interact (such as no double application) on the NTS &quot;VAT penalty tax&quot; page and in the statutes. For simplified taxpayers, tax-invoice penalties apply to supplies from 2021-07-01.</li>
 </ul>
 <pre><code class="language-text">Sign a B2B contract
 → Confirm the supply time (service completion date / payment date, etc.)
@@ -228,6 +338,13 @@
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2461&cntntsId=7787">NTS - Who must issue electronic tax invoices</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2463&cntntsId=7789">NTS - Electronic tax invoice timing and issuing and transmission deadlines</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2464&cntntsId=7790">NTS - Electronic tax invoice benefits and penalties</a> (accessed 2026-09-28)</li>
+<li><a href="https://nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2276&cntntsId=7697">NTS - VAT penalty tax (individuals)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=900317806&lsId=001571&chrClsCd=010202&print=print">Korea Law Information Center - VAT Act Article 60, penalty tax</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsId=001586&lsJoLnkSeq=1000819702&print=print">Korea Law Information Center - Framework Act on National Taxes Article 47-2, failure-to-file penalty</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/gmt/cm/cntnts/cntntsView.do?mi=41010&cntntsId=239059">NTS - Penalty tax and fines (late payment penalty)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900331724&lsId=003666&print=print">Korea Law Information Center - VAT Act Enforcement Decree Article 59, foreign-currency conversion</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsSideInfoP.do?lsiSeq=269797&joNo=0052&joBrNo=00&docCls=jo&urlMode=lsScJoRltInfoR">Korea Law Information Center - VAT Act Article 52, proxy payment</a> (accessed 2026-09-28)</li>
+<li><a href="https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937">NTS Call Center - Simplified taxation Q&amp;A (preliminary return)</a> (accessed 2026-09-28)</li>
 <li><a href="https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11943">NTS Call Center - Main VAT filing questions</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.taxwatch.co.kr/article/tax/2022/05/16/0002">TaxWatch - App revenue must be reported including platform fees (press report, unofficial)</a> (reported 2022-05-16, accessed 2026-09-28)</li>
 </ul>

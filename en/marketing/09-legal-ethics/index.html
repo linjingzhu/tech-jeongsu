@@ -118,9 +118,10 @@
 </code></pre>
 <ol>
 <li><strong>Do you use personal data?</strong> → Consent for collection and use, purpose limitation, consent for targeted advertising</li>
-<li><strong>Is it an ad?</strong> → Ad labeling, disclosure of material connections, opt-in consent to receive</li>
+<li><strong>Is it an ad?</strong> → Ad labeling, disclosure of material connections, opt-in consent to receive, truthfulness and substantiation of claims</li>
 <li><strong>Is it AI-generated?</strong> → Labeling of AI-generated content and virtual people</li>
 </ol>
+<p>If you are building checkout, cancellation, or pricing screens, add one more: <strong>does the screen design distort the consumer&#39;s choice?</strong> → Korea&#39;s E-Commerce Act dark-pattern rules.</p>
 <h2>Korea: Sending Advertising Information (Network Act)</h2>
 <p>Article 50 of Korea&#39;s Act on Promotion of Information and Communications Network Utilization and Information Protection (Network Act) and its Enforcement Decree set the rules for sending commercial advertising information through electronic transmission media (text messages, email, app push, etc.).</p>
 <table>
@@ -165,6 +166,97 @@
 <li>In 2022-09 the Personal Information Protection Commission (PIPC) fined Google (KRW 69.2 billion) and Meta (KRW 30.8 billion) for collecting and using third-party behavioral data without user consent, and on 2025-01-23 the Seoul Administrative Court upheld the sanctions.</li>
 <li>In 2024-01 the PIPC announced a policy plan for protecting online behavioral data used in targeted advertising and signaled a revision of its guidelines. Whether the revised guidelines were finalized, and their content, must be checked in the original sources.</li>
 </ul>
+<h2>Korea: Labeling and Advertising Act (Unfair Labeling and Advertising)</h2>
+<p>Article 3(1) of Korea&#39;s Act on Fair Labeling and Advertising prohibits four kinds of labeling or advertising that are likely to deceive or mislead consumers and to harm fair trade.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+<th>Easy-to-trip claims for the example product</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>False or exaggerated</td>
+<td>Stating things contrary to fact, or overstating facts</td>
+<td>Advertising an integration still in beta as &quot;fully supported&quot;</td>
+</tr>
+<tr>
+<td>Deceptive</td>
+<td>Concealing or downplaying facts</td>
+<td>Advertising a &quot;free plan&quot; while hiding its 7-day retention limit</td>
+</tr>
+<tr>
+<td>Unfairly comparative</td>
+<td>Comparing without stating what is compared and on what basis, or claiming superiority without objective grounds</td>
+<td>&quot;3x faster than competitors&quot; with no conditions</td>
+</tr>
+<tr>
+<td>Disparaging</td>
+<td>Belittling another business or product without objective grounds, or advertising only unfavorable facts about it</td>
+<td>&quot;Company A&#39;s tool goes dark during incidents&quot;</td>
+</tr>
+</tbody></table>
+<p>Article 5 sets a <strong>duty to substantiate</strong>. A business must be able to substantiate the factual claims in its labeling and advertising, and must submit substantiating material within 15 days when the KFTC requests it. In practice, to say &quot;first&quot;, &quot;No. 1&quot;, or &quot;N times&quot;, you need the evidence before the ad runs.</p>
+<p>Bad example:</p>
+<blockquote>
+<p>Korea&#39;s first and industry-leading incident analysis tool</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>In-house benchmark as of 2026-06: with 100,000 log lines and 20 deploys, finding candidate causes was 1.8x faster than manual searching. (Method published)</p>
+</blockquote>
+<p>The number in the good example is an assumption for illustration. The point is to state <strong>the date, conditions, comparison baseline, and measurement method</strong> together and to keep the evidence. AI-generated ad copy and images are held to the same standard.</p>
+<h2>Korea: E-Commerce Act Dark-Pattern Rules (in Force Since 2025-02-14)</h2>
+<p>With the amended E-Commerce Act taking effect on 2025-02-14, six types of online dark patterns became <strong>subject to statutory regulation</strong>. The KFTC published a Q&amp;A just before the rules took effect, and an amended Enforcement Decree set fines and business-suspension criteria for violations. The rules cover online transactions with consumers; a SaaS that individual developers pay for by card may be covered, so confirm with legal review.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hidden renewal</td>
+<td>Raising a subscription price or converting free to paid without the consumer consent and notice procedure</td>
+<td>Act Article 13(6), Enforcement Decree</td>
+</tr>
+<tr>
+<td>Drip pricing</td>
+<td>Showing only part of the price at first and revealing extra charges during checkout</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Preselected options</td>
+<td>Preselecting options that favor the business so the consumer pays with them</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>False hierarchy</td>
+<td>Making one choice stand out by size, color, or position so consumers are misled</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Obstructing cancellation or withdrawal</td>
+<td>Cancellation or account deletion harder than signup; restricted ways to cancel</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Nagging</td>
+<td>Repeatedly asking, via pop-ups and the like, to change a choice already made; excepted if the consumer can opt not to be asked again for at least 7 days</td>
+<td>Act Article 21-2(1), Enforcement Decree</td>
+</tr>
+</tbody></table>
+<p><strong>Rule for paid conversions and price increases</strong>: when a subscription price increases or a free service converts to paid, the business must obtain the consumer&#39;s consent <strong>within the 30 days before</strong> the increase or conversion, and must tell the consumer the conditions and methods for withdrawing that consent (Enforcement Decree).</p>
+<p>Bad example:</p>
+<blockquote>
+<p>When the 14-day free trial ends, charge the card automatically without notice, and accept cancellations only by email to support.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Within the 30 days before conversion, tell the user the conversion date, amount, and how to cancel, and get explicit consent. Without consent, the account stays on the free plan. Cancellation happens in the same settings screen as signup, in the same number of steps.</p>
+</blockquote>
 <h2>Korea: Endorsements and AI Virtual People (Korea Fair Trade Commission)</h2>
 <ul>
 <li>The KFTC&#39;s guidelines on endorsements and testimonials in labeling and advertising require that <strong>material connections such as payments, discounts, or sponsorship be disclosed so consumers can easily notice them</strong> in influencer posts, reviews, and similar content. Disclosure should be in an easily seen place such as the title or the beginning; hiding it mid-text, in comments, or behind &quot;more&quot; is not considered adequate.</li>
@@ -173,9 +265,28 @@
 <h2>Korea: AI Basic Act</h2>
 <ul>
 <li>Korea&#39;s Framework Act on the Development of Artificial Intelligence and Establishment of Trust took effect on 2026-01-22.</li>
-<li>It includes a duty to label generative AI output, and deepfake output must be labeled more clearly.</li>
+<li>The transparency duties in Article 31 consist of advance notice, labeling of generative AI output, and clear notice and labeling of deepfake output.</li>
+<li><strong>The duty-holder is the AI business operator</strong> (one who develops AI or provides AI products or services). The Ministry of Science and ICT&#39;s AI transparency guideline (2026-01) treats someone who merely uses AI as a tool to produce their own work or content as a <strong>user</strong>, who is not subject to these duties.</li>
 <li>The Ministry of Science and ICT said it would run a grace period of at least one year for administrative fines. Check the original sources for the exact period and approach.</li>
 </ul>
+<p>In marketing practice, split the cases like this.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Rules to check first</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>You make ad images, copy, or virtual models with AI tools (a user)</td>
+<td>Virtual-person disclosure under the KFTC endorsement guidelines; the Labeling and Advertising Act&#39;s ban on unfair ads</td>
+</tr>
+<tr>
+<td>Your product provides a generative AI feature (e.g., it shows customers incident-cause summaries written by generative AI)</td>
+<td>As an AI business operator, advance notice and output labeling under AI Basic Act Article 31</td>
+</tr>
+</tbody></table>
+<p>Even when you are a user with no AI Basic Act duty, AI output used in ads still carries the disclosure duties of other laws.</p>
 <h2>EU</h2>
 <ul>
 <li><strong>Consent</strong>: To keep using Google ad measurement and personalization features for EEA users, you must obtain consent and pass Consent Mode signals (since 2024-03).</li>
@@ -191,6 +302,9 @@
 <li>Is marketing consent separated from mandatory service consent</li>
 <li>Are consent records (time, scope, channel) kept</li>
 <li>Do ad message templates include &quot;(Ad)&quot;, the sender, and opt-out by default</li>
+<li>Does every factual claim in ads (&quot;first&quot;, &quot;No. 1&quot;, &quot;N times&quot;) have substantiating evidence with its date and conditions</li>
+<li>Do checkout, cancellation, and pricing screens avoid the six dark-pattern types</li>
+<li>Is there a consent and notice step within the 30 days before a paid conversion or price increase</li>
 <li>Do influencer and affiliate contracts state the disclosure duty</li>
 <li>Are there rules for using AI-generated people, images, and reviews</li>
 <li>If you target users abroad, have you checked that country&#39;s rules</li>
@@ -198,20 +312,28 @@
 <h2>Ethics: Lines to Hold Before the Law</h2>
 <ul>
 <li>Do not use data in ways customers would find offensive if they knew</li>
-<li>Do not make cancelling or opting out harder than signing up (dark patterns)</li>
-<li>Do not use numbers or comparisons that cannot be verified</li>
+<li>Even when a design does not fit one of the six statutory dark-pattern types exactly, do not make cancelling or opting out harder than signing up</li>
+<li>Even where the duty to substantiate does not reach, do not create impressions that cannot be verified</li>
 <li>Do not pressure vulnerable users (such as minors)</li>
 </ul>
 <h2>References</h2>
 <ul>
 <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C50%EC%A1%B0">Network Act Article 50 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C62%EC%A1%B0%EC%9D%983">Network Act Enforcement Decree Article 62-3 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%91%9C%EC%8B%9C%EA%B4%91%EA%B3%A0%EC%9D%98%EA%B3%B5%EC%A0%95%ED%99%94%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0">Act on Fair Labeling and Advertising — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.consumer.go.kr/user/bbs/consumer/380/940/bbsDataView/2813.do">Types of unfair labeling and advertising under the Act — Consumer24 (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=31411">Amended E-Commerce Act rules on dark patterns take effect, with KFTC Q&amp;A — Kim &amp; Chang (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
+<li><a href="https://news.seoul.go.kr/economy/archives/566114">KFTC distributes Q&amp;A on six types of online dark patterns — Seoul Metropolitan Government (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156674112">KFTC distributes Q&amp;A on six types of online dark patterns — Korea.kr (in Korean)</a> (2025-02-13, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148939436">Consumer consent required within 30 days before a subscription price increase or paid conversion — Korea.kr (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
 <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95/%EC%A0%9C22%EC%A1%B0">Personal Information Protection Act Article 22 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
 <li><a href="https://m.korea.kr/news/policyNewsView.do?newsId=148905887">PIPC fines Google and Meta for unlawful collection of behavioral data — Korea.kr</a> (2022-09, accessed 2026-09-28)</li>
 <li><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156671852">PIPC wins administrative lawsuit by Google and Meta — Korea.kr</a> (2025-01, accessed 2026-09-28)</li>
 <li><a href="https://www.korea.kr/briefing/policyBriefingView.do?newsId=156613321">PIPC briefing on online behavioral advertising policy — Korea.kr</a> (2024-01, accessed 2026-09-28)</li>
 <li><a href="https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547">KFTC amended guidelines on endorsements and testimonials take effect — KFTC</a> (2026, accessed 2026-09-28)</li>
 <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148958380">AI Basic Act takes effect with labeling duty for generative AI output — Korea.kr</a> (2026-01, accessed 2026-09-28)</li>
+<li><a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=217123">The AI Basic Act and the content industry: transparency duties — Law Times (in Korean)</a> (2026, accessed 2026-09-28)</li>
+<li><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=276195">MSIT publishes AI transparency guideline — KDI Economic Information and Education Center (in Korean)</a> (2026-01, accessed 2026-09-28)</li>
 <li><a href="https://support.google.com/google-ads/answer/13695607?hl=en">Updates to consent mode for traffic in the EEA — Google Ads Help</a> (accessed 2026-09-28)</li>
 <li><a href="https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act">Transparency obligations under Article 50 of the AI Act — European Commission</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.ftc.gov/news-events/news/press-releases/2023/06/federal-trade-commission-announces-updated-advertising-guides-combat-deceptive-reviews-endorsements">FTC Announces Updated Advertising Guides to Combat Deceptive Reviews and Endorsements — FTC</a> (2023-06, accessed 2026-09-28)</li>
