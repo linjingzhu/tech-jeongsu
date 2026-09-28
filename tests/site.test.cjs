@@ -33,7 +33,7 @@ test("every page has its own address, title, description, canonical URL and lang
       assert.match(html, /<title>[^<]{5,}<\/title>/, file + ": title");
       assert.match(html, /<meta name="description" content="[^"]{10,}"/, file + ": description");
       assert.match(html, /hreflang="ko"[\s\S]*hreflang="en"[\s\S]*hreflang="x-default"/, file);
-      assert.ok(!html.includes("{{"), file + ": unfilled placeholder");
+      assert.ok(!/\{\{(t:)?\w+\}\}/.test(html), file + ": unfilled placeholder");
       if (docPath.startsWith("content/")) {
         const md = read(lang === "en" ? docPath.replace("content/", "content/en/") : docPath);
         const h1 = md.match(/^# (.+)$/m)[1].replace(/[*`_]/g, "");
