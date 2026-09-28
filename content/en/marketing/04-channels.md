@@ -140,6 +140,8 @@ The **order in which you add money** matters more than the number of channels.
 3. **Scale only after an incrementality read.** Judge by lift or geo experiments, not platform-reported ROAS (document 06).
 4. **Look at marginal CAC, not average CAC.** Most channels become less efficient as spend grows (diminishing returns), because the cheapest demand (branded search, high-intent keywords) is used up first.
 
+The numbers below are a generic illustration unrelated to the example product. See document 07 for the example product's paying-customer scale.
+
 ```text
 Marginal CAC example (assumption)
 KRW 2.0M per month → 20 new customers   average CAC KRW 100,000
