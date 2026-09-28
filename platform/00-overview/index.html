@@ -111,7 +111,7 @@
 <h2>이 트랙이 답하는 질문</h2>
 <ol>
 <li>어디에 올릴 것인가? (Static, PaaS, Container, Serverless, Cloud)</li>
-<li>어떻게 자동으로 올릴 것인가? (CI/CD)</li>
+<li>어떻게 자동으로, 재현 가능하게 올릴 것인가? (CI/CD, Environment, IaC)</li>
 <li>어떻게 위험을 줄이며 내보낼 것인가? (Canary, Feature Flag, Rollback)</li>
 <li>모바일 앱은 Store 심사와 정책을 어떻게 통과하는가?</li>
 <li>사용자는 어떤 주소와 경로로 도달하는가? (Domain, DNS, TLS, CDN)</li>
@@ -119,6 +119,7 @@
 <li>무엇이 들어 있고 누가 만들었는지 증명할 수 있는가? (Supply Chain)</li>
 <li>비용은 누가 보고 누가 줄이는가? (FinOps)</li>
 <li>여러 팀이 같은 길로 배포하게 하려면? (Platform Engineering)</li>
+<li>Data를 잃지 않으려면? (Backup, RPO · RTO, 복구 연습)</li>
 </ol>
 <h2>전체 흐름</h2>
 <pre><code class="language-mermaid">flowchart LR
@@ -160,7 +161,7 @@
 <tr>
 <td>03</td>
 <td>CI/CD Pipeline</td>
-<td>Commit부터 Production까지 무엇을 자동화하는가</td>
+<td>Commit부터 Production까지 무엇을 자동화하는가, Environment 설계, Infra도 코드로(IaC)</td>
 </tr>
 <tr>
 <td>04</td>
@@ -170,7 +171,7 @@
 <tr>
 <td>05</td>
 <td>모바일 Store 배포</td>
-<td>App Store, Google Play 심사와 Testing Track, 2026 정책</td>
+<td>App Store, Google Play 심사와 Testing Track, 2026 정책, 서명 키 관리</td>
 </tr>
 <tr>
 <td>06</td>
@@ -180,7 +181,7 @@
 <tr>
 <td>07</td>
 <td>Observability와 Incident</td>
-<td>SLI/SLO, Error Budget, On-call, Postmortem</td>
+<td>SLI/SLO, Error Budget, On-call, Postmortem, Backup · RPO/RTO</td>
 </tr>
 <tr>
 <td>08</td>

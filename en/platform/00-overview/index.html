@@ -111,7 +111,7 @@
 <h2>Questions This Track Answers</h2>
 <ol>
 <li>Where will it run? (Static, PaaS, Container, Serverless, Cloud)</li>
-<li>How will it get there automatically? (CI/CD)</li>
+<li>How will it get there automatically and reproducibly? (CI/CD, environments, IaC)</li>
 <li>How do we ship while reducing risk? (Canary, Feature Flag, Rollback)</li>
 <li>How does a mobile app pass store review and policy?</li>
 <li>By what address and path do users reach it? (Domain, DNS, TLS, CDN)</li>
@@ -119,6 +119,7 @@
 <li>Can we prove what is inside and who built it? (Supply Chain)</li>
 <li>Who watches the cost, and who reduces it? (FinOps)</li>
 <li>How do many teams deploy along the same path? (Platform Engineering)</li>
+<li>How do we avoid losing data? (Backups, RPO · RTO, restore drills)</li>
 </ol>
 <h2>The Whole Flow</h2>
 <pre><code class="language-mermaid">flowchart LR
@@ -160,7 +161,7 @@
 <tr>
 <td>03</td>
 <td>CI/CD Pipeline</td>
-<td>What do we automate from commit to production?</td>
+<td>What do we automate from commit to production? Environment design, infrastructure as code</td>
 </tr>
 <tr>
 <td>04</td>
@@ -170,7 +171,7 @@
 <tr>
 <td>05</td>
 <td>Mobile Store Distribution</td>
-<td>App Store and Google Play review, testing tracks, 2026 policies</td>
+<td>App Store and Google Play review, testing tracks, 2026 policies, signing key management</td>
 </tr>
 <tr>
 <td>06</td>
@@ -180,7 +181,7 @@
 <tr>
 <td>07</td>
 <td>Observability and Incidents</td>
-<td>SLI/SLO, error budget, on-call, postmortem</td>
+<td>SLI/SLO, error budget, on-call, postmortem, backups · RPO/RTO</td>
 </tr>
 <tr>
 <td>08</td>

@@ -53,7 +53,7 @@ The pillars involve **trade-offs**. Multi-region, for example, raises reliabilit
 - Grading (high · medium · low) introduced in 2023-01: evaluation criteria differ by the using institution and the importance of the system
 - Low grade: used for systems such as those handling public data without personal information
 - According to press reports, Microsoft (2024-12), Google Cloud (2025-02) and AWS (2025-04) obtained the low grade
-- On 2026-04-20 the Ministry of Science and ICT and the National Intelligence Service announced a reform that **unifies public-cloud security verification under the NIS** and abolishes CSAP. Press reports put the start at 2027-07. For public-sector deals, confirm with the buyer which rules apply at contract time.
+- On 2026-04-20 the Ministry of Science and ICT and the National Intelligence Service announced a reform that **unifies public-cloud security verification under the NIS** and abolishes CSAP. Press reports put the start at 2027-07 and say products certified under CSAP before the switch keep the remaining validity of their certification. For public-sector deals, confirm with the buyer which rules apply at contract time.
 
 ```mermaid
 flowchart LR
@@ -217,3 +217,4 @@ Good: Start on serverless containers, and move to managed Kubernetes when servic
 - [Kakao Enterprise obtains CSAP with Kubernetes-based cloud](https://zdnet.co.kr/view/?no=20220630091430) — ZDNet Korea, 2022-06-30, accessed 2026-09-28
 - [Kubernetes Engine](https://docs.kakaocloud.com/en/service/container-pack/k8se) — KakaoCloud Docs, accessed 2026-09-28
 - [Public cloud certification unified under the NIS; CSAP dismantled after 10 years](https://zdnet.co.kr/view/?no=20260420130424) — ZDNet Korea, 2026-04-20, accessed 2026-09-28
+- [Lowering the bar for public cloud: CSAP abolished and merged into the NIS](https://www.mt.co.kr/tech/2026/04/20/2026042010255865866) — Money Today, 2026-04-20, accessed 2026-09-28

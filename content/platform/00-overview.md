@@ -9,7 +9,7 @@
 ## 이 트랙이 답하는 질문
 
 1. 어디에 올릴 것인가? (Static, PaaS, Container, Serverless, Cloud)
-2. 어떻게 자동으로 올릴 것인가? (CI/CD)
+2. 어떻게 자동으로, 재현 가능하게 올릴 것인가? (CI/CD, Environment, IaC)
 3. 어떻게 위험을 줄이며 내보낼 것인가? (Canary, Feature Flag, Rollback)
 4. 모바일 앱은 Store 심사와 정책을 어떻게 통과하는가?
 5. 사용자는 어떤 주소와 경로로 도달하는가? (Domain, DNS, TLS, CDN)
@@ -17,6 +17,7 @@
 7. 무엇이 들어 있고 누가 만들었는지 증명할 수 있는가? (Supply Chain)
 8. 비용은 누가 보고 누가 줄이는가? (FinOps)
 9. 여러 팀이 같은 길로 배포하게 하려면? (Platform Engineering)
+10. Data를 잃지 않으려면? (Backup, RPO · RTO, 복구 연습)
 
 ## 전체 흐름
 
@@ -46,11 +47,11 @@ flowchart LR
 |---|---|---|
 | 01 | 배포 대상 고르기 | Static, Edge, PaaS, Serverless 중 무엇이 맞는가 |
 | 02 | Cloud와 Kubernetes | AWS / Google Cloud / Azure / 국내 Cloud와 Container 운영 |
-| 03 | CI/CD Pipeline | Commit부터 Production까지 무엇을 자동화하는가 |
+| 03 | CI/CD Pipeline | Commit부터 Production까지 무엇을 자동화하는가, Environment 설계, Infra도 코드로(IaC) |
 | 04 | Release 전략 | Rolling, Blue-Green, Canary, Feature Flag, Rollback |
-| 05 | 모바일 Store 배포 | App Store, Google Play 심사와 Testing Track, 2026 정책 |
+| 05 | 모바일 Store 배포 | App Store, Google Play 심사와 Testing Track, 2026 정책, 서명 키 관리 |
 | 06 | Domain · DNS · TLS · CDN | 사용자가 안전하고 빠르게 도달하는 경로 |
-| 07 | Observability와 Incident | SLI/SLO, Error Budget, On-call, Postmortem |
+| 07 | Observability와 Incident | SLI/SLO, Error Budget, On-call, Postmortem, Backup · RPO/RTO |
 | 08 | 보안과 Supply Chain | Secret, SBOM, SLSA, 의존성, 규제 |
 | 09 | FinOps와 Platform Engineering | 비용 책임과 내부 개발자 Platform |
 | 10 | 작은 팀 실전 가이드 | 1인·소규모 팀의 최소 구성 |

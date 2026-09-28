@@ -33,7 +33,7 @@ flowchart LR
 | 2025-03 | `tj-actions/changed-files` Action 변조(CVE-2025-30066), Workflow Log로 Secret 노출 가능 | Action SHA 고정, 노출 Secret 즉시 교체 |
 | 2025-09 | npm 생태계 Worm("Shai-Hulud"): 탈취한 개발자 권한으로 다른 Package에 악성 코드 주입 후 재배포 | 게시용 장기 Token 제거, 게시 권한 최소화 |
 
-이후 npm은 **Trusted Publishing(OIDC)** 을 2025-07-31 정식 제공했고, 2025년 말까지 Classic Token을 폐지하며 쓰기 권한 Granular Token의 수명을 짧게 제한했다.
+npm은 사고 전인 2025-07-31에 이미 **Trusted Publishing(OIDC)** 을 정식 제공하고 있었다. 사고 이후에는 2025-11-05 쓰기 권한 Granular Token의 수명을 최대 90일로, 새 Granular Token의 기본 수명을 7일로 제한했고, 2025-12-09 남아 있던 Classic Token을 모두 폐지했다. 게시에는 장기 Token 대신 Trusted Publishing을 쓴다.
 
 ## Secret 관리
 
@@ -118,6 +118,7 @@ EU에 디지털 요소가 있는 제품을 판매한다면 CRA를 확인한다.
 - [Supply Chain Compromise of Third-Party tj-actions/changed-files](https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction) — CISA, 2025-03-18, 접근일 2026-09-28
 - [Widespread Supply Chain Compromise Impacting npm Ecosystem](https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem) — CISA, 2025-09-23, 접근일 2026-09-28
 - [npm trusted publishing with OIDC is generally available](https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/) — GitHub Changelog, 2025-07-31, 접근일 2026-09-28
+- [npm security update: Classic token creation disabled and granular token changes](https://github.blog/changelog/2025-11-05-npm-security-update-classic-token-creation-disabled-and-granular-token-changes/) — GitHub Changelog, 2025-11-05, 접근일 2026-09-28
 - [npm classic tokens revoked, session-based auth and CLI token management now available](https://github.blog/changelog/2025-12-09-npm-classic-tokens-revoked-session-based-auth-and-cli-token-management-now-available/) — GitHub Changelog, 2025-12-09, 접근일 2026-09-28
 - [Secret scanning and push protection are enabled by default on new public repositories](https://github.blog/changelog/2024-03-11-secret-scanning-and-push-protection-are-enabled-by-default-on-new-public-repositories/) — GitHub Changelog, 2024-03-11, 접근일 2026-09-28
 - [2026 Minimum Elements for a Software Bill of Materials (SBOM)](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) — CISA, 2026-07-29, 접근일 2026-09-28

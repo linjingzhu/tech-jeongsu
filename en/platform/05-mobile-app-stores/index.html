@@ -233,8 +233,12 @@
 <td>Android developer verification starts in Brazil, Indonesia, Singapore and Thailand (certified devices, participating stores)</td>
 </tr>
 <tr>
+<td>2025-11-01 (in force)</td>
+<td>New apps and updates targeting Android 15+ must support 16 KB page sizes on 64-bit devices. This affects apps with native (C/C++) code or native libraries; apps using only Kotlin or Java are already compatible</td>
+</tr>
+<tr>
 <td>2027-02-01</td>
-<td>Updates to apps targeting Android 15+ that do not support 16 KB page sizes cannot be released</td>
+<td>Final deadline for updates to existing apps after the extension period: updates without 16 KB page size support cannot be released</td>
 </tr>
 </tbody></table>
 <pre><code class="language-kotlin">android {
@@ -270,7 +274,7 @@
 <td>Upload key</td>
 <td>Developer</td>
 <td>Signs the AAB before uploading to Play Console</td>
-<td>Request an <strong>upload key reset</strong> in Play Console (requires the account owner or equivalent permission). You can keep updating the same app</td>
+<td>Request an <strong>upload key reset</strong> in Play Console; only the account owner can request it. You can keep updating the same app</td>
 </tr>
 </tbody></table>
 <ul>
@@ -367,6 +371,17 @@
 <li>The service account key used to upload to Play is also a long-lived secret. Limit its permissions to release management and keep it behind the <code>environment: production</code> protection rules.</li>
 <li>Upload to the <code>internal</code> track first, and promote separately in Play Console or through the API.</li>
 </ul>
+<p>For iOS → TestFlight, write a fastlane lane. It authenticates with an App Store Connect API key, and match runs <code>readonly</code> so it only downloads existing certificates and profiles.</p>
+<pre><code class="language-ruby">lane :beta do
+  key = app_store_connect_api_key(key_id: ENV[&quot;ASC_KEY_ID&quot;], issuer_id: ENV[&quot;ASC_ISSUER_ID&quot;], key_content: ENV[&quot;ASC_KEY_P8&quot;])
+  match(type: &quot;appstore&quot;, readonly: true, api_key: key)
+  build_app(scheme: &quot;App&quot;)
+  upload_to_testflight(api_key: key)
+end
+</code></pre>
+<ul>
+<li>Put the API key values such as <code>ASC_KEY_P8</code> and the match storage passphrase (<code>MATCH_PASSWORD</code>) in CI secrets.</li>
+</ul>
 <h2>Running a Staged Rollout</h2>
 <ul>
 <li>A Google Play staged rollout percentage <strong>does not increase automatically</strong>. A person raises it after checking metrics.</li>
@@ -412,6 +427,9 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 <li><a href="https://docs.fastlane.tools/actions/upload_to_play_store/">upload_to_play_store</a> — fastlane docs, accessed 2026-09-28</li>
 <li><a href="https://docs.expo.dev/app-signing/managed-credentials/">Using automatically managed credentials</a> — Expo Docs, accessed 2026-09-28</li>
 <li><a href="https://developers.google.com/android-publisher">Google Play Developer API</a> — Google for Developers, accessed 2026-09-28</li>
+<li><a href="https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html">Prepare your apps for Google Play&#39;s 16 KB page size compatibility requirement</a> — Android Developers Blog, 2025-05, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/app-store-connect-api/">Using App Store Connect API</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/upload_to_testflight/">upload_to_testflight</a> — fastlane docs, accessed 2026-09-28</li>
 <li><a href="https://onestore-dev.gitbook.io/dev">ONE store developer center</a> — ONE store, accessed 2026-09-28</li>
 </ul>
 </article>

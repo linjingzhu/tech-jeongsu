@@ -9,7 +9,7 @@ There is a long distance between "finishing" code and users **relying on it ever
 ## Questions This Track Answers
 
 1. Where will it run? (Static, PaaS, Container, Serverless, Cloud)
-2. How will it get there automatically? (CI/CD)
+2. How will it get there automatically and reproducibly? (CI/CD, environments, IaC)
 3. How do we ship while reducing risk? (Canary, Feature Flag, Rollback)
 4. How does a mobile app pass store review and policy?
 5. By what address and path do users reach it? (Domain, DNS, TLS, CDN)
@@ -17,6 +17,7 @@ There is a long distance between "finishing" code and users **relying on it ever
 7. Can we prove what is inside and who built it? (Supply Chain)
 8. Who watches the cost, and who reduces it? (FinOps)
 9. How do many teams deploy along the same path? (Platform Engineering)
+10. How do we avoid losing data? (Backups, RPO · RTO, restore drills)
 
 ## The Whole Flow
 
@@ -46,11 +47,11 @@ The key point is that the arrows return to Code. Deployment is not a one-time ev
 |---|---|---|
 | 01 | Choosing a Deployment Target | Which fits: Static, Edge, PaaS, or Serverless? |
 | 02 | Cloud and Kubernetes | AWS / Google Cloud / Azure / Korean clouds and running containers |
-| 03 | CI/CD Pipeline | What do we automate from commit to production? |
+| 03 | CI/CD Pipeline | What do we automate from commit to production? Environment design, infrastructure as code |
 | 04 | Release Strategies | Rolling, Blue-Green, Canary, Feature Flag, Rollback |
-| 05 | Mobile Store Distribution | App Store and Google Play review, testing tracks, 2026 policies |
+| 05 | Mobile Store Distribution | App Store and Google Play review, testing tracks, 2026 policies, signing key management |
 | 06 | Domain · DNS · TLS · CDN | A safe, fast path for users to reach you |
-| 07 | Observability and Incidents | SLI/SLO, error budget, on-call, postmortem |
+| 07 | Observability and Incidents | SLI/SLO, error budget, on-call, postmortem, backups · RPO/RTO |
 | 08 | Security and Supply Chain | Secrets, SBOM, SLSA, dependencies, regulation |
 | 09 | FinOps and Platform Engineering | Cost accountability and internal developer platforms |
 | 10 | Practical Guide for Small Teams | The minimum setup for solo developers and small teams |

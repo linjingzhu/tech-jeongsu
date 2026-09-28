@@ -180,6 +180,8 @@ Infrastructure created by hand in a console (click-ops) leaves no record of who 
 
 State maps code to real resources. Kept on a laptop, teammates overwrite each other, and secrets held in resource attributes can sit there in plain text. Keep it in a **remote backend**, encrypted, with restricted access. Two people running `apply` at once corrupt the state, so also take a **lock**. Terraform's S3 backend introduced S3-native locking (`use_lockfile`) in 1.10; when it became generally available in 1.11, DynamoDB-based locking was deprecated.
 
+- Turn on **bucket versioning** for the state bucket. HashiCorp highly recommends it; it is how you restore a previous version when the state is accidentally deleted or overwritten.
+
 ```hcl
 terraform {
   backend "s3" {

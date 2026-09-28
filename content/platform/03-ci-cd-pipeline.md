@@ -180,6 +180,8 @@ Console에서 손으로 만든 Infra(Click-ops)는 누가 무엇을 왜 바꿨�
 
 State는 코드와 실제 Resource의 대응표다. 로컬 PC에 두면 팀원끼리 덮어쓰고, Resource 속성에 들어 있는 Secret이 평문으로 남을 수 있다. **원격 Backend**에 암호화해 두고 접근을 제한한다. 두 사람이 동시에 `apply`하면 State가 깨지므로 **Lock**도 건다. Terraform의 S3 Backend는 1.10에서 S3 자체 Lock(`use_lockfile`)을 도입했고, 1.11에서 정식 기능이 되면서 DynamoDB 기반 Lock은 Deprecated되었다.
 
+- State Bucket에는 **Bucket Versioning**을 켠다. HashiCorp가 강하게 권장하는 설정으로, State가 실수로 지워지거나 덮어써졌을 때 이전 Version으로 되돌리는 방법이다.
+
 ```hcl
 terraform {
   backend "s3" {

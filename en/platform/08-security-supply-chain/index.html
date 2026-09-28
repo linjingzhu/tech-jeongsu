@@ -174,7 +174,7 @@
 <td>Remove long-lived publish tokens, minimize publish rights</td>
 </tr>
 </tbody></table>
-<p>Afterwards npm made <strong>Trusted Publishing (OIDC)</strong> generally available on 2025-07-31, retired classic tokens by the end of 2025, and shortened the lifetime of write-enabled granular tokens.</p>
+<p>npm had already made <strong>Trusted Publishing (OIDC)</strong> generally available on 2025-07-31, before the incident. After it, on 2025-11-05 npm capped write-enabled granular tokens at a 90-day maximum lifetime and set a 7-day default for new granular tokens, and on 2025-12-09 it revoked all remaining classic tokens. Publish with Trusted Publishing instead of long-lived tokens.</p>
 <h2>Managing Secrets</h2>
 <pre><code class="language-text">Bad:  Commit a .env file to the repository, and after the leak just revert the commit.
 Good: Store it in a secret manager and inject it at runtime. If it leaks, &quot;rotate&quot;, don&#39;t just &quot;delete&quot;.
@@ -257,6 +257,7 @@ steps:
 <li><a href="https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction">Supply Chain Compromise of Third-Party tj-actions/changed-files</a> — CISA, 2025-03-18, accessed 2026-09-28</li>
 <li><a href="https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem">Widespread Supply Chain Compromise Impacting npm Ecosystem</a> — CISA, 2025-09-23, accessed 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/">npm trusted publishing with OIDC is generally available</a> — GitHub Changelog, 2025-07-31, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-11-05-npm-security-update-classic-token-creation-disabled-and-granular-token-changes/">npm security update: Classic token creation disabled and granular token changes</a> — GitHub Changelog, 2025-11-05, accessed 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2025-12-09-npm-classic-tokens-revoked-session-based-auth-and-cli-token-management-now-available/">npm classic tokens revoked, session-based auth and CLI token management now available</a> — GitHub Changelog, 2025-12-09, accessed 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2024-03-11-secret-scanning-and-push-protection-are-enabled-by-default-on-new-public-repositories/">Secret scanning and push protection are enabled by default on new public repositories</a> — GitHub Changelog, 2024-03-11, accessed 2026-09-28</li>
 <li><a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom">2026 Minimum Elements for a Software Bill of Materials (SBOM)</a> — CISA, 2026-07-29, accessed 2026-09-28</li>

@@ -67,7 +67,8 @@ Amounts vary by region and over time, so check them on the enrollment screen.
 | 2026-08-31 | Existing apps must target API 35 or higher to stay available to new users on newer Android versions |
 | 2026-11-01 | Latest date available when requesting an extension to the above |
 | 2026-09-30 | Android developer verification starts in Brazil, Indonesia, Singapore and Thailand (certified devices, participating stores) |
-| 2027-02-01 | Updates to apps targeting Android 15+ that do not support 16 KB page sizes cannot be released |
+| 2025-11-01 (in force) | New apps and updates targeting Android 15+ must support 16 KB page sizes on 64-bit devices. This affects apps with native (C/C++) code or native libraries; apps using only Kotlin or Java are already compatible |
+| 2027-02-01 | Final deadline for updates to existing apps after the extension period: updates without 16 KB page size support cannot be released |
 
 ```kotlin
 android {
@@ -90,7 +91,7 @@ For a mobile app, **the signing key is the app's identity**. Lose the key or mis
 | Key | Held by | Purpose | If lost |
 |---|---|---|---|
 | App signing key | Google | Signs the APKs installed on user devices. Never changes during the app's lifetime | Google holds it, so the developer cannot lose it |
-| Upload key | Developer | Signs the AAB before uploading to Play Console | Request an **upload key reset** in Play Console (requires the account owner or equivalent permission). You can keep updating the same app |
+| Upload key | Developer | Signs the AAB before uploading to Play Console | Request an **upload key reset** in Play Console; only the account owner can request it. You can keep updating the same app |
 
 - Play App Signing is required for distribution on Google Play. Only apps created before 2021-08 may keep distributing self-signed builds.
 - If you lose a signing key you manage yourself, **you cannot publish updates to the existing app**, and the same key cannot be regenerated.
@@ -153,6 +154,19 @@ jobs:
 - The service account key used to upload to Play is also a long-lived secret. Limit its permissions to release management and keep it behind the `environment: production` protection rules.
 - Upload to the `internal` track first, and promote separately in Play Console or through the API.
 
+For iOS → TestFlight, write a fastlane lane. It authenticates with an App Store Connect API key, and match runs `readonly` so it only downloads existing certificates and profiles.
+
+```ruby
+lane :beta do
+  key = app_store_connect_api_key(key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key_content: ENV["ASC_KEY_P8"])
+  match(type: "appstore", readonly: true, api_key: key)
+  build_app(scheme: "App")
+  upload_to_testflight(api_key: key)
+end
+```
+
+- Put the API key values such as `ASC_KEY_P8` and the match storage passphrase (`MATCH_PASSWORD`) in CI secrets.
+
 ## Running a Staged Rollout
 
 - A Google Play staged rollout percentage **does not increase automatically**. A person raises it after checking metrics.
@@ -201,4 +215,7 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 - [upload_to_play_store](https://docs.fastlane.tools/actions/upload_to_play_store/) — fastlane docs, accessed 2026-09-28
 - [Using automatically managed credentials](https://docs.expo.dev/app-signing/managed-credentials/) — Expo Docs, accessed 2026-09-28
 - [Google Play Developer API](https://developers.google.com/android-publisher) — Google for Developers, accessed 2026-09-28
+- [Prepare your apps for Google Play's 16 KB page size compatibility requirement](https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html) — Android Developers Blog, 2025-05, accessed 2026-09-28
+- [Using App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) — fastlane docs, accessed 2026-09-28
+- [upload_to_testflight](https://docs.fastlane.tools/actions/upload_to_testflight/) — fastlane docs, accessed 2026-09-28
 - [ONE store developer center](https://onestore-dev.gitbook.io/dev) — ONE store, accessed 2026-09-28

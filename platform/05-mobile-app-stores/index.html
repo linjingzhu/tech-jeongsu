@@ -233,8 +233,12 @@
 <td>Brazil, Indonesia, Singapore, Thailand에서 Android Developer Verification 시작(인증 기기, 참여 Store)</td>
 </tr>
 <tr>
+<td>2025-11-01 (시행 중)</td>
+<td>Android 15 이상을 Target하는 신규 앱과 Update는 64-bit 기기의 16 KB Page Size를 지원해야 함. Native(C/C++) 코드나 Native Library를 포함한 앱이 대상이며, Kotlin · Java만 쓰는 앱은 이미 호환</td>
+</tr>
+<tr>
 <td>2027-02-01</td>
-<td>Android 15 이상을 Target하는 앱의 Update가 16 KB Page Size를 지원하지 않으면 출시 불가</td>
+<td>연장 기간이 끝난 뒤 기존 앱 Update의 최종 기한: 16 KB Page Size를 지원하지 않는 Update는 출시 불가</td>
 </tr>
 </tbody></table>
 <pre><code class="language-kotlin">android {
@@ -270,7 +274,7 @@
 <td>Upload Key</td>
 <td>개발자</td>
 <td>AAB를 Play Console에 올리기 전 서명</td>
-<td>Play Console에서 <strong>Upload Key Reset</strong> 요청(계정 소유자 등 권한 필요). 같은 앱으로 Update를 계속 낼 수 있다</td>
+<td>Play Console에서 <strong>Upload Key Reset</strong> 요청. 계정 소유자(Account owner)만 요청 가능. 같은 앱으로 Update를 계속 낼 수 있다</td>
 </tr>
 </tbody></table>
 <ul>
@@ -367,6 +371,17 @@
 <li>Play 업로드용 Service Account Key도 장기 Secret이다. 권한을 Release 관리로 좁히고, <code>environment: production</code> 보호 규칙 뒤에 둔다.</li>
 <li>처음에는 <code>internal</code> Track으로 올리고, 승격은 Play Console이나 API로 따로 한다.</li>
 </ul>
+<p>iOS → TestFlight는 fastlane Lane으로 쓴다. App Store Connect API Key로 인증하고, match는 <code>readonly</code>로 기존 Certificate와 Profile만 내려받는다.</p>
+<pre><code class="language-ruby">lane :beta do
+  key = app_store_connect_api_key(key_id: ENV[&quot;ASC_KEY_ID&quot;], issuer_id: ENV[&quot;ASC_ISSUER_ID&quot;], key_content: ENV[&quot;ASC_KEY_P8&quot;])
+  match(type: &quot;appstore&quot;, readonly: true, api_key: key)
+  build_app(scheme: &quot;App&quot;)
+  upload_to_testflight(api_key: key)
+end
+</code></pre>
+<ul>
+<li><code>ASC_KEY_P8</code> 등 API Key 값과 match 저장소의 암호(<code>MATCH_PASSWORD</code>)는 CI Secret으로 넣는다.</li>
+</ul>
 <h2>Staged Rollout 운영</h2>
 <ul>
 <li>Google Play의 Staged Rollout 비율은 <strong>자동으로 오르지 않는다</strong>. 지표를 보고 사람이 올린다.</li>
@@ -412,6 +427,9 @@
 <li><a href="https://docs.fastlane.tools/actions/upload_to_play_store/">upload_to_play_store</a> — fastlane docs, 접근일 2026-09-28</li>
 <li><a href="https://docs.expo.dev/app-signing/managed-credentials/">Using automatically managed credentials</a> — Expo Docs, 접근일 2026-09-28</li>
 <li><a href="https://developers.google.com/android-publisher">Google Play Developer API</a> — Google for Developers, 접근일 2026-09-28</li>
+<li><a href="https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html">Prepare your apps for Google Play&#39;s 16 KB page size compatibility requirement</a> — Android Developers Blog, 2025-05, 접근일 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/app-store-connect-api/">Using App Store Connect API</a> — fastlane docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/upload_to_testflight/">upload_to_testflight</a> — fastlane docs, 접근일 2026-09-28</li>
 <li><a href="https://onestore-dev.gitbook.io/dev">ONE store developer center</a> — ONE store, 접근일 2026-09-28</li>
 </ul>
 </article>

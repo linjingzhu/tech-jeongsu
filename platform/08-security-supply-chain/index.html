@@ -174,7 +174,7 @@
 <td>게시용 장기 Token 제거, 게시 권한 최소화</td>
 </tr>
 </tbody></table>
-<p>이후 npm은 <strong>Trusted Publishing(OIDC)</strong> 을 2025-07-31 정식 제공했고, 2025년 말까지 Classic Token을 폐지하며 쓰기 권한 Granular Token의 수명을 짧게 제한했다.</p>
+<p>npm은 사고 전인 2025-07-31에 이미 <strong>Trusted Publishing(OIDC)</strong> 을 정식 제공하고 있었다. 사고 이후에는 2025-11-05 쓰기 권한 Granular Token의 수명을 최대 90일로, 새 Granular Token의 기본 수명을 7일로 제한했고, 2025-12-09 남아 있던 Classic Token을 모두 폐지했다. 게시에는 장기 Token 대신 Trusted Publishing을 쓴다.</p>
 <h2>Secret 관리</h2>
 <pre><code class="language-text">나쁜 예: .env 파일을 Repository에 Commit하고, 유출 후 Commit만 되돌린다.
 좋은 예: Secret Manager에 저장하고 실행 시 주입한다. 유출되면 &quot;삭제&quot;가 아니라 &quot;교체&quot;한다.
@@ -257,6 +257,7 @@ steps:
 <li><a href="https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction">Supply Chain Compromise of Third-Party tj-actions/changed-files</a> — CISA, 2025-03-18, 접근일 2026-09-28</li>
 <li><a href="https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem">Widespread Supply Chain Compromise Impacting npm Ecosystem</a> — CISA, 2025-09-23, 접근일 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/">npm trusted publishing with OIDC is generally available</a> — GitHub Changelog, 2025-07-31, 접근일 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-11-05-npm-security-update-classic-token-creation-disabled-and-granular-token-changes/">npm security update: Classic token creation disabled and granular token changes</a> — GitHub Changelog, 2025-11-05, 접근일 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2025-12-09-npm-classic-tokens-revoked-session-based-auth-and-cli-token-management-now-available/">npm classic tokens revoked, session-based auth and CLI token management now available</a> — GitHub Changelog, 2025-12-09, 접근일 2026-09-28</li>
 <li><a href="https://github.blog/changelog/2024-03-11-secret-scanning-and-push-protection-are-enabled-by-default-on-new-public-repositories/">Secret scanning and push protection are enabled by default on new public repositories</a> — GitHub Changelog, 2024-03-11, 접근일 2026-09-28</li>
 <li><a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom">2026 Minimum Elements for a Software Bill of Materials (SBOM)</a> — CISA, 2026-07-29, 접근일 2026-09-28</li>

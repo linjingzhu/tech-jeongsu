@@ -310,6 +310,9 @@ jobs:
 </ul>
 <h3>Remote State and Locking</h3>
 <p>State maps code to real resources. Kept on a laptop, teammates overwrite each other, and secrets held in resource attributes can sit there in plain text. Keep it in a <strong>remote backend</strong>, encrypted, with restricted access. Two people running <code>apply</code> at once corrupt the state, so also take a <strong>lock</strong>. Terraform&#39;s S3 backend introduced S3-native locking (<code>use_lockfile</code>) in 1.10; when it became generally available in 1.11, DynamoDB-based locking was deprecated.</p>
+<ul>
+<li>Turn on <strong>bucket versioning</strong> for the state bucket. HashiCorp highly recommends it; it is how you restore a previous version when the state is accidentally deleted or overwritten.</li>
+</ul>
 <pre><code class="language-hcl">terraform {
   backend &quot;s3&quot; {
     bucket       = &quot;acme-tfstate&quot;

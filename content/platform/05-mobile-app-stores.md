@@ -67,7 +67,8 @@ flowchart LR
 | 2026-08-31 | 기존 앱은 API 35 이상이어야 더 높은 Android 버전의 신규 사용자에게 계속 노출 |
 | 2026-11-01 | 위 기한의 연장 요청 시 최대 기한 |
 | 2026-09-30 | Brazil, Indonesia, Singapore, Thailand에서 Android Developer Verification 시작(인증 기기, 참여 Store) |
-| 2027-02-01 | Android 15 이상을 Target하는 앱의 Update가 16 KB Page Size를 지원하지 않으면 출시 불가 |
+| 2025-11-01 (시행 중) | Android 15 이상을 Target하는 신규 앱과 Update는 64-bit 기기의 16 KB Page Size를 지원해야 함. Native(C/C++) 코드나 Native Library를 포함한 앱이 대상이며, Kotlin · Java만 쓰는 앱은 이미 호환 |
+| 2027-02-01 | 연장 기간이 끝난 뒤 기존 앱 Update의 최종 기한: 16 KB Page Size를 지원하지 않는 Update는 출시 불가 |
 
 ```kotlin
 android {
@@ -90,7 +91,7 @@ android {
 | 키 | 보관 | 용도 | 잃어버리면 |
 |---|---|---|---|
 | App Signing Key | Google | 사용자 기기에 설치되는 APK 서명. 앱 수명 동안 바뀌지 않는다 | Google이 보관하므로 개발자가 잃을 일이 없다 |
-| Upload Key | 개발자 | AAB를 Play Console에 올리기 전 서명 | Play Console에서 **Upload Key Reset** 요청(계정 소유자 등 권한 필요). 같은 앱으로 Update를 계속 낼 수 있다 |
+| Upload Key | 개발자 | AAB를 Play Console에 올리기 전 서명 | Play Console에서 **Upload Key Reset** 요청. 계정 소유자(Account owner)만 요청 가능. 같은 앱으로 Update를 계속 낼 수 있다 |
 
 - Google Play 배포에는 Play App Signing 설정이 필수다. 2021-08 이전에 만든 앱만 직접 서명(Self-signed)을 계속할 수 있다.
 - 직접 관리하던 서명 키를 잃으면 **기존 앱에 Update를 낼 수 없고**, 같은 키를 다시 만들 수도 없다.
@@ -153,6 +154,19 @@ jobs:
 - Play 업로드용 Service Account Key도 장기 Secret이다. 권한을 Release 관리로 좁히고, `environment: production` 보호 규칙 뒤에 둔다.
 - 처음에는 `internal` Track으로 올리고, 승격은 Play Console이나 API로 따로 한다.
 
+iOS → TestFlight는 fastlane Lane으로 쓴다. App Store Connect API Key로 인증하고, match는 `readonly`로 기존 Certificate와 Profile만 내려받는다.
+
+```ruby
+lane :beta do
+  key = app_store_connect_api_key(key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key_content: ENV["ASC_KEY_P8"])
+  match(type: "appstore", readonly: true, api_key: key)
+  build_app(scheme: "App")
+  upload_to_testflight(api_key: key)
+end
+```
+
+- `ASC_KEY_P8` 등 API Key 값과 match 저장소의 암호(`MATCH_PASSWORD`)는 CI Secret으로 넣는다.
+
 ## Staged Rollout 운영
 
 - Google Play의 Staged Rollout 비율은 **자동으로 오르지 않는다**. 지표를 보고 사람이 올린다.
@@ -201,4 +215,7 @@ jobs:
 - [upload_to_play_store](https://docs.fastlane.tools/actions/upload_to_play_store/) — fastlane docs, 접근일 2026-09-28
 - [Using automatically managed credentials](https://docs.expo.dev/app-signing/managed-credentials/) — Expo Docs, 접근일 2026-09-28
 - [Google Play Developer API](https://developers.google.com/android-publisher) — Google for Developers, 접근일 2026-09-28
+- [Prepare your apps for Google Play's 16 KB page size compatibility requirement](https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html) — Android Developers Blog, 2025-05, 접근일 2026-09-28
+- [Using App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) — fastlane docs, 접근일 2026-09-28
+- [upload_to_testflight](https://docs.fastlane.tools/actions/upload_to_testflight/) — fastlane docs, 접근일 2026-09-28
 - [ONE store developer center](https://onestore-dev.gitbook.io/dev) — ONE store, 접근일 2026-09-28
