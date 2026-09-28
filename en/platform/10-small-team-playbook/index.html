@@ -130,15 +130,15 @@
 </tr>
 <tr>
 <td>1. First users</td>
-<td>Auto-deploy after CI tests, error tracking, uptime checks, automatic DB backups and one restore drill</td>
+<td>Auto-deploy after CI tests, error tracking, uptime checks, automatic DB backups (PITR) with an agreed RPO and RTO, and one restore drill (document 07, &quot;Backups and Recovery Objectives&quot;)</td>
 </tr>
 <tr>
 <td>2. Paying customers</td>
-<td>One or two simple SLOs, budget alerts, a status page, feature flags, an incident record template</td>
+<td>One or two simple SLOs, budget alerts, a status page, feature flags, an incident record template, infrastructure moved to IaC (Terraform, OpenTofu, etc.) with <code>plan</code> as a PR check (document 03, &quot;Infrastructure as Code Too&quot;)</td>
 </tr>
 <tr>
 <td>3. Growing team</td>
-<td>Documented deployment procedure, template repository, on-call rotation, cost tag policy</td>
+<td>Documented deployment procedure, template repository, on-call rotation, cost tag policy, IaC drift checks, a review of whether cross-region backups are needed</td>
 </tr>
 </tbody></table>
 <h2>Example Combinations</h2>
@@ -167,7 +167,7 @@
 </tr>
 <tr>
 <td>SaaS for the Korean public sector</td>
-<td>Start by checking for a CSAP-certified cloud</td>
+<td>Start by checking for a CSAP-certified cloud (verification planned to move to the NIS in 2027-07, document 02)</td>
 <td>Reflect the required certification grade</td>
 </tr>
 </tbody></table>
@@ -210,13 +210,13 @@ Good: Use a work account with 2FA, keep recovery codes safe, and get alerts befo
 <li><input disabled="" type="checkbox"> HTTPS certificate issuance and renewal confirmed as automatic</li>
 <li><input disabled="" type="checkbox"> Tried rolling back to a previous version</li>
 <li><input disabled="" type="checkbox"> Error tracking and uptime alerts reach my phone</li>
-<li><input disabled="" type="checkbox"> DB backups exist and the restore procedure is documented</li>
+<li><input disabled="" type="checkbox"> DB backups exist, RPO and RTO are set, and the restore procedure is documented (document 07)</li>
 <li><input disabled="" type="checkbox"> No secrets in the repository (secret scanning passes)</li>
 <li><input disabled="" type="checkbox"> For mobile: latest SDK and target API requirements met, and a demo account ready for review</li>
 <li><input disabled="" type="checkbox"> Cost alerts configured</li>
 </ul>
 <h2>How to Revisit This Track</h2>
-<p>Read whatever hurts most right now. Scared of deploying: 04. Learning about outages late: 07. Scared of the bill: 09. Stuck in app review: 05.</p>
+<p>Read whatever hurts most right now. Scared of deploying: 04. Learning about outages late: 07. Scared of losing data: the backups and recovery objectives in 07. Infrastructure built by hand: infrastructure as code in 03. Scared of the bill: 09. Stuck in app review: 05.</p>
 <h2>References</h2>
 <ul>
 <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub Pages limits</a> — GitHub Docs, accessed 2026-09-28</li>

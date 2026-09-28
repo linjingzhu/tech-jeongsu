@@ -21,9 +21,9 @@ flowchart LR
 | 단계 | 최소 구성 |
 |---|---|
 | 0. 출시 전 | Git + PR, Static / PaaS Hosting, Preview 배포, 도메인 자동 갱신, 모든 계정 2FA |
-| 1. 첫 사용자 | CI에서 Test 후 자동 배포, Error Tracking, Uptime Check, DB 자동 Backup과 복구 연습 1회 |
-| 2. 유료 고객 | 단순한 SLO 1–2개, 예산 경보, Status Page, Feature Flag, 장애 기록 템플릿 |
-| 3. 팀 확장 | 배포 절차 문서화, Template Repository, On-call 순번, 비용 Tag 정책 |
+| 1. 첫 사용자 | CI에서 Test 후 자동 배포, Error Tracking, Uptime Check, DB 자동 Backup(PITR)과 RPO · RTO 합의, 복구 연습 1회(07 문서 "Backup과 복구 목표") |
+| 2. 유료 고객 | 단순한 SLO 1–2개, 예산 경보, Status Page, Feature Flag, 장애 기록 템플릿, Infra를 IaC(Terraform · OpenTofu 등)로 옮기고 `plan`을 PR Check로(03 문서 "Infra도 코드로") |
+| 3. 팀 확장 | 배포 절차 문서화, Template Repository, On-call 순번, 비용 Tag 정책, IaC Drift 검사, Cross-Region Backup 필요성 검토 |
 
 ## 추천 조합 예시
 
@@ -32,7 +32,7 @@ flowchart LR
 | 문서 · Landing Page | GitHub Pages 또는 Cloudflare Workers Static Assets | CDN Cache 규칙, Analytics |
 | Web App + API | Vercel / Netlify(Frontend) + Serverless Container(API) + Managed DB | Staging 환경, Canary |
 | 모바일 앱 + Backend | TestFlight · Closed Test + Serverless Backend | Phased Release, Server Feature Flag |
-| 국내 공공 대상 SaaS | CSAP 인증을 받은 Cloud 확인부터 | 인증 등급 요구사항 반영 |
+| 국내 공공 대상 SaaS | CSAP 인증을 받은 Cloud 확인부터(2027-07 국정원 검증 일원화 예정, 02 문서) | 인증 등급 요구사항 반영 |
 
 플랜 조건은 바뀐다. 상업적 사용 허용 여부, 과금 단위, 제공사 로드맵은 01 문서의 Checklist로 확인한다.
 
@@ -83,14 +83,14 @@ jobs:
 - [ ] HTTPS 인증서 자동 발급 · 갱신 확인
 - [ ] 이전 버전으로 Rollback 해 봄
 - [ ] Error Tracking과 Uptime 경보가 내 휴대폰으로 옴
-- [ ] DB Backup 존재, 복구 절차 문서화
+- [ ] DB Backup 존재, RPO · RTO를 정했고 복구 절차 문서화 (07 문서)
 - [ ] Secret이 Repository에 없음 (Secret Scanning 통과)
 - [ ] 모바일이라면 최신 SDK · Target API 요구사항과 심사용 Demo 계정 준비
 - [ ] 비용 경보 설정
 
 ## 이 트랙을 다시 읽는 순서
 
-지금 가장 아픈 곳부터 읽는다. 배포가 무섭다면 04, 장애를 늦게 안다면 07, 청구서가 무섭다면 09, 앱 심사가 막혔다면 05.
+지금 가장 아픈 곳부터 읽는다. 배포가 무섭다면 04, 장애를 늦게 안다면 07, Data를 잃을까 무섭다면 07의 Backup과 복구 목표, Infra가 손으로 만들어져 있다면 03의 Infra도 코드로, 청구서가 무섭다면 09, 앱 심사가 막혔다면 05.
 
 ## 참고 자료
 

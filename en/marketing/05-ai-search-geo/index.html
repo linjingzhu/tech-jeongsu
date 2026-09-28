@@ -130,8 +130,8 @@
 </tr>
 <tr>
 <td>Search Console</td>
-<td>Reports for visibility in generative AI features introduced</td>
-<td>Announcement, 2026-06</td>
+<td>Generative AI performance report: launched 2026-06-03 for a subset of UK sites, expanded to all sites around 2026-08-31. Shows <strong>impressions, pages, countries, and devices only</strong> for AI Overviews, AI Mode, and similar features; no clicks, CTR, or queries. Data starts 2026-05-18</td>
+<td>Google announcement 2026-06, expansion 2026-08</td>
 </tr>
 <tr>
 <td>ChatGPT search</td>
@@ -140,16 +140,22 @@
 </tr>
 <tr>
 <td>ChatGPT ads</td>
-<td>Ad testing announced for US Free and Go users; later pilot expansion to countries including Korea reported</td>
-<td>Announced 2026-01, reported 2026-08</td>
+<td>US test announced 2026-01. For Korea: plans announced 2026-05, pilot announced and reported 2026-06-19, and per OpenAI&#39;s notice launched on 2026-08-11 alongside the UK, Mexico, Brazil, and Japan. Shown only to <strong>logged-in adult Free and Go users</strong>; Plus, Pro, Business, Enterprise, and Edu have no ads</td>
+<td>2026-01, 2026-06, 2026-08 OpenAI and press</td>
 </tr>
 <tr>
 <td>Naver AI Briefing</td>
 <td>AI summary answers with source attribution introduced in integrated search</td>
 <td>Reported 2025-03</td>
 </tr>
+<tr>
+<td>Naver AI Briefing</td>
+<td>Naver said on an earnings call it would roughly double the share of searches it covers by the end of 2026</td>
+<td>Earnings call report, 2026-02</td>
+</tr>
 </tbody></table>
-<p>User and country counts are <strong>the providers&#39; own announcements</strong> and change often. Re-check the originals before planning.</p>
+<p>User and country counts are <strong>the providers&#39; own announcements</strong> and change often. Re-check the originals before planning. Korean press (2026-06) and OpenAI&#39;s notice (2026-08-11) give different start dates for ChatGPT ads in Korea, so check OpenAI&#39;s advertiser guidance before running campaigns.</p>
+<p>For consumer products aimed at Korea, <strong>check exposure in Naver AI Briefing with the same weight as Google AI Overviews</strong>. Naver keeps widening the range of searches where AI Briefing appears.</p>
 <h2>Clicks Can Fall</h2>
 <p>Pew Research Center analyzed March 2025 browsing data from 900 US adults (published 2025-07-22). On Google search pages with an AI summary, users clicked a result link 8% of the time; on pages without one, 15% of the time. Clicks on source links inside the AI summary were very rare.</p>
 <p>This is <strong>the observation of a single study</strong> and may differ by industry and query type. The direction, however, is clear.</p>
@@ -190,6 +196,16 @@
 <td>Collection for training generative models</td>
 <td>Signals that you do not want content used for training</td>
 </tr>
+<tr>
+<td>ChatGPT-User</td>
+<td>Visits made on a user&#39;s request, such as asking ChatGPT to open a specific page</td>
+<td>OpenAI says robots.txt rules may not apply because the visit is user-initiated</td>
+</tr>
+<tr>
+<td>OAI-AdsBot</td>
+<td>Visits landing pages submitted as ChatGPT ads to check ad-policy compliance and relevance</td>
+<td>If you run ChatGPT ads it is part of ad review, so decide together with ad operations</td>
+</tr>
 </tbody></table>
 <p>So it is possible to <strong>allow search visibility while refusing training collection</strong>. Decide robots.txt settings together with legal and content policy.</p>
 <h2>Practical Checklist</h2>
@@ -205,7 +221,7 @@
 <li><strong>Create unique answers</strong>: Publish information only you know precisely, such as pricing, limits, comparisons, setup procedures, and real cases.</li>
 <li><strong>Make it accessible</strong>: Check indexing, crawler permissions, rendering, and page speed.</li>
 <li><strong>Stay consistent</strong>: Make sure product names, prices, and feature descriptions match across the website, docs, marketplaces, and review sites. AI answers combine many sources, so inconsistencies can turn into wrong answers.</li>
-<li><strong>Measure</strong>: Use Search Console&#39;s generative AI reports and a manual check that regularly asks AI services key questions and records mentions and accuracy.</li>
+<li><strong>Measure</strong>: Use Search Console&#39;s generative AI report for <strong>the impression side</strong>. It has no clicks, CTR, or queries, so count <strong>the click side</strong> separately with landing-page referrers (chatgpt.com, perplexity.ai, and others) and UTM parameters. Add a manual check that regularly asks AI services key questions and records mentions and accuracy.</li>
 </ol>
 <h2>Bad Example / Good Example</h2>
 <p>Bad example:</p>
@@ -235,9 +251,13 @@
 <li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Google users are less likely to click on links when an AI summary appears — Pew Research Center</a> (2025-07-22, accessed 2026-09-28)</li>
 <li><a href="https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents">Gartner Predicts Search Engine Volume Will Drop 25% by 2026 — Gartner</a> (2024-02-19, accessed 2026-09-28)</li>
 <li><a href="https://openai.com/index/introducing-chatgpt-search/">Introducing ChatGPT search — OpenAI</a> (2024-10, accessed 2026-09-28)</li>
-<li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI Crawlers — OpenAI</a> (accessed 2026-09-28)</li>
-<li><a href="https://openai.com/index/testing-ads-in-chatgpt/">Testing ads in ChatGPT — OpenAI</a> (2026-01-16, accessed 2026-09-28)</li>
-<li><a href="https://zdnet.co.kr/view/?no=20260813204559">OpenAI ChatGPT ads pilot in five countries including Korea — ZDNet Korea</a> (2026-08-13, accessed 2026-09-28)</li>
+<li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI Crawlers — OpenAI</a> (accessed 2026-09-28, includes ChatGPT-User and OAI-AdsBot)</li>
+<li><a href="https://openai.com/index/testing-ads-in-chatgpt/">Testing ads in ChatGPT — OpenAI</a> (published 2026-01-16, updated 2026-08-11, accessed 2026-09-28)</li>
+<li><a href="https://www.koreatimes.co.kr/business/companies/20260619/openai-brings-chatgpt-ads-to-korea-keeps-paid-plans-ad-free">OpenAI brings ChatGPT ads to Korea, keeps paid plans ad-free — The Korea Times</a> (2026-06-19, accessed 2026-09-28)</li>
+<li><a href="https://en.sedaily.com/technology/2026/06/19/openai-brings-chatgpt-ads-to-korea-for-free-and-go-tiers">OpenAI Brings ChatGPT Ads to Korea for Free and Go Tiers — Seoul Economic Daily</a> (2026-06-19, accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/webmasters/answer/16984139?hl=en">Generative AI performance report (Search) — Search Console Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.seroundtable.com/google-search-console-ai-report-live-41850.html">Google Search Console Generative AI Performance Report Live For All — Search Engine Roundtable</a> (2026-08, accessed 2026-09-28)</li>
+<li><a href="https://www.sentv.co.kr/article/view/sentv202602060034">Naver: AI Briefing to double by year-end — Seoul Economic TV (in Korean)</a> (2026-02-06, accessed 2026-09-28)</li>
 <li><a href="https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html">Naver introduces AI Briefing in search — NewDaily</a> (2025-03-24, accessed 2026-09-28)</li>
 </ul>
 </article>

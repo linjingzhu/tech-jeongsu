@@ -9,12 +9,15 @@
 | Google AI Overviews | 200개 이상 국가·지역, 40개 이상 언어로 제공 | 2025-05 Google 발표 |
 | Google AI Mode | 한국어 등 5개 언어 추가 | 2025-09 Google 발표 |
 | Google AI Mode | 출시 1년 만에 월 사용자 10억 명 돌파라고 Google이 발표 | 2026-05 Google I/O |
-| Search Console | 생성형 AI 기능 노출을 따로 보는 보고서 도입 | 2026-06 발표 |
+| Search Console | 생성형 AI 성과 보고서: 2026-06-03 영국 일부 사이트에 도입, 2026-08-31경 전체 사이트로 확대. AI Overviews·AI Mode 등의 **노출, 페이지, 국가, 기기만** 제공하며 클릭·CTR·검색어는 없다. 데이터는 2026-05-18부터 | 2026-06 Google 발표, 2026-08 확대 |
 | ChatGPT search | 웹 출처 링크와 함께 답변 제공 시작 | 2024-10 OpenAI 발표 |
-| ChatGPT 광고 | 미국 Free·Go 이용자 대상 광고 테스트 발표, 이후 한국 등으로 파일럿 확대 보도 | 2026-01 발표, 2026-08 보도 |
+| ChatGPT 광고 | 2026-01 미국 테스트 발표. 한국은 2026-05 도입 예고, 2026-06-19 파일럿 발표·보도, OpenAI 공지 기준 2026-08-11 영국·멕시코·브라질·일본과 함께 출시. **로그인한 성인 Free·Go 이용자**에게만 표시되고 Plus·Pro·Business·Enterprise·Edu는 광고 없음 | 2026-01, 2026-06, 2026-08 OpenAI·언론 |
 | Naver AI 브리핑 | 통합검색에 AI 요약 답변과 출처 표시 도입 | 2025-03 보도 |
+| Naver AI 브리핑 | 적용 범위를 2026년 말까지 약 2배로 넓히겠다고 실적 발표에서 밝힘 | 2026-02 실적 발표 보도 |
 
-사용자 수·국가 수는 **제공사 자체 발표**이며 자주 바뀐다. 계획을 세우기 전에 원문을 다시 확인한다.
+사용자 수·국가 수는 **제공사 자체 발표**이며 자주 바뀐다. 계획을 세우기 전에 원문을 다시 확인한다. ChatGPT 광고의 한국 시작 시점은 국내 보도(2026-06)와 OpenAI 공지(2026-08-11)가 다르게 적혀 있으므로, 집행 전 OpenAI 광고 안내를 기준으로 확인한다.
+
+한국 소비자 대상 제품이라면 **Naver AI 브리핑 노출을 Google AI Overviews와 같은 비중으로 점검**한다. 네이버는 AI 브리핑이 적용되는 검색 범위를 계속 넓히고 있다.
 
 ## 클릭은 줄 수 있다
 
@@ -49,6 +52,8 @@ OpenAI 문서에 따르면 Crawler 역할이 나뉘어 있다.
 |---|---|---|
 | OAI-SearchBot | ChatGPT 검색 결과 노출용 | ChatGPT 검색 답변·Snippet에 나오기 어려움 |
 | GPTBot | 생성형 모델 학습용 수집 | 학습 사용을 원하지 않는다는 의사 표시 |
+| ChatGPT-User | 사용자가 ChatGPT에 특정 페이지를 열어 달라고 요청할 때 등 사용자 요청에 따른 방문 | 사용자 요청 기반이라 robots.txt 규칙이 적용되지 않을 수 있다고 OpenAI는 설명 |
+| OAI-AdsBot | ChatGPT 광고로 제출된 Landing Page를 방문해 광고 정책 준수와 관련성 확인 | ChatGPT 광고를 집행한다면 심사 경로이므로 광고 운영과 함께 결정 |
 
 즉 **검색 노출은 허용하고 학습 수집은 거부**하는 조합이 가능하다. robots.txt 설정은 법무·콘텐츠 정책과 함께 결정한다.
 
@@ -67,7 +72,7 @@ flowchart LR
 2. **고유한 답 만들기**: 가격, 제한, 비교, 설정 절차, 실제 사례처럼 우리만 정확히 아는 정보를 공개한다.
 3. **접근 가능하게 하기**: 색인, 크롤링 허용 여부, 렌더링, 페이지 속도를 점검한다.
 4. **일관성 유지**: 제품명·가격·기능 설명이 사이트, 문서, 마켓플레이스, 리뷰 사이트에서 서로 맞는지 확인한다. AI 답변은 여러 출처를 합치므로 불일치가 오답으로 이어질 수 있다.
-5. **측정하기**: Search Console의 생성형 AI 보고서, 주요 질문을 정기적으로 AI 서비스에 물어 언급·정확도를 기록하는 수동 점검.
+5. **측정하기**: Search Console의 생성형 AI 보고서로 **노출 쪽**을 본다. 이 보고서에는 클릭·CTR·검색어가 없으므로, **클릭 쪽**은 Landing Page의 Referrer(chatgpt.com, perplexity.ai 등)와 UTM으로 따로 집계한다. 여기에 주요 질문을 정기적으로 AI 서비스에 물어 언급·정확도를 기록하는 수동 점검을 더한다.
 
 ## 나쁜 예 / 좋은 예
 
@@ -99,7 +104,11 @@ flowchart LR
 - [Google users are less likely to click on links when an AI summary appears — Pew Research Center](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/) (2025-07-22, 접속 2026-09-28)
 - [Gartner Predicts Search Engine Volume Will Drop 25% by 2026 — Gartner](https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents) (2024-02-19, 접속 2026-09-28)
 - [Introducing ChatGPT search — OpenAI](https://openai.com/index/introducing-chatgpt-search/) (2024-10, 접속 2026-09-28)
-- [Overview of OpenAI Crawlers — OpenAI](https://developers.openai.com/api/docs/bots) (접속 2026-09-28)
-- [Testing ads in ChatGPT — OpenAI](https://openai.com/index/testing-ads-in-chatgpt/) (2026-01-16, 접속 2026-09-28)
-- [OpenAI ChatGPT ads pilot in five countries including Korea — ZDNet Korea](https://zdnet.co.kr/view/?no=20260813204559) (2026-08-13, 접속 2026-09-28)
+- [Overview of OpenAI Crawlers — OpenAI](https://developers.openai.com/api/docs/bots) (접속 2026-09-28, ChatGPT-User·OAI-AdsBot 포함)
+- [Testing ads in ChatGPT — OpenAI](https://openai.com/index/testing-ads-in-chatgpt/) (2026-01-16 게시, 2026-08-11 갱신, 접속 2026-09-28)
+- [OpenAI brings ChatGPT ads to Korea, keeps paid plans ad-free — The Korea Times](https://www.koreatimes.co.kr/business/companies/20260619/openai-brings-chatgpt-ads-to-korea-keeps-paid-plans-ad-free) (2026-06-19, 접속 2026-09-28)
+- [OpenAI Brings ChatGPT Ads to Korea for Free and Go Tiers — 서울경제](https://en.sedaily.com/technology/2026/06/19/openai-brings-chatgpt-ads-to-korea-for-free-and-go-tiers) (2026-06-19, 접속 2026-09-28)
+- [Generative AI performance report (Search) — Search Console Help](https://support.google.com/webmasters/answer/16984139?hl=en) (접속 2026-09-28)
+- [Google Search Console Generative AI Performance Report Live For All — Search Engine Roundtable](https://www.seroundtable.com/google-search-console-ai-report-live-41850.html) (2026-08, 접속 2026-09-28)
+- [네이버 "AI 브리핑 연말까지 2배 확대" — 서울경제TV](https://www.sentv.co.kr/article/view/sentv202602060034) (2026-02-06, 접속 2026-09-28)
 - [Naver introduces AI Briefing in search — NewDaily](https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html) (2025-03-24, 접속 2026-09-28)

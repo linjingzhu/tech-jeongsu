@@ -21,9 +21,9 @@ flowchart LR
 | Stage | Minimum setup |
 |---|---|
 | 0. Before launch | Git + PRs, static / PaaS hosting, preview deploys, domain auto-renewal, 2FA on every account |
-| 1. First users | Auto-deploy after CI tests, error tracking, uptime checks, automatic DB backups and one restore drill |
-| 2. Paying customers | One or two simple SLOs, budget alerts, a status page, feature flags, an incident record template |
-| 3. Growing team | Documented deployment procedure, template repository, on-call rotation, cost tag policy |
+| 1. First users | Auto-deploy after CI tests, error tracking, uptime checks, automatic DB backups (PITR) with an agreed RPO and RTO, and one restore drill (document 07, "Backups and Recovery Objectives") |
+| 2. Paying customers | One or two simple SLOs, budget alerts, a status page, feature flags, an incident record template, infrastructure moved to IaC (Terraform, OpenTofu, etc.) with `plan` as a PR check (document 03, "Infrastructure as Code Too") |
+| 3. Growing team | Documented deployment procedure, template repository, on-call rotation, cost tag policy, IaC drift checks, a review of whether cross-region backups are needed |
 
 ## Example Combinations
 
@@ -32,7 +32,7 @@ flowchart LR
 | Docs · landing page | GitHub Pages or Cloudflare Workers Static Assets | CDN cache rules, analytics |
 | Web app + API | Vercel / Netlify (frontend) + serverless container (API) + managed DB | Staging environment, canary |
 | Mobile app + backend | TestFlight · closed test + serverless backend | Phased release, server feature flags |
-| SaaS for the Korean public sector | Start by checking for a CSAP-certified cloud | Reflect the required certification grade |
+| SaaS for the Korean public sector | Start by checking for a CSAP-certified cloud (verification planned to move to the NIS in 2027-07, document 02) | Reflect the required certification grade |
 
 Plan conditions change. Check commercial-use permission, billing units and provider roadmaps with the checklist in document 01.
 
@@ -83,14 +83,14 @@ Good: Use a work account with 2FA, keep recovery codes safe, and get alerts befo
 - [ ] HTTPS certificate issuance and renewal confirmed as automatic
 - [ ] Tried rolling back to a previous version
 - [ ] Error tracking and uptime alerts reach my phone
-- [ ] DB backups exist and the restore procedure is documented
+- [ ] DB backups exist, RPO and RTO are set, and the restore procedure is documented (document 07)
 - [ ] No secrets in the repository (secret scanning passes)
 - [ ] For mobile: latest SDK and target API requirements met, and a demo account ready for review
 - [ ] Cost alerts configured
 
 ## How to Revisit This Track
 
-Read whatever hurts most right now. Scared of deploying: 04. Learning about outages late: 07. Scared of the bill: 09. Stuck in app review: 05.
+Read whatever hurts most right now. Scared of deploying: 04. Learning about outages late: 07. Scared of losing data: the backups and recovery objectives in 07. Infrastructure built by hand: infrastructure as code in 03. Scared of the bill: 09. Stuck in app review: 05.
 
 ## References
 

@@ -174,6 +174,60 @@ e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
 <td>Handle during working hours</td>
 </tr>
 </tbody></table>
+<p>The SRE Workbook recommends these starting values (for a 30-day SLO).</p>
+<table>
+<thead>
+<tr>
+<th>Budget consumed</th>
+<th>Long window</th>
+<th>Short window</th>
+<th>Burn rate</th>
+<th>Alert</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2%</td>
+<td>1 hour</td>
+<td>5 minutes</td>
+<td>14.4</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>5%</td>
+<td>6 hours</td>
+<td>30 minutes</td>
+<td>6</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>3 days</td>
+<td>6 hours</td>
+<td>1</td>
+<td>Ticket</td>
+</tr>
+</tbody></table>
+<p>An alert fires only when <strong>both</strong> windows exceed the threshold. The long window keeps a brief error spike from waking people; the short window stops an alert from firing for hours after the incident is already over.</p>
+<p>A Prometheus alert rule example (99.9% SLO, so the allowed error ratio is 0.001). It assumes recording rules such as <code>job:slo_errors_per_request:ratio_rate1h</code> precompute the error ratio for each window.</p>
+<pre><code class="language-yaml">groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors_per_request:ratio_rate1h{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate5m{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+          )
+          or
+          (
+            job:slo_errors_per_request:ratio_rate6h{job=&quot;api&quot;} &gt; (6 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate30m{job=&quot;api&quot;} &gt; (6 * 0.001)
+          )
+        labels:
+          severity: page
+</code></pre>
 <h2>The Three Signals of Observability</h2>
 <table>
 <thead>
@@ -198,7 +252,7 @@ e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
 <p><strong>OpenTelemetry</strong> is a vendor-neutral standard for collecting and exporting metrics, logs and traces, and it reached CNCF Graduated status in 2026-05. Instrumenting with OpenTelemetry means fewer code changes when you switch backends (monitoring products).</p>
 <h2>On-call</h2>
 <ul>
-<li>The Google SRE Book sets a target of <strong>at most two events</strong> per on-call shift (8–12 hours). That leaves time to respond accurately, clean up, and write the postmortem.</li>
+<li>The Google SRE Book sets a target of <strong>at most two incidents per 12-hour on-call shift</strong>. The number comes from the estimate that one incident, including root-cause analysis, remediation and follow-up such as the postmortem and bug fixes, takes about 6 hours on average. Scale it down for shorter shifts.</li>
 <li>Link a <strong>runbook</strong> (what to check, what to try) to every alert.</li>
 <li>Delete alerts that need no action. Ignored alerts teach people to ignore the real ones too.</li>
 </ul>
@@ -212,6 +266,50 @@ e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
     P --&gt; A[Track action items]
 </code></pre>
 <p><strong>Mitigation comes before root-cause analysis.</strong> Even without knowing the cause, stop the user impact first with a rollback or a flag off.</p>
+<h2>Backups and Recovery Objectives</h2>
+<p>Code can be redeployed, but <strong>data comes back only from backups</strong>. First decide, in numbers, how much you can lose and how long you can be down.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+<th>Question it asks</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RPO (Recovery Point Objective)</td>
+<td>The maximum acceptable time since the last recovery point: how much data you can lose</td>
+<td>In the worst case, how many minutes of data can we lose?</td>
+</tr>
+<tr>
+<td>RTO (Recovery Time Objective)</td>
+<td>The maximum acceptable delay between the interruption and restoration of service</td>
+<td>Within how many minutes or hours must we be back?</td>
+</tr>
+</tbody></table>
+<h3>PITR on Managed Databases</h3>
+<p>PITR (point-in-time recovery) restores any moment within the retention period from backups and transaction logs.</p>
+<ul>
+<li><strong>Amazon RDS</strong>: automated backup retention is 1–35 days. Transaction logs are uploaded to S3 every 5 minutes, so the latest restorable time is usually about 5 minutes before now. A restore does not overwrite the existing instance; it creates a <strong>new DB instance</strong>, and settings such as security groups and parameter groups may be created with defaults.</li>
+<li><strong>Cloud SQL</strong>: PITR log retention is 1–35 days (default 14) on Enterprise Plus and 1–7 days (default 7) on Enterprise.</li>
+<li>Because the restore lands on a new instance, your runbook needs <strong>switching the connection address and restoring settings</strong> to meet the RTO.</li>
+</ul>
+<h3>Restore Drill</h3>
+<ol>
+<li>Pick the point to restore (e.g. yesterday 14:00) and the target RTO.</li>
+<li>Create a new instance with PITR, separate from production. Do not touch production.</li>
+<li>Check row counts, the latest record timestamp and key queries, then attach the app and run a smoke test.</li>
+<li>The time from request until the app can use it again is your <strong>measured RTO</strong>; the gap between the last restored record and the target point is your <strong>measured RPO</strong>.</li>
+<li>Write down every step that blocked you (permissions, networking, parameters, secrets) in the runbook.</li>
+<li>Delete the restored instance to cut cost and personal-data exposure.</li>
+</ol>
+<h3>When Cross-Region Copies Are Worth It</h3>
+<ul>
+<li>A contract or regulation requires recovery from a full-region outage</li>
+<li>A paid core service must meet its RPO and RTO even during a region outage</li>
+<li>You need a copy in a <strong>separate place</strong> against account takeover or accidental deletion (also consider copying to another account)</li>
+</ul>
+<p>Amazon RDS offers cross-Region automated backups that replicate snapshots and transaction logs to another region. For an early product, or data you can regenerate, it is often not worth the storage and transfer cost. If you copy personal data to an overseas region, also review cross-border transfer requirements.</p>
 <h2>Blameless Postmortem</h2>
 <p>Google runs a <strong>blameless postmortem</strong> culture. It assumes the people involved made the best decisions they could with the information they had at the time, and it <strong>fixes the environment and the system, not the people</strong>.</p>
 <pre><code class="language-text">Bad:  &quot;The person who deployed didn&#39;t check, so it broke. Be careful next time.&quot;
@@ -227,6 +325,10 @@ Good: &quot;There was no pre-deploy migration compatibility check.
 <li><a href="https://sre.google/workbook/alerting-on-slos/">Alerting on SLOs</a> — Google SRE Workbook, accessed 2026-09-28</li>
 <li><a href="https://sre.google/sre-book/being-on-call/">Being On-Call</a> — Google SRE Book, accessed 2026-09-28</li>
 <li><a href="https://sre.google/sre-book/postmortem-culture/">Postmortem Culture: Learning from Failure</a> — Google SRE Book, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html">Disaster Recovery (DR) objectives</a> — AWS Well-Architected Reliability Pillar, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html">Restoring a DB instance to a specified time for Amazon RDS</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html">Replicating automated backups to another AWS Region</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/configure-pitr">Configure point-in-time recovery (PITR)</a> — Cloud SQL for PostgreSQL Docs, accessed 2026-09-28</li>
 <li><a href="https://www.cncf.io/announcements/2026/05/21/cloud-native-computing-foundation-announces-opentelemetrys-graduation-solidifying-status-as-the-de-facto-observability-standard/">CNCF Announces OpenTelemetry&#39;s Graduation</a> — CNCF, 2026-05-21, accessed 2026-09-28</li>
 </ul>
 </article>

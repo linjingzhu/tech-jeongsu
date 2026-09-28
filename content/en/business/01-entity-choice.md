@@ -22,6 +22,28 @@ The second choice applies only to sole proprietors. A corporation cannot be a si
 
 > Do not pick a corporation on tax rates alone. The moment you take the corporation's money for personal use, **tax on salary or dividends** applies again, and withdrawals without a basis cause problems.
 
+### Tax Comparison Example (2026 tax year, illustration only)
+
+A simple example that applies only the rate tables to the same **taxable income (gwase pyojun)**. In practice the two tax bases are not the same number (the CEO's salary is a corporate expense; an individual gets income deductions, etc.), and reliefs, tax credits and social insurance are all left out.
+
+| Taxable income | Individual: global income tax | Individual: local income tax (10%) | Individual total | Corporation: corporate tax | Corporation: local income tax | Corporation total |
+|---|---|---|---|---|---|---|
+| KRW 100 million | KRW 19.56 million | KRW 1.956 million | about KRW 21.52 million | KRW 10 million | KRW 1 million | KRW 11 million |
+| KRW 300 million | KRW 94.06 million | KRW 9.406 million | about KRW 103.47 million | KRW 40 million | KRW 4 million | KRW 44 million |
+
+How it was computed:
+
+- Individual global income tax = taxable income × rate − progressive deduction (NTS global income tax rate table). KRW 100 million falls in the over-88-million to 150-million bracket (35%, deduction KRW 15.44 million): 100 million × 35% − 15.44 million = KRW 19.56 million. KRW 300 million falls in the over-150-million to 300-million bracket (38%, deduction KRW 19.94 million): 300 million × 38% − 19.94 million = KRW 94.06 million.
+- Individual local income tax is taken as 10% of the computed income tax (the local income tax table is one tenth of the national table).
+- Corporate tax (fiscal years starting on or after 2026-01-01, NTS): 10% up to KRW 200 million, 20% on the excess. KRW 300 million = 200 million × 10% + 100 million × 20% = KRW 40 million.
+- Corporate local income tax rose by 0.1 percentage point in every bracket for fiscal years starting on or after 2026-01-01, to 1%, 2%, 2.2% and 2.5% (2026 local tax amendment, local government notice). KRW 300 million = 200 million × 1% + 100 million × 2% = KRW 4 million.
+
+How to read it:
+
+- The corporate totals above are the tax **while the profit stays inside the corporation**. Once the CEO takes that money out, salary adds **wage income tax and social insurance (paid by both the corporation and the CEO)**, and dividends add **dividend income tax**.
+- So a corporation mainly wins **when you can afford to reinvest or retain a large part of the profit**. If you must take almost everything out each year to live on, the gap shrinks a lot or can reverse.
+- For a real decision, run the numbers with a tax accountant, including CEO salary, dividend plans and startup relief (document 08).
+
 ## Decision Flow
 
 ```mermaid
@@ -45,7 +67,7 @@ flowchart TD
 |---|---|---|
 | Criterion | Individuals with prior-year gross supply below KRW 104 million (threshold applied from 2024-07-01) | All other individuals, every corporation |
 | VAT payment exemption | No VAT payable if gross supply for the period is below KRW 48 million (tax periods starting 2021 onward) | None |
-| Filings per year | Once | Twice (final returns, individuals) |
+| Filings per year | One final return (January). But if you issued tax invoices in January to June, a preliminary return is due by July 25 (VAT Act Article 66(3)) | Twice (final returns, individuals) |
 | Tax invoices | Must issue if prior-year gross supply is KRW 48 million or more; new or smaller businesses issue receipts | Issues invoices |
 | Input VAT | 0.5% of invoiced purchase amounts credited (supplies from 2021-07-01) | Full input VAT credit, refunds possible |
 
@@ -54,6 +76,18 @@ Simplified status is not always better.
 - If early equipment or contractor costs are large and you **want input VAT refunded**, general status can be better.
 - If much of your revenue is **zero-rated** overseas revenue, refunds can arise, and simplified status can be a disadvantage there. See document 06.
 - To give up simplified status you must file **by the last day of the month before the month you want general status to apply**, and you cannot return to simplified status for 3 years (VAT Act Article 70).
+
+### Switch Timing and Exclusions
+
+| Situation | Detail (per the NTS simplified taxation Q&A and the statutes) |
+|---|---|
+| New business | If first-year gross supply is expected to stay below the threshold, **report simplified status together with the business registration application** (VAT Act Article 61) |
+| Threshold exceeded | If gross supply for a calendar year reaches the threshold, you become a general taxpayer **from July 1 of the next year**. Check the tax office's notice of the change in taxpayer type |
+| Just before a July 1 switch | A business switching from simplified to general files and pays for January 1 to June 30 as a tax period **by July 25** |
+| Exclusion regardless of sales | Excluded industries under Enforcement Decree Article 109(2), such as manufacturing and wholesale, and the **Simplified Taxation Exclusion Criteria** notified by the NTS Commissioner (regions and industries, notice applied from 2024-07-01) bar simplified status even with small sales |
+| Real estate rental, taxable entertainment venues | Not excluded industries, but a separate threshold of **KRW 48 million** applies |
+
+- Whether software development and supply falls under the exclusion criteria can depend on the location and any other lines of business, so check on Hometax or with the tax office before registering.
 
 ## Incorporation Basics
 
@@ -88,6 +122,13 @@ Good example:
 
 Many start as sole proprietors and move to a corporation once profit is stable.
 
+Signals to consider converting:
+
+- Taxable income reaches the 35% bracket (over KRW 88 million) and you do not need to spend all of that profit right away (see the tax comparison example above)
+- Revenue passes the **double-entry bookkeeping** threshold (KRW 150 million for information and communications and similar industries), so the bookkeeping load becomes close to a corporation's (document 07)
+- Revenue approaches the **faithful filing confirmation** threshold (KRW 750 million for information and communications and similar industries) (document 07)
+- You need outside investment or stock options
+
 | Method | Overview |
 |---|---|
 | New corporation, then move the business | Create a new corporation and close the sole proprietorship. Contracts and accounts must be moved |
@@ -109,6 +150,10 @@ Check when converting:
 - [NTS Call Center - Simplified taxation FAQ](https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937) (accessed 2026-09-28)
 - [NTS - Corporate tax rates (2026 onward)](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7746&mi=2372) (accessed 2026-09-28)
 - [NTS - Global income tax rates](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2227&cntntsId=7667) (accessed 2026-09-28)
+- [Anyang City - Local tax changes in 2026 (corporate local income tax up 0.1 percentage point)](https://www.anyang.go.kr/main/contents.do?key=482) (effective 2026, accessed 2026-09-28)
+- [NTS - VAT filing and payment deadlines (simplified taxpayer preliminary return)](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2273&cntntsId=7694) (accessed 2026-09-28)
+- [Korea Law Information Center - VAT Act Enforcement Decree Article 109, scope of simplified taxation](https://www.law.go.kr/LSW/lsLawLinkInfo.do?lsJoLnkSeq=1015986155&chrClsCd=010202&ancYnChk=) (accessed 2026-09-28)
+- [Korea Law Information Center - Simplified Taxation Exclusion Criteria (NTS notice)](https://law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000231706) (accessed 2026-09-28)
 - [Korea Law Information Center - VAT Act Article 61, scope of simplified taxation](https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=1000920535&lsId=001571&chrClsCd=010202&print=print) (accessed 2026-09-28)
 - [Korea Law Information Center - Commercial Act Article 292, effect of articles](https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900729564) (accessed 2026-09-28)
 - [Easy Law - Concept of a stock company](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=736&ccfNo=1&cciNo=1&cnpClsNo=2) (accessed 2026-09-28)

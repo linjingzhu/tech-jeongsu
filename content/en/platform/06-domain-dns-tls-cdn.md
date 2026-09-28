@@ -54,6 +54,14 @@ Good: Use automatic issuance in your hosting / CDN / ingress, or renew with an A
       and receive monitoring alerts when expiry approaches.
 ```
 
+**How to automate it**
+
+- **VM · single server**: an ACME client such as certbot issues the certificate and schedules renewal. With Caddy as the web server, issuance, renewal and HTTP → HTTPS redirects are the default behavior.
+- **Kubernetes**: cert-manager watches `Certificate` resources, issues and renews through ACME, stores the result in a Secret, and the ingress or gateway uses that Secret.
+- **Managed platforms**: most hosting, CDN and serverless platforms issue and renew certificates automatically once you attach a custom domain. Your job is to keep the DNS and CAA records right.
+
+Let's Encrypt's `shortlived` (6-day) and `tlsserver` profiles are **opt-in**. The ACME client must request a profile explicitly; without a request, certificates come from the default `classic` profile. Some clients do not support profile selection.
+
 ## Forcing HTTPS: HSTS
 
 HSTS (RFC 6797) uses the `Strict-Transport-Security` header to tell browsers "connect to this site only over HTTPS."
@@ -97,3 +105,7 @@ Good: Put a content hash in file names at build time and cache only HTML briefly
 - [Decreasing Certificate Lifetimes to 45 Days](https://letsencrypt.org/2025/12/02/from-90-to-45) — Let's Encrypt, 2025-12-02, accessed 2026-09-28
 - [6-day and IP Address Certificates are Generally Available](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) — Let's Encrypt, 2026-01-15, accessed 2026-09-28
 - [Certificate Lifetime Rationale and Plans](https://letsencrypt.org/docs/cert-lifetimes/) — Let's Encrypt, accessed 2026-09-28
+- [Profiles](https://letsencrypt.org/docs/profiles/) — Let's Encrypt, accessed 2026-09-28
+- [Certbot](https://certbot.eff.org/) — EFF, accessed 2026-09-28
+- [Automatic HTTPS](https://caddyserver.com/docs/automatic-https) — Caddy Docs, accessed 2026-09-28
+- [ACME](https://cert-manager.io/docs/configuration/acme/) — cert-manager Docs, accessed 2026-09-28

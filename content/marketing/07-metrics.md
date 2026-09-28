@@ -47,12 +47,44 @@ CAC Payback (개월)
 
 Gross Margin을 빼고 계산하면 회수 기간이 실제보다 짧아 보인다.
 
+## 예시: 장애 모니터링 도구의 Unit Economics (가정)
+
+위 Payback 예와 같은 숫자로 LTV, LTV:CAC, Blended·Paid CAC까지 한 번에 계산한다. 모든 수치는 **가정**이다.
+
+```text
+가정
+- ARPA (계정당 월 매출): 50만 원
+- Gross Margin: 80%
+- 월 Logo Churn: 3%, 기간과 관계없이 일정
+- Expansion 없음, 할인율(현재가치 환산) 미적용
+- CAC (Marketing + Sales, Blended): 600만 원
+
+월 매출총이익   = 50만 × 0.8 = 40만 원
+평균 고객 수명  ≈ 1 / 0.03 ≈ 33.3개월
+LTV             ≈ 40만 / 0.03 ≈ 1,333만 원
+LTV:CAC         ≈ 1,333만 / 600만 ≈ 2.2
+CAC Payback     = 600만 / 40만 = 15개월
+```
+
+Blended CAC와 Paid CAC를 나누면 그림이 달라진다.
+
+```text
+이번 분기 신규 유료 계정 10곳, Marketing + Sales 총비용 6,000만 원
+- 유료 채널 경유 4곳, 유료 채널 비용(광고비 + 해당 영업비) 4,000만 원
+- 자연 검색·추천 경유 6곳, 콘텐츠·커뮤니티 비용 2,000만 원
+
+Blended CAC = 6,000만 / 10곳 = 600만 원   → LTV:CAC ≈ 2.2, Payback 15개월
+Paid CAC    = 4,000만 / 4곳  = 1,000만 원 → LTV:CAC ≈ 1.3, Payback 25개월
+```
+
+Blended 숫자만 보면 유료 채널을 늘려도 될 것 같지만, 유료 채널만 떼어 보면 회수에 2년 넘게 걸린다. **예산을 늘릴지는 Paid CAC(가능하면 06 문서의 Incremental CAC)로 판단한다.** Churn이 시간이 지나며 줄거나 Expansion이 있으면 LTV는 더 커지므로, 가정을 바꿀 때마다 다시 계산한다.
+
 ## 벤치마크는 참고일 뿐이다
 
 자주 인용되는 경험칙:
 
-- **LTV:CAC 3:1**: a16z는 투자자들이 소비자 기업의 건전성을 볼 때 대략적인 기준으로 3배를 쓴다고 설명한다
-- **CAC Payback**: a16z 자료는 평균적인 Startup의 Payback을 12–18개월, 대기업 대상 18–24개월, SMB 대상 6–12개월 수준으로 제시한다
+- **LTV:CAC 3:1**: a16z는 투자자들이 소비자 기업의 재무 건전성을 볼 때 3배를 대략적인 기준으로 쓴다고 설명한다. 같은 글은 LTV:CAC를 2배에서 3배로 올리면 기업가치가 거의 3배가 될 수 있다는 계산 예를 보여 준다. CAC 1원당 재투자할 수 있는 이익이 커지기 때문이다. 위 예시의 2.2는 이 기준에 못 미친다.
+- **CAC Payback**: 공개된 Payback 벤치마크는 조사 기관, 연도, 고객 규모(SMB·Enterprise), Gross Margin 반영 여부에 따라 범위가 크게 다르다. 출처와 정의를 확인할 수 없는 범위는 목표로 쓰지 않는다.
 
 이 숫자들은 **업종, 가격 모델, 성장 단계, 자본 비용**에 따라 달라진다. 우리 회사의 Cohort 데이터가 더 중요한 기준이다.
 
@@ -105,6 +137,6 @@ Gross Margin을 빼고 계산하면 회수 기간이 실제보다 짧아 보인�
 ## 참고 자료
 
 - [16 Startup Metrics — Andreessen Horowitz](https://a16z.com/16-startup-metrics/) (2015, 접속 2026-09-28)
-- [Why Do Investors Care So Much About LTV:CAC? — Andreessen Horowitz](https://a16z.com/why-do-investors-care-so-much-about-ltvcac/) (접속 2026-09-28)
+- [Why Do Investors Care So Much About LTV:CAC? — Andreessen Horowitz](https://a16z.com/why-do-investors-care-so-much-about-ltvcac/) (2023-08, 접속 2026-09-28)
 - [What is the CAC payback period? — Stripe](https://stripe.com/resources/more/what-is-the-cac-payback-period) (접속 2026-09-28)
 - [It's Payback Time: A Crash Course in Our Favorite SaaS Metric — HubSpot](https://product.hubspot.com/blog/its-payback-time-a-crash-course-in-saas-metrics) (접속 2026-09-28)

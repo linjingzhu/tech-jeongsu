@@ -64,6 +64,28 @@ SLSA is a specification that splits supply chain security into **tracks and leve
 
 GitHub Artifact Attestations produce build provenance and, per GitHub's documentation, provide **SLSA v1.0 Build Level 2**.
 
+Produce the SBOM and provenance together in the release build job.
+
+```yaml
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+steps:
+  - uses: actions/checkout@<commit-sha>
+  - run: npm ci && npm run build
+  - run: mkdir -p dist && tar -czf dist/app.tar.gz build
+  - run: npm sbom --sbom-format cyclonedx > dist/sbom.cdx.json
+  - uses: actions/attest-build-provenance@<commit-sha>
+    with:
+      subject-path: dist/app.tar.gz
+```
+
+- `npm sbom` builds a CycloneDX or SPDX SBOM from the installed dependencies. For mixed languages or container images, use a tool such as syft (`syft <image> -o spdx-json`).
+- `attest-build-provenance` signs with an OIDC token (`id-token: write`) and stores the attestation with the `attestations: write` permission.
+
+The consumer verifies before deploying.
+
 ```bash
 gh attestation verify ./dist/app.tar.gz --repo my-org/my-app
 ```
@@ -104,3 +126,7 @@ If you sell products with digital elements in the EU, check the CRA.
 - [Artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations) — GitHub Docs, accessed 2026-09-28
 - [OpenSSF Scorecard](https://openssf.org/projects/scorecard/) — OpenSSF, accessed 2026-09-28
 - [Cyber Resilience Act - Reporting obligations](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting) — European Commission, accessed 2026-09-28
+- [npm-sbom](https://docs.npmjs.com/cli/v11/commands/npm-sbom/) — npm Docs, accessed 2026-09-28
+- [Using artifact attestations to establish provenance for builds](https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds) — GitHub Docs, accessed 2026-09-28
+- [actions/attest-build-provenance](https://github.com/actions/attest-build-provenance) — GitHub, accessed 2026-09-28
+- [anchore/syft](https://github.com/anchore/syft) — Anchore, accessed 2026-09-28

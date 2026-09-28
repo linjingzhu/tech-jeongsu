@@ -46,10 +46,35 @@ Lift = (Test conversion rate - Control conversion rate) / Control conversion rat
 ```
 
 - User-level experiments: platform conversion lift tools (e.g., Google Ads, Meta)
-- Region-level experiments: geo experiments (e.g., Meta GeoLift, GeoX in Google Meridian)
+- Region-level experiments: geo experiments (e.g., Meta GeoLift, Google Meridian GeoX)
+- Google Meridian GeoX: an open-source geo-experiment library previewed in 2026-05. It splits regions into test and control groups independently of the ad publisher, measures the incremental effect, and is designed to feed those results into Meridian MMM calibration. General availability was reported on 2026-09-09
 - Google stated that in 2025 it lowered the minimum budget for Google Ads incrementality experiments (a USD 5,000 minimum, per Google Ads Help)
 
 Caution: small samples produce unstable results. Before the experiment, decide **the observation period, the minimum effect size, and the decision criteria**.
+
+### A Worked Example
+
+Assume the example product is checking the incremental effect of its search ads. Every number is **illustrative**.
+
+```text
+50,000 people per group (randomly assigned)
+Control conversion rate 2.0%  → 1,000 conversions
+Test    conversion rate 2.4%  → 1,200 conversions
+
+Lift                    = (2.4 - 2.0) / 2.0 = 20%
+Incremental conversions = 50,000 × (2.4% - 2.0%) = 200
+Test ad spend           = KRW 10,000,000
+Incremental CAC         = KRW 10,000,000 / 200 = KRW 50,000
+```
+
+If the platform credits all 1,200 test-group conversions to the ads, CAC looks like about KRW 8,333. The conversions the ads **added** are 200, and budget decisions use the incremental CAC of KRW 50,000.
+
+### Decide Before the Experiment
+
+- **MDE (minimum detectable effect)**: Set the smallest lift you want to detect first. The required sample grows with the inverse square of the MDE, so halving the MDE needs roughly four times the sample.
+- **Minimum sample and number of regions**: In the example above, detecting 2.0% → 2.4% with 80% power and a 5% two-sided significance level needs about 21,000 people per group (normal approximation). In geo experiments, too few regions let region-to-region variation swamp the effect, so set the number of regions and the duration with the power analysis in GeoLift or GeoX.
+- **A fixed, pre-registered duration**: Write down the duration, metrics, and decision criteria before the experiment. Use whole weeks so day-of-week effects do not leak in.
+- **No peeking**: Checking results daily and stopping on the day they look significant pushes the false-positive rate well above the nominal 5%. If you need interim looks, use a method designed for them from the start, such as a sequential test.
 
 ## MMM
 
@@ -105,6 +130,9 @@ This is **not a way to bypass consent.** Use it only within the scope of consent
 - [Updates to consent mode for traffic in the EEA — Google Ads Help](https://support.google.com/google-ads/answer/13695607?hl=en) (accessed 2026-09-28)
 - [Meridian is now available to everyone — Google](https://blog.google/products/ads-commerce/meridian-marketing-mix-model-open-to-everyone/) (2025-01-29, accessed 2026-09-28)
 - [An Analyst's Guide to MMM — Meta Robyn](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) (accessed 2026-09-28)
+- [Meridian GeoX: Google's new open-source Geo incrementality solution — Google](https://business.google.com/us/accelerate/announcements/meridian-geox-googles-new-open-source-geo-incrementality-solution/) (2026-05, accessed 2026-09-28)
+- [google/meridian-geox — GitHub](https://github.com/google/meridian-geox) (accessed 2026-09-28)
+- [Google Launches Meridian GeoX Globally — Search Engine Journal](https://www.searchenginejournal.com/google-launches-meridian-geox-globally/589030/) (2026-09, accessed 2026-09-28)
 - [Strengthen media measurement with incrementality testing improvements — Google Ads Help](https://support.google.com/google-ads/answer/16719772?hl=en) (2025, accessed 2026-09-28)
 - [Conversions API — Meta for Developers](https://developers.facebook.com/docs/marketing-api/conversions-api/) (accessed 2026-09-28)
 - [About enhanced conversions — Google Ads Help](https://support.google.com/google-ads/answer/9888656?hl=en) (accessed 2026-09-28)

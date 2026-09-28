@@ -47,12 +47,44 @@ Example: CAC 6,000,000 KRW, monthly revenue 500,000 KRW, gross margin 80%
 
 Calculating without gross margin makes the payback period look shorter than it really is.
 
+## Example: Unit Economics of the Incident-Monitoring Tool (Assumptions)
+
+Using the same numbers as the payback example above, calculate LTV, LTV:CAC, and blended versus paid CAC in one pass. Every number is an **assumption**.
+
+```text
+Assumptions
+- ARPA (monthly revenue per account): KRW 500,000
+- Gross margin: 80%
+- Monthly logo churn: 3%, constant over time
+- No expansion, no discounting to present value
+- CAC (marketing + sales, blended): KRW 6,000,000
+
+Monthly gross profit = 500,000 × 0.8 = KRW 400,000
+Average lifetime     ≈ 1 / 0.03 ≈ 33.3 months
+LTV                  ≈ 400,000 / 0.03 ≈ KRW 13.33M
+LTV:CAC              ≈ 13.33M / 6.0M ≈ 2.2
+CAC Payback          = 6.0M / 400,000 = 15 months
+```
+
+Splitting blended and paid CAC changes the picture.
+
+```text
+New paying accounts this quarter: 10; total marketing + sales cost KRW 60M
+- 4 via paid channels, paid-channel cost (ad spend + related sales cost) KRW 40M
+- 6 via organic search and referrals, content and community cost KRW 20M
+
+Blended CAC = 60M / 10 = KRW 6.0M  → LTV:CAC ≈ 2.2, payback 15 months
+Paid CAC    = 40M / 4  = KRW 10.0M → LTV:CAC ≈ 1.3, payback 25 months
+```
+
+Looking only at the blended number, adding paid spend seems fine; isolate the paid channels and payback takes more than two years. **Decide whether to raise the budget using paid CAC (ideally the incremental CAC from document 06).** If churn falls over time or there is expansion, LTV grows, so recalculate whenever an assumption changes.
+
 ## Benchmarks Are Only a Reference
 
 Frequently cited rules of thumb:
 
-- **LTV:CAC of 3:1**: a16z explains that investors use roughly 3x as a rough benchmark of a consumer company's health
-- **CAC Payback**: a16z material puts the average startup's payback at around 12–18 months, 18–24 months for selling to large enterprises, and 6–12 months for SMBs
+- **LTV:CAC of 3:1**: a16z explains that investors use about 3x as a rough benchmark of a consumer company's financial health. The same piece shows a calculation in which improving LTV:CAC from 2x to 3x can nearly triple a company's valuation, because each unit of CAC leaves more profit to reinvest. The example's 2.2 falls short of this benchmark.
+- **CAC Payback**: Published payback benchmarks vary widely by survey provider, year, customer size (SMB or enterprise), and whether gross margin is applied. Do not adopt a range as a target if you cannot check its source and definition.
 
 These numbers vary with **industry, pricing model, growth stage, and cost of capital**. Your own cohort data is the more important benchmark.
 
@@ -105,6 +137,6 @@ A good report flows from **number → interpretation → decision**.
 ## References
 
 - [16 Startup Metrics — Andreessen Horowitz](https://a16z.com/16-startup-metrics/) (2015, accessed 2026-09-28)
-- [Why Do Investors Care So Much About LTV:CAC? — Andreessen Horowitz](https://a16z.com/why-do-investors-care-so-much-about-ltvcac/) (accessed 2026-09-28)
+- [Why Do Investors Care So Much About LTV:CAC? — Andreessen Horowitz](https://a16z.com/why-do-investors-care-so-much-about-ltvcac/) (2023-08, accessed 2026-09-28)
 - [What is the CAC payback period? — Stripe](https://stripe.com/resources/more/what-is-the-cac-payback-period) (accessed 2026-09-28)
 - [It's Payback Time: A Crash Course in Our Favorite SaaS Metric — HubSpot](https://product.hubspot.com/blog/its-payback-time-a-crash-course-in-saas-metrics) (accessed 2026-09-28)

@@ -54,6 +54,14 @@ Let's Encrypt의 공지된 일정(2026-09-28 확인):
         만료 임박을 Monitoring 경보로 받는다.
 ```
 
+**어떻게 자동화하나**
+
+- **VM · 단일 Server**: certbot 같은 ACME Client가 발급하고 갱신 작업을 예약한다. Web Server를 Caddy로 두면 인증서 발급 · 갱신과 HTTP → HTTPS 전환이 기본 동작이다.
+- **Kubernetes**: cert-manager가 `Certificate` Resource를 보고 ACME로 발급 · 갱신해 Secret에 저장하고, Ingress · Gateway가 그 Secret을 쓴다.
+- **Managed Platform**: 대부분의 Hosting · CDN · Serverless Platform은 Custom Domain을 연결하면 인증서를 자동 발급 · 갱신한다. 할 일은 DNS와 CAA Record를 맞게 두는 것이다.
+
+Let's Encrypt의 `shortlived`(6일)와 `tlsserver` Profile은 **Opt-in**이다. ACME Client가 Profile을 명시적으로 요청해야 하고, 요청하지 않으면 기본 `classic` Profile로 발급된다. Profile 선택을 지원하지 않는 Client도 있다.
+
 ## HTTPS 강제: HSTS
 
 HSTS(RFC 6797)는 `Strict-Transport-Security` Header로 "이 사이트는 HTTPS로만 접속하라"고 Browser에 알린다.
@@ -97,3 +105,7 @@ CDN은 사용자 가까운 Edge에서 응답해 **지연 시간과 Origin 부하
 - [Decreasing Certificate Lifetimes to 45 Days](https://letsencrypt.org/2025/12/02/from-90-to-45) — Let's Encrypt, 2025-12-02, 접근일 2026-09-28
 - [6-day and IP Address Certificates are Generally Available](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) — Let's Encrypt, 2026-01-15, 접근일 2026-09-28
 - [Certificate Lifetime Rationale and Plans](https://letsencrypt.org/docs/cert-lifetimes/) — Let's Encrypt, 접근일 2026-09-28
+- [Profiles](https://letsencrypt.org/docs/profiles/) — Let's Encrypt, 접근일 2026-09-28
+- [Certbot](https://certbot.eff.org/) — EFF, 접근일 2026-09-28
+- [Automatic HTTPS](https://caddyserver.com/docs/automatic-https) — Caddy Docs, 접근일 2026-09-28
+- [ACME](https://cert-manager.io/docs/configuration/acme/) — cert-manager Docs, 접근일 2026-09-28

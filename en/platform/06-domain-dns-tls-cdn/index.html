@@ -188,6 +188,13 @@
 Good: Use automatic issuance in your hosting / CDN / ingress, or renew with an ACME client,
       and receive monitoring alerts when expiry approaches.
 </code></pre>
+<p><strong>How to automate it</strong></p>
+<ul>
+<li><strong>VM · single server</strong>: an ACME client such as certbot issues the certificate and schedules renewal. With Caddy as the web server, issuance, renewal and HTTP → HTTPS redirects are the default behavior.</li>
+<li><strong>Kubernetes</strong>: cert-manager watches <code>Certificate</code> resources, issues and renews through ACME, stores the result in a Secret, and the ingress or gateway uses that Secret.</li>
+<li><strong>Managed platforms</strong>: most hosting, CDN and serverless platforms issue and renew certificates automatically once you attach a custom domain. Your job is to keep the DNS and CAA records right.</li>
+</ul>
+<p>Let&#39;s Encrypt&#39;s <code>shortlived</code> (6-day) and <code>tlsserver</code> profiles are <strong>opt-in</strong>. The ACME client must request a profile explicitly; without a request, certificates come from the default <code>classic</code> profile. Some clients do not support profile selection.</p>
 <h2>Forcing HTTPS: HSTS</h2>
 <p>HSTS (RFC 6797) uses the <code>Strict-Transport-Security</code> header to tell browsers &quot;connect to this site only over HTTPS.&quot;</p>
 <pre><code class="language-http">Strict-Transport-Security: max-age=31536000; includeSubDomains
@@ -242,6 +249,10 @@ Good: Put a content hash in file names at build time and cache only HTML briefly
 <li><a href="https://letsencrypt.org/2025/12/02/from-90-to-45">Decreasing Certificate Lifetimes to 45 Days</a> — Let&#39;s Encrypt, 2025-12-02, accessed 2026-09-28</li>
 <li><a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability">6-day and IP Address Certificates are Generally Available</a> — Let&#39;s Encrypt, 2026-01-15, accessed 2026-09-28</li>
 <li><a href="https://letsencrypt.org/docs/cert-lifetimes/">Certificate Lifetime Rationale and Plans</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
+<li><a href="https://letsencrypt.org/docs/profiles/">Profiles</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
+<li><a href="https://certbot.eff.org/">Certbot</a> — EFF, accessed 2026-09-28</li>
+<li><a href="https://caddyserver.com/docs/automatic-https">Automatic HTTPS</a> — Caddy Docs, accessed 2026-09-28</li>
+<li><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> — cert-manager Docs, accessed 2026-09-28</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/05-mobile-app-stores/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>App Store · Google Play</span></a><a class="page-link next" href="../../../en/platform/07-observability-incident/"><span><small>Next</small>SLO · On-call · Postmortem</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>

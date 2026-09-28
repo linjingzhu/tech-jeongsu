@@ -209,6 +209,25 @@ Good: Store it in a secret manager and inject it at runtime. If it leaks, &quot;
 </tr>
 </tbody></table>
 <p>GitHub Artifact Attestations produce build provenance and, per GitHub&#39;s documentation, provide <strong>SLSA v1.0 Build Level 2</strong>.</p>
+<p>Produce the SBOM and provenance together in the release build job.</p>
+<pre><code class="language-yaml">permissions:
+  contents: read
+  id-token: write
+  attestations: write
+steps:
+  - uses: actions/checkout@&lt;commit-sha&gt;
+  - run: npm ci &amp;&amp; npm run build
+  - run: mkdir -p dist &amp;&amp; tar -czf dist/app.tar.gz build
+  - run: npm sbom --sbom-format cyclonedx &gt; dist/sbom.cdx.json
+  - uses: actions/attest-build-provenance@&lt;commit-sha&gt;
+    with:
+      subject-path: dist/app.tar.gz
+</code></pre>
+<ul>
+<li><code>npm sbom</code> builds a CycloneDX or SPDX SBOM from the installed dependencies. For mixed languages or container images, use a tool such as syft (<code>syft &lt;image&gt; -o spdx-json</code>).</li>
+<li><code>attest-build-provenance</code> signs with an OIDC token (<code>id-token: write</code>) and stores the attestation with the <code>attestations: write</code> permission.</li>
+</ul>
+<p>The consumer verifies before deploying.</p>
 <pre><code class="language-bash">gh attestation verify ./dist/app.tar.gz --repo my-org/my-app
 </code></pre>
 <h2>Dependency Health</h2>
@@ -246,6 +265,10 @@ Good: Store it in a secret manager and inject it at runtime. If it leaks, &quot;
 <li><a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations">Artifact attestations</a> — GitHub Docs, accessed 2026-09-28</li>
 <li><a href="https://openssf.org/projects/scorecard/">OpenSSF Scorecard</a> — OpenSSF, accessed 2026-09-28</li>
 <li><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">Cyber Resilience Act - Reporting obligations</a> — European Commission, accessed 2026-09-28</li>
+<li><a href="https://docs.npmjs.com/cli/v11/commands/npm-sbom/">npm-sbom</a> — npm Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds">Using artifact attestations to establish provenance for builds</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://github.com/actions/attest-build-provenance">actions/attest-build-provenance</a> — GitHub, accessed 2026-09-28</li>
+<li><a href="https://github.com/anchore/syft">anchore/syft</a> — Anchore, accessed 2026-09-28</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/07-observability-incident/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>SLO · On-call · Postmortem</span></a><a class="page-link next" href="../../../en/platform/09-finops-platform-engineering/"><span><small>Next</small>FinOps · Platform Engineering</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>

@@ -51,6 +51,39 @@ e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
 | Page | The budget is burning fast | Respond now |
 | Ticket | It is leaking slowly | Handle during working hours |
 
+The SRE Workbook recommends these starting values (for a 30-day SLO).
+
+| Budget consumed | Long window | Short window | Burn rate | Alert |
+|---|---|---|---|---|
+| 2% | 1 hour | 5 minutes | 14.4 | Page |
+| 5% | 6 hours | 30 minutes | 6 | Page |
+| 10% | 3 days | 6 hours | 1 | Ticket |
+
+An alert fires only when **both** windows exceed the threshold. The long window keeps a brief error spike from waking people; the short window stops an alert from firing for hours after the incident is already over.
+
+A Prometheus alert rule example (99.9% SLO, so the allowed error ratio is 0.001). It assumes recording rules such as `job:slo_errors_per_request:ratio_rate1h` precompute the error ratio for each window.
+
+```yaml
+groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors_per_request:ratio_rate1h{job="api"} > (14.4 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate5m{job="api"} > (14.4 * 0.001)
+          )
+          or
+          (
+            job:slo_errors_per_request:ratio_rate6h{job="api"} > (6 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate30m{job="api"} > (6 * 0.001)
+          )
+        labels:
+          severity: page
+```
+
 ## The Three Signals of Observability
 
 | Signal | Question it answers |
@@ -63,7 +96,7 @@ e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
 
 ## On-call
 
-- The Google SRE Book sets a target of **at most two events** per on-call shift (8–12 hours). That leaves time to respond accurately, clean up, and write the postmortem.
+- The Google SRE Book sets a target of **at most two incidents per 12-hour on-call shift**. The number comes from the estimate that one incident, including root-cause analysis, remediation and follow-up such as the postmortem and bug fixes, takes about 6 hours on average. Scale it down for shorter shifts.
 - Link a **runbook** (what to check, what to try) to every alert.
 - Delete alerts that need no action. Ignored alerts teach people to ignore the real ones too.
 
@@ -80,6 +113,40 @@ flowchart LR
 ```
 
 **Mitigation comes before root-cause analysis.** Even without knowing the cause, stop the user impact first with a rollback or a flag off.
+
+## Backups and Recovery Objectives
+
+Code can be redeployed, but **data comes back only from backups**. First decide, in numbers, how much you can lose and how long you can be down.
+
+| Term | Definition | Question it asks |
+|---|---|---|
+| RPO (Recovery Point Objective) | The maximum acceptable time since the last recovery point: how much data you can lose | In the worst case, how many minutes of data can we lose? |
+| RTO (Recovery Time Objective) | The maximum acceptable delay between the interruption and restoration of service | Within how many minutes or hours must we be back? |
+
+### PITR on Managed Databases
+
+PITR (point-in-time recovery) restores any moment within the retention period from backups and transaction logs.
+
+- **Amazon RDS**: automated backup retention is 1–35 days. Transaction logs are uploaded to S3 every 5 minutes, so the latest restorable time is usually about 5 minutes before now. A restore does not overwrite the existing instance; it creates a **new DB instance**, and settings such as security groups and parameter groups may be created with defaults.
+- **Cloud SQL**: PITR log retention is 1–35 days (default 14) on Enterprise Plus and 1–7 days (default 7) on Enterprise.
+- Because the restore lands on a new instance, your runbook needs **switching the connection address and restoring settings** to meet the RTO.
+
+### Restore Drill
+
+1. Pick the point to restore (e.g. yesterday 14:00) and the target RTO.
+2. Create a new instance with PITR, separate from production. Do not touch production.
+3. Check row counts, the latest record timestamp and key queries, then attach the app and run a smoke test.
+4. The time from request until the app can use it again is your **measured RTO**; the gap between the last restored record and the target point is your **measured RPO**.
+5. Write down every step that blocked you (permissions, networking, parameters, secrets) in the runbook.
+6. Delete the restored instance to cut cost and personal-data exposure.
+
+### When Cross-Region Copies Are Worth It
+
+- A contract or regulation requires recovery from a full-region outage
+- A paid core service must meet its RPO and RTO even during a region outage
+- You need a copy in a **separate place** against account takeover or accidental deletion (also consider copying to another account)
+
+Amazon RDS offers cross-Region automated backups that replicate snapshots and transaction logs to another region. For an early product, or data you can regenerate, it is often not worth the storage and transfer cost. If you copy personal data to an overseas region, also review cross-border transfer requirements.
 
 ## Blameless Postmortem
 
@@ -101,4 +168,8 @@ Basic postmortem sections: summary, impact (users, duration, budget spent), time
 - [Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/) — Google SRE Workbook, accessed 2026-09-28
 - [Being On-Call](https://sre.google/sre-book/being-on-call/) — Google SRE Book, accessed 2026-09-28
 - [Postmortem Culture: Learning from Failure](https://sre.google/sre-book/postmortem-culture/) — Google SRE Book, accessed 2026-09-28
+- [Disaster Recovery (DR) objectives](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html) — AWS Well-Architected Reliability Pillar, accessed 2026-09-28
+- [Restoring a DB instance to a specified time for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) — AWS Docs, accessed 2026-09-28
+- [Replicating automated backups to another AWS Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) — AWS Docs, accessed 2026-09-28
+- [Configure point-in-time recovery (PITR)](https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/configure-pitr) — Cloud SQL for PostgreSQL Docs, accessed 2026-09-28
 - [CNCF Announces OpenTelemetry's Graduation](https://www.cncf.io/announcements/2026/05/21/cloud-native-computing-foundation-announces-opentelemetrys-graduation-solidifying-status-as-the-de-facto-observability-standard/) — CNCF, 2026-05-21, accessed 2026-09-28

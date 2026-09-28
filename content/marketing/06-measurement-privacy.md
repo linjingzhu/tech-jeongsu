@@ -46,10 +46,35 @@ Lift = (Test 전환율 - Control 전환율) / Control 전환율
 ```
 
 - 사용자 단위 실험: 플랫폼의 Conversion Lift 도구 (예: Google Ads, Meta)
-- 지역 단위 실험: Geo 실험 (예: Meta GeoLift, Google Meridian의 GeoX)
+- 지역 단위 실험: Geo 실험 (예: Meta GeoLift, Google Meridian GeoX)
+- Google Meridian GeoX: 2026-05 미리 공개된 오픈소스 Geo 실험 라이브러리로, 광고 매체와 무관하게 지역을 Test·Control로 나눠 순증을 측정하고 그 결과로 Meridian MMM을 보정하도록 설계되었다. 2026-09-09 정식 출시(GA)가 보도되었다
 - Google은 2025년 Google Ads 증분 실험의 최소 예산을 낮췄다고 안내했다 (Google Ads Help 기준 최소 5,000달러)
 
 주의: 표본이 작으면 결과가 흔들린다. 실험 전에 **관찰 기간, 최소 효과 크기, 판단 기준**을 먼저 정한다.
+
+### 숫자로 보는 예
+
+예시 제품이 검색광고의 순증 효과를 확인한다고 가정한다. 모든 수치는 **예시**다.
+
+```text
+각 그룹 50,000명 (무작위 배정)
+Control 전환율 2.0%  → 전환 1,000건
+Test    전환율 2.4%  → 전환 1,200건
+
+Lift             = (2.4 - 2.0) / 2.0 = 20%
+Incremental 전환 = 50,000 × (2.4% - 2.0%) = 200건
+Test 광고비      = 1,000만 원
+Incremental CAC  = 1,000만 원 / 200건 = 5만 원
+```
+
+플랫폼이 Test 그룹의 전환 1,200건을 모두 광고 덕분으로 보고하면 CAC는 약 8,333원으로 보인다. 실제로 광고가 **추가로** 만든 전환은 200건이고, 예산 판단은 Incremental CAC 5만 원으로 한다.
+
+### 실험 전에 정할 것
+
+- **MDE(Minimum Detectable Effect)**: 감지하려는 최소 Lift를 먼저 정한다. 필요한 표본은 MDE의 제곱에 반비례해 늘어나므로 MDE를 절반으로 줄이면 표본은 약 4배가 필요하다.
+- **최소 표본·지역 수**: 위 예에서 2.0% → 2.4%를 검정력 80%, 유의수준 5%(양측)로 감지하려면 그룹당 약 2.1만 명이 필요하다(정규 근사). Geo 실험은 지역 수가 적으면 지역 간 편차가 효과를 덮으므로, GeoLift·GeoX의 Power 분석으로 지역 수와 기간을 정한다.
+- **고정된 기간의 사전 등록**: 기간, 지표, 판단 기준을 실험 전에 문서로 남긴다. 요일 효과가 섞이지 않도록 주 단위로 잡는다.
+- **Peeking 금지**: 결과를 매일 보다가 유의해 보이는 날 멈추면 거짓 양성 확률이 명목 5%보다 크게 높아진다. 중간 확인이 필요하면 처음부터 Sequential Test처럼 중간 분석을 전제로 한 방법을 쓴다.
 
 ## MMM
 
@@ -105,6 +130,9 @@ MMM은 개인 단위 추적이 필요 없어서 Privacy 변화에 강하다. 대
 - [Updates to consent mode for traffic in the EEA — Google Ads Help](https://support.google.com/google-ads/answer/13695607?hl=en) (접속 2026-09-28)
 - [Meridian is now available to everyone — Google](https://blog.google/products/ads-commerce/meridian-marketing-mix-model-open-to-everyone/) (2025-01-29, 접속 2026-09-28)
 - [An Analyst's Guide to MMM — Meta Robyn](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) (접속 2026-09-28)
+- [Meridian GeoX: Google's new open-source Geo incrementality solution — Google](https://business.google.com/us/accelerate/announcements/meridian-geox-googles-new-open-source-geo-incrementality-solution/) (2026-05, 접속 2026-09-28)
+- [google/meridian-geox — GitHub](https://github.com/google/meridian-geox) (접속 2026-09-28)
+- [Google Launches Meridian GeoX Globally — Search Engine Journal](https://www.searchenginejournal.com/google-launches-meridian-geox-globally/589030/) (2026-09, 접속 2026-09-28)
 - [Strengthen media measurement with incrementality testing improvements — Google Ads Help](https://support.google.com/google-ads/answer/16719772?hl=en) (2025, 접속 2026-09-28)
 - [Conversions API — Meta for Developers](https://developers.facebook.com/docs/marketing-api/conversions-api/) (접속 2026-09-28)
 - [About enhanced conversions — Google Ads Help](https://support.google.com/google-ads/answer/9888656?hl=en) (접속 2026-09-28)

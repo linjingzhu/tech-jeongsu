@@ -51,6 +51,39 @@ Burn Rate = 실제 Error 비율 / SLO가 허용하는 Error 비율
 | Page | Budget이 빠르게 타고 있다 | 즉시 대응 |
 | Ticket | 천천히 새고 있다 | 업무 시간에 처리 |
 
+SRE Workbook이 권장하는 시작값(30일 SLO 기준)은 다음과 같다.
+
+| 소모한 Budget | Long Window | Short Window | Burn Rate | 경보 |
+|---|---|---|---|---|
+| 2% | 1시간 | 5분 | 14.4 | Page |
+| 5% | 6시간 | 30분 | 6 | Page |
+| 10% | 3일 | 6시간 | 1 | Ticket |
+
+두 창이 **모두** 기준을 넘을 때만 울린다. Long Window는 잠깐 튄 Error로 사람을 깨우지 않게 하고, Short Window는 이미 끝난 사고로 경보가 몇 시간씩 계속 울리지 않게 한다.
+
+Prometheus 경보 규칙 예시(99.9% SLO, 즉 허용 Error 비율 0.001). `job:slo_errors_per_request:ratio_rate1h` 같은 Recording Rule이 창별 Error 비율을 미리 계산해 둔다고 가정한다.
+
+```yaml
+groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors_per_request:ratio_rate1h{job="api"} > (14.4 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate5m{job="api"} > (14.4 * 0.001)
+          )
+          or
+          (
+            job:slo_errors_per_request:ratio_rate6h{job="api"} > (6 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate30m{job="api"} > (6 * 0.001)
+          )
+        labels:
+          severity: page
+```
+
 ## Observability의 세 신호
 
 | 신호 | 답하는 질문 |
@@ -63,7 +96,7 @@ Burn Rate = 실제 Error 비율 / SLO가 허용하는 Error 비율
 
 ## On-call
 
-- Google SRE Book은 On-call 교대(8–12시간)당 **최대 2건의 Event**를 목표로 제시한다. 그래야 정확히 대응하고, 정리하고, Postmortem까지 쓸 시간이 남는다.
+- Google SRE Book은 **12시간 On-call 교대당 최대 2건의 Incident**를 목표로 제시한다. 사고 하나에 원인 분석, 복구, Postmortem 작성과 Bug 수정 같은 후속 작업까지 평균 약 6시간이 든다는 계산에서 나온 숫자다. 교대가 더 짧으면 그만큼 줄여 잡는다.
 - 경보마다 **Runbook**(무엇을 확인하고 무엇을 해 볼지)을 연결한다.
 - 대응하지 않아도 되는 경보는 지운다. 무시되는 경보는 진짜 경보까지 무시하게 만든다.
 
@@ -80,6 +113,40 @@ flowchart LR
 ```
 
 원인 분석보다 **완화가 먼저**다. 원인을 몰라도 Rollback이나 Flag Off로 사용자 영향을 먼저 멈춘다.
+
+## Backup과 복구 목표
+
+코드는 다시 배포하면 되지만 **Data는 Backup에서만 돌아온다**. 먼저 얼마나 잃고 얼마나 멈춰도 되는지 숫자로 정한다.
+
+| 용어 | 정의 | 묻는 질문 |
+|---|---|---|
+| RPO (Recovery Point Objective) | 마지막 복구 지점 이후 허용 가능한 최대 시간. 잃어도 되는 Data의 양 | 최악의 경우 몇 분치 Data를 잃어도 되나? |
+| RTO (Recovery Time Objective) | 서비스 중단부터 복구까지 허용 가능한 최대 지연 | 몇 분 · 몇 시간 안에 다시 열려야 하나? |
+
+### Managed DB의 PITR
+
+PITR(Point-in-Time Recovery)은 Backup과 Transaction Log로 보존 기간 안의 임의 시점을 복원한다.
+
+- **Amazon RDS**: 자동 Backup 보존 기간은 1–35일. Transaction Log를 5분마다 S3에 올리므로 복원 가능한 최신 시점은 보통 현재보다 약 5분 전이다. 복원하면 기존 Instance를 덮지 않고 **새 DB Instance**가 생기며, Security Group · Parameter Group 같은 설정은 기본값으로 만들어질 수 있다.
+- **Cloud SQL**: PITR Log 보존 기간은 Enterprise Plus 1–35일(기본 14일), Enterprise 1–7일(기본 7일).
+- 새 Instance로 복원되므로 **연결 주소 교체와 설정 복구**가 Runbook에 있어야 RTO를 지킬 수 있다.
+
+### 복구 연습 절차
+
+1. 복원할 시점(예: 어제 14:00)과 목표 RTO를 정한다.
+2. Production과 분리된 곳에 PITR로 새 Instance를 만든다. Production은 건드리지 않는다.
+3. Row 수, 가장 최근 Record 시각, 핵심 Query를 확인하고 App을 붙여 Smoke Test를 한다.
+4. 요청부터 App이 다시 쓸 수 있을 때까지 걸린 시간이 **측정된 RTO**, 복원된 마지막 Record 시각과 목표 시점의 차이가 **측정된 RPO**다.
+5. 막힌 단계(권한, Network, Parameter, Secret)를 Runbook에 적는다.
+6. 복원한 Instance를 지운다. 비용과 개인정보 노출을 줄인다.
+
+### Cross-Region 복사는 언제 값어치가 있나
+
+- 계약이나 규제가 Region 전체 장애에서도 복구를 요구할 때
+- 유료 핵심 서비스라 Region 장애에도 RPO · RTO를 지켜야 할 때
+- 계정 탈취나 실수 삭제에 대비해 **분리된 곳**에 사본이 필요할 때(다른 계정으로의 복사도 함께 검토)
+
+Amazon RDS는 Snapshot과 Transaction Log를 다른 Region으로 복제하는 Cross-Region 자동 Backup을 제공한다. 초기 제품이거나 Data를 다시 만들 수 있다면 저장 · 전송 비용만큼의 가치가 없는 경우가 많다. 개인정보를 해외 Region으로 복사한다면 국외 이전 요건도 검토한다.
 
 ## Blameless Postmortem
 
@@ -101,4 +168,8 @@ Postmortem 기본 항목: 요약, 영향(사용자·시간·Budget 소모), Time
 - [Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/) — Google SRE Workbook, 접근일 2026-09-28
 - [Being On-Call](https://sre.google/sre-book/being-on-call/) — Google SRE Book, 접근일 2026-09-28
 - [Postmortem Culture: Learning from Failure](https://sre.google/sre-book/postmortem-culture/) — Google SRE Book, 접근일 2026-09-28
+- [Disaster Recovery (DR) objectives](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html) — AWS Well-Architected Reliability Pillar, 접근일 2026-09-28
+- [Restoring a DB instance to a specified time for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) — AWS Docs, 접근일 2026-09-28
+- [Replicating automated backups to another AWS Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) — AWS Docs, 접근일 2026-09-28
+- [Configure point-in-time recovery (PITR)](https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/configure-pitr) — Cloud SQL for PostgreSQL Docs, 접근일 2026-09-28
 - [CNCF Announces OpenTelemetry's Graduation](https://www.cncf.io/announcements/2026/05/21/cloud-native-computing-foundation-announces-opentelemetrys-graduation-solidifying-status-as-the-de-facto-observability-standard/) — CNCF, 2026-05-21, 접근일 2026-09-28

@@ -64,6 +64,28 @@ SLSA는 Supply Chain 보안 수준을 **Track과 Level**로 나눈 명세다. 20
 
 GitHub Artifact Attestations는 Build Provenance를 만들어 주며, GitHub 문서 기준 **SLSA v1.0 Build Level 2**를 제공한다.
 
+Release Build Job에서 SBOM과 Provenance를 함께 만든다.
+
+```yaml
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+steps:
+  - uses: actions/checkout@<commit-sha>
+  - run: npm ci && npm run build
+  - run: mkdir -p dist && tar -czf dist/app.tar.gz build
+  - run: npm sbom --sbom-format cyclonedx > dist/sbom.cdx.json
+  - uses: actions/attest-build-provenance@<commit-sha>
+    with:
+      subject-path: dist/app.tar.gz
+```
+
+- `npm sbom`은 설치된 의존성으로 CycloneDX 또는 SPDX 형식 SBOM을 만든다. 언어가 섞여 있거나 Container Image가 대상이면 syft(`syft <image> -o spdx-json`) 같은 도구를 쓴다.
+- `attest-build-provenance`는 OIDC Token(`id-token: write`)으로 서명하고 `attestations: write` 권한으로 Attestation을 저장한다.
+
+받는 쪽은 배포 전에 검증한다.
+
 ```bash
 gh attestation verify ./dist/app.tar.gz --repo my-org/my-app
 ```
@@ -104,3 +126,7 @@ EU에 디지털 요소가 있는 제품을 판매한다면 CRA를 확인한다.
 - [Artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations) — GitHub Docs, 접근일 2026-09-28
 - [OpenSSF Scorecard](https://openssf.org/projects/scorecard/) — OpenSSF, 접근일 2026-09-28
 - [Cyber Resilience Act - Reporting obligations](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting) — European Commission, 접근일 2026-09-28
+- [npm-sbom](https://docs.npmjs.com/cli/v11/commands/npm-sbom/) — npm Docs, 접근일 2026-09-28
+- [Using artifact attestations to establish provenance for builds](https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds) — GitHub Docs, 접근일 2026-09-28
+- [actions/attest-build-provenance](https://github.com/actions/attest-build-provenance) — GitHub, 접근일 2026-09-28
+- [anchore/syft](https://github.com/anchore/syft) — Anchore, 접근일 2026-09-28
