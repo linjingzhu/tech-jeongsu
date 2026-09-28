@@ -114,6 +114,33 @@
 <li>Rates are progressive from <strong>6% to 45%</strong> by tax base bracket (NTS global income tax rate table). Local income tax is added separately.</li>
 <li><strong>Interim prepayment</strong>: part of the income tax for the first half (January 1 to June 30) is billed and paid in November. If the estimated interim amount is below KRW 500,000 nothing is payable, but you must file the estimate to cancel the notice.</li>
 </ul>
+<h3>Who Needs a Sincere-Filing Confirmation</h3>
+<p>A sole proprietor whose <strong>revenue for the tax period</strong> reaches the industry threshold must file a sincere-filing confirmation checked by a tax accountant or similar with the global income tax return (Income Tax Act Article 70-2, Enforcement Decree Article 133). Per the NTS sincere-filing confirmation guide (as of filings for the 2026 tax year):</p>
+<table>
+<thead>
+<tr>
+<th>Industry group (excerpt)</th>
+<th>Revenue threshold</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Agriculture, forestry, fishing, mining, wholesale and retail, real estate sales, and any business not listed below</td>
+<td>KRW 1.5 billion or more</td>
+</tr>
+<tr>
+<td>Manufacturing, accommodation and food, construction, transport and storage, <strong>information and communications</strong>, finance and insurance, etc.</td>
+<td>KRW 750 million or more</td>
+</tr>
+<tr>
+<td>Real estate including rental, professional, scientific and technical services, facility management and business support services, education, arts, sports and recreation, etc.</td>
+<td>KRW 500 million or more</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Software development and supply usually falls under information and communications (KRW 750 million), but if contract development is registered under a professional, scientific and technical services code the KRW 500 million threshold may apply, so check your registered industry code.</li>
+<li>Filing the confirmation gives a <strong>tax credit of 60% of the cost</strong> spent directly on it (Restriction of Special Taxation Act Article 126-6). The credit has a cap, so check the amount in the article.</li>
+<li>If an under-report leads to a correction, the confirmation cost credit is denied for the following 3 tax years (NTS guide).</li>
+</ul>
 <h2>Corporate Tax</h2>
 <ul>
 <li>File within <strong>3 months</strong> from the end of the month in which the fiscal year ends (Corporate Tax Act Article 60). For December year-end corporations, March 31 of the next year.</li>
@@ -133,7 +160,7 @@
 <tbody><tr>
 <td>Staff salary (wage income)</td>
 <td>Simplified tax table, year-end settlement</td>
-<td>Payment statement by March 10 of the next year. Simplified statements are semiannual as of 2026</td>
+<td>Payment statement by March 10 of the next year. Simplified statements are semiannual for payments through 2026 and <strong>monthly for payments from 2027-01-01</strong> (by the end of the next month)</td>
 </tr>
 <tr>
 <td>Daily workers</td>
@@ -150,6 +177,7 @@
 <li>Pay withheld tax <strong>by the 10th of the month after the month of withholding</strong>.</li>
 <li>If you meet conditions such as regular headcount and are approved, <strong>semiannual payment</strong> (10th of the month after the half-year) is possible.</li>
 <li>Missing the payment statement deadline incurs penalty tax of 1% of the unsubmitted amount (0.25% for daily wage income and simplified statements). Submitting within 1 month after the deadline reduces it (NTS guide).</li>
+<li>Monthly simplified statements for wage income were deferred once and start on 2027-01-01. The NTS says that during 2027 (through 2028 for small businesses), filing by the old half-year deadline waives the non-filing penalty.</li>
 </ul>
 <pre><code class="language-mermaid">flowchart LR
     P[Pay a freelancer] --&gt; W[Withhold 3.3%]
@@ -232,10 +260,43 @@
 <blockquote>
 <p>We used only the business card, gathered overseas invoices into a folder at each month-end, and noted the purpose.</p>
 </blockquote>
+<h3>Business Passenger Cars (double-entry bookkeepers)</h3>
+<p>A double-entry bookkeeper who deducts business passenger car costs (depreciation, lease or rental fees, fuel, insurance, repairs, vehicle tax, tolls, etc.) follows Income Tax Act Article 33-2 and Enforcement Decree Article 78-3.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Business-only car insurance</td>
+<td>Costs are allowed by the business-use ratio only if, for the whole tax period, the car is insured for driving by the business owner, staff and similar people only</td>
+</tr>
+<tr>
+<td>No such insurance</td>
+<td>For costs incurred in 2024 and 2025 a transition rule allowed 50% of the business-use amount (excluding sincere-filing businesses, medical practices, etc.). <strong>For costs from 2026-01-01 that 50% transition rule has ended</strong>, so less is allowed (the decree sets 0% for cars beyond the first, etc.). Check how it applies by number of cars and industry in the decree and with a tax accountant (needs verification)</td>
+</tr>
+<tr>
+<td>Depreciation</td>
+<td>Straight-line over 5 years, and business-use depreciation is capped at <strong>KRW 8 million a year</strong>. The excess carries over to later tax periods</td>
+</tr>
+<tr>
+<td>Driving log</td>
+<td>With a log, costs are allowed by business mileage ratio. Without one, only up to <strong>KRW 15 million</strong> of annual related costs counts as business use</td>
+</tr>
+<tr>
+<td>Statement</td>
+<td>File the business passenger car cost statement with the global income tax return. Penalty tax applies if it is missing or inaccurate (NTS business passenger car guide)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Simplified bookkeepers are outside this special rule, but they must still prove business use.</li>
+</ul>
 <h2>Monthly Routine</h2>
 <pre><code class="language-text">Start of month: download last month&#39;s settlement reports (domestic / overseas split)
 10th: pay withholding tax (if any)
-End of month: submit simplified payment statements (business income)
+End of month: submit simplified payment statements (business income, and wage income from 2027)
 End of month: file overseas invoices and card slips
 End of quarter: check VAT preliminary notices and returns
 </code></pre>
@@ -243,6 +304,10 @@ End of quarter: check VAT preliminary notices and returns
 <ul>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2225&cntntsId=7665">NTS - Global income tax filing and payment deadlines</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2234&cntntsId=7672">NTS - Sincere filing confirmation system</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000684517&lsId=001584&print=print">Korea Law Information Center - Restriction of Special Taxation Act Article 126-6, credit for sincere-filing confirmation costs</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?lsJoLnkSeq=1000316871&chrClsCd=010202">Korea Law Information Center - Income Tax Act Enforcement Decree Article 78-3, business passenger car costs</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=21e8ce1222b24853f1ed9c839862b569">NTS - Tax treatment of business passenger cars (PDF)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2207&bbsId=1011&nttSn=1330270">NTS - Notice deferring monthly simplified payment statements for regular employees</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2227&cntntsId=7667">NTS - Global income tax rates</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7673&mi=2236">NTS - Global income tax interim prepayment</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2371&cntntsId=7745">NTS - Corporate tax filing and payment deadlines</a> (accessed 2026-09-28)</li>

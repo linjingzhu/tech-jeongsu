@@ -101,6 +101,23 @@ flowchart TD
 - [ ] Prepare a certificate for issuing electronic tax invoices (document 06)
 - [ ] Put the first VAT filing month in your calendar (document 08)
 
+## Suspending or Closing the Business
+
+Pausing or closing a business also has filings, and the deadlines matter as much as at registration.
+
+| Task | Deadline and key point | Basis |
+|---|---|---|
+| Suspension or closure report | File on Hometax or Sontax, or with the tax office (Government24), attaching the registration certificate | VAT Act Article 8, Government24 suspension and closure guide |
+| Deemed supply of remaining goods | Goods still held at closure (such as equipment whose input VAT was credited) are treated as supplied to yourself and become subject to VAT | VAT Act Article 10(6) |
+| Closing VAT final return | File and pay for results from the start of the tax period to the closure date, plus remaining goods, **by the 25th of the month after the month of closure** | VAT Act Article 49, Easy Law |
+| Global income tax | Income for the year of closure is combined with other income and filed **in May of the next year** | Income Tax Act (NTS global income tax filing guide) |
+| Mail-order business closure report | If you filed a mail-order business report, report the suspension or closure to the local government (Government24) | E-Commerce Act, Government24 |
+| Social insurance workplace withdrawal report | If you had staff, file loss-of-coverage reports and a workplace withdrawal report. Health insurance must be notified **within 14 days** of the event. For the National Pension, withdrawing the workplace also ends its members' coverage | Government24 health insurance workplace withdrawal, National Health Insurance EDI guide |
+| Withholding tax and payment statements | Settle withholding tax and payment statements for wages and business income paid up to the closure date | Document 07 |
+
+- If you **restart the same kind of business** after closing, it is not a "startup" for the startup SME tax reduction (Restriction of Special Taxation Act Article 6(10), document 08). If you only want a break, consider suspension instead of closure.
+- Sort out app-store and payment-processor accounts, business accounts and cards, and domain ownership before closing.
+
 ## References
 
 - [Korea Law Information Center - VAT Act Article 8, business registration](https://www.law.go.kr/LSW/lsLawLinkInfo.do?lsJoLnkSeq=1011773243&chrClsCd=010202&ancYnChk=) (accessed 2026-09-28)
@@ -112,3 +129,10 @@ flowchart TD
 - [Government24 - Mail-order business report](https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=11300000006) (accessed 2026-09-28)
 - [Korea Law Information Center - Notice on criteria for exemption from mail-order business report](https://www.law.go.kr/admRulLsInfoP.do?admRulSeq=2100000191541) (accessed 2026-09-28)
 - [Hometax - Industry code lookup](https://mob.tbht.hometax.go.kr/jsonAction.do?actionId=UTBABAAB78F001) (accessed 2026-09-28)
+- [Government24 - Business suspension (closure) report](https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12100000078) (accessed 2026-09-28)
+- [Easy Law - Online shop founders: suspension, closure and resumption reports](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=25&ccfNo=2&cciNo=2&cnpClsNo=2) (accessed 2026-09-28)
+- [Easy Law - Business closure report (closing VAT final return)](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=534&ccfNo=5&cciNo=1&cnpClsNo=2) (accessed 2026-09-28)
+- [Government24 - Mail-order business suspension, closure and resumption report](https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09006&CappBizCD=11300000008&tp_seq=03) (accessed 2026-09-28)
+- [Government24 - Health insurance workplace withdrawal report](https://gov.kr/mw/AA020InfoCappView.do?CappBizCD=14600000324&HighCtgCD=A05007&tp_seq=) (accessed 2026-09-28)
+- [National Health Insurance EDI - Workplace withdrawal (extinction) report](https://edi.nhis.or.kr/webedi/help/html/appli/ap_06.html) (accessed 2026-09-28)
+- [Korea Law Information Center - VAT Act](https://law.go.kr/LSW/lsInfoP.do?lsiSeq=269797) (Article 10(6), remaining goods at closure, accessed 2026-09-28)

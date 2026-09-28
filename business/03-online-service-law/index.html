@@ -148,16 +148,67 @@
 </blockquote>
 <h2>개인정보 처리방침</h2>
 <p>개인정보처리자는 개인정보 처리방침을 정하고 정보주체가 쉽게 확인할 수 있게 공개해야 한다 (개인정보 보호법 제30조).</p>
-<p>처리방침에 들어가는 대표 항목:</p>
-<ul>
-<li>개인정보의 처리 목적</li>
-<li>처리 및 보유 기간</li>
-<li>제3자 제공 (해당하는 경우)</li>
-<li>처리 위탁 (해당하는 경우)</li>
-<li>파기 절차 및 방법</li>
-<li>정보주체의 권리와 행사 방법</li>
-<li>개인정보 보호책임자</li>
-</ul>
+<p>처리방침에 반드시 적어야 하는 사항은 법 제30조 제1항과 시행령 제31조 제1항에 있다. &quot;해당 시&quot;는 그 처리를 할 때만 적는다.</p>
+<table>
+<thead>
+<tr>
+<th>기재사항</th>
+<th>적는 경우</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>개인정보의 처리 목적</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>처리하는 개인정보의 항목</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>처리 및 보유 기간</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>제3자 제공</td>
+<td>해당 시</td>
+</tr>
+<tr>
+<td>처리 위탁</td>
+<td>해당 시</td>
+</tr>
+<tr>
+<td>국외 이전 (이전 근거, 항목, 국가, 받는 자 등)</td>
+<td>해당 시</td>
+</tr>
+<tr>
+<td>파기 절차 및 방법 (법령에 따라 보존하면 그 근거와 항목)</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>정보주체와 법정대리인의 권리·의무와 행사 방법</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>안전성 확보조치</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>자동 수집 장치(쿠키, 분석·광고 SDK 등)의 설치·운영과 거부 방법</td>
+<td>해당 시</td>
+</tr>
+<tr>
+<td>개인정보 보호책임자 성명 또는 담당 부서와 연락처</td>
+<td>필수</td>
+</tr>
+<tr>
+<td>열람청구를 접수·처리하는 부서</td>
+<td>작성지침 권장 (조문 근거 확인 필요)</td>
+</tr>
+<tr>
+<td>정보주체의 권익침해 구제방법</td>
+<td>작성지침 권장 (조문 근거 확인 필요)</td>
+</tr>
+</tbody></table>
 <p>개인정보보호위원회가 **「개인정보 처리방침 작성지침」**을 공개한다. 2025년 4월 개정본이 있으므로 최신본을 기준으로 작성한다.</p>
 <h2>개인정보 처리에서 자주 놓치는 것</h2>
 <table>
@@ -188,6 +239,11 @@
 <td>제30조 처리방침, 위탁·제공 구분</td>
 <td>SDK가 무엇을 수집하는지 목록화</td>
 </tr>
+<tr>
+<td>개인정보 유출</td>
+<td>제34조 유출 등의 통지·신고</td>
+<td>알게 된 때부터 72시간 이내 정보주체 통지. 1천명 이상·민감정보·고유식별정보·외부 불법 접근이면 72시간 이내 보호위원회 또는 KISA 신고</td>
+</tr>
 </tbody></table>
 <pre><code class="language-mermaid">flowchart TD
     A[새 기능이 개인정보를 쓰는가] --&gt;|아니오| Z[기록만 남김]
@@ -201,6 +257,50 @@
     F --&gt;|아니오| H[보유 기간과 파기 방법 정의]
     G --&gt; H
 </code></pre>
+<h2>앱이면 추가로 확인할 것</h2>
+<p>모바일 앱은 웹 서비스보다 법적 의무가 몇 가지 더 붙는다.</p>
+<table>
+<thead>
+<tr>
+<th>의무</th>
+<th>조문</th>
+<th>누가 해당</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>위치기반서비스사업 신고</td>
+<td>위치정보법 제9조, 소상공인 등 특례 제9조의2</td>
+<td>개인위치정보를 대상으로 위치기반서비스를 하는 사업자는 방송미디어통신위원회에 신고. 소상공인·1인 창조기업은 신고 없이 시작할 수 있지만 사업 개시 후 1개월이 지나 계속하려면 신고</td>
+</tr>
+<tr>
+<td>앱 접근권한 고지·동의</td>
+<td>정보통신망법 제22조의2</td>
+<td>카메라·위치·연락처 등 단말기 정보·기능에 접근하는 앱. <strong>필수/선택 접근권한을 구분해 알리고 동의</strong>를 받으며, 선택 권한에 동의하지 않았다고 서비스를 거부하면 안 된다</td>
+</tr>
+<tr>
+<td>광고성 정보 전송(푸시 마케팅)</td>
+<td>정보통신망법 제50조</td>
+<td>앱 푸시·문자·이메일로 영리 목적 광고를 보내는 자. <strong>명시적 사전 동의</strong>, 오후 9시~오전 8시 전송은 별도 동의, 정기적인 수신동의 여부 확인</td>
+</tr>
+<tr>
+<td>게임물 등급분류</td>
+<td>게임산업법 제21조, 제21조의2</td>
+<td>게임을 유통·제공하려는 자. 게임물관리위원회 또는 자체등급분류사업자(앱마켓 등)에게서 등급분류를 받는다</td>
+</tr>
+<tr>
+<td>청소년유해매체물 표시</td>
+<td>청소년 보호법 제13조</td>
+<td>청소년유해매체물에 해당하는 콘텐츠를 제공하는 경우. 청소년유해표시와 연령 확인 조치</td>
+</tr>
+<tr>
+<td>개인정보 유출 통지·신고</td>
+<td>개인정보 보호법 제34조, 시행령 제39조·제40조</td>
+<td>모든 개인정보처리자. 72시간 이내 정보주체 통지, 요건에 해당하면 72시간 이내 보호위원회·KISA 신고 (미신고 과태료)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>앱마켓 심사 기준(권한 설명, 개인정보 라벨 등)은 법과 별개로 따로 맞춘다.</li>
+</ul>
 <h2>전자상거래법 의무</h2>
 <h3>신원정보 표시</h3>
 <p>사이버몰 운영자는 상호, 대표자 성명, 영업소 주소, 전화번호, 전자우편주소, 사업자등록번호, 이용약관 등을 초기화면에 표시해야 한다 (전자상거래법 제10조). 통신판매업자는 광고할 때 통신판매업 신고번호 등 신원정보를 표시한다.</p>
@@ -266,6 +366,8 @@
 <li><input disabled="" type="checkbox"> 초기화면 하단: 사업자 신원정보, 통신판매업 신고번호</li>
 <li><input disabled="" type="checkbox"> 결제 화면: 총액 표시, 청약철회 제한 안내</li>
 <li><input disabled="" type="checkbox"> 구독: 무료→유료 전환 동의 흐름, 해지 경로</li>
+<li><input disabled="" type="checkbox"> 앱: 접근권한 필수/선택 고지, 푸시 광고 수신 동의, 위치정보 신고 대상 여부</li>
+<li><input disabled="" type="checkbox"> 유출 대응: 72시간 통지·신고 담당자와 연락 경로</li>
 </ul>
 <h2>참고 자료</h2>
 <ul>
@@ -273,6 +375,15 @@
 <li><a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1033215151">국가법령정보센터 - 개인정보 보호법 제30조</a> (접근 2026-09-28)</li>
 <li><a href="https://www.privacy.go.kr/front/bbs/bbsView.do?bbsNo=BBSMSTR_000000000049&bbscttNo=20806">개인정보 포털 - 개인정보 처리방침 작성지침 (2025.4.)</a> (2025년 4월 발간, 접근 2026-09-28)</li>
 <li><a href="https://www.privacy.go.kr/front/contents/cntntsView.do?contsNo=94">개인정보 포털 - 법정대리인 동의확인 의무</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsInfoP.do?lsId=011468&ancYnChk=0">국가법령정보센터 - 개인정보 보호법 시행령 (제31조 처리방침의 내용)</a> (접근 2026-09-28)</li>
+<li><a href="https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=1257&ccfNo=3&cciNo=2&cnpClsNo=3">찾기쉬운 생활법령정보 - 개인정보 유출 시의 조치방안</a> (접근 2026-09-28)</li>
+<li><a href="https://www.pipc.go.kr/np/default/page.do?mCode=D030040000">개인정보보호위원회 - 개인정보 유출신고제도</a> (접근 2026-09-28)</li>
+<li><a href="https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09001&CappBizCD=15701000085">정부24 - 위치기반서비스사업 신고, 변경신고</a> (접근 2026-09-28)</li>
+<li><a href="https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09001&CappBizCD=15701000086&tp_seq=">정부24 - 소상공인등의 위치기반서비스사업 신고</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=900630227&lsId=000030&chrClsCd=010202">국가법령정보센터 - 정보통신망법 제22조의2 접근권한에 대한 동의</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000688185&lsId=000030&print=print">국가법령정보센터 - 정보통신망법 제50조 영리목적의 광고성 정보 전송 제한</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsInfoP.do?lsId=010196">국가법령정보센터 - 게임산업진흥에 관한 법률</a> (제21조 등급분류, 접근 2026-09-28)</li>
+<li><a href="https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=718&ccfNo=2&cciNo=2&cnpClsNo=3">찾기쉬운 생활법령정보 - 청소년유해표시 및 포장</a> (접근 2026-09-28)</li>
 <li><a href="https://www.law.go.kr/lsInfoP.do?lsId=009318&ancYnChk=0">국가법령정보센터 - 전자상거래 등에서의 소비자보호에 관한 법률</a> (접근 2026-09-28)</li>
 <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148939436">대한민국 정책브리핑 - 정기결제 대금 인상 또는 유료 전환 전 30일 이내 소비자 동의</a> (접근 2026-09-28)</li>
 <li><a href="https://www.ftc.go.kr/www/selectBbsNttView.do?key=12&bordCd=3&nttSn=46527">공정거래위원회 - 전자상거래 등에서의 소비자보호 지침 개정</a> (접근 2026-09-28)</li>

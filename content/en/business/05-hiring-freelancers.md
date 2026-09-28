@@ -59,11 +59,22 @@ Good example:
 | National Pension | 9.5% | Rising 0.5 percentage points a year from 2026 up to 13% (Ministry of Health and Welfare). Split equally between worker and employer |
 | Health Insurance | 7.19% | Split equally between worker and employer |
 | Long-term Care Insurance | 0.9448% of income | Ministry of Health and Welfare 2026 rate announcement |
-| Employment Insurance | Unemployment benefit rate has been raised before | Additional rates by business size. Check with the Social Insurance Information Center calculator |
+| Employment Insurance | Unemployment benefits 1.8% (worker 0.9%, employer 0.9%) + employment stability and vocational skills programs 0.25% to 0.85% (employer only, by size, from 0.25% under 150 workers) | Enforcement Decree of the Act on the Collection of Employment and Industrial Accident Insurance Premiums, Article 12. Check with the Social Insurance Information Center calculator |
 | Industrial Accident Insurance | Published per industry | Announced at year-end for the next year |
 
 - When you hire, file a **workplace establishment report** and **employee enrollment reports**. Deadlines differ by insurance, so check the Social Insurance Information Center (4insure.or.kr) and file via EDI.
-- If a corporate CEO receives pay, the CEO can also become an employee-insured member.
+- There are **press reports** that a government plan to raise the unemployment benefit rate to 2.0% (1.0% each for worker and employer) from 2027 was reviewed by the Employment Insurance Committee in September 2026. The decree has not been amended, so this is not a confirmed rate (unconfirmed).
+
+### What About the Owner or CEO?
+
+| Case | National Pension and Health Insurance | Employment Insurance | Industrial Accident Insurance |
+|---|---|---|---|
+| Sole proprietor with 1 or more employees | The owner is also a **workplace (employee-type) member** | The owner is excluded in principle. With fewer than 50 workers, **voluntary self-employed employment insurance** is available | The owner is excluded in principle. With fewer than 300 workers, **voluntary SME-owner accident insurance** is available |
+| Sole proprietor with no employees | **Regional (self-paying) member** | Voluntary self-employed employment insurance available | Voluntary SME-owner accident insurance available (check industry conditions) |
+| Corporate CEO | If paid, even a one-person corporation is a **workplace member**. If unpaid, submit evidence of no pay and join as a regional member | A CEO is not a worker and is excluded in principle. Corporate CEOs are included among those who may join self-employed employment insurance | Voluntary SME-owner accident insurance available |
+
+- Sources: Easy Law "Reporting the four social insurances", National Pension Service workplace member guide, Korea Workers' Compensation and Welfare Service guides on self-employed employment insurance and SME-owner accident insurance. Confirm eligibility and premium bases with each agency.
+- Setting the CEO's pay moves corporate tax expense, wage income tax and social insurance together, so read it alongside the tax comparison example in document 01.
 
 ## Freelancer (Business Income) Contracts
 
@@ -91,4 +102,9 @@ Good example:
 - [Ministry of Health and Welfare - 2026 long-term care insurance rate](https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&act=view&list_no=1487817) (accessed 2026-09-28)
 - [Social Insurance Information Center - Premium calculator](https://www.4insure.or.kr/pbiz/ntcn/inscSmlCalcView.do) (accessed 2026-09-28)
 - [Easy Law - Reporting the four social insurances](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=632&ccfNo=3&cciNo=4&cnpClsNo=1) (accessed 2026-09-28)
+- [Korea Law Information Center - Premium Collection Act Enforcement Decree Article 12 (employment insurance rates)](http://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B3%A0%EC%9A%A9%EB%B3%B4%ED%97%98%EB%B0%8F%EC%82%B0%EC%97%85%EC%9E%AC%ED%95%B4%EB%B3%B4%EC%83%81%EB%B3%B4%ED%97%98%EC%9D%98%EB%B3%B4%ED%97%98%EB%A3%8C%EC%A7%95%EC%88%98%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C12%EC%A1%B0) (accessed 2026-09-28)
+- [National Pension Service - Workplace members](https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0016M0.do) (accessed 2026-09-28)
+- [Korea Workers' Compensation and Welfare Service - Who can join self-employed employment insurance](https://www.comwel.or.kr/comwel/paym/ownr/targ.jsp) (accessed 2026-09-28)
+- [Easy Law - Industrial accident insurance special rules for SME owners](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=570&ccfNo=2&cciNo=3&cnpClsNo=4) (accessed 2026-09-28)
+- [Seoul Shinmun - Employment insurance rate to rise from 1.8% to 2.0% next year (press report, unofficial)](https://www.seoul.co.kr/news/society/2026/09/01/20260901500315) (reported 2026-09-01, accessed 2026-09-28)
 - [NTS - Simplified payment statement (business income of residents)](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=40349&cntntsId=238925) (accessed 2026-09-28)

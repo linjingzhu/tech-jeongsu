@@ -30,15 +30,23 @@ Good example:
 
 A personal information controller must set a privacy policy and publish it so data subjects can easily check it (PIPA Article 30).
 
-Typical items in the policy:
+The items the policy must contain are set by Article 30(1) of the Act and Article 31(1) of the Enforcement Decree. "If applicable" items are written only when you do that processing.
 
-- Purpose of processing personal data
-- Processing and retention period
-- Provision to third parties (if applicable)
-- Outsourcing of processing (if applicable)
-- Destruction procedure and method
-- Rights of data subjects and how to exercise them
-- Chief privacy officer
+| Required item | When to include |
+|---|---|
+| Purpose of processing personal data | Always |
+| Personal data items processed | Always |
+| Processing and retention period | Always |
+| Provision to third parties | If applicable |
+| Outsourcing of processing | If applicable |
+| Cross-border transfer (legal ground, items, country, recipient, etc.) | If applicable |
+| Destruction procedure and method (with the legal ground and items if a law requires retention) | Always |
+| Rights and duties of data subjects and legal guardians, and how to exercise them | Always |
+| Security safeguards | Always |
+| Installation, operation and refusal of automatic collection tools (cookies, analytics and ad SDKs, etc.) | If applicable |
+| Name of the chief privacy officer, or the responsible department and contact details | Always |
+| Department that receives and handles access requests | Recommended by the drafting guidelines (statutory basis needs verification) |
+| Remedies for infringement of data subjects' rights | Recommended by the drafting guidelines (statutory basis needs verification) |
 
 The Personal Information Protection Commission (PIPC) publishes **Privacy Policy Drafting Guidelines**. A revised edition was released in April 2025, so write from the latest edition.
 
@@ -50,6 +58,7 @@ The Personal Information Protection Commission (PIPC) publishes **Privacy Policy
 | Users under 14 | Article 22-2, protection of children's data | Legal guardian consent and verification of that consent |
 | Appointing an officer | Article 31, chief privacy officer | Required in principle, with exceptions below certain thresholds |
 | Analytics and ad SDKs | Article 30 policy, outsourcing vs provision | Inventory what each SDK collects |
+| Personal data breach | Article 34, breach notification and reporting | Notify data subjects within 72 hours of learning of it. If 1,000 or more people, sensitive or unique identifying data, or unlawful outside access is involved, report to the PIPC or KISA within 72 hours |
 
 ```mermaid
 flowchart TD
@@ -64,6 +73,21 @@ flowchart TD
     F -->|No| H[Define retention period and destruction]
     G --> H
 ```
+
+## Extra Checks If You Ship an App
+
+Mobile apps carry a few more legal duties than web services.
+
+| Duty | Article | Who it applies to |
+|---|---|---|
+| Location-based service business report | Location Information Act Article 9, special rule for small businesses Article 9-2 | Businesses offering location-based services using personal location data report to the Korea Media and Communications Commission. Small business owners and one-person creative companies may start without reporting, but must report to continue past 1 month after starting |
+| App access permission notice and consent | Network Act Article 22-2 | Apps that access device data or functions such as camera, location or contacts. **Separate required and optional permissions, explain them and get consent**, and do not refuse service because an optional permission was declined |
+| Sending advertising information (push marketing) | Network Act Article 50 | Anyone sending commercial ads by app push, text or email. **Explicit prior consent**, separate consent for sending between 9 p.m. and 8 a.m., and periodic confirmation of consent |
+| Game rating classification | Game Industry Promotion Act Articles 21 and 21-2 | Anyone distributing or offering a game. Get a rating from the Game Rating and Administration Committee or a self-rating business (such as an app market) |
+| Harmful-to-minors media labeling | Youth Protection Act Article 13 | When offering content classified as harmful to minors. Harmful-to-minors label and age verification measures |
+| Personal data breach notification and reporting | PIPA Article 34, Enforcement Decree Articles 39 and 40 | Every personal information controller. Notify data subjects within 72 hours, and report to the PIPC or KISA within 72 hours when the conditions apply (fine for not reporting) |
+
+- App-store review rules (permission explanations, privacy labels, etc.) are separate from the law and must be met on their own.
 
 ## E-Commerce Act Duties
 
@@ -105,6 +129,8 @@ Good example:
 - [ ] Site footer: operator identity and mail-order report number
 - [ ] Checkout: total price shown, notice of withdrawal limits
 - [ ] Subscriptions: free-to-paid consent flow and cancellation path
+- [ ] Apps: required and optional permission notice, push ad consent, whether a location service report applies
+- [ ] Breach response: owner and contact path for the 72-hour notification and report
 
 ## References
 
@@ -112,6 +138,15 @@ Good example:
 - [Korea Law Information Center - PIPA Article 30](https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1033215151) (accessed 2026-09-28)
 - [Privacy Portal - Privacy Policy Drafting Guidelines (April 2025)](https://www.privacy.go.kr/front/bbs/bbsView.do?bbsNo=BBSMSTR_000000000049&bbscttNo=20806) (published April 2025, accessed 2026-09-28)
 - [Privacy Portal - Duty to verify legal guardian consent](https://www.privacy.go.kr/front/contents/cntntsView.do?contsNo=94) (accessed 2026-09-28)
+- [Korea Law Information Center - PIPA Enforcement Decree (Article 31, content of the privacy policy)](https://www.law.go.kr/LSW/lsInfoP.do?lsId=011468&ancYnChk=0) (accessed 2026-09-28)
+- [Easy Law - Measures when personal data is leaked](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=1257&ccfNo=3&cciNo=2&cnpClsNo=3) (accessed 2026-09-28)
+- [PIPC - Personal data breach reporting](https://www.pipc.go.kr/np/default/page.do?mCode=D030040000) (accessed 2026-09-28)
+- [Government24 - Location-based service business report and change report](https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09001&CappBizCD=15701000085) (accessed 2026-09-28)
+- [Government24 - Location-based service business report for small businesses](https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09001&CappBizCD=15701000086&tp_seq=) (accessed 2026-09-28)
+- [Korea Law Information Center - Network Act Article 22-2, consent to access permissions](https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=900630227&lsId=000030&chrClsCd=010202) (accessed 2026-09-28)
+- [Korea Law Information Center - Network Act Article 50, limits on commercial advertising](https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000688185&lsId=000030&print=print) (accessed 2026-09-28)
+- [Korea Law Information Center - Game Industry Promotion Act](https://www.law.go.kr/LSW/lsInfoP.do?lsId=010196) (Article 21, rating classification, accessed 2026-09-28)
+- [Easy Law - Harmful-to-minors labeling and packaging](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=718&ccfNo=2&cciNo=2&cnpClsNo=3) (accessed 2026-09-28)
 - [Korea Law Information Center - E-Commerce Act](https://www.law.go.kr/lsInfoP.do?lsId=009318&ancYnChk=0) (accessed 2026-09-28)
 - [Korea Policy Briefing - Consent required within 30 days before a recurring price increase or paid conversion](https://www.korea.kr/news/policyNewsView.do?newsId=148939436) (accessed 2026-09-28)
 - [Fair Trade Commission - Amendment of the E-Commerce consumer protection guideline](https://www.ftc.go.kr/www/selectBbsNttView.do?key=12&bordCd=3&nttSn=46527) (accessed 2026-09-28)
