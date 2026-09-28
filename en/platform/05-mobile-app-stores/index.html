@@ -207,7 +207,7 @@
 <td>General release, staged rollout available</td>
 </tr>
 </tbody></table>
-<p><strong>Personal developer accounts created after 2023-11-13</strong> must run <strong>a closed test with at least 12 testers opted in for 14 consecutive days</strong> before applying for production access. Meeting the conditions does not guarantee approval. Organization accounts and older personal accounts are not affected.</p>
+<p><strong>Personal developer accounts created on or after 2023-11-13</strong> must run <strong>a closed test with at least 12 testers opted in for 14 consecutive days</strong> before applying for production access. Meeting the conditions does not guarantee approval. Organization accounts and older personal accounts are not affected.</p>
 <h2>Google Play: Requirements Verified for 2026</h2>
 <table>
 <thead>
@@ -246,6 +246,126 @@
 <ul>
 <li><strong>Data safety</strong> form: every app on closed, open or production tracks must complete it, with a privacy policy link. Apps that collect nothing still fill it in.</li>
 <li><strong>Developer verification</strong> also applies to apps distributed outside Play and is planned to expand worldwide in 2027. Limited distribution accounts (up to 20 devices) are described for students and hobbyists.</li>
+<li>Google Play is not the only Android channel in Korea. The Korean app market <strong>ONE store</strong> offers Android app registration and sales plus an in-app payment SDK through its own developer center, and Samsung&#39;s <strong>Galaxy Store</strong> is on the participating-store list for Android developer verification.</li>
+</ul>
+<h2>Signing and Key Management</h2>
+<p>For a mobile app, <strong>the signing key is the app&#39;s identity</strong>. Lose the key or miss an expiry and you cannot ship updates, even with perfectly good code.</p>
+<h3>Android: Play App Signing</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Held by</th>
+<th>Purpose</th>
+<th>If lost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App signing key</td>
+<td>Google</td>
+<td>Signs the APKs installed on user devices. Never changes during the app&#39;s lifetime</td>
+<td>Google holds it, so the developer cannot lose it</td>
+</tr>
+<tr>
+<td>Upload key</td>
+<td>Developer</td>
+<td>Signs the AAB before uploading to Play Console</td>
+<td>Request an <strong>upload key reset</strong> in Play Console (requires the account owner or equivalent permission). You can keep updating the same app</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Play App Signing is required for distribution on Google Play. Only apps created before 2021-08 may keep distributing self-signed builds.</li>
+<li>If you lose a signing key you manage yourself, <strong>you cannot publish updates to the existing app</strong>, and the same key cannot be regenerated.</li>
+</ul>
+<h3>Apple: Certificates and Provisioning Profiles</h3>
+<ul>
+<li>Distribution builds are signed with the team&#39;s <strong>distribution certificate</strong> and a <strong>provisioning profile</strong> that ties an App ID to that certificate.</li>
+<li>If a certificate expires or is revoked while the membership is valid, <strong>apps already on the App Store are not affected</strong>. But new builds signed with it cannot be uploaded to App Store Connect, and uploaded builds not yet submitted for review may be marked Invalid Binary if signed with a revoked certificate.</li>
+<li>In-house (internal distribution) certificates are different: once expired or revoked, <strong>users can no longer run the app</strong>.</li>
+<li>Cloud-managed certificates used by Xcode cloud signing are recreated automatically 90 days before expiry when new signing requests arrive. If you manage certificates yourself, schedule creating a new certificate and regenerating the profiles that reference it.</li>
+</ul>
+<h3>Where Keys Live in CI</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CI secret</td>
+<td>Store the keystore · p12 as Base64 in a secret and restore it to a temp file in the job. Most common, but rotation and auditing are manual</td>
+</tr>
+<tr>
+<td>fastlane match</td>
+<td>Encrypts certificates and profiles in a separate store (Git and others) shared by the team and CI. Use <code>readonly</code> mode on CI so it never creates new certificates</td>
+</tr>
+<tr>
+<td>EAS (Expo)</td>
+<td>Keeps the keystore and distribution certificate encrypted on EAS servers and uses them at build time</td>
+</tr>
+<tr>
+<td>Xcode Cloud</td>
+<td>Apple&#39;s CI/CD. Cloud signing hands certificate and profile management to Apple</td>
+</tr>
+</tbody></table>
+<p>Release automation tools: <strong>fastlane</strong> (<code>upload_to_play_store</code> / <code>supply</code>, actions for App Store and TestFlight upload), <strong>EAS Submit</strong>, <strong>Xcode Cloud</strong> (distribution to TestFlight and App Store Connect), and the <strong>Google Play Developer API</strong> (upload AABs in an edit, set track and rollout).</p>
+<h3>Costly Failures</h3>
+<table>
+<thead>
+<tr>
+<th>Mistake</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Losing a self-managed Android signing key</td>
+<td>No more updates to the existing app</td>
+</tr>
+<tr>
+<td>Upload key or keystore password in the repository or build files</td>
+<td>Treat it as leaked and reset the upload key. Keep passwords outside build files (environment variables, a separate file)</td>
+</tr>
+<tr>
+<td>Discovering an expired distribution certificate on launch day</td>
+<td>Uploads fail and the launch slips. Put expiry dates on a calendar and in alerts</td>
+</tr>
+<tr>
+<td>Expired in-house certificate</td>
+<td>Every internal app stops launching at once</td>
+</tr>
+<tr>
+<td>Keys only on one person&#39;s laptop</td>
+<td>A resignation or lost laptop halts releases</td>
+</tr>
+</tbody></table>
+<h3>CI Upload Example (Android → Internal Track)</h3>
+<pre><code class="language-yaml">jobs:
+  android-release:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@&lt;commit-sha&gt;
+      - run: echo &quot;$UPLOAD_KEYSTORE_B64&quot; | base64 -d &gt; &quot;$RUNNER_TEMP/upload.jks&quot;
+        env:
+          UPLOAD_KEYSTORE_B64: ${{ secrets.UPLOAD_KEYSTORE_B64 }}
+      - run: ./gradlew bundleRelease
+        env:
+          UPLOAD_KEYSTORE_PATH: ${{ runner.temp }}/upload.jks
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
+      - run: &gt;-
+          fastlane supply
+          --aab app/build/outputs/bundle/release/app-release.aab
+          --package_name com.example.app
+          --track internal
+          --json_key_data &quot;$PLAY_JSON&quot;
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+</code></pre>
+<ul>
+<li>Make <code>signingConfigs</code> in <code>build.gradle</code> read these environment variables and never write the password into the file.</li>
+<li>The service account key used to upload to Play is also a long-lived secret. Limit its permissions to release management and keep it behind the <code>environment: production</code> protection rules.</li>
+<li>Upload to the <code>internal</code> track first, and promote separately in Play Console or through the API.</li>
 </ul>
 <h2>Running a Staged Rollout</h2>
 <ul>
@@ -282,6 +402,17 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 <li><a href="https://support.google.com/googleplay/android-developer/answer/14151465?hl=en">App testing requirements for new personal developer accounts</a> — Play Console Help, accessed 2026-09-28</li>
 <li><a href="https://support.google.com/googleplay/android-developer/answer/6346149?hl=en">Release app updates with staged rollouts</a> — Play Console Help, accessed 2026-09-28</li>
 <li><a href="https://support.google.com/googleplay/android-developer/answer/10787469?hl=en">Provide information for Google Play&#39;s Data safety section</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/9842756?hl=en">Use Play App Signing</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/studio/publish/app-signing">Sign your app</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/support/certificates/">Certificates</a> — Apple Developer Support, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/account/certificates/cloud-managed-certificates">Cloud-managed certificates</a> — Apple Developer Account Help, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/account/certificates/certificates-overview/">Certificates overview</a> — Apple Developer Account Help, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/documentation/xcode/xcode-cloud">Xcode Cloud</a> — Apple Developer Documentation, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/match/">match</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/upload_to_play_store/">upload_to_play_store</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.expo.dev/app-signing/managed-credentials/">Using automatically managed credentials</a> — Expo Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.google.com/android-publisher">Google Play Developer API</a> — Google for Developers, accessed 2026-09-28</li>
+<li><a href="https://onestore-dev.gitbook.io/dev">ONE store developer center</a> — ONE store, accessed 2026-09-28</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/04-release-strategies/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Canary · Blue-Green · Flags · Rollback</span></a><a class="page-link next" href="../../../en/platform/06-domain-dns-tls-cdn/"><span><small>Next</small>Domain · DNS · TLS · CDN</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>

@@ -205,6 +205,54 @@ PQL (Product Qualified Lead)
 <li>If the website and sales say different things, trust is lost</li>
 <li>How AI answers summarize your product also becomes part of GTM (document 05)</li>
 </ul>
+<h2>Pricing · Packaging</h2>
+<p>Pricing is not a single number; it is a decision about <strong>what you charge for (the value metric)</strong> and <strong>where free ends (packaging)</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Value metric</th>
+<th>Advantage</th>
+<th>Disadvantage</th>
+<th>Applied to the incident-monitoring tool</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Seat (number of users)</td>
+<td>Easy for buyers to understand and forecast</td>
+<td>Makes people hesitate to invite teammates, slowing spread</td>
+<td>Small amounts for teams of 1–5; a poor fit if team invites are the core behavior</td>
+</tr>
+<tr>
+<td>Usage (log volume, events, alerts)</td>
+<td>Price moves with value; customers can start small</td>
+<td>Bills are hard to predict</td>
+<td>Logs spike during incidents, so bills spike too and cause anxiety; a cap is needed</td>
+</tr>
+<tr>
+<td>Tier (bundles of features and limits)</td>
+<td>Simple, with a clear upgrade path</td>
+<td>A badly placed boundary leaks value or causes frustration</td>
+<td>Split tiers by log retention, number of connected services, and team size</td>
+</tr>
+</tbody></table>
+<p>Place the free-plan boundary <strong>after activation and before PQL</strong>.</p>
+<pre><code class="language-text">Signup → Activation (first value experience)   ← free, and generously so, up to here
+       → PQL signals (team invites, repeated use, nearing limits)  ← paid boundary here
+       → Paid
+</code></pre>
+<ul>
+<li>Block before activation and people leave before experiencing value.</li>
+<li>Give everything free past the PQL signals and there is no reason to pay.</li>
+</ul>
+<p>Bad example:</p>
+<blockquote>
+<p>The free plan blocks log integrations and only sends alerts. Signups leave without ever seeing the root-cause screen.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>The free plan allows one connected service and 7-day retention, enough to experience the first root-cause investigation. The paid boundary sits where teams need more than 3 members, 30-day retention, or several connected services. (The numbers are assumptions, to be adjusted using the behavior of accounts that actually converted.)</p>
+</blockquote>
+<p>Treat a price change as a <strong>Tier 1 launch</strong> (table below). It needs existing-customer notices, sales and support scripts, and pricing pages that match the docs. If it raises a subscription price or converts free to paid, also check the E-Commerce Act&#39;s prior consent and notice requirements (document 09).</p>
 <h2>Tiering Launches</h2>
 <p>If every launch is the same size, the team burns out and customers become numb.</p>
 <table>
@@ -241,6 +289,12 @@ PQL (Product Qualified Lead)
 <li>Measurement plan (baseline, target, observation period)</li>
 <li>Criteria for rollback or rescheduling</li>
 </ul>
+<p>A default schedule for Tier 1 and Tier 2 launches:</p>
+<pre><code class="language-text">T-4 weeks  Finalize positioning and message, finalize measurement plan (baseline, target)
+T-2 weeks  Brief sales and support; prepare docs, FAQ, and support scripts
+T-0        Launch, send through each channel
+T+14 days  Review results → expand / adjust / roll back
+</code></pre>
 <h2>Bad Example / Good Example</h2>
 <p>Bad example:</p>
 <blockquote>

@@ -241,9 +241,10 @@
 <td>Cancellation, long inactivity</td>
 </tr>
 </tbody></table>
+<p>Onboarding and activation messages should aim at an <strong>activation event</strong>, and that event is not set by guesswork. Compare the first one to two weeks of behavior of users still active months later with those who left, and pick the behavior most strongly associated with staying. For the example product, a candidate would be &quot;connects one service and opens the root-cause screen from one alert within the first week&quot; (assumption). This is a correlation, so confirm causality with onboarding experiments. The method is the same as in document 03, where <strong>PQL criteria are derived from the behavior of accounts that actually converted to paid</strong>.</p>
 <h3>Sending Infrastructure Requirements</h3>
 <ul>
-<li>Since 2024-02, Gmail has required senders of 5,000 or more messages a day to Gmail accounts to use SPF and DKIM authentication, DMARC, one-click unsubscribe for marketing mail (RFC 8058), and to keep the spam rate reported in Postmaster Tools below 0.3%. Google said it would ramp up enforcement on non-compliant traffic from 2025-11.</li>
+<li>Since 2024-02, Gmail has required senders of 5,000 or more messages a day to Gmail accounts to use SPF and DKIM authentication, DMARC, and one-click unsubscribe for marketing mail (RFC 8058). Its guidance is to <strong>keep the spam rate reported in Postmaster Tools below 0.10% and never reach 0.30%</strong>. Google said it would ramp up enforcement on non-compliant traffic from 2025-11.</li>
 <li>Apple Mail Privacy Protection (announced 2021-06) downloads remote content in advance so senders cannot tell whether a message was opened. As a result, <strong>open rate is an unreliable metric</strong>. Look at clicks, conversions, and unsubscribe rates.</li>
 <li>In Korea, advertising messages require prior opt-in consent, an &quot;(Ad)&quot; label, and instructions for opting out, among other things (document 09).</li>
 </ul>
@@ -284,6 +285,131 @@
 <td>Duty to disclose material connections (document 09)</td>
 </tr>
 </tbody></table>
+<h2>Korean Channel Specifics</h2>
+<p>When targeting Korean customers, a global channel list is not enough. Naver and Kakao each bundle search, messaging, and commerce under one company, so <strong>each channel has a different character and different applicable rules.</strong></p>
+<p>The advertising-information rules in Network Act Article 50 (prior opt-in consent, an &quot;(Ad)&quot; label, separate consent for night-time sending, opt-out instructions) apply to <strong>channels that send to a recipient, such as text messages, email, app push, and messenger messages</strong>. Ads shown in search results or feeds are not transmissions, so Article 50 does not apply to them, but their copy and sponsorship disclosures follow the Labeling and Advertising Act and the KFTC endorsement guidelines (document 09).</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Character</th>
+<th>Network Act Article 50 applies?</th>
+<th>Measurability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naver search ads (Power Link and others)</td>
+<td>Search ads with keyword bidding and pay-per-click; capture Korean-language search demand</td>
+<td>No; display-type</td>
+<td>Clicks and cost in the ad system; signups and payments linked via UTM and your own analytics</td>
+</tr>
+<tr>
+<td>Naver Blog and Cafe</td>
+<td>Reviews and community content shown alongside search results (earned and owned)</td>
+<td>Posts: no. Sponsored or product-trial posts must disclose material connections under the endorsement guidelines</td>
+<td>Only some traffic visible via UTM; impact through indirect signals such as branded search trends</td>
+</tr>
+<tr>
+<td>Naver Smart Store</td>
+<td>A sales channel connected to Naver Shopping and Naver Pay (mostly B2C goods)</td>
+<td>Yes, if you send advertising notices to buyers</td>
+<td>Mostly Seller Center statistics; merging with your own analytics needs separate design</td>
+</tr>
+<tr>
+<td>KakaoTalk Channel</td>
+<td>An owned channel built on follows (chat, posts, messages)</td>
+<td>Yes, when sending ad messages: &quot;(Ad)&quot; label, contact details, opt-out method</td>
+<td>Send and click metrics, follower count</td>
+</tr>
+<tr>
+<td>AlimTalk</td>
+<td>Only for <strong>informational</strong> messages needed for transactions and service use, such as orders, payments, and signups; cannot be sent if any advertising content is mixed in</td>
+<td>Within the informational scope it is an exception to the advertising rules; mixed-in ads make it advertising</td>
+<td>Delivery reported by the sending vendor; later behavior via link UTM</td>
+</tr>
+<tr>
+<td>Brand Message (replaces FriendTalk)</td>
+<td><strong>Advertising</strong> messages. FriendTalk ended on 2025-12-31 and was replaced by Brand Message from 2026-01-01. Sent to channel followers and customers who consented to marketing</td>
+<td>Yes: prior opt-in consent, &quot;(Ad)&quot; label, separate night-time consent, opt-out instructions</td>
+<td>Sends and clicks, link UTM</td>
+</tr>
+<tr>
+<td>Kakao Moment</td>
+<td>Ad platform for Bizboard (a banner at the top of the chat tab), display, video, and message ads</td>
+<td>Display-type: no; message ads: yes</td>
+<td>Platform-reported conversions (the attribution limits in document 06 apply)</td>
+</tr>
+<tr>
+<td>Daangn (Biz Profile, Daangn ads)</td>
+<td>A neighborhood-based local channel; Biz Profile is free, ads target by area, age, and interests</td>
+<td>Display ads: no</td>
+<td>Ad manager metrics; area-level targeting makes it a geo-experiment candidate</td>
+</tr>
+<tr>
+<td>Instagram · YouTube</td>
+<td>Global platforms, but channels routinely considered for Korean B2C and creator marketing</td>
+<td>Feed and video ads: no. Sponsored content follows the endorsement guidelines</td>
+<td>Platform-reported conversions, platform lift tools</td>
+</tr>
+</tbody></table>
+<p>Example judgment: for the example product (an incident-monitoring tool for developers), Naver and Google search ads, a technical blog, and AlimTalk for signup and billing notices are the first candidates, while Daangn and Instagram rank low. For a local shop or B2C commerce, the order is almost reversed.</p>
+<p>Product names and policies change often. The table summarizes each provider&#39;s guidance as of 2026-09-28, so re-check the originals before running campaigns.</p>
+<h2>Budget Allocation</h2>
+<p>The <strong>order in which you add money</strong> matters more than the number of channels.</p>
+<ol>
+<li><strong>Prove one channel first.</strong> Do not add channels before you have a repeatable CAC.</li>
+<li><strong>Cap the test budget.</strong> Give new-channel experiments an amount and duration (e.g., 10–20% of the total for 6–8 weeks, assumption) and write down stop criteria in advance.</li>
+<li><strong>Scale only after an incrementality read.</strong> Judge by lift or geo experiments, not platform-reported ROAS (document 06).</li>
+<li><strong>Look at marginal CAC, not average CAC.</strong> Most channels become less efficient as spend grows (diminishing returns), because the cheapest demand (branded search, high-intent keywords) is used up first.</li>
+</ol>
+<pre><code class="language-text">Marginal CAC example (assumption)
+KRW 2.0M per month → 20 new customers   average CAC KRW 100,000
+KRW 3.0M per month → 25 new customers   average CAC KRW 120,000
+Extra KRW 1.0M     → 5 extra customers  marginal CAC KRW 200,000
+</code></pre>
+<p>An average CAC of KRW 120,000 looks fine, but the last KRW 1.0M is spending KRW 200,000 per customer. Base scaling decisions on this number.</p>
+<h3>Channel Mix Example: 5-Person B2B SaaS, KRW 5M per Month (Assumption)</h3>
+<p>An allocation assuming the 5-person team behind the example product spends KRW 5M a month. The amounts are <strong>assumptions</strong> that show how to read the table.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Monthly budget</th>
+<th>Role</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naver and Google search ads (problem keywords such as &quot;errors after deploy&quot;, &quot;log monitoring&quot;)</td>
+<td>KRW 2.0M</td>
+<td>Capture demand from people who already feel the problem</td>
+<td>Signup-to-activation conversion by query, paid CAC, a quarterly on/off or geo test</td>
+</tr>
+<tr>
+<td>Content, SEO, AI search (incident write-ups, setup guides)</td>
+<td>KRW 1.5M</td>
+<td>Compounding asset, candidate for citation in AI answers</td>
+<td>Organic signups, Search Console (including the generative AI report), AI-service referrers</td>
+</tr>
+<tr>
+<td>Lifecycle email and in-app (onboarding, PQL nurture)</td>
+<td>KRW 0.5M</td>
+<td>Activation and paid conversion</td>
+<td>Activation rate, free-to-paid conversion, comparison with a no-send holdout group</td>
+</tr>
+<tr>
+<td>Community and partners (developer community sponsorship, integration marketplaces)</td>
+<td>KRW 0.5M</td>
+<td>Trust and referrals</td>
+<td>Signups via community (UTM), signup survey &quot;Where did you hear about us?&quot;</td>
+</tr>
+<tr>
+<td>Test budget (next channel candidate)</td>
+<td>KRW 0.5M</td>
+<td>Validate a new channel</td>
+<td>Stop criteria and duration set in advance</td>
+</tr>
+</tbody></table>
 <h2>Common Mistakes</h2>
 <ul>
 <li>Entering a channel because competitors are there</li>
@@ -298,10 +424,21 @@
 <li><a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content">Google Search&#39;s guidance about AI-generated content — Google Search Central</a> (2023-02, accessed 2026-09-28)</li>
 <li><a href="https://blog.google/products/ads-commerce/google-ai-max-for-search-campaigns/">Unlock next-level performance with AI Max for Search campaigns — Google</a> (2025, accessed 2026-09-28)</li>
 <li><a href="https://www.facebook.com/business/ads/meta-advantage-plus">Meta Advantage+ — Meta for Business</a> (accessed 2026-09-28)</li>
-<li><a href="https://support.google.com/a/answer/81126?hl=en">Email sender guidelines — Gmail Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/a/answer/81126?hl=en">Email sender guidelines — Gmail Help</a> (accessed 2026-09-28, 0.10% and 0.30% spam-rate thresholds checked)</li>
 <li><a href="https://support.google.com/mail/answer/14229414?hl=en">Email sender guidelines FAQ — Gmail Help</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.apple.com/legal/privacy/data/en/mail-privacy-protection/">Mail Privacy Protection &amp; Privacy — Apple</a> (accessed 2026-09-28)</li>
 <li><a href="https://www.apple.com/newsroom/2021/06/apple-advances-its-privacy-leadership-with-ios-15-ipados-15-macos-monterey-and-watchos-8/">Apple advances its privacy leadership with iOS 15 — Apple Newsroom</a> (2021-06, accessed 2026-09-28)</li>
+<li><a href="https://searchad.naver.com/">Naver Search Ads — NAVER</a> (accessed 2026-09-28)</li>
+<li><a href="https://inside.ampm.co.kr/insight/10860">How marketers actually set up Power Link campaigns — Marketing Inside (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://sell.smartstore.naver.com/">Naver Smart Store Center — NAVER</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/infotalk">AlimTalk — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/infotalk/operations">AlimTalk sending rules — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/moment/start/messagead/operations">Channel message sending rules — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://solapi.com/notices/notices-2025-12-04">FriendTalk shutdown and automatic replacement by Brand Message — SOLAPI (in Korean)</a> (2025-12-04, accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/moment">Kakao Moment — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://bizschool.daangn.com/ads">Introducing Daangn ads — Daangn Biz School (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://business.daangn.com/">Daangn Business — Daangn (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C50%EC%A1%B0">Network Act Article 50 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/03-go-to-market/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Go-to-Market · Launch · PLG/SLG</span></a><a class="page-link next" href="../../../en/marketing/05-ai-search-geo/"><span><small>Next</small>AI Search · GEO/AEO</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>

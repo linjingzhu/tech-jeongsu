@@ -148,6 +148,62 @@
 <p>The core principle is <strong>promoting an artifact built once through every environment</strong>. Rebuilding per environment means what you verified in staging may differ from what reached production.</p>
 <h2>Configuration Lives Outside the Code</h2>
 <p>The Twelve-Factor App recommends keeping values that differ per deploy (database addresses, credentials for external services, hostnames) <strong>in the environment, not in the code</strong>. The same artifact should run in many places by changing only the environment. Mounting secrets as volumes is now discussed as well.</p>
+<h2>Environment Design</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Preview (per PR)</th>
+<th>Staging</th>
+<th>Production</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Purpose</td>
+<td>See and review the change</td>
+<td>Verify the deploy procedure, migrations and integrations</td>
+<td>Real users</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Seed or fake data</td>
+<td>Synthetic data or an anonymized subset</td>
+<td>Real data</td>
+</tr>
+<tr>
+<td>Who deploys</td>
+<td>Automatic when a PR opens</td>
+<td>Automatic on merge to main</td>
+<td>CI only, after approval</td>
+</tr>
+<tr>
+<td>Protection rules</td>
+<td>Short-lived, deleted when the PR closes, payments / email / push go to sandboxes</td>
+<td>Internal access only, no production secrets</td>
+<td>Required reviewers, wait timer, restricted deployment branches</td>
+</tr>
+</tbody></table>
+<h3>Per-Environment Configuration and Secrets</h3>
+<ul>
+<li>Inject only different environment variables into the same artifact. Do not add code branches on the environment name (<code>if (env === &quot;staging&quot;)</code>).</li>
+<li>Keep secrets separate per environment. A GitHub environment secret can be read only by jobs that reference that environment, and if the environment requires approval, not before a reviewer approves.</li>
+<li>Separate cloud accounts or projects when you can, so a staging mistake cannot touch production resources.</li>
+<li>Depending on your GitHub plan, protection rules such as required reviewers and wait timers may not be available for private repositories. Check what your plan includes first.</li>
+</ul>
+<h3>The Trap of Production-Like Data</h3>
+<ul>
+<li>Do not copy the production database as is. Personal data ends up in an environment with weaker protection. If you need it, use the minimum, anonymized or pseudonymized.</li>
+<li>If copied data still holds real email addresses or phone numbers, a notification test in staging reaches real customers. Route outbound messages to sandbox accounts.</li>
+</ul>
+<h3>When a Small Team Can Skip Staging</h3>
+<p>You can go straight from preview to production when <strong>all</strong> of these are true.</p>
+<ol>
+<li>Every PR gets a preview with the same artifact and configuration structure as production.</li>
+<li>Database migrations stay backward compatible via expand → contract (document 04).</li>
+<li>You can roll back within minutes and have actually done it.</li>
+<li>Risky features are exposed through feature flags.</li>
+</ol>
+<p>If any one is false, keep staging. It is essential if you often ship irreversible migrations or changes to payments, authentication or external integrations.</p>
 <h2>GitHub Actions Example</h2>
 <pre><code class="language-yaml">name: deploy
 on:
@@ -177,6 +233,46 @@ jobs:
 Good: Narrow the OIDC trust to &quot;this repository&#39;s main branch, production environment&quot;
       and use only tokens that expire when the job ends.
 </code></pre>
+<p>An AWS example. The workflow holds only <code>id-token: write</code> and a role; there is no access key.</p>
+<pre><code class="language-yaml">permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: aws-actions/configure-aws-credentials@&lt;commit-sha&gt;
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/deploy-production
+          aws-region: ap-northeast-2
+      - run: aws sts get-caller-identity
+</code></pre>
+<p>The IAM role&#39;s trust policy narrows <strong>which workflows may assume the role</strong> through the <code>sub</code> claim.</p>
+<pre><code class="language-json">{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Principal&quot;: {
+        &quot;Federated&quot;: &quot;arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com&quot;
+      },
+      &quot;Action&quot;: &quot;sts:AssumeRoleWithWebIdentity&quot;,
+      &quot;Condition&quot;: {
+        &quot;StringEquals&quot;: {
+          &quot;token.actions.githubusercontent.com:aud&quot;: &quot;sts.amazonaws.com&quot;,
+          &quot;token.actions.githubusercontent.com:sub&quot;: &quot;repo:ORG/REPO:environment:production&quot;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>A <code>sub</code> of the form <code>environment:production</code> is issued only when the job declares <code>environment: production</code>, so the token is available only after the environment protection rules (approval, deployment branch restrictions) pass.</li>
+<li><strong>Failure mode</strong>: if <code>sub</code> is opened with <code>StringLike</code> and a wildcard such as <code>repo:ORG/*</code> or <code>repo:ORG/REPO:*</code>, a workflow in any repository of that organization, or on any branch, receives the production role. Anyone with push access can create a new branch and bypass code review, branch protection and environment approval. With no <code>sub</code> condition at all, <strong>any repository on GitHub</strong> can request the role.</li>
+<li>Repositories created, renamed or transferred after 2026-07-15 get immutable owner and repository IDs in the default <code>sub</code> (in the form <code>repo:ORG@&lt;owner-id&gt;/REPO@&lt;repo-id&gt;:...</code>). Check the actual <code>sub</code> of a token before writing the trust policy.</li>
+</ul>
 <h2>Incident: CI Is an Attack Surface Too</h2>
 <ul>
 <li>In 2025-03 the widely used <code>tj-actions/changed-files</code> action was tampered with so that secrets could be exposed in workflow logs (CVE-2025-30066). CISA advised checking affected repositories and <strong>rotating every secret that may have been exposed</strong>.</li>
@@ -191,6 +287,58 @@ Good: Narrow the OIDC trust to &quot;this repository&#39;s main branch, producti
 <li><strong>Continuously Reconciled</strong>: agents keep observing the actual state and bring it to the desired state.</li>
 </ol>
 <p>Instead of CI pushing directly to a cluster, an agent inside the cluster watches Git and follows it, so <strong>drift</strong> (settings someone changed by hand) surfaces automatically.</p>
+<h2>Infrastructure as Code Too</h2>
+<p>Infrastructure created by hand in a console (click-ops) leaves no record of who changed what and why, and the same environment cannot be recreated. <strong>IaC (Infrastructure as Code)</strong> lets you review, version and reproduce infrastructure like application code.</p>
+<table>
+<thead>
+<tr>
+<th>Manage with IaC</th>
+<th>Fine to leave as click-ops</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Networking (VPC, subnets), DNS records, databases · queues · buckets, IAM roles and policies, per-environment service settings, alerts and dashboards</td>
+<td>One-time bootstrap (state storage, management account), billing and organization settings, emergency fixes during an incident (then reflect them in code), personal exploration sandboxes</td>
+</tr>
+</tbody></table>
+<h3>Tools in One Line Each</h3>
+<ul>
+<li><strong>Terraform</strong>: declarative HCL with the broadest provider ecosystem. In 2023-08 its license changed from MPL 2.0 to the BSL (Business Source License).</li>
+<li><strong>OpenTofu</strong>: an open-source fork of Terraform from before the license change. It is hosted by the Linux Foundation and became a CNCF Sandbox project in 2025-04. It uses the same HCL and providers.</li>
+<li><strong>Pulumi</strong>: write infrastructure in general-purpose languages such as TypeScript, Python and Go.</li>
+<li><strong>AWS CDK</strong>: write in TypeScript, Python and others, then synthesize a CloudFormation template. AWS only.</li>
+</ul>
+<h3>Remote State and Locking</h3>
+<p>State maps code to real resources. Kept on a laptop, teammates overwrite each other, and secrets held in resource attributes can sit there in plain text. Keep it in a <strong>remote backend</strong>, encrypted, with restricted access. Two people running <code>apply</code> at once corrupt the state, so also take a <strong>lock</strong>. Terraform&#39;s S3 backend introduced S3-native locking (<code>use_lockfile</code>) in 1.10; when it became generally available in 1.11, DynamoDB-based locking was deprecated.</p>
+<pre><code class="language-hcl">terraform {
+  backend &quot;s3&quot; {
+    bucket       = &quot;acme-tfstate&quot;
+    key          = &quot;prod/network.tfstate&quot;
+    region       = &quot;ap-northeast-2&quot;
+    encrypt      = true
+    use_lockfile = true
+  }
+}
+
+resource &quot;aws_s3_bucket&quot; &quot;assets&quot; {
+  bucket = &quot;acme-prod-assets&quot;
+}
+</code></pre>
+<h3>plan as a PR Check</h3>
+<pre><code class="language-mermaid">flowchart LR
+    PR[Open PR] --&gt; PL[Post plan output to the PR]
+    PL --&gt; RV{Review approved?}
+    RV --&gt;|Yes| AP[CI applies after merge]
+    RV --&gt;|No| FX[Fix the code]
+    FX --&gt; PL
+    AP --&gt; DR[Daily drift check]
+</code></pre>
+<p>Run <code>plan</code> on every PR and attach &quot;what will be created, changed and destroyed&quot; to the review. Stop if you see a <code>destroy</code>. Only CI runs <code>apply</code>, after merge, using the role obtained through OIDC (section above).</p>
+<pre><code class="language-yaml">      - run: terraform init -input=false
+      - run: terraform plan -input=false -out=tfplan
+</code></pre>
+<h3>Drift Detection</h3>
+<p>Main should hold no unapplied code, so run <code>terraform plan -detailed-exitcode</code> on main every day. Exit code 0 means no changes, 1 an error, 2 differences present. A 2 means someone changed something in the console: reflect it in code or revert it. Giving people read-only production console access reduces drift in the first place.</p>
 <h2>Measuring Results: DORA Metrics</h2>
 <table>
 <thead>
@@ -238,6 +386,17 @@ Nightly      Heavy E2E, performance, dependency scans
 <li><a href="https://github.com/open-gitops/documents/blob/main/PRINCIPLES.md">OpenGitOps Principles</a> — OpenGitOps, accessed 2026-09-28</li>
 <li><a href="https://dora.dev/guides/dora-metrics/">DORA&#39;s software delivery performance metrics</a> — DORA, accessed 2026-09-28</li>
 <li><a href="https://dora.dev/insights/dora-metrics-history/">A history of DORA&#39;s software delivery metrics</a> — DORA, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments">Deployments and environments</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services">Configuring OpenID Connect in Amazon Web Services</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://www.wiz.io/blog/avoiding-mistakes-with-aws-oidc-integration-conditions">Avoiding mistakes with AWS OIDC integration conditions</a> — Wiz Blog, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/">Immutable subject claims for GitHub Actions OIDC tokens</a> — GitHub Changelog, 2026-04-23, accessed 2026-09-28</li>
+<li><a href="https://developer.hashicorp.com/terraform/language/backend/s3">Backend Type: s3</a> — HashiCorp Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.hashicorp.com/terraform/cli/commands/plan">terraform plan command</a> — HashiCorp Developer, accessed 2026-09-28</li>
+<li><a href="https://www.hashicorp.com/blog/hashicorp-adopts-business-source-license">HashiCorp adopts Business Source License</a> — HashiCorp Blog, 2023-08-10, accessed 2026-09-28</li>
+<li><a href="https://www.linuxfoundation.org/press/announcing-opentofu">Linux Foundation Launches OpenTofu</a> — Linux Foundation, 2023-09-20, accessed 2026-09-28</li>
+<li><a href="https://www.cncf.io/projects/opentofu/">OpenTofu</a> — CNCF, accessed 2026-09-28</li>
+<li><a href="https://www.pulumi.com/docs/">Pulumi Docs</a> — Pulumi, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">What is the AWS CDK?</a> — AWS Docs, accessed 2026-09-28</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/02-cloud-kubernetes/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Cloud · Kubernetes · Korean Clouds</span></a><a class="page-link next" href="../../../en/platform/04-release-strategies/"><span><small>Next</small>Canary · Blue-Green · Flags · Rollback</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
