@@ -876,7 +876,7 @@ footer {
   font-size: 13px;
 }
 .ai-map-flow-output span {
-  color: var(--muted);
+  color: #566579;
   font-size: 12px;
 }
 .ai-map-flow-finish {
