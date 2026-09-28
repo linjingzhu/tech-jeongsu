@@ -62,7 +62,7 @@ Good example:
 | Month | Individual general taxpayer | Individual simplified taxpayer | Corporation | Common (with staff or freelancers) |
 |---|---|---|---|---|
 | January | VAT final return (previous 2nd period) | VAT final return (previous January to December, January 25) | VAT final return | Withholding tax, simplified statement (wages, previous second half; payments through 2026) |
-| February | | | | Withholding tax, prepare year-end settlement |
+| February | | | | Withholding tax, prepare year-end settlement, payment statements for interest, dividends and other income (end of February; includes other income such as one-off manuscript or lecture fees, excludes religious workers' income) |
 | March | | | Corporate tax return (March 31) | Payment statements (March 10) |
 | April | Pay VAT preliminary notice | | VAT preliminary return or notice | Withholding tax |
 | May | Global income tax return (May 31) | Global income tax return (May 31) | | Withholding tax |
@@ -104,5 +104,7 @@ What is better delegated: corporate tax returns, applying reductions, global inc
 - [NTS - VAT filing and payment deadlines](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2273&cntntsId=7694) (accessed 2026-09-28)
 - [NTS - Corporate tax interim prepayment](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6565&cntntsId=7991) (accessed 2026-09-28)
 - [NTS Call Center - Simplified taxation Q&A (preliminary return for invoice-issuing simplified taxpayers)](https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937) (accessed 2026-09-28)
+- [NTS - Other income payment statement submission](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=12245&cntntsId=8634) (accessed 2026-09-28)
+- [NTS - Payment statement submission (deadlines by income type)](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=12242&cntntsId=8631) (accessed 2026-09-28)
 - [NTS - Simplified payment statement (wage income) deadline examples](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=40678&cntntsId=239032) (accessed 2026-09-28)
 - [NTS - Notice deferring monthly simplified payment statements for regular employees](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2207&bbsId=1011&nttSn=1330270) (accessed 2026-09-28)

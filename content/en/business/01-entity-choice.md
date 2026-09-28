@@ -76,6 +76,7 @@ Simplified status is not always better.
 - If early equipment or contractor costs are large and you **want input VAT refunded**, general status can be better.
 - If much of your revenue is **zero-rated** overseas revenue, refunds can arise, and simplified status can be a disadvantage there. See document 06.
 - To give up simplified status you must file **by the last day of the month before the month you want general status to apply**, and you cannot return to simplified status for 3 years (VAT Act Article 70).
+  - Exception (from 2024-07-01, Article 70(4) and (5)): a sole proprietor who was a new business or had prior-year gross supply below KRW 48 million when giving up simplified status may return to it within the 3 years if prior-year gross supply is **KRW 48 million or more but below KRW 104 million**, by reporting at least 10 days before the tax period in which it should apply (NTS simplified taxation Q&A).
 
 ### Switch Timing and Exclusions
 
@@ -105,7 +106,7 @@ Decide trade name, purpose, head office
 
 Points to know:
 
-- **The minimum capital rule was abolished** (Commercial Act amendment of 2009, effective 2010-05-29). Par value per share must be KRW 100 or more (Commercial Act Article 329).
+- **The minimum capital rule was abolished** (Commercial Act amendment promulgated 2009-05-28, Act No. 9746). Par value per share must be KRW 100 or more (Commercial Act Article 329).
 - **Notarizing the articles**: notarization is required in principle, but for a company with total capital under KRW 1 billion founded by promoters only (balgi seollip), the articles take effect when each promoter signs or seals them (Commercial Act Article 292).
 - With capital under KRW 1 billion you can incorporate online through the **Online Incorporation System** of the Ministry of SMEs and Startups. It provides only standard articles, so write your own if you need special share terms.
 - Where you place the head office can change the registration license tax burden and startup tax relief (document 08). Confirm amounts with the local government and a judicial scrivener.

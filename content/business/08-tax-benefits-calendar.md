@@ -62,7 +62,7 @@ flowchart TD
 | 월 | 개인 일반과세자 | 개인 간이과세자 | 법인 | 공통 (직원·프리랜서가 있을 때) |
 |---|---|---|---|---|
 | 1월 | 부가세 확정신고 (전년 2기) | 부가세 확정신고 (전년 1~12월, 1월 25일) | 부가세 확정신고 | 원천세, 간이지급명세서(근로, 전년 하반기 — 2026년 지급분까지) |
-| 2월 | | | | 원천세, 연말정산 준비 |
+| 2월 | | | | 원천세, 연말정산 준비, 이자·배당·기타소득 지급명세서 (2월 말일. 일회성 원고료·강연료 등 기타소득 포함, 종교인소득 제외) |
 | 3월 | | | 법인세 신고 (3월 31일) | 지급명세서 (3월 10일) |
 | 4월 | 부가세 예정고지 납부 | | 부가세 예정신고 또는 예정고지 | 원천세 |
 | 5월 | 종합소득세 신고 (5월 31일) | 종합소득세 신고 (5월 31일) | | 원천세 |
@@ -104,5 +104,7 @@ flowchart TD
 - [국세청 - 부가가치세 신고납부기한](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2273&cntntsId=7694) (접근 2026-09-28)
 - [국세청 - 법인세 중간예납](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6565&cntntsId=7991) (접근 2026-09-28)
 - [국세상담센터 - 간이과세 Q&A (세금계산서 발급 간이과세자 예정신고)](https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937) (접근 2026-09-28)
+- [국세청 - 기타소득 지급명세서 제출](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=12245&cntntsId=8634) (접근 2026-09-28)
+- [국세청 - 지급명세서 제출 (소득별 기한)](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=12242&cntntsId=8631) (접근 2026-09-28)
 - [국세청 - 간이지급명세서(근로소득) 제출기한 적용 사례](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=40678&cntntsId=239032) (접근 2026-09-28)
 - [국세청 - 상용근로자 간이지급명세서 매월 제출 시행시기 유예 안내](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2207&bbsId=1011&nttSn=1330270) (접근 2026-09-28)

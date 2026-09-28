@@ -96,8 +96,8 @@ A double-entry bookkeeper who deducts business passenger car costs (depreciation
 
 | Item | Detail |
 |---|---|
-| Business-only car insurance | Costs are allowed by the business-use ratio only if, for the whole tax period, the car is insured for driving by the business owner, staff and similar people only |
-| No such insurance | For costs incurred in 2024 and 2025 a transition rule allowed 50% of the business-use amount (excluding sincere-filing businesses, medical practices, etc.). **For costs from 2026-01-01 that 50% transition rule has ended**, so less is allowed (the decree sets 0% for cars beyond the first, etc.). Check how it applies by number of cars and industry in the decree and with a tax accountant (needs verification) |
+| Business-only car insurance | Insurance that, for the whole tax period, covers only the business owner, staff and similar drivers. For individual double-entry bookkeepers this requirement applies to **every car except one** (Income Tax Act Article 33-2(2), Enforcement Decree Article 78-3). With only one car, the business-use share per the driving log is allowed without this insurance |
+| No such insurance (cars beyond the first) | Related costs of cars beyond the first are allowed at 0% of the business-use amount. A transition rule allowed 50% for costs incurred in 2024 and 2025 (excluding sincere-filing businesses, medical practices, etc.), and **it does not apply to costs from 2026-01-01** |
 | Depreciation | Straight-line over 5 years, and business-use depreciation is capped at **KRW 8 million a year**. The excess carries over to later tax periods |
 | Driving log | With a log, costs are allowed by business mileage ratio. Without one, only up to **KRW 15 million** of annual related costs counts as business use |
 | Statement | File the business passenger car cost statement with the global income tax return. Penalty tax applies if it is missing or inaccurate (NTS business passenger car guide) |

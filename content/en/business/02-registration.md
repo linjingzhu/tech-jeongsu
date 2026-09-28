@@ -112,7 +112,7 @@ Pausing or closing a business also has filings, and the deadlines matter as much
 | Closing VAT final return | File and pay for results from the start of the tax period to the closure date, plus remaining goods, **by the 25th of the month after the month of closure** | VAT Act Article 49, Easy Law |
 | Global income tax | Income for the year of closure is combined with other income and filed **in May of the next year** | Income Tax Act (NTS global income tax filing guide) |
 | Mail-order business closure report | If you filed a mail-order business report, report the suspension or closure to the local government (Government24) | E-Commerce Act, Government24 |
-| Social insurance workplace withdrawal report | If you had staff, file loss-of-coverage reports and a workplace withdrawal report. Health insurance must be notified **within 14 days** of the event. For the National Pension, withdrawing the workplace also ends its members' coverage | Government24 health insurance workplace withdrawal, National Health Insurance EDI guide |
+| Social insurance workplace withdrawal report | If you had staff, file loss-of-coverage reports and a workplace withdrawal report. Health insurance must be notified **within 14 days** of the event. National Pension workplace withdrawal and loss-of-coverage reports are due **by the 15th of the month after the event**, and withdrawing the workplace also ends its members' coverage | Government24 health insurance workplace withdrawal, National Health Insurance EDI guide, National Pension Service workplace guide |
 | Withholding tax and payment statements | Settle withholding tax and payment statements for wages and business income paid up to the closure date | Document 07 |
 
 - If you **restart the same kind of business** after closing, it is not a "startup" for the startup SME tax reduction (Restriction of Special Taxation Act Article 6(10), document 08). If you only want a break, consider suspension instead of closure.
@@ -135,4 +135,5 @@ Pausing or closing a business also has filings, and the deadlines matter as much
 - [Government24 - Mail-order business suspension, closure and resumption report](https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09006&CappBizCD=11300000008&tp_seq=03) (accessed 2026-09-28)
 - [Government24 - Health insurance workplace withdrawal report](https://gov.kr/mw/AA020InfoCappView.do?CappBizCD=14600000324&HighCtgCD=A05007&tp_seq=) (accessed 2026-09-28)
 - [National Health Insurance EDI - Workplace withdrawal (extinction) report](https://edi.nhis.or.kr/webedi/help/html/appli/ap_06.html) (accessed 2026-09-28)
+- [National Pension Service - Workplace practice guide 2026 (PDF)](https://edi.nps.or.kr/cm/main/guide/edi_workguide_new.pdf) (2026 edition, accessed 2026-09-28)
 - [Korea Law Information Center - VAT Act](https://law.go.kr/LSW/lsInfoP.do?lsiSeq=269797) (Article 10(6), remaining goods at closure, accessed 2026-09-28)

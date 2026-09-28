@@ -15,7 +15,7 @@ Value-added tax (VAT, bugagachise) is paid as **the tax collected on sales minus
 | Corporation | Four filings a year in January, April, July and October in principle. Small corporations with prior-period supply below KRW 150 million get April and October preliminary notices |
 | Simplified taxpayer | January final return (previous January to December). July: the tax office issues a preliminary assessment notice for January to June, payable by July 25. But **a simplified taxpayer who issued tax invoices in January to June must file a preliminary return by July 25** (VAT Act Article 66(3)) |
 
-- Instead of a preliminary return, individual general taxpayers receive a notice in April and October for **50% of the tax paid in the previous period** (NTS guide).
+- Instead of a preliminary return, individual general taxpayers receive a notice in April and October for **50% of the tax paid in the previous period** (NTS guide). If the amount to notice is **below KRW 500,000**, no preliminary notice is issued and everything is paid with the final return (applies to individual general taxpayers and small corporations alike).
 - With a simplified taxpayer's July preliminary return, the summary tables of tax invoices issued and received are filed too (NTS Call Center Q&A). A business switching from simplified to general on July 1 also files and pays for January 1 to June 30 by July 25.
 
 ```mermaid
@@ -95,7 +95,7 @@ Good example:
 
 | Penalty | Rate | Basis | Situation |
 |---|---|---|---|
-| Not registered | 1% of supply value from business start to the day before applying | VAT Act Article 60(1) | Contract revenue started in March but you applied for registration only in June |
+| Not registered | 1% of supply value from business start to the day before applying (0.5% of gross supply for simplified taxpayers) | VAT Act Article 60(1); Article 68-2 for simplified taxpayers | Contract revenue started in March but you applied for registration only in June |
 | Tax invoice not issued | 2% of supply value | VAT Act Article 60(2) | Past the issuing deadline and still not issued by that period's final return deadline |
 | Tax invoice issued late | 1% of supply value | VAT Act Article 60(2) | A March service was invoiced after April 10 but before July 25 |
 | Electronic invoice transmitted late | 0.3% of supply value | VAT Act Article 60(2) | Missed the transmission deadline but transmitted by the final return deadline |

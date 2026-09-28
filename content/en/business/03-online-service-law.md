@@ -41,6 +41,7 @@ The items the policy must contain are set by Article 30(1) of the Act and Articl
 | Outsourcing of processing | If applicable |
 | Cross-border transfer (legal ground, items, country, recipient, etc.) | If applicable |
 | Destruction procedure and method (with the legal ground and items if a law requires retention) | Always |
+| Whether sensitive data may become public and how to choose non-disclosure (Act Article 30(1) item 4-2, related to Article 23(3), effective 2024-03-15) | If applicable |
 | Rights and duties of data subjects and legal guardians, and how to exercise them | Always |
 | Security safeguards | Always |
 | Installation, operation and refusal of automatic collection tools (cookies, analytics and ad SDKs, etc.) | If applicable |
