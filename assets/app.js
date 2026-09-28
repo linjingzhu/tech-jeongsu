@@ -88,6 +88,21 @@ const DOCS = [
       ["작은 팀 실전 가이드", "content/platform/10-small-team-playbook.md"],
     ],
   },
+  {
+    title: "비즈니스",
+    items: [
+      ["비즈니스 트랙 개요", "content/business/00-overview.md"],
+      ["개인 · 법인 · 과세유형", "content/business/01-entity-choice.md"],
+      ["사업자 등록 · 통신판매업", "content/business/02-registration.md"],
+      ["약관 · 개인정보 · 전자상거래", "content/business/03-online-service-law.md"],
+      ["계약 · 지식재산 · 오픈소스", "content/business/04-contracts-ip.md"],
+      ["채용 · 4대보험 · 프리랜서", "content/business/05-hiring-freelancers.md"],
+      ["부가세 · 영세율 · 세금계산서", "content/business/06-vat-invoices.md"],
+      ["소득세 · 법인세 · 원천징수 · 장부", "content/business/07-income-tax-books.md"],
+      ["창업 감면 · 세무 달력 · 세무사", "content/business/08-tax-benefits-calendar.md"],
+      ["창업 지원사업", "content/business/09-startup-support.md"],
+    ],
+  },
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -113,7 +128,7 @@ const storage = {
 let language = storage.get("jt-language", "ko") === "en" ? "en" : "ko";
 const t = (key) => window.UI_TEXT[language][key];
 const allPaths = DOCS.flatMap((g) => g.items.map((item) => item[1]));
-const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload"];
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase"];
 const icon = (name) => '<img src="./assets/icons/' + name + '.svg" alt="" aria-hidden="true">';
 let currentPath = "",
   loadVersion = 0,

@@ -1,6 +1,6 @@
 # Jeongsu Tech
 
-기술 학습 문서를 모은 정적 사이트입니다. AI 사용방법, Git 사용방법, 제품 기획과 운영, AI Map을 제공합니다.
+기술 학습 문서를 모은 정적 사이트입니다. AI 사용방법, Git 사용방법, 제품 기획과 운영, AI Map, Marketing, Platform 배포와 서비스, 비즈니스를 제공합니다. 비즈니스 문서는 일반 정보이며 법률·세무 자문이 아닙니다.
 
 - 배포: https://linjingzhu.github.io/tech-jeongsu/
 - GitHub Pages는 기존 `stable` 브랜치의 루트 파일을 배포합니다. 별도 빌드가 필요하지 않습니다.

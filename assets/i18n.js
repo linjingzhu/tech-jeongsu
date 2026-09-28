@@ -44,7 +44,7 @@ window.UI_TEXT = {
     output: "결과",
     news: "AI 소식",
     newsIntro: "AI Map에 기록된 뉴스와 학습 리소스입니다.",
-    groups: ["AI 사용방법", "GIT 사용방법", "AI Map", "제품 기획과 운영", "Marketing", "Platform 배포와 서비스"],
+    groups: ["AI 사용방법", "GIT 사용방법", "AI Map", "제품 기획과 운영", "Marketing", "Platform 배포와 서비스", "비즈니스"],
     titles: [
       [
         "AI 개발 운영 개요",
@@ -117,6 +117,18 @@ window.UI_TEXT = {
         "FinOps · Platform Engineering",
         "작은 팀 실전 가이드",
       ],
+      [
+        "비즈니스 트랙 개요",
+        "개인 · 법인 · 과세유형",
+        "사업자 등록 · 통신판매업",
+        "약관 · 개인정보 · 전자상거래",
+        "계약 · 지식재산 · 오픈소스",
+        "채용 · 4대보험 · 프리랜서",
+        "부가세 · 영세율 · 세금계산서",
+        "소득세 · 법인세 · 원천징수 · 장부",
+        "창업 감면 · 세무 달력 · 세무사",
+        "창업 지원사업",
+      ],
     ],
   },
   en: {
@@ -164,7 +176,7 @@ window.UI_TEXT = {
     output: "Output",
     news: "AI news",
     newsIntro: "News and learning resources collected in AI Map.",
-    groups: ["Using AI", "Using Git", "AI Map", "Product Planning & Operations", "Marketing", "Platform Deployment & Services"],
+    groups: ["Using AI", "Using Git", "AI Map", "Product Planning & Operations", "Marketing", "Platform Deployment & Services", "Business"],
     titles: [
       [
         "AI development overview",
@@ -236,6 +248,18 @@ window.UI_TEXT = {
         "Secrets · SBOM · SLSA",
         "FinOps · Platform Engineering",
         "Small Team Playbook",
+      ],
+      [
+        "Business Track Overview",
+        "Sole Prop · Corporation · VAT Type",
+        "Registration · Mail-Order Sales",
+        "Terms · Privacy · E-Commerce",
+        "Contracts · IP · Open Source",
+        "Hiring · Social Insurance · Freelancers",
+        "VAT · Zero Rate · Tax Invoices",
+        "Income Tax · Corporate Tax · Withholding · Books",
+        "Startup Relief · Tax Calendar · Accountants",
+        "Startup Support Programs",
       ],
     ],
   },
