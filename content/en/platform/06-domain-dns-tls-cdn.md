@@ -88,6 +88,14 @@ Bad:  Keep file names unchanged with a long cache, so users still get old JS aft
 Good: Put a content hash in file names at build time and cache only HTML briefly.
 ```
 
+## What to Block at the Edge
+
+A CDN or edge is not only a cache; it is **where bad requests are filtered before they reach the origin**.
+
+- **Rate limits**: limit requests per client (IP, API key, etc.) on paths that are easy to abuse, such as login, signup, password reset and API key issuance. Examples: Cloudflare rate limiting rules, AWS WAF rate-based rules.
+- **Managed WAF rules**: rule sets maintained and updated by the provider (Cloudflare Managed Ruleset, AWS Managed Rules) block known attack types. Start in log (count) mode to check for false positives.
+- **Bot filtering**: block or challenge known bot patterns (Cloudflare Bot Fight Mode, AWS WAF Bot Control). Exempt legitimate automation such as payment webhooks and external integrations.
+
 ## Cutover Procedure
 
 1. Lower the DNS TTL a few days before the cutover.
@@ -106,6 +114,12 @@ Good: Put a content hash in file names at build time and cache only HTML briefly
 - [6-day and IP Address Certificates are Generally Available](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) — Let's Encrypt, 2026-01-15, accessed 2026-09-28
 - [Certificate Lifetime Rationale and Plans](https://letsencrypt.org/docs/cert-lifetimes/) — Let's Encrypt, accessed 2026-09-28
 - [Profiles](https://letsencrypt.org/docs/profiles/) — Let's Encrypt, accessed 2026-09-28
+- [Rate limiting rules](https://developers.cloudflare.com/waf/rate-limiting-rules/) — Cloudflare WAF Docs, accessed 2026-09-28
+- [Cloudflare Managed Ruleset](https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/) — Cloudflare WAF Docs, accessed 2026-09-28
+- [Get started with Bot Fight Mode](https://developers.cloudflare.com/bots/get-started/bot-fight-mode/) — Cloudflare Docs, accessed 2026-09-28
+- [Using rate-based rule statements in AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html) — AWS Docs, accessed 2026-09-28
+- [Using managed rule groups in AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html) — AWS Docs, accessed 2026-09-28
+- [AWS WAF Bot Control](https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html) — AWS Docs, accessed 2026-09-28
 - [Certbot](https://certbot.eff.org/) — EFF, accessed 2026-09-28
 - [Automatic HTTPS](https://caddyserver.com/docs/automatic-https) — Caddy Docs, accessed 2026-09-28
 - [ACME](https://cert-manager.io/docs/configuration/acme/) — cert-manager Docs, accessed 2026-09-28

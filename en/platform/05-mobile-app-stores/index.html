@@ -144,7 +144,7 @@
 <p>Amounts vary by region and over time, so check them on the enrollment screen.</p>
 <h2>Apple: Review and Testing</h2>
 <ul>
-<li><strong>TestFlight</strong>: up to 100 internal testers and up to 10,000 external testers. External testing requires the first build to be approved by App Review.</li>
+<li><strong>TestFlight</strong>: up to 100 internal testers and up to 10,000 external testers. External testing requires the first build to be approved by App Review. A TestFlight build expires <strong>90 days after upload</strong> and can no longer be tested, so upload fresh builds regularly during a long beta.</li>
 <li><strong>App Review</strong>: Apple states that on average 90% of submissions are reviewed in less than 24 hours. You can request an <strong>expedited review</strong> for a critical bug fix or an event deadline.</li>
 <li><strong>Phased Release</strong>: rolls an update out to automatic-update users over 7 days. It can be paused for up to 30 days, and anyone can still download manually at any time.</li>
 <li>Common rejection points (App Review Guidelines):<ul>
@@ -176,6 +176,14 @@
 <tr>
 <td>2026-09-09</td>
 <td>iOS · iPadOS apps must target iOS 13 or later to upload</td>
+</tr>
+<tr>
+<td>2026-09 (in force)</td>
+<td>Submitting new apps and updates, and notarization for alternative distribution, require answers to the <strong>social media capability questions</strong> in the age rating questionnaire. Apps that declare the capability go into the Time Allowance &quot;Social Media&quot; category with a minimum age rating of 13+. Apps that disable it for users under 13 must check age ranges with the Declared Age Range API</td>
+</tr>
+<tr>
+<td>2027-04 (announced)</td>
+<td>iOS · iPadOS apps must be built with the iOS 27 · iPadOS 27 SDK or later (Xcode 27) to upload. tvOS, visionOS and watchOS need their 27 SDKs too</td>
 </tr>
 </tbody></table>
 <ul>
@@ -387,6 +395,7 @@ end
 <li>A Google Play staged rollout percentage <strong>does not increase automatically</strong>. A person raises it after checking metrics.</li>
 <li>If something goes wrong, <strong>halt</strong>: no additional users receive the version, and users who already have it stay on it.</li>
 <li>You can halt even after a 100% rollout; the previous version is then served to new users again.</li>
+<li>Halting a rollout or pausing a phased release does not undo the build on <strong>devices that already have it</strong>. The only way to retire that build is for the app to fetch a <strong>minimum supported version</strong> from your server at startup and, if it is older, show a <strong>force-update screen</strong>. That path must already be in your first release build, and you must test it before launch. On Android, Play&#39;s in-app updates (immediate flow) can implement the screen.</li>
 </ul>
 <h2>Bad Example / Good Example</h2>
 <pre><code class="language-text">Bad:  First submission the day before launch. A login-only app without a demo account is rejected; launch slips.
@@ -399,6 +408,8 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 <li><input disabled="" type="checkbox"> Privacy manifest / Data safety matches what is actually collected (including SDKs)</li>
 <li><input disabled="" type="checkbox"> Demo account and backend ready for review</li>
 <li><input disabled="" type="checkbox"> An in-app account deletion path exists</li>
+<li><input disabled="" type="checkbox"> Answered the social media capability questions in the age rating questionnaire (required from 2026-09)</li>
+<li><input disabled="" type="checkbox"> Tested the server-checked minimum supported version and the force-update screen</li>
 <li><input disabled="" type="checkbox"> Rollout percentages and halt criteria (crash rate, etc.) are defined</li>
 </ul>
 <h2>References</h2>
@@ -427,6 +438,11 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 <li><a href="https://docs.fastlane.tools/actions/upload_to_play_store/">upload_to_play_store</a> — fastlane docs, accessed 2026-09-28</li>
 <li><a href="https://docs.expo.dev/app-signing/managed-credentials/">Using automatically managed credentials</a> — Expo Docs, accessed 2026-09-28</li>
 <li><a href="https://developers.google.com/android-publisher">Google Play Developer API</a> — Google for Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=0d2gpmml">Introducing Time Allowances</a> — Apple Developer News, 2026-06-08, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=tlur8uvi">Age rating questionnaire now includes social media questions</a> — Apple Developer News, 2026-07-09, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=k1mtkt1k">App Store submissions now open for the latest OS releases</a> — Apple Developer News, 2026-09-09, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/app-store-connect/reference/app-uploads/app-build-statuses/">App build statuses</a> — App Store Connect Help, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/guide/playcore/in-app-updates">In-app updates</a> — Android Developers, accessed 2026-09-28</li>
 <li><a href="https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html">Prepare your apps for Google Play&#39;s 16 KB page size compatibility requirement</a> — Android Developers Blog, 2025-05, accessed 2026-09-28</li>
 <li><a href="https://docs.fastlane.tools/app-store-connect-api/">Using App Store Connect API</a> — fastlane docs, accessed 2026-09-28</li>
 <li><a href="https://docs.fastlane.tools/actions/upload_to_testflight/">upload_to_testflight</a> — fastlane docs, accessed 2026-09-28</li>

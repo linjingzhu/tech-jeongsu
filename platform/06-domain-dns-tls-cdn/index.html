@@ -232,6 +232,13 @@
 <pre><code class="language-text">나쁜 예: 파일명을 그대로 두고 긴 Cache를 걸어, 배포 후에도 사용자가 옛 JS를 받는다.
 좋은 예: Build 시 파일명에 Content Hash를 넣고, HTML만 짧게 Cache한다.
 </code></pre>
+<h2>Edge에서 막는 것</h2>
+<p>CDN · Edge는 캐시뿐 아니라 <strong>나쁜 요청을 Origin 앞에서 거르는 곳</strong>이다.</p>
+<ul>
+<li><strong>Rate Limit</strong>: 로그인, 회원가입, 비밀번호 재설정, API Key 발급처럼 남용되기 쉬운 경로에 Client(IP, API Key 등)별 요청 수 제한을 건다. Cloudflare Rate Limiting Rules, AWS WAF Rate-based Rule 등이 있다.</li>
+<li><strong>Managed WAF Rule</strong>: 제공사가 관리하고 갱신하는 규칙 묶음(Cloudflare Managed Ruleset, AWS Managed Rules)으로 알려진 공격 유형을 막는다. 처음에는 기록(Log / Count) 모드로 켜서 오탐을 확인한다.</li>
+<li><strong>Bot 필터링</strong>: 알려진 Bot 패턴을 차단하거나 Challenge를 건다(Cloudflare Bot Fight Mode, AWS WAF Bot Control). 결제 Webhook이나 외부 연동처럼 정상 자동 요청은 예외로 둔다.</li>
+</ul>
 <h2>전환(Cutover) 절차</h2>
 <ol>
 <li>전환 며칠 전 DNS TTL을 낮춘다.</li>
@@ -250,6 +257,12 @@
 <li><a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability">6-day and IP Address Certificates are Generally Available</a> — Let&#39;s Encrypt, 2026-01-15, 접근일 2026-09-28</li>
 <li><a href="https://letsencrypt.org/docs/cert-lifetimes/">Certificate Lifetime Rationale and Plans</a> — Let&#39;s Encrypt, 접근일 2026-09-28</li>
 <li><a href="https://letsencrypt.org/docs/profiles/">Profiles</a> — Let&#39;s Encrypt, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/rate-limiting-rules/">Rate limiting rules</a> — Cloudflare WAF Docs, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> — Cloudflare WAF Docs, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/bots/get-started/bot-fight-mode/">Get started with Bot Fight Mode</a> — Cloudflare Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html">Using rate-based rule statements in AWS WAF</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html">Using managed rule groups in AWS WAF</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html">AWS WAF Bot Control</a> — AWS Docs, 접근일 2026-09-28</li>
 <li><a href="https://certbot.eff.org/">Certbot</a> — EFF, 접근일 2026-09-28</li>
 <li><a href="https://caddyserver.com/docs/automatic-https">Automatic HTTPS</a> — Caddy Docs, 접근일 2026-09-28</li>
 <li><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> — cert-manager Docs, 접근일 2026-09-28</li>

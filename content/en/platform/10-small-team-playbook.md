@@ -30,7 +30,7 @@ flowchart LR
 | Product type | Starting combination | Next step |
 |---|---|---|
 | Docs · landing page | GitHub Pages or Cloudflare Workers Static Assets | CDN cache rules, analytics |
-| Web app + API | Vercel / Netlify (frontend) + serverless container (API) + managed DB | Staging environment, canary |
+| Web app + API | Vercel / Netlify (frontend) + serverless container (API) + managed DB. Cap max instances to fit the database connection limit, or add a connection pooler (document 01) | Staging environment, canary |
 | Mobile app + backend | TestFlight · closed test + serverless backend | Phased release, server feature flags |
 | SaaS for the Korean public sector | Start by checking for a CSAP-certified cloud (verification planned to move to the NIS in 2027-07, document 02) | Reflect the required certification grade |
 

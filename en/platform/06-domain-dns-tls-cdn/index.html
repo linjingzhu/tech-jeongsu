@@ -232,6 +232,13 @@ Good: Use automatic issuance in your hosting / CDN / ingress, or renew with an A
 <pre><code class="language-text">Bad:  Keep file names unchanged with a long cache, so users still get old JS after a deploy.
 Good: Put a content hash in file names at build time and cache only HTML briefly.
 </code></pre>
+<h2>What to Block at the Edge</h2>
+<p>A CDN or edge is not only a cache; it is <strong>where bad requests are filtered before they reach the origin</strong>.</p>
+<ul>
+<li><strong>Rate limits</strong>: limit requests per client (IP, API key, etc.) on paths that are easy to abuse, such as login, signup, password reset and API key issuance. Examples: Cloudflare rate limiting rules, AWS WAF rate-based rules.</li>
+<li><strong>Managed WAF rules</strong>: rule sets maintained and updated by the provider (Cloudflare Managed Ruleset, AWS Managed Rules) block known attack types. Start in log (count) mode to check for false positives.</li>
+<li><strong>Bot filtering</strong>: block or challenge known bot patterns (Cloudflare Bot Fight Mode, AWS WAF Bot Control). Exempt legitimate automation such as payment webhooks and external integrations.</li>
+</ul>
 <h2>Cutover Procedure</h2>
 <ol>
 <li>Lower the DNS TTL a few days before the cutover.</li>
@@ -250,6 +257,12 @@ Good: Put a content hash in file names at build time and cache only HTML briefly
 <li><a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability">6-day and IP Address Certificates are Generally Available</a> — Let&#39;s Encrypt, 2026-01-15, accessed 2026-09-28</li>
 <li><a href="https://letsencrypt.org/docs/cert-lifetimes/">Certificate Lifetime Rationale and Plans</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
 <li><a href="https://letsencrypt.org/docs/profiles/">Profiles</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/rate-limiting-rules/">Rate limiting rules</a> — Cloudflare WAF Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> — Cloudflare WAF Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/bots/get-started/bot-fight-mode/">Get started with Bot Fight Mode</a> — Cloudflare Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html">Using rate-based rule statements in AWS WAF</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html">Using managed rule groups in AWS WAF</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html">AWS WAF Bot Control</a> — AWS Docs, accessed 2026-09-28</li>
 <li><a href="https://certbot.eff.org/">Certbot</a> — EFF, accessed 2026-09-28</li>
 <li><a href="https://caddyserver.com/docs/automatic-https">Automatic HTTPS</a> — Caddy Docs, accessed 2026-09-28</li>
 <li><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> — cert-manager Docs, accessed 2026-09-28</li>

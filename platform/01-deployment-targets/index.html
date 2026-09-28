@@ -247,6 +247,7 @@
 </tr>
 </tbody></table>
 <p>Scale to Zero는 비용을 줄이지만, 첫 요청이 Instance 시작을 기다리는 <strong>Cold Start</strong>가 생길 수 있다. 응답 지연이 중요한 API라면 최소 Instance 설정 비용과 비교한다.</p>
+<p>반대 방향의 함정도 있다. Serverless가 Scale Out하면 <strong>Instance마다 DB 연결을 따로 연다</strong>. Traffic이 몰리면 연결 수가 곱으로 늘어 관계형 DB의 최대 연결 수를 넘기고, 장애가 App이 아니라 DB에서 난다. RDS Proxy, Cloud SQL Connector와 Instance별 Connection Pool, PgBouncer 같은 Pooler · Proxy를 앞에 두거나, <strong>최대 Instance 수 × Instance당 연결 수</strong>가 DB 한도 안에 들도록 최대 Instance 수를 제한한다.</p>
 <h2>나쁜 예 / 좋은 예</h2>
 <pre><code class="language-text">나쁜 예: 사내 문서 사이트를 위해 VM을 띄우고 Nginx, 인증서, OS Patch를 직접 관리한다.
 좋은 예: 문서 사이트는 Static Hosting에 올리고, 운영 시간은 제품 기능에 쓴다.
@@ -276,6 +277,9 @@
 <li><a href="https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html">AWS App Runner availability change</a> — AWS Docs, 접근일 2026-09-28</li>
 <li><a href="https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/">Announcing Amazon ECS Express Mode</a> — AWS, 2025-11, 접근일 2026-09-28</li>
 <li><a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda Pricing</a> — AWS, 접근일 2026-09-28</li>
+<li><a href="https://aws.amazon.com/blogs/compute/using-amazon-rds-proxy-with-aws-lambda/">Using Amazon RDS Proxy with AWS Lambda</a> — AWS Compute Blog, 접근일 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/connect-run">Connect from Cloud Run</a> — Cloud SQL Docs, 접근일 2026-09-28</li>
+<li><a href="https://www.pgbouncer.org/">PgBouncer</a> — PgBouncer, 접근일 2026-09-28</li>
 <li><a href="https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/">New for AWS Lambda – 1ms Billing Granularity</a> — AWS News Blog, 2020-12, 접근일 2026-09-28</li>
 <li><a href="https://docs.cloud.google.com/run/docs/configuring/billing-settings">Cloud Run billing settings for services</a> — Google Cloud Docs, 접근일 2026-09-28</li>
 <li><a href="https://learn.microsoft.com/en-us/azure/container-apps/scale-app">Scaling in Azure Container Apps</a> — Microsoft Learn, 접근일 2026-09-28</li>

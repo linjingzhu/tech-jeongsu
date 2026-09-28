@@ -68,6 +68,8 @@ flowchart TD
 
 Scale to Zero는 비용을 줄이지만, 첫 요청이 Instance 시작을 기다리는 **Cold Start**가 생길 수 있다. 응답 지연이 중요한 API라면 최소 Instance 설정 비용과 비교한다.
 
+반대 방향의 함정도 있다. Serverless가 Scale Out하면 **Instance마다 DB 연결을 따로 연다**. Traffic이 몰리면 연결 수가 곱으로 늘어 관계형 DB의 최대 연결 수를 넘기고, 장애가 App이 아니라 DB에서 난다. RDS Proxy, Cloud SQL Connector와 Instance별 Connection Pool, PgBouncer 같은 Pooler · Proxy를 앞에 두거나, **최대 Instance 수 × Instance당 연결 수**가 DB 한도 안에 들도록 최대 Instance 수를 제한한다.
+
 ## 나쁜 예 / 좋은 예
 
 ```text
@@ -102,6 +104,9 @@ Scale to Zero는 비용을 줄이지만, 첫 요청이 Instance 시작을 기다
 - [AWS App Runner availability change](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html) — AWS Docs, 접근일 2026-09-28
 - [Announcing Amazon ECS Express Mode](https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/) — AWS, 2025-11, 접근일 2026-09-28
 - [AWS Lambda Pricing](https://aws.amazon.com/lambda/pricing/) — AWS, 접근일 2026-09-28
+- [Using Amazon RDS Proxy with AWS Lambda](https://aws.amazon.com/blogs/compute/using-amazon-rds-proxy-with-aws-lambda/) — AWS Compute Blog, 접근일 2026-09-28
+- [Connect from Cloud Run](https://docs.cloud.google.com/sql/docs/postgres/connect-run) — Cloud SQL Docs, 접근일 2026-09-28
+- [PgBouncer](https://www.pgbouncer.org/) — PgBouncer, 접근일 2026-09-28
 - [New for AWS Lambda – 1ms Billing Granularity](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/) — AWS News Blog, 2020-12, 접근일 2026-09-28
 - [Cloud Run billing settings for services](https://docs.cloud.google.com/run/docs/configuring/billing-settings) — Google Cloud Docs, 접근일 2026-09-28
 - [Scaling in Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/scale-app) — Microsoft Learn, 접근일 2026-09-28

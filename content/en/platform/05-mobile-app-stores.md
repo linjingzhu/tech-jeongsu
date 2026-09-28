@@ -29,7 +29,7 @@ Amounts vary by region and over time, so check them on the enrollment screen.
 
 ## Apple: Review and Testing
 
-- **TestFlight**: up to 100 internal testers and up to 10,000 external testers. External testing requires the first build to be approved by App Review.
+- **TestFlight**: up to 100 internal testers and up to 10,000 external testers. External testing requires the first build to be approved by App Review. A TestFlight build expires **90 days after upload** and can no longer be tested, so upload fresh builds regularly during a long beta.
 - **App Review**: Apple states that on average 90% of submissions are reviewed in less than 24 hours. You can request an **expedited review** for a critical bug fix or an event deadline.
 - **Phased Release**: rolls an update out to automatic-update users over 7 days. It can be paused for up to 30 days, and anyone can still download manually at any time.
 - Common rejection points (App Review Guidelines):
@@ -44,6 +44,8 @@ Amounts vary by region and over time, so check them on the enrollment screen.
 | 2026-01-31 | Answer the new age rating questions so update submissions are not interrupted |
 | 2026-04-28 | Builds must use Xcode 26 or later with a 26 SDK (e.g. iOS 26) to upload |
 | 2026-09-09 | iOS · iPadOS apps must target iOS 13 or later to upload |
+| 2026-09 (in force) | Submitting new apps and updates, and notarization for alternative distribution, require answers to the **social media capability questions** in the age rating questionnaire. Apps that declare the capability go into the Time Allowance "Social Media" category with a minimum age rating of 13+. Apps that disable it for users under 13 must check age ranges with the Declared Age Range API |
+| 2027-04 (announced) | iOS · iPadOS apps must be built with the iOS 27 · iPadOS 27 SDK or later (Xcode 27) to upload. tvOS, visionOS and watchOS need their 27 SDKs too |
 
 - If you include a commonly used third-party SDK (on Apple's list), that SDK's **privacy manifest and signature** are required.
 - Apps distributed in the EU need a **trader status** under the DSA (Digital Services Act).
@@ -172,6 +174,7 @@ end
 - A Google Play staged rollout percentage **does not increase automatically**. A person raises it after checking metrics.
 - If something goes wrong, **halt**: no additional users receive the version, and users who already have it stay on it.
 - You can halt even after a 100% rollout; the previous version is then served to new users again.
+- Halting a rollout or pausing a phased release does not undo the build on **devices that already have it**. The only way to retire that build is for the app to fetch a **minimum supported version** from your server at startup and, if it is older, show a **force-update screen**. That path must already be in your first release build, and you must test it before launch. On Android, Play's in-app updates (immediate flow) can implement the screen.
 
 ## Bad Example / Good Example
 
@@ -187,6 +190,8 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 - [ ] Privacy manifest / Data safety matches what is actually collected (including SDKs)
 - [ ] Demo account and backend ready for review
 - [ ] An in-app account deletion path exists
+- [ ] Answered the social media capability questions in the age rating questionnaire (required from 2026-09)
+- [ ] Tested the server-checked minimum supported version and the force-update screen
 - [ ] Rollout percentages and halt criteria (crash rate, etc.) are defined
 
 ## References
@@ -215,6 +220,11 @@ Good: Start TestFlight and a closed test two weeks early, prepare a demo account
 - [upload_to_play_store](https://docs.fastlane.tools/actions/upload_to_play_store/) — fastlane docs, accessed 2026-09-28
 - [Using automatically managed credentials](https://docs.expo.dev/app-signing/managed-credentials/) — Expo Docs, accessed 2026-09-28
 - [Google Play Developer API](https://developers.google.com/android-publisher) — Google for Developers, accessed 2026-09-28
+- [Introducing Time Allowances](https://developer.apple.com/news/?id=0d2gpmml) — Apple Developer News, 2026-06-08, accessed 2026-09-28
+- [Age rating questionnaire now includes social media questions](https://developer.apple.com/news/?id=tlur8uvi) — Apple Developer News, 2026-07-09, accessed 2026-09-28
+- [App Store submissions now open for the latest OS releases](https://developer.apple.com/news/?id=k1mtkt1k) — Apple Developer News, 2026-09-09, accessed 2026-09-28
+- [App build statuses](https://developer.apple.com/help/app-store-connect/reference/app-uploads/app-build-statuses/) — App Store Connect Help, accessed 2026-09-28
+- [In-app updates](https://developer.android.com/guide/playcore/in-app-updates) — Android Developers, accessed 2026-09-28
 - [Prepare your apps for Google Play's 16 KB page size compatibility requirement](https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html) — Android Developers Blog, 2025-05, accessed 2026-09-28
 - [Using App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) — fastlane docs, accessed 2026-09-28
 - [upload_to_testflight](https://docs.fastlane.tools/actions/upload_to_testflight/) — fastlane docs, accessed 2026-09-28

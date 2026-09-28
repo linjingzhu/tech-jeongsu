@@ -88,6 +88,14 @@ CDN은 사용자 가까운 Edge에서 응답해 **지연 시간과 Origin 부하
 좋은 예: Build 시 파일명에 Content Hash를 넣고, HTML만 짧게 Cache한다.
 ```
 
+## Edge에서 막는 것
+
+CDN · Edge는 캐시뿐 아니라 **나쁜 요청을 Origin 앞에서 거르는 곳**이다.
+
+- **Rate Limit**: 로그인, 회원가입, 비밀번호 재설정, API Key 발급처럼 남용되기 쉬운 경로에 Client(IP, API Key 등)별 요청 수 제한을 건다. Cloudflare Rate Limiting Rules, AWS WAF Rate-based Rule 등이 있다.
+- **Managed WAF Rule**: 제공사가 관리하고 갱신하는 규칙 묶음(Cloudflare Managed Ruleset, AWS Managed Rules)으로 알려진 공격 유형을 막는다. 처음에는 기록(Log / Count) 모드로 켜서 오탐을 확인한다.
+- **Bot 필터링**: 알려진 Bot 패턴을 차단하거나 Challenge를 건다(Cloudflare Bot Fight Mode, AWS WAF Bot Control). 결제 Webhook이나 외부 연동처럼 정상 자동 요청은 예외로 둔다.
+
 ## 전환(Cutover) 절차
 
 1. 전환 며칠 전 DNS TTL을 낮춘다.
@@ -106,6 +114,12 @@ CDN은 사용자 가까운 Edge에서 응답해 **지연 시간과 Origin 부하
 - [6-day and IP Address Certificates are Generally Available](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) — Let's Encrypt, 2026-01-15, 접근일 2026-09-28
 - [Certificate Lifetime Rationale and Plans](https://letsencrypt.org/docs/cert-lifetimes/) — Let's Encrypt, 접근일 2026-09-28
 - [Profiles](https://letsencrypt.org/docs/profiles/) — Let's Encrypt, 접근일 2026-09-28
+- [Rate limiting rules](https://developers.cloudflare.com/waf/rate-limiting-rules/) — Cloudflare WAF Docs, 접근일 2026-09-28
+- [Cloudflare Managed Ruleset](https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/) — Cloudflare WAF Docs, 접근일 2026-09-28
+- [Get started with Bot Fight Mode](https://developers.cloudflare.com/bots/get-started/bot-fight-mode/) — Cloudflare Docs, 접근일 2026-09-28
+- [Using rate-based rule statements in AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html) — AWS Docs, 접근일 2026-09-28
+- [Using managed rule groups in AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html) — AWS Docs, 접근일 2026-09-28
+- [AWS WAF Bot Control](https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html) — AWS Docs, 접근일 2026-09-28
 - [Certbot](https://certbot.eff.org/) — EFF, 접근일 2026-09-28
 - [Automatic HTTPS](https://caddyserver.com/docs/automatic-https) — Caddy Docs, 접근일 2026-09-28
 - [ACME](https://cert-manager.io/docs/configuration/acme/) — cert-manager Docs, 접근일 2026-09-28

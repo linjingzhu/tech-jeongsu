@@ -120,11 +120,16 @@ spec:
       labels:
         app: web
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: web
           image: registry.example.com/web@sha256:<digest>
           ports:
             - containerPort: 8080
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 5
           readinessProbe:
             httpGet:
               path: /healthz/ready
@@ -157,7 +162,7 @@ spec:
 
 - **readinessProbe**: the Service sends traffic to the Pod only after it passes. Check readiness (database connection, warmed cache).
 - **livenessProbe**: the container is restarted when it fails. Check only whether the process is stuck. If it also checks an external database, every Pod restarts together during a database outage.
-- **resources.requests**: the scheduler uses these values to pick a node for the Pod.
+- **Shutdown**: when a Pod terminates, Kubernetes starts removing it from the Service endpoints and starts the termination sequence at the same time. A short `preStop` `sleep` (GA since 1.34) buys time for the endpoint removal to propagate; then the container receives SIGTERM. The app must **stop accepting new requests on SIGTERM and finish in-flight requests** before exiting. After `terminationGracePeriodSeconds` (default 30 seconds) it is killed with SIGKILL, so keep preStop plus drain time within it.
 
 | Missing | What happens |
 |---|---|
@@ -208,6 +213,8 @@ Good: Start on serverless containers, and move to managed Kubernetes when servic
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) — Kubernetes Docs, accessed 2026-09-28
 - [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) — Kubernetes Docs, accessed 2026-09-28
 - [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/) — Kubernetes Docs, accessed 2026-09-28
+- [Pod Lifecycle: Termination of Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) — Kubernetes Docs, accessed 2026-09-28
+- [Container Lifecycle Hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/) — Kubernetes Docs, accessed 2026-09-28
 - [Build context: .dockerignore files](https://docs.docker.com/build/concepts/context/#dockerignore-files) — Docker Docs, accessed 2026-09-28
 - [AWS Activate Credits](https://aws.amazon.com/startups/lp/aws-activate-credits) — AWS, accessed 2026-09-28
 - [Google for Startups Cloud Program](https://cloud.google.com/startup) — Google Cloud, accessed 2026-09-28

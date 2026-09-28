@@ -158,6 +158,7 @@
 <li>With <code>maxUnavailable: 0</code>, old Pods are removed only after new Pods are ready.</li>
 <li>If the readiness probe is inaccurate, traffic reaches Pods that are not ready and the rolling update loses its point.</li>
 <li>Rolling back: <code>kubectl rollout undo deployment/&lt;name&gt;</code> (use <code>--to-revision</code> for a specific revision)</li>
+<li>Do not cut off in-flight requests when old Pods go away. The app stops taking new requests on SIGTERM and finishes the ones in progress before exiting; a short <code>preStop</code> wait and <code>terminationGracePeriodSeconds</code> give it the time (see the minimal manifest in document 02).</li>
 </ul>
 <h2>Blue-Green</h2>
 <pre><code class="language-mermaid">flowchart LR
@@ -235,10 +236,11 @@ Flag Off      Keep the code; just turn the feature off. The fastest.
 Good: Split add column → write both → switch reads → drop old column across several releases.
 </code></pre>
 <h2>How Mobile Differs</h2>
-<p>A mobile binary that is already installed cannot be rolled back. That makes store-level <strong>gradual releases</strong> (Apple Phased Release, Google Play Staged Rollout) and <strong>server-side feature flags</strong> more important. Document 05 covers the details.</p>
+<p>A mobile binary that is already installed cannot be rolled back. That makes store-level <strong>gradual releases</strong> (Apple Phased Release, Google Play Staged Rollout) and <strong>server-side feature flags</strong> more important. Document 05 covers the details. The only way to retire a broken build already on devices is a <strong>server-checked minimum supported version with a force-update screen</strong>, built and tested before launch (see &quot;Running a Staged Rollout&quot; in document 05).</p>
 <h2>References</h2>
 <ul>
 <li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> — Kubernetes Docs, accessed 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination">Pod Lifecycle: Termination of Pods</a> — Kubernetes Docs, accessed 2026-09-28</li>
 <li><a href="https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/kubectl_rollout_undo/">kubectl rollout undo</a> — Kubernetes Docs, accessed 2026-09-28</li>
 <li><a href="https://martinfowler.com/bliki/BlueGreenDeployment.html">Blue Green Deployment</a> — Martin Fowler, accessed 2026-09-28</li>
 <li><a href="https://martinfowler.com/bliki/CanaryRelease.html">Canary Release</a> — Martin Fowler, accessed 2026-09-28</li>

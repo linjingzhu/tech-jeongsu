@@ -306,11 +306,16 @@ spec:
       labels:
         app: web
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: web
           image: registry.example.com/web@sha256:&lt;digest&gt;
           ports:
             - containerPort: 8080
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 5
           readinessProbe:
             httpGet:
               path: /healthz/ready
@@ -344,6 +349,7 @@ spec:
 <li><strong>readinessProbe</strong>: 통과해야 Service가 이 Pod로 Traffic을 보낸다. 준비 상태(DB 연결, Cache 준비)를 본다.</li>
 <li><strong>livenessProbe</strong>: 실패하면 Container를 재시작한다. 프로세스가 멈췄는지만 본다. 외부 DB까지 검사하면 DB 장애 때 모든 Pod가 함께 재시작된다.</li>
 <li><strong>resources.requests</strong>: Scheduler가 이 값으로 Pod를 놓을 Node를 고른다.</li>
+<li><strong>종료 처리</strong>: Pod가 종료될 때 Kubernetes는 Service Endpoint에서 Pod를 빼는 작업과 종료 절차를 함께 시작한다. <code>preStop</code>의 짧은 <code>sleep</code>(1.34부터 GA)은 Endpoint 제거가 퍼질 시간을 벌고, 그 뒤 Container가 SIGTERM을 받는다. App은 <strong>SIGTERM을 받으면 새 요청을 멈추고 처리 중인 요청을 끝낸 뒤</strong> 종료해야 한다. <code>terminationGracePeriodSeconds</code>(기본 30초)가 지나면 SIGKILL로 강제 종료되므로, preStop과 Drain 시간을 합쳐 그 안에 끝나게 잡는다.</li>
 </ul>
 <table>
 <thead>
@@ -403,6 +409,8 @@ spec:
 <li><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Configure Liveness, Readiness and Startup Probes</a> — Kubernetes Docs, 접근일 2026-09-28</li>
 <li><a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">Resource Management for Pods and Containers</a> — Kubernetes Docs, 접근일 2026-09-28</li>
 <li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/">Node-pressure Eviction</a> — Kubernetes Docs, 접근일 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination">Pod Lifecycle: Termination of Pods</a> — Kubernetes Docs, 접근일 2026-09-28</li>
+<li><a href="https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/">Container Lifecycle Hooks</a> — Kubernetes Docs, 접근일 2026-09-28</li>
 <li><a href="https://docs.docker.com/build/concepts/context/#dockerignore-files">Build context: .dockerignore files</a> — Docker Docs, 접근일 2026-09-28</li>
 <li><a href="https://aws.amazon.com/startups/lp/aws-activate-credits">AWS Activate Credits</a> — AWS, 접근일 2026-09-28</li>
 <li><a href="https://cloud.google.com/startup">Google for Startups Cloud Program</a> — Google Cloud, 접근일 2026-09-28</li>

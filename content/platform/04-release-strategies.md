@@ -28,6 +28,7 @@ spec:
 - `maxUnavailable: 0`으로 두면 새 Pod가 준비된 뒤에만 기존 Pod를 줄인다.
 - Readiness Probe가 부정확하면 준비되지 않은 Pod로 Traffic이 가서 Rolling의 의미가 사라진다.
 - 되돌리기: `kubectl rollout undo deployment/<name>` (특정 Revision은 `--to-revision`)
+- 기존 Pod가 내려갈 때 처리 중인 요청이 끊기지 않게 한다. App은 SIGTERM을 받으면 새 요청을 멈추고 진행 중인 요청을 마친 뒤 종료하고, `preStop`의 짧은 대기와 `terminationGracePeriodSeconds`로 시간을 확보한다(02 문서의 최소 Manifest).
 
 ## Blue-Green
 
@@ -100,11 +101,12 @@ Flag Off      코드는 두고 기능만 끈다. 가장 빠르다.
 
 ## 모바일은 어떻게 다른가
 
-모바일 앱은 이미 설치된 Binary를 되돌릴 수 없다. 그래서 Store의 **단계적 출시**(Apple Phased Release, Google Play Staged Rollout)와 **Server 측 Feature Flag**가 더 중요하다. 자세한 내용은 05 문서에서 다룬다.
+모바일 앱은 이미 설치된 Binary를 되돌릴 수 없다. 그래서 Store의 **단계적 출시**(Apple Phased Release, Google Play Staged Rollout)와 **Server 측 Feature Flag**가 더 중요하다. 자세한 내용은 05 문서에서 다룬다. 이미 기기에 깔린 문제 Build를 퇴출하는 유일한 방법은 **Server가 확인하는 최소 지원 버전과 강제 Update 화면**이며, 출시 전에 만들어 시험해 두어야 한다(05 문서의 Staged Rollout 운영).
 
 ## 참고 자료
 
 - [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) — Kubernetes Docs, 접근일 2026-09-28
+- [Pod Lifecycle: Termination of Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) — Kubernetes Docs, 접근일 2026-09-28
 - [kubectl rollout undo](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/kubectl_rollout_undo/) — Kubernetes Docs, 접근일 2026-09-28
 - [Blue Green Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) — Martin Fowler, 접근일 2026-09-28
 - [Canary Release](https://martinfowler.com/bliki/CanaryRelease.html) — Martin Fowler, 접근일 2026-09-28

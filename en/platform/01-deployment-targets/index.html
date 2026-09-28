@@ -247,6 +247,7 @@
 </tr>
 </tbody></table>
 <p>Scale to zero lowers cost, but the first request may wait for an instance to start: a <strong>cold start</strong>. For latency-sensitive APIs, compare this with the cost of keeping a minimum number of instances.</p>
+<p>There is a trap in the other direction too. When serverless scales out, <strong>each instance opens its own database connections</strong>. Under a traffic spike the connection count multiplies past the relational database&#39;s connection limit, and the outage happens in the database, not the app. Put a pooler or proxy in front, such as RDS Proxy, Cloud SQL connectors with a per-instance connection pool, or PgBouncer, or cap max instances so that <strong>max instances × connections per instance</strong> stays within the database limit.</p>
 <h2>Bad Example / Good Example</h2>
 <pre><code class="language-text">Bad:  Spin up a VM for an internal docs site and manage Nginx, certificates and OS patches by hand.
 Good: Put the docs site on static hosting and spend operating time on product features.
@@ -276,6 +277,9 @@ Good: Before revenue starts, check plan terms, caps and how overage is billed.
 <li><a href="https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html">AWS App Runner availability change</a> — AWS Docs, accessed 2026-09-28</li>
 <li><a href="https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/">Announcing Amazon ECS Express Mode</a> — AWS, 2025-11, accessed 2026-09-28</li>
 <li><a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda Pricing</a> — AWS, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/blogs/compute/using-amazon-rds-proxy-with-aws-lambda/">Using Amazon RDS Proxy with AWS Lambda</a> — AWS Compute Blog, accessed 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/connect-run">Connect from Cloud Run</a> — Cloud SQL Docs, accessed 2026-09-28</li>
+<li><a href="https://www.pgbouncer.org/">PgBouncer</a> — PgBouncer, accessed 2026-09-28</li>
 <li><a href="https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/">New for AWS Lambda – 1ms Billing Granularity</a> — AWS News Blog, 2020-12, accessed 2026-09-28</li>
 <li><a href="https://docs.cloud.google.com/run/docs/configuring/billing-settings">Cloud Run billing settings for services</a> — Google Cloud Docs, accessed 2026-09-28</li>
 <li><a href="https://learn.microsoft.com/en-us/azure/container-apps/scale-app">Scaling in Azure Container Apps</a> — Microsoft Learn, accessed 2026-09-28</li>

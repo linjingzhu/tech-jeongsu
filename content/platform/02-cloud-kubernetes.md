@@ -120,11 +120,16 @@ spec:
       labels:
         app: web
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: web
           image: registry.example.com/web@sha256:<digest>
           ports:
             - containerPort: 8080
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 5
           readinessProbe:
             httpGet:
               path: /healthz/ready
@@ -158,6 +163,7 @@ spec:
 - **readinessProbe**: 통과해야 Service가 이 Pod로 Traffic을 보낸다. 준비 상태(DB 연결, Cache 준비)를 본다.
 - **livenessProbe**: 실패하면 Container를 재시작한다. 프로세스가 멈췄는지만 본다. 외부 DB까지 검사하면 DB 장애 때 모든 Pod가 함께 재시작된다.
 - **resources.requests**: Scheduler가 이 값으로 Pod를 놓을 Node를 고른다.
+- **종료 처리**: Pod가 종료될 때 Kubernetes는 Service Endpoint에서 Pod를 빼는 작업과 종료 절차를 함께 시작한다. `preStop`의 짧은 `sleep`(1.34부터 GA)은 Endpoint 제거가 퍼질 시간을 벌고, 그 뒤 Container가 SIGTERM을 받는다. App은 **SIGTERM을 받으면 새 요청을 멈추고 처리 중인 요청을 끝낸 뒤** 종료해야 한다. `terminationGracePeriodSeconds`(기본 30초)가 지나면 SIGKILL로 강제 종료되므로, preStop과 Drain 시간을 합쳐 그 안에 끝나게 잡는다.
 
 | 빠뜨린 것 | 일어나는 일 |
 |---|---|
@@ -208,6 +214,8 @@ Kubernetes 프로젝트는 널리 쓰이던 **Ingress NGINX** Controller의 은�
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) — Kubernetes Docs, 접근일 2026-09-28
 - [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) — Kubernetes Docs, 접근일 2026-09-28
 - [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/) — Kubernetes Docs, 접근일 2026-09-28
+- [Pod Lifecycle: Termination of Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) — Kubernetes Docs, 접근일 2026-09-28
+- [Container Lifecycle Hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/) — Kubernetes Docs, 접근일 2026-09-28
 - [Build context: .dockerignore files](https://docs.docker.com/build/concepts/context/#dockerignore-files) — Docker Docs, 접근일 2026-09-28
 - [AWS Activate Credits](https://aws.amazon.com/startups/lp/aws-activate-credits) — AWS, 접근일 2026-09-28
 - [Google for Startups Cloud Program](https://cloud.google.com/startup) — Google Cloud, 접근일 2026-09-28

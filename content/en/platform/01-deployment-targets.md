@@ -68,6 +68,8 @@ Unit prices change, but **what you pay for** rarely does.
 
 Scale to zero lowers cost, but the first request may wait for an instance to start: a **cold start**. For latency-sensitive APIs, compare this with the cost of keeping a minimum number of instances.
 
+There is a trap in the other direction too. When serverless scales out, **each instance opens its own database connections**. Under a traffic spike the connection count multiplies past the relational database's connection limit, and the outage happens in the database, not the app. Put a pooler or proxy in front, such as RDS Proxy, Cloud SQL connectors with a per-instance connection pool, or PgBouncer, or cap max instances so that **max instances × connections per instance** stays within the database limit.
+
 ## Bad Example / Good Example
 
 ```text
@@ -102,6 +104,9 @@ Good: Before revenue starts, check plan terms, caps and how overage is billed.
 - [AWS App Runner availability change](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html) — AWS Docs, accessed 2026-09-28
 - [Announcing Amazon ECS Express Mode](https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/) — AWS, 2025-11, accessed 2026-09-28
 - [AWS Lambda Pricing](https://aws.amazon.com/lambda/pricing/) — AWS, accessed 2026-09-28
+- [Using Amazon RDS Proxy with AWS Lambda](https://aws.amazon.com/blogs/compute/using-amazon-rds-proxy-with-aws-lambda/) — AWS Compute Blog, accessed 2026-09-28
+- [Connect from Cloud Run](https://docs.cloud.google.com/sql/docs/postgres/connect-run) — Cloud SQL Docs, accessed 2026-09-28
+- [PgBouncer](https://www.pgbouncer.org/) — PgBouncer, accessed 2026-09-28
 - [New for AWS Lambda – 1ms Billing Granularity](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/) — AWS News Blog, 2020-12, accessed 2026-09-28
 - [Cloud Run billing settings for services](https://docs.cloud.google.com/run/docs/configuring/billing-settings) — Google Cloud Docs, accessed 2026-09-28
 - [Scaling in Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/scale-app) — Microsoft Learn, accessed 2026-09-28

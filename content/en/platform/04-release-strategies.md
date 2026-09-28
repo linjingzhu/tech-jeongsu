@@ -28,6 +28,7 @@ spec:
 - With `maxUnavailable: 0`, old Pods are removed only after new Pods are ready.
 - If the readiness probe is inaccurate, traffic reaches Pods that are not ready and the rolling update loses its point.
 - Rolling back: `kubectl rollout undo deployment/<name>` (use `--to-revision` for a specific revision)
+- Do not cut off in-flight requests when old Pods go away. The app stops taking new requests on SIGTERM and finishes the ones in progress before exiting; a short `preStop` wait and `terminationGracePeriodSeconds` give it the time (see the minimal manifest in document 02).
 
 ## Blue-Green
 
@@ -100,11 +101,12 @@ Good: Split add column → write both → switch reads → drop old column acros
 
 ## How Mobile Differs
 
-A mobile binary that is already installed cannot be rolled back. That makes store-level **gradual releases** (Apple Phased Release, Google Play Staged Rollout) and **server-side feature flags** more important. Document 05 covers the details.
+A mobile binary that is already installed cannot be rolled back. That makes store-level **gradual releases** (Apple Phased Release, Google Play Staged Rollout) and **server-side feature flags** more important. Document 05 covers the details. The only way to retire a broken build already on devices is a **server-checked minimum supported version with a force-update screen**, built and tested before launch (see "Running a Staged Rollout" in document 05).
 
 ## References
 
 - [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) — Kubernetes Docs, accessed 2026-09-28
+- [Pod Lifecycle: Termination of Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) — Kubernetes Docs, accessed 2026-09-28
 - [kubectl rollout undo](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/kubectl_rollout_undo/) — Kubernetes Docs, accessed 2026-09-28
 - [Blue Green Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html) — Martin Fowler, accessed 2026-09-28
 - [Canary Release](https://martinfowler.com/bliki/CanaryRelease.html) — Martin Fowler, accessed 2026-09-28

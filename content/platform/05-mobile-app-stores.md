@@ -29,7 +29,7 @@ flowchart LR
 
 ## Apple: 심사와 Test
 
-- **TestFlight**: 내부 Tester 최대 100명, 외부 Tester 최대 10,000명. 외부 Test는 첫 Build가 App Review 승인을 받아야 한다.
+- **TestFlight**: 내부 Tester 최대 100명, 외부 Tester 최대 10,000명. 외부 Test는 첫 Build가 App Review 승인을 받아야 한다. TestFlight Build는 **Upload 후 90일**이 지나면 만료되어 Test에 쓸 수 없으므로, 긴 Beta는 새 Build를 주기적으로 올린다.
 - **App Review**: Apple은 평균적으로 제출의 90%를 24시간 이내에 심사한다고 안내한다. 치명적 Bug 수정이나 행사 일정이 있으면 **Expedited Review**를 요청할 수 있다.
 - **Phased Release**: 자동 Update 사용자에게 7일에 걸쳐 나누어 배포한다. 최대 30일까지 일시 중지할 수 있으며, 수동 Download는 누구나 언제든 가능하다.
 - 자주 거절되는 지점(App Review Guidelines):
@@ -44,6 +44,8 @@ flowchart LR
 | 2026-01-31 | 새 연령 등급 질문에 응답해야 Update 제출이 막히지 않음 |
 | 2026-04-28 | Xcode 26 이상, iOS 26 등 26 SDK로 Build해야 Upload 가능 |
 | 2026-09-09 | iOS · iPadOS 앱은 iOS 13 이상을 Target해야 Upload 가능 |
+| 2026-09 (시행 중) | 신규 앱과 Update 제출, 대체 배포용 Notarization에 연령 등급 설문의 **Social Media 기능 질문** 응답 필요. Social Media 기능이 있다고 답하면 Time Allowance의 Social Media 범주에 들어가고 최소 연령 등급 13+. 13세 미만에게 그 기능을 끈 앱은 Declared Age Range API로 연령대를 확인해야 한다 |
+| 2027-04 (예고) | iOS · iPadOS 앱은 iOS 27 · iPadOS 27 SDK 이상(Xcode 27)으로 Build해야 Upload 가능. tvOS · visionOS · watchOS도 각 27 SDK |
 
 - 널리 쓰이는 Third-party SDK(Apple 목록)를 포함하면 해당 SDK의 **Privacy Manifest와 서명**이 필요하다.
 - EU에 배포하는 앱은 DSA(Digital Services Act)에 따른 **Trader 상태** 등록이 필요하다.
@@ -172,6 +174,7 @@ end
 - Google Play의 Staged Rollout 비율은 **자동으로 오르지 않는다**. 지표를 보고 사람이 올린다.
 - 문제가 생기면 **Halt**: 추가 사용자에게 배포가 멈추고, 이미 받은 사용자는 그 버전에 남는다.
 - 100% 배포 후에도 Halt할 수 있으며, 이때 이전 버전이 신규 사용자에게 다시 제공된다.
+- Halt와 Phased Release 일시 중지는 **이미 받은 기기**의 Build를 되돌리지 못한다. 그 Build를 퇴출하는 유일한 방법은 앱이 시작할 때 Server에서 **최소 지원 버전**을 받아 비교하고, 더 낮으면 **강제 Update 화면**을 띄우는 것이다. 이 경로는 첫 출시 Build에 이미 들어 있어야 하고, 출시 전에 실제로 시험해 둔다. Android는 Play의 In-app Update(즉시 Update 흐름)로 이 화면을 구현할 수 있다.
 
 ## 나쁜 예 / 좋은 예
 
@@ -187,6 +190,8 @@ end
 - [ ] Privacy Manifest / Data safety가 실제 수집 내용과 일치하는가 (SDK 포함)
 - [ ] 심사용 Demo 계정과 Backend가 준비되었는가
 - [ ] 계정 삭제 경로가 앱 안에 있는가
+- [ ] 연령 등급 설문의 Social Media 기능 질문에 답했는가 (2026-09부터 필수)
+- [ ] Server가 확인하는 최소 지원 버전과 강제 Update 화면을 시험했는가
 - [ ] 단계적 출시 비율과 Halt 기준(Crash Rate 등)을 정했는가
 
 ## 참고 자료
@@ -215,6 +220,11 @@ end
 - [upload_to_play_store](https://docs.fastlane.tools/actions/upload_to_play_store/) — fastlane docs, 접근일 2026-09-28
 - [Using automatically managed credentials](https://docs.expo.dev/app-signing/managed-credentials/) — Expo Docs, 접근일 2026-09-28
 - [Google Play Developer API](https://developers.google.com/android-publisher) — Google for Developers, 접근일 2026-09-28
+- [Introducing Time Allowances](https://developer.apple.com/news/?id=0d2gpmml) — Apple Developer News, 2026-06-08, 접근일 2026-09-28
+- [Age rating questionnaire now includes social media questions](https://developer.apple.com/news/?id=tlur8uvi) — Apple Developer News, 2026-07-09, 접근일 2026-09-28
+- [App Store submissions now open for the latest OS releases](https://developer.apple.com/news/?id=k1mtkt1k) — Apple Developer News, 2026-09-09, 접근일 2026-09-28
+- [App build statuses](https://developer.apple.com/help/app-store-connect/reference/app-uploads/app-build-statuses/) — App Store Connect Help, 접근일 2026-09-28
+- [In-app updates](https://developer.android.com/guide/playcore/in-app-updates) — Android Developers, 접근일 2026-09-28
 - [Prepare your apps for Google Play's 16 KB page size compatibility requirement](https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html) — Android Developers Blog, 2025-05, 접근일 2026-09-28
 - [Using App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) — fastlane docs, 접근일 2026-09-28
 - [upload_to_testflight](https://docs.fastlane.tools/actions/upload_to_testflight/) — fastlane docs, 접근일 2026-09-28
