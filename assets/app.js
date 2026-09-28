@@ -638,7 +638,8 @@ function enhanceContent() {
   $("content")
     .querySelectorAll("a[href]")
     .forEach((a) => {
-      if (a.href.startsWith("http")) {
+      // Only links that leave this site open in a new tab.
+      if (a.protocol.startsWith("http") && a.origin !== location.origin) {
         a.target = "_blank";
         a.rel = "noopener noreferrer";
       }
@@ -1125,7 +1126,11 @@ document.querySelectorAll("[data-language]").forEach(
     (btn.onclick = () => {
       if (btn.dataset.language === language) return;
       storage.set("jt-language", btn.dataset.language);
-      location.href = routeUrl(currentPath, currentHeading, btn.dataset.language);
+      location.href = routeUrl(
+        currentPath,
+        scrollY > 100 ? currentHeading : "",
+        btn.dataset.language,
+      );
     }),
 );
 window.addEventListener("hashchange", () => {

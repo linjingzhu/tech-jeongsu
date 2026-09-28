@@ -16,6 +16,8 @@
 
 페이지, `sitemap.xml`, `robots.txt`, `.nojekyll`은 `node tools/build-site.mjs`가 만듭니다. 설정을 채우면 `ads.txt`와 `CNAME`도 만듭니다. 생성된 파일을 직접 고치지 말고 Markdown, `tools/site/template.html`, `site.config.json`을 고친 뒤 다시 빌드합니다. `node tools/build-site.mjs --check`와 테스트가 빌드 누락을 잡습니다.
 
+`.nojekyll`이 있어 GitHub Pages가 Jekyll 변환 없이 파일을 그대로 배포합니다. 검색이 Markdown 원문을 불러오려면 필요합니다. 그 대신 `.ai/`, `.claude/`처럼 점으로 시작하는 폴더도 공개 주소로 열립니다. 이 폴더에는 비밀 정보를 두지 않습니다. `robots.txt`의 차단은 개인 도메인 루트로 옮긴 뒤에만 적용됩니다.
+
 AI Map의 도구 목록, 카테고리, 가이드, 뉴스 화면은 원본 `linjingzhu/ai-map`과 내용이 같습니다. 그래서 검색 제외(`noindex`)로 두고 사이트맵에서도 뺍니다. 설정 파일의 `noindexPrefixes`가 이 범위를 정합니다.
 
 ## 콘텐츠 수정

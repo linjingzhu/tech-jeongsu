@@ -184,15 +184,17 @@ function render(page) {
   const groupIndex = DOCS.findIndex((g) => g.items.some(([, p]) => p === docPath));
   const itemIndex = groupIndex >= 0 ? DOCS[groupIndex].items.findIndex(([, p]) => p === docPath) : -1;
   const navTitle = groupIndex >= 0 ? ui.titles[groupIndex][itemIndex] : "";
+  // Many Korean pages have English titles, so English pages carry a marker to stay distinct.
+  const siteTitle = config.siteName + (lang === "en" ? " (English)" : "");
   let content, title, desc, busy = "false", prerendered = "true";
 
   if (!docPath) {
     content = homeHtml(lang, root);
-    title = `${config.siteName} · ${ui.tagline}`;
+    title = `${siteTitle} · ${ui.tagline}`;
     desc = ui.homeLead;
   } else if (docPath.startsWith("@")) {
     content = `<p class="loading" role="status">${escapeHtml(ui.loading)}</p>`;
-    title = `${navTitle} · AI Map | ${config.siteName}`;
+    title = `${navTitle} · AI Map | ${siteTitle}`;
     desc = `${ui.groups[groupIndex]} · ${navTitle}`;
     busy = "true";
     prerendered = "false";
@@ -201,7 +203,7 @@ function render(page) {
     markdown = markdown.replace("{{contact}}", contactMarkdown(lang));
     const h1 = plain((markdown.match(/^# (.+)$/m) || [, navTitle])[1]);
     content = marked.parse(markdown, { gfm: true, breaks: false });
-    title = `${h1} | ${config.siteName}`;
+    title = `${h1} | ${siteTitle}`;
     desc = description(markdown) || h1;
   }
 

@@ -22,7 +22,8 @@ test("generated pages are up to date with the Markdown, templates and config", (
 });
 
 test("every page has its own address, title, description, canonical URL and language alternates", () => {
-  const seen = new Set();
+  const seen = new Set(),
+    titles = new Set();
   for (const lang of ["ko", "en"])
     for (const [docPath, file] of pagesFor(lang)) {
       const html = read(file);
@@ -30,7 +31,9 @@ test("every page has its own address, title, description, canonical URL and lang
       assert.ok(canonical && !seen.has(canonical), file + ": unique canonical");
       seen.add(canonical);
       assert.match(html, new RegExp('<html lang="' + lang + '">'), file);
-      assert.match(html, /<title>[^<]{5,}<\/title>/, file + ": title");
+      const title = html.match(/<title>([^<]{5,})<\/title>/)?.[1];
+      assert.ok(title && !titles.has(title), file + ": unique title");
+      titles.add(title);
       assert.match(html, /<meta name="description" content="[^"]{10,}"/, file + ": description");
       assert.match(html, /hreflang="ko"[\s\S]*hreflang="en"[\s\S]*hreflang="x-default"/, file);
       assert.ok(!/\{\{(t:)?\w+\}\}/.test(html), file + ": unfilled placeholder");
