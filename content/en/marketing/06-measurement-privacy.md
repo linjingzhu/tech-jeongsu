@@ -54,9 +54,10 @@ Caution: small samples produce unstable results. Before the experiment, decide *
 
 ### A Worked Example
 
-Assume the example product is checking the incremental effect of its search ads. Every number is **illustrative**.
+This is a **generic illustration** of how to read a user-level lift experiment. It does not use the example product from documents 04 and 07 (KRW 2M a month in search ads, 10 paying accounts a quarter); it assumes a service with much larger ad reach. Here a **conversion is a free signup**. Every number is illustrative.
 
 ```text
+Conversion = free signup
 50,000 people per group (randomly assigned)
 Control conversion rate 2.0%  → 1,000 conversions
 Test    conversion rate 2.4%  → 1,200 conversions
@@ -67,7 +68,9 @@ Test ad spend           = KRW 10,000,000
 Incremental CAC         = KRW 10,000,000 / 200 = KRW 50,000
 ```
 
-If the platform credits all 1,200 test-group conversions to the ads, CAC looks like about KRW 8,333. The conversions the ads **added** are 200, and budget decisions use the incremental CAC of KRW 50,000.
+If the platform credits all 1,200 test-group conversions to the ads, CAC looks like about KRW 8,333. The conversions the ads **added** are 200, and budget decisions use the incremental CAC of KRW 50,000. That is a cost per free signup; to turn it into a cost per paying customer, divide once more by the signup-to-paid conversion rate.
+
+At the scale of the example product in documents 04 and 07, this design is **underpowered**. As calculated below, detecting 2.0% → 2.4% needs about 21,000 people per group; with KRW 2M a month in search ads and about 10 paying accounts a quarter, the sample is hard to fill even for signups, and a difference in paid conversions cannot be detected at all. That is why the channel mix in document 04 checks this channel with **a quarterly on/off or geo test**.
 
 ### Decide Before the Experiment
 

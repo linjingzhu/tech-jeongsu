@@ -87,6 +87,8 @@ With the amended E-Commerce Act taking effect on 2025-02-14, six types of online
 
 **Rule for paid conversions and price increases**: when a subscription price increases or a free service converts to paid, the business must obtain the consumer's consent **within the 30 days before** the increase or conversion, and must tell the consumer the conditions and methods for withdrawing that consent (Enforcement Decree).
 
+- **Subscriptions billed through app stores**: since 2025-02-14, for subscriptions paid through the App Store or Google Play, the platform itself asks Korean users to consent to the first paid charge before a free trial or discounted price ends, and automatically cancels the subscription if the user does not consent. Google Play temporarily let developers who collect consent in their own app opt out of this flow, but stopped accepting opt-outs from 2026-02-03. For app subscriptions, forecast conversion and churn assuming the platform flow, not your own consent screen.
+
 Bad example:
 
 > When the 14-day free trial ends, charge the card automatically without notice, and accept cancellations only by email to support.
@@ -155,6 +157,9 @@ Even when you are a user with no AI Basic Act duty, AI output used in ads still 
 - [KFTC distributes Q&A on six types of online dark patterns — Seoul Metropolitan Government (in Korean)](https://news.seoul.go.kr/economy/archives/566114) (2025-02, accessed 2026-09-28)
 - [KFTC distributes Q&A on six types of online dark patterns — Korea.kr (in Korean)](https://www.korea.kr/briefing/pressReleaseView.do?newsId=156674112) (2025-02-13, accessed 2026-09-28)
 - [Consumer consent required within 30 days before a subscription price increase or paid conversion — Korea.kr (in Korean)](https://www.korea.kr/news/policyNewsView.do?newsId=148939436) (2025-02, accessed 2026-09-28)
+- [Upcoming changes to offers and trials for subscriptions in South Korea — Apple Developer](https://developer.apple.com/news/?id=bo1b122z) (accessed 2026-09-28)
+- [Changes to Google Play's subscription functionality in South Korea — Play Console Help](https://support.google.com/googleplay/android-developer/answer/15722617?hl=en) (accessed 2026-09-28)
+- [South Korea Subscriptions Developer Opt-Out Period Ending — Play Console Help](https://support.google.com/googleplay/android-developer/answer/16514827?hl=en) (accessed 2026-09-28)
 - [Personal Information Protection Act Article 22 — Korea National Law Information Center](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95/%EC%A0%9C22%EC%A1%B0) (accessed 2026-09-28)
 - [PIPC fines Google and Meta for unlawful collection of behavioral data — Korea.kr](https://m.korea.kr/news/policyNewsView.do?newsId=148905887) (2022-09, accessed 2026-09-28)
 - [PIPC wins administrative lawsuit by Google and Meta — Korea.kr](https://www.korea.kr/briefing/pressReleaseView.do?newsId=156671852) (2025-01, accessed 2026-09-28)

@@ -77,7 +77,9 @@ Blended CAC = 60M / 10 = KRW 6.0M  → LTV:CAC ≈ 2.2, payback 15 months
 Paid CAC    = 40M / 4  = KRW 10.0M → LTV:CAC ≈ 1.3, payback 25 months
 ```
 
-Looking only at the blended number, adding paid spend seems fine; isolate the paid channels and payback takes more than two years. **Decide whether to raise the budget using paid CAC (ideally the incremental CAC from document 06).** If churn falls over time or there is expansion, LTV grows, so recalculate whenever an assumption changes.
+The paid-channel cost of KRW 40M includes, on top of the search-ad media spend in document 04's channel mix (KRW 2M a month, about KRW 6M a quarter), sales costs such as demos and onboarding support plus allocated staff cost (assumption). Dividing media spend alone makes paid CAC look far lower than it is.
+
+Looking only at the blended number, adding paid spend seems fine; isolate the paid channels and payback takes more than two years. **Decide whether to raise the budget using paid CAC (ideally an incremental CAC estimated as in document 06).** At this scale a user-level lift experiment is underpowered, so estimate it with an on/off or geo test as documents 06 and 04 describe. If churn falls over time or there is expansion, LTV grows, so recalculate whenever an assumption changes.
 
 ## Benchmarks Are Only a Reference
 

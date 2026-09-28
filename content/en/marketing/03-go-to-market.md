@@ -93,7 +93,7 @@ Good example:
 
 > The free plan allows one connected service and 7-day retention, enough to experience the first root-cause investigation. The paid boundary sits where teams need more than 3 members, 30-day retention, or several connected services. (The numbers are assumptions, to be adjusted using the behavior of accounts that actually converted.)
 
-Treat a price change as a **Tier 1 launch** (table below). It needs existing-customer notices, sales and support scripts, and pricing pages that match the docs. If it raises a subscription price or converts free to paid, also check the E-Commerce Act's prior consent and notice requirements (document 09).
+Treat a price change as a **Tier 1 launch** (table below). It needs existing-customer notices, sales and support scripts, and pricing pages that match the docs. If it raises a subscription price or converts free to paid, also check the E-Commerce Act's prior consent and notice requirements. For subscriptions billed through the App Store or Google Play in Korea, the platform collects this consent itself and auto-cancels without it, so build that into conversion forecasts (document 09).
 
 ## Tiering Launches
 
