@@ -37,12 +37,12 @@ flowchart LR
 
 | Stage | Representative program (2026 calls) | Condition to check first |
 |---|---|---|
-| Pre-startup | Pre-Startup Package | The applicant must hold **no** business registration (individual or corporate) as of the announcement date |
+| Pre-startup | Pre-Startup Package | As of **the reference date set in the call** (2026 first call: 2026-01-22), the applicant must hold **no** business registration (individual or corporate) and no corporate representative authority |
 | Early | Early-Stage Startup Package | Business-age requirement (check the call) |
 | Leap | Startup Leap Package | Business-age requirement (check the call) |
 | R&D | Startup Growth Technology Development | Technical merit, corporate R&D lab and other requirements |
 
-- The 2026 Pre-Startup Package application period was **2026-03-06 to 2026-03-24** (per the Bizinfo call). Dates change every year.
+- The 2026 Pre-Startup Package was called twice: a **first round (applications 2026-03-06 to 2026-03-24)** and a **second round in June** (per the Bizinfo calls). Each round can have its own reference date and schedule, and they change every year.
 - Funding amounts, self-contribution ratios and business-age criteria differ by program and change yearly. Decide based on **the original call text**.
 
 ## The Most Common Mistake: Registration Order
@@ -81,6 +81,7 @@ Good example:
 - [Bizinfo - 2026 integrated announcement of central and local startup support programs](https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000116904) (accessed 2026-09-28)
 - [Ministry of SMEs and Startups - 2026 integrated announcement of startup support programs](https://www.mss.go.kr/site/ulsan/ex/bbs/View.do?cbIdx=254&bcIdx=1064200) (accessed 2026-09-28)
 - [Bizinfo - 2026 Pre-Startup Package revised call for pre-founders](https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000119019) (accessed 2026-09-28)
+- [Bizinfo - 2026 second-round Pre-Startup Package revised call for pre-founders](https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000119859) (accessed 2026-09-28)
 - [Bizinfo - 2026 Early-Stage Startup Package (general) call](https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000117819) (accessed 2026-09-28)
 - [KISED - Program calls](https://www.kised.or.kr/menu.es?mid=a10302000000) (accessed 2026-09-28)
 - [Korea Law Information Center - Support for Small and Medium Enterprise Establishment Act](https://www.law.go.kr/LSW/lsInfoP.do?urlMode=lsInfoP&lsId=001472) (accessed 2026-09-28)

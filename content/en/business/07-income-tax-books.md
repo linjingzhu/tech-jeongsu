@@ -10,6 +10,7 @@ If VAT is "tax on transactions," income tax and corporate tax are **tax on the p
 - Businesses that submit a sincere-filing confirmation (seongsil singo hwagin) get one more month, until **June 30**.
 - Rates are progressive from **6% to 45%** by tax base bracket (NTS global income tax rate table). Local income tax is added separately.
 - **Interim prepayment**: part of the income tax for the first half (January 1 to June 30) is billed and paid in November. If the estimated interim amount is below KRW 500,000 nothing is payable, but you must file the estimate to cancel the notice.
+- **Withholding by foreign platforms**: overseas app stores and payment platforms may withhold local tax from payouts (and may ask for forms such as W-8BEN to apply a tax treaty). Keep the settlement statements or certificates showing the withholding, and claim it as a **foreign tax credit** in the global income tax return (Income Tax Act Article 57). The credit is capped (computed income tax × foreign-source income ÷ global income), and any excess carries forward for 10 years. Check the withholding rate per country in the tax treaty and the platform's guide (needs verification).
 
 ### Who Needs a Sincere-Filing Confirmation
 
@@ -73,6 +74,7 @@ The bookkeeping duty is set by **revenue by industry in the previous tax period*
 
 - To have a cost recognized, the rule is to obtain **qualified evidence** (tax invoice, invoice, credit card slip, cash receipt).
 - If you pay a business and do not receive qualified evidence, a **2%** penalty on the unreceived amount can apply (check the NTS guide for the threshold amount and exceptions).
+- On the other side, **when you receive revenue**, some industries have cash receipt issuing and merchant duties (mandatory industries such as e-commerce retail must issue for cash transactions of KRW 100,000 or more even without a request, with a 20% penalty on unissued amounts). See choosing an industry code in document 02 for the criteria.
 
 | Cost | Evidence | Caution |
 |---|---|---|
@@ -80,7 +82,7 @@ The bookkeeping duty is set by **revenue by industry in the previous tax period*
 | App-store fees | Settlement report | Keep it paired with the gross revenue |
 | Contract development | Tax invoice or withholding record | Distinguish a business from an individual freelancer |
 | Equipment | Tax invoice, card slip | Fixed asset or not, depreciation |
-| Meals and entertainment | Card slip | Record the business purpose |
+| Meals and entertainment | Card slip | Record the business purpose. Client entertainment (business promotion expenses) over KRW 30,000 per occasion (the decree amount) without qualified evidence is not deductible, and the annual cap is a KRW 36 million SME base plus revenue × the applicable rate (Income Tax Act Article 35) |
 
 Bad example:
 
@@ -120,6 +122,9 @@ End of quarter: check VAT preliminary notices and returns
 - [NTS - Sincere filing confirmation system](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2234&cntntsId=7672) (accessed 2026-09-28)
 - [Korea Law Information Center - Restriction of Special Taxation Act Article 126-6, credit for sincere-filing confirmation costs](https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000684517&lsId=001584&print=print) (accessed 2026-09-28)
 - [Korea Law Information Center - Income Tax Act Enforcement Decree Article 78-3, business passenger car costs](https://www.law.go.kr/LSW/lsLawLinkInfo.do?lsJoLnkSeq=1000316871&chrClsCd=010202) (accessed 2026-09-28)
+- [Korea Law Information Center - Income Tax Act Article 35, non-deductible business promotion expenses](https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=1001060508&lsId=001565&chrClsCd=010202&print=print) (accessed 2026-09-28)
+- [Korea Law Information Center - Income Tax Act Article 57, foreign tax credit](https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1001060946&lsId=001565) (accessed 2026-09-28)
+- [NTS - Duty to issue cash receipts](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2471&cntntsId=7796) (accessed 2026-09-28)
 - [NTS - Tax treatment of business passenger cars (PDF)](https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=21e8ce1222b24853f1ed9c839862b569) (accessed 2026-09-28)
 - [NTS - Notice deferring monthly simplified payment statements for regular employees](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2207&bbsId=1011&nttSn=1330270) (accessed 2026-09-28)
 - [NTS - Global income tax rates](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2227&cntntsId=7667) (accessed 2026-09-28)

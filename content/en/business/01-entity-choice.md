@@ -106,7 +106,7 @@ Decide trade name, purpose, head office
 
 Points to know:
 
-- **The minimum capital rule was abolished** (Commercial Act amendment promulgated 2009-05-28, Act No. 9746). Par value per share must be KRW 100 or more (Commercial Act Article 329).
+- **The minimum capital rule was abolished** (Commercial Act amendment promulgated 2009-05-28, Act No. 9746. The Act as a whole took effect on 2010-05-29, but the Article 329 change took effect on promulgation under the proviso of the addenda). Par value per share must be KRW 100 or more (Commercial Act Article 329).
 - **Notarizing the articles**: notarization is required in principle, but for a company with total capital under KRW 1 billion founded by promoters only (balgi seollip), the articles take effect when each promoter signs or seals them (Commercial Act Article 292).
 - With capital under KRW 1 billion you can incorporate online through the **Online Incorporation System** of the Ministry of SMEs and Startups. It provides only standard articles, so write your own if you need special share terms.
 - Where you place the head office can change the registration license tax burden and startup tax relief (document 08). Confirm amounts with the local government and a judicial scrivener.

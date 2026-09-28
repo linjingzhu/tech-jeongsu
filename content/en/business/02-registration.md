@@ -26,6 +26,12 @@ The industry code (eopjong code) affects expense ratios, eligibility for tax rel
 - You can register one main industry and several secondary ones.
 - Codes and names can change every year, so check the current code in the **Hometax industry code lookup**.
 
+The industry also decides your **cash receipt (hyeongeum yeongsujeung) duties**.
+
+- **Mandatory cash receipt industries**: e-commerce retail is on the mandatory list (limited, per the NTS, to "selling goods or services supplied by mandatory industries"). A mandatory-industry business that receives KRW 100,000 or more per transaction (VAT included) in cash (including bank transfer) must issue a cash receipt **even if the customer does not ask**, with a penalty of 20% of the unissued amount (NTS guide on the duty to issue cash receipts; halved if you issue voluntarily within 10 days of the transaction). The list grows every year (it expanded again in 2026), so check the current list.
+- **Duty to join as a cash receipt merchant**: a consumer-facing business with prior-period revenue of **KRW 24 million or more** must join within 3 months from the end of the month in which it meets the condition (by **March 31** when judged on a calendar year). Mandatory-industry businesses must join within 60 days regardless of revenue (Income Tax Act Article 162-3, Enforcement Decree Article 210-3). Not joining incurs penalty tax.
+- Whether software development and supply counts as a consumer-facing industry must be **checked in the industry schedule of the Income Tax Act Enforcement Decree**.
+
 ## Registration Steps
 
 ```mermaid
@@ -129,6 +135,10 @@ Pausing or closing a business also has filings, and the deadlines matter as much
 - [Government24 - Mail-order business report](https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=11300000006) (accessed 2026-09-28)
 - [Korea Law Information Center - Notice on criteria for exemption from mail-order business report](https://www.law.go.kr/admRulLsInfoP.do?admRulSeq=2100000191541) (accessed 2026-09-28)
 - [Hometax - Industry code lookup](https://mob.tbht.hometax.go.kr/jsonAction.do?actionId=UTBABAAB78F001) (accessed 2026-09-28)
+- [NTS - Duty to issue cash receipts](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2471&cntntsId=7796) (accessed 2026-09-28)
+- [NTS - Joining as a cash receipt merchant](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2470&cntntsId=7795) (accessed 2026-09-28)
+- [Korea Law Information Center - Income Tax Act Article 162-3, cash receipt merchant membership and issuing duties](https://www.law.go.kr/LSW//lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900636995&lsId=001565&print=print) (accessed 2026-09-28)
+- [Korea Policy Briefing - Mandatory cash receipt industries expanded from 2026](https://www.korea.kr/news/policyNewsView.do?newsId=148956966) (accessed 2026-09-28)
 - [Government24 - Business suspension (closure) report](https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12100000078) (accessed 2026-09-28)
 - [Easy Law - Online shop founders: suspension, closure and resumption reports](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=25&ccfNo=2&cciNo=2&cnpClsNo=2) (accessed 2026-09-28)
 - [Easy Law - Business closure report (closing VAT final return)](https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=534&ccfNo=5&cciNo=1&cnpClsNo=2) (accessed 2026-09-28)
