@@ -86,7 +86,7 @@ IMPORTANT!!! NEVER touch .env!!!
 Good example:
 
 ```text
-Before reporting done, run `node --test tests/` and quote the result.
+Before reporting done, run `node --test tests/*.test.cjs` and quote the result.
 Any merge → read `.ai/REPOSITORY.md` first.
 Secrets: `.env*` is blocked by a deny rule in `.claude/settings.json`; do not work around it.
 ```

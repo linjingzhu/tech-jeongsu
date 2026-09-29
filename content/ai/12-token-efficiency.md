@@ -15,9 +15,8 @@ Claude Code와 Codex로 여러 제품을 만드는 1인 스튜디오에서 AI �
 | 영어는 대략 1 token ≈ 4글자 ≈ 0.75단어. 언어와 내용에 따라 달라진다 | Anthropic Pricing FAQ |
 | Claude 4.7 이후 모델의 tokenizer는 같은 텍스트에 약 30% 더 많은 token을 만든다(내용에 따라 다름) | Anthropic Pricing |
 | 같은 문장을 번역해도 언어에 따라 token 길이가 최대 약 15배까지 차이 난다 | Petrov 외, NeurIPS 2023 |
-| Claude token 수를 OpenAI tokenizer(tiktoken)로 추정하면 틀린다. 모델별 `count_tokens`를 쓴다 | Anthropic Token counting |
 
-한국어·영어·코드 중 무엇이 몇 배 비싼지는 **모델마다 직접 재야 한다.** 인터넷에 도는 "한국어는 N배"라는 숫자는 다른 tokenizer로 잰 값인 경우가 많다. `count_tokens`는 무료(분당 요청 한도만 있음)이므로 같은 내용을 한국어·영어·코드로 준비해 한 번 재 두면 된다.
+한국어·영어·코드 중 무엇이 몇 배 비싼지는 **모델마다 직접 재야 한다.** 인터넷에 도는 "한국어는 N배"라는 숫자는 다른 tokenizer로 잰 값인 경우가 많다. Claude token 수는 OpenAI tokenizer(tiktoken)가 아니라 모델별 `count_tokens`로 센다. 무료(분당 요청 한도만 있음)이므로 같은 내용을 한국어·영어·코드로 준비해 한 번 재 두면 된다.
 
 ```python
 import anthropic
@@ -76,22 +75,14 @@ N이 두 배가 되면 입력은 약 네 배가 된다. **Prompt caching**은 �
 
 ### 2. Context window는 작업 기억이다
 
-Context window는 모델이 한 번에 보는 작업 기억이다. 1M token 모델도 900k token 요청을 9k 요청과 같은 token 단가로 받지만, **넣을 수 있다고 넣어서 좋은 것은 아니다.**
+Context window는 모델이 한 번에 보는 작업 기억이다. 1M token 모델도 900k token 요청을 9k 요청과 같은 token 단가로 받지만, **넣을 수 있다고 넣어서 좋은 것은 아니다.** 불필요한 context는 돈을 두 번 쓴다. 한 번은 token 값으로, 또 한 번은 품질 저하로 인한 재시도로.
 
 - Liu 외 「Lost in the Middle」(TACL 2024): 관련 정보가 긴 입력의 중간에 있을 때 성능이 크게 떨어졌다.
 - Anthropic 「Effective context engineering for AI agents」(2025-09): token이 늘수록 context에서 정보를 정확히 찾아내는 능력이 떨어지는 **context rot**이 모든 모델에서 나타난다며, "원하는 결과를 낼 가능성이 가장 높은, 가장 작은 고신호 token 집합"을 찾으라고 권한다.
 
-불필요한 context는 돈을 두 번 쓴다. 한 번은 token 값으로, 또 한 번은 품질 저하로 인한 재시도로.
-
 ### 3. 비용의 단위는 요청이 아니라 완료된 과제다
 
-싼 모델이 실패하면 그 token 값, 재시도 값, 사람이 고치는 시간이 모두 붙는다. 실패하면 성공할 때까지 다시 돌린다고 가정하면:
-
-```text
-cost_per_completed_task = cost_per_attempt / success_rate
-model A: 0.20 / 0.50 = 0.40 USD
-model B: 0.30 / 0.90 = 0.33 USD   (attempt price is higher, task price is lower)
-```
+싼 모델이 실패하면 그 token 값, 재시도 값, 사람이 고치는 시간이 모두 붙는다. 성공할 때까지 다시 돌린다고 가정하면 **과제당 비용 = 시도당 비용 ÷ 성공률**이다. 시도당 $0.20에 성공률 50%인 설정은 과제당 $0.40, 시도당 $0.30에 성공률 90%인 설정은 과제당 $0.33이다. 시도는 비싸도 과제는 싸다.
 
 Anthropic의 측정(SWE-bench Pro, Claude Opus 5.5)에서는 전부 `low` effort로 돌린 뒤 실패한 13%만 `high`로 다시 돌렸더니 약 97%가 과제당 약 $0.17에 통과했다. 전부 `high`로 돌리면 95.3%에 $0.29였다. 실패를 판별할 신호(테스트, 검증기)가 있을 때만 쓸 수 있는 방법이다.
 
@@ -136,8 +127,6 @@ Codex의 `usage`에는 `cached_input_tokens`와 `reasoning_output_tokens`가 따
 
 ## 적용: 1인 스튜디오의 하루
 
-아래 숫자는 모두 **가정**이다. Claude는 API 키로 쓴다고 보고 달러로 환산했다.
-
 | 시간 | 작업 | 도구 · 모델 | Token(가정) | 비용 |
 |---|---|---|---|---|
 | 09:00 | 결제 화면 기능 구현, 30턴 | Claude Code · Opus 5.5 `medium` | 읽기 1,798,000 / 쓰기 107,000 / 출력 24,000 | $1.37 |
@@ -145,7 +134,7 @@ Codex의 `usage`에는 `cached_input_tokens`와 `reasoning_output_tokens`가 따
 | 14:00 | 다른 제품 리팩터링 | Codex CLI | 입력 400,000(그중 cache 320,000) / 출력 30,000(추론 18,000) | ChatGPT 플랜 한도에서 차감 |
 | 22:00 | 상품 설명 1,000건 생성 | Claude API · Sonnet 5.5 Batch | 건당 입력 2,000 / 출력 500 | 표준 $9.00 → Batch $4.50 |
 
-Claude 쪽 합계는 $1.37 + $0.54 + $4.50 = **$6.41**(약 8,970원)이다. 눈여겨볼 줄은 모델 단가가 아니라 **cache miss 한 번**(적중 대비 약 25배)과 **밤에 돌려도 되는 작업**(Batch로 절반)이다. 오후에 다른 일을 할 거라면 점심 전에 `/clear`로 세션을 끝내고, API 키 사용자가 긴 공백 뒤 같은 세션을 이어 가야 한다면 1시간 TTL을 검토한다. 도구별 방법은 「토큰 절약 실전: 도구별 방법」에 있다.
+숫자는 모두 가정이고, Claude는 API 키로 쓴다고 보고 달러로 환산했다. Claude 쪽 합계는 $1.37 + $0.54 + $4.50 = **$6.41**(약 8,970원)이다. 눈여겨볼 줄은 모델 단가가 아니라 **cache miss 한 번**(적중 대비 약 25배)과 **밤에 돌려도 되는 작업**(Batch로 절반)이다. 오후에 다른 일을 할 거라면 점심 전에 `/clear`로 세션을 끝내고, API 키 사용자가 긴 공백 뒤 같은 세션을 이어 가야 한다면 1시간 TTL을 검토한다. 도구별 방법은 「토큰 절약 실전: 도구별 방법」에 있다.
 
 ## 심화
 
@@ -161,16 +150,13 @@ Sonnet 4.6($3/$15)에서 Sonnet 5($2/$10)로 옮기면 입력 단가는 33% 내�
 
 화면에 보이는 답이 500 token이어도 thinking이 4,000 token이면 Opus 5.5에서 출력 비용은 4,500×$20 = $0.09다. 보이는 부분만 세면 $0.01로 9배 과소평가한다. Opus 5.5·Sonnet 5.5·Fable 모델은 thinking을 끌 수 없고 effort로만 조절한다(Claude Code 문서, 2026-09).
 
-### `max_tokens`는 절약 도구가 아니다
-
-`max_tokens`는 안전장치일 뿐, 모델은 이 값을 보지 못한다. 한도에 걸린 응답은 중간에 잘린 실패이고, 다시 돌리는 비용이 붙는다. 답을 짧게 하려면 출력 형식을 지정하고, 생각을 줄이려면 effort를 낮춘다.
-
 ## 흔한 오해
 
 - **"싼 모델이 항상 싸다."** 과제당 비용 = 시도당 비용 ÷ 성공률이다. Cache가 켜지면 모델 간 차이도 줄어든다.
 - **"캐시는 켜 두면 알아서 된다."** System prompt의 시각·UUID, 정렬되지 않은 JSON, 턴마다 바뀌는 도구 목록은 오류 없이 cache를 깬다. `cache_read_input_tokens`로 확인해야 한다.
 - **"한국어로 쓰면 N배 비싸다."** Tokenizer마다 다르다. `count_tokens`로 직접 잰 값만 믿는다.
 - **"Context window가 크면 다 넣는 게 낫다."** 단가는 같아도 품질은 떨어질 수 있다(context rot).
+- **"`max_tokens`를 낮추면 절약된다."** 모델은 이 값을 보지 못한다. 한도에 걸린 응답은 잘린 실패이고 재시도 비용이 붙는다. 답을 짧게 하려면 형식을 지정하고, 생각을 줄이려면 effort를 낮춘다.
 - **"`/compact`는 공짜다."** 요약 요청 자체가 대화 전체를 읽는다. Cache가 식은 뒤라면 비싸다.
 
 ## 자기 점검 질문

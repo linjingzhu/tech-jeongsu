@@ -148,7 +148,7 @@ The conclusion is the same each time: **settings that must be identical across e
 
 ### Model and cost settings
 
-Claude Code picks models through the `model` key (usually user scope), the `model` field in subagent files, and the organization-level `availableModels` allowlist. Codex uses `model`, `model_reasoning_effort` and the subagent default `[agents] default_subagent_model`. For the principles of assigning models to roles, see "Multi-agent roles and model routing". The remaining layers (subagents · skills, MCP, runtime environments and cost) are covered in detail in documents 09–11 that follow.
+Claude Code picks models through the `model` key (usually user scope), the `model` field in subagent files, and the organization-level `availableModels` allowlist. Codex uses `model`, `model_reasoning_effort` and the subagent default `[agents] default_subagent_model`. For the principles of assigning models to roles, see "Multi-agent roles and model routing". The remaining layers are covered in detail in the documents that follow: "Subagents, Skills, Commands and Plugins", "MCP and External Tools", and "Headless, CI and Cloud Runs".
 
 ## Common Misconceptions
 

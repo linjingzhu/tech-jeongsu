@@ -148,7 +148,7 @@ tech-jeongsu/
 
 ### 모델과 비용 설정
 
-Claude Code는 `model` 키(보통 user scope), subagent 파일의 `model` 필드, 조직용 `availableModels` 허용 목록으로 모델을 정한다. Codex는 `model`, `model_reasoning_effort`, subagent 기본값 `[agents] default_subagent_model`을 쓴다. 역할별 모델 배정 원칙은 「Multi-Agent 역할과 모델 라우팅」을 참고한다. 나머지 층(Subagent · Skill, MCP, 실행 환경과 비용)의 상세는 이어지는 09–11번 문서에서 다룬다.
+Claude Code는 `model` 키(보통 user scope), subagent 파일의 `model` 필드, 조직용 `availableModels` 허용 목록으로 모델을 정한다. Codex는 `model`, `model_reasoning_effort`, subagent 기본값 `[agents] default_subagent_model`을 쓴다. 역할별 모델 배정 원칙은 「Multi-Agent 역할과 모델 라우팅」을 참고한다. 나머지 층의 상세는 이어지는 「Subagent · Skill · Command · Plugin」, 「MCP와 외부 도구 연결」, 「Headless · CI · Cloud 실행」에서 다룬다.
 
 ## 흔한 오해
 

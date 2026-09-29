@@ -86,7 +86,7 @@ Git 정책: 1) main에 직접 push 금지 2) commit은 작게 3) … (GIT_POLICY
 좋은 예:
 
 ```text
-Before reporting done, run `node --test tests/` and quote the result.
+Before reporting done, run `node --test tests/*.test.cjs` and quote the result.
 Any merge → read `.ai/REPOSITORY.md` first.
 Secrets: `.env*` is blocked by a deny rule in `.claude/settings.json`; do not work around it.
 ```
