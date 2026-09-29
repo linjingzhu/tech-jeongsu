@@ -288,19 +288,20 @@
   }
 }
 </code></pre>
-<p><strong>Hook 1, block force push</strong> (<code>.claude/hooks/block-force-push.sh</code>). It joins lines continued with a trailing <code>\</code>, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains <code>$</code> or a backtick is kept, not deleted. It then deletes comments (from a <code>#</code> at the start of a word to the end of the line), splits the command on <code>&amp;&amp;</code> · <code>;</code> · <code>|</code> · newlines, and checks **only the arguments after each <code>push</code>**. It blocks bundled short options containing <code>f</code> (<code>-uf</code>, <code>-4f</code>), every long option starting with <code>--force</code> (including abbreviations such as <code>--force-w</code>), <code>--mirror</code> and its abbreviations (down to <code>--m</code>), <code>+</code> refspecs, and **every argument containing <code>$</code> or a backtick**. Variables and command substitutions have no value until they run, so it blocks them without looking, failing closed. If <code>jq</code> is missing or the input cannot be read, it **fails closed** (exit 2). Had a <code>jq</code> failure left <code>CMD</code> empty and the script exited 0, the block would have been silently off, and stderr at exit 0 only reaches the debug log, so nobody would have known.</p>
+<p><strong>Hook 1, block force push</strong> (<code>.claude/hooks/block-force-push.sh</code>). It joins lines continued with a trailing <code>\</code>, turns an escaped <code>\#</code> into <code>_</code>, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains <code>$</code> or a backtick is kept, not deleted. It then deletes comments (from a <code>#</code> at the start of a word to the end of the line), splits the command on <code>&amp;&amp;</code> · <code>;</code> · <code>|</code> · newlines, and checks **every argument after the first <code>push</code> in each command**. Anchoring on the last <code>push</code> instead would let a trailing word <code>push</code>, as in <code>git push -f origin main push</code>, hide every option before it. It blocks bundled short options containing <code>f</code> (<code>-uf</code>, <code>-4f</code>), every long option starting with <code>--force</code> (including abbreviations such as <code>--force-w</code>), <code>--mirror</code> and its abbreviations (down to <code>--m</code>), refspecs starting with <code>+</code>, and **every argument containing <code>$</code>, a backtick, <code>{</code> or <code>}</code>**. Variables, command substitutions and brace expansions (<code>-{f,v}</code>) have no value until they run, so it blocks them without looking, failing closed. It also blocks any command that contains <code>remote.&lt;name&gt;.mirror</code> or a <code>remote.&lt;name&gt;.push</code> value starting with <code>+</code>, whether set once with <code>git -c ...</code> or saved with <code>git config</code>. If <code>jq</code> is missing or the input cannot be read, it **fails closed** (exit 2). Had a <code>jq</code> failure left <code>CMD</code> empty and the script exited 0, the block would have been silently off, and stderr at exit 0 only reaches the debug log, so nobody would have known.</p>
 <pre><code class="language-bash">command -v jq &gt;/dev/null || { echo &quot;Blocked: jq is missing, so the force-push check cannot run.&quot; &gt;&amp;2; exit 2; }
 CMD=$(jq -r &#39;.tool_input.command // empty&#39;) || exit 2
 CMD=${CMD//$&#39;\\\n&#39;/}
-S=$(printf &#39;%s\n&#39; &quot;$CMD&quot; | sed -E &quot;s/\\\\//g; s/[\&quot;&#39;]([^\&quot;&#39;[:space:]#]*)[\&quot;&#39;]/\1/g; s/\&quot;[^\&quot;\$\`]*\&quot;|&#39;[^&#39;]*&#39;//g; s/(^|[[:space:];&amp;|])#.*$//; s/(&amp;&amp;|\|\||[;&amp;|])/\n/g&quot;)
-ARGS=$(printf &#39;%s\n&#39; &quot;$S&quot; | sed -nE &#39;s/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p&#39;)
-if printf &#39;%s\n&#39; &quot;$ARGS&quot; | grep -Eq &#39;[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]|[$`]&#39;; then
+S=$(printf &#39;%s\n&#39; &quot;$CMD&quot; | sed -E &quot;s/\\\\#/_/g; s/\\\\//g; s/[\&quot;&#39;]([^\&quot;&#39;[:space:]#]*)[\&quot;&#39;]/\1/g; s/\&quot;[^\&quot;\$\`]*\&quot;|&#39;[^&#39;]*&#39;//g; s/(^|[[:space:];&amp;|])#.*$//; s/(&amp;&amp;|\|\||[;&amp;|])/\n/g&quot;)
+ARGS=$(printf &#39;%s\n&#39; &quot;$S&quot; | grep -oE &#39;(^|[[:space:]])push([[:space:]].*)?$&#39; | sed -E &#39;s/^[[:space:]]?push//; s/^/ /; s/$/ /&#39;)
+if printf &#39;%s\n&#39; &quot;$ARGS&quot; | grep -Eq &#39;[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|[[:space:]]\+[^[:space:]]|[$`{}]&#39; ||
+   printf &#39;%s\n&#39; &quot;$S&quot; | grep -Eiq &#39;remote\.[^[:space:]]+\.(mirror|push[=[:space:]]+\+)&#39;; then
   echo &quot;Blocked: force push is not allowed from an agent session. Ask the owner.&quot; &gt;&amp;2
   exit 2
 fi
 exit 0
 </code></pre>
-<p>Below is a subset of the 53 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). That <code>-4f</code>, <code>--force-w</code>, <code>--mirr</code>, <code>\-f</code> and <code>--forc$&#39;e&#39;</code> really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. &quot;No jq&quot; means a run with <code>jq</code> removed from <code>PATH</code>. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.</p>
+<p>Below is a subset of the 71 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). That <code>-4f</code>, <code>--force-w</code>, <code>--mirr</code>, <code>\-f</code>, <code>--forc$&#39;e&#39;</code>, <code>-{f,v}</code> and <code>git -c remote.x.push=+HEAD:refs/heads/main push x</code> really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. &quot;No jq&quot; means a run with <code>jq</code> removed from <code>PATH</code>. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.</p>
 <table>
 <thead>
 <tr>
@@ -347,6 +348,18 @@ exit 0
 <td>2</td>
 </tr>
 <tr>
+<td><code>git push origin HEAD:+main</code> (creates a remote branch named <code>+main</code>) · <code>git push origin main -o push</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git -c remote.origin.push=refs/heads/main:refs/heads/main push origin</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
 <td><code>git push --no-force</code> · <code>--no-force-with-lease</code> · <code>--porcelain</code> · <code>--prune</code> · <code>--follow-tags</code> · <code>--push-option=x</code></td>
 <td>0</td>
 <td>0</td>
@@ -365,7 +378,7 @@ exit 0
 <td>2</td>
 </tr>
 <tr>
-<td><code>git push origin &quot;+main&quot;</code> · <code>&#39;+main&#39;</code> · <code>HEAD:+main</code></td>
+<td><code>git push origin &quot;+main&quot;</code> · <code>&#39;+main&#39;</code></td>
 <td>2</td>
 <td>2</td>
 <td>2</td>
@@ -437,6 +450,42 @@ exit 0
 <td>2</td>
 </tr>
 <tr>
+<td><code>git tag push &amp;&amp; git push -f origin main push</code> · <code>git push -f origin main -o push</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git remote add push ../remote.git &amp;&amp; git push -f push main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -{f,v} origin main</code> · <code>--{mirror,verbose}</code> · <code>-{f,}</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git branch \# &amp;&amp; git push origin main \# -f</code> · <code>git push origin main -o \# -f</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git -c remote.origin.mirror=true push origin</code> · <code>git -c Remote.Origin.Mirror push origin</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git -c remote.origin.push=+refs/heads/main:refs/heads/main push origin</code> · <code>git config remote.origin.push +refs/heads/main:refs/heads/main &amp;&amp; git push origin</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
 <td>Limit: <code>git p -f origin main</code> · <code>git -c alias.p=push p -f origin main</code></td>
 <td>2</td>
 <td><strong>0</strong></td>
@@ -448,9 +497,15 @@ exit 0
 <td><strong>2</strong></td>
 <td>2</td>
 </tr>
+<tr>
+<td>Out of scope: <code>git push origin :main</code> · <code>--delete origin main</code> · <code>-d origin main</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
 </tbody></table>
-<p>Comment removal targets only a <code>#</code> <strong>at the start of a word</strong>, and a single-token quote containing <code>#</code> is deleted rather than unwrapped. Deleting every <code>#</code> on the line would let <code>git push origin fix#1 -f</code> and <code>git commit -m &#39;#&#39; &amp;&amp; git push -f origin main</code> through (checked with the two cases above). Conversely, as in bash, the tail of <code>git status;# note &amp;&amp; git push -f</code> is a comment, so it passes.</p>
-<p>The limits of Hook 1, stated plainly: aliases are expanded by git at run time, so they are not caught (<code>git p -f</code>, <code>git -c alias.p=push p -f</code>). Neither are strings wrapped in <code>eval</code> or <code>sh -c</code>, a push inside a script file, or force set in git config (a <code>+</code> refspec in <code>remote.&lt;name&gt;.push</code>, <code>remote.&lt;name&gt;.mirror</code>). In the other direction, other commands where <code>-f</code> follows the word <code>push</code>, such as <code>echo push -f</code>, and every push argument containing <code>$</code>, such as <code>git push origin $BRANCH</code>, are blocked as false positives. So this hook cuts down common mistakes; it is not a security boundary. The real boundary is a server-side rule outside the agent, such as the GitHub branch protection in the T3 row of the risk-tier table below.</p>
+<p>Comment removal targets only a <code>#</code> <strong>at the start of a word</strong>, and a single-token quote containing <code>#</code> is deleted rather than unwrapped. Deleting every <code>#</code> on the line would let <code>git push origin fix#1 -f</code> and <code>git commit -m &#39;#&#39; &amp;&amp; git push -f origin main</code> through (checked with the two cases above). Conversely, as in bash, the tail of <code>git status;# note &amp;&amp; git push -f</code> is a comment, so it passes. In bash, <code>\#</code> is a literal <code>#</code>, not a comment, so it becomes <code>_</code> <strong>before</strong> backslashes are deleted. In the other order, <code>\#</code> would turn into a <code>#</code> at the start of a word, and the <code>-f</code> in <code>git push origin main -o \# -f</code> would vanish as a comment (checked with the case above).</p>
+<p>The limits of Hook 1, stated plainly: aliases are expanded by git at run time, so they are not caught (<code>git p -f</code>, <code>git -c alias.p=push p -f</code>). Neither are strings wrapped in <code>eval</code> or <code>sh -c</code>, or a push inside a script file. Force set in git config (a <code>+</code> refspec in <code>remote.&lt;name&gt;.push</code>, <code>remote.&lt;name&gt;.mirror</code>) is blocked only when it appears in the command; settings already in <code>.git/config</code>, or supplied through <code>GIT_CONFIG_*</code> environment variables or <code>--config-env</code>, are not seen. Branch deletion via <code>:dst</code>, <code>--delete</code>, <code>-d</code> or <code>--prune</code> is not covered; branch protection is. In the other direction, other commands where <code>-f</code> follows the word <code>push</code>, such as <code>echo push -f</code>, every push argument containing <code>$</code>, <code>{</code> or <code>}</code>, such as <code>git push origin $BRANCH</code>, and lookups such as <code>git config --get remote.origin.mirror</code> are blocked as false positives. So this hook cuts down common mistakes; it is not a security boundary. The real boundary is a server-side rule outside the agent, such as the GitHub branch protection in the T3 row of the risk-tier table below.</p>
 <p><strong>Hooks 2 · 3, do not stop with uncommitted changes this session made</strong>. A session can start on a dirty tree that holds the owner&#39;s WIP. So <code>SessionStart</code> (<code>session-baseline.sh</code>) saves <code>git status --porcelain</code> as a per-session baseline, and <code>Stop</code> (<code>stop-if-dirty.sh</code>) objects <strong>only to new lines</strong>. Paths come from <code>cwd</code> in the stdin JSON, not <code>$CLAUDE_PROJECT_DIR</code>: after Claude enters a worktree, <code>CLAUDE_PROJECT_DIR</code> stays where the session started and only <code>cwd</code> follows. The baseline is written only when absent, so it survives <code>SessionStart</code> firing again after compact or resume. <code>session_id</code> goes into a file name, so any character other than letters, digits, <code>.</code>, <code>_</code> and <code>-</code> becomes <code>_</code>, and if the value is empty or <code>null</code> the script does nothing and exits.</p>
 <pre><code class="language-bash">command -v jq &gt;/dev/null || exit 0
 INPUT=$(cat)

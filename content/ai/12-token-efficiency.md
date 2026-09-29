@@ -144,7 +144,7 @@ Sonnet 4.6($3/$15)에서 Sonnet 5($2/$10)로 옮기면 입력 단가는 33% 내�
 
 ### Cache 손익분기
 
-5분 TTL은 두 번째 요청에서 이미 이득이다: 1.25 + 0.1 = 1.35 < 2(cache 없이 두 번). 1시간 TTL은 세 번째 요청부터다: 2 + 0.1×2 = 2.2 < 3. Opus 5.5는 읽기가 0.05×라 1.25 + 0.05 = 1.30이다. 요청 간격(시작 기준)이 5분 미만이면 5분 TTL이 항상 더 싸고, 5~60분이면 대개 1시간 TTL이 이득이다. 예외는 Opus 5.5(읽기 0.05×)와 Fable 5.1(0.025×)처럼 읽기가 싼 모델이다. 5분 TTL을 두고 공백 중에 직전 요청을 `max_tokens: 0`으로 4분마다 다시 보내는 keep-alive는 갱신 한 번에 읽기 값만 든다. Anthropic의 「Optimizing for cost and intelligence」 측정에서 Opus 5.5는 turn의 5~10%만 6~32분 공백 뒤에 올 때 1시간 TTL보다 8~13% 쌌지만(`medium` effort), 모든 turn 앞에 공백이 있으면 더 비쌌다. Fable 5.1은 공백이 몇 분 단위일 때 13~20% 쌌다. 이 측정은 keep-alive를 `max_tokens: 1`로 보냈고, `max_tokens: 0`이 기존 항목을 갱신하는지는 Opus 5.5에서 측정되지 않았다. `max_tokens: 0` 요청은 `stream: true`나 Batch와 함께 쓸 수 없다.
+5분 TTL은 두 번째 요청에서 이미 이득이다: 1.25 + 0.1 = 1.35 < 2(cache 없이 두 번). 1시간 TTL은 세 번째 요청부터다: 2 + 0.1×2 = 2.2 < 3. Opus 5.5는 읽기가 0.05×라 1.25 + 0.05 = 1.30이다. 요청 간격(시작 기준)이 5분 미만이면 5분 TTL이 항상 더 싸고, 5~60분이면 대개 1시간 TTL이 이득이다. 예외는 Opus 5.5(읽기 0.05×)와 Fable 5.1(0.025×)처럼 읽기가 싼 모델이다. 5분 TTL을 두고 공백 중에 직전 요청을 `max_tokens: 0`으로 4분마다 다시 보내는 keep-alive는 갱신 한 번에 읽기 값만 든다. Anthropic의 「Optimizing for cost and intelligence」 측정에서 Opus 5.5는 turn의 5~10%만 6~32분 공백 뒤에 올 때 1시간 TTL보다 8~13% 쌌지만(`medium` effort), 모든 turn 앞에 공백이 있으면 더 비쌌다. Opus 5.5 측정은 keep-alive를 `max_tokens: 1`로 보냈고, `max_tokens: 0`이 기존 항목을 갱신하는지는 Opus 5.5에서 측정되지 않았다. Fable 5.1은 공백이 몇 분 단위일 때 13~20% 쌌고, 이 수치는 `max_tokens: 0`으로 측정됐다. `max_tokens: 0` 요청은 `stream: true`, `thinking.type: "enabled"`, `output_config.format`(구조화 출력), 특정 도구를 강제하는 `tool_choice`(`{"type": "tool"}`·`{"type": "any"}`)와 함께 쓰거나 Message Batches 안에서 보내면 `invalid_request_error`로 거부된다. 이런 작업에서는 keep-alive 대신 1시간 TTL을 쓴다.
 
 ### Thinking token은 출력 단가로 과금된다
 
