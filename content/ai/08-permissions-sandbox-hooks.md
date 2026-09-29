@@ -110,22 +110,23 @@ flowchart TD
 }
 ```
 
-**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 줄 끝 `\` 이어쓰기를 합치고 backslash를 모두 지운 뒤, 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운다. `$`나 backtick이 든 큰따옴표 문자열은 지우지 않고 남긴다. 이어서 단어 첫머리의 `#`부터 줄 끝까지(주석)를 지우고, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 `push` 뒤의 인자만** 검사한다. 막는 것은 `f`가 든 짧은 옵션 묶음(`-uf`, `-4f`), `--force`로 시작하는 모든 긴 옵션(`--force-w` 같은 축약 포함), `--mirror`와 그 축약(`--m`까지), `+` refspec, 그리고 **`$`나 backtick이 든 모든 인자**다. 변수와 명령 치환은 실행 전에는 값을 알 수 없으므로 값을 따지지 않고 닫힌 쪽으로 막는다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝났다면 차단이 조용히 꺼졌을 것이고, exit 0의 stderr는 debug log에만 남으므로 아무도 몰랐을 것이다.
+**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 줄 끝 `\` 이어쓰기를 합치고, escape된 `\#`를 `_`로 바꾼 다음 backslash를 모두 지운 뒤, 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운다. `$`나 backtick이 든 큰따옴표 문자열은 지우지 않고 남긴다. 이어서 단어 첫머리의 `#`부터 줄 끝까지(주석)를 지우고, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 명령의 첫 번째 `push` 뒤 인자 전부**를 검사한다. 마지막 `push`를 기준으로 삼으면 `git push -f origin main push`처럼 끝에 붙인 `push` 한 단어가 앞의 옵션을 모두 숨긴다. 막는 것은 `f`가 든 짧은 옵션 묶음(`-uf`, `-4f`), `--force`로 시작하는 모든 긴 옵션(`--force-w` 같은 축약 포함), `--mirror`와 그 축약(`--m`까지), `+`로 시작하는 refspec, 그리고 **`$`, backtick, `{`, `}`가 든 모든 인자**다. 변수, 명령 치환, brace 확장(`-{f,v}`)은 실행 전에는 값을 알 수 없으므로 값을 따지지 않고 닫힌 쪽으로 막는다. 또 명령 어디에든 `remote.<name>.mirror`나 `+`로 시작하는 `remote.<name>.push` 값이 있으면 막는다. `git -c …`로 한 번만 넣든 `git config`로 저장하든 같다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝났다면 차단이 조용히 꺼졌을 것이고, exit 0의 stderr는 debug log에만 남으므로 아무도 몰랐을 것이다.
 
 ```bash
 command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
 CMD=$(jq -r '.tool_input.command // empty') || exit 2
 CMD=${CMD//$'\\\n'/}
-S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
-ARGS=$(printf '%s\n' "$S" | sed -nE 's/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p')
-if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]|[$`]'; then
+S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\#/_/g; s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
+ARGS=$(printf '%s\n' "$S" | grep -oE '(^|[[:space:]])push([[:space:]].*)?$' | sed -E 's/^[[:space:]]?push//; s/^/ /; s/$/ /')
+if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|[[:space:]]\+[^[:space:]]|[$`{}]' ||
+   printf '%s\n' "$S" | grep -Eiq 'remote\.[^[:space:]]+\.(mirror|push[=[:space:]]+\+)'; then
   echo "Blocked: force push is not allowed from an agent session. Ask the owner." >&2
   exit 2
 fi
 exit 0
 ```
 
-아래는 실제로 실행한 53개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`가 실제로 강제 갱신이나 mirror push로 처리된다는 것은 git 2.43과 로컬 bare 원격으로 따로 확인했다. "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
+아래는 실제로 실행한 71개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`, `-{f,v}`, `git -c remote.x.push=+HEAD:refs/heads/main push x`가 실제로 강제 갱신이나 mirror push로 처리된다는 것은 git 2.43과 로컬 bare 원격으로 따로 확인했다. "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
 
 | 명령 | 기대 | jq 있음 | jq 없음 |
 |---|---|---|---|
@@ -135,10 +136,12 @@ exit 0
 | `git commit -m "push -f later" && git status` | 0 | 0 | 2 |
 | `git push origin main # -f` · `git commit -m "fix #12" && git push origin main` | 0 | 0 | 2 |
 | `git push -o ci.skip origin main` · `origin force` · `origin mirror` · `origin fix-force` | 0 | 0 | 2 |
+| `git push origin HEAD:+main`(원격에 `+main`이라는 브랜치를 만든다) · `git push origin main -o push` | 0 | 0 | 2 |
+| `git -c remote.origin.push=refs/heads/main:refs/heads/main push origin` | 0 | 0 | 2 |
 | `git push --no-force` · `--no-force-with-lease` · `--porcelain` · `--prune` · `--follow-tags` · `--push-option=x` | 0 | 0 | 2 |
 | `git push -fu origin main` · `-uf` · `-nf` | 2 | 2 | 2 |
 | `git -C . push -f origin main` | 2 | 2 | 2 |
-| `git push origin "+main"` · `'+main'` · `HEAD:+main` | 2 | 2 | 2 |
+| `git push origin "+main"` · `'+main'` | 2 | 2 | 2 |
 | `git push --force-with-lease=main:abc123 origin main` | 2 | 2 | 2 |
 | `git push --force-if-includes origin main` | 2 | 2 | 2 |
 | `git push --mirror origin` | 2 | 2 | 2 |
@@ -150,12 +153,19 @@ exit 0
 | `F=-f; git push $F origin main` · `git push -$(echo f) origin main` | 2 | 2 | 2 |
 | `git push origin fix#1 -f` · `git commit -m '#' && git push -f origin main` | 2 | 2 | 2 |
 | `git push \` 뒤 줄바꿈, 다음 줄 `-f origin main` | 2 | 2 | 2 |
+| `git tag push && git push -f origin main push` · `git push -f origin main -o push` | 2 | 2 | 2 |
+| `git remote add push ../remote.git && git push -f push main` | 2 | 2 | 2 |
+| `git push -{f,v} origin main` · `--{mirror,verbose}` · `-{f,}` | 2 | 2 | 2 |
+| `git branch \# && git push origin main \# -f` · `git push origin main -o \# -f` | 2 | 2 | 2 |
+| `git -c remote.origin.mirror=true push origin` · `git -c Remote.Origin.Mirror push origin` | 2 | 2 | 2 |
+| `git -c remote.origin.push=+refs/heads/main:refs/heads/main push origin` · `git config remote.origin.push +refs/heads/main:refs/heads/main && git push origin` | 2 | 2 | 2 |
 | 한계: `git p -f origin main` · `git -c alias.p=push p -f origin main` | 2 | **0** | 2 |
 | 한계: `echo push -f` | 0 | **2** | 2 |
+| 범위 밖: `git push origin :main` · `--delete origin main` · `-d origin main` | 0 | 0 | 2 |
 
-주석 제거는 **단어 첫머리의** `#`만 대상으로 하고, `#`가 든 한 글자 따옴표는 풀지 않고 지운다. 줄의 모든 `#`를 지우면 `git push origin fix#1 -f`와 `git commit -m '#' && git push -f origin main`이 통과해 버린다(위 두 사례로 확인). 반대로 bash처럼 `git status;# note && git push -f`의 뒷부분은 주석이라 통과시킨다.
+주석 제거는 **단어 첫머리의** `#`만 대상으로 하고, `#`가 든 한 글자 따옴표는 풀지 않고 지운다. 줄의 모든 `#`를 지우면 `git push origin fix#1 -f`와 `git commit -m '#' && git push -f origin main`이 통과해 버린다(위 두 사례로 확인). 반대로 bash처럼 `git status;# note && git push -f`의 뒷부분은 주석이라 통과시킨다. `\#`는 bash에서 주석이 아니라 글자 `#`이므로 backslash를 지우기 **전에** `_`로 바꾼다. 순서가 반대면 `\#`가 단어 첫머리의 `#`가 되어 `git push origin main -o \# -f`의 `-f`가 주석으로 사라진다(위 사례로 확인).
 
-Hook 1의 한계도 적어 둔다. alias는 git이 실행할 때 펼치므로 잡지 못한다(`git p -f`, `git -c alias.p=push p -f`). `eval`이나 `sh -c`로 감싼 문자열, 스크립트 파일 안의 push, git 설정에 넣은 강제(`remote.<name>.push`의 `+` refspec, `remote.<name>.mirror`)도 마찬가지다. 반대로 `echo push -f`처럼 `push`라는 단어 뒤에 `-f`가 오는 다른 명령과, `git push origin $BRANCH`처럼 `$`가 든 모든 push 인자는 막히는 오탐이다. 그러니 이 hook은 흔한 실수를 줄이는 장치일 뿐 보안 경계가 아니다. 실제 경계는 아래 위험 등급 표의 T3 행에 둔 GitHub branch protection처럼 agent 바깥의 서버 쪽 규칙이다.
+Hook 1의 한계도 적어 둔다. alias는 git이 실행할 때 펼치므로 잡지 못한다(`git p -f`, `git -c alias.p=push p -f`). `eval`이나 `sh -c`로 감싼 문자열과 스크립트 파일 안의 push도 마찬가지다. git 설정에 넣은 강제(`remote.<name>.push`의 `+` refspec, `remote.<name>.mirror`)는 명령에 드러날 때만 막고, 이미 `.git/config`에 들어 있거나 `GIT_CONFIG_*` 환경 변수 · `--config-env`로 들어온 설정은 보지 못한다. `:main`, `--delete`, `-d`, `--prune`을 통한 원격 브랜치 삭제는 다루지 않으며, 그것도 branch protection의 몫이다. 반대로 `echo push -f`처럼 `push`라는 단어 뒤에 `-f`가 오는 다른 명령, `git push origin $BRANCH`처럼 `$`나 `{` · `}`가 든 모든 push 인자, `git config --get remote.origin.mirror` 같은 조회는 막히는 오탐이다. 그러니 이 hook은 흔한 실수를 줄이는 장치일 뿐 보안 경계가 아니다. 실제 경계는 아래 위험 등급 표의 T3 행에 둔 GitHub branch protection처럼 agent 바깥의 서버 쪽 규칙이다.
 
 **Hook 2 · 3, 이번 세션이 만든 변경을 커밋하지 않은 채 끝내지 않기**. 세션은 주인의 WIP가 남은 더러운 트리에서 시작할 수 있다. 그래서 `SessionStart`(`session-baseline.sh`)가 `git status --porcelain`을 세션별 기준선으로 저장하고, `Stop`(`stop-if-dirty.sh`)은 **새로 생긴 줄만** 문제 삼는다. 경로는 `$CLAUDE_PROJECT_DIR`이 아니라 stdin의 `cwd`를 쓴다. worktree에 들어가면 `CLAUDE_PROJECT_DIR`은 시작 위치에 머물고 `cwd`만 따라가기 때문이다. 기준선은 없을 때만 쓰므로 compact · resume으로 `SessionStart`가 다시 불려도 유지된다. `session_id`는 파일 이름에 들어가므로 영문자 · 숫자 · `.` · `_` · `-` 밖의 문자는 `_`로 바꾸고, 값이 비었거나 `null`이면 아무것도 하지 않고 끝낸다.
 
