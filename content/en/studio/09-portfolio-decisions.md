@@ -103,16 +103,18 @@ By realized revenue per hour alone, all fall short of KRW 21,875. These are earl
 
 ### Pre-Committed Decision Rules (D60 Review, Verdict Date per Row)
 
-| Product | Kill | Continue | Double down |
-|---|---|---|---|
-| T1 | At day 60, trial to payment under 3% or fewer than 10 paying users → archive | At day 60, 3-10% | At day 60, 10% or more and monthly net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) |
-| C2 | Under 3,000 monthly page views at day 90 | 3,000-10,000 | 10,000 or more → double the publishing pace |
-| GM1 | Under 500 total wishlists at day 90 | 500-1,500 | 1,500 or more → start Next Fest preparation |
-| P1 | Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive | Maintenance only, 1 hour a week, until the verdict | G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter's triage |
+| Product | Kill | Hold | Continue | Double down |
+|---|---|---|---|---|
+| T1 | At day 60, trial to payment under 3% (checked first) → archive | Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch | 3-10%, or 10% or more with net revenue under KRW 400,000 | 10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) |
+| C2 | Under 3,000 monthly page views at day 90 | — | 3,000-10,000 | 10,000 or more → double the publishing pace |
+| GM1 | Under 500 total wishlists at day 90 | — | 500-1,500 | 1,500 or more → start Next Fest preparation |
+| P1 | Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive | — | Maintenance only, 1 hour a week, until the verdict | G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter's triage |
+
+Verdicts are read in the order kill → hold → continue → double down, and only the first match applies, so T1's four cells neither overlap nor leave gaps. A held T1 is judged again at D90 by the same rule, and if it still has fewer than 10 payments then, it is killed. Hold is the "not enough data → hold: improve measurement" branch in the flowchart above.
 
 P1 launched on 2026-06-15 (assumption), so G4's 60-day window closed on 2026-08-14, but that was before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10's applied section). The criteria do not change before the verdict.
 
-Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2, GM1 and P1 await their day-90 verdict. P1's 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.
+Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000, about 12 payments = 450,000 ÷ 37,870), while C2, GM1 and P1 await their day-90 verdict. P1's 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.
 
 ## Going Deeper
 

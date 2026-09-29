@@ -297,37 +297,43 @@ Example studio&#39;s required hourly rate = KRW 3.5 million a month ÷ 160 hours
 <tr>
 <th>Product</th>
 <th>Kill</th>
+<th>Hold</th>
 <th>Continue</th>
 <th>Double down</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>T1</td>
-<td>At day 60, trial to payment under 3% or fewer than 10 paying users → archive</td>
-<td>At day 60, 3-10%</td>
-<td>At day 60, 10% or more and monthly net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month)</td>
+<td>At day 60, trial to payment under 3% (checked first) → archive</td>
+<td>Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch</td>
+<td>3-10%, or 10% or more with net revenue under KRW 400,000</td>
+<td>10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month)</td>
 </tr>
 <tr>
 <td>C2</td>
 <td>Under 3,000 monthly page views at day 90</td>
+<td>—</td>
 <td>3,000-10,000</td>
 <td>10,000 or more → double the publishing pace</td>
 </tr>
 <tr>
 <td>GM1</td>
 <td>Under 500 total wishlists at day 90</td>
+<td>—</td>
 <td>500-1,500</td>
 <td>1,500 or more → start Next Fest preparation</td>
 </tr>
 <tr>
 <td>P1</td>
 <td>Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive</td>
+<td>—</td>
 <td>Maintenance only, 1 hour a week, until the verdict</td>
 <td>G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter&#39;s triage</td>
 </tr>
 </tbody></table>
+<p>Verdicts are read in the order kill → hold → continue → double down, and only the first match applies, so T1&#39;s four cells neither overlap nor leave gaps. A held T1 is judged again at D90 by the same rule, and if it still has fewer than 10 payments then, it is killed. Hold is the &quot;not enough data → hold: improve measurement&quot; branch in the flowchart above.</p>
 <p>P1 launched on 2026-06-15 (assumption), so G4&#39;s 60-day window closed on 2026-08-14, but that was before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10&#39;s applied section). The criteria do not change before the verdict.</p>
-<p>Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2, GM1 and P1 await their day-90 verdict. P1&#39;s 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.</p>
+<p>Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000, about 12 payments = 450,000 ÷ 37,870), while C2, GM1 and P1 await their day-90 verdict. P1&#39;s 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.</p>
 <h2>Going Deeper</h2>
 <h3>Review Rituals</h3>
 <table>
