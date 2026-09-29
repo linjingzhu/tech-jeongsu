@@ -55,6 +55,8 @@ const plain = (markdown) =>
     .replace(/[*_`]/g, "")
     .replace(/\s+/g, " ")
     .trim();
+const siteNameFor = (lang) =>
+  typeof config.siteName === "string" ? config.siteName : config.siteName[lang] || config.siteName.ko;
 const sourceFile = (docPath, lang) =>
   lang === "en" ? docPath.replace(/^content\//, "content/en/") : docPath;
 const absolute = (href) => new URL(href, siteUrl).href;
@@ -183,8 +185,8 @@ function render(page) {
   const groupIndex = DOCS.findIndex((g) => g.items.some(([, p]) => p === docPath));
   const itemIndex = groupIndex >= 0 ? DOCS[groupIndex].items.findIndex(([, p]) => p === docPath) : -1;
   const navTitle = groupIndex >= 0 ? ui.titles[groupIndex][itemIndex] : "";
-  // Many Korean pages have English titles, so English pages carry a marker to stay distinct.
-  const siteTitle = config.siteName + (lang === "en" ? " (English)" : "");
+  // The Korean and English site names differ, which keeps ko/en page titles distinct.
+  const siteTitle = siteNameFor(lang);
   let content, title, desc, busy = "false", prerendered = "true";
 
   if (!docPath) {
@@ -230,7 +232,8 @@ function render(page) {
     alternates,
     ogType: docPath ? "article" : "website",
     ogLocale: lang === "en" ? "en_US" : "ko_KR",
-    siteName: escapeHtml(config.siteName),
+    siteName: escapeHtml(siteTitle),
+    brandName: escapeHtml(siteTitle),
     root,
     docPath: escapeHtml(docPath),
     adsense,

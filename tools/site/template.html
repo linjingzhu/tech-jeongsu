@@ -32,7 +32,7 @@
     <script defer src="{{root}}assets/vendor/highlight.min.js"></script>
     <script defer src="{{root}}assets/ai-map-data.js?v=workflow-flow-1"></script>
     <script defer src="{{root}}assets/ai-map-data.en.js?v=workflow-flow-1"></script>
-    <script defer src="{{root}}assets/i18n.js?v=studio-1"></script>
+    <script defer src="{{root}}assets/i18n.js?v=myai-1"></script>
     <script defer src="{{root}}assets/search.js?v=site-pages-1"></script>
     <script defer src="{{root}}assets/app.js?v=studio-1"></script>
   </head>
@@ -48,7 +48,7 @@
       >
         <img src="{{root}}assets/icons/menu-2.svg" alt="" />
       </button>
-      <a class="brand" href="{{homeHref}}">Jeongsu Tech</a
+      <a class="brand" href="{{homeHref}}">{{brandName}}</a
       ><span class="brand-note" data-i18n="tagline">{{t:tagline}}</span>
       <div id="siteSearch" role="search">
         <div class="document-search">
@@ -104,7 +104,7 @@
       <nav id="pageNav" aria-label="{{t:previous}} / {{t:next}}">{{pageNav}}</nav>
       <footer class="site-footer">
         <nav aria-label="{{t:siteInfo}}">{{footerLinks}}</nav>
-        <span>© 2026 Jeongsu Tech Notes</span>
+        <span>© 2026 {{siteName}}</span>
       </footer>
     </main>
     <nav id="readingNav" aria-label="{{t:readingPosition}}"><div id="readingTicks"></div></nav>

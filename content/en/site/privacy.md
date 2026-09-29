@@ -2,7 +2,7 @@
 
 Effective date: 2026-09-28
 
-Jeongsu Tech Notes ("this site") does not collect visitors' personal information directly. This policy explains what information is processed, and where, when you use this site.
+MyAI ("this site") does not collect visitors' personal information directly. This policy explains what information is processed, and where, when you use this site.
 
 ## Information this site collects directly
 

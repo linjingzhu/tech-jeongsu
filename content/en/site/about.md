@@ -1,6 +1,6 @@
 # About This Site
 
-Jeongsu Tech Notes is a personal technical notebook that turns what I learn in development, product planning and operations into **structured, sourced learning documents**.
+MyAI is a personal technical notebook that turns what I learn in development, product planning and operations into **structured, sourced learning documents**.
 
 ## Topics
 
