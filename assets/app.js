@@ -103,6 +103,22 @@ const DOCS = [
       ["창업 지원사업", "content/business/09-startup-support.md"],
     ],
   },
+  {
+    title: "1인 스튜디오 수익화",
+    items: [
+      ["1인 스튜디오 수익화 전체 개요", "content/studio/00-overview.md"],
+      ["1인 스튜디오의 경제학", "content/studio/01-studio-economics.md"],
+      ["제품 포트폴리오 이론", "content/studio/02-portfolio-theory.md"],
+      ["기회 선택과 수요 검증", "content/studio/03-opportunity-validation.md"],
+      ["수익 모델 개론", "content/studio/04-revenue-models.md"],
+      ["광고 수익 심화", "content/studio/05-ad-revenue.md"],
+      ["유료 판매·구독과 가격 설계", "content/studio/06-paid-and-subscription.md"],
+      ["게임 수익화", "content/studio/07-game-monetization.md"],
+      ["출시 시스템", "content/studio/08-shipping-system.md"],
+      ["측정과 포트폴리오 의사결정", "content/studio/09-portfolio-decisions.md"],
+      ["90일 실행 계획 사례", "content/studio/10-90-day-plan.md"],
+    ],
+  },
 ];
 const SITE_PAGES = ["content/site/about.md", "content/site/privacy.md", "content/site/contact.md"];
 // Every document has its own crawlable address, relative to the site root.
@@ -117,7 +133,7 @@ function pageHref(path, lang) {
   return (lang === "en" ? "en/" : "") + pagePath(path);
 }
 // One icon per DOCS group, in the same order.
-const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase"];
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase", "coins"];
 
 const $ = (id) => document.getElementById(id);
 const escapeHtml = (value) =>

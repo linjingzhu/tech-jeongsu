@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Game Monetization | Jeongsu Tech Notes (English)</title>
+    <meta name="description" content="Games are the highest-variance asset in a solo studio&#39;s portfolio: in document 02&#39;s terms, the aggressive end of the barbell. This document covers how to…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/07-game-monetization/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/07-game-monetization/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/07-game-monetization/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/07-game-monetization/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="Game Monetization | Jeongsu Tech Notes (English)" />
+    <meta property="og:description" content="Games are the highest-variance asset in a solo studio&#39;s portfolio: in document 02&#39;s terms, the aggressive end of the barbell. This document covers how to…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/07-game-monetization/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/07-game-monetization.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=studio-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=studio-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link active" aria-current="page" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Game Monetization</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Game Monetization</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Tell apart the money structures of premium, F2P and ad-supported games, know the key Steam and mobile numbers and Korean rules, and keep a solo developer&#39;s game scope under control.</p>
+</blockquote>
+<p>Games are the highest-variance asset in a solo studio&#39;s portfolio: in document 02&#39;s terms, the aggressive end of the barbell. This document covers how to shrink that bet to a size you can calculate.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Who pays</th>
+<th>Key metrics</th>
+<th>Fit for a solo developer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Premium (paid)</td>
+<td>Each buyer, once</td>
+<td>Wishlists, conversion, price</td>
+<td>High: low operating load, a proven path on PC</td>
+</tr>
+<tr>
+<td>F2P + IAP</td>
+<td>A small share of spending users</td>
+<td>Retention, ARPDAU, payer conversion</td>
+<td>Low: content operations and user acquisition costs are large</td>
+</tr>
+<tr>
+<td>Ad-supported (rewarded ads and others)</td>
+<td>Advertisers</td>
+<td>DAU, ad impressions, eCPM</td>
+<td>Medium: assumes huge install volume</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>Ads + IAP</td>
+<td>ARPDAU</td>
+<td>Medium: complex to design</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Wishlist</strong>: the list where a Steam user marks &quot;interested&quot;. It is the audience for launch notifications.</li>
+<li><strong>D1/D7/D30 retention</strong>: share of users who return on day 1, 7 and 30 after install.</li>
+<li><strong>ARPDAU</strong>: revenue per daily active user per day = daily revenue ÷ DAU.</li>
+<li><strong>Rewarded ads</strong>: ads a user chooses to watch in exchange for a reward. For ad rate math, see document 05.</li>
+</ul>
+<h2>Principles</h2>
+<h3>How Money Works on Steam</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Revenue share</td>
+<td>Per game lifetime revenue: Valve 30% up to $10M, 25% from $10M to $50M, 20% above $50M</td>
+<td>Valve announcement, applies to revenue after 2018-10-01</td>
+</tr>
+<tr>
+<td>Steam Direct fee</td>
+<td>$100 per app, non-refundable. Recouped in payment once adjusted gross revenue passes $1,000</td>
+<td>Steamworks documentation</td>
+</tr>
+<tr>
+<td>Revenue distribution</td>
+<td>Of about 41,000 games released over the prior three years, half grossed $500 or less</td>
+<td>Game World Observer, reported 2023-10-06</td>
+</tr>
+</tbody></table>
+<p>The last row is how document 01&#39;s power law shows up in games. The median game does not earn a living.</p>
+<h3>Wishlists and Launch Visibility</h3>
+<ul>
+<li>Per Steamworks documentation, users who wishlist a game get an email <strong>at launch</strong> and <strong>when it is discounted 20% or more</strong>. That is why wishlists on launch day underpin first-week sales.</li>
+<li>Chris Zukowski&#39;s (howtomarketagame.com) <strong>heuristics</strong>: about 7,000 wishlists gathered within a short period makes a &quot;Popular Upcoming&quot; appearance likely. First-week sales are roughly 15-25% of wishlists at launch, and games under 5,000 wishlists are quoted at a median of about 15%. These were confirmed through secondary sources, not the original page, so use them only as planning assumptions.</li>
+<li><strong>Steam Next Fest</strong>: an event that shows pre-release demos for one week. Each game can join only once. The October 2026 edition was announced for October 19-26 (submission deadline September 28), and the February 2027 edition for February 22 to March 1 (registration deadline 2027-01-10).</li>
+<li><strong>Regional pricing</strong>: Valve provides a tool that suggests per-currency prices relative to a USD base price, and the developer sets the final price.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+    P[Store page goes live] --&gt; W[Wishlists accumulate]
+    D[Demo and Next Fest] --&gt; W
+    C[Content and community] --&gt; W
+    W --&gt; L[Launch notification email]
+    L --&gt; S[First-week sales]
+    S --&gt; A{Algorithm widens exposure}
+    A --&gt;|strong response| T[More sales]
+    A --&gt;|weak response| F[Tail revenue from discount events]
+</code></pre>
+<h3>Mobile Game Numbers</h3>
+<ul>
+<li>GameAnalytics&#39; 2025 mobile benchmarks (about 11,600 games) reported median D1 around 22%, D7 around 3.4-3.9%, D30 under 1%, and top-quartile D1 around 26-28% (per secondary summaries).</li>
+<li>Revenue = DAU × ARPDAU. DAU is built from new installs times retention, so low retention demands large daily install volume (usually paid ads).</li>
+<li>IAP revenue carries app store fees (document 06). Ad revenue follows ad network settlement (document 05).</li>
+</ul>
+<h2>Applied: The Example Studio</h2>
+<p>The example studio (assumption) has three game prototypes: GM1 roguelike puzzle (PC), GM2 hyper-casual (mobile), GM3 narrative adventure (PC).</p>
+<p><strong>If GM1 sells on Steam at $9.99 (all assumptions)</strong></p>
+<pre><code class="language-text">Assumed average net unit price after VAT, refunds, regional prices and discounts: $7
+After Valve&#39;s 30% → 7 × 0.7 = $4.90 → KRW 6,860 at KRW 1,400
+Launch wishlists 3,000 × first week 15% (heuristic) = 450 units
+First-week revenue = 450 × 4.90 = $2,205 ≈ KRW 3.087 million
+To earn KRW 3.5 million in the first week: 3,500,000 ÷ 6,860 = 510.2 → 511 units
+Wishlists needed = 511 ÷ 0.15 = 3,406.7 → about 3,407
+</code></pre>
+<p><strong>If GM2 runs ad-supported (all assumptions)</strong></p>
+<pre><code class="language-text">Target DAU 2,000 × ARPDAU $0.04 = $80 a day
+30 days = $2,400 ≈ KRW 3.36 million (gross, before ad network settlement)
+Assume 3 active days per install on average → holding DAU 2,000 needs about 667 installs a day, 20,000 a month
+</code></pre>
+<p>Without a channel that brings 20,000 installs a month without ads, GM2 does not work on paper. GM1 has wishlists as a <strong>pre-launch leading indicator</strong>, so the bet size can be adjusted.</p>
+<p>Bad example:</p>
+<blockquote>
+<p>GM3, now with an open-world editor and multiplayer, has been in production for two years. It still has no store page.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Built a 20-minute demo containing only GM1&#39;s core loop first, opened the store page, watched the pace of wishlist growth, then set the production scope.</p>
+</blockquote>
+<h3>Scope Control for a Solo Developer</h3>
+<ul>
+<li><strong>One core loop</strong>: if the fun does not repeat within 30 seconds, more content will not revive it.</li>
+<li><strong>Vertical slice</strong>: finish one short stretch at final quality first and use it for store assets (trailer, screenshots).</li>
+<li><strong>Fixed time, variable scope</strong>: apply document 08&#39;s appetite to games too. Fix the date and cut features.</li>
+<li><strong>Avoid live-ops models</strong>: F2P live operations demand daily events and balancing. For one person, premium is the default.</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>Duties When Selling Games in Korea (checked 2026-09-29)</h3>
+<table>
+<thead>
+<tr>
+<th>Duty</th>
+<th>Detail</th>
+<th>What it means for a solo developer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Age rating</td>
+<td>A game must be rated before distribution (Game Industry Promotion Act Article 21). Platforms designated as self-rating operators, such as Google and Apple, handle it through a store questionnaire</td>
+<td>On mobile stores this often ends with the questionnaire</td>
+</tr>
+<tr>
+<td>Steam and other non-designated platforms</td>
+<td>As of July 2024 reports, Valve was only considering designation as a self-rating operator</td>
+<td>PC games rated All, 12+ or 15+ apply to the Game Contents Rating Board (GCRB), adults-only to the Game Rating and Administration Committee (GRAC). The fee table lists KRW 360,000 for PC, and a game production business registration certificate is required</td>
+</tr>
+<tr>
+<td>Loot box probability disclosure</td>
+<td>From 2024-03-22, a duty to display item types and probabilities (Enforcement Decree amendment)</td>
+<td>If you add gacha or random boxes, show the odds in the game and on the website</td>
+</tr>
+<tr>
+<td>Damages for disclosure violations</td>
+<td>In force from 2025-08-01: up to three times the damages for intentional violations, and the company must prove it was not at fault</td>
+<td>Loot boxes carry large legal risk for one person</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The legal basics and procedure are in the Business track&#39;s &quot;Terms · Privacy · E-Commerce&quot;, under game ratings.</li>
+<li>For VAT and foreign withholding on game revenue, see the Business track&#39;s tax documents.</li>
+</ul>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;A good game sells itself.&quot;</strong> On Steam, exposure is decided by wishlists and early response. Starting marketing on launch day is too late.</li>
+<li><strong>&quot;F2P earns more.&quot;</strong> That is the story of a small top slice. F2P works only with retention, content operations and a user acquisition budget all in place.</li>
+<li><strong>&quot;Wishlist conversion is a fixed number.&quot;</strong> It swings widely with genre, price and trailer. Use heuristics only as ranges.</li>
+<li><strong>&quot;You can join Next Fest again any time.&quot;</strong> It is once per game. Use it after the demo is ready.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>For premium, F2P and ad-supported games, who pays and which metrics are central?</li>
+<li>With a net unit price of $4.90 and 15% first-week conversion, how many wishlists does KRW 5 million in first-week revenue need? (KRW 1,400 per dollar)</li>
+<li>What does a mobile game with 22% D1 need to hold its DAU?</li>
+<li>Which rating path must a Korean solo developer releasing a PC game on Steam take?</li>
+<li>What duties arrived in 2024 and in 2025 for games with loot boxes?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://variety.com/2018/gaming/news/valve-revenue-split-changes-1203078700/">Variety - Valve Introduces New Revenue Split Changes For Steam Sales (2018)</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/gettingstarted/appfee">Steamworks - Steam Direct Fee</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/marketing/wishlist">Steamworks - Wishlists</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/marketing/discounts">Steamworks - Discounting</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/marketing/upcoming_events/nextfest/2026october">Steamworks - Steam Next Fest: October 2026</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/marketing/upcoming_events/nextfest/feb_2027">Steamworks - Steam Next Fest: February 2027</a> (accessed 2026-09-29)</li>
+<li><a href="https://partner.steamgames.com/doc/store/pricing">Steamworks - Pricing</a> (accessed 2026-09-29)</li>
+<li><a href="https://howtomarketagame.com/benchmarks/">How To Market A Game - Benchmarks</a> (accessed 2026-09-29)</li>
+<li><a href="https://presskit.gg/field-guides/how-to-build-steam-wishlist">presskit.gg - How to Get More Steam Wishlists Before Launch</a> (accessed 2026-09-29)</li>
+<li><a href="https://gameworldobserver.com/2023/10/06/steam-stats-41k-games-last-3-years-half-made-500-or-less">Game World Observer - 41k games released on Steam over past 3 years (2023-10-06)</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.gameanalytics.com/reports/2025-mobile-gaming-benchmarks">GameAnalytics - 2025 Mobile Gaming Benchmarks</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148924297">Korea Policy Briefing - Loot box information disclosed from March 22 (in Korean)</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=210245">Law Times - Litigation special rules for loot box disclosure violations take effect (in Korean)</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.asiae.co.kr/article/2024070317305284345">Asia Economy - Steam considers self-rating operator status in Korea (2024-07-03, in Korean)</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.gcrb.or.kr/Mobile_NEW/sub/fee%20calculation.aspx">Game Contents Rating Board - Fee guide (in Korean)</a> (accessed 2026-09-29)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/06-paid-and-subscription/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Paid Sales, Subscriptions and Pricing</span></a><a class="page-link next" href="../../../en/studio/08-shipping-system/"><span><small>Next</small>A Shipping System</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

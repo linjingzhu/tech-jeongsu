@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Choosing Opportunities and Validating Demand | Jeongsu Tech Notes (English)</title>
+    <meta name="description" content="As of: 2026-09-28. Market sizes and threshold numbers are all assumptions; fill in real values with your own research." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/03-opportunity-validation/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/03-opportunity-validation/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/03-opportunity-validation/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/03-opportunity-validation/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="Choosing Opportunities and Validating Demand | Jeongsu Tech Notes (English)" />
+    <meta property="og:description" content="As of: 2026-09-28. Market sizes and threshold numbers are all assumptions; fill in real values with your own research." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/03-opportunity-validation/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/03-opportunity-validation.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=studio-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=studio-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link active" aria-current="page" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Choosing Opportunities and Validating Demand</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Choosing Opportunities and Validating Demand</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Size opportunity candidates bottom-up, confirm demand before building with Mom Test interviews, fake doors, pre-sales and waitlists, and decide against pass criteria set in advance.</p>
+</blockquote>
+<p>As of: 2026-09-28. Market sizes and threshold numbers are all assumptions; fill in real values with your own research.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Opportunity source</td>
+<td>Where you discover a problem to solve (your own friction, user complaints, platform changes, search demand, and so on)</td>
+</tr>
+<tr>
+<td>TAM / SAM / SOM</td>
+<td>Total market / the market you can actually reach / the share you can realistically capture</td>
+</tr>
+<tr>
+<td>Bottom-up estimate</td>
+<td>Building market size from below as &quot;number of customers × spend per customer&quot;</td>
+</tr>
+<tr>
+<td>Fake door (smoke test)</td>
+<td>An experiment that opens a price page or button for a product or feature that does not exist yet and measures the response</td>
+</tr>
+<tr>
+<td>Pre-sale</td>
+<td>Validation that takes real payment before launch, often at a discount</td>
+</tr>
+<tr>
+<td>Waitlist</td>
+<td>Validation that collects emails for a launch notice</td>
+</tr>
+<tr>
+<td>Mom Test</td>
+<td>Customer-interview rules that ask about specific past behavior instead of collecting compliments (Rob Fitzpatrick)</td>
+</tr>
+<tr>
+<td>Signal threshold</td>
+<td>A pass number set before the experiment</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>Where Opportunities Come From</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Where to look for signal</th>
+<th>Strength</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Your own friction</td>
+<td>Tasks you keep working around</td>
+<td>You know the problem deeply</td>
+<td>It may be a problem only you have</td>
+</tr>
+<tr>
+<td>Complaints about existing products</td>
+<td>Low-star store reviews, complaint threads in communities</td>
+<td>People are already spending money</td>
+<td>Complaints can be loud while willingness to switch is weak</td>
+</tr>
+<tr>
+<td>Platform changes</td>
+<td>New OS APIs, store policy or fee changes</td>
+<td>A short window with few competitors opens</td>
+<td>The window closes fast</td>
+</tr>
+<tr>
+<td>Search demand</td>
+<td>Search Console, keyword tools, Q&amp;A sites</td>
+<td>Demand shows up as numbers</td>
+<td>AI answers can reduce clicks (05)</td>
+</tr>
+<tr>
+<td>Adjacent expansion</td>
+<td>Requests from users of a product you already launched</td>
+<td>The first customers already exist</td>
+<td>The market may be small</td>
+</tr>
+</tbody></table>
+<h3>Market Size for Small Products: Bottom-up</h3>
+<p>For a small product, a top-down estimate such as &quot;1% of the global design software market&quot; is useless. Build up from below: who, how many, and how much they pay.</p>
+<blockquote>
+<p>TAM = potential customers with the problem × annual willingness to pay
+SAM = the part of TAM you can reach with your language, platform and payment methods
+SOM = the share of SAM you can realistically win in the first one to two years</p>
+</blockquote>
+<p><strong>Example: a hypothetical creative tool (all numbers are assumptions)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Calculation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TAM</td>
+<td>50,000 potential customers × KRW 20,000 a year</td>
+<td>KRW 1.0 billion</td>
+</tr>
+<tr>
+<td>SAM</td>
+<td>Korean and English, share able to pay on the web 20% → 10,000 × KRW 20,000</td>
+<td>KRW 200 million</td>
+</tr>
+<tr>
+<td>SOM</td>
+<td>2% of SAM customers → 200 × KRW 20,000</td>
+<td>KRW 4,000,000 a year (about KRW 333,000 a month)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Bad example</strong>: &quot;TAM is KRW 1 billion, so taking just 1% gives KRW 10 million a year.&quot;</li>
+<li><strong>Good example</strong>: &quot;SOM is about KRW 330,000 a month, roughly 10% of break-even (KRW 3,500,000 a month) from this one product. Treat it as a side product that covers the KRW 500,000 fixed cost, or proceed only if there is a way to widen SAM.&quot;</li>
+</ul>
+<h3>Validating Demand Before Building: The Evidence Ladder</h3>
+<p>Actions are stronger evidence than words, and money is stronger than actions.</p>
+<pre><code class="language-mermaid">flowchart TD
+    S1[Compliments and opinions] --&gt; S2[Email sign-up]
+    S2 --&gt; S3[Waitlist reply or return visit]
+    S3 --&gt; S4[Click on the buy button of a price page]
+    S4 --&gt; S5[Pre-payment or deposit]
+    S5 --&gt; T{Is the highest signal reached at or above the preset threshold}
+    T --&gt;|yes| GO[Move to a build slot]
+    T --&gt;|no| RE[Revise the message once and measure again]
+    RE --&gt;|short again| AR[Archive]
+</code></pre>
+<ul>
+<li><strong>Fake door</strong>: Tell anyone who presses the button right away that &quot;this is not ready yet and we will notify you at launch.&quot; Do not take money or pretend it exists.</li>
+<li><strong>Pre-sale</strong>: Real payment makes it the strongest signal. It also creates e-commerce obligations such as refund terms, a delivery date and mail-order sales registration. Read the Business section&#39;s &quot;Registration · Mail-Order Sales&quot; and &quot;Terms · Privacy · E-Commerce&quot; first.</li>
+<li><strong>Waitlist</strong>: Collecting emails requires consent to personal data collection and a privacy policy. Filter signal quality once more with reply and return-visit rates after sign-up.</li>
+<li><strong>Steam wishlist</strong>: A strong advance signal for games. How to read it is covered in 07.</li>
+</ul>
+<h3>Mom Test Interviews</h3>
+<p>In <em>The Mom Test</em> (2013), Rob Fitzpatrick set out three rules for asking questions even your mom cannot lie to you about: <strong>talk about their life instead of your idea, ask about specifics in the past instead of opinions about the future, and talk less and listen more.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Bad question</th>
+<th>Why it is bad</th>
+<th>Good question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&quot;Would you use an app like this?&quot;</td>
+<td>A hypothetical future; politeness produces &quot;yes&quot;</td>
+<td>&quot;The last time you did this task, how did you do it?&quot;</td>
+</tr>
+<tr>
+<td>&quot;Would you pay KRW 5,000 a month?&quot;</td>
+<td>Opinions about price do not predict behavior</td>
+<td>&quot;Are you spending any money or time on this problem right now?&quot;</td>
+</tr>
+<tr>
+<td>&quot;What do you think of my idea?&quot;</td>
+<td>You end up collecting compliments</td>
+<td>&quot;When did this problem last happen? What did it cost you then?&quot;</td>
+</tr>
+</tbody></table>
+<h3>Set Signal Thresholds First</h3>
+<p>If you set the criteria after the experiment, any result reads as &quot;promising&quot;. Write one line before the experiment.</p>
+<blockquote>
+<p>Hypothesis / metric / period / pass threshold / action if passed / action if missed</p>
+</blockquote>
+<p>Example (assumption): &quot;Productivity app P solves freelancers&#39; schedule-sorting problem / waitlist sign-ups per landing-page visit / 2 weeks / at least 10% of 300 visitors / move to a build slot / revise the message once and measure again; if short again, archive.&quot;</p>
+<h2>Applied: The Example Studio</h2>
+<p>This lays out the products placed in validation slots in 02 and the first validation method for each other type. All thresholds are assumptions, run within the monthly validation budget of 24 hours.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>First signal to watch</th>
+<th>Method</th>
+<th>Example pass threshold (assumption)</th>
+<th>Period</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Game</td>
+<td>Steam page wishlists, demo play</td>
+<td>Publish a Steam page, a short demo</td>
+<td>Follow the criteria in 07</td>
+<td>See 07</td>
+</tr>
+<tr>
+<td>Creative tool</td>
+<td>Pre-payment</td>
+<td>Price page + early-bird payment</td>
+<td>5 payments from 300 visitors</td>
+<td>3 weeks</td>
+</tr>
+<tr>
+<td>Productivity app</td>
+<td>Past behavior, waitlist sign-ups</td>
+<td>5 Mom Test interviews + waitlist page</td>
+<td>At least 3 interviewees faced it recently, 10% sign-up</td>
+<td>2 weeks</td>
+</tr>
+<tr>
+<td>Content site</td>
+<td>Search impressions and clicks</td>
+<td>Publish 20 articles, then Search Console</td>
+<td>At least 100 weekly clicks by week 8</td>
+<td>8 weeks</td>
+</tr>
+</tbody></table>
+<p>The technical documentation site already has articles, so the traffic math in 05 comes before &quot;demand validation&quot;. If visitor numbers fall far short of what the target RPM math requires, consider other models (04) alongside ads.</p>
+<h2>Going Deeper</h2>
+<p><strong>Conversion rates wobble in small samples.</strong> The standard error of a conversion rate p is √(p × (1 − p) ÷ n) (a normal approximation, and a rough one for small samples).</p>
+<table>
+<thead>
+<tr>
+<th>Visitors n</th>
+<th>Observed sign-up rate</th>
+<th>Standard error</th>
+<th>Rough 95% range (± 1.96 × standard error)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>300</td>
+<td>10%</td>
+<td>√(0.09 ÷ 300) ≈ 1.73 points</td>
+<td>about 6.6% to 13.4%</td>
+</tr>
+<tr>
+<td>50</td>
+<td>10%</td>
+<td>√(0.09 ÷ 50) ≈ 4.24 points</td>
+<td>about 1.7% to 18.3%</td>
+</tr>
+</tbody></table>
+<p>A 10% seen from 50 visitors might really be 2% or 18%. So set a <strong>minimum sample size</strong> in advance along with the threshold. Not having enough traffic to fill the sample is itself an important signal: &quot;there is no acquisition channel&quot;.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;We got lots of compliments, so there is demand&quot;</strong> — Compliments sit at the bottom of the evidence ladder.</li>
+<li><strong>&quot;A big TAM means a good opportunity&quot;</strong> — A solo studio&#39;s problem is SOM and the path to reach it.</li>
+<li><strong>&quot;No competitors means opportunity&quot;</strong> — There may be no competitors because there is no demand. First check whether anyone already spends money.</li>
+<li><strong>&quot;A fake door deceives users&quot;</strong> — Telling the truth immediately and taking no money makes it an honest experiment. The moment you take payment, it is a pre-sale with legal obligations.</li>
+<li><strong>&quot;If validation is ambiguous, build a bit more&quot;</strong> — Ambiguous means missed. Revise the message once, measure again, and stop if it misses again.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Write a bottom-up TAM/SAM/SOM for one current candidate. What percentage of break-even is the SOM?</li>
+<li>Find one question from a recent customer conversation that broke the Mom Test and rewrite it as a good question.</li>
+<li>What is the highest rung of the evidence ladder your product has reached so far?</li>
+<li>With 100 visitors and a 10% sign-up rate, compute the rough 95% range.</li>
+<li>What are two legal obligations to check before starting a pre-sale?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.goodreads.com/en/book/show/52283963-the-mom-test">The Mom Test — Rob Fitzpatrick (Goodreads)</a> (2013, accessed 2026-09-28)</li>
+<li><a href="https://mtlynch.io/book-reports/the-mom-test/">The Mom Test by Rob Fitzpatrick — mtlynch.io book report</a> (accessed 2026-09-28)</li>
+<li><a href="https://learningloop.io/plays/fake-door-testing">Fake Door Testing: What It Is and How to Run One — Learning Loop</a> (accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/02-portfolio-theory/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Product Portfolio Theory</span></a><a class="page-link next" href="../../../en/studio/04-revenue-models/"><span><small>Next</small>Revenue Models: An Introduction</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -13,6 +13,7 @@ Jeongsu Tech Notes is a personal technical notebook that turns what I learn in d
 | Marketing | How do you bring a product to customers and measure the results? |
 | Platform Deployment & Services | What does it take to ship code to users safely and run it? |
 | Business | How do you prepare registration, legal and tax work when starting a software business in Korea? |
+| Solo Studio Monetization | What should a solo studio that builds a lot choose, ship and earn from? |
 
 ## How the documents are made
 

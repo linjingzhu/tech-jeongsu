@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>A Shipping System | Jeongsu Tech Notes (English)</title>
+    <meta name="description" content="AI agents made building faster, but shipping does not get faster on its own. That is why the example studio (assumption) has twelve prototypes and one lau…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/08-shipping-system/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/08-shipping-system/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/08-shipping-system/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/08-shipping-system/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Jeongsu Tech Notes" />
+    <meta property="og:title" content="A Shipping System | Jeongsu Tech Notes (English)" />
+    <meta property="og:description" content="AI agents made building faster, but shipping does not get faster on its own. That is why the example studio (assumption) has twelve prototypes and one lau…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/08-shipping-system/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/08-shipping-system.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=studio-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=studio-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">Jeongsu Tech</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link active" aria-current="page" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>A Shipping System</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>A Shipping System</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Know why prototypes fail to ship, and build a shipping system made of a definition of done, scope cutting, a repeatable launch checklist, a launch cadence and a 30-day post-launch routine.</p>
+</blockquote>
+<p>AI agents made building faster, but <strong>shipping does not get faster on its own</strong>. That is why the example studio (assumption) has twelve prototypes and one launch. Shipping is made by a system, not by willpower.</p>
+<h2>Key Concepts</h2>
+<h3>Five Reasons Prototypes Never Ship</h3>
+<table>
+<thead>
+<tr>
+<th>Cause</th>
+<th>Symptom</th>
+<th>How a system prevents it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scope creep</td>
+<td>&quot;Just one more thing&quot; repeats</td>
+<td>Fix the time first and cut scope (appetite)</td>
+</tr>
+<tr>
+<td>Polish loop</td>
+<td>You keep reworking screens that already work</td>
+<td>Write the bar for &quot;good enough&quot; into the definition of done</td>
+</tr>
+<tr>
+<td>Fear of launch</td>
+<td>The launch date keeps slipping</td>
+<td>Ship small and often to lighten each launch</td>
+</tr>
+<tr>
+<td>No distribution</td>
+<td>Only after building: &quot;who do I tell?&quot;</td>
+<td>Decide where the first 100 users come from before building</td>
+</tr>
+<tr>
+<td>Context switching</td>
+<td>Touching twelve projects a little in turn</td>
+<td>Limit work in progress (WIP) (document 02)</td>
+</tr>
+</tbody></table>
+<h3>A Definition of Done for a Solo Studio</h3>
+<p>Shippable = <strong>all</strong> of the following are true.</p>
+<ul>
+<li>A first-time user can finish one core task without help.</li>
+<li>A path to getting paid works (payment, ads, or a pre-sale link). For free products, a path to collect contact details.</li>
+<li>Measurement is on: visits, activation and payment events (document 09).</li>
+<li>Terms, privacy policy and business information are displayed (Business track).</li>
+<li>A known-bug list exists, and critical bugs are zero.</li>
+<li>Three channels for the first announcement are chosen.</li>
+</ul>
+<h2>Principles</h2>
+<h3>Fix the Time and Cut the Scope</h3>
+<ul>
+<li><strong>Parkinson&#39;s law</strong>: &quot;Work expands so as to fill the time available for its completion&quot; (C. Northcote Parkinson, The Economist, 1955). Without a deadline, polishing never ends.</li>
+<li><strong>Appetite (Shape Up)</strong>: a concept Ryan Singer of Basecamp set out in <em>Shape Up</em> (2019). Instead of &quot;how long will it take?&quot;, first decide &quot;how much time is this worth?&quot;, then design a solution that fits that time. Basecamp uses six-week build cycles and a two-week cooldown.</li>
+<li><strong>MoSCoW</strong>: a prioritization technique Dai Clegg created at Oracle in 1994, splitting work into Must, Should, Could and Won&#39;t. DSDM (Agile Business Consortium) guidance recommends keeping <strong>Must at no more than 60% of effort (time)</strong> and Could at about 20%, leaving room to protect the Musts when the schedule slips. Split by time, not by count.</li>
+</ul>
+<h3>Ship Small and Often</h3>
+<ul>
+<li>A line widely attributed to Reid Hoffman (LinkedIn co-founder): &quot;If you are not embarrassed by the first version of your product, you&#39;ve launched too late.&quot; It does not mean abandon quality; it means do not hide for long before learning.</li>
+<li>Pieter Levels publicly started a &quot;12 startups in 12 months&quot; challenge in 2014, and Nomad List and Remote OK came out of it. Fix the launch cadence and shipping becomes a habit instead of an event.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+    I[Idea] --&gt; A[Set the appetite]
+    A --&gt; M[Cut scope with MoSCoW]
+    M --&gt; B[Build]
+    B --&gt; D{Meets definition of done}
+    D --&gt;|no| M
+    D --&gt;|yes| L[Launch checklist]
+    L --&gt; R[Launch]
+    R --&gt; F[30-day routine]
+    F --&gt; G[Gate review in document 09]
+</code></pre>
+<h2>Applied: The Example Studio</h2>
+<p>The example studio gives the MVP of T1, a pixel art editor (creative tool), a <strong>60-hour appetite</strong> (assumption). At 16 hours a week on T1 out of 160 hours a month, that is about four weeks.</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Items</th>
+<th>Hours</th>
+<th>Share</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Must</td>
+<td>Canvas, palette, two layers, PNG export, payment (early bird)</td>
+<td>36 hours</td>
+<td>60%</td>
+</tr>
+<tr>
+<td>Should</td>
+<td>Four animation frames, shortcuts</td>
+<td>12 hours</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Could</td>
+<td>Themes, share link</td>
+<td>12 hours</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Won&#39;t (not this time)</td>
+<td>Collaboration, mobile app, plugins</td>
+<td>0 hours</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Total</td>
+<td></td>
+<td>60 hours</td>
+<td>100%</td>
+</tr>
+</tbody></table>
+<p>If Must exceeds 60%, cut the scope again. If the Musts are not done at hour 45, drop the Coulds and shrink the Shoulds. <strong>The launch date does not move.</strong></p>
+<h3>Launch Cadence</h3>
+<ul>
+<li>The example studio uses an <strong>8-week cycle</strong> (6 weeks building + 2 weeks cooldown) (assumption). 52 weeks a year ÷ 8 weeks = 6.5, so six or seven launch opportunities a year.</li>
+<li>Each cycle allows one &quot;big launch&quot; (a new product or monetization) and several &quot;small launches&quot; (features, price experiments).</li>
+<li>The two cooldown weeks go to bug fixing, the gate review in document 09, and betting on the next cycle.</li>
+</ul>
+<h3>A Repeatable Launch Checklist</h3>
+<pre><code class="language-text">[D-14] Confirm three sources of the first 100 users, publish a waitlist page
+[D-7]  Check the definition of done, run one test payment and one refund
+[D-3]  Finalize store and landing copy, screenshots, price table
+[D-1]  Verify measurement events, verify the rollback path, three announcement drafts
+[D-0]  Deploy, email the waitlist, announce in three channels, answer questions for the first 24 hours
+</code></pre>
+<p>Design the first 100 users before the product. For choosing channels and tiering launches, see the Marketing track&#39;s &quot;Go-to-Market · Launch · PLG and SLG&quot; and &quot;Channel Strategy · Content · Paid · Lifecycle · Community&quot;.</p>
+<h3>The 30-Day Post-Launch Routine</h3>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>What to do</th>
+<th>Number to watch</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D+1</td>
+<td>Error logs, payment failures, answer first questions</td>
+<td>Critical error count</td>
+</tr>
+<tr>
+<td>D+3</td>
+<td>Fix where users get stuck in activation</td>
+<td>Sign-up to core task completion rate</td>
+</tr>
+<tr>
+<td>D+7</td>
+<td>Short conversations with five users (the Mom Test from document 03)</td>
+<td>First-week retention, first payments</td>
+</tr>
+<tr>
+<td>D+14</td>
+<td>One price or onboarding experiment</td>
+<td>Conversion rate</td>
+</tr>
+<tr>
+<td>D+30</td>
+<td>Gate review in document 09: kill, continue or double down</td>
+<td>Thresholds set in advance</td>
+</tr>
+</tbody></table>
+<p>Bad example:</p>
+<blockquote>
+<p>Started a new prototype the day after launch. A month later, the payment button turned out to have been broken on mobile.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Put the 30-day routine on the calendar first, and set new-prototype time to zero for that period.</p>
+</blockquote>
+<h2>Going Deeper</h2>
+<h3>Running the Release Pipeline with AI Agents</h3>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Work for the agent</th>
+<th>Gate a human keeps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Build and test</td>
+<td>Run tests, lint and builds in CI, summarize failures</td>
+<td>What the tests actually verify</td>
+</tr>
+<tr>
+<td>Release notes</td>
+<td>Draft changes from commits and issues</td>
+<td>The sentences sent to users</td>
+</tr>
+<tr>
+<td>Store assets</td>
+<td>Fit screenshot specs, draft descriptions and translations</td>
+<td>Whether promised features really exist</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Deploy to staging, run smoke tests</td>
+<td>Production approval and rollback decisions</td>
+</tr>
+<tr>
+<td>After launch</td>
+<td>Summarize error logs, triage questions</td>
+<td>Answers on refunds and personal data</td>
+</tr>
+</tbody></table>
+<p>Build the pipeline following the Platform track&#39;s &quot;CI/CD Pipeline: From Commit to Production&quot; and &quot;Practical Guide for Small Teams: Solo Developers and Small Teams&quot;. Keep payments, personal data and production approval as human gates.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;A little more polish and the response will improve.&quot;</strong> Pre-launch polish tests no hypothesis. Response can only be measured after launch.</li>
+<li><strong>&quot;A launch is one big event.&quot;</strong> Shipping small and often makes each failure cheap and speeds up learning.</li>
+<li><strong>&quot;If AI builds it, there is no need to cut scope.&quot;</strong> Building gets cheaper, but testing, support and maintenance costs still grow with the number of features.</li>
+<li><strong>&quot;Users can be found after launch.&quot;</strong> A launch without a source for the first 100 users is a launch nobody sees.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Pick which of the five causes kept one of your prototypes from shipping, and write down the system that would prevent it.</li>
+<li>With an 80-hour appetite, what is the most time Must can take under DSDM guidance?</li>
+<li>How does an appetite differ from an estimate?</li>
+<li>With an 8-week cycle, how many launch opportunities are there in a year, and what happens during cooldown?</li>
+<li>Why should you not start a new prototype during the 30 days after launch?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://basecamp.com/shapeup">Basecamp - Shape Up: Stop Running in Circles and Ship Work that Matters</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.agilebusiness.org/dsdm-project-framework/moscow-prioritisation.html">Agile Business Consortium - MoSCoW Prioritisation (DSDM Handbook)</a> (accessed 2026-09-29)</li>
+<li><a href="https://en.wikipedia.org/wiki/MoSCoW_method">Wikipedia - MoSCoW method</a> (accessed 2026-09-29)</li>
+<li><a href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Wikipedia - Parkinson&#39;s law</a> (accessed 2026-09-29)</li>
+<li><a href="https://levels.io/12-startups-12-months">levels.io - I&#39;m Launching 12 Startups in 12 Months (2014)</a> (accessed 2026-09-29)</li>
+<li><a href="https://www.producthunt.com/launch">Product Hunt - Launch Guide</a> (accessed 2026-09-29)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/07-game-monetization/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Game Monetization</span></a><a class="page-link next" href="../../../en/studio/09-portfolio-decisions/"><span><small>Next</small>Measurement and Portfolio Decisions</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 Jeongsu Tech Notes</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>
