@@ -134,7 +134,7 @@ Codex's `usage` carries `cached_input_tokens` and `reasoning_output_tokens` sepa
 | 14:00 | Refactor another product | Codex CLI | Input 400,000 (320,000 cached) / output 30,000 (18,000 reasoning) | Drawn from the ChatGPT plan limit |
 | 22:00 | Generate 1,000 product descriptions | Claude API · Sonnet 5.5 Batch | 2,000 input / 500 output each | $9.00 standard → $4.50 Batch |
 
-All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = **$6.41** (about 8,970 KRW). The lines to notice are not model prices but **one cache miss** (about 25x a hit) and **work that could run overnight** (halved by Batch). For gaps of 5 to 60 minutes the 1-hour TTL pays off, but past an hour, as here, neither TTL helps, so `/clear` before lunch or accept the cold miss. Tool-by-tool methods are in "Saving Tokens in Practice".
+All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = **$6.41** (about 8,970 KRW). The lines to notice are not model prices but **one cache miss** (about 25x a hit) and **work that could run overnight** (halved by Batch). For gaps of 5 to 60 minutes the 1-hour TTL pays off. On models with cheap cache reads such as Opus 5.5 and Fable 5.1, though, a 5-minute TTL plus a `max_tokens: 0` keep-alive can be cheaper (see the Cache break-even section below). Past an hour, as here, neither TTL helps, so `/clear` before lunch or accept the cold miss. Tool-by-tool methods are in "Saving Tokens in Practice".
 
 ## Going Deeper
 
@@ -144,7 +144,7 @@ Moving from Sonnet 4.6 ($3/$15) to Sonnet 5 ($2/$10) cuts the input price by 33%
 
 ### Cache break-even
 
-The 5-minute TTL already pays on the second request: 1.25 + 0.1 = 1.35 < 2 (two uncached requests). The 1-hour TTL pays from the third: 2 + 0.1×2 = 2.2 < 3. On Opus 5.5, reads are 0.05x, so 1.25 + 0.05 = 1.30. If requests start less than 5 minutes apart, the 5-minute TTL is always cheaper; at 5 to 60 minutes, the 1-hour TTL wins.
+The 5-minute TTL already pays on the second request: 1.25 + 0.1 = 1.35 < 2 (two uncached requests). The 1-hour TTL pays from the third: 2 + 0.1×2 = 2.2 < 3. On Opus 5.5, reads are 0.05x, so 1.25 + 0.05 = 1.30. If requests start less than 5 minutes apart, the 5-minute TTL is always cheaper; at 5 to 60 minutes, the 1-hour TTL usually wins. The exception is models with cheap reads, such as Opus 5.5 (0.05x reads) and Fable 5.1 (0.025x). A keep-alive that stays on the 5-minute TTL and, during a pause, re-sends the previous request with `max_tokens: 0` every 4 minutes pays only a read per refresh. In Anthropic's "Optimizing for cost and intelligence" measurements, on Opus 5.5 this cost 8-13% less than the 1-hour TTL when only 5-10% of turns followed a pause of 6 to 32 minutes (at `medium` effort), but more when every turn followed a pause. On Fable 5.1 it cost 13-20% less when pauses ran for minutes. Those measurements sent the keep-alive with `max_tokens: 1`; whether `max_tokens: 0` refreshes an existing entry was not measured on Opus 5.5. A `max_tokens: 0` request cannot be combined with `stream: true` or Batch.
 
 ### Thinking tokens bill at the output rate
 

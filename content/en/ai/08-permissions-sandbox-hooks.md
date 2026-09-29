@@ -66,7 +66,7 @@ Claude Code's sandbox puts an OS boundary around Bash · PowerShell · Monitor c
 | `approval_policy` | `never` | never asks; failures go straight back to the model |
 | `approval_policy` | `{ granular = { ... } }` | per-category allow or automatic rejection |
 
-So Codex separates **what it can do** (`sandbox_mode`) from **when it asks** (`approval_policy`). The value `untrusted` raises a "no longer supported" error in the 2026-09 main source. On the CLI, change them with `-s`/`--sandbox` and `-a`/`--ask-for-approval`; `--dangerously-bypass-approvals-and-sandbox` (alias `--yolo`) is only for environments already isolated from outside. Per-command rules are written in Starlark in `rules/*.rules` under a config folder (for example `~/.codex/rules/default.rules`), such as `prefix_rule(pattern = ["git", "push", ["--force", "-f"]], decision = "forbidden")`. The rule matches tokens **from the front**, so `git push origin --force` is not caught.
+So Codex separates **what it can do** (`sandbox_mode`) from **when it asks** (`approval_policy`). The value `untrusted` raises a "no longer supported" error in the 2026-09 main source. On the CLI, change the sandbox with `-s`/`--sandbox`; the interactive TUI also accepts `-a`/`--ask-for-approval` (`-a` is a TUI flag defined in `codex-rs/tui/src/cli.rs` in the 2026-09 main source, not one of the shared options that `codex exec` also takes); `--dangerously-bypass-approvals-and-sandbox` (alias `--yolo`) is only for environments already isolated from outside. Per-command rules are written in Starlark in `rules/*.rules` under a config folder (for example `~/.codex/rules/default.rules`), such as `prefix_rule(pattern = ["git", "push", ["--force", "-f"]], decision = "forbidden")`. The rule matches tokens **from the front**, so `git push origin --force` is not caught.
 
 ### Hooks: events and the input/output contract
 
@@ -93,7 +93,7 @@ flowchart TD
 
 ## Applied: This Repository's Setup
 
-This repository bakes permissions into its role agents. The two Claude agents declare `tools: Read, Grep, Glob, Bash` and `permissionMode: plan`; the three Codex agents declare `sandbox_mode = "read-only"`. `.ai/HARNESS.md` adds that a parent runtime override can supersede a file's sandbox setting, so the effective permissions must be verified. But **there is no committed `.claude/settings.json` and no hook**. Below is a draft that fills that gap; this repository's test command is `node --test tests/*.test.cjs`.
+This repository bakes permissions into its role agents. The two Claude agents declare `tools: Read, Grep, Glob, Bash` and `permissionMode: plan`; the three Codex agents declare `sandbox_mode = "read-only"`. The Claude agents, though, are read-only only when the parent is in default, plan or dontAsk. When the parent conversation is in `acceptEdits`, `auto` or `bypassPermissions`, the subagent runs in the parent's mode and `permissionMode` is ignored, and since both agents have `Bash`, they are not read-only then. `.ai/HARNESS.md` adds that a parent runtime override can supersede a file's sandbox setting, so the effective permissions must be verified. But **there is no committed `.claude/settings.json` and no hook**. Below is a draft that fills that gap; this repository's test command is `node --test tests/*.test.cjs`.
 
 ```json
 {
@@ -110,21 +110,22 @@ This repository bakes permissions into its role agents. The two Claude agents de
 }
 ```
 
-**Hook 1, block force push** (`.claude/hooks/block-force-push.sh`). It unwraps single-token quotes, deletes multi-word quoted strings (commit messages and the like), splits the command on `&&` · `;` · `|` · newlines, and checks **only the arguments after each `push`**. If `jq` is missing or the input cannot be read, it **fails closed** (exit 2). Had a `jq` failure left `CMD` empty and the script exited 0, the block would be silently off, and stderr at exit 0 only reaches the debug log, so nobody would know.
+**Hook 1, block force push** (`.claude/hooks/block-force-push.sh`). It joins lines continued with a trailing `\`, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains `$` or a backtick is kept, not deleted. It then deletes comments (from a `#` at the start of a word to the end of the line), splits the command on `&&` · `;` · `|` · newlines, and checks **only the arguments after each `push`**. It blocks bundled short options containing `f` (`-uf`, `-4f`), every long option starting with `--force` (including abbreviations such as `--force-w`), `--mirror` and its abbreviations (down to `--m`), `+` refspecs, and **every argument containing `$` or a backtick**. Variables and command substitutions have no value until they run, so it blocks them without looking, failing closed. If `jq` is missing or the input cannot be read, it **fails closed** (exit 2). Had a `jq` failure left `CMD` empty and the script exited 0, the block would have been silently off, and stderr at exit 0 only reaches the debug log, so nobody would have known.
 
 ```bash
 command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
 CMD=$(jq -r '.tool_input.command // empty') || exit 2
-S=$(printf '%s\n' "$CMD" | sed -E "s/[\"']([^\"'[:space:]]*)[\"']/\1/g; s/\"[^\"]*\"|'[^']*'//g; s/(&&|\|\||[;&|])/\n/g")
+CMD=${CMD//$'\\\n'/}
+S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
 ARGS=$(printf '%s\n' "$S" | sed -nE 's/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p')
-if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z]*f[A-Za-z]*([[:space:]]|$)|[[:space:]]--force(-with-lease|-if-includes)?(=|[[:space:]]|$)|[[:space:]]--mirror([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]'; then
+if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]|[$`]'; then
   echo "Blocked: force push is not allowed from an agent session. Ask the owner." >&2
   exit 2
 fi
 exit 0
 ```
 
-Below is a subset of the 29 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). "No jq" means a run with `jq` removed from `PATH`. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.
+Below is a subset of the 53 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). That `-4f`, `--force-w`, `--mirr`, `\-f` and `--forc$'e'` really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. "No jq" means a run with `jq` removed from `PATH`. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.
 
 | Command | Expected | With jq | No jq |
 |---|---|---|---|
@@ -132,6 +133,9 @@ Below is a subset of the 29 cases actually run (2026-09-29, bash 5 · GNU grep/s
 | `git push -u origin feature` | 0 | 0 | 2 |
 | `git push origin fix-foo` | 0 | 0 | 2 |
 | `git commit -m "push -f later" && git status` | 0 | 0 | 2 |
+| `git push origin main # -f` · `git commit -m "fix #12" && git push origin main` | 0 | 0 | 2 |
+| `git push -o ci.skip origin main` · `origin force` · `origin mirror` · `origin fix-force` | 0 | 0 | 2 |
+| `git push --no-force` · `--no-force-with-lease` · `--porcelain` · `--prune` · `--follow-tags` · `--push-option=x` | 0 | 0 | 2 |
 | `git push -fu origin main` · `-uf` · `-nf` | 2 | 2 | 2 |
 | `git -C . push -f origin main` | 2 | 2 | 2 |
 | `git push origin "+main"` · `'+main'` · `HEAD:+main` | 2 | 2 | 2 |
@@ -139,13 +143,27 @@ Below is a subset of the 29 cases actually run (2026-09-29, bash 5 · GNU grep/s
 | `git push --force-if-includes origin main` | 2 | 2 | 2 |
 | `git push --mirror origin` | 2 | 2 | 2 |
 | `git commit -m "push" && git push -f origin main` | 2 | 2 | 2 |
+| `git push -4f origin main` · `-f4` | 2 | 2 | 2 |
+| `git push --force-w origin main` · `--force-with-l` | 2 | 2 | 2 |
+| `git push --mirr origin` · `--mir` · `--mi` · `--m` | 2 | 2 | 2 |
+| `git push \-f origin main` · `--forc\e` · `--forc$'e'` | 2 | 2 | 2 |
+| `F=-f; git push $F origin main` · `git push -$(echo f) origin main` | 2 | 2 | 2 |
+| `git push origin fix#1 -f` · `git commit -m '#' && git push -f origin main` | 2 | 2 | 2 |
+| `git push \` then a newline, next line `-f origin main` | 2 | 2 | 2 |
+| Limit: `git p -f origin main` · `git -c alias.p=push p -f origin main` | 2 | **0** | 2 |
+| Limit: `echo push -f` | 0 | **2** | 2 |
 
-**Hooks 2 · 3, do not stop with uncommitted changes this session made**. A session can start on a dirty tree that holds the owner's WIP. So `SessionStart` (`session-baseline.sh`) saves `git status --porcelain` as a per-session baseline, and `Stop` (`stop-if-dirty.sh`) objects **only to new lines**. Paths come from `cwd` in the stdin JSON, not `$CLAUDE_PROJECT_DIR`: after Claude enters a worktree, `CLAUDE_PROJECT_DIR` stays where the session started and only `cwd` follows. The baseline is written only when absent, so it survives `SessionStart` firing again after compact or resume.
+Comment removal targets only a `#` **at the start of a word**, and a single-token quote containing `#` is deleted rather than unwrapped. Deleting every `#` on the line would let `git push origin fix#1 -f` and `git commit -m '#' && git push -f origin main` through (checked with the two cases above). Conversely, as in bash, the tail of `git status;# note && git push -f` is a comment, so it passes.
+
+The limits of Hook 1, stated plainly: aliases are expanded by git at run time, so they are not caught (`git p -f`, `git -c alias.p=push p -f`). Neither are strings wrapped in `eval` or `sh -c`, a push inside a script file, or force set in git config (a `+` refspec in `remote.<name>.push`, `remote.<name>.mirror`). In the other direction, other commands where `-f` follows the word `push`, such as `echo push -f`, and every push argument containing `$`, such as `git push origin $BRANCH`, are blocked as false positives. So this hook cuts down common mistakes; it is not a security boundary. The real boundary is a server-side rule outside the agent, such as the GitHub branch protection in the T3 row of the risk-tier table below.
+
+**Hooks 2 · 3, do not stop with uncommitted changes this session made**. A session can start on a dirty tree that holds the owner's WIP. So `SessionStart` (`session-baseline.sh`) saves `git status --porcelain` as a per-session baseline, and `Stop` (`stop-if-dirty.sh`) objects **only to new lines**. Paths come from `cwd` in the stdin JSON, not `$CLAUDE_PROJECT_DIR`: after Claude enters a worktree, `CLAUDE_PROJECT_DIR` stays where the session started and only `cwd` follows. The baseline is written only when absent, so it survives `SessionStart` firing again after compact or resume. `session_id` goes into a file name, so any character other than letters, digits, `.`, `_` and `-` becomes `_`, and if the value is empty or `null` the script does nothing and exits.
 
 ```bash
 command -v jq >/dev/null || exit 0
 INPUT=$(cat)
-SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+SID=$(printf '%s' "$INPUT" | jq -j '.session_id' | tr -c 'A-Za-z0-9._-' '_'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+[ -n "$SID" ] && [ "$SID" != null ] || exit 0
 cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
 [ -e "$GITDIR/agent-baseline-$SID" ] || git status --porcelain > "$GITDIR/agent-baseline-$SID"
 exit 0
@@ -155,7 +173,8 @@ exit 0
 command -v jq >/dev/null || { echo '{"systemMessage":"stop-if-dirty: jq is missing, uncommitted-work check skipped"}'; exit 0; }
 INPUT=$(cat)
 [ "$(printf '%s' "$INPUT" | jq -r '.stop_hook_active')" = "true" ] && exit 0
-SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+SID=$(printf '%s' "$INPUT" | jq -j '.session_id' | tr -c 'A-Za-z0-9._-' '_'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+[ -n "$SID" ] && [ "$SID" != null ] || exit 0
 cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
 BASE="$GITDIR/agent-baseline-$SID"
 [ -f "$BASE" ] || { echo '{"systemMessage":"stop-if-dirty: no session baseline, check skipped"}'; exit 0; }
@@ -175,8 +194,11 @@ exit 0
 | same, with `stop_hook_active: true` | 0 | 0 |
 | agent committed; only the owner's WIP remains | 0 | 0 |
 | no baseline · no `jq` | 0 + warning | 0 + `systemMessage` |
+| `session_id` is `../../evil` · `a b/c` | a file inside `.git/` | `agent-baseline-.._.._evil` · `agent-baseline-a_b_c` |
+| `session_id` missing · `null` · empty string | 0, no file | 0, no file |
+| Limit: agent adds a new file inside `u/`, which the owner left untracked | 2 | **0** |
 
-The limits, stated plainly: if the agent further edits a file the owner had already modified, the `git status` line is unchanged and the hook misses it. With no baseline (installed mid-session, a new worktree) or no `jq`, it does not block but reports through `systemMessage`, because failing closed at Stop would leave a session unable to end. Baseline files stay in `.git/`, so remove them with a `SessionEnd` hook if you want.
+The limits, stated plainly: if the agent further edits a file the owner had already modified, the `git status` line is unchanged and the hook misses it. If the agent adds a file inside a directory the owner left untracked, `git status --porcelain` still shows the single line `?? u/`, so the hook misses that too (the last row of the table above). With no baseline (installed mid-session, a new worktree) or no `jq`, it does not block but reports through `systemMessage`, because failing closed at Stop would leave a session unable to end. Baseline files stay in `.git/`, so remove them with a `SessionEnd` hook if you want.
 
 ## Going Deeper
 

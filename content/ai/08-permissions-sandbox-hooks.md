@@ -66,7 +66,7 @@ Claude Code의 sandbox는 Bash · PowerShell · Monitor 명령과 자식 프로�
 | `approval_policy` | `never` | 묻지 않는다. 실패는 모델에게 그대로 반환 |
 | `approval_policy` | `{ granular = { … } }` | 범주별 허용 또는 자동 거절 |
 
-이처럼 Codex는 **무엇을 할 수 있는가**(`sandbox_mode`)와 **언제 묻는가**(`approval_policy`)를 분리한다. `untrusted` 값은 2026-09 main 소스에서 "no longer supported" 오류를 낸다. CLI에서는 `-s`/`--sandbox`, `-a`/`--ask-for-approval`로 바꾸며, `--dangerously-bypass-approvals-and-sandbox`(별칭 `--yolo`)는 외부에서 이미 격리된 환경 전용이다. 명령 단위 규칙은 설정 폴더의 `rules/*.rules`(예: `~/.codex/rules/default.rules`)에 Starlark로 적는다. 예: `prefix_rule(pattern = ["git", "push", ["--force", "-f"]], decision = "forbidden")`. 이 규칙은 **앞에서부터** 토큰을 맞추므로 `git push origin --force`는 걸리지 않는다.
+이처럼 Codex는 **무엇을 할 수 있는가**(`sandbox_mode`)와 **언제 묻는가**(`approval_policy`)를 분리한다. `untrusted` 값은 2026-09 main 소스에서 "no longer supported" 오류를 낸다. CLI에서는 `-s`/`--sandbox`로 바꾸고, 대화형 TUI에서는 `-a`/`--ask-for-approval`도 쓸 수 있다(`-a`는 2026-09 main 소스의 `codex-rs/tui/src/cli.rs`에 정의된 TUI 플래그이고, `codex exec`와 함께 쓰는 공용 옵션에는 없다). `--dangerously-bypass-approvals-and-sandbox`(별칭 `--yolo`)는 외부에서 이미 격리된 환경 전용이다. 명령 단위 규칙은 설정 폴더의 `rules/*.rules`(예: `~/.codex/rules/default.rules`)에 Starlark로 적는다. 예: `prefix_rule(pattern = ["git", "push", ["--force", "-f"]], decision = "forbidden")`. 이 규칙은 **앞에서부터** 토큰을 맞추므로 `git push origin --force`는 걸리지 않는다.
 
 ### Hook: 이벤트와 입출력 계약
 
@@ -93,7 +93,7 @@ flowchart TD
 
 ## 적용: 이 저장소의 설정
 
-이 저장소는 역할 agent에 권한을 박아 두었다. Claude agent 두 개는 `tools: Read, Grep, Glob, Bash`와 `permissionMode: plan`, Codex agent 세 개는 `sandbox_mode = "read-only"`다. `.ai/HARNESS.md`는 parent runtime override가 파일의 sandbox 설정을 이길 수 있으니 실제 권한을 확인하라고 덧붙인다. 그러나 **커밋된 `.claude/settings.json`과 hook은 없다**. 아래는 이 빈칸을 채우는 초안이며, 테스트 명령은 이 저장소의 `node --test tests/*.test.cjs`다.
+이 저장소는 역할 agent에 권한을 박아 두었다. Claude agent 두 개는 `tools: Read, Grep, Glob, Bash`와 `permissionMode: plan`, Codex agent 세 개는 `sandbox_mode = "read-only"`다. 다만 Claude agent는 부모가 default·plan·dontAsk일 때 읽기 전용이다. 부모 대화가 `acceptEdits` · `auto` · `bypassPermissions`면 subagent는 부모 mode로 돌고 `permissionMode`는 무시되며, 두 agent에는 `Bash`가 있으므로 그때는 읽기 전용이 아니다. `.ai/HARNESS.md`는 parent runtime override가 파일의 sandbox 설정을 이길 수 있으니 실제 권한을 확인하라고 덧붙인다. 그러나 **커밋된 `.claude/settings.json`과 hook은 없다**. 아래는 이 빈칸을 채우는 초안이며, 테스트 명령은 이 저장소의 `node --test tests/*.test.cjs`다.
 
 ```json
 {
@@ -110,21 +110,22 @@ flowchart TD
 }
 ```
 
-**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운 뒤, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 `push` 뒤의 인자만** 검사한다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝나면 차단이 조용히 꺼지고, exit 0의 stderr는 debug log에만 남아 아무도 모른다.
+**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 줄 끝 `\` 이어쓰기를 합치고 backslash를 모두 지운 뒤, 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운다. `$`나 backtick이 든 큰따옴표 문자열은 지우지 않고 남긴다. 이어서 단어 첫머리의 `#`부터 줄 끝까지(주석)를 지우고, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 `push` 뒤의 인자만** 검사한다. 막는 것은 `f`가 든 짧은 옵션 묶음(`-uf`, `-4f`), `--force`로 시작하는 모든 긴 옵션(`--force-w` 같은 축약 포함), `--mirror`와 그 축약(`--m`까지), `+` refspec, 그리고 **`$`나 backtick이 든 모든 인자**다. 변수와 명령 치환은 실행 전에는 값을 알 수 없으므로 값을 따지지 않고 닫힌 쪽으로 막는다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝났다면 차단이 조용히 꺼졌을 것이고, exit 0의 stderr는 debug log에만 남으므로 아무도 몰랐을 것이다.
 
 ```bash
 command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
 CMD=$(jq -r '.tool_input.command // empty') || exit 2
-S=$(printf '%s\n' "$CMD" | sed -E "s/[\"']([^\"'[:space:]]*)[\"']/\1/g; s/\"[^\"]*\"|'[^']*'//g; s/(&&|\|\||[;&|])/\n/g")
+CMD=${CMD//$'\\\n'/}
+S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
 ARGS=$(printf '%s\n' "$S" | sed -nE 's/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p')
-if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z]*f[A-Za-z]*([[:space:]]|$)|[[:space:]]--force(-with-lease|-if-includes)?(=|[[:space:]]|$)|[[:space:]]--mirror([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]'; then
+if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]|[$`]'; then
   echo "Blocked: force push is not allowed from an agent session. Ask the owner." >&2
   exit 2
 fi
 exit 0
 ```
 
-아래는 실제로 실행한 29개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
+아래는 실제로 실행한 53개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`가 실제로 강제 갱신이나 mirror push로 처리된다는 것은 git 2.43과 로컬 bare 원격으로 따로 확인했다. "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
 
 | 명령 | 기대 | jq 있음 | jq 없음 |
 |---|---|---|---|
@@ -132,6 +133,9 @@ exit 0
 | `git push -u origin feature` | 0 | 0 | 2 |
 | `git push origin fix-foo` | 0 | 0 | 2 |
 | `git commit -m "push -f later" && git status` | 0 | 0 | 2 |
+| `git push origin main # -f` · `git commit -m "fix #12" && git push origin main` | 0 | 0 | 2 |
+| `git push -o ci.skip origin main` · `origin force` · `origin mirror` · `origin fix-force` | 0 | 0 | 2 |
+| `git push --no-force` · `--no-force-with-lease` · `--porcelain` · `--prune` · `--follow-tags` · `--push-option=x` | 0 | 0 | 2 |
 | `git push -fu origin main` · `-uf` · `-nf` | 2 | 2 | 2 |
 | `git -C . push -f origin main` | 2 | 2 | 2 |
 | `git push origin "+main"` · `'+main'` · `HEAD:+main` | 2 | 2 | 2 |
@@ -139,13 +143,27 @@ exit 0
 | `git push --force-if-includes origin main` | 2 | 2 | 2 |
 | `git push --mirror origin` | 2 | 2 | 2 |
 | `git commit -m "push" && git push -f origin main` | 2 | 2 | 2 |
+| `git push -4f origin main` · `-f4` | 2 | 2 | 2 |
+| `git push --force-w origin main` · `--force-with-l` | 2 | 2 | 2 |
+| `git push --mirr origin` · `--mir` · `--mi` · `--m` | 2 | 2 | 2 |
+| `git push \-f origin main` · `--forc\e` · `--forc$'e'` | 2 | 2 | 2 |
+| `F=-f; git push $F origin main` · `git push -$(echo f) origin main` | 2 | 2 | 2 |
+| `git push origin fix#1 -f` · `git commit -m '#' && git push -f origin main` | 2 | 2 | 2 |
+| `git push \` 뒤 줄바꿈, 다음 줄 `-f origin main` | 2 | 2 | 2 |
+| 한계: `git p -f origin main` · `git -c alias.p=push p -f origin main` | 2 | **0** | 2 |
+| 한계: `echo push -f` | 0 | **2** | 2 |
 
-**Hook 2 · 3, 이번 세션이 만든 변경을 커밋하지 않은 채 끝내지 않기**. 세션은 주인의 WIP가 남은 더러운 트리에서 시작할 수 있다. 그래서 `SessionStart`(`session-baseline.sh`)가 `git status --porcelain`을 세션별 기준선으로 저장하고, `Stop`(`stop-if-dirty.sh`)은 **새로 생긴 줄만** 문제 삼는다. 경로는 `$CLAUDE_PROJECT_DIR`이 아니라 stdin의 `cwd`를 쓴다. worktree에 들어가면 `CLAUDE_PROJECT_DIR`은 시작 위치에 머물고 `cwd`만 따라가기 때문이다. 기준선은 없을 때만 쓰므로 compact · resume으로 `SessionStart`가 다시 불려도 유지된다.
+주석 제거는 **단어 첫머리의** `#`만 대상으로 하고, `#`가 든 한 글자 따옴표는 풀지 않고 지운다. 줄의 모든 `#`를 지우면 `git push origin fix#1 -f`와 `git commit -m '#' && git push -f origin main`이 통과해 버린다(위 두 사례로 확인). 반대로 bash처럼 `git status;# note && git push -f`의 뒷부분은 주석이라 통과시킨다.
+
+Hook 1의 한계도 적어 둔다. alias는 git이 실행할 때 펼치므로 잡지 못한다(`git p -f`, `git -c alias.p=push p -f`). `eval`이나 `sh -c`로 감싼 문자열, 스크립트 파일 안의 push, git 설정에 넣은 강제(`remote.<name>.push`의 `+` refspec, `remote.<name>.mirror`)도 마찬가지다. 반대로 `echo push -f`처럼 `push`라는 단어 뒤에 `-f`가 오는 다른 명령과, `git push origin $BRANCH`처럼 `$`가 든 모든 push 인자는 막히는 오탐이다. 그러니 이 hook은 흔한 실수를 줄이는 장치일 뿐 보안 경계가 아니다. 실제 경계는 아래 위험 등급 표의 T3 행에 둔 GitHub branch protection처럼 agent 바깥의 서버 쪽 규칙이다.
+
+**Hook 2 · 3, 이번 세션이 만든 변경을 커밋하지 않은 채 끝내지 않기**. 세션은 주인의 WIP가 남은 더러운 트리에서 시작할 수 있다. 그래서 `SessionStart`(`session-baseline.sh`)가 `git status --porcelain`을 세션별 기준선으로 저장하고, `Stop`(`stop-if-dirty.sh`)은 **새로 생긴 줄만** 문제 삼는다. 경로는 `$CLAUDE_PROJECT_DIR`이 아니라 stdin의 `cwd`를 쓴다. worktree에 들어가면 `CLAUDE_PROJECT_DIR`은 시작 위치에 머물고 `cwd`만 따라가기 때문이다. 기준선은 없을 때만 쓰므로 compact · resume으로 `SessionStart`가 다시 불려도 유지된다. `session_id`는 파일 이름에 들어가므로 영문자 · 숫자 · `.` · `_` · `-` 밖의 문자는 `_`로 바꾸고, 값이 비었거나 `null`이면 아무것도 하지 않고 끝낸다.
 
 ```bash
 command -v jq >/dev/null || exit 0
 INPUT=$(cat)
-SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+SID=$(printf '%s' "$INPUT" | jq -j '.session_id' | tr -c 'A-Za-z0-9._-' '_'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+[ -n "$SID" ] && [ "$SID" != null ] || exit 0
 cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
 [ -e "$GITDIR/agent-baseline-$SID" ] || git status --porcelain > "$GITDIR/agent-baseline-$SID"
 exit 0
@@ -155,7 +173,8 @@ exit 0
 command -v jq >/dev/null || { echo '{"systemMessage":"stop-if-dirty: jq is missing, uncommitted-work check skipped"}'; exit 0; }
 INPUT=$(cat)
 [ "$(printf '%s' "$INPUT" | jq -r '.stop_hook_active')" = "true" ] && exit 0
-SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+SID=$(printf '%s' "$INPUT" | jq -j '.session_id' | tr -c 'A-Za-z0-9._-' '_'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+[ -n "$SID" ] && [ "$SID" != null ] || exit 0
 cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
 BASE="$GITDIR/agent-baseline-$SID"
 [ -f "$BASE" ] || { echo '{"systemMessage":"stop-if-dirty: no session baseline, check skipped"}'; exit 0; }
@@ -175,8 +194,11 @@ exit 0
 | 같은 상황, `stop_hook_active: true` | 0 | 0 |
 | agent는 commit했고 주인 WIP만 남음 | 0 | 0 |
 | 기준선 없음 · `jq` 없음 | 0 + 경고 | 0 + `systemMessage` |
+| `session_id`가 `../../evil` · `a b/c` | `.git/` 안의 파일 | `agent-baseline-.._.._evil` · `agent-baseline-a_b_c` |
+| `session_id` 없음 · `null` · 빈 문자열 | 0, 파일 없음 | 0, 파일 없음 |
+| 한계: 주인이 untracked로 둔 `u/` 안에 agent가 새 파일 추가 | 2 | **0** |
 
-한계도 적어 둔다. 주인이 이미 수정한 파일을 agent가 더 고치면 `git status` 줄이 같아 잡지 못한다. 기준선이 없을 때(세션 도중 설치, 새 worktree)와 `jq`가 없을 때는 막지 않고 `systemMessage`로 알린다. Stop에서 닫힌 쪽으로 실패하면 세션을 끝낼 수 없기 때문이다. 기준선 파일은 `.git/` 안에 남으므로 필요하면 `SessionEnd` hook으로 지운다.
+한계도 적어 둔다. 주인이 이미 수정한 파일을 agent가 더 고치면 `git status` 줄이 같아 잡지 못한다. 주인이 untracked로 둔 디렉터리 안에 agent가 파일을 더해도 `git status --porcelain`은 여전히 `?? u/` 한 줄만 보여 주므로 잡지 못한다(위 표의 마지막 줄). 기준선이 없을 때(세션 도중 설치, 새 worktree)와 `jq`가 없을 때는 막지 않고 `systemMessage`로 알린다. Stop에서 닫힌 쪽으로 실패하면 세션을 끝낼 수 없기 때문이다. 기준선 파일은 `.git/` 안에 남으므로 필요하면 `SessionEnd` hook으로 지운다.
 
 ## 심화
 

@@ -55,7 +55,7 @@ Claude Code reads four settings files (user, project, local, managed), plus a co
 
 Codex stacks TOML layers from lowest to highest precedence (per the config loader comments in the openai/codex source, as of 2026-09): system `/etc/codex/config.toml` → user `~/.codex/config.toml` → the selected profile → project `.codex/config.toml` → `--config` and flags at run time. Constraints an organization wants to enforce go in a separate `requirements.toml`.
 
-A **profile** is a bundle of settings chosen with `--profile <name>`. In the 2026-09 main source (`codex-rs/config/src/loader/mod.rs`), `--profile work` layers `~/.codex/work.config.toml` **on top of** the user `config.toml`, so the profile file only needs the values it changes. The older `profile = "work"` selector inside `config.toml` raises a "no longer supported" error, and using `--profile work` while a `[profiles.work]` table for the same name is still in `config.toml` is also an error. `profile` and `profiles`, along with keys such as `model_provider` and `notify`, are ignored in a project `.codex/config.toml`, so repository content cannot choose where a user's credentials go or which local commands run.
+A **profile** is a bundle of settings chosen with `--profile <name>`. In the 2026-09 main source (`codex-rs/config/src/loader/mod.rs`), `--profile work` layers `~/.codex/work.config.toml` **on top of** the user `config.toml`, so the profile file only needs the values it changes. If a legacy `profile = "work"` selector or a `[profiles.work]` table with the chosen name is still in `config.toml`, `--profile work` stops with an error. `profile` and `profiles`, along with keys such as `model_provider` and `notify`, are ignored in a project `.codex/config.toml`, so repository content cannot choose where a user's credentials go or which local commands run.
 
 The important difference is that **project settings only take effect once the project is trusted**. A `.codex/config.toml` in an untrusted directory is read but left disabled. Claude Code is similar: `permissions.allow` in a committed `.claude/settings.json` applies only after you accept the workspace trust dialog, while deny and ask rules, which only restrict, apply immediately.
 
@@ -116,7 +116,7 @@ tech-jeongsu/
 | Layer | In this repository | Observation |
 |---|---|---|
 | Instructions | `CLAUDE.md` and `AGENTS.md` point into `.ai/` | Entry files are short contracts; the body loads on demand by trigger |
-| Subagents | two Claude agents, three Codex agents | All read-only: `permissionMode: plan`, `sandbox_mode = "read-only"` |
+| Subagents | two Claude agents, three Codex agents | Read-only when the parent is in default, plan or dontAsk: `permissionMode: plan`, `sandbox_mode = "read-only"`. Under an acceptEdits, auto or bypassPermissions parent the Claude agents follow the parent's mode, and a parent runtime override can win over the Codex agents too |
 | Skills | two editions of `auto-dev` | The Codex edition sets `allow_implicit_invocation: false`, so it never starts itself |
 | Model | only the Codex dispatcher and fast-explorer pin a model in TOML | The Codex reviewer and both Claude agents leave it unset; the reviewer so that a model different from the implementer's can be chosen at spawn time |
 | Permissions · hooks · MCP | no committed files | HARNESS.md says "commit them", yet the enforced layer is still empty |

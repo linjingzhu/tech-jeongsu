@@ -214,7 +214,7 @@ maxTurns: 6
 <tr>
 <td><code>permissionMode</code></td>
 <td><code>plan</code></td>
-<td>Starts in read-only exploration (plan mode)</td>
+<td>Starts in read-only exploration (plan mode). If the parent conversation is in acceptEdits, auto or bypassPermissions, though, this value is ignored and the parent&#39;s mode applies</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -251,7 +251,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tbody><tr>
 <td><code>name</code>, <code>description</code>, body</td>
 <td><code>name</code>, <code>description</code>, <code>developer_instructions</code></td>
-<td>All three are required</td>
+<td><code>name</code> and <code>developer_instructions</code> are required. <code>description</code> may be left out of the file, but if present it must not be blank, and if no role of the same name in another config layer supplies one either, the role is dropped with a warning (<code>codex-rs/agent-roles/src/</code>, 2026-09-29 main)</td>
 </tr>
 <tr>
 <td><code>tools</code> allowlist</td>
@@ -261,7 +261,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tr>
 <td><code>permissionMode: plan</code></td>
 <td><code>sandbox_mode = &quot;read-only&quot;</code></td>
-<td>A parent runtime setting can override it, so check the effective permissions</td>
+<td>The parent or runtime can override either side. Claude follows the parent&#39;s mode when the parent is in acceptEdits, auto or bypassPermissions; Codex follows a parent runtime override. Check the effective permissions</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -315,7 +315,7 @@ Good: description: Independent review of a diff against its requirement.
 <li><strong>&quot;Many skills fill the context.&quot;</strong> Only descriptions are always present. The real problem is descriptions getting truncated so the skill is <strong>never invoked</strong>.</li>
 <li><strong>&quot;More subagents are cheaper and faster.&quot;</strong> Each rereads in a fresh context, and usage accumulates against the same limits.</li>
 <li><strong>&quot;Codex reads Claude&#39;s setup as is.&quot;</strong> The SKILL.md format is shared, but the folders (<code>.claude/skills</code> vs <code>.agents/skills</code>) and agent formats (Markdown vs TOML) differ.</li>
-<li><strong>&quot;<code>sandbox_mode</code> in the agent file is the effective permission.&quot;</strong> A parent runtime setting can override it. Check what actually applies.</li>
+<li><strong>&quot;<code>permissionMode</code>/<code>sandbox_mode</code> in the agent file is the effective permission.&quot;</strong> In Claude Code, if the parent conversation is in acceptEdits, auto or bypassPermissions, <code>permissionMode</code> is ignored and the subagent runs in the parent&#39;s mode. The file&#39;s mode applies only when the parent is in default, dontAsk or plan. Codex&#39;s <code>sandbox_mode</code> can likewise be overridden by a parent runtime setting. Check what actually applies.</li>
 </ul>
 <h2>Self-Check Questions</h2>
 <ol>

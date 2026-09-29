@@ -239,7 +239,7 @@
 </ul>
 <h3>Codex: config layers and trust</h3>
 <p>Codex stacks TOML layers from lowest to highest precedence (per the config loader comments in the openai/codex source, as of 2026-09): system <code>/etc/codex/config.toml</code> → user <code>~/.codex/config.toml</code> → the selected profile → project <code>.codex/config.toml</code> → <code>--config</code> and flags at run time. Constraints an organization wants to enforce go in a separate <code>requirements.toml</code>.</p>
-<p>A <strong>profile</strong> is a bundle of settings chosen with <code>--profile &lt;name&gt;</code>. In the 2026-09 main source (<code>codex-rs/config/src/loader/mod.rs</code>), <code>--profile work</code> layers <code>~/.codex/work.config.toml</code> <strong>on top of</strong> the user <code>config.toml</code>, so the profile file only needs the values it changes. The older <code>profile = &quot;work&quot;</code> selector inside <code>config.toml</code> raises a &quot;no longer supported&quot; error, and using <code>--profile work</code> while a <code>[profiles.work]</code> table for the same name is still in <code>config.toml</code> is also an error. <code>profile</code> and <code>profiles</code>, along with keys such as <code>model_provider</code> and <code>notify</code>, are ignored in a project <code>.codex/config.toml</code>, so repository content cannot choose where a user&#39;s credentials go or which local commands run.</p>
+<p>A <strong>profile</strong> is a bundle of settings chosen with <code>--profile &lt;name&gt;</code>. In the 2026-09 main source (<code>codex-rs/config/src/loader/mod.rs</code>), <code>--profile work</code> layers <code>~/.codex/work.config.toml</code> <strong>on top of</strong> the user <code>config.toml</code>, so the profile file only needs the values it changes. If a legacy <code>profile = &quot;work&quot;</code> selector or a <code>[profiles.work]</code> table with the chosen name is still in <code>config.toml</code>, <code>--profile work</code> stops with an error. <code>profile</code> and <code>profiles</code>, along with keys such as <code>model_provider</code> and <code>notify</code>, are ignored in a project <code>.codex/config.toml</code>, so repository content cannot choose where a user&#39;s credentials go or which local commands run.</p>
 <p>The important difference is that <strong>project settings only take effect once the project is trusted</strong>. A <code>.codex/config.toml</code> in an untrusted directory is read but left disabled. Claude Code is similar: <code>permissions.allow</code> in a committed <code>.claude/settings.json</code> applies only after you accept the workspace trust dialog, while deny and ask rules, which only restrict, apply immediately.</p>
 <pre><code class="language-toml">model = &quot;gpt-6-sol&quot;
 model_reasoning_effort = &quot;medium&quot;
@@ -299,7 +299,7 @@ trust_level = &quot;trusted&quot;
 <tr>
 <td>Subagents</td>
 <td>two Claude agents, three Codex agents</td>
-<td>All read-only: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code></td>
+<td>Read-only when the parent is in default, plan or dontAsk: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code>. Under an acceptEdits, auto or bypassPermissions parent the Claude agents follow the parent&#39;s mode, and a parent runtime override can win over the Codex agents too</td>
 </tr>
 <tr>
 <td>Skills</td>

@@ -103,8 +103,8 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 |---|---|---|---|
 | Mechanism | Explicit `cache_control` or top-level automatic | Automatic (prefixes of 1,024 tokens or more) | Implicit automatic + explicit manual |
 | Cache read | 0.1x input (0.05x Opus 5.5, 0.025x Fable 5.1) | Up to 90% off (per-model cached-input price) | 90% off on Gemini 2.5 and later |
-| Cache write | 1.25x (5 minutes), 2x (1 hour) | 1.25x cache write on GPT-5.6 and later models | Standard input price; explicit adds hourly storage cost |
-| Lifetime | 5 minutes or 1 hour | At least 30 minutes on GPT-5.6 and later models (announced late 2026-09; exact date needs checking) | Explicit caches take a set TTL |
+| Cache write | 1.25x (5 minutes), 2x (1 hour) | Needs checking (secondary sources do not confirm a write multiplier) | Standard input price; explicit adds hourly storage cost |
+| Lifetime | 5 minutes or 1 hour | 30-minute window on the GPT-6 family (Sol · Luna) (announced 2026-09-22, confirmed only by secondary sources) | Explicit caches take a set TTL |
 | Batch | 50% | 50% | 50% |
 
 ## Applied: A Day in a Solo Studio
@@ -168,6 +168,6 @@ Change one lever, rerun the same task, and read `usage` and output quality toget
 - [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) — Anthropic, checked 2026-09-29
 - [openai/codex](https://github.com/openai/codex) — `codex-rs/core/src/config/mod.rs`, `codex-rs/exec/src/cli.rs`, `codex-rs/tui/src/slash_command.rs`, checked 2026-09-29
 - [Codex configuration reference](https://developers.openai.com/codex/config-reference) — OpenAI, checked via search results 2026-09-29
-- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, checked via search results 2026-09-29 (publication date needs checking)
+- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, checked via search results 2026-09-29 (announced 2026-09-22 per secondary sources; original not checked)
 - [Context caching](https://ai.google.dev/gemini-api/docs/caching) · [Context caching overview (Google Cloud)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) · [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) — Google, checked via search results 2026-09-29
 - [.claudeignore feature request #29455](https://github.com/anthropics/claude-code/issues/29455) — GitHub, checked via search results 2026-09-29

@@ -321,13 +321,13 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <tr>
 <td>Cache write</td>
 <td>1.25x (5 minutes), 2x (1 hour)</td>
-<td>1.25x cache write on GPT-5.6 and later models</td>
+<td>Needs checking (secondary sources do not confirm a write multiplier)</td>
 <td>Standard input price; explicit adds hourly storage cost</td>
 </tr>
 <tr>
 <td>Lifetime</td>
 <td>5 minutes or 1 hour</td>
-<td>At least 30 minutes on GPT-5.6 and later models (announced late 2026-09; exact date needs checking)</td>
+<td>30-minute window on the GPT-6 family (Sol · Luna) (announced 2026-09-22, confirmed only by secondary sources)</td>
 <td>Explicit caches take a set TTL</td>
 </tr>
 <tr>
@@ -422,7 +422,7 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <li><a href="https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence">Optimizing for cost and intelligence</a> — Anthropic, checked 2026-09-29</li>
 <li><a href="https://github.com/openai/codex">openai/codex</a> — <code>codex-rs/core/src/config/mod.rs</code>, <code>codex-rs/exec/src/cli.rs</code>, <code>codex-rs/tui/src/slash_command.rs</code>, checked 2026-09-29</li>
 <li><a href="https://developers.openai.com/codex/config-reference">Codex configuration reference</a> — OpenAI, checked via search results 2026-09-29</li>
-<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> · <a href="https://openai.com/index/better-prompt-caching-for-gpt-6/">Better prompt caching for GPT-6</a> — OpenAI, checked via search results 2026-09-29 (publication date needs checking)</li>
+<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> · <a href="https://openai.com/index/better-prompt-caching-for-gpt-6/">Better prompt caching for GPT-6</a> — OpenAI, checked via search results 2026-09-29 (announced 2026-09-22 per secondary sources; original not checked)</li>
 <li><a href="https://ai.google.dev/gemini-api/docs/caching">Context caching</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">Context caching overview (Google Cloud)</a> · <a href="https://ai.google.dev/gemini-api/docs/batch-api">Batch API</a> — Google, checked via search results 2026-09-29</li>
 <li><a href="https://github.com/anthropics/claude-code/issues/29455">.claudeignore feature request #29455</a> — GitHub, checked via search results 2026-09-29</li>
 </ul>

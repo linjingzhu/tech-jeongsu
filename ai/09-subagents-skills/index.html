@@ -214,7 +214,7 @@ maxTurns: 6
 <tr>
 <td><code>permissionMode</code></td>
 <td><code>plan</code></td>
-<td>읽기 전용 탐색 모드(Plan Mode)로 시작한다</td>
+<td>읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 대화가 acceptEdits · auto · bypassPermissions면 이 값은 무시되고 부모 mode를 따른다</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -251,7 +251,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tbody><tr>
 <td><code>name</code>, <code>description</code>, 본문</td>
 <td><code>name</code>, <code>description</code>, <code>developer_instructions</code></td>
-<td>세 가지 모두 필수</td>
+<td><code>name</code>과 <code>developer_instructions</code>는 필수다. <code>description</code>은 파일에서 생략할 수 있지만 적었다면 비어 있으면 안 되고, 다른 설정 층의 같은 이름 역할도 설명을 채우지 않으면 그 역할은 경고와 함께 무시된다(<code>codex-rs/agent-roles/src/</code>, 2026-09-29 main)</td>
 </tr>
 <tr>
 <td><code>tools</code> 허용 목록</td>
@@ -261,7 +261,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tr>
 <td><code>permissionMode: plan</code></td>
 <td><code>sandbox_mode = &quot;read-only&quot;</code></td>
-<td>상위 Runtime 설정이 덮어쓸 수 있어 실효 권한을 확인한다</td>
+<td>양쪽 모두 부모나 Runtime이 덮어쓸 수 있다. Claude는 부모가 acceptEdits · auto · bypassPermissions면 부모 mode를, Codex는 상위 Runtime override를 따르므로 실효 권한을 확인한다</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -315,7 +315,7 @@ Draft release notes for commits since $ARGUMENTS, grouped by user-visible change
 <li><strong>&quot;Skill이 많으면 Context가 가득 찬다.&quot;</strong> 늘 들어가는 것은 설명뿐이다. 문제는 설명이 잘려 <strong>호출이 안 되는</strong> 쪽이다.</li>
 <li><strong>&quot;Subagent를 늘리면 싸고 빠르다.&quot;</strong> 각자 새 Context에서 다시 읽고, 사용량은 같은 한도에 쌓인다.</li>
 <li><strong>&quot;Claude 설정을 Codex가 그대로 읽는다.&quot;</strong> SKILL.md 형식은 공유하지만 폴더(<code>.claude/skills</code> vs <code>.agents/skills</code>)와 Agent 형식(Markdown vs TOML)이 다르다.</li>
-<li><strong>&quot;Agent 파일의 <code>sandbox_mode</code>가 곧 실효 권한이다.&quot;</strong> 상위 Runtime 설정이 덮어쓸 수 있다. 실제로 확인한다.</li>
+<li><strong>&quot;Agent 파일의 <code>permissionMode</code>/<code>sandbox_mode</code>가 곧 실효 권한이다.&quot;</strong> Claude Code에서는 부모 대화가 acceptEdits · auto · bypassPermissions면 <code>permissionMode</code>가 무시되고 부모 mode로 돈다. 파일의 mode가 적용되는 것은 부모가 default · dontAsk · plan일 때뿐이다. Codex의 <code>sandbox_mode</code>도 상위 Runtime 설정이 덮어쓸 수 있다. 실제로 확인한다.</li>
 </ul>
 <h2>자기 점검 질문</h2>
 <ol>

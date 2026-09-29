@@ -239,7 +239,7 @@
 </ul>
 <h3>Codex: 설정 층과 신뢰</h3>
 <p>Codex는 TOML 층을 낮은 우선순위부터 쌓는다(openai/codex 소스의 설정 로더 주석, 2026-09 기준). 시스템 <code>/etc/codex/config.toml</code> → 사용자 <code>~/.codex/config.toml</code> → 선택한 profile → 프로젝트 <code>.codex/config.toml</code> → 실행 시 <code>--config</code>와 플래그 순이다. 조직이 강제할 제약은 별도의 <code>requirements.toml</code>에 둔다.</p>
-<p><strong>Profile</strong>은 <code>--profile &lt;name&gt;</code>으로 고르는 설정 묶음이다. 2026-09 main 소스(<code>codex-rs/config/src/loader/mod.rs</code>) 기준으로 <code>--profile work</code>는 <code>~/.codex/work.config.toml</code>을 사용자 <code>config.toml</code> <strong>위에</strong> 한 층 더 얹으므로, profile 파일에는 바꿀 값만 적으면 된다. 예전 방식인 <code>config.toml</code> 안의 <code>profile = &quot;work&quot;</code> 선택자는 &quot;no longer supported&quot; 오류를 내고, 같은 이름의 <code>[profiles.work]</code> 표가 <code>config.toml</code>에 남아 있는 채로 <code>--profile work</code>를 쓰면 오류가 난다. 또 <code>profile</code>, <code>profiles</code>는 <code>model_provider</code>, <code>notify</code> 등과 함께 프로젝트 <code>.codex/config.toml</code>에서 무시되는 키다. 저장소 내용이 사용자의 자격 증명이나 실행 명령을 고르지 못하게 하려는 것이다.</p>
+<p><strong>Profile</strong>은 <code>--profile &lt;name&gt;</code>으로 고르는 설정 묶음이다. 2026-09 main 소스(<code>codex-rs/config/src/loader/mod.rs</code>) 기준으로 <code>--profile work</code>는 <code>~/.codex/work.config.toml</code>을 사용자 <code>config.toml</code> <strong>위에</strong> 한 층 더 얹으므로, profile 파일에는 바꿀 값만 적으면 된다. 선택한 이름과 같은 legacy <code>profile = &quot;work&quot;</code> 선택자나 <code>[profiles.work]</code> 표가 <code>config.toml</code>에 남아 있으면 <code>--profile work</code>는 오류로 멈춘다. 또 <code>profile</code>, <code>profiles</code>는 <code>model_provider</code>, <code>notify</code> 등과 함께 프로젝트 <code>.codex/config.toml</code>에서 무시되는 키다. 저장소 내용이 사용자의 자격 증명이나 실행 명령을 고르지 못하게 하려는 것이다.</p>
 <p>중요한 차이는 <strong>프로젝트 설정이 신뢰(trust)를 받아야 켜진다</strong>는 점이다. 신뢰하지 않은 디렉터리의 <code>.codex/config.toml</code>은 읽히지만 비활성 상태로 남는다. Claude Code도 비슷하게, 커밋된 <code>.claude/settings.json</code>의 <code>permissions.allow</code>는 workspace trust 대화상자를 수락한 뒤에야 적용된다. 반면 deny와 ask는 제한만 하므로 즉시 적용된다.</p>
 <pre><code class="language-toml">model = &quot;gpt-6-sol&quot;
 model_reasoning_effort = &quot;medium&quot;
@@ -299,7 +299,7 @@ trust_level = &quot;trusted&quot;
 <tr>
 <td>Subagent</td>
 <td>두 Claude agent, 세 Codex agent</td>
-<td>모두 읽기 전용: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code></td>
+<td>부모가 default·plan·dontAsk일 때 읽기 전용: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code>. 부모가 acceptEdits · auto · bypassPermissions면 Claude agent는 부모 mode를 따르고, Codex agent도 상위 runtime override가 이길 수 있다</td>
 </tr>
 <tr>
 <td>Skill</td>

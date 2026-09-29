@@ -153,7 +153,7 @@ Codex에도 `[memories]` 설정 묶음이 있지만 세부 동작은 이 문서�
 
 ### Subagent는 무엇을 물려받는가
 
-Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 `omitClaudeMd: true`로 user · project · local CLAUDE.md를 끌 수 있다. 이때도 조직의 managed CLAUDE.md는 로드된다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 `.ai/` 전체 대신 **Mission Packet**만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.
+Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 `omitClaudeMd: true`로 user · project · local CLAUDE.md를 끌 수 있다. 이때도 조직의 managed policy 파일(managed CLAUDE.md)은 로드된다. 단, managed 설정으로 배포된 subagent는 예외라서 이 값을 켜면 managed policy 파일도 로드하지 않는다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 `.ai/` 전체 대신 **Mission Packet**만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.
 
 ## 흔한 오해
 

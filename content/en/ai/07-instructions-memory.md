@@ -153,7 +153,7 @@ Codex also has a `[memories]` settings group, but its detailed behaviour was not
 
 ### What a subagent inherits
 
-An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can skip the user, project and local CLAUDE.md files with `omitClaudeMd: true`. The organization's managed CLAUDE.md still loads even then. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a **Mission Packet** instead of the whole `.ai/` folder: a subagent's context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.
+An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can skip the user, project and local CLAUDE.md files with `omitClaudeMd: true`. The organization's managed policy files (managed CLAUDE.md) still load even then, except for managed subagents: a subagent deployed through managed settings that sets this field loads no managed policy files either. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a **Mission Packet** instead of the whole `.ai/` folder: a subagent's context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.
 
 ## Common Misconceptions
 

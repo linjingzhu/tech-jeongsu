@@ -103,8 +103,8 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 |---|---|---|---|
 | 방식 | `cache_control` 명시 또는 top-level 자동 | 자동(1,024 token 이상 prefix) | Implicit 자동 + explicit 수동 |
 | Cache 읽기 | 입력의 0.1×(Opus 5.5 0.05×, Fable 5.1 0.025×) | 최대 90% 할인(모델별 cached input 단가) | Gemini 2.5 이상 90% 할인 |
-| Cache 쓰기 | 1.25×(5분), 2×(1시간) | GPT-5.6 이후 모델은 1.25× cache write | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
-| 수명 | 5분 또는 1시간 | GPT-5.6 이후 모델 최소 30분(발표일 2026-09 하순, 정확한 날짜 확인 필요) | Explicit는 TTL 지정 |
+| Cache 쓰기 | 1.25×(5분), 2×(1시간) | 확인 필요(2차 출처는 write 배수를 확인해 주지 않는다) | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
+| 수명 | 5분 또는 1시간 | GPT-6 계열(Sol · Luna) 30분 창(2026-09-22 발표, 2차 출처로만 확인) | Explicit는 TTL 지정 |
 | Batch | 50% | 50% | 50% |
 
 ## 적용: 1인 스튜디오의 하루
@@ -168,6 +168,6 @@ Prefix를 바꾸는 절약은 모두 cache를 한 번 깬다. Compaction, contex
 - [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) — Anthropic, 2026-09-29 확인
 - [openai/codex](https://github.com/openai/codex) — `codex-rs/core/src/config/mod.rs`, `codex-rs/exec/src/cli.rs`, `codex-rs/tui/src/slash_command.rs`, 2026-09-29 확인
 - [Codex configuration reference](https://developers.openai.com/codex/config-reference) — OpenAI, 2026-09-29 검색 결과로 확인
-- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, 2026-09-29 검색 결과로 확인(게시일 확인 필요)
+- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, 2026-09-29 검색 결과로 확인(2차 출처상 2026-09-22 발표, 원문 미확인)
 - [Context caching](https://ai.google.dev/gemini-api/docs/caching) · [Context caching overview(Google Cloud)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) · [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) — Google, 2026-09-29 검색 결과로 확인
 - [.claudeignore 기능 요청 #29455](https://github.com/anthropics/claude-code/issues/29455) — GitHub, 2026-09-29 검색 결과로 확인

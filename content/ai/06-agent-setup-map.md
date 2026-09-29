@@ -55,7 +55,7 @@ Claude Code는 settings 파일 네 개(user, project, local, managed)를 읽고,
 
 Codex는 TOML 층을 낮은 우선순위부터 쌓는다(openai/codex 소스의 설정 로더 주석, 2026-09 기준). 시스템 `/etc/codex/config.toml` → 사용자 `~/.codex/config.toml` → 선택한 profile → 프로젝트 `.codex/config.toml` → 실행 시 `--config`와 플래그 순이다. 조직이 강제할 제약은 별도의 `requirements.toml`에 둔다.
 
-**Profile**은 `--profile <name>`으로 고르는 설정 묶음이다. 2026-09 main 소스(`codex-rs/config/src/loader/mod.rs`) 기준으로 `--profile work`는 `~/.codex/work.config.toml`을 사용자 `config.toml` **위에** 한 층 더 얹으므로, profile 파일에는 바꿀 값만 적으면 된다. 예전 방식인 `config.toml` 안의 `profile = "work"` 선택자는 "no longer supported" 오류를 내고, 같은 이름의 `[profiles.work]` 표가 `config.toml`에 남아 있는 채로 `--profile work`를 쓰면 오류가 난다. 또 `profile`, `profiles`는 `model_provider`, `notify` 등과 함께 프로젝트 `.codex/config.toml`에서 무시되는 키다. 저장소 내용이 사용자의 자격 증명이나 실행 명령을 고르지 못하게 하려는 것이다.
+**Profile**은 `--profile <name>`으로 고르는 설정 묶음이다. 2026-09 main 소스(`codex-rs/config/src/loader/mod.rs`) 기준으로 `--profile work`는 `~/.codex/work.config.toml`을 사용자 `config.toml` **위에** 한 층 더 얹으므로, profile 파일에는 바꿀 값만 적으면 된다. 선택한 이름과 같은 legacy `profile = "work"` 선택자나 `[profiles.work]` 표가 `config.toml`에 남아 있으면 `--profile work`는 오류로 멈춘다. 또 `profile`, `profiles`는 `model_provider`, `notify` 등과 함께 프로젝트 `.codex/config.toml`에서 무시되는 키다. 저장소 내용이 사용자의 자격 증명이나 실행 명령을 고르지 못하게 하려는 것이다.
 
 중요한 차이는 **프로젝트 설정이 신뢰(trust)를 받아야 켜진다**는 점이다. 신뢰하지 않은 디렉터리의 `.codex/config.toml`은 읽히지만 비활성 상태로 남는다. Claude Code도 비슷하게, 커밋된 `.claude/settings.json`의 `permissions.allow`는 workspace trust 대화상자를 수락한 뒤에야 적용된다. 반면 deny와 ask는 제한만 하므로 즉시 적용된다.
 
@@ -116,7 +116,7 @@ tech-jeongsu/
 | 층 | 이 저장소에서 | 관찰 |
 |---|---|---|
 | 지시문 | `CLAUDE.md`, `AGENTS.md`가 `.ai/`를 가리킴 | 진입 파일은 짧은 계약, 본문은 trigger로 on demand 로드 |
-| Subagent | 두 Claude agent, 세 Codex agent | 모두 읽기 전용: `permissionMode: plan`, `sandbox_mode = "read-only"` |
+| Subagent | 두 Claude agent, 세 Codex agent | 부모가 default·plan·dontAsk일 때 읽기 전용: `permissionMode: plan`, `sandbox_mode = "read-only"`. 부모가 acceptEdits · auto · bypassPermissions면 Claude agent는 부모 mode를 따르고, Codex agent도 상위 runtime override가 이길 수 있다 |
 | Skill | `auto-dev` 두 판 | Codex 판은 `allow_implicit_invocation: false`로 자동 실행 금지 |
 | 모델 | Codex dispatcher와 fast-explorer만 TOML에 모델 고정 | Codex reviewer와 두 Claude agent는 비워 둠. reviewer는 구현자와 다른 모델을 호출 시점에 고르기 위해 |
 | 권한 · Hook · MCP | 커밋된 파일 없음 | HARNESS.md는 "commit하라"고 하지만 강제 층은 아직 비어 있다 |
