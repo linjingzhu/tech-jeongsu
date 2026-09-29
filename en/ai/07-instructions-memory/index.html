@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Instructions and Memory: CLAUDE.md and AGENTS.md | MyAI</title>
+    <meta name="description" content="&quot;Agent setup map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Instructions and Memory: CLAUDE.md and AGENTS.md | MyAI" />
+    <meta property="og:description" content="&quot;Agent setup map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/07-instructions-memory.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link active" aria-current="page" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Instructions and Memory</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Instructions and Memory: CLAUDE.md and AGENTS.md</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain where instruction files are discovered and in what order they enter context. Keep only content worth paying for on every turn, write rules agents actually follow, and check those files so they do not rot.</p>
+</blockquote>
+<p>&quot;Agent setup map&quot; called instructions the <strong>advisory layer</strong>. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the official Claude Code docs, the openai/codex source and the agents.md specification.</p>
+<h2>Key Concepts</h2>
+<p>An <strong>instruction file</strong> is Markdown that enters context automatically when a session starts. Conversation history disappears when the session ends, but a file survives into the next session and into other tools. That is why durable decisions go into files, not conversations (see &quot;Developing with Claude Code + Codex&quot;). <strong>Memory</strong>, by contrast, is a record the agent writes for itself rather than one a person writes. Claude Code&#39;s auto memory is the main example; it is machine-local and not shared.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>File</th>
+<th>Scope</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Code</td>
+<td><code>/etc/claude-code/CLAUDE.md</code> (Linux), etc.</td>
+<td>organization, managed</td>
+<td>Cannot be excluded</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>~/.claude/CLAUDE.md</code>, <code>~/.claude/rules/</code></td>
+<td>user, every project</td>
+<td>Personal preference</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>./CLAUDE.md</code> or <code>./.claude/CLAUDE.md</code></td>
+<td>project, committed</td>
+<td>Shared with the team</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>./CLAUDE.local.md</code></td>
+<td>just me, this project</td>
+<td>Add to <code>.gitignore</code></td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>.claude/rules/*.md</code></td>
+<td>project</td>
+<td>Loads at start without <code>paths</code>; with <code>paths</code>, when a matching file is read</td>
+</tr>
+<tr>
+<td>Codex</td>
+<td><code>~/.codex/AGENTS.md</code> (<code>AGENTS.override.md</code> first)</td>
+<td>user, global</td>
+<td></td>
+</tr>
+<tr>
+<td>Codex</td>
+<td><code>AGENTS.md</code> in each directory (<code>AGENTS.override.md</code> first)</td>
+<td>project root down to cwd</td>
+<td>Total capped by <code>project_doc_max_bytes</code>, 32 KiB by default</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>Discovery and load order</h3>
+<p>Claude Code reads <code>CLAUDE.md</code> and <code>CLAUDE.local.md</code> from the directory you launch in and <strong>every directory above it</strong> at start, and <strong>concatenates</strong> them instead of letting one override another. Content stacks from the filesystem root toward the working directory, so the nearest file is read last. Within one directory, <code>CLAUDE.local.md</code> is appended after <code>CLAUDE.md</code>. Files in <strong>subdirectories</strong> load not at start but when Claude reads a file in that directory.</p>
+<p>Codex finds the project root by a root marker such as <code>.git</code>, then, in each directory from the root down to cwd, picks <strong>the first file</strong> in the order <code>AGENTS.override.md</code> → <code>AGENTS.md</code> → <code>project_doc_fallback_filenames</code>, and concatenates them. It never walks above the root, and anything past the 32 KiB total is truncated (source <code>codex-rs/core/src/agents_md.rs</code>, as of 2026-09).</p>
+<pre><code class="language-mermaid">flowchart TD
+    S[Session starts] --&gt; G[User-level global file]
+    G --&gt; R[Project root file]
+    R --&gt; C[Intermediate directory files down to cwd]
+    C --&gt; X[Concatenated into context]
+    X --&gt; W{Does work read files in a subdirectory}
+    W --&gt;|Yes| N[Load that subdirectory&#39;s instructions too]
+    W --&gt;|No| K[Continue as is]
+    N --&gt; K
+</code></pre>
+<p><strong>Imports</strong>: CLAUDE.md can pull in other files with <code>@path/to/file</code>. Relative paths resolve against <em>the importing file</em>, and imports recurse up to four hops. Imported files also load in full at start, so imports <strong>organize content but do not save tokens</strong>. <code>`@README`</code> inside a code span is not imported. Block-level HTML comments <code>&lt;!-- --&gt;</code> are stripped before content enters context, so they can hold notes for human maintainers.</p>
+<h3>How AGENTS.md relates to Claude Code</h3>
+<p>AGENTS.md is an open format that many coding agents read. The agents.md specification settles conflicts this way: &quot;the closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.&quot; Claude Code reads AGENTS.md directly from v2.1.277, but under the default (<code>claude-md-or-agents-md</code>) it reads <strong>only CLAUDE.md whenever any CLAUDE.md exists</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Repository has</th>
+<th>What Claude Code reads (default)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>only <code>AGENTS.md</code></td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>both <code>AGENTS.md</code> and <code>CLAUDE.md</code></td>
+<td><code>CLAUDE.md</code> only</td>
+</tr>
+<tr>
+<td>a <code>CLAUDE.md</code> that imports <code>@AGENTS.md</code></td>
+<td>both, without duplication</td>
+</tr>
+</tbody></table>
+<p>To make one file the shared source for both tools, put the import on the first line of CLAUDE.md and write only Claude-specific content beneath it. A symlink also works, but a Windows clone may check it out as a one-line text file.</p>
+<pre><code class="language-markdown">@AGENTS.md
+
+Claude Code only: start changes under `src/billing/` in plan mode.
+</code></pre>
+<h3>What goes in and what stays out</h3>
+<p>Instructions are <strong>context paid for on every turn</strong>. The Claude Code docs recommend under 200 lines per file and note that longer files reduce adherence.</p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Where it goes</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Facts every session needs: build and test commands, forbidden paths</td>
+<td>CLAUDE.md / AGENTS.md</td>
+<td>Always needed</td>
+</tr>
+<tr>
+<td>Rules for one path only</td>
+<td><code>paths</code> rules in <code>.claude/rules/</code>, a subdirectory AGENTS.md</td>
+<td>Loads only when those files are touched</td>
+</tr>
+<tr>
+<td>Multi-step procedures: deploy, release</td>
+<td>Skill</td>
+<td>Body loads only when invoked</td>
+</tr>
+<tr>
+<td>Prohibitions that must hold</td>
+<td>permission deny, hooks</td>
+<td>Enforcement, not advice</td>
+</tr>
+<tr>
+<td>Long design documents</td>
+<td>ordinary docs + one pointer line in the instructions</td>
+<td>Read when needed</td>
+</tr>
+<tr>
+<td>Structure the code already reveals</td>
+<td>leave it out</td>
+<td>The agent reads the code itself</td>
+</tr>
+</tbody></table>
+<h3>Writing rules that get followed</h3>
+<p>A good rule points to <strong>a single source</strong>, is <strong>testable</strong>, and has a <strong>trigger</strong> that says when it applies.</p>
+<p>Bad example:</p>
+<pre><code class="language-text">Keep the code clean and write good tests.
+Git policy: 1) no direct push to main 2) small commits 3) ... (40 lines copied from GIT_POLICY.md)
+IMPORTANT!!! NEVER touch .env!!!
+</code></pre>
+<p>Good example:</p>
+<pre><code class="language-text">Before reporting done, run `node --test tests/*.test.cjs` and quote the result.
+Any merge → read `.ai/REPOSITORY.md` first.
+Secrets: `.env*` is blocked by a deny rule in `.claude/settings.json`; do not work around it.
+</code></pre>
+<p>The first bad line cannot be checked. The second copies its source, so the two drift apart. The third tries to replace enforcement with emphasis. The good lines each point, in one line, to a command, a trigger and the place enforcement lives.</p>
+<h2>Applied: This Repository&#39;s Setup</h2>
+<p>This repository&#39;s <code>CLAUDE.md</code> (31 lines) is not a manual but an <strong>entry contract</strong>. Its opening, followed by four things to notice:</p>
+<pre><code class="language-text">First check that `.ai/PROJECT_CONTEXT.md` exists and describes *this*
+repository. Missing → the set is not adopted here: stop and run
+`python3 .ai/tools/adopt.py`, which is the procedure and travels with the set.
+
+Read at the start of a run, and nothing more:
+`.ai/CORE.md`, `.ai/MANAGER.md`, `.ai/PROJECT_CONTEXT.md`.
+
+Load on demand:
+- parallel work → `.ai/EXECUTION.md`
+- review → `.ai/REVIEW.md`
+- any merge → `.ai/REPOSITORY.md`
+</code></pre>
+<ol>
+<li><strong>Adoption check</strong>: the first line tests a precondition so that policy copied from another repository is not trusted blindly. <code>AGENTS.md</code> adds a line saying that where this repository is the policy set&#39;s home (<code>LESSONS_FROM_PRACTICE.md</code> present), the instance files are absent on purpose.</li>
+<li><strong>&quot;and nothing more&quot;</strong>: pinning the start-up reading to three files caps the context cost.</li>
+<li><strong>Trigger table</strong>: everything else is read only when a condition arises, as in &quot;merge → REPOSITORY.md&quot;. It imitates on-demand skill loading at the level of documents.</li>
+<li><strong>Two entry files</strong>: Claude Code ignores AGENTS.md when CLAUDE.md exists, so this repository gives each tool its own entry file. AGENTS.md carries extra Codex-only lines such as the pointer to Codex model routing. The price is the risk that the two files drift.</li>
+</ol>
+<p><code>.ai/HARNESS.md</code> writes this principle down in a section titled &quot;The entry file is read every turn&quot;. A section that summarizes another document does not belong in an entry file: it is paid for every turn, it drifts from its source, and when its heading differs the checks cannot see it.</p>
+<p><strong>The guard against rot</strong> is <code>.ai/tools/check_policy_set.py</code>. Each check prints the question it answers, and each one admits, in its own <code>NOT VERIFIED</code> comment, that it reads structure only and never judges whether the prose is right.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>front matter</td>
+<td>Does every policy document carry <code>doc_id</code>, <code>version</code>, <code>canonical_path</code> and <code>updated</code>?</td>
+</tr>
+<tr>
+<td>cross-references</td>
+<td>Does every <code>`file.md` § *Section*</code> reference point to something that exists?</td>
+</tr>
+<tr>
+<td>one owner per heading</td>
+<td>Is any heading claimed by two policy documents? (a structural proxy for duplicated rules)</td>
+</tr>
+<tr>
+<td>portability</td>
+<td>Has any project-specific term leaked outside the files allowed to know it?</td>
+</tr>
+<tr>
+<td>changelog</td>
+<td>Does every release entry carry a version, a date and an improvement?</td>
+</tr>
+<tr>
+<td>project context</td>
+<td>Does an adopting repository&#39;s <code>.ai/PROJECT_CONTEXT.md</code> hold every fact the set reads?</td>
+</tr>
+<tr>
+<td>capability definitions</td>
+<td>Does every agent and skill definition carry a <code>name</code> and <code>description</code>, with the name matching its file or folder?</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">python3 .ai/tools/check_policy_set.py
+</code></pre>
+<h2>Going Deeper</h2>
+<h3>Memory features and their limits</h3>
+<p>Claude Code&#39;s <strong>auto memory</strong> is on by default and writes a <code>MEMORY.md</code> index plus topic files under <code>~/.claude/projects/&lt;project&gt;/memory/</code>. Each session loads only the first 200 lines or 25KB of <code>MEMORY.md</code>; topic files are read on demand. Turn it off with the toggle in <code>/memory</code> or with <code>&quot;autoMemoryEnabled&quot;: false</code>.</p>
+<p>The limits are clear too. It is <strong>machine-local</strong>: worktrees of the same repository share it, but other machines, cloud environments and Codex do not. Ordinary subagents do not receive the main conversation&#39;s auto memory, and records accumulate that no human has reviewed.</p>
+<p>Codex also has a <code>[memories]</code> settings group, but its detailed behaviour was not verified for this document (needs confirmation). This is why this repository&#39;s <code>.ai/CORE.md</code> says that on hearing a standing directive such as &quot;from now on&quot;, the run writes it <strong>in the same turn</strong> into <code>.ai/PROJECT_CONTEXT.md</code> or <code>.ai/memory/PROJECT_LESSONS.md</code>. Memory that every tool and machine shares, and that git reviews, is in the end a file in the repository.</p>
+<h3>Tools for checking instruction state</h3>
+<ul>
+<li><code>/context</code>: the memory files actually loaded in this session.</li>
+<li><code>/memory</code>: open and edit CLAUDE.md, CLAUDE.local.md and the auto memory location.</li>
+<li><code>/doctor prompt-audit</code>: finds outdated or contradictory instructions and proposes edits (v2.1.283 or later).</li>
+<li><code>InstructionsLoaded</code> hook: logs which file loaded, when and why. Useful when debugging path-scoped rules.</li>
+</ul>
+<h3>What a subagent inherits</h3>
+<p>An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can opt out with <code>omitClaudeMd: true</code>. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a <strong>Mission Packet</strong> instead of the whole <code>.ai/</code> folder: a subagent&#39;s context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;CLAUDE.md is the system prompt, so it is always obeyed.&quot;</strong> According to the Claude Code docs, CLAUDE.md is delivered as a user message after the system prompt, and strict compliance is not guaranteed.</li>
+<li><strong>&quot;Splitting with @imports saves tokens.&quot;</strong> Imports load at start too. To save, move content to <code>paths</code> rules or skills.</li>
+<li><strong>&quot;If AGENTS.md exists, Claude Code reads it.&quot;</strong> Not by default when a CLAUDE.md is also present.</li>
+<li><strong>&quot;Auto memory means decision records are unnecessary.&quot;</strong> Auto memory is machine-local and not shared with other tools.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>You start Claude Code in <code>foo/bar/</code>. When does each of <code>foo/CLAUDE.md</code>, <code>foo/bar/CLAUDE.md</code> and <code>foo/bar/baz/CLAUDE.md</code> load?</li>
+<li>In Codex, if one directory has both <code>AGENTS.override.md</code> and <code>AGENTS.md</code>, which is read?</li>
+<li>If a 40-line deployment procedure must leave CLAUDE.md, where does it go, and why?</li>
+<li>What does this repository pay for keeping two entry files instead of importing <code>@AGENTS.md</code> from CLAUDE.md?</li>
+<li>Name one defect <code>check_policy_set.py</code> can catch and one it cannot.</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li>Claude Code, <a href="https://code.claude.com/docs/en/memory">How Claude remembers your project</a> (checked 2026-09-29)</li>
+<li>Claude Code, <a href="https://code.claude.com/docs/en/features-overview">Extend Claude Code: context costs</a> (checked 2026-09-29)</li>
+<li>OpenAI Codex, <a href="https://developers.openai.com/codex/guides/agents-md">Custom instructions with AGENTS.md</a> (2026-09-29, cross-checked against source <code>codex-rs/core/src/agents_md.rs</code>)</li>
+<li><a href="https://agents.md">AGENTS.md specification</a> (2026-09-29, checked via the <code>agentsmd/agents.md</code> repository)</li>
+<li>This repository: <code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>.ai/HARNESS.md</code>, <code>.ai/CORE.md</code>, <code>.ai/tools/check_policy_set.py</code></li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/06-agent-setup-map/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Agent Setup Map</span></a><a class="page-link next" href="../../../en/ai/08-permissions-sandbox-hooks/"><span><small>Next</small>Permissions, Sandbox, Hooks</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

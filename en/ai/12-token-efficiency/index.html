@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Principles of AI Token Efficiency: Count Cost per Completed Task | MyAI</title>
+    <meta name="description" content="In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as &quot;how much to finish one feature&quot;, not &quot;how much…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/12-token-efficiency/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/12-token-efficiency/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Principles of AI Token Efficiency: Count Cost per Completed Task | MyAI" />
+    <meta property="og:description" content="In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as &quot;how much to finish one feature&quot;, not &quot;how much…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/12-token-efficiency.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link active" aria-current="page" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Principles of AI Token Efficiency</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Principles of AI Token Efficiency: Count Cost per Completed Task</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain what a token is and which line items you pay for, calculate why agent-loop cost compounds, and plan and measure savings in order, from free levers to trade-off levers.</p>
+</blockquote>
+<p>In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as &quot;how much to finish one feature&quot;, not &quot;how much per request&quot;. This document covers the principles; tool-by-tool practice is in &quot;Saving Tokens in Practice, Tool by Tool&quot;. Prices and features are <strong>as of 2026-09</strong> and include only what official documentation confirms. Dollar-to-won conversions use <strong>1 USD = 1,400 KRW (an assumption for easy arithmetic)</strong>.</p>
+<h2>Key Concepts</h2>
+<h3>Tokens and tokenizers</h3>
+<p>A <strong>token</strong> is the unit a model processes text in. The tokenizer cuts text into tokens, and billing, context limits and speed are all set in tokens. The same text yields different token counts under different tokenizers.</p>
+<table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Source (checked 2026-09)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>In English, roughly 1 token ≈ 4 characters ≈ 0.75 words; it varies by language and content</td>
+<td>Anthropic Pricing FAQ</td>
+</tr>
+<tr>
+<td>The tokenizer in Claude 4.7 and later models produces about 30% more tokens for the same text (content-dependent)</td>
+<td>Anthropic Pricing</td>
+</tr>
+<tr>
+<td>The same sentence translated into different languages can differ in token length by up to about 15x</td>
+<td>Petrov et al., NeurIPS 2023</td>
+</tr>
+</tbody></table>
+<p>Whether Korean, English or code costs more, and by how much, <strong>must be measured per model.</strong> The &quot;Korean costs N times more&quot; figures that circulate online were usually measured with a different tokenizer. Count Claude tokens with the model-specific <code>count_tokens</code>, not with OpenAI&#39;s tokenizer (tiktoken). It is free (only a requests-per-minute limit applies), so prepare the same content in Korean, English and code and measure it once.</p>
+<pre><code class="language-python">import anthropic
+
+client = anthropic.Anthropic()
+for path in [&quot;sample_ko.txt&quot;, &quot;sample_en.txt&quot;, &quot;sample_code.ts&quot;]:
+    text = open(path, encoding=&quot;utf-8&quot;).read()
+    for model in [&quot;claude-opus-5-5&quot;, &quot;claude-haiku-4-5&quot;]:
+        n = client.messages.count_tokens(
+            model=model,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: text}],
+        ).input_tokens
+        print(f&quot;{path}\t{model}\t{len(text)} chars\t{n} tokens\t{len(text)/n:.2f} chars/token&quot;)
+</code></pre>
+<h3>What you pay for</h3>
+<p>An API response&#39;s <code>usage</code> reports four token counts separately, each at its own rate. Total prompt size is <code>input_tokens + cache_creation_input_tokens + cache_read_input_tokens</code>; <code>input_tokens</code> is only the uncached remainder.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th><code>usage</code> field</th>
+<th>Rate (relative to input price)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Regular input</td>
+<td><code>input_tokens</code></td>
+<td>1x</td>
+</tr>
+<tr>
+<td>Cache write</td>
+<td><code>cache_creation_input_tokens</code></td>
+<td>1.25x for 5-minute TTL, 2x for 1-hour TTL</td>
+</tr>
+<tr>
+<td>Cache read</td>
+<td><code>cache_read_input_tokens</code></td>
+<td>0.1x (0.05x on Opus 5.5, 0.025x on Fable 5.1)</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code>output_tokens</code></td>
+<td>Output price. <strong>Includes thinking tokens</strong>, billed even when not shown</td>
+</tr>
+<tr>
+<td>Batch API</td>
+<td>All of the above</td>
+<td>50% off every item, stacks with cache discounts</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Model (2026-09, USD per 1M tokens)</th>
+<th align="right">Input</th>
+<th align="right">5m write</th>
+<th align="right">1h write</th>
+<th align="right">Cache read</th>
+<th align="right">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Fable 5.1</td>
+<td align="right">10</td>
+<td align="right">12.50</td>
+<td align="right">20</td>
+<td align="right">0.25</td>
+<td align="right">50</td>
+</tr>
+<tr>
+<td>Claude Opus 5.5</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">8</td>
+<td align="right">0.20</td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td>Claude Sonnet 5.5</td>
+<td align="right">2</td>
+<td align="right">2.50</td>
+<td align="right">4</td>
+<td align="right">0.20</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>Claude Haiku 4.5</td>
+<td align="right">1</td>
+<td align="right">1.25</td>
+<td align="right">2</td>
+<td align="right">0.10</td>
+<td align="right">5</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. An agent loop resends the whole history every turn</h3>
+<p>The model remembers nothing between requests. Every turn, Claude Code and Codex resend the system prompt, tool definitions, and all prior conversation and tool results. With a fixed prefix S, growth of Δ per turn, and N turns:</p>
+<pre><code class="language-text">total_input = N*S + D*N*(N-1)/2
+assumption: S = 20,000, D = 3,000, N = 30, output 800 per turn
+total_input = 600,000 + 1,305,000 = 1,905,000 tokens
+output      = 30 * 800 = 24,000 tokens
+</code></pre>
+<p>Double N and input roughly quadruples. <strong>Prompt caching</strong> does not stop the resending; it reprices the prefix already processed. Assume turn 1 writes S and each later turn reads the previous prompt and writes only the new Δ: that is 1,798,000 read and 107,000 written tokens (sum 1,905,000).</p>
+<table>
+<thead>
+<tr>
+<th>Assumed 30-turn session</th>
+<th align="right">No cache</th>
+<th align="right">With cache</th>
+<th align="right">Ratio</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Opus 5.5</td>
+<td align="right">1,905,000×$4 + 24,000×$20 = <strong>$8.10</strong> (11,340 KRW)</td>
+<td align="right">107,000×$5 + 1,798,000×$0.20 + $0.48 = <strong>$1.37</strong> (1,924 KRW)</td>
+<td align="right">about 5.9x</td>
+</tr>
+<tr>
+<td>Sonnet 5.5</td>
+<td align="right">1,905,000×$2 + 24,000×$10 = <strong>$4.05</strong> (5,670 KRW)</td>
+<td align="right">107,000×$2.50 + 1,798,000×$0.20 + $0.24 = <strong>$0.87</strong> (1,214 KRW)</td>
+<td align="right">about 4.7x</td>
+</tr>
+</tbody></table>
+<p>(Each ×$ multiplies by the per-1M-token price, then divides by 1,000,000.) With caching on, the gap between the two models shrinks from 2x to about 1.6x, because both read cache at $0.20. In its published measurements, Anthropic reports that caching cut agent-loop cost by a factor of 2.7 to 5.3.</p>
+<h3>2. The context window is working memory</h3>
+<p>The context window is the working memory the model sees at once. A 1M-token model bills a 900k-token request at the same per-token rate as a 9k one, but <strong>being able to fit something is not a reason to include it.</strong> Unneeded context costs twice: once in tokens, and again in retries caused by lower quality.</p>
+<ul>
+<li>Liu et al., &quot;Lost in the Middle&quot; (TACL 2024): performance dropped significantly when the relevant information sat in the middle of a long input.</li>
+<li>Anthropic, &quot;Effective context engineering for AI agents&quot; (2025-09): as tokens grow, the ability to recall information from context accurately declines, a <strong>context rot</strong> that appears across all models; it advises finding &quot;the smallest possible set of high-signal tokens&quot; that maximizes the chance of the desired outcome.</li>
+</ul>
+<h3>3. The unit of cost is the completed task, not the request</h3>
+<p>When a cheap model fails, you pay its tokens, the retry, and your own time fixing it. Assuming you retry until success, <strong>cost per completed task = cost per attempt ÷ success rate</strong>. A setup at $0.20 per attempt with 50% success costs $0.40 per task; one at $0.30 with 90% success costs $0.33. The attempt is pricier; the task is cheaper.</p>
+<p>In Anthropic&#39;s measurements (SWE-bench Pro, Claude Opus 5.5), running everything at <code>low</code> effort and re-running only the 13% that failed at <code>high</code> passed about 97% for about $0.17 per task, against 95.3% for $0.29 running everything at <code>high</code>. It only works when you have a failure signal (tests, a validator).</p>
+<h3>4. Lever order: free levers first, trade-offs later</h3>
+<p>Anthropic&#39;s cost-optimization guidance splits levers into two kinds. <strong>Free levers</strong> lower the price without lowering quality. <strong>Trade-off levers</strong> exchange intelligence for cost. The order matters.</p>
+<pre><code class="language-mermaid">flowchart TD
+    M[Measure: usage and cost per task] --&gt; F{Free levers used up?}
+    F --&gt;|No| C[Prompt caching]
+    C --&gt; I[Input hygiene: load only what is needed, progressively]
+    I --&gt; L[Loop hygiene: prune and isolate]
+    L --&gt; O[Output control: specify the shape]
+    O --&gt; B[Batch: work that can wait]
+    B --&gt; M
+    F --&gt;|Yes| E[Adjust effort]
+    E --&gt; R[Choose the model]
+    R --&gt; V[Check quality with an eval]
+    V --&gt; M
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Lever</th>
+<th>Effect</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Free</td>
+<td>Prompt caching</td>
+<td>Repeated prefix at 0.1x or less</td>
+<td>Keep the prefix byte-identical</td>
+</tr>
+<tr>
+<td>Free</td>
+<td>Input hygiene</td>
+<td>Load reference docs and tool definitions only when needed</td>
+<td>No gain if most calls use the whole doc</td>
+</tr>
+<tr>
+<td>Free</td>
+<td>Loop hygiene</td>
+<td>Summarize or isolate bulky tool results</td>
+<td>Only for long loops</td>
+</tr>
+<tr>
+<td>Free</td>
+<td>Output control</td>
+<td>Fix the answer shape to cut output tokens</td>
+<td>Provide a format example</td>
+</tr>
+<tr>
+<td>Free</td>
+<td>Batch</td>
+<td>50% off every token</td>
+<td>Work that only needs to finish within 24 hours</td>
+</tr>
+<tr>
+<td>Trade-off</td>
+<td>Effort</td>
+<td>Tune thinking and tool-call depth</td>
+<td>Check quality with an eval</td>
+</tr>
+<tr>
+<td>Trade-off</td>
+<td>Model choice</td>
+<td>Changes the unit price itself</td>
+<td>Last, one step at a time</td>
+</tr>
+</tbody></table>
+<h3>5. How to measure</h3>
+<table>
+<thead>
+<tr>
+<th>What you want to see</th>
+<th>Claude API</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tokens per request</td>
+<td>The four fields of the response <code>usage</code></td>
+<td>Status line <code>current_usage</code>, <code>claude -p --output-format json</code></td>
+<td><code>usage</code> on the <code>turn.completed</code> event of <code>codex exec --json</code></td>
+</tr>
+<tr>
+<td>Size before sending</td>
+<td><code>POST /v1/messages/count_tokens</code></td>
+<td><code>/context</code> (context breakdown and optimization suggestions)</td>
+<td><code>/status</code> (configuration and token usage)</td>
+</tr>
+<tr>
+<td>Session and account totals</td>
+<td>Console Usage, Usage &amp; Cost Admin API</td>
+<td><code>/usage</code> (<code>/cost</code> is an alias), including a cache hit-rate line</td>
+<td><code>/usage</code> (account usage)</td>
+</tr>
+</tbody></table>
+<p>Codex&#39;s <code>usage</code> carries <code>cached_input_tokens</code> and <code>reasoning_output_tokens</code> separately, so cache hits and reasoning tokens can be told apart (openai/codex source, checked 2026-09). The dollar figure in Claude Code&#39;s <code>/usage</code> is a list-price estimate; on a subscription plan, read it as plan-limit consumption rather than cost.</p>
+<h2>Applied: A Day in a Solo Studio</h2>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Task</th>
+<th>Tool · model</th>
+<th>Tokens (assumed)</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>09:00</td>
+<td>Build the checkout screen, 30 turns</td>
+<td>Claude Code · Opus 5.5 <code>medium</code></td>
+<td>Read 1,798,000 / write 107,000 / output 24,000</td>
+<td>$1.37</td>
+</tr>
+<tr>
+<td>12:30</td>
+<td>Resume the same session after lunch; the 5-minute TTL has passed, so the 107,000-token prefix is rewritten</td>
+<td>Claude Code · Opus 5.5</td>
+<td>Write 107,000</td>
+<td>107,000×$5 = $0.54 ($0.02 on a hit)</td>
+</tr>
+<tr>
+<td>14:00</td>
+<td>Refactor another product</td>
+<td>Codex CLI</td>
+<td>Input 400,000 (320,000 cached) / output 30,000 (18,000 reasoning)</td>
+<td>Drawn from the ChatGPT plan limit</td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>Generate 1,000 product descriptions</td>
+<td>Claude API · Sonnet 5.5 Batch</td>
+<td>2,000 input / 500 output each</td>
+<td>$9.00 standard → $4.50 Batch</td>
+</tr>
+</tbody></table>
+<p>All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = <strong>$6.41</strong> (about 8,970 KRW). The lines to notice are not model prices but <strong>one cache miss</strong> (about 25x a hit) and <strong>work that could run overnight</strong> (halved by Batch). If the afternoon is for other work, end the session with <code>/clear</code> before lunch; if an API-key user must continue the same session after a long gap, consider the 1-hour TTL. Tool-by-tool methods are in &quot;Saving Tokens in Practice, Tool by Tool&quot;.</p>
+<h2>Going Deeper</h2>
+<h3>A tokenizer change distorts price comparisons</h3>
+<p>Moving from Sonnet 4.6 ($3/$15) to Sonnet 5 ($2/$10) cuts the input price by 33%, but the new tokenizer produces about 30% more tokens for the same text. Text that was 1,000,000 tokens under the old tokenizer becomes about 1,300,000, so 1.3×$2 = $2.60: about 13% cheaper than $3. When switching models, compare <strong><code>usage</code> on the same task</strong>, not the price table.</p>
+<h3>Cache break-even</h3>
+<p>The 5-minute TTL already pays on the second request: 1.25 + 0.1 = 1.35 &lt; 2 (two uncached requests). The 1-hour TTL pays from the third: 2 + 0.1×2 = 2.2 &lt; 3. On Opus 5.5, reads are 0.05x, so 1.25 + 0.05 = 1.30. If requests start less than 5 minutes apart, the 5-minute TTL is always cheaper; at 5 to 60 minutes, the 1-hour TTL wins.</p>
+<h3>Thinking tokens bill at the output rate</h3>
+<p>Even if the visible answer is 500 tokens, 4,000 thinking tokens make the Opus 5.5 output cost 4,500×$20 = $0.09. Counting only the visible part gives $0.01, a 9x underestimate. Opus 5.5, Sonnet 5.5 and the Fable models cannot turn thinking off; effort is the only control (Claude Code docs, 2026-09).</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;The cheap model is always cheaper.&quot;</strong> Cost per task = cost per attempt ÷ success rate, and caching narrows the gap between models.</li>
+<li><strong>&quot;Turn caching on and it just works.&quot;</strong> A timestamp or UUID in the system prompt, unsorted JSON, or a tool list that changes per turn breaks the cache without any error. Confirm with <code>cache_read_input_tokens</code>.</li>
+<li><strong>&quot;Writing in Korean costs N times more.&quot;</strong> It depends on the tokenizer. Trust only what you measured with <code>count_tokens</code>.</li>
+<li><strong>&quot;With a big context window, include everything.&quot;</strong> The price per token is the same, but quality can drop (context rot).</li>
+<li><strong>&quot;Lowering <code>max_tokens</code> saves money.&quot;</strong> The model never sees it. A response that hits it is a truncated failure that costs a retry. To shorten answers, specify the shape; to shorten thinking, lower effort.</li>
+<li><strong>&quot;<code>/compact</code> is free.&quot;</strong> The summarization request itself reads the whole conversation. After the cache has gone cold, it is expensive.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>What do you miss if you look only at <code>input_tokens</code> among the four <code>usage</code> fields and conclude &quot;input was only 4K&quot;?</li>
+<li>With S = 10,000, Δ = 2,000 and N = 20, what is the total uncached input in tokens?</li>
+<li>Which is cheaper per task: $0.10 per attempt at 40% success, or $0.25 per attempt at 95% success?</li>
+<li>Which TTL fits a feature whose requests arrive about 20 minutes apart, and why?</li>
+<li>Why do effort and model choice come last in the lever order?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Prompt caching</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">Token counting</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence">Optimizing for cost and intelligence</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a> · <a href="https://code.claude.com/docs/en/commands">Commands</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> — Anthropic Engineering, 2025-09</li>
+<li><a href="https://aclanthology.org/2024.tacl-1.9/">Lost in the Middle: How Language Models Use Long Contexts</a> — Liu et al., TACL 2024</li>
+<li><a href="https://arxiv.org/abs/2305.15425">Language Model Tokenizers Introduce Unfairness Between Languages</a> — Petrov et al., NeurIPS 2023</li>
+<li><a href="https://github.com/openai/codex/blob/main/codex-rs/exec/src/exec_events.rs">openai/codex <code>exec_events.rs</code></a> — OpenAI, checked 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/11-headless-ci-cloud/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Headless, CI and Cloud Runs</span></a><a class="page-link next" href="../../../en/ai/13-token-saving-practice/"><span><small>Next</small>Saving Tokens in Practice</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

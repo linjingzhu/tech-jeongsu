@@ -2,7 +2,7 @@
 
 > **Learning goal**: Understand that AI agents have sharply lowered the cost of building but not the cost of distribution and attention, and explain the order in which the eleven documents of this track tackle the problem of "many prototypes, few launches, little revenue".
 
-As of: 2026-09-28. Fees, policies and statistics are the values checked on this date, and every document lists its sources with dates. All example numbers are **assumptions**.
+As of: 2026-09-29 (shared by all eleven documents of the track). Fees, policies and statistics are values checked on 2026-09-28 to 29, and the access dates in the references are the days they were actually checked. Every document lists its sources with dates. All example numbers are **assumptions**.
 
 ## Key Concepts
 
@@ -48,7 +48,7 @@ Building is fun and, thanks to AI, fast; the work just before launch is dull and
 
 ## Learning Map
 
-Part 1 (00–04) covers concepts and theory; part 2 (05–10) covers revenue models in depth and execution. The measurements in 09 feed back into the portfolio decisions of 02.
+Part 1 (00–04) covers concepts and theory; part 2 (05–10) covers revenue models in depth and execution. The measurements in 09 and the D90 triage in 10 feed back into the portfolio decisions of 02 and become the next quarter's allocation.
 
 ```mermaid
 flowchart TD
@@ -65,6 +65,7 @@ flowchart TD
     D08 --> D09[09 Measurement and Portfolio Decisions]
     D09 -->|next quarter allocation| D02
     D09 --> D10[10 A 90-Day Plan, Worked Through]
+    D10 -->|D90 triage| D02
 ```
 
 | No. | Document | Question it answers |
@@ -91,9 +92,9 @@ The whole track uses the same **example studio**. Every number below is an assum
 | Monthly fixed cost | KRW 500,000 (AI subscriptions, servers, tools) |
 | Target living cost | KRW 3,000,000 per month |
 | Operating cash | KRW 18,000,000 |
-| Prototypes | 12: 3 games, 4 creative tools, 3 productivity apps, 2 content sites |
-| One of the content sites | A technical documentation site preparing for AdSense |
-| Launched products | 1, with KRW 0 monthly revenue |
+| Prototypes | 12 (including the launched P1): 3 games (GM1–GM3), 4 creative tools (T1–T4), 3 productivity apps (P1–P3), 2 content sites (C1–C2) |
+| C2 | A technical documentation site preparing for AdSense, 5,000 pageviews a month at the plan's start (D0 in 10) |
+| Launched products | 1 of the 12: P1 habit tracker (a productivity app), KRW 0 monthly revenue |
 
 Runway divides operating cash by the money that leaves each month.
 

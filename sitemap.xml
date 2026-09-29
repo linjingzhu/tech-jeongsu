@@ -71,6 +71,86 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/05-git-operator/"/>
   </url>
   <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/06-agent-setup-map/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/06-agent-setup-map/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/06-agent-setup-map/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/06-agent-setup-map/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/06-agent-setup-map/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/06-agent-setup-map/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/10-mcp-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/10-mcp-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/10-mcp-tools/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/10-mcp-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/10-mcp-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/10-mcp-tools/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/11-headless-ci-cloud/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/11-headless-ci-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/11-headless-ci-cloud/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/12-token-efficiency/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/12-token-efficiency/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/12-token-efficiency/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/12-token-efficiency/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/"/>
+  </url>
+  <url>
     <loc>https://linjingzhu.github.io/tech-jeongsu/git/00-overview/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/00-overview/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/git/00-overview/"/>

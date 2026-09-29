@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Headless, CI and Cloud Runs | MyAI</title>
+    <meta name="description" content="As of 2026-09-29. Claude Code follows its official docs, and Codex its public source and official action repository; flag names change often. Recheck ever…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/11-headless-ci-cloud/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/11-headless-ci-cloud/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Headless, CI and Cloud Runs | MyAI" />
+    <meta property="og:description" content="As of 2026-09-29. Claude Code follows its official docs, and Codex its public source and official action repository; flag names change often. Recheck ever…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/11-headless-ci-cloud/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/11-headless-ci-cloud.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link active" aria-current="page" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Headless, CI and Cloud Runs</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Headless, CI and Cloud Runs</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Tell apart agent runs nobody watches (headless CLI, SDK, GitHub Actions, cloud sessions, scheduled runs), set permissions, network reach and spending limits explicitly for each, keep a record of every run, and diagnose common setup problems in order.</p>
+</blockquote>
+<p>As of 2026-09-29. Claude Code follows its official docs, and Codex its public source and official action repository; flag names change often. Recheck every command in this document with <code>--help</code> before running it.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Run type</th>
+<th>Claude Code</th>
+<th>Codex</th>
+<th>Fits</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Headless CLI</td>
+<td><code>claude -p</code></td>
+<td><code>codex exec</code></td>
+<td>Ask once and get a result from a script or Makefile</td>
+</tr>
+<tr>
+<td>SDK</td>
+<td>Claude Agent SDK (Python, TypeScript)</td>
+<td>Needs checking</td>
+<td>Put an agent loop inside your own program</td>
+</tr>
+<tr>
+<td>CI action</td>
+<td><code>anthropics/claude-code-action</code></td>
+<td><code>openai/codex-action</code></td>
+<td>React to PR and issue events</td>
+</tr>
+<tr>
+<td>Cloud session</td>
+<td>Claude Code on the web</td>
+<td>Codex cloud</td>
+<td>Work that continues after you close the laptop</td>
+</tr>
+<tr>
+<td>Scheduled run</td>
+<td>Routines, Actions <code>schedule</code></td>
+<td>Actions <code>schedule</code></td>
+<td>Daily reports, weekly cleanups</td>
+</tr>
+</tbody></table>
+<pre><code class="language-mermaid">flowchart LR
+    T1[A person&#39;s command] --&gt; R[Runner]
+    T2[PR or issue event] --&gt; R
+    T3[Cron schedule] --&gt; R
+    R --&gt; A[Agent: permissions, network and budget applied]
+    A --&gt; O[Output: branch, PR, comment, report]
+    O --&gt; G{Has a person reviewed it}
+    G --&gt;|Yes| MG[Merge or apply]
+</code></pre>
+<h2>Principles</h2>
+<h3>With Nobody There, Configuration Answers</h3>
+<p>In an interactive session a person answers permission prompts, stops the run and watches the cost. Headless, those answers must be <strong>written down in advance</strong>. <code>dontAsk</code> denies every call that would prompt and runs only what an allow rule covers, which suits a locked-down CI. The space in the rule <code>Bash(git diff *)</code> matters: written as <code>Bash(git diff*)</code>, it also matches <code>git diff-index</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What may run without asking</td>
+<td><code>--allowedTools &quot;Read,Bash(git diff *)&quot;</code>, <code>--permission-mode dontAsk</code></td>
+<td><code>--sandbox read-only</code> or <code>workspace-write</code></td>
+</tr>
+<tr>
+<td>How far can it reach</td>
+<td>The cloud environment&#39;s network level, <code>--strict-mcp-config</code></td>
+<td>The sandbox, the cloud agent phase&#39;s internet setting</td>
+</tr>
+<tr>
+<td>How much may it spend</td>
+<td><code>--max-turns</code>, <code>--max-budget-usd</code>, <code>--model</code></td>
+<td><code>--model</code>, workflow <code>timeout-minutes</code></td>
+</tr>
+</tbody></table>
+<h3>Reproducible Runs Dislike Implicit Configuration</h3>
+<p>By default <code>claude -p</code> reads the same configuration as an interactive session (CLAUDE.md, hooks, skills, plugins, <code>.mcp.json</code>) and runs the repository&#39;s hooks and MCP servers <strong>without a trust check</strong>. <code>--bare</code> skips all of that auto-discovery; it is recommended for scripts and is planned to become the default for <code>-p</code>. You then pass what you need <strong>explicitly</strong> with <code>--append-system-prompt-file</code>, <code>--mcp-config</code>, <code>--agents</code> and <code>--settings</code>. The more a CI job runs code others submitted, the safer this is.</p>
+<h2>Applied: This Repository&#39;s Setup</h2>
+<p>As of 2026-09-29 this repository has neither <code>.github/workflows/</code> nor <code>.claude/settings.json</code>, so the configuration below is what adoption would look like (model names are examples; <code>&lt;commit-sha&gt;</code> is a reviewed action commit). Before adopting, <code>.ai/HARNESS.md</code> requires two things:</p>
+<ul>
+<li><strong>Cost-bearing automation</strong>: before enabling it, record the provider, billing unit, expected upper bound, owner approval and expiry. If any is unknown, do not enable it; use local verification instead.</li>
+<li><strong>Reproducing a run</strong>: any result that will be quoted later carries the base commit, the exact command and the tool versions that command depended on.</li>
+</ul>
+<h3>Headless One-Liners</h3>
+<pre><code class="language-bash">claude --bare -p &quot;Summarize the failing tests in test.log&quot; --allowedTools &quot;Read&quot; --output-format json --max-turns 5 --max-budget-usd 1.00
+codex exec --sandbox read-only --json -o summary.md &quot;Summarize the failing tests in test.log&quot;
+</code></pre>
+<ul>
+<li>Claude&#39;s <code>--output-format</code> is <code>text</code>, <code>json</code> or <code>stream-json</code>. A <code>json</code> result includes <code>result</code>, <code>session_id</code> and <code>total_cost_usd</code>, and <code>--json-schema</code> enforces a shape through <code>structured_output</code>. Follow up with <code>--resume &lt;session_id&gt;</code> or <code>--continue</code>; in Codex, <code>codex exec resume --last</code>.</li>
+<li>Codex&#39;s <code>--json</code> streams events as JSONL, and <code>-o</code> (<code>--output-last-message</code>) writes only the final answer to a file. Structured output uses <code>--output-schema &lt;file&gt;</code>. The <code>--full-auto</code> flag in older guides does not appear among the shared options in the main-branch source as of 2026-09, so set <code>--sandbox</code> directly. Use <code>--dangerously-bypass-approvals-and-sandbox</code> (Codex) and <code>bypassPermissions</code> (Claude) only on a disposable runner that is already isolated.</li>
+</ul>
+<h3>GitHub Actions</h3>
+<pre><code class="language-yaml">name: agent-review
+on: pull_request
+permissions:
+  contents: read
+  pull-requests: read
+  id-token: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: agent-review-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@&lt;commit-sha&gt;
+      - uses: anthropics/claude-code-action@&lt;commit-sha&gt;
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: &quot;Use the adversarial-reviewer subagent to review this pull request against its description.&quot;
+          claude_args: |
+            --max-turns 8
+            --allowedTools &quot;Read,Grep,Glob,Bash(git diff *)&quot;
+</code></pre>
+<pre><code class="language-yaml">      - uses: openai/codex-action@&lt;commit-sha&gt;
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .github/codex/review.md
+          sandbox: read-only
+          safety-strategy: drop-sudo
+          output-file: codex-review.md
+</code></pre>
+<ul>
+<li>With a <code>prompt</code>, the Claude action runs in automation mode and has neither shell nor GitHub API access beyond the tools you allow. To post results as PR comments, name the commenting tool in <code>--allowedTools</code> as the official examples do. <code>id-token: write</code> is needed for the default GitHub App authentication. The easiest install is <code>/install-github-app</code> inside Claude Code.</li>
+<li>The Codex action&#39;s default <code>safety-strategy</code>, <code>drop-sudo</code>, removes sudo rights before Codex runs. There are also interactive integrations where a person calls <code>@claude</code> or <code>@codex review</code> on a PR.</li>
+<li>PRs from forks get no secrets. Working around that by checking out PR code under <code>pull_request_target</code> runs a stranger&#39;s code next to your secrets. Do not.</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>Claude Agent SDK</h3>
+<pre><code class="language-python">import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+async def main():
+    options = ClaudeAgentOptions(allowed_tools=[&quot;Read&quot;, &quot;Grep&quot;, &quot;Glob&quot;], max_turns=5, max_budget_usd=1.0)
+    async for message in query(prompt=&quot;List TODO comments in src/ grouped by file.&quot;, options=options):
+        print(message)
+
+asyncio.run(main())
+</code></pre>
+<p>Install with <code>pip install claude-agent-sdk</code> or <code>npm install @anthropic-ai/claude-agent-sdk</code>. It gives you Claude Code&#39;s tools, agent loop and context management as a library, and it reads skills and settings from <code>.claude/</code>. From other languages, call <code>claude -p --output-format json</code> as a subprocess. Third-party products may not offer claude.ai login, so use API key authentication.</p>
+<h3>Cloud Sessions</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Claude Code on the web</th>
+<th>Codex cloud</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network</td>
+<td>Per environment: None, Trusted (default), Full or Custom</td>
+<td>Internet during setup; agent phase blocked by default, plus an allowlist</td>
+</tr>
+<tr>
+<td>Preparation</td>
+<td>Setup script: runs as root on Ubuntu 24.04 before Claude Code starts, must exit 0</td>
+<td>Setup script, optional maintenance script</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Snapshot of a setup that finishes in about five minutes, rebuilt after about seven days</td>
+<td>Invalidated when scripts, variables or secrets change</td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>Environment variables are readable by everyone who uses the environment. Keep secrets out</td>
+<td>Secrets go only to the setup script and are removed before the agent phase</td>
+</tr>
+<tr>
+<td>Repository config</td>
+<td>CLAUDE.md, <code>.claude/settings.json</code>, <code>.mcp.json</code>, skills and agents come along. <code>~/.claude</code> and plugins do not</td>
+<td>Reads AGENTS.md</td>
+</tr>
+</tbody></table>
+<p>In Claude Code, the setup script is for <strong>preparing the VM</strong> (installing tools), and a SessionStart hook is for <strong>preparing the project</strong> (<code>npm install</code>) in both local and cloud sessions. From the terminal, <code>claude --cloud &quot;task&quot;</code> creates a cloud session and <code>claude --teleport</code> pulls one back.</p>
+<h3>Scheduled Runs</h3>
+<ul>
+<li><strong>Claude Routines</strong>: start a cloud session on a schedule, an API call or a GitHub event. From the CLI, use <code>/schedule</code>. The minimum interval is one hour, and a routine belongs to your personal account, so its commits and comments appear <strong>under your name</strong>.</li>
+<li><strong>GitHub <code>schedule</code></strong>: runs only on the default branch, and public repositories have schedules disabled after 60 days without activity. A scheduled prompt must not invoke a skill that &quot;decides what to build&quot;; that is why this repository&#39;s <code>auto-dev</code> never starts itself.</li>
+</ul>
+<h3>Cost Control and Observability</h3>
+<table>
+<thead>
+<tr>
+<th>Lever</th>
+<th>Setting</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Model</td>
+<td><code>--model</code>, subagent <code>model: haiku</code></td>
+<td>Simple classification and search on a cheaper model</td>
+</tr>
+<tr>
+<td>Turns and budget</td>
+<td><code>--max-turns</code>, <code>--max-budget-usd</code> (print mode, includes subagent spend)</td>
+<td>Stops runaway runs</td>
+</tr>
+<tr>
+<td>Time and concurrency</td>
+<td><code>timeout-minutes</code>, <code>concurrency</code></td>
+<td>Stops duplicate runs and endless waits</td>
+</tr>
+<tr>
+<td>Records</td>
+<td><code>total_cost_usd</code> in JSON, <code>/usage</code>, <code>CLAUDE_CODE_ENABLE_TELEMETRY=1</code> (OpenTelemetry), Codex <code>[otel]</code></td>
+<td>Collects estimated cost and events. The billing console is the source of truth</td>
+</tr>
+</tbody></table>
+<h3>Troubleshooting Checklist</h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Look first at</th>
+<th>Common causes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The agent ignores instructions</td>
+<td>Whether CLAUDE.md appears in <code>/context</code></td>
+<td>Not read under <code>--bare</code>; a subfolder CLAUDE.md loads only when a file there is read; vague or conflicting instructions. Rules that must hold belong in permissions or hooks</td>
+</tr>
+<tr>
+<td>Permission prompts everywhere</td>
+<td><code>/permissions</code></td>
+<td>Rule syntax errors; allowed locally but never committed. Headless uses <code>--allowedTools</code></td>
+</tr>
+<tr>
+<td>An MCP server does not load</td>
+<td><code>/mcp</code>, <code>claude mcp list</code>, <code>codex mcp list</code></td>
+<td>Pending approval, a missing-variable warning, unfinished OAuth. Read the <code>claude --debug=mcp</code> log</td>
+</tr>
+<tr>
+<td>Hooks do not fire</td>
+<td><code>/hooks</code></td>
+<td>Defined in a standalone file (must be the <code>&quot;hooks&quot;</code> key of a settings file), <code>matcher</code> written as an array, <code>--bare</code>, user settings absent in the cloud</td>
+</tr>
+<tr>
+<td>A cloud session will not start</td>
+<td>The setup-phase log</td>
+<td>Script exited non-zero; installing with network level None</td>
+</tr>
+<tr>
+<td>429 or 529 errors</td>
+<td>The error reference, <code>/usage</code></td>
+<td>Too many concurrent subagents or jobs. Limit concurrency, <code>--fallback-model</code></td>
+</tr>
+<tr>
+<td>No idea where to start</td>
+<td><code>/doctor</code> or <code>claude doctor</code>, <code>codex doctor</code></td>
+<td>Installation, authentication or settings-file errors</td>
+</tr>
+</tbody></table>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Headless runs with the interactive configuration.&quot;</strong> It may (<code>-p</code>) or may load almost nothing (<code>--bare</code>). Check what was read.</li>
+<li><strong>&quot;The agent in CI cannot see secrets.&quot;</strong> Every step in a job can read job-level environment variables. Give keys only to the step that needs them.</li>
+<li><strong>&quot;Cloud environment variables are a secret store.&quot;</strong> Everyone who uses the environment can read them.</li>
+<li><strong>&quot;<code>--max-budget-usd</code> fixes the bill.&quot;</strong> It is a client-side estimate. The billing console is the source of truth.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>How do <code>claude -p</code> and <code>claude --bare -p</code> treat the repository&#39;s hooks and <code>.mcp.json</code> differently?</li>
+<li>Explain why <code>pull_request_target</code> is dangerous in a workflow that reviews fork PRs.</li>
+<li>What belongs in a cloud setup script, and what in a SessionStart hook?</li>
+<li>What must be recorded alongside an agent run&#39;s result so it can be quoted later?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/headless">Run Claude Code programmatically</a>, <a href="https://code.claude.com/docs/en/cli-reference">CLI reference</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/overview">Agent SDK overview</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/github-actions">Claude Code GitHub Actions</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/claude-code-on-the-web">Claude Code on the web</a>, <a href="https://code.claude.com/docs/en/cloud-environments">Configure cloud environments</a>, <a href="https://code.claude.com/docs/en/routines">Routines</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/debug-your-config">Debug your configuration</a>, <a href="https://code.claude.com/docs/en/monitoring-usage">Monitoring</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs">codex exec CLI definition</a>, <a href="https://github.com/openai/codex-action">openai/codex-action</a> — OpenAI GitHub, accessed 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/noninteractive">Non-interactive mode</a>, <a href="https://developers.openai.com/codex/cloud/environments">Cloud environments</a> — OpenAI Codex Docs, confirmed through search results, accessed 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/10-mcp-tools/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>MCP and External Tools</span></a><a class="page-link next" href="../../../en/ai/12-token-efficiency/"><span><small>Next</small>Principles of AI Token Efficiency</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

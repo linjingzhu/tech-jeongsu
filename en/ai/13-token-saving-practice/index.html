@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Saving Tokens in Practice, Tool by Tool | MyAI</title>
+    <meta name="description" content="The principles (billing line items, loop compounding, lever order) are in &quot;Principles of AI Token Efficiency&quot;. This document is the tool-by-tool practice.…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Saving Tokens in Practice, Tool by Tool | MyAI" />
+    <meta property="og:description" content="The principles (billing line items, loop compounding, lever order) are in &quot;Principles of AI Token Efficiency&quot;. This document is the tool-by-tool practice.…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/13-token-saving-practice/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/13-token-saving-practice.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link active" aria-current="page" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Saving Tokens in Practice</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Saving Tokens in Practice, Tool by Tool</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Find where tokens leak in Claude Code, Codex and your own API apps, cut them with tool-specific settings and habits, and compare before and after in numbers.</p>
+</blockquote>
+<p>The principles (billing line items, loop compounding, lever order) are in &quot;Principles of AI Token Efficiency&quot;. This document is the tool-by-tool practice. Where configuration files live and how they combine is in &quot;The AI Agent Setup Map&quot;; writing instructions in &quot;Instructions and Memory: CLAUDE.md and AGENTS.md&quot;; permissions and hooks in &quot;Permissions, Sandboxes and Hooks: Designing the Enforced Layer&quot;; subagents and skills in &quot;Subagents, Skills, Commands and Plugins&quot;; MCP in &quot;MCP and External Tools&quot;; and cost control for headless runs and CI in document 11. Here we cover only the token angle. Commands and settings keys are <strong>as of 2026-09</strong>, limited to what official documentation and source confirm. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).</p>
+<h2>Key Concepts</h2>
+<h3>Three directions: put in less, repeat less, generate less</h3>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Meaning</th>
+<th>Typical means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Put in less</td>
+<td>Keep each request&#39;s context small</td>
+<td>Short CLAUDE.md and AGENTS.md, skills, MCP tool search, narrow file reads, output filters</td>
+</tr>
+<tr>
+<td>Repeat less</td>
+<td>Re-send the same prefix cheaply</td>
+<td>Keep prompt caching intact, pin model and effort, cut history with <code>/clear</code>, isolate with subagents</td>
+</tr>
+<tr>
+<td>Generate less</td>
+<td>Reduce output and thinking</td>
+<td>Specify the output shape, tune effort, Batch</td>
+</tr>
+</tbody></table>
+<p>When cost spikes, do not guess; find where it leaks first.</p>
+<pre><code class="language-mermaid">flowchart TD
+    S[Cost is high] --&gt; Q{Where does it leak?}
+    Q --&gt;|Large starting context| A[Trim CLAUDE.md and split into skills]
+    Q --&gt;|Long conversation| B[clear or compact]
+    Q --&gt;|Large tool output| C[Hook filters and subagents]
+    Q --&gt;|Frequent cache misses| D[Pin model and effort, adjust TTL]
+    Q --&gt;|Bulk work that can wait| E[Batch API]
+    Q --&gt;|Heavy thinking| F[Lower effort]
+    A --&gt; M[Measure again with usage]
+    B --&gt; M
+    C --&gt; M
+    D --&gt; M
+    E --&gt; M
+    F --&gt; M
+</code></pre>
+<h2>Principles</h2>
+<h3>Claude Code</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it cuts</th>
+<th>Command or setting (2026-09)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep CLAUDE.md under 200 lines; move task-specific instructions into skills</td>
+<td>Base context carried every turn</td>
+<td><code>/memory</code>, <code>/context</code></td>
+</tr>
+<tr>
+<td>Skills keep only their description resident; the body loads when invoked</td>
+<td>Base context</td>
+<td><code>/skills</code>, press <code>t</code> to sort by token count</td>
+</tr>
+<tr>
+<td>Hand high-output work such as exploration, logs and tests to subagents</td>
+<td>Main conversation context</td>
+<td><code>model: haiku</code> in the subagent configuration</td>
+</tr>
+<tr>
+<td><code>/clear</code> when the task changes, <code>/compact &lt;what to keep&gt;</code> at boundaries, <code>/rewind</code> for a wrong turn</td>
+<td>History</td>
+<td><code>/autocompact 500k</code></td>
+</tr>
+<tr>
+<td>Keep side questions out of the history</td>
+<td>History</td>
+<td><code>/btw</code></td>
+</tr>
+<tr>
+<td>Choose model and effort at session start and do not change them midway</td>
+<td>Cache misses</td>
+<td><code>/model</code>, <code>/effort</code></td>
+</tr>
+<tr>
+<td>MCP tool definitions are deferred by default (tool search). Disable unused servers, and prefer a CLI when one exists</td>
+<td>Starting context</td>
+<td><code>/mcp</code>, <code>ENABLE_TOOL_SEARCH</code></td>
+</tr>
+<tr>
+<td>Filter test output with a hook so only failing lines remain</td>
+<td>Tool output</td>
+<td><code>PreToolUse</code> hook</td>
+</tr>
+<tr>
+<td>Name the file and function instead of &quot;improve the codebase&quot;</td>
+<td>Read volume</td>
+<td>Specific prompts, plan mode</td>
+</tr>
+<tr>
+<td>An API-key user keeps using the same session after long gaps</td>
+<td>Cache misses</td>
+<td><code>promptCacheTtl: &quot;1h&quot;</code></td>
+</tr>
+</tbody></table>
+<p><strong><code>.claudeignore</code> is not an official feature</strong> (absent from the official docs as of 2026-09; GitHub has only feature requests). Block files that never need reading with <code>Read</code> rules under <code>permissions.deny</code>. Such a rule stops Claude&#39;s file tools but is not a security boundary, so follow &quot;Permissions, Sandboxes and Hooks: Designing the Enforced Layer&quot; for permission design.</p>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: {
+    &quot;deny&quot;: [&quot;Read(./dist/**)&quot;, &quot;Read(./coverage/**)&quot;, &quot;Read(./.env)&quot;]
+  },
+  &quot;autoCompactWindow&quot;: &quot;500k&quot;
+}
+</code></pre>
+<p>Know which actions break the cache and which keep it (Claude Code, &quot;How Claude Code uses prompt caching&quot;).</p>
+<table>
+<thead>
+<tr>
+<th>Breaks the cache</th>
+<th>Keeps the cache</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switching models (including <code>opusplan</code> plan-mode toggles and a skill that names a <code>model</code>)</td>
+<td>Editing repository files (only a change notice is appended)</td>
+</tr>
+<tr>
+<td>Changing effort on most models (kept on Opus 5.5, Sonnet 5.5 and Fable 5.1 with an API key or subscription)</td>
+<td>Editing CLAUDE.md (but it does not apply until <code>/clear</code>, <code>/compact</code> or a restart)</td>
+</tr>
+<tr>
+<td>Turning on fast mode; MCP connection changes while tool search is off</td>
+<td>Changing permission mode, invoking skills and commands, <code>/recap</code>, <code>/rewind</code></td>
+</tr>
+<tr>
+<td><code>/compact</code> (rewrites the conversation layer); the first session after a Claude Code upgrade</td>
+<td>Spawning a subagent (the parent prefix is untouched)</td>
+</tr>
+</tbody></table>
+<h3>Codex</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it cuts</th>
+<th>Setting or command (2026-09, checked in openai/codex source)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep AGENTS.md short. The combined size cap defaults to 32 KiB, and a cap is not a target</td>
+<td>Base context every turn</td>
+<td><code>project_doc_max_bytes</code></td>
+</tr>
+<tr>
+<td>Match the reasoning level to the task; the options vary by model</td>
+<td>Reasoning tokens</td>
+<td><code>model_reasoning_effort</code>, <code>plan_mode_reasoning_effort</code></td>
+</tr>
+<tr>
+<td>Create configuration layers per kind of work</td>
+<td>Wrong defaults</td>
+<td><code>codex --profile &lt;name&gt;</code> → <code>$CODEX_HOME/&lt;name&gt;.config.toml</code></td>
+</tr>
+<tr>
+<td>Summarize a long conversation or start fresh</td>
+<td>History</td>
+<td><code>/compact</code>, <code>/new</code></td>
+</tr>
+<tr>
+<td>Check usage</td>
+<td>Measurement</td>
+<td><code>/status</code>, <code>/usage</code></td>
+</tr>
+<tr>
+<td>Run repeated jobs non-interactively and fix the result shape</td>
+<td>History and output</td>
+<td><code>codex exec --json</code>, <code>--output-schema</code></td>
+</tr>
+</tbody></table>
+<p>There are also <code>tool_output_token_limit</code> (the token budget for storing tool output in context) and <code>model_auto_compact_token_limit</code> (the auto-compact threshold), but their defaults vary by version and need checking. The old <code>profile = &quot;...&quot;</code> setting is no longer supported.</p>
+<pre><code class="language-bash">codex exec --profile cheap --json &quot;Summarize the last 10 commits into CHANGELOG.md&quot; &gt; run.jsonl
+jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: (map(.input_tokens) | add), cached: (map(.cached_input_tokens) | add), reasoning: (map(.reasoning_output_tokens) | add)}&#39; run.jsonl
+</code></pre>
+<h3>Your own API apps</h3>
+<ul>
+<li><strong>Caching design</strong>: render order is <code>tools</code> → <code>system</code> → <code>messages</code>, and a single differing byte invalidates everything after it. Put what never changes first and what changes per turn last. There are at most 4 breakpoints, or a top-level <code>cache_control</code> can place them automatically. The minimum cacheable length varies by model (512 to 4,096 tokens); anything shorter silently does not cache.</li>
+<li><strong>Silent invalidators</strong>: the current time or a UUID in the system prompt, unsorted JSON serialization, per-user tool lists, conditionally appended system sections. Put dynamic instructions late in <code>messages</code>.</li>
+<li><strong>Batch API</strong>: work that can wait gets 50% off every token, stacking with cache discounts. Results arrive within 24 hours.</li>
+<li><strong>Context editing and compaction (beta)</strong>: context editing clears old tool results to free the window; it is not a savings lever. Every clear rewrites the cache. Prune rarely and in large batches.</li>
+<li><strong>Output shape</strong>: in Anthropic&#39;s measurements, a memo-style answer used six times the output tokens and cost 2.8 times a one-line answer, with accuracy within run-to-run noise. Specify the shape with an example, and keep <code>max_tokens</code> only as a backstop.</li>
+<li><strong>Let the model look things up instead of stuffing</strong>: move large reference docs behind a tool or skill, and use tool search (<code>defer_loading</code>) once tool definitions pass roughly 10K tokens. In Anthropic&#39;s measurements it cost 45% less at 502 tools. Measure user input with <code>count_tokens</code> first and trim it.</li>
+</ul>
+<h3>Comparison with other vendors (as of 2026-09)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Anthropic Claude API</th>
+<th>OpenAI API</th>
+<th>Google Gemini</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mechanism</td>
+<td>Explicit <code>cache_control</code> or top-level automatic</td>
+<td>Automatic (prefixes of 1,024 tokens or more)</td>
+<td>Implicit automatic + explicit manual</td>
+</tr>
+<tr>
+<td>Cache read</td>
+<td>0.1x input (0.05x Opus 5.5, 0.025x Fable 5.1)</td>
+<td>Up to 90% off (per-model cached-input price)</td>
+<td>90% off on Gemini 2.5 and later</td>
+</tr>
+<tr>
+<td>Cache write</td>
+<td>1.25x (5 minutes), 2x (1 hour)</td>
+<td>GPT-6 family price list shows a 1.25x cache-write line</td>
+<td>Standard input price; explicit adds hourly storage cost</td>
+</tr>
+<tr>
+<td>Lifetime</td>
+<td>5 minutes or 1 hour</td>
+<td>30 minutes for the GPT-6 family (announced 2026-09-22)</td>
+<td>Explicit caches take a set TTL</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>50%</td>
+<td>50%</td>
+<td>50%</td>
+</tr>
+</tbody></table>
+<h2>Applied: A Day in a Solo Studio</h2>
+<p>These are anti-patterns that show up often in a real day. All token counts and costs are <strong>assumptions</strong>, with Claude on an API key and Opus 5.5.</p>
+<table>
+<thead>
+<tr>
+<th>Anti-pattern</th>
+<th>Bad example (assumed)</th>
+<th>Good example (assumed)</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bloated CLAUDE.md</td>
+<td>600 lines ≈ 12,000 tokens carried for 30 turns</td>
+<td>150 lines ≈ 3,000 tokens + 2 skills</td>
+<td>9,000×$5 + 270,000×$0.20 ≈ <strong>$0.10/session</strong></td>
+</tr>
+<tr>
+<td>Whole test log</td>
+<td>A 40,000-token log carried for the next 15 turns</td>
+<td>Hook keeps 1,500 tokens of failing lines</td>
+<td>38,500×$5 + 577,500×$0.20 ≈ <strong>$0.31/run</strong></td>
+</tr>
+<tr>
+<td>Exploring 20 files in the main session</td>
+<td>60,000 tokens carried for the next 20 turns: $0.30 + $0.24 = $0.54</td>
+<td>A Haiku 4.5 subagent explores and returns only a 1,000-token summary ≈ $0.14</td>
+<td><strong>about $0.40/run</strong></td>
+</tr>
+<tr>
+<td>Switching to Sonnet for a side question</td>
+<td>Sonnet 5.5 rewrites the 150,000-token context: $0.375</td>
+<td>Ask Opus as is: 150,000×$0.20 = $0.03</td>
+<td><strong>about 12.5x</strong></td>
+</tr>
+<tr>
+<td>Current time in an API app&#39;s system prompt</td>
+<td>10,000 tokens × 2,000 requests a day, rewritten every time: 20M×$2.50 = $50/day (Sonnet 5.5)</td>
+<td>Move the time into the user message: 20M×$0.20 ≈ $4/day</td>
+<td><strong>about $46/day</strong></td>
+</tr>
+</tbody></table>
+<p>The last row is more expensive than not caching at all (20M×$2 = $40/day): a broken cache pays only the write premium. The subagent row&#39;s $0.14 is Haiku-side writes 60,000×$1.25 + reads 300,000×$0.10 + output 5,000×$5 = $0.13, plus about $0.01 for returning the summary. When caching works well, as in the CLAUDE.md row, the dollar difference is small. You still trim for context quality and for what a cache miss costs.</p>
+<p><strong>Solo studio checklist</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Each product repository&#39;s CLAUDE.md and AGENTS.md stays under 200 lines, with procedural instructions in skills</li>
+<li><input disabled="" type="checkbox"> Model and effort are chosen at session start, and <code>/clear</code> runs when the task changes</li>
+<li><input disabled="" type="checkbox"> Logs, tests and exploration go through subagents or hooks so only summaries reach the main conversation</li>
+<li><input disabled="" type="checkbox"> Unused MCP servers are off, and <code>/context</code> checks the starting context once a week</li>
+<li><input disabled="" type="checkbox"> Build output and minified files are in <code>Read</code> deny rules</li>
+<li><input disabled="" type="checkbox"> Bulk generation that can run overnight goes through the Batch API, and repeated coding jobs through <code>codex exec</code> scripts</li>
+<li><input disabled="" type="checkbox"> API apps assert <code>cache_read_input_tokens &gt; 0</code> in a test</li>
+<li><input disabled="" type="checkbox"> The <code>/usage</code> cache hit-rate line and the monthly bill are recorded once a month</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>When savings levers collide</h3>
+<p>Every saving that changes the prefix breaks the cache once. Compaction, context editing and client-side history pruning all do, and a subagent starts from a fresh prefix that shares no cache with its parent. Launch several workers on the same prefix at once and none can read the others&#39; cache; each writes its own. The rule is to prune <strong>rarely, in large batches, at natural boundaries</strong>. The Claude Code docs&#39; figure that agent teams use about 7x the tokens of a standard session in plan mode comes from the fact that each teammate keeps its own context.</p>
+<h3>One lever at a time, confirmed by measurement</h3>
+<p>Change one lever, rerun the same task, and read <code>usage</code> and output quality together. Keep it if it helps; revert it if not. Change two at once and you cannot tell which one worked. Change quality-affecting levers such as effort and model only when you have a pass bar such as tests or a checklist.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Just create a <code>.claudeignore</code>.&quot;</strong> It is not an official feature as of 2026-09. Use <code>Read</code> deny rules.</li>
+<li><strong>&quot;Switching to a cheaper model for a moment is cheaper.&quot;</strong> The new model has no cache and rewrites the whole conversation.</li>
+<li><strong>&quot;Subagents always save money.&quot;</strong> A subagent sends its own requests and starts from a fresh prefix. It pays only when it isolates high-output work.</li>
+<li><strong>&quot;Editing CLAUDE.md takes effect immediately.&quot;</strong> It applies on the next <code>/clear</code>, <code>/compact</code> or restart.</li>
+<li><strong>&quot;Context editing is a savings feature.&quot;</strong> It is a tool for freeing the window. Used often, it keeps breaking the cache.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>If <code>/context</code> shows a large MCP entry, what would you check and change first?</li>
+<li>Name two alternatives to switching models for a side question.</li>
+<li>In Codex, which output do you read, and how, to total the token usage of a nightly job?</li>
+<li>If an API app&#39;s <code>cache_creation_input_tokens</code> equals the whole conversation size on every request, what do you suspect?</li>
+<li>Which checklist item will you apply first this week, and how will you measure it?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/prompt-caching">How Claude Code uses prompt caching</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/context-window">Explore the context window</a> · <a href="https://code.claude.com/docs/en/model-config">Model configuration</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/permissions">Configure permissions</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Prompt caching</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/batch-processing">Batch processing</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence">Optimizing for cost and intelligence</a> — Anthropic, checked 2026-09-29</li>
+<li><a href="https://github.com/openai/codex">openai/codex</a> — <code>codex-rs/core/src/config/mod.rs</code>, <code>codex-rs/exec/src/cli.rs</code>, <code>codex-rs/tui/src/slash_command.rs</code>, checked 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/config-reference">Codex configuration reference</a> — OpenAI, checked via search results 2026-09-29</li>
+<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> — OpenAI, checked via search results 2026-09-29</li>
+<li><a href="https://ai.google.dev/gemini-api/docs/caching">Context caching</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">Context caching overview (Google Cloud)</a> · <a href="https://ai.google.dev/gemini-api/docs/batch-api">Batch API</a> — Google, checked via search results 2026-09-29</li>
+<li><a href="https://github.com/anthropics/claude-code/issues/29455">.claudeignore feature request #29455</a> — GitHub, checked via search results 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/12-token-efficiency/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Principles of AI Token Efficiency</span></a><a class="page-link next" href="../../../en/git/00-overview/"><span><small>Next</small>The big picture of Git</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

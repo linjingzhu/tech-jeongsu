@@ -2,7 +2,7 @@
 
 > **Learning goal**: Compute the hourly cost, fixed and variable costs, Runway and break-even point with the example studio's numbers, and explain what the power-law distribution of product outcomes means for strategy.
 
-As of: 2026-09-28. All example numbers are assumptions, and taxes are left out of the calculations.
+As of: 2026-09-29. All example numbers are assumptions, and taxes are left out of the calculations.
 
 ## Key Concepts
 
