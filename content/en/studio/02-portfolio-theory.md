@@ -2,7 +2,7 @@
 
 > **Learning goal**: Treat products as bets, compute Expected Value and variance, and design a portfolio for 160 hours a month using small bets, the barbell, Stage-Gate, kill criteria set in advance and WIP limits.
 
-As of: 2026-09-28. All probabilities and amounts are illustrative assumptions.
+As of: 2026-09-29. All probabilities and amounts are illustrative assumptions.
 
 ## Key Concepts
 
@@ -95,28 +95,56 @@ In practice, reducing WIP often raises throughput too, because there is less con
 
 | Area | Hours | Share | Content |
 |---|---|---|---|
-| Operate | 32 | 20% | Improving, marketing and supporting the one launched product |
+| Operate | 32 | 20% | Improving and supporting the launched product (P1), plus distribution shared by several products (the shared audience in Going Deeper) |
 | Build | 80 | 50% | Taking the 2 WIP items to launch |
 | Validate | 24 | 15% | Checking demand signals for 2 new candidates (03) |
 | Manage | 24 | 15% | Tax, measurement, learning, next month's plan |
 | Total | 160 | 100% | |
 
+This table is the track's default allocation. The 90-day plan in 10 starts from it and lists every deviation with its reason.
+
 **Sorting the 12 prototypes (assumption)**
 
 | State | Count | Example |
 |---|---|---|
-| Build slots | 2 | The technical documentation site preparing for AdSense, one creative tool with a pre-sale signal |
-| Validation slots | 2 | One game (Steam page signal, 07), one productivity app (interviews, 03) |
-| Archive | 8 | The remaining 2 games, 3 creative tools, 2 productivity apps, 1 content site |
+| Operating slot | 1 | P1 habit tracker (launched, one of the 3 productivity apps) |
+| Build slots | 2 | C2 technical documentation site (preparing for AdSense), creative tool T1 with a pre-sale signal |
+| Validation slots | 2 | Game GM1 (Steam page signal, 07), productivity app P2 (passed G1 through interviews, G2 measured with a waitlist and fake door page, 03) |
+| Archive | 7 | 2 games (GM2, GM3), 3 creative tools (T2–T4), 1 productivity app (P3), 1 content site (C1) |
 | Total | 12 | |
 
-The archive is not deletion. Tidy the repository, write one line on "the condition for taking it back out", and leave it alone. The one launched product sits separately in the operating slot.
+The archive is not deletion. Tidy the repository, write one line on "the condition for taking it back out", and leave it alone. The launched P1 sits in the operating slot. P1 shipped before the G4 gate existed and so had no criteria set in advance; document 10 writes its first date and state, using the same numbers as G4.
 
 ## Going Deeper
 
-**Correlation within the portfolio.** As with financial portfolios, products that move together lose the benefit of diversification. If four products all depend on Google search traffic and AdSense, one change in the search algorithm shakes all of them at once. The axes to diversify are **acquisition channel** (search, stores, communities), **revenue model** (ads, sales, subscriptions) and **platform** (web, iOS, Android, Steam). Look at the fit table in 04 again from this angle.
+**Correlation within the portfolio.** As with financial portfolios, products that move together lose the benefit of diversification. If four products all depend on Google search traffic and AdSense, one change in the search algorithm shakes all of them at once. The axes to diversify are **acquisition channel** (search, stores, communities), **revenue model** (ads, sales, subscriptions) and **platform** (web, iOS, Android, Steam). Look at the fit table in 04 again from this angle, and use the checklist in 04's Going Deeper to score the example studio's three-path combination.
 
 **Validation buys information.** If 16 hours of validation can avoid 80 hours of building, those 16 hours (KRW 350,000 worth) are insurance that can save up to 64 hours (KRW 1,400,000 worth).
+
+### The Portfolio's Shared Asset: One Audience
+
+Products can be archived or killed, but the people who found them can stay with the studio. To avoid gathering the first 100 users (08) from scratch for every bet, design **the audience as an asset of the studio rather than of one product**.
+
+| Element | Rule (assumption) | Related documents |
+|---|---|---|
+| One email list | Waitlists, the newsletter and buyer notices go into a single studio list, split by product tags. A new product's waitlist page only adds a tag to the same list | 03, 08 |
+| Cross-links between products | Link only where relevant: C2's image and asset articles → T1, T1's export-complete screen → GM1's Steam page, every product's footer → the studio list sign-up | 05 |
+| Bundles | Bundle only after each product has passed G4 on its own. Pricing rule in 06 | 06 |
+| Build in public | Post one number and one decision a week as a public log. When a product is archived, the log and the followers remain | 08, 09 |
+
+- Consent: collect consent for the waitlist and consent to receive promotional messages (newsletter, new-product notices) separately. See the Business section's "Terms · Privacy · E-Commerce".
+- Correlation: a shared audience makes products share an acquisition channel. It is an asset and a common risk at once, so measure how much with the checklist in 04's Going Deeper.
+
+**What the 16 hours a month of "shared distribution" in 10 contain (assumption)**
+
+| Work | Hours a month |
+|---|---|
+| Build-in-public log, 1 post a week × 4 weeks | 4 |
+| Studio newsletter once a month (news from each product) | 3 |
+| Community participation and posts (each product's first-100 source, 08) | 5 |
+| Checking and updating cross-links and sign-up forms | 2 |
+| Replying to waitlisted people and subscribers, tidying tags | 2 |
+| Total | 16 |
 
 ## Common Misconceptions
 

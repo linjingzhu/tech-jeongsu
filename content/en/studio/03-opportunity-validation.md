@@ -2,7 +2,7 @@
 
 > **Learning goal**: Size opportunity candidates bottom-up, confirm demand before building with Mom Test interviews, fake doors, pre-sales and waitlists, and decide against pass criteria set in advance.
 
-As of: 2026-09-28. Market sizes and threshold numbers are all assumptions; fill in real values with your own research.
+As of: 2026-09-29. Market sizes and threshold numbers are all assumptions; fill in real values with your own research.
 
 ## Key Concepts
 
@@ -96,9 +96,9 @@ This lays out the products placed in validation slots in 02 and the first valida
 | Game | Steam page wishlists, demo play | Publish a Steam page, a short demo | Follow the criteria in 07 | See 07 |
 | Creative tool | Pre-payment | Price page + early-bird payment | 5 payments from 300 visitors | 3 weeks |
 | Productivity app | Past behavior, waitlist sign-ups | 5 Mom Test interviews + waitlist page | At least 3 interviewees faced it recently, 10% sign-up | 2 weeks |
-| Content site | Search impressions and clicks | Publish 20 articles, then Search Console | At least 100 weekly clicks by week 8 | 8 weeks |
+| Content site | Pageviews from search | Publish 20 articles, then Search Console and an analytics tool | At least 3,000 monthly pageviews by week 8 (the same unit and value as C2's kill line in 09 and 10) | 8 weeks |
 
-The technical documentation site already has articles, so the traffic math in 05 comes before "demand validation". If visitor numbers fall far short of what the target RPM math requires, consider other models (04) alongside ads.
+The technical documentation site (C2) already has articles and is past this validation step. So the traffic math in 05 comes before "demand validation", and its gates use the same unit (monthly pageviews) in 09 and 10. If visitor numbers fall far short of what the target RPM math requires, consider other models (04) alongside ads.
 
 ## Going Deeper
 

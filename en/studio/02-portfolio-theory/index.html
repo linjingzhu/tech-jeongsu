@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Product Portfolio Theory | MyAI</title>
-    <meta name="description" content="As of: 2026-09-28. All probabilities and amounts are illustrative assumptions." />
+    <meta name="description" content="As of: 2026-09-29. All probabilities and amounts are illustrative assumptions." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/02-portfolio-theory/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/02-portfolio-theory/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI" />
     <meta property="og:title" content="Product Portfolio Theory | MyAI" />
-    <meta property="og:description" content="As of: 2026-09-28. All probabilities and amounts are illustrative assumptions." />
+    <meta property="og:description" content="As of: 2026-09-29. All probabilities and amounts are illustrative assumptions." />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/02-portfolio-theory/" />
     <meta property="og:locale" content="en_US" />
     <meta name="site-root" content="../../../" />
@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Treat products as bets, compute Expected Value and variance, and design a portfolio for 160 hours a month using small bets, the barbell, Stage-Gate, kill criteria set in advance and WIP limits.</p>
 </blockquote>
-<p>As of: 2026-09-28. All probabilities and amounts are illustrative assumptions.</p>
+<p>As of: 2026-09-29. All probabilities and amounts are illustrative assumptions.</p>
 <h2>Key Concepts</h2>
 <table>
 <thead>
@@ -278,7 +278,7 @@ Cut WIP to 2 with the same throughput → 2 ÷ 0.5 = <strong>4 months</strong></
 <td>Operate</td>
 <td>32</td>
 <td>20%</td>
-<td>Improving, marketing and supporting the one launched product</td>
+<td>Improving and supporting the launched product (P1), plus distribution shared by several products (the shared audience in Going Deeper)</td>
 </tr>
 <tr>
 <td>Build</td>
@@ -305,6 +305,7 @@ Cut WIP to 2 with the same throughput → 2 ÷ 0.5 = <strong>4 months</strong></
 <td></td>
 </tr>
 </tbody></table>
+<p>This table is the track&#39;s default allocation. The 90-day plan in 10 starts from it and lists every deviation with its reason.</p>
 <p><strong>Sorting the 12 prototypes (assumption)</strong></p>
 <table>
 <thead>
@@ -315,19 +316,24 @@ Cut WIP to 2 with the same throughput → 2 ÷ 0.5 = <strong>4 months</strong></
 </tr>
 </thead>
 <tbody><tr>
+<td>Operating slot</td>
+<td>1</td>
+<td>P1 habit tracker (launched, one of the 3 productivity apps)</td>
+</tr>
+<tr>
 <td>Build slots</td>
 <td>2</td>
-<td>The technical documentation site preparing for AdSense, one creative tool with a pre-sale signal</td>
+<td>C2 technical documentation site (preparing for AdSense), creative tool T1 with a pre-sale signal</td>
 </tr>
 <tr>
 <td>Validation slots</td>
 <td>2</td>
-<td>One game (Steam page signal, 07), one productivity app (interviews, 03)</td>
+<td>Game GM1 (Steam page signal, 07), productivity app P2 (passed G1 through interviews, G2 measured with a waitlist and fake door page, 03)</td>
 </tr>
 <tr>
 <td>Archive</td>
-<td>8</td>
-<td>The remaining 2 games, 3 creative tools, 2 productivity apps, 1 content site</td>
+<td>7</td>
+<td>2 games (GM2, GM3), 3 creative tools (T2–T4), 1 productivity app (P3), 1 content site (C1)</td>
 </tr>
 <tr>
 <td>Total</td>
@@ -335,10 +341,78 @@ Cut WIP to 2 with the same throughput → 2 ÷ 0.5 = <strong>4 months</strong></
 <td></td>
 </tr>
 </tbody></table>
-<p>The archive is not deletion. Tidy the repository, write one line on &quot;the condition for taking it back out&quot;, and leave it alone. The one launched product sits separately in the operating slot.</p>
+<p>The archive is not deletion. Tidy the repository, write one line on &quot;the condition for taking it back out&quot;, and leave it alone. The launched P1 sits in the operating slot. P1 shipped before the G4 gate existed and so had no criteria set in advance; document 10 writes its first date and state, using the same numbers as G4.</p>
 <h2>Going Deeper</h2>
-<p><strong>Correlation within the portfolio.</strong> As with financial portfolios, products that move together lose the benefit of diversification. If four products all depend on Google search traffic and AdSense, one change in the search algorithm shakes all of them at once. The axes to diversify are <strong>acquisition channel</strong> (search, stores, communities), <strong>revenue model</strong> (ads, sales, subscriptions) and <strong>platform</strong> (web, iOS, Android, Steam). Look at the fit table in 04 again from this angle.</p>
+<p><strong>Correlation within the portfolio.</strong> As with financial portfolios, products that move together lose the benefit of diversification. If four products all depend on Google search traffic and AdSense, one change in the search algorithm shakes all of them at once. The axes to diversify are <strong>acquisition channel</strong> (search, stores, communities), <strong>revenue model</strong> (ads, sales, subscriptions) and <strong>platform</strong> (web, iOS, Android, Steam). Look at the fit table in 04 again from this angle, and use the checklist in 04&#39;s Going Deeper to score the example studio&#39;s three-path combination.</p>
 <p><strong>Validation buys information.</strong> If 16 hours of validation can avoid 80 hours of building, those 16 hours (KRW 350,000 worth) are insurance that can save up to 64 hours (KRW 1,400,000 worth).</p>
+<h3>The Portfolio&#39;s Shared Asset: One Audience</h3>
+<p>Products can be archived or killed, but the people who found them can stay with the studio. To avoid gathering the first 100 users (08) from scratch for every bet, design <strong>the audience as an asset of the studio rather than of one product</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Rule (assumption)</th>
+<th>Related documents</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>One email list</td>
+<td>Waitlists, the newsletter and buyer notices go into a single studio list, split by product tags. A new product&#39;s waitlist page only adds a tag to the same list</td>
+<td>03, 08</td>
+</tr>
+<tr>
+<td>Cross-links between products</td>
+<td>Link only where relevant: C2&#39;s image and asset articles → T1, T1&#39;s export-complete screen → GM1&#39;s Steam page, every product&#39;s footer → the studio list sign-up</td>
+<td>05</td>
+</tr>
+<tr>
+<td>Bundles</td>
+<td>Bundle only after each product has passed G4 on its own. Pricing rule in 06</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Build in public</td>
+<td>Post one number and one decision a week as a public log. When a product is archived, the log and the followers remain</td>
+<td>08, 09</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Consent: collect consent for the waitlist and consent to receive promotional messages (newsletter, new-product notices) separately. See the Business section&#39;s &quot;Terms · Privacy · E-Commerce&quot;.</li>
+<li>Correlation: a shared audience makes products share an acquisition channel. It is an asset and a common risk at once, so measure how much with the checklist in 04&#39;s Going Deeper.</li>
+</ul>
+<p><strong>What the 16 hours a month of &quot;shared distribution&quot; in 10 contain (assumption)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Work</th>
+<th>Hours a month</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Build-in-public log, 1 post a week × 4 weeks</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Studio newsletter once a month (news from each product)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Community participation and posts (each product&#39;s first-100 source, 08)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Checking and updating cross-links and sign-up forms</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Replying to waitlisted people and subscribers, tidying tags</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>16</td>
+</tr>
+</tbody></table>
 <h2>Common Misconceptions</h2>
 <ul>
 <li><strong>&quot;Small bets always beat big bets&quot;</strong> — It flips depending on probabilities and payoff sizes. Write the numbers down and compare.</li>
