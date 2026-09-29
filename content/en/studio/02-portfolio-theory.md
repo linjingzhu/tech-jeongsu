@@ -108,7 +108,7 @@ This table is the track's default allocation. The 90-day plan in 10 starts from 
 | State | Count | Example |
 |---|---|---|
 | Operating slot | 1 | P1 habit tracker (launched, one of the 3 productivity apps) |
-| Build slots | 2 | C2 technical documentation site (preparing for AdSense), creative tool T1 with a pre-sale signal |
+| Build slots | 2 | C2 technical documentation site (preparing for AdSense), creative tool T1 with pre-sale inquiries and waitlist signals (its G2 is measured at D14-D42 in 10) |
 | Validation slots | 2 | Game GM1 (Steam page signal, 07), productivity app P2 (passed G1 through interviews, G2 measured with a waitlist and fake door page, 03) |
 | Archive | 7 | 2 games (GM2, GM3), 3 creative tools (T2–T4), 1 productivity app (P3), 1 content site (C1) |
 | Total | 12 | |

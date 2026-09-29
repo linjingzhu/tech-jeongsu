@@ -81,7 +81,7 @@ flowchart TD
 
 | Source | Finding |
 |---|---|
-| RevenueCat, State of Subscription Apps 2025 | Among newly launched subscription apps, the bottom 25% made USD 19 or less in their first year and the top 5% made USD 8,880 or more, a gap of over 400x |
+| RevenueCat, State of Subscription Apps 2025 | Revenue per newly launched subscription app two years after launch (USD): the bottom 25% made USD 19 or less and the top 5% USD 8,880 or more, a gap of over 400x |
 | VG Insights, Global Indie Games Market Report 2024 (reported by Game World Observer) | Of more than 12,000 indie releases on Steam in January–September 2024, under 0.5% were estimated to account for about 80% of revenue |
 | SteamDB (2025-12) | More than 19,000 Steam releases in 2025, almost half with fewer than ten reviews |
 
@@ -140,5 +140,6 @@ A solo studio's advantage is that it can aim for hundreds of paying users, not m
 - [Default Alive or Default Dead? — Paul Graham](https://paulgraham.com/aord.html) (2015-10, accessed 2026-09-28)
 - [1000 True Fans — Kevin Kelly, The Technium](https://kk.org/thetechnium/1000-true-fans/) (2008-03, accessed 2026-09-28)
 - [State of Subscription Apps 2025 — RevenueCat](https://www.revenuecat.com/state-of-subscription-apps-2025) (2025-03, accessed 2026-09-28)
+- [The State of Subscription Apps 2025: The year AI ate everything — RevenueCat Blog](https://www.revenuecat.com/blog/company/the-state-of-subscription-apps-2025-launch) (2025-03, "after two years" basis confirmed, accessed 2026-09-29)
 - [Indie games come close to AA/AAA games in revenue on Steam — Game World Observer](https://gameworldobserver.com/2024/10/16/indie-games-revenue-steam-vs-aaa-titles-vg-insights) (2024-10-16, citing the VG Insights report, accessed 2026-09-28)
 - [More than 19,000 games launched on Steam this year—but almost half have fewer than 10 reviews — PC Gamer](https://www.pcgamer.com/gaming-industry/more-than-19-000-games-launched-on-steam-this-year-but-almost-half-have-fewer-than-10-reviews/) (2025-12, accessed 2026-09-28)

@@ -101,16 +101,16 @@ By realized revenue per hour alone, all fall short of KRW 21,875. These are earl
 - C2 has a low expected value but takes little time and is steady. For the basis of ad rates (RPM), see document 05.
 - Conclusion (assumed): keep T1 as the main bet, and add hours to GM1 only when its leading indicator, wishlists, crosses the bar. This matches document 02's barbell allocation.
 
-### Pre-Committed Decision Rules (Day-60 Gate)
+### Pre-Committed Decision Rules (D60 Review, Verdict Date per Row)
 
 | Product | Kill | Continue | Double down |
 |---|---|---|---|
-| T1 | Trial to payment under 3% or fewer than 10 paying users | 3-10% | 10% or more and monthly net revenue KRW 400,000 or more → add 4 hours a week |
+| T1 | At day 60, trial to payment under 3% or fewer than 10 paying users → archive | At day 60, 3-10% | At day 60, 10% or more and monthly net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) |
 | C2 | Under 3,000 monthly page views at day 90 | 3,000-10,000 | 10,000 or more → double the publishing pace |
 | GM1 | Under 500 total wishlists at day 90 | 500-1,500 | 1,500 or more → start Next Fest preparation |
 | P1 | Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive | Maintenance only, 1 hour a week, until the verdict | G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter's triage |
 
-P1 shipped before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10's applied section). The criteria do not change before the verdict.
+P1 launched on 2026-06-15 (assumption), so G4's 60-day window closed on 2026-08-14, but that was before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10's applied section). The criteria do not change before the verdict.
 
 Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2, GM1 and P1 await their day-90 verdict. P1's 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.
 
@@ -137,6 +137,7 @@ The decision journal popularized by Farnam Street (Shane Parrish) records the fo
 ```text
 Date and state: 2026-12-04, moderately tired
 Decision: add 4 hours a week to T1, P1 maintenance only
+Where the hours come from (D60-D90, per month): T1 64 → 80, GM1 32 → 24, P2 4 → 0 (the fake door ended at D28), management and reviews 16 → 12
 Numbers behind it: trial to payment 11%, monthly net revenue KRW 450,000
 Expected outcome: monthly net revenue KRW 800,000 at day 90, probability 60%
 Alternative rejected: pull GM1's demo work forward

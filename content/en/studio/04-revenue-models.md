@@ -97,8 +97,8 @@ Judge a subscription by **LTV** rather than monthly revenue. With 8% monthly chu
 | itch.io | The developer chooses 0–100%, default 10% | Open revenue sharing, introduced in 2015 |
 | Stripe (US) | Domestic cards 2.9% + 30 cents | South Korea is not on Stripe's list of supported merchant countries |
 | Paddle (MoR) | 5% + 50 cents | Paddle calculates, collects and remits taxes as the seller |
-| Lemon Squeezy (MoR) | 5% + 50 cents, plus extra rates for international payments, PayPal, subscriptions and more | Acquired by Stripe in 2024, migrating to Stripe Managed Payments. New sign-ups: reported as waitlist or invite-only (as of 2026-09, not officially confirmed). If starting now, use Paddle or Gumroad |
-| Stripe Managed Payments (MoR) | Stripe processing fees + 3.5% per transaction | For sellers in about 35 countries, access by waitlist (2026 reports). Eligibility of sellers in South Korea not confirmed |
+| Lemon Squeezy (MoR) | 5% + 50 cents, plus extra rates for international payments, PayPal, subscriptions and more | Acquired by Stripe in 2024, migrating to Stripe Managed Payments. New sign-ups: reported as waitlist or invite-only, not officially confirmed. In 2026-06 an announcement that invite-free public sign-up for Stripe Managed Payments was coming soon was reported, but its opening is not confirmed (accessed 2026-09-29). If starting now, use Paddle or Gumroad |
+| Stripe Managed Payments (MoR) | Stripe processing fees + 3.5% per transaction. The 3.5% applies to the full transaction amount including indirect taxes such as VAT (Stripe Support) | Public preview from 2026-02, invite-free public sign-up announced as coming in 2026-06 (reported). **Not available to sellers in South Korea**: Stripe does not list South Korea as a supported merchant country, and 2026 secondary sources list it among excluded countries (the official country list could not be checked directly, accessed 2026-09-29) |
 | Gumroad | Direct sales 10% + 50 cents, via Discover 30% | MoR since 2025-01 |
 | Patreon | 10% for new creators after 2025-08-04, plus payment processing fees | Earlier creators keep their existing rates |
 | Google AdSense (content) | Publisher share 80% (after the buy-side platform fee) | About 68% of advertiser spend for ads bought through Google Ads (05) |
@@ -134,16 +134,17 @@ Every added model adds one more payment integration, refund policy, set of terms
 | Overseas tax | Paddle, as the seller, calculates, collects and files | You do it. Digital products sold to EU consumers carry EU VAT from the first sale even for sellers outside the EU, which can be filed in one country through the non-Union OSS. Other countries must be checked one by one |
 | Monthly fixed cost | 0 | Tax work 4 hours a month × KRW 21,875 = KRW 87,500 + annual fee KRW 110,000 ÷ 12 ≈ KRW 9,167 = about KRW 96,667 |
 
-> Difference per sale = 2,730 − 1,380.4 = KRW 1,349.6 → break-even volume = 96,667 ÷ 1,349.6 ≈ **72 sales a month** (about KRW 2.91M gross)
+> Difference per sale = 2,730 − 1,380.4 = KRW 1,349.6 → break-even = 96,667 ÷ 1,349.6 ≈ 71.6 sales → the MoR is cheaper up to 71 sales a month, and **the direct PG is cheaper from the 72nd sale** (break-even gross about KRW 2.91M)
 
-| Monthly tax hours (assumption) | Monthly fixed cost | Range where the MoR is cheaper |
-|---|---|---|
-| 2 hours | about KRW 52,917 | 39 sales a month or fewer |
-| 4 hours | about KRW 96,667 | 71 sales a month or fewer |
-| 8 hours | about KRW 184,167 | 136 sales a month or fewer |
+| Monthly tax hours (assumption) | Monthly fixed cost | Break-even | MoR cheaper | Direct PG cheaper |
+|---|---|---|---|---|
+| 2 hours | about KRW 52,917 | 39.2 sales | 39 a month or fewer | From the 40th sale |
+| 4 hours | about KRW 96,667 | 71.6 sales | 71 a month or fewer | From the 72nd sale |
+| 8 hours | about KRW 184,167 | 136.5 sales | 136 a month or fewer | From the 137th sale |
 
 - How to read it: T1's day-60 net revenue of KRW 450,000 (09) is about 12 sales a month at 06's $29 price (450,000 ÷ 37,870). That is far below break-even, so the MoR is cheaper for the example studio.
 - Left out: the PG sign-up fee of KRW 220,000, tax adviser fees, time spent on chargebacks and fraud, and domestic VAT filing (needed on both paths). Foreign-card rates differ by contract and may exceed 3.4% (to be confirmed). The higher the rate, the higher the break-even volume, and the longer the MoR stays ahead.
+- VAT itself: VAT on digital products sold to consumers abroad, such as in the EU, arises on either path. An MoR calculates and collects it at checkout automatically; with a direct PG the seller must add each country's VAT at checkout or, failing that, absorb it. Absorbing 20% VAT on a $29 sale costs 29 × 20% × 1,400 = KRW 8,120 per sale, about six times the fee gap above (KRW 1,349.6). Without checkout set up to add each country's VAT, the direct PG is more expensive at any volume.
 
 ### Checking Model, Channel and Platform Correlation
 
@@ -207,7 +208,8 @@ Prices to Korean consumers are displayed including VAT, while app-store and over
 - [Pricing — Paddle](https://www.paddle.com/pricing) (accessed 2026-09-28)
 - [Fees — Lemon Squeezy Docs](https://docs.lemonsqueezy.com/help/getting-started/fees) (accessed 2026-09-28)
 - [2026 Update: Lemon Squeezy + Stripe Managed Payments — Lemon Squeezy](https://www.lemonsqueezy.com/blog/2026-update) (2026, confirmed through search results, accessed 2026-09-29)
-- [Managed Payments pricing — Stripe Support](https://support.stripe.com/questions/managed-payments-pricing) (accessed 2026-09-29)
+- [Managed Payments pricing — Stripe Support](https://support.stripe.com/questions/managed-payments-pricing) (charged on the tax-inclusive total, accessed 2026-09-29)
+- [Stripe's Merchant of Record (Stripe Managed Payments): How Does it Work? — Paddle](https://www.paddle.com/resources/stripe-managed-payments) (secondary source from a competitor, states South Korea is excluded, accessed 2026-09-29)
 - [EU VAT One Stop Shop (OSS) — Your Europe](https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm) (non-Union OSS, accessed 2026-09-29)
 - [Gumroad's fees — Gumroad Help Center](https://gumroad.com/help/article/66-gumroads-fees) (accessed 2026-09-28)
 - [A standard platform fee for new creators — Patreon Help Center](https://support.patreon.com/hc/en-us/articles/36426991446797-A-standard-platform-fee-for-new-creators-effective-after-August-4-2025) (2025, accessed 2026-09-28)

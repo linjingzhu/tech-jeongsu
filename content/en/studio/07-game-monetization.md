@@ -53,7 +53,7 @@ flowchart LR
 
 ### Mobile Game Numbers
 
-- GameAnalytics' 2025 mobile benchmarks (about 11,600 games) reported median D1 around 22%, D7 around 3.4-3.9%, D30 under 1%, and top-quartile D1 around 26-28% (per secondary summaries).
+- GameAnalytics' 2026 benchmarks (2025 data, 16,000+ mobile games with 1,000+ monthly active users) reported median D1 around 22%, D7 just under 4%, D30 around 0.7-0.8%, and top-quartile D1 just above 30% (per secondary summaries).
 - Revenue = DAU × ARPDAU. DAU is built from new installs times retention, so low retention demands large daily install volume (usually paid ads).
 - IAP revenue carries app store fees (document 06). Ad revenue follows ad network settlement (document 05).
 
@@ -140,7 +140,7 @@ Good example:
 - [How To Market A Game - Benchmarks](https://howtomarketagame.com/benchmarks/) (accessed 2026-09-29)
 - [presskit.gg - How to Get More Steam Wishlists Before Launch](https://presskit.gg/field-guides/how-to-build-steam-wishlist) (accessed 2026-09-29)
 - [Game World Observer - 41k games released on Steam over past 3 years (2023-10-06)](https://gameworldobserver.com/2023/10/06/steam-stats-41k-games-last-3-years-half-made-500-or-less) (accessed 2026-09-29)
-- [GameAnalytics - 2025 Mobile Gaming Benchmarks](https://www.gameanalytics.com/reports/2025-mobile-gaming-benchmarks) (accessed 2026-09-29)
+- [GameAnalytics - 2026 Mobile & PC Gaming Benchmarks](https://www.gameanalytics.com/reports/2026-mobile-pc-gaming-benchmarks) (2025 data, accessed 2026-09-29)
 - [Korea Policy Briefing - Loot box information disclosed from March 22 (in Korean)](https://www.korea.kr/news/policyNewsView.do?newsId=148924297) (accessed 2026-09-29)
 - [Law Times - Litigation special rules for loot box disclosure violations take effect (in Korean)](https://www.lawtimes.co.kr/news/articleView.html?idxno=210245) (accessed 2026-09-29)
 - [Asia Economy - Steam considers self-rating operator status in Korea (2024-07-03, in Korean)](https://www.asiae.co.kr/article/2024070317305284345) (accessed 2026-09-29)

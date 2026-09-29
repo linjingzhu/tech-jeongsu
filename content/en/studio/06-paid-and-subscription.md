@@ -54,7 +54,7 @@ A survey proposed by Dutch economist Peter van Westendorp in 1976 asks four thin
 | Freemium to paid | Good 3-5%, great 8-12% | Same source |
 | App trials of 17 days or more vs 4 days or less, trial to paid (median) | 42.5% vs 25.5% | RevenueCat trial length analysis (17,000+ apps), 2026 |
 | Paid conversion within 35 days of install (median) | Hard paywall 10.7%, freemium 2.1% | RevenueCat State of Subscription Apps 2026 |
-| Annual subscriptions retained after one year (median) | 28% (monthly plans about 11%) | Same report |
+| Annual subscribers retained after one year (median) | Freemium apps 28%, hard paywall apps 27% | Same report |
 | B2C SaaS monthly churn | Good 3-5%, great under 2% | Lenny's Newsletter (2022), based on ProfitWell data from about 13,000 SaaS companies |
 
 - The same author's 2023 edition (Lenny's Newsletter, survey of 1,000+ products) gave 8-12%/15-25% for trials and 3-5%/6-8% for freemium. The table uses the newer 2026 edition, but its sample (200 B2B products, USD 1-10M in annual revenue) and its trial split (card required or not) differ, so do not read the two years as a trend.
@@ -124,8 +124,8 @@ Good example:
 | Google Play | Currently 15% up to $1M a year, auto-renewing subscriptions 15% (since 2022-01-01). Korean alternative billing cuts it by 4 points (15% → 11%) | Press reports a new structure for Korea (10% on the first $1M, among others) planned for 2026-12-31; recheck in document 04's table |
 | Toss Payments (Korean PG) | General card rate 3.4%, sign-up fee KRW 220,000, annual fee KRW 110,000 (per comparison sources) | Preferential rates for small merchants; automatic billing needs a separate review and contract |
 | Paddle (MoR) | 5% + 50 cents | Supports Korean sellers; Paddle, as seller, calculates, collects and files taxes |
-| Lemon Squeezy (MoR) | 5% + 50 cents + surcharges for international payments, subscriptions and more | Acquired by Stripe in 2024; migrating to Stripe Managed Payments. New sign-ups reported as waitlist or invite-only (as of 2026-09, not officially confirmed) |
-| Stripe Managed Payments (MoR) | Stripe processing fees + 3.5% per transaction | For sellers in about 35 countries, access by waitlist (2026 reports). Eligibility of sellers in South Korea not confirmed |
+| Lemon Squeezy (MoR) | 5% + 50 cents + surcharges for international payments, subscriptions and more | Acquired by Stripe in 2024, migrating to Stripe Managed Payments. New sign-ups: reported as waitlist or invite-only, not officially confirmed. In 2026-06 an announcement that invite-free public sign-up for Stripe Managed Payments was coming soon was reported, but its opening is not confirmed (accessed 2026-09-29) |
+| Stripe Managed Payments (MoR) | Stripe processing fees + 3.5% per transaction. The 3.5% applies to the full transaction amount including indirect taxes such as VAT (Stripe Support) | Public preview from 2026-02, invite-free public sign-up announced as coming in 2026-06 (reported). **Not available to sellers in South Korea**: Stripe does not list South Korea as a supported merchant country, and 2026 secondary sources list it among excluded countries (the official country list could not be checked directly, accessed 2026-09-29) |
 | Stripe (direct processor) | Not applicable | Korea is not on Stripe's list of supported merchant countries; needs an entity abroad |
 
 A Korean solo developer starting overseas sales now should look at Paddle or Gumroad (both MoRs) first. The break-even between an MoR and a direct PG is computed in 04's Going Deeper.
