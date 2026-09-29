@@ -198,8 +198,8 @@
 <tr>
 <td>하네스</td>
 <td>2026년 2월</td>
-<td>Mitchell Hashimoto가 글에서 &quot;Engineer the Harness&quot;를 한 단계로 꼽음(2월 초). OpenAI Ryan Lopopolo 「Harness engineering: leveraging Codex in an agent-first world」(2차 출처상 2026-02-11). Birgitta Böckeler가 martinfowler.com에 체계화(2026-04)</td>
-<td>모두 검색 결과로 확인, 원문 미확인</td>
+<td>Anthropic이 2025-11-26 글 「Effective harnesses for long-running agents」 제목에 이미 &#39;harness&#39;를 썼고(원문 확인), &#39;harness engineering&#39;이라는 분야 이름은 2026년 2월에 퍼졌다. Mitchell Hashimoto가 글에서 &quot;Engineer the Harness&quot;를 한 단계로 꼽음(2월 초). OpenAI Ryan Lopopolo 「Harness engineering: leveraging Codex in an agent-first world」(2차 출처상 2026-02-11). Birgitta Böckeler가 martinfowler.com에 체계화(2026-04)</td>
+<td>Anthropic 글은 원문 확인, 나머지는 검색 결과로 확인(원문 미확인)</td>
 </tr>
 </tbody></table>
 <p>Anthropic 글은 둘을 이렇게 구분한다. 프롬프트 엔지니어링은 &quot;최적의 결과를 위해 LLM 지시를 쓰고 조직하는 방법&quot;이고, 컨텍스트 엔지니어링은 &quot;추론 중 최적의 token(정보) 집합을 선별하고 유지하는 전략&quot;이다. 목표는 &quot;원하는 결과의 가능성을 최대화하는, 가능한 가장 작은 고신호 token 집합&quot;이다.</p>
@@ -360,14 +360,14 @@
 <li><strong>검사는 있지만 아무도 부르지 않으면 돌지 않는다.</strong> 테스트는 이 문서 같은 한·영 쌍의 구조를 기계적으로 검사하는 좋은 sensor다. 하지만 hook도 CI도 없으니 실행 여부는 agent가 지시를 따르느냐에 달려 있다. 강제력 있는 검사가 요청으로 호출되는 셈이다.</li>
 <li><strong>진입 계약 두 개가 같은 상황을 다르게 읽는다.</strong> 이 저장소에는 <code>.ai/PROJECT_CONTEXT.md</code>가 없고 템플릿만 있다. <code>CLAUDE.md</code>는 없을 때 &quot;the set is not adopted here: stop and run <code>python3 .ai/tools/adopt.py</code>&quot;라고 하고, <code>AGENTS.md</code>는 정책 템플릿 자체를 관리할 때(<code>LESSONS_FROM_PRACTICE.md</code>가 있을 때) &quot;project instance files are intentionally absent; do not create them&quot;이라고 한다. <code>check_policy_set.py</code>도 이 상태를 &quot;the set as shipped&quot;로 읽고 통과시킨다. 사람이 쓴 요청끼리 어긋나면 모델마다 다르게 행동한다. 이것은 컨텍스트 층의 결함이다.</li>
 </ol>
-<p><strong>다음 한 걸음.</strong> 모든 빈칸을 한 번에 채우지 않는다. 가장 자주 어겨진 요청 하나를 골라 강제로 옮기고, 아래 <em>하네스 변경을 측정하기</em> 절의 방식으로 전후를 비교한다. 이 저장소라면 후보는 &quot;끝내기 전에 <code>node --test tests/*.test.cjs</code>를 돌린다&quot;를 <code>Stop</code> hook이나 CI로 옮기는 것이다. 구현 초안은 「권한 · Sandbox · Hook」에 있다.</p>
+<p><strong>다음 한 걸음.</strong> 모든 빈칸을 한 번에 채우지 않는다. 가장 자주 어겨진 요청 하나를 골라 강제로 옮기고, 아래 <em>하네스 변경을 측정하기</em> 절의 방식으로 전후를 비교한다. 이 저장소라면 후보는 &quot;끝내기 전에 <code>node --test tests/*.test.cjs</code>를 돌린다&quot;를 <code>Stop</code> hook이나 CI로 옮기는 것이다. hook 설정 형식과 <code>Stop</code> hook 예시는 「권한 · Sandbox · Hook」, CI 초안은 「Headless · CI · Cloud 실행」에 있다. 테스트를 돌리는 hook 자체는 두 문서에 없으니 그 예시를 바탕으로 직접 만든다.</p>
 <h2>심화</h2>
 <h3>하네스 투자와 모델 업그레이드</h3>
 <p>모델은 몇 달마다 좋아지고 업그레이드는 대개 설정 한 줄이다. 하네스는 직접 만들고 유지해야 한다. 그래서 하네스 부품을 두 종류로 나눠 본다. <strong>프로젝트의 사실과 규칙을 담은 부품</strong>(테스트, 아키텍처 검사, 권한, 문서 지도)은 모델이 바뀌어도 가치가 남고, 더 좋은 모델일수록 더 잘 활용한다. <strong>모델의 약점을 메우는 부품</strong>(단계를 잘게 지시하는 긴 프롬프트, 특정 실수를 피하는 우회 지시)은 모델이 바뀌면 불필요해지거나 오히려 방해가 될 수 있다. 모델을 올릴 때마다 뒤쪽 부품을 하나씩 빼 보고 고정 과제 세트로 확인한다. 이 구분은 이 문서의 설계 판단이며 공개 측정으로 확인한 결론은 아니다.</p>
 <h3>하네스 잠금</h3>
 <p>권한 문법, hook 이벤트 스키마, agent 정의 형식은 도구마다 다르다. 이 저장소가 같은 역할을 <code>.claude/agents/*.md</code>와 <code>.codex/agents/*.toml</code>로, 같은 Skill을 <code>.claude/skills/</code>와 <code>.agents/skills/</code>로 두 번 쓰고, 그 과정에서 <code>maxTurns</code>처럼 한쪽에만 강제되는 규칙이 생긴 것이 잠금 비용의 실례다. 대응은 규칙의 본체를 <strong>이식 가능한 층</strong>(테스트, 스크립트, Markdown 문서)에 두고, 도구별 파일은 그것을 부르는 얇은 포장으로 유지하는 것이다. 예를 들어 금지 규칙은 스크립트 하나에 쓰고, Claude hook과 Codex hook이 같은 스크립트를 호출하게 한다.</p>
 <h3>하네스 변경을 측정하기</h3>
-<p>하네스 변경의 효과는 느낌이 아니라 <strong>고정 과제 세트의 전후 비교</strong>로 확인한다. Anthropic 「Demystifying evals for AI agents」(2026-01, 검색 결과로 확인)는 agent 평가를 과제, 시도(trial), 채점기(grader), 기록(transcript) 등으로 나누고, 최종 메시지보다 결과 상태(테스트 통과, 파일 변화)를 채점하라고 권한다고 소개된다. 아래 과제 수는 출발점일 뿐 권장값이 아니며, 과제 세트가 작으면 우연한 차이를 효과로 오해하기 쉬우니 차이가 작을 때는 결론을 미룬다.</p>
+<p>하네스 변경의 효과는 느낌이 아니라 <strong>고정 과제 세트의 전후 비교</strong>로 확인한다. Anthropic 「Demystifying evals for AI agents」(2026-01-09, 원문 확인)는 agent 평가를 과제, 시도(trial), 채점기(grader), 기록(transcript) 등으로 나누고, 도구 호출 순서 같은 경로보다 agent가 만든 결과를 채점하는 편이 대개 낫다고 쓴다(&quot;grade what the agent produced, not the path it took&quot;). 아래 과제 수는 출발점일 뿐 권장값이 아니며, 과제 세트가 작으면 우연한 차이를 효과로 오해하기 쉬우니 차이가 작을 때는 결론을 미룬다.</p>
 <pre><code class="language-text">1. 과제 세트: 지난 버그와 기능 요청에서 10~20개, 각각 기계적 합격 기준(테스트, 검사 명령)
 2. 고정: 모델, effort, 기준 commit, 도구 버전
 3. 변경: 하네스 한 가지만(예: Stop hook 추가)
@@ -445,7 +445,7 @@
 <ul>
 <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> — Anthropic Engineering, 2025-09-29 게시, 2026-09-29 확인</li>
 <li><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a> — Anthropic Engineering, 2025-11-26 게시, 2026-09-29 확인</li>
-<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a> — Anthropic Engineering, 2026-01 게시, 2026-09-29 검색 결과로 확인</li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a> — Anthropic Engineering, 2026-01-09 게시, 2026-09-29 확인</li>
 <li><a href="https://code.claude.com/docs/en/memory">How Claude remembers your project</a> — Claude Code Docs, 2026-09-29 확인</li>
 <li><a href="https://code.claude.com/docs/en/hooks-guide">Automate actions with hooks</a> — Claude Code Docs, 2026-09-29 확인</li>
 <li><a href="https://openai.com/index/harness-engineering/">Harness engineering: leveraging Codex in an agent-first world</a> — OpenAI, Ryan Lopopolo, 2026-09-29 검색 결과로 확인(2차 출처상 2026-02-11 게시, 원문 미확인)</li>

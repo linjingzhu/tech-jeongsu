@@ -49,7 +49,7 @@ Each outer layer contains the inner ones. A good prompt is useless if the contex
 |---|---|---|---|
 | Prompt | Early 2020s | Spread of conversational LLMs | Common knowledge |
 | Context | Around June 2025 | Tobi Lütke and Andrej Karpathy spoke of "context engineering rather than prompt engineering". Anthropic "Effective context engineering for AI agents" (2025-09-29) | Anthropic post read in the original; the June remarks confirmed via search results |
-| Harness | February 2026 | Mitchell Hashimoto listed "Engineer the Harness" as a step in a post (early February). OpenAI, Ryan Lopopolo, "Harness engineering: leveraging Codex in an agent-first world" (2026-02-11 per secondary sources). Birgitta Böckeler systematised it on martinfowler.com (2026-04) | All confirmed via search results; originals not checked |
+| Harness | February 2026 | Anthropic already used "harness" in the title of its 2025-11-26 post "Effective harnesses for long-running agents" (original checked); the discipline name "harness engineering" spread in February 2026. Mitchell Hashimoto listed "Engineer the Harness" as a step in a post (early February). OpenAI, Ryan Lopopolo, "Harness engineering: leveraging Codex in an agent-first world" (2026-02-11 per secondary sources). Birgitta Böckeler systematised it on martinfowler.com (2026-04) | Anthropic post: original checked; the rest confirmed via search results (originals not checked) |
 
 The Anthropic post separates the two like this. Prompt engineering is "methods for writing and organizing LLM instructions for optimal outcomes"; context engineering is the "set of strategies for curating and maintaining the optimal set of tokens (information) during LLM inference". The goal is "the smallest possible set of high-signal tokens that maximize the likelihood of some desired outcome".
 
@@ -130,7 +130,7 @@ The file layout is in "Agent Setup Map". Here we map **what actually exists** in
 2. **The checks exist, but they do not run unless someone calls them.** The tests are a good sensor that mechanically checks the structure of Korean and English pairs such as this document. With no hook and no CI, though, whether they run depends on the agent following an instruction. A check with teeth is being invoked by request.
 3. **The two entry contracts read the same situation differently.** This repository has no `.ai/PROJECT_CONTEXT.md`, only its template. When it is missing, `CLAUDE.md` says "the set is not adopted here: stop and run `python3 .ai/tools/adopt.py`", while `AGENTS.md` says that when maintaining the policy template itself (`LESSONS_FROM_PRACTICE.md` is present), "project instance files are intentionally absent; do not create them". `check_policy_set.py` also reads this state as "the set as shipped" and passes. When human-written requests disagree, different models behave differently. This is a defect in the context layer.
 
-**Next step.** Do not fill every gap at once. Pick the request broken most often, move it to enforcement, and compare before and after as in the *Measuring a harness change* section below. In this repository the candidate is moving "run `node --test tests/*.test.cjs` before finishing" into a `Stop` hook or CI. A draft implementation is in "Permissions, Sandbox, Hooks".
+**Next step.** Do not fill every gap at once. Pick the request broken most often, move it to enforcement, and compare before and after as in the *Measuring a harness change* section below. In this repository the candidate is moving "run `node --test tests/*.test.cjs` before finishing" into a `Stop` hook or CI. The hook settings format and a `Stop` hook example are in "Permissions, Sandbox, Hooks", and the CI draft is in "Headless, CI and Cloud Runs". Neither has a hook that runs the tests, so build one from those examples.
 
 ## Going Deeper
 
@@ -144,7 +144,7 @@ Permission syntax, hook event schemas and agent definition formats differ from t
 
 ### Measuring a harness change
 
-Confirm the effect of a harness change with **a before/after comparison on a fixed task set**, not a feeling. Anthropic's "Demystifying evals for AI agents" (2026-01, confirmed via search results) is reported to break agent evaluation into tasks, trials, graders and transcripts, among other parts, and to recommend grading the resulting state (tests passing, files changed) rather than the final message. The counts below are a starting point, not a recommendation; with a small task set it is easy to mistake a chance difference for an effect, so hold off on conclusions when the difference is small.
+Confirm the effect of a harness change with **a before/after comparison on a fixed task set**, not a feeling. Anthropic's "Demystifying evals for AI agents" (2026-01-09, original checked) breaks agent evaluation into tasks, trials, graders and transcripts, among other parts, and says it is often better to grade the result the agent produced than the path it took, such as the order of tool calls ("grade what the agent produced, not the path it took"). The counts below are a starting point, not a recommendation; with a small task set it is easy to mistake a chance difference for an effect, so hold off on conclusions when the difference is small.
 
 ```text
 1. Task set: 10-20 tasks from past bugs and feature requests, each with a mechanical pass criterion (test, check command)
@@ -188,7 +188,7 @@ Confirm the effect of a harness change with **a before/after comparison on a fix
 
 - [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic Engineering, published 2025-09-29, checked 2026-09-29
 - [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — Anthropic Engineering, published 2025-11-26, checked 2026-09-29
-- [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic Engineering, published 2026-01, checked via search results 2026-09-29
+- [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic Engineering, published 2026-01-09, checked 2026-09-29
 - [How Claude remembers your project](https://code.claude.com/docs/en/memory) — Claude Code Docs, checked 2026-09-29
 - [Automate actions with hooks](https://code.claude.com/docs/en/hooks-guide) — Claude Code Docs, checked 2026-09-29
 - [Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/) — OpenAI, Ryan Lopopolo, checked via search results 2026-09-29 (published 2026-02-11 per secondary sources; original not checked)

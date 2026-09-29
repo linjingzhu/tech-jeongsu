@@ -49,7 +49,7 @@ flowchart TB
 |---|---|---|---|
 | 프롬프트 | 2020년대 초 | 대화형 LLM 보급 | 일반 통념 |
 | 컨텍스트 | 2025년 6월 무렵 | Tobi Lütke와 Andrej Karpathy가 "prompt engineering 대신 context engineering"을 말함. Anthropic 「Effective context engineering for AI agents」(2025-09-29) | Anthropic 글은 원문 확인, 6월 발언은 검색 결과로 확인 |
-| 하네스 | 2026년 2월 | Mitchell Hashimoto가 글에서 "Engineer the Harness"를 한 단계로 꼽음(2월 초). OpenAI Ryan Lopopolo 「Harness engineering: leveraging Codex in an agent-first world」(2차 출처상 2026-02-11). Birgitta Böckeler가 martinfowler.com에 체계화(2026-04) | 모두 검색 결과로 확인, 원문 미확인 |
+| 하네스 | 2026년 2월 | Anthropic이 2025-11-26 글 「Effective harnesses for long-running agents」 제목에 이미 'harness'를 썼고(원문 확인), 'harness engineering'이라는 분야 이름은 2026년 2월에 퍼졌다. Mitchell Hashimoto가 글에서 "Engineer the Harness"를 한 단계로 꼽음(2월 초). OpenAI Ryan Lopopolo 「Harness engineering: leveraging Codex in an agent-first world」(2차 출처상 2026-02-11). Birgitta Böckeler가 martinfowler.com에 체계화(2026-04) | Anthropic 글은 원문 확인, 나머지는 검색 결과로 확인(원문 미확인) |
 
 Anthropic 글은 둘을 이렇게 구분한다. 프롬프트 엔지니어링은 "최적의 결과를 위해 LLM 지시를 쓰고 조직하는 방법"이고, 컨텍스트 엔지니어링은 "추론 중 최적의 token(정보) 집합을 선별하고 유지하는 전략"이다. 목표는 "원하는 결과의 가능성을 최대화하는, 가능한 가장 작은 고신호 token 집합"이다.
 
@@ -130,7 +130,7 @@ Agent는 볼 수 있는 것만 고친다. OpenAI 팀은 agent가 브라우저(Ch
 2. **검사는 있지만 아무도 부르지 않으면 돌지 않는다.** 테스트는 이 문서 같은 한·영 쌍의 구조를 기계적으로 검사하는 좋은 sensor다. 하지만 hook도 CI도 없으니 실행 여부는 agent가 지시를 따르느냐에 달려 있다. 강제력 있는 검사가 요청으로 호출되는 셈이다.
 3. **진입 계약 두 개가 같은 상황을 다르게 읽는다.** 이 저장소에는 `.ai/PROJECT_CONTEXT.md`가 없고 템플릿만 있다. `CLAUDE.md`는 없을 때 "the set is not adopted here: stop and run `python3 .ai/tools/adopt.py`"라고 하고, `AGENTS.md`는 정책 템플릿 자체를 관리할 때(`LESSONS_FROM_PRACTICE.md`가 있을 때) "project instance files are intentionally absent; do not create them"이라고 한다. `check_policy_set.py`도 이 상태를 "the set as shipped"로 읽고 통과시킨다. 사람이 쓴 요청끼리 어긋나면 모델마다 다르게 행동한다. 이것은 컨텍스트 층의 결함이다.
 
-**다음 한 걸음.** 모든 빈칸을 한 번에 채우지 않는다. 가장 자주 어겨진 요청 하나를 골라 강제로 옮기고, 아래 *하네스 변경을 측정하기* 절의 방식으로 전후를 비교한다. 이 저장소라면 후보는 "끝내기 전에 `node --test tests/*.test.cjs`를 돌린다"를 `Stop` hook이나 CI로 옮기는 것이다. 구현 초안은 「권한 · Sandbox · Hook」에 있다.
+**다음 한 걸음.** 모든 빈칸을 한 번에 채우지 않는다. 가장 자주 어겨진 요청 하나를 골라 강제로 옮기고, 아래 *하네스 변경을 측정하기* 절의 방식으로 전후를 비교한다. 이 저장소라면 후보는 "끝내기 전에 `node --test tests/*.test.cjs`를 돌린다"를 `Stop` hook이나 CI로 옮기는 것이다. hook 설정 형식과 `Stop` hook 예시는 「권한 · Sandbox · Hook」, CI 초안은 「Headless · CI · Cloud 실행」에 있다. 테스트를 돌리는 hook 자체는 두 문서에 없으니 그 예시를 바탕으로 직접 만든다.
 
 ## 심화
 
@@ -144,7 +144,7 @@ Agent는 볼 수 있는 것만 고친다. OpenAI 팀은 agent가 브라우저(Ch
 
 ### 하네스 변경을 측정하기
 
-하네스 변경의 효과는 느낌이 아니라 **고정 과제 세트의 전후 비교**로 확인한다. Anthropic 「Demystifying evals for AI agents」(2026-01, 검색 결과로 확인)는 agent 평가를 과제, 시도(trial), 채점기(grader), 기록(transcript) 등으로 나누고, 최종 메시지보다 결과 상태(테스트 통과, 파일 변화)를 채점하라고 권한다고 소개된다. 아래 과제 수는 출발점일 뿐 권장값이 아니며, 과제 세트가 작으면 우연한 차이를 효과로 오해하기 쉬우니 차이가 작을 때는 결론을 미룬다.
+하네스 변경의 효과는 느낌이 아니라 **고정 과제 세트의 전후 비교**로 확인한다. Anthropic 「Demystifying evals for AI agents」(2026-01-09, 원문 확인)는 agent 평가를 과제, 시도(trial), 채점기(grader), 기록(transcript) 등으로 나누고, 도구 호출 순서 같은 경로보다 agent가 만든 결과를 채점하는 편이 대개 낫다고 쓴다("grade what the agent produced, not the path it took"). 아래 과제 수는 출발점일 뿐 권장값이 아니며, 과제 세트가 작으면 우연한 차이를 효과로 오해하기 쉬우니 차이가 작을 때는 결론을 미룬다.
 
 ```text
 1. 과제 세트: 지난 버그와 기능 요청에서 10~20개, 각각 기계적 합격 기준(테스트, 검사 명령)
@@ -188,7 +188,7 @@ Agent는 볼 수 있는 것만 고친다. OpenAI 팀은 agent가 브라우저(Ch
 
 - [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic Engineering, 2025-09-29 게시, 2026-09-29 확인
 - [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — Anthropic Engineering, 2025-11-26 게시, 2026-09-29 확인
-- [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic Engineering, 2026-01 게시, 2026-09-29 검색 결과로 확인
+- [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic Engineering, 2026-01-09 게시, 2026-09-29 확인
 - [How Claude remembers your project](https://code.claude.com/docs/en/memory) — Claude Code Docs, 2026-09-29 확인
 - [Automate actions with hooks](https://code.claude.com/docs/en/hooks-guide) — Claude Code Docs, 2026-09-29 확인
 - [Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/) — OpenAI, Ryan Lopopolo, 2026-09-29 검색 결과로 확인(2차 출처상 2026-02-11 게시, 원문 미확인)
