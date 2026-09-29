@@ -2,7 +2,7 @@
 
 > **Learning goal**: Explain how MCP is built (host, client and server; tools, resources and prompts; stdio and Streamable HTTP), register MCP servers in Claude Code and Codex at the right scope, treat tool output as untrusted data, and choose between an MCP server, a CLI and a skill.
 
-As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (`codex-rs`). Permission rules themselves are in "Permissions, Sandbox and Hooks", and packaging tool definitions for distribution is in "Subagents, Skills, Commands and Plugins".
+As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (`codex-rs`). Permission rules themselves are in "Permissions, Sandboxes and Hooks: Designing the Enforced Layer", and packaging tool definitions for distribution is in "Subagents, Skills, Commands and Plugins".
 
 ## Key Concepts
 

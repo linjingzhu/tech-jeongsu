@@ -2,7 +2,7 @@
 
 > **Learning goal**: Tell apart what subagents, skills, commands and plugins hold and when each enters the context, define them as files in Claude Code and Codex, and read and change this repository's explorer, reviewer and automatic-development skill using the rule of one role per file.
 
-As of 2026-09-29. Field names and paths follow the official Claude Code docs and Codex's public source and docs, and both change often. The concepts live in "The Difference Between Sessions, Agents, and Subagents" and "Multi-Agent Roles and Model Routing"; this document turns them into **actual configuration files**. Instruction files are covered in "Instructions and Memory: CLAUDE.md and AGENTS.md", permissions and hooks in "Permissions, Sandbox and Hooks".
+As of 2026-09-29. Field names and paths follow the official Claude Code docs and Codex's public source and docs, and both change often. The concepts live in "The Difference Between Sessions, Agents, and Subagents" and "Multi-Agent Roles and Model Routing"; this document turns them into **actual configuration files**. Instruction files are covered in "Instructions and Memory: CLAUDE.md and AGENTS.md", permissions and hooks in "Permissions, Sandboxes and Hooks: Designing the Enforced Layer".
 
 ## Key Concepts
 

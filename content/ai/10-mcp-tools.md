@@ -2,7 +2,7 @@
 
 > **학습 목표**: MCP의 구성(Host · Client · Server, Tool · Resource · Prompt, stdio · Streamable HTTP)을 설명하고, Claude Code와 Codex에 MCP Server를 범위에 맞게 등록하며, Tool 결과를 신뢰할 수 없는 데이터로 다루고, MCP · CLI · Skill 중 무엇을 쓸지 고를 수 있다.
 
-기준일: 2026-09-29. MCP 사양은 2026-07-28 판, Claude Code는 공식 문서, Codex는 공개 소스(`codex-rs`) 기준이다. 권한 규칙 자체는 「권한 · Sandbox · Hook」, 도구 정의를 묶어 나누는 방법은 「Subagent · Skill · Command · Plugin」에서 다룬다.
+기준일: 2026-09-29. MCP 사양은 2026-07-28 판, Claude Code는 공식 문서, Codex는 공개 소스(`codex-rs`) 기준이다. 권한 규칙 자체는 「권한 · Sandbox · Hook: 강제 층 설계하기」, 도구 정의를 묶어 나누는 방법은 「Subagent · Skill · Command · Plugin」에서 다룬다.
 
 ## 핵심 개념
 
