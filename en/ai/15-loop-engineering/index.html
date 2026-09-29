@@ -268,17 +268,24 @@
 set -u
 echo &quot;none&quot; &gt; prev-failure.txt
 for i in 1 2 3; do                                   # attempt budget
-  claude -p &quot;$(cat PROMPT.md)&quot; --permission-mode acceptEdits \
+  timeout 20m claude -p &quot;$(cat PROMPT.md)&quot; --permission-mode acceptEdits \
     --allowedTools &quot;Bash(git add *)&quot; &quot;Bash(git commit *)&quot; \
-    --max-turns 30 --max-budget-usd 3 --output-format json &gt; &quot;run-$i.json&quot;   # turn and cost cap per run
+    --max-turns 30 --max-budget-usd 3 --output-format json &gt; &quot;run-$i.json&quot;   # time, turn and cost cap per run
+  rc=$?
+  [ &quot;$rc&quot; -eq 124 ] &amp;&amp; { echo &quot;TIME BUDGET: attempt $i ran past 20m&quot;; exit 3; }
+  kind=$(jq -r &#39;.subtype // empty&#39; &quot;run-$i.json&quot; 2&gt;/dev/null)
+  case &quot;$rc:$kind&quot; in
+    0:*|*:error_max_turns|*:error_max_budget_usd) ;;                             # capped runs still get verified
+    *) echo &quot;BLOCKED: claude exited $rc&quot;; exit 4 ;;                              # auth, config or startup failure
+  esac
   if npm test &gt; &quot;test-$i.log&quot; 2&gt;&amp;1; then echo &quot;DONE at attempt $i&quot;; exit 0; fi
-  grep -E &quot;FAIL|Error&quot; &quot;test-$i.log&quot; | head -n 40 &gt; last-failure.txt       # feedback for PROMPT.md to read
+  { grep -E &quot;FAIL|Error|not ok&quot; &quot;test-$i.log&quot; || tail -n 40 &quot;test-$i.log&quot;; } | head -n 40 &gt; last-failure.txt
   cmp -s last-failure.txt prev-failure.txt &amp;&amp; { echo &quot;NO PROGRESS: rethink the diagnosis&quot;; exit 2; }
   cp last-failure.txt prev-failure.txt
 done
 echo &quot;BUDGET SPENT: see PROGRESS.md for ruled-out causes&quot;; exit 1
 </code></pre>
-<p><code>PROMPT.md</code> says: &quot;Read <code>PROGRESS.md</code> and <code>last-failure.txt</code> first; at the end, write the causes you ruled out into <code>PROGRESS.md</code> and commit; do not edit test files.&quot; The key point is that the verifier (<code>npm test</code>) runs outside the agent.</p>
+<p><code>PROMPT.md</code> says: &quot;Read <code>PROGRESS.md</code> and <code>last-failure.txt</code> first; at the end, write the causes you ruled out into <code>PROGRESS.md</code> and commit; do not edit test files.&quot; The key point is that the verifier (<code>npm test</code>) runs outside the agent. <code>timeout</code> exits with 124 when time runs out, and the script treats that as the time budget being spent. If the <code>subtype</code> in the <code>--output-format json</code> result is <code>error_max_turns</code> or <code>error_max_budget_usd</code>, the run hit a cap and ended normally, so it goes on to the verifier (these are the Agent SDK result-message values). Any other nonzero exit, especially an empty <code>run-$i.json</code> or one without a <code>subtype</code> (an authentication, config or startup failure), ends as BLOCKED without running the verifier. The failure signal uses the <code>FAIL</code>, <code>Error</code> and <code>not ok</code> lines, and falls back to the last 40 log lines when there are none.</p>
 <h2>Applied: This Repository&#39;s Loop</h2>
 <h3>The unit loop: <code>.ai/LOOP.md</code></h3>
 <p>This repository&#39;s agent rules in <code>.ai/LOOP.md</code> fix one attempt at four steps. <strong>Orient</strong> (read what you are about to change and the gate that decides whether the change is reached at all) → <strong>Act</strong> (the smallest reversible change that could settle the question) → <strong>Verify</strong> (the cheapest check that answers the question you actually have, and write down which question) → <strong>Record</strong> (the result, and what it did not answer). It warns that Record is the step dropped under time pressure, and dropping it turns three attempts into the same attempt three times.</p>
@@ -307,47 +314,68 @@ echo &quot;BUDGET SPENT: see PROGRESS.md for ruled-out causes&quot;; exit 1
 </tr>
 </tbody></table>
 <h3>The review loop that built this site</h3>
-<p>This site&#39;s documents were built with this review loop. A <strong>writer agent</strong> drafts → an <strong>adversarial reviewer on a different model</strong> reads the draft in a fresh context, attacks it, and grades each finding → a <strong>fixer</strong> addresses the findings. After three rounds of this comes a <strong>fix-verification pass</strong> that re-reads only what was fixed, and finally build, tests and deploy. The round cap (3) is the attempt budget, the fix verification plus build and tests are the final verifier, and merge and deploy are the human checkpoints. <code>.ai/EXECUTION.md</code> gives a reviewer only the requirements, relevant architecture, the diff, test and build evidence and the review rules, and <strong>never the implementer&#39;s reasoning history</strong>. Below is the per-round record format. <strong>The finding counts by severity are illustrative numbers</strong>; &quot;What changed&quot; is taken from this repository&#39;s commit log (AI documents 06 to 13).</p>
+<p>This site&#39;s documents were built with this review loop. A <strong>writer agent</strong> drafts → an <strong>adversarial reviewer on a different model</strong> reads the draft in a fresh context, attacks it, and grades each finding → a <strong>fixer</strong> addresses the findings. After three rounds of this comes a <strong>fix-verification pass</strong> that re-reads only what was fixed, and finally build, tests and deploy. The round cap (3) is the attempt budget, the fix verification plus build and tests are the final verifier, and merge and deploy are the human checkpoints. <code>.ai/EXECUTION.md</code> gives a reviewer only the requirements, relevant architecture, the diff, test and build evidence and the review rules, and <strong>never the implementer&#39;s reasoning history</strong>. Below is the actual record by section. The sources are the review-record table in the description of linjingzhu/tech-jeongsu PR #10 and PR #11, which records the later third round. C = Critical, M = Major, m = Minor; sections whose round-1 counts were never written down say &quot;not recorded&quot;. &quot;What changed&quot; is taken from the commit log for the AI 06–13 rows only.</p>
 <table>
 <thead>
 <tr>
-<th>Round</th>
-<th align="right">Critical</th>
-<th align="right">Major</th>
-<th align="right">Minor</th>
+<th>Section</th>
+<th>Round 1</th>
+<th>Round 2</th>
+<th>Round 3</th>
+<th>Fix verification</th>
 <th>What changed</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td align="right">2</td>
-<td align="right">6</td>
-<td align="right">9</td>
-<td>Hooks fail closed and catch every force-push form, a baseline-aware Stop hook, Codex profiles, bare-mode auth, TTL guidance, nav-title references</td>
+<td>Platform Deployment &amp; Services</td>
+<td>8M / 11m</td>
+<td>1M / 6m</td>
+<td>1M / 6m</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>2</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td>Closed Hook 1 bypasses (digit-combined short flags, long-option prefixes, backslash escapes, <code>$</code> expansions, line continuations), sanitised <code>session_id</code>, corrected the Codex profile error and TOML fields, narrowed the keep-alive guidance</td>
+<td>Marketing</td>
+<td>12M / 6m</td>
+<td>1M / 2m</td>
+<td>1M / 1m</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>3</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td>Closed more Hook 1 bypasses (fail closed on brace expansion, 71 cases in the case table), documented branch deletion as out of scope (branch protection covers it)</td>
+<td>Business</td>
+<td>1C / 10M / 4m</td>
+<td>2M / 6m</td>
+<td>2M / 2m</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>Fix verification</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td>(Example) Defer the remaining Minor to the next task, then build, test and deploy</td>
+<td>AI 06–08</td>
+<td>not recorded</td>
+<td>1C / 1M / 5m</td>
+<td>2C / 1M / 3m</td>
+<td></td>
+<td>R1 (<code>c6a3b4d</code>): hooks fail closed and catch every force-push form, a baseline-aware Stop hook, Codex profiles. R2 (<code>af9cac7</code>): closed Hook 1 bypasses (digit-combined short flags, long-option prefixes, backslash escapes, <code>$</code> expansions, line continuations), sanitised <code>session_id</code>, corrected the Codex profile error and TOML fields. R3 (<code>0a128c1</code>): scan every argument after the first <code>push</code>, fail closed on arguments with <code>{</code> or <code>}</code>, branch deletion documented as out of scope, 71 cases in the case table</td>
+</tr>
+<tr>
+<td>AI 09–13</td>
+<td>not recorded</td>
+<td>1M / 3m</td>
+<td>2m</td>
+<td></td>
+<td>R1 (<code>1994663</code>): Codex action input, bare-mode auth, TTL guidance, nav-title references. R2 (<code>af9cac7</code>): qualified the subagent read-only claims, narrowed the keep-alive guidance, hedged the GPT-6 caching row. R3 (<code>c5ec72f</code>): scoped the keep-alive measurement caveat, listed every <code>max_tokens: 0</code> restriction</td>
+</tr>
+<tr>
+<td>Solo Studio Monetization</td>
+<td>not recorded</td>
+<td>12 findings</td>
+<td>3M / 3m</td>
+<td>1M / 5m</td>
+<td></td>
 </tr>
 </tbody></table>
-<p>One lesson stands out in the record. <strong>Hook 1 bypasses came back in rounds 1, 2 and 3.</strong> Blocking a new bypass form each round is the shape of &quot;the same failure repeated with parameter tweaks&quot;. Applying the <code>.ai/LOOP.md</code> rule, the second recurrence was the moment to question the diagnosis (that string-matching shell commands can catch every form). Handing part of it to branch protection in round 3 can be read as that change of diagnosis.</p>
+<p>Most sections had fewer findings each round, but <strong>the critical findings in AI 06–08 went up in round 3, from 1 to 2.</strong> That is the &quot;the same kind of finding comes back&quot; signal this page teaches. At its centre is Hook 1 (the example force-push blocker). The bypass was first raised in round 1 and came back in new forms in rounds 2 and 3. Blocking one form at a time is the shape of &quot;the same failure repeated with parameter tweaks&quot;. What changed the diagnosis was the rule that <strong>arguments whose value cannot be known in advance (<code>$</code>, backtick, <code>{}</code>) fail closed without examining the value</strong> (<code>$</code> and backticks in round 2, <code>{</code> and <code>}</code> in round 3). It stopped trying to list every possible value. Branch protection was stated as the last line of defence outside the agent from the first draft; round 3 only added a sentence putting branch deletion out of scope.</p>
 <h3>Loop design checklist: what to decide before starting</h3>
 <table>
 <thead>
@@ -375,7 +403,7 @@ echo &quot;BUDGET SPENT: see PROGRESS.md for ruled-out causes&quot;; exit 1
 <tr>
 <td>Budget</td>
 <td>After how many tries, how much money, how many minutes?</td>
-<td>3 attempts per failure, 3 review rounds, <code>--max-budget-usd</code> and <code>--max-turns</code> per run, the overall cap computed as in the cost section below</td>
+<td>3 attempts per failure, 3 review rounds, <code>timeout 20m</code>, <code>--max-budget-usd</code> and <code>--max-turns</code> per run, the overall cap computed as in the cost section below</td>
 </tr>
 <tr>
 <td>No-progress detection</td>
@@ -484,7 +512,7 @@ fixer    Opus 5.5,   N=15:  62,000*$5   +   553,000*$0.20 + 12,000*$20 = $0.6606
 <h2>Self-Check Questions</h2>
 <ol>
 <li>Write the done criteria for one task you are working on as a single sentence a machine can judge. What is the easiest change that would weaken that sentence, and how would you prevent it?</li>
-<li>In the shell loop above, which line handles each of the three layers of stop conditions (attempts, cost and time, no progress)?</li>
+<li>In the shell loop above, which line handles each of the three layers of stop conditions (attempts, cost and time, no progress)? What does the script do when <code>timeout</code> exits with 124?</li>
 <li>If the same kind of finding appears in three consecutive review rounds, what would you ask the fixer to do differently?</li>
 <li>With writer N = 30, reviewer N = 10 and fixer N = 15, what does the loop cost with only 2 review rounds and no fix verification (same assumptions as above)?</li>
 <li>How does the fact that the <code>/goal</code> evaluator never reads files itself change the way you write a done condition?</li>

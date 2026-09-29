@@ -84,18 +84,25 @@ flowchart TD
 set -u
 echo "none" > prev-failure.txt
 for i in 1 2 3; do                                   # attempt budget
-  claude -p "$(cat PROMPT.md)" --permission-mode acceptEdits \
+  timeout 20m claude -p "$(cat PROMPT.md)" --permission-mode acceptEdits \
     --allowedTools "Bash(git add *)" "Bash(git commit *)" \
-    --max-turns 30 --max-budget-usd 3 --output-format json > "run-$i.json"   # turn and cost cap per run
+    --max-turns 30 --max-budget-usd 3 --output-format json > "run-$i.json"   # time, turn and cost cap per run
+  rc=$?
+  [ "$rc" -eq 124 ] && { echo "TIME BUDGET: attempt $i ran past 20m"; exit 3; }
+  kind=$(jq -r '.subtype // empty' "run-$i.json" 2>/dev/null)
+  case "$rc:$kind" in
+    0:*|*:error_max_turns|*:error_max_budget_usd) ;;                             # capped runs still get verified
+    *) echo "BLOCKED: claude exited $rc"; exit 4 ;;                              # auth, config or startup failure
+  esac
   if npm test > "test-$i.log" 2>&1; then echo "DONE at attempt $i"; exit 0; fi
-  grep -E "FAIL|Error" "test-$i.log" | head -n 40 > last-failure.txt       # feedback for PROMPT.md to read
+  { grep -E "FAIL|Error|not ok" "test-$i.log" || tail -n 40 "test-$i.log"; } | head -n 40 > last-failure.txt
   cmp -s last-failure.txt prev-failure.txt && { echo "NO PROGRESS: rethink the diagnosis"; exit 2; }
   cp last-failure.txt prev-failure.txt
 done
 echo "BUDGET SPENT: see PROGRESS.md for ruled-out causes"; exit 1
 ```
 
-`PROMPT.md`에는 "`PROGRESS.md`와 `last-failure.txt`를 먼저 읽고, 끝에 배제한 원인을 `PROGRESS.md`에 적고 commit하라, 테스트 파일은 고치지 마라"를 넣는다. Verifier(`npm test`)가 agent 밖에서 돈다는 점이 핵심이다.
+`PROMPT.md`에는 "`PROGRESS.md`와 `last-failure.txt`를 먼저 읽고, 끝에 배제한 원인을 `PROGRESS.md`에 적고 commit하라, 테스트 파일은 고치지 마라"를 넣는다. Verifier(`npm test`)가 agent 밖에서 돈다는 점이 핵심이다. `timeout`은 시간을 넘기면 124로 끝나고, 스크립트는 이것을 시간 예산 소진으로 본다. `--output-format json` 결과의 `subtype`이 `error_max_turns`나 `error_max_budget_usd`이면 상한에 걸린 정상 종료로 보고 verifier로 넘어간다(Agent SDK 결과 메시지의 값). 그 밖의 0이 아닌 종료, 특히 `run-$i.json`이 비었거나 `subtype`이 없는 경우(인증 · 설정 · 시작 실패)는 verifier를 돌리지 않고 BLOCKED로 끝낸다. 실패 신호는 `FAIL` · `Error` · `not ok` 줄을 쓰고, 그런 줄이 없으면 로그 마지막 40줄로 대신한다.
 
 ## 적용: 이 저장소의 루프
 
@@ -112,16 +119,18 @@ echo "BUDGET SPENT: see PROGRESS.md for ruled-out causes"; exit 1
 
 ### 이 사이트를 만든 리뷰 루프
 
-이 사이트의 문서는 다음 review loop로 만들어졌다. **Writer agent**가 초안을 쓰고 → **다른 모델의 적대적 reviewer**가 새 context에서 초안을 공격하듯 읽고 지적에 등급을 붙이고 → **Fixer**가 지적을 고친다. 이것을 3라운드 반복한 뒤, 고친 내용만 다시 보는 **수정 확인 패스**를 거치고, 마지막에 build · test · 배포를 한다. 라운드 상한(3회)이 시도 예산이고, 수정 확인과 build · test가 최종 verifier이며, merge와 배포가 사람 checkpoint다. `.ai/EXECUTION.md`는 reviewer에게 요구사항 · 관련 구조 · diff · 테스트와 build 증거 · 리뷰 규칙만 주고 **구현자의 추론 이력은 넘기지 않는다**고 정한다. 아래는 라운드별 기록 형식이다. **등급별 지적 수는 설명을 위한 예시 숫자**이고, "무엇이 바뀌었나"는 이 저장소의 commit 기록(AI 문서 06~13)에서 옮겼다.
+이 사이트의 문서는 다음 review loop로 만들어졌다. **Writer agent**가 초안을 쓰고 → **다른 모델의 적대적 reviewer**가 새 context에서 초안을 공격하듯 읽고 지적에 등급을 붙이고 → **Fixer**가 지적을 고친다. 이것을 3라운드 반복한 뒤, 고친 내용만 다시 보는 **수정 확인 패스**를 거치고, 마지막에 build · test · 배포를 한다. 라운드 상한(3회)이 시도 예산이고, 수정 확인과 build · test가 최종 verifier이며, merge와 배포가 사람 checkpoint다. `.ai/EXECUTION.md`는 reviewer에게 요구사항 · 관련 구조 · diff · 테스트와 build 증거 · 리뷰 규칙만 주고 **구현자의 추론 이력은 넘기지 않는다**고 정한다. 아래는 영역별 실제 기록이다. 출처는 linjingzhu/tech-jeongsu PR #10 설명의 review record 표와, 그 뒤의 3라운드를 기록한 PR #11이다. C = Critical, M = Major, m = Minor이고, 1라운드 수를 적지 않은 영역은 "기록 없음"으로 둔다. "무엇이 바뀌었나"는 AI 06–13 영역만 commit 기록에서 옮겼다.
 
-| 라운드 | Critical | Major | Minor | 무엇이 바뀌었나 |
-|---|---:|---:|---:|---|
-| 1 | 2 | 6 | 9 | Hook이 닫힌 쪽으로 실패하고 모든 force-push 형태를 잡게 함, 기준선을 아는 Stop hook, Codex profile, bare mode 인증, TTL 안내, nav 제목 참조 |
-| 2 | 1 | 4 | 5 | Hook 1 우회(숫자 결합 short flag, long option 접두어, backslash escape, `$` 확장, 줄 이음) 차단, `session_id` 정리, Codex profile 오류와 TOML 필드 정정, keep-alive 안내 범위 축소 |
-| 3 | 0 | 2 | 3 | Hook 1 우회 추가 차단(brace 확장은 닫힌 쪽으로 실패, 사례표 71개), branch 삭제는 범위 밖(branch protection 담당)으로 명시 |
-| 수정 확인 | 0 | 0 | 1 | (예시) 남은 Minor는 다음 작업으로 넘기고 build · test · 배포 |
+| 영역 | 1라운드 | 2라운드 | 3라운드 | 수정 확인 | 무엇이 바뀌었나 |
+|---|---|---|---|---|---|
+| Platform 배포와 서비스 | 8M / 11m | 1M / 6m | 1M / 6m | | |
+| Marketing | 12M / 6m | 1M / 2m | 1M / 1m | | |
+| 비즈니스 | 1C / 10M / 4m | 2M / 6m | 2M / 2m | | |
+| AI 06–08 | 기록 없음 | 1C / 1M / 5m | 2C / 1M / 3m | | R1(`c6a3b4d`): hook이 닫힌 쪽으로 실패하고 모든 force-push 형태를 잡게 함, 기준선을 아는 Stop hook, Codex profile. R2(`af9cac7`): Hook 1 우회(숫자 결합 short flag, long option 접두어, backslash escape, `$` 확장, 줄 이음) 차단, `session_id` 정리, Codex profile 오류와 TOML 필드 정정. R3(`0a128c1`): 첫 `push` 뒤 인자 전부 검사, `{` · `}`가 든 인자도 닫힌 쪽으로 차단, branch 삭제는 범위 밖으로 명시, 사례표 71개 |
+| AI 09–13 | 기록 없음 | 1M / 3m | 2m | | R1(`1994663`): Codex action 입력, bare mode 인증, TTL 안내, nav 제목 참조. R2(`af9cac7`): subagent 읽기 전용 주장 한정, keep-alive 안내 범위 축소, GPT-6 caching 줄 hedge. R3(`c5ec72f`): keep-alive 측정 단서 범위 한정, `max_tokens: 0` 거부 조건 전부 나열 |
+| 1인 스튜디오 수익화 | 기록 없음 | 지적 12건 | 3M / 3m | 1M / 5m | |
 
-기록에서 읽을 교훈이 하나 있다. **Hook 1 우회는 1 · 2 · 3라운드 모두에서 다시 나왔다.** 매 라운드 새 우회 형태를 막는 것은 "같은 실패를 파라미터만 바꿔 반복"하는 모양이다. `.ai/LOOP.md`의 규칙을 적용하면 두 번째 재등장에서 진단(shell 명령 문자열 매칭으로 모든 형태를 잡을 수 있다)부터 의심할 차례였다. 3라운드에서 일부를 branch protection에 넘긴 것은 그 진단 변경으로 볼 수 있다.
+대부분의 영역은 라운드마다 지적이 줄었지만, **AI 06–08의 Critical은 3라운드에서 1건에서 2건으로 늘었다.** 이 문서가 가르치는 "같은 종류의 지적이 다시 나온다" 신호다. 중심은 Hook 1(force push 차단 예제)이다. 우회는 1라운드에서 처음 지적됐고, 2 · 3라운드에서 새 형태로 다시 나왔다. 형태를 하나씩 막는 것은 "같은 실패를 파라미터만 바꿔 반복"하는 모양이다. 진단을 바꾼 것은 **값을 미리 알 수 없는 인자(`$`, backtick, `{}`)는 값을 따지지 않고 닫힌 쪽으로 막는** 규칙이다(2라운드에 `$`와 backtick, 3라운드에 `{` · `}`). 가능한 모든 값을 나열하려는 시도를 그만둔 것이다. Branch protection은 첫 초안부터 agent 바깥의 마지막 방어선으로 적혀 있었고, 3라운드는 branch 삭제를 범위 밖으로 적는 문장만 더했다.
 
 ### 루프 설계 점검표: 시작 전에 정할 것
 
@@ -130,7 +139,7 @@ echo "BUDGET SPENT: see PROGRESS.md for ruled-out causes"; exit 1
 | 완료 기준과 끝 보고 | 기계가 판정할 수 있는 문장인가? 어떤 끝 상태로 보고하나? | Build · test 통과, 리뷰의 미해결 Critical · Major 0건. Done · Blocked · Budget spent 중 하나 + NOT VERIFIED 목록 |
 | Verifier | 만든 쪽과 분리됐나? 일부러 깨뜨린 변경을 떨어뜨리나? | 다른 모델의 새 context reviewer + build · test |
 | 피드백 | 다음 반복에 무엇을, 얼마나 넣나? | 등급이 붙은 지적 목록만. 전체 로그는 넣지 않는다 |
-| 예산 | 몇 번, 얼마, 몇 분 뒤에 멈추나? | 한 실패에 3회, 리뷰 3라운드, 실행별 `--max-budget-usd` · `--max-turns`, 전체 상한은 아래 비용 절로 계산 |
+| 예산 | 몇 번, 얼마, 몇 분 뒤에 멈추나? | 한 실패에 3회, 리뷰 3라운드, 실행별 `timeout 20m` · `--max-budget-usd` · `--max-turns`, 전체 상한은 아래 비용 절로 계산 |
 | 무진전 감지 | 무엇이 같으면 진전이 없다고 보나? | 같은 실패 문구 2회, 같은 종류의 지적이 라운드마다 재등장 |
 | 상태와 기록 | 반복 사이에 무엇을 남기나? | Commit, 라운드별 지적 표, 배제한 원인 |
 | 금지 변경 | Verifier를 약하게 만드는 변경을 어떻게 막나? | 테스트 · 검사 스크립트 변경은 별도 승인, diff에서 확인 |
@@ -183,7 +192,7 @@ fixer    Opus 5.5,   N=15:  62,000*$5   +   553,000*$0.20 + 12,000*$20 = $0.6606
 ## 자기 점검 질문
 
 1. 지금 쓰는 작업 하나에서 완료 기준을 기계가 판정할 수 있는 한 문장으로 적어 보라. 그 문장을 약하게 만드는 가장 쉬운 변경은 무엇이고, 어떻게 막겠는가?
-2. 세 겹의 멈춤 조건(시도, 비용 · 시간, 무진전)을 위 shell loop에서 각각 어느 줄이 맡는가?
+2. 세 겹의 멈춤 조건(시도, 비용 · 시간, 무진전)을 위 shell loop에서 각각 어느 줄이 맡는가? `timeout`이 124로 끝나면 스크립트는 어떻게 하는가?
 3. Review loop에서 같은 종류의 지적이 세 라운드 연속 나오면, fixer에게 무엇을 다르게 시키겠는가?
 4. Writer N = 30, reviewer N = 10, fixer N = 15로 리뷰를 2라운드만 하고 수정 확인을 생략하면 비용은 얼마인가(위 가정 그대로)?
 5. `/goal`의 평가자가 파일을 직접 읽지 않는다는 사실은 완료 조건을 쓰는 방법을 어떻게 바꾸는가?

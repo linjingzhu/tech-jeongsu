@@ -84,18 +84,25 @@ Under the hood `/goal` is a session-scoped, prompt-based Stop hook. The evaluato
 set -u
 echo "none" > prev-failure.txt
 for i in 1 2 3; do                                   # attempt budget
-  claude -p "$(cat PROMPT.md)" --permission-mode acceptEdits \
+  timeout 20m claude -p "$(cat PROMPT.md)" --permission-mode acceptEdits \
     --allowedTools "Bash(git add *)" "Bash(git commit *)" \
-    --max-turns 30 --max-budget-usd 3 --output-format json > "run-$i.json"   # turn and cost cap per run
+    --max-turns 30 --max-budget-usd 3 --output-format json > "run-$i.json"   # time, turn and cost cap per run
+  rc=$?
+  [ "$rc" -eq 124 ] && { echo "TIME BUDGET: attempt $i ran past 20m"; exit 3; }
+  kind=$(jq -r '.subtype // empty' "run-$i.json" 2>/dev/null)
+  case "$rc:$kind" in
+    0:*|*:error_max_turns|*:error_max_budget_usd) ;;                             # capped runs still get verified
+    *) echo "BLOCKED: claude exited $rc"; exit 4 ;;                              # auth, config or startup failure
+  esac
   if npm test > "test-$i.log" 2>&1; then echo "DONE at attempt $i"; exit 0; fi
-  grep -E "FAIL|Error" "test-$i.log" | head -n 40 > last-failure.txt       # feedback for PROMPT.md to read
+  { grep -E "FAIL|Error|not ok" "test-$i.log" || tail -n 40 "test-$i.log"; } | head -n 40 > last-failure.txt
   cmp -s last-failure.txt prev-failure.txt && { echo "NO PROGRESS: rethink the diagnosis"; exit 2; }
   cp last-failure.txt prev-failure.txt
 done
 echo "BUDGET SPENT: see PROGRESS.md for ruled-out causes"; exit 1
 ```
 
-`PROMPT.md` says: "Read `PROGRESS.md` and `last-failure.txt` first; at the end, write the causes you ruled out into `PROGRESS.md` and commit; do not edit test files." The key point is that the verifier (`npm test`) runs outside the agent.
+`PROMPT.md` says: "Read `PROGRESS.md` and `last-failure.txt` first; at the end, write the causes you ruled out into `PROGRESS.md` and commit; do not edit test files." The key point is that the verifier (`npm test`) runs outside the agent. `timeout` exits with 124 when time runs out, and the script treats that as the time budget being spent. If the `subtype` in the `--output-format json` result is `error_max_turns` or `error_max_budget_usd`, the run hit a cap and ended normally, so it goes on to the verifier (these are the Agent SDK result-message values). Any other nonzero exit, especially an empty `run-$i.json` or one without a `subtype` (an authentication, config or startup failure), ends as BLOCKED without running the verifier. The failure signal uses the `FAIL`, `Error` and `not ok` lines, and falls back to the last 40 log lines when there are none.
 
 ## Applied: This Repository's Loop
 
@@ -112,16 +119,18 @@ This repository's agent rules in `.ai/LOOP.md` fix one attempt at four steps. **
 
 ### The review loop that built this site
 
-This site's documents were built with this review loop. A **writer agent** drafts → an **adversarial reviewer on a different model** reads the draft in a fresh context, attacks it, and grades each finding → a **fixer** addresses the findings. After three rounds of this comes a **fix-verification pass** that re-reads only what was fixed, and finally build, tests and deploy. The round cap (3) is the attempt budget, the fix verification plus build and tests are the final verifier, and merge and deploy are the human checkpoints. `.ai/EXECUTION.md` gives a reviewer only the requirements, relevant architecture, the diff, test and build evidence and the review rules, and **never the implementer's reasoning history**. Below is the per-round record format. **The finding counts by severity are illustrative numbers**; "What changed" is taken from this repository's commit log (AI documents 06 to 13).
+This site's documents were built with this review loop. A **writer agent** drafts → an **adversarial reviewer on a different model** reads the draft in a fresh context, attacks it, and grades each finding → a **fixer** addresses the findings. After three rounds of this comes a **fix-verification pass** that re-reads only what was fixed, and finally build, tests and deploy. The round cap (3) is the attempt budget, the fix verification plus build and tests are the final verifier, and merge and deploy are the human checkpoints. `.ai/EXECUTION.md` gives a reviewer only the requirements, relevant architecture, the diff, test and build evidence and the review rules, and **never the implementer's reasoning history**. Below is the actual record by section. The sources are the review-record table in the description of linjingzhu/tech-jeongsu PR #10 and PR #11, which records the later third round. C = Critical, M = Major, m = Minor; sections whose round-1 counts were never written down say "not recorded". "What changed" is taken from the commit log for the AI 06–13 rows only.
 
-| Round | Critical | Major | Minor | What changed |
-|---|---:|---:|---:|---|
-| 1 | 2 | 6 | 9 | Hooks fail closed and catch every force-push form, a baseline-aware Stop hook, Codex profiles, bare-mode auth, TTL guidance, nav-title references |
-| 2 | 1 | 4 | 5 | Closed Hook 1 bypasses (digit-combined short flags, long-option prefixes, backslash escapes, `$` expansions, line continuations), sanitised `session_id`, corrected the Codex profile error and TOML fields, narrowed the keep-alive guidance |
-| 3 | 0 | 2 | 3 | Closed more Hook 1 bypasses (fail closed on brace expansion, 71 cases in the case table), documented branch deletion as out of scope (branch protection covers it) |
-| Fix verification | 0 | 0 | 1 | (Example) Defer the remaining Minor to the next task, then build, test and deploy |
+| Section | Round 1 | Round 2 | Round 3 | Fix verification | What changed |
+|---|---|---|---|---|---|
+| Platform Deployment & Services | 8M / 11m | 1M / 6m | 1M / 6m | | |
+| Marketing | 12M / 6m | 1M / 2m | 1M / 1m | | |
+| Business | 1C / 10M / 4m | 2M / 6m | 2M / 2m | | |
+| AI 06–08 | not recorded | 1C / 1M / 5m | 2C / 1M / 3m | | R1 (`c6a3b4d`): hooks fail closed and catch every force-push form, a baseline-aware Stop hook, Codex profiles. R2 (`af9cac7`): closed Hook 1 bypasses (digit-combined short flags, long-option prefixes, backslash escapes, `$` expansions, line continuations), sanitised `session_id`, corrected the Codex profile error and TOML fields. R3 (`0a128c1`): scan every argument after the first `push`, fail closed on arguments with `{` or `}`, branch deletion documented as out of scope, 71 cases in the case table |
+| AI 09–13 | not recorded | 1M / 3m | 2m | | R1 (`1994663`): Codex action input, bare-mode auth, TTL guidance, nav-title references. R2 (`af9cac7`): qualified the subagent read-only claims, narrowed the keep-alive guidance, hedged the GPT-6 caching row. R3 (`c5ec72f`): scoped the keep-alive measurement caveat, listed every `max_tokens: 0` restriction |
+| Solo Studio Monetization | not recorded | 12 findings | 3M / 3m | 1M / 5m | |
 
-One lesson stands out in the record. **Hook 1 bypasses came back in rounds 1, 2 and 3.** Blocking a new bypass form each round is the shape of "the same failure repeated with parameter tweaks". Applying the `.ai/LOOP.md` rule, the second recurrence was the moment to question the diagnosis (that string-matching shell commands can catch every form). Handing part of it to branch protection in round 3 can be read as that change of diagnosis.
+Most sections had fewer findings each round, but **the critical findings in AI 06–08 went up in round 3, from 1 to 2.** That is the "the same kind of finding comes back" signal this page teaches. At its centre is Hook 1 (the example force-push blocker). The bypass was first raised in round 1 and came back in new forms in rounds 2 and 3. Blocking one form at a time is the shape of "the same failure repeated with parameter tweaks". What changed the diagnosis was the rule that **arguments whose value cannot be known in advance (`$`, backtick, `{}`) fail closed without examining the value** (`$` and backticks in round 2, `{` and `}` in round 3). It stopped trying to list every possible value. Branch protection was stated as the last line of defence outside the agent from the first draft; round 3 only added a sentence putting branch deletion out of scope.
 
 ### Loop design checklist: what to decide before starting
 
@@ -130,7 +139,7 @@ One lesson stands out in the record. **Hook 1 bypasses came back in rounds 1, 2 
 | Done criteria and final report | Is it a sentence a machine can judge? Which end state will be reported? | Build and tests pass, no unresolved Critical or Major review findings. One of Done, Blocked or Budget spent, plus a NOT VERIFIED list |
 | Verifier | Is it separate from the maker? Does it fail a deliberately broken change? | A fresh-context reviewer on a different model, plus build and tests |
 | Feedback | What goes into the next iteration, and how much? | Only the graded list of findings, never the full log |
-| Budget | After how many tries, how much money, how many minutes? | 3 attempts per failure, 3 review rounds, `--max-budget-usd` and `--max-turns` per run, the overall cap computed as in the cost section below |
+| Budget | After how many tries, how much money, how many minutes? | 3 attempts per failure, 3 review rounds, `timeout 20m`, `--max-budget-usd` and `--max-turns` per run, the overall cap computed as in the cost section below |
 | No-progress detection | What being the same counts as no progress? | The same failure text twice, the same kind of finding in every round |
 | State and records | What is kept between iterations? | Commits, the per-round findings table, ruled-out causes |
 | Forbidden changes | How do you stop changes that weaken the verifier? | Changes to tests or check scripts need separate approval, checked in the diff |
@@ -183,7 +192,7 @@ If a loop will run against someone else's software or service, check the legal b
 ## Self-Check Questions
 
 1. Write the done criteria for one task you are working on as a single sentence a machine can judge. What is the easiest change that would weaken that sentence, and how would you prevent it?
-2. In the shell loop above, which line handles each of the three layers of stop conditions (attempts, cost and time, no progress)?
+2. In the shell loop above, which line handles each of the three layers of stop conditions (attempts, cost and time, no progress)? What does the script do when `timeout` exits with 124?
 3. If the same kind of finding appears in three consecutive review rounds, what would you ask the fixer to do differently?
 4. With writer N = 30, reviewer N = 10 and fixer N = 15, what does the loop cost with only 2 review rounds and no fix verification (same assumptions as above)?
 5. How does the fact that the `/goal` evaluator never reads files itself change the way you write a done condition?
