@@ -2,7 +2,7 @@
 
 > **Learning goal**: Explain what a token is and which line items you pay for, calculate why agent-loop cost compounds, and plan and measure savings in order, from free levers to trade-off levers.
 
-In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as "how much to finish one feature", not "how much per request". This document covers the principles; tool-by-tool practice is in "Saving Tokens in Practice, Tool by Tool". Prices and features are **as of 2026-09** and include only what official documentation confirms. Dollar-to-won conversions use **1 USD = 1,400 KRW (an assumption for easy arithmetic)**.
+In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as "how much to finish one feature", not "how much per request". This document covers the principles; tool-by-tool practice is in "Saving Tokens in Practice". Prices and features are **as of 2026-09** and include only what official documentation confirms. Dollar-to-won conversions use **1 USD = 1,400 KRW (an assumption for easy arithmetic)**.
 
 ## Key Concepts
 
@@ -134,7 +134,7 @@ Codex's `usage` carries `cached_input_tokens` and `reasoning_output_tokens` sepa
 | 14:00 | Refactor another product | Codex CLI | Input 400,000 (320,000 cached) / output 30,000 (18,000 reasoning) | Drawn from the ChatGPT plan limit |
 | 22:00 | Generate 1,000 product descriptions | Claude API · Sonnet 5.5 Batch | 2,000 input / 500 output each | $9.00 standard → $4.50 Batch |
 
-All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = **$6.41** (about 8,970 KRW). The lines to notice are not model prices but **one cache miss** (about 25x a hit) and **work that could run overnight** (halved by Batch). If the afternoon is for other work, end the session with `/clear` before lunch; if an API-key user must continue the same session after a long gap, consider the 1-hour TTL. Tool-by-tool methods are in "Saving Tokens in Practice, Tool by Tool".
+All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = **$6.41** (about 8,970 KRW). The lines to notice are not model prices but **one cache miss** (about 25x a hit) and **work that could run overnight** (halved by Batch). For gaps of 5 to 60 minutes the 1-hour TTL pays off, but past an hour, as here, neither TTL helps, so `/clear` before lunch or accept the cold miss. Tool-by-tool methods are in "Saving Tokens in Practice".
 
 ## Going Deeper
 

@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Find where tokens leak in Claude Code, Codex and your own API apps, cut them with tool-specific settings and habits, and compare before and after in numbers.</p>
 </blockquote>
-<p>The principles (billing line items, loop compounding, lever order) are in &quot;Principles of AI Token Efficiency&quot;. This document is the tool-by-tool practice. Where configuration files live and how they combine is in &quot;The AI Agent Setup Map&quot;; writing instructions in &quot;Instructions and Memory: CLAUDE.md and AGENTS.md&quot;; permissions and hooks in &quot;Permissions, Sandboxes and Hooks: Designing the Enforced Layer&quot;; subagents and skills in &quot;Subagents, Skills, Commands and Plugins&quot;; MCP in &quot;MCP and External Tools&quot;; and cost control for headless runs and CI in document 11. Here we cover only the token angle. Commands and settings keys are <strong>as of 2026-09</strong>, limited to what official documentation and source confirm. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).</p>
+<p>The principles (billing line items, loop compounding, lever order) are in &quot;Principles of AI Token Efficiency&quot;. This document is the tool-by-tool practice. Where configuration files live and how they combine is in &quot;Agent Setup Map&quot;; writing instructions in &quot;Instructions and Memory&quot;; permissions and hooks in &quot;Permissions, Sandbox, Hooks&quot;; subagents and skills in &quot;Subagents, Skills and Plugins&quot;; MCP in &quot;MCP and External Tools&quot;; and cost control for headless runs and CI in &quot;Headless, CI and Cloud Runs&quot;. Here we cover only the token angle. Commands and settings keys are <strong>as of 2026-09</strong>, limited to what official documentation and source confirm. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).</p>
 <h2>Key Concepts</h2>
 <h3>Three directions: put in less, repeat less, generate less</h3>
 <table>
@@ -192,7 +192,7 @@
 <tr>
 <td>MCP tool definitions are deferred by default (tool search). Disable unused servers, and prefer a CLI when one exists</td>
 <td>Starting context</td>
-<td><code>/mcp</code>, <code>ENABLE_TOOL_SEARCH</code></td>
+<td><code>/mcp</code>, <code>/context</code> (<code>ENABLE_TOOL_SEARCH</code> only needed via a proxy or custom base URL)</td>
 </tr>
 <tr>
 <td>Filter test output with a hook so only failing lines remain</td>
@@ -210,7 +210,7 @@
 <td><code>promptCacheTtl: &quot;1h&quot;</code></td>
 </tr>
 </tbody></table>
-<p><strong><code>.claudeignore</code> is not an official feature</strong> (absent from the official docs as of 2026-09; GitHub has only feature requests). Block files that never need reading with <code>Read</code> rules under <code>permissions.deny</code>. Such a rule stops Claude&#39;s file tools but is not a security boundary, so follow &quot;Permissions, Sandboxes and Hooks: Designing the Enforced Layer&quot; for permission design.</p>
+<p><strong><code>.claudeignore</code> is not an official feature</strong> (absent from the official docs as of 2026-09; GitHub has only feature requests). Block files that never need reading with <code>Read</code> rules under <code>permissions.deny</code>. Such a rule stops Claude&#39;s file tools but is not a security boundary, so follow &quot;Permissions, Sandbox, Hooks&quot; for permission design.</p>
 <pre><code class="language-json">{
   &quot;permissions&quot;: {
     &quot;deny&quot;: [&quot;Read(./dist/**)&quot;, &quot;Read(./coverage/**)&quot;, &quot;Read(./.env)&quot;]
@@ -283,7 +283,7 @@
 <td><code>codex exec --json</code>, <code>--output-schema</code></td>
 </tr>
 </tbody></table>
-<p>There are also <code>tool_output_token_limit</code> (the token budget for storing tool output in context) and <code>model_auto_compact_token_limit</code> (the auto-compact threshold), but their defaults vary by version and need checking. The old <code>profile = &quot;...&quot;</code> setting is no longer supported.</p>
+<p>There are also <code>tool_output_token_limit</code> (the token budget for storing tool output in context) and <code>model_auto_compact_token_limit</code> (the auto-compact threshold), but their defaults vary by version and need checking. <code>profile</code> and <code>[profiles.&lt;name&gt;]</code> inside config.toml are legacy: using <code>--profile &lt;name&gt;</code> while config.toml also has <code>profile = &quot;&lt;name&gt;&quot;</code> or <code>[profiles.&lt;name&gt;]</code> is an error that tells you to move them into <code>$CODEX_HOME/&lt;name&gt;.config.toml</code>.</p>
 <pre><code class="language-bash">codex exec --profile cheap --json &quot;Summarize the last 10 commits into CHANGELOG.md&quot; &gt; run.jsonl
 jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: (map(.input_tokens) | add), cached: (map(.cached_input_tokens) | add), reasoning: (map(.reasoning_output_tokens) | add)}&#39; run.jsonl
 </code></pre>
@@ -321,13 +321,13 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <tr>
 <td>Cache write</td>
 <td>1.25x (5 minutes), 2x (1 hour)</td>
-<td>GPT-6 family price list shows a 1.25x cache-write line</td>
+<td>1.25x cache write on GPT-5.6 and later models</td>
 <td>Standard input price; explicit adds hourly storage cost</td>
 </tr>
 <tr>
 <td>Lifetime</td>
 <td>5 minutes or 1 hour</td>
-<td>30 minutes for the GPT-6 family (announced 2026-09-22)</td>
+<td>At least 30 minutes on GPT-5.6 and later models (announced late 2026-09; exact date needs checking)</td>
 <td>Explicit caches take a set TTL</td>
 </tr>
 <tr>
@@ -352,7 +352,7 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <td>Bloated CLAUDE.md</td>
 <td>600 lines ≈ 12,000 tokens carried for 30 turns</td>
 <td>150 lines ≈ 3,000 tokens + 2 skills</td>
-<td>9,000×$5 + 270,000×$0.20 ≈ <strong>$0.10/session</strong></td>
+<td>Turn-1 write 9,000×$5 + turns 2–30 reads 261,000×$0.20 ≈ <strong>$0.10/session</strong></td>
 </tr>
 <tr>
 <td>Whole test log</td>
@@ -422,7 +422,7 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <li><a href="https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence">Optimizing for cost and intelligence</a> — Anthropic, checked 2026-09-29</li>
 <li><a href="https://github.com/openai/codex">openai/codex</a> — <code>codex-rs/core/src/config/mod.rs</code>, <code>codex-rs/exec/src/cli.rs</code>, <code>codex-rs/tui/src/slash_command.rs</code>, checked 2026-09-29</li>
 <li><a href="https://developers.openai.com/codex/config-reference">Codex configuration reference</a> — OpenAI, checked via search results 2026-09-29</li>
-<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> — OpenAI, checked via search results 2026-09-29</li>
+<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> · <a href="https://openai.com/index/better-prompt-caching-for-gpt-6/">Better prompt caching for GPT-6</a> — OpenAI, checked via search results 2026-09-29 (publication date needs checking)</li>
 <li><a href="https://ai.google.dev/gemini-api/docs/caching">Context caching</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">Context caching overview (Google Cloud)</a> · <a href="https://ai.google.dev/gemini-api/docs/batch-api">Batch API</a> — Google, checked via search results 2026-09-29</li>
 <li><a href="https://github.com/anthropics/claude-code/issues/29455">.claudeignore feature request #29455</a> — GitHub, checked via search results 2026-09-29</li>
 </ul>

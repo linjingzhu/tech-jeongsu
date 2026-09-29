@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>토큰 절약 실전: 도구별 방법 | MyAI(마이아이)</title>
-    <meta name="description" content="원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리: CLAUDE.md · AGENTS.md」, 권한과 hoo…" />
+    <meta name="description" content="원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리」, 권한과 hook은 「권한 · Sandbox · Hook…" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI(마이아이)" />
     <meta property="og:title" content="토큰 절약 실전: 도구별 방법 | MyAI(마이아이)" />
-    <meta property="og:description" content="원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리: CLAUDE.md · AGENTS.md」, 권한과 hoo…" />
+    <meta property="og:description" content="원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리」, 권한과 hook은 「권한 · Sandbox · Hook…" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/ai/13-token-saving-practice/" />
     <meta property="og:locale" content="ko_KR" />
     <meta name="site-root" content="../../" />
@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>학습 목표</strong>: Claude Code, Codex, 직접 만든 API 앱에서 token이 새는 지점을 찾아 도구별 설정과 습관으로 줄이고, 절약 전후를 숫자로 비교할 수 있다.</p>
 </blockquote>
-<p>원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리: CLAUDE.md · AGENTS.md」, 권한과 hook은 「권한 · Sandbox · Hook: 강제 층 설계하기」, Subagent와 Skill은 「Subagent · Skill · Command · Plugin」, MCP는 「MCP와 외부 도구 연결」, headless·CI의 비용 통제는 11번 문서에서 자세히 다루므로 여기서는 token 관점만 짚는다. 명령과 설정 키는 <strong>2026-09 기준</strong> 공식 문서와 소스에서 확인한 것만 적었다. 달러→원 환산은 1 USD = 1,400원(가정)이다.</p>
+<p>원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리」, 권한과 hook은 「권한 · Sandbox · Hook」, Subagent와 Skill은 「Subagent · Skill · Plugin」, MCP는 「MCP와 외부 도구」, headless·CI의 비용 통제는 「Headless · CI · Cloud 실행」에서 자세히 다루므로 여기서는 token 관점만 짚는다. 명령과 설정 키는 <strong>2026-09 기준</strong> 공식 문서와 소스에서 확인한 것만 적었다. 달러→원 환산은 1 USD = 1,400원(가정)이다.</p>
 <h2>핵심 개념</h2>
 <h3>세 방향: 덜 넣고, 덜 반복하고, 덜 생성한다</h3>
 <table>
@@ -192,7 +192,7 @@
 <tr>
 <td>MCP tool 정의는 기본 지연 로드(tool search). 안 쓰는 서버는 끄고, CLI가 있으면 CLI를 쓴다</td>
 <td>시작 context</td>
-<td><code>/mcp</code>, <code>ENABLE_TOOL_SEARCH</code></td>
+<td><code>/mcp</code>, <code>/context</code>(<code>ENABLE_TOOL_SEARCH</code>는 proxy·base URL 경유 시에만 필요)</td>
 </tr>
 <tr>
 <td>테스트 출력은 hook으로 실패 줄만 남긴다</td>
@@ -210,7 +210,7 @@
 <td><code>promptCacheTtl: &quot;1h&quot;</code></td>
 </tr>
 </tbody></table>
-<p><strong><code>.claudeignore</code>는 공식 기능이 아니다</strong>(2026-09 공식 문서에 없음, GitHub에는 기능 요청만 있다). 읽힐 필요 없는 파일은 <code>permissions.deny</code>의 <code>Read</code> 규칙으로 막는다. 이 규칙은 Claude의 파일 도구를 막을 뿐 보안 경계는 아니므로 권한 설계는 「권한 · Sandbox · Hook: 강제 층 설계하기」를 따른다.</p>
+<p><strong><code>.claudeignore</code>는 공식 기능이 아니다</strong>(2026-09 공식 문서에 없음, GitHub에는 기능 요청만 있다). 읽힐 필요 없는 파일은 <code>permissions.deny</code>의 <code>Read</code> 규칙으로 막는다. 이 규칙은 Claude의 파일 도구를 막을 뿐 보안 경계는 아니므로 권한 설계는 「권한 · Sandbox · Hook」을 따른다.</p>
 <pre><code class="language-json">{
   &quot;permissions&quot;: {
     &quot;deny&quot;: [&quot;Read(./dist/**)&quot;, &quot;Read(./coverage/**)&quot;, &quot;Read(./.env)&quot;]
@@ -283,7 +283,7 @@
 <td><code>codex exec --json</code>, <code>--output-schema</code></td>
 </tr>
 </tbody></table>
-<p><code>tool_output_token_limit</code>(도구 출력을 context에 저장할 때의 token 예산)과 <code>model_auto_compact_token_limit</code>(자동 compact 기준) 키도 있지만 기본값은 버전마다 달라 확인이 필요하다. 예전의 <code>profile = &quot;...&quot;</code> 설정은 더 이상 지원되지 않는다.</p>
+<p><code>tool_output_token_limit</code>(도구 출력을 context에 저장할 때의 token 예산)과 <code>model_auto_compact_token_limit</code>(자동 compact 기준) 키도 있지만 기본값은 버전마다 달라 확인이 필요하다. config.toml 안의 <code>profile</code>·<code>[profiles.&lt;name&gt;]</code>는 legacy다. <code>--profile &lt;name&gt;</code>을 쓰면서 config.toml에도 <code>profile = &quot;&lt;name&gt;&quot;</code>이나 <code>[profiles.&lt;name&gt;]</code>가 있으면 오류가 나고, <code>$CODEX_HOME/&lt;name&gt;.config.toml</code>로 옮기라고 안내한다.</p>
 <pre><code class="language-bash">codex exec --profile cheap --json &quot;Summarize the last 10 commits into CHANGELOG.md&quot; &gt; run.jsonl
 jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: (map(.input_tokens) | add), cached: (map(.cached_input_tokens) | add), reasoning: (map(.reasoning_output_tokens) | add)}&#39; run.jsonl
 </code></pre>
@@ -321,13 +321,13 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <tr>
 <td>Cache 쓰기</td>
 <td>1.25×(5분), 2×(1시간)</td>
-<td>GPT-6 계열 가격표에 1.25× cache write 항목</td>
+<td>GPT-5.6 이후 모델은 1.25× cache write</td>
 <td>일반 입력 단가, explicit는 시간당 저장 비용 추가</td>
 </tr>
 <tr>
 <td>수명</td>
 <td>5분 또는 1시간</td>
-<td>GPT-6 계열 30분(2026-09-22 발표)</td>
+<td>GPT-5.6 이후 모델 최소 30분(발표일 2026-09 하순, 정확한 날짜 확인 필요)</td>
 <td>Explicit는 TTL 지정</td>
 </tr>
 <tr>
@@ -352,7 +352,7 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <td>비대한 CLAUDE.md</td>
 <td>600줄 ≈ 12,000 token이 30턴 동안 실림</td>
 <td>150줄 ≈ 3,000 token + Skill 2개</td>
-<td>9,000×$5 + 270,000×$0.20 ≈ <strong>$0.10/세션</strong></td>
+<td>턴 1 쓰기 9,000×$5 + 턴 2~30 읽기 261,000×$0.20 ≈ <strong>$0.10/세션</strong></td>
 </tr>
 <tr>
 <td>테스트 로그 전체</td>
@@ -422,7 +422,7 @@ jq -s &#39;[.[] | select(.type==&quot;turn.completed&quot;) | .usage] | {input: 
 <li><a href="https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence">Optimizing for cost and intelligence</a> — Anthropic, 2026-09-29 확인</li>
 <li><a href="https://github.com/openai/codex">openai/codex</a> — <code>codex-rs/core/src/config/mod.rs</code>, <code>codex-rs/exec/src/cli.rs</code>, <code>codex-rs/tui/src/slash_command.rs</code>, 2026-09-29 확인</li>
 <li><a href="https://developers.openai.com/codex/config-reference">Codex configuration reference</a> — OpenAI, 2026-09-29 검색 결과로 확인</li>
-<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> — OpenAI, 2026-09-29 검색 결과로 확인</li>
+<li><a href="https://developers.openai.com/api/docs/guides/prompt-caching">Prompt caching</a> · <a href="https://developers.openai.com/api/docs/pricing">Pricing</a> · <a href="https://openai.com/index/better-prompt-caching-for-gpt-6/">Better prompt caching for GPT-6</a> — OpenAI, 2026-09-29 검색 결과로 확인(게시일 확인 필요)</li>
 <li><a href="https://ai.google.dev/gemini-api/docs/caching">Context caching</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">Context caching overview(Google Cloud)</a> · <a href="https://ai.google.dev/gemini-api/docs/batch-api">Batch API</a> — Google, 2026-09-29 검색 결과로 확인</li>
 <li><a href="https://github.com/anthropics/claude-code/issues/29455">.claudeignore 기능 요청 #29455</a> — GitHub, 2026-09-29 검색 결과로 확인</li>
 </ul>

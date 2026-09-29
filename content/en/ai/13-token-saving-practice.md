@@ -2,7 +2,7 @@
 
 > **Learning goal**: Find where tokens leak in Claude Code, Codex and your own API apps, cut them with tool-specific settings and habits, and compare before and after in numbers.
 
-The principles (billing line items, loop compounding, lever order) are in "Principles of AI Token Efficiency". This document is the tool-by-tool practice. Where configuration files live and how they combine is in "The AI Agent Setup Map"; writing instructions in "Instructions and Memory: CLAUDE.md and AGENTS.md"; permissions and hooks in "Permissions, Sandboxes and Hooks: Designing the Enforced Layer"; subagents and skills in "Subagents, Skills, Commands and Plugins"; MCP in "MCP and External Tools"; and cost control for headless runs and CI in document 11. Here we cover only the token angle. Commands and settings keys are **as of 2026-09**, limited to what official documentation and source confirm. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).
+The principles (billing line items, loop compounding, lever order) are in "Principles of AI Token Efficiency". This document is the tool-by-tool practice. Where configuration files live and how they combine is in "Agent Setup Map"; writing instructions in "Instructions and Memory"; permissions and hooks in "Permissions, Sandbox, Hooks"; subagents and skills in "Subagents, Skills and Plugins"; MCP in "MCP and External Tools"; and cost control for headless runs and CI in "Headless, CI and Cloud Runs". Here we cover only the token angle. Commands and settings keys are **as of 2026-09**, limited to what official documentation and source confirm. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).
 
 ## Key Concepts
 
@@ -45,12 +45,12 @@ flowchart TD
 | `/clear` when the task changes, `/compact <what to keep>` at boundaries, `/rewind` for a wrong turn | History | `/autocompact 500k` |
 | Keep side questions out of the history | History | `/btw` |
 | Choose model and effort at session start and do not change them midway | Cache misses | `/model`, `/effort` |
-| MCP tool definitions are deferred by default (tool search). Disable unused servers, and prefer a CLI when one exists | Starting context | `/mcp`, `ENABLE_TOOL_SEARCH` |
+| MCP tool definitions are deferred by default (tool search). Disable unused servers, and prefer a CLI when one exists | Starting context | `/mcp`, `/context` (`ENABLE_TOOL_SEARCH` only needed via a proxy or custom base URL) |
 | Filter test output with a hook so only failing lines remain | Tool output | `PreToolUse` hook |
 | Name the file and function instead of "improve the codebase" | Read volume | Specific prompts, plan mode |
 | An API-key user keeps using the same session after long gaps | Cache misses | `promptCacheTtl: "1h"` |
 
-**`.claudeignore` is not an official feature** (absent from the official docs as of 2026-09; GitHub has only feature requests). Block files that never need reading with `Read` rules under `permissions.deny`. Such a rule stops Claude's file tools but is not a security boundary, so follow "Permissions, Sandboxes and Hooks: Designing the Enforced Layer" for permission design.
+**`.claudeignore` is not an official feature** (absent from the official docs as of 2026-09; GitHub has only feature requests). Block files that never need reading with `Read` rules under `permissions.deny`. Such a rule stops Claude's file tools but is not a security boundary, so follow "Permissions, Sandbox, Hooks" for permission design.
 
 ```json
 {
@@ -81,7 +81,7 @@ Know which actions break the cache and which keep it (Claude Code, "How Claude C
 | Check usage | Measurement | `/status`, `/usage` |
 | Run repeated jobs non-interactively and fix the result shape | History and output | `codex exec --json`, `--output-schema` |
 
-There are also `tool_output_token_limit` (the token budget for storing tool output in context) and `model_auto_compact_token_limit` (the auto-compact threshold), but their defaults vary by version and need checking. The old `profile = "..."` setting is no longer supported.
+There are also `tool_output_token_limit` (the token budget for storing tool output in context) and `model_auto_compact_token_limit` (the auto-compact threshold), but their defaults vary by version and need checking. `profile` and `[profiles.<name>]` inside config.toml are legacy: using `--profile <name>` while config.toml also has `profile = "<name>"` or `[profiles.<name>]` is an error that tells you to move them into `$CODEX_HOME/<name>.config.toml`.
 
 ```bash
 codex exec --profile cheap --json "Summarize the last 10 commits into CHANGELOG.md" > run.jsonl
@@ -103,8 +103,8 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 |---|---|---|---|
 | Mechanism | Explicit `cache_control` or top-level automatic | Automatic (prefixes of 1,024 tokens or more) | Implicit automatic + explicit manual |
 | Cache read | 0.1x input (0.05x Opus 5.5, 0.025x Fable 5.1) | Up to 90% off (per-model cached-input price) | 90% off on Gemini 2.5 and later |
-| Cache write | 1.25x (5 minutes), 2x (1 hour) | GPT-6 family price list shows a 1.25x cache-write line | Standard input price; explicit adds hourly storage cost |
-| Lifetime | 5 minutes or 1 hour | 30 minutes for the GPT-6 family (announced 2026-09-22) | Explicit caches take a set TTL |
+| Cache write | 1.25x (5 minutes), 2x (1 hour) | 1.25x cache write on GPT-5.6 and later models | Standard input price; explicit adds hourly storage cost |
+| Lifetime | 5 minutes or 1 hour | At least 30 minutes on GPT-5.6 and later models (announced late 2026-09; exact date needs checking) | Explicit caches take a set TTL |
 | Batch | 50% | 50% | 50% |
 
 ## Applied: A Day in a Solo Studio
@@ -113,7 +113,7 @@ These are anti-patterns that show up often in a real day. All token counts and c
 
 | Anti-pattern | Bad example (assumed) | Good example (assumed) | Difference |
 |---|---|---|---|
-| Bloated CLAUDE.md | 600 lines ≈ 12,000 tokens carried for 30 turns | 150 lines ≈ 3,000 tokens + 2 skills | 9,000×$5 + 270,000×$0.20 ≈ **$0.10/session** |
+| Bloated CLAUDE.md | 600 lines ≈ 12,000 tokens carried for 30 turns | 150 lines ≈ 3,000 tokens + 2 skills | Turn-1 write 9,000×$5 + turns 2–30 reads 261,000×$0.20 ≈ **$0.10/session** |
 | Whole test log | A 40,000-token log carried for the next 15 turns | Hook keeps 1,500 tokens of failing lines | 38,500×$5 + 577,500×$0.20 ≈ **$0.31/run** |
 | Exploring 20 files in the main session | 60,000 tokens carried for the next 20 turns: $0.30 + $0.24 = $0.54 | A Haiku 4.5 subagent explores and returns only a 1,000-token summary ≈ $0.14 | **about $0.40/run** |
 | Switching to Sonnet for a side question | Sonnet 5.5 rewrites the 150,000-token context: $0.375 | Ask Opus as is: 150,000×$0.20 = $0.03 | **about 12.5x** |
@@ -168,6 +168,6 @@ Change one lever, rerun the same task, and read `usage` and output quality toget
 - [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) — Anthropic, checked 2026-09-29
 - [openai/codex](https://github.com/openai/codex) — `codex-rs/core/src/config/mod.rs`, `codex-rs/exec/src/cli.rs`, `codex-rs/tui/src/slash_command.rs`, checked 2026-09-29
 - [Codex configuration reference](https://developers.openai.com/codex/config-reference) — OpenAI, checked via search results 2026-09-29
-- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) — OpenAI, checked via search results 2026-09-29
+- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, checked via search results 2026-09-29 (publication date needs checking)
 - [Context caching](https://ai.google.dev/gemini-api/docs/caching) · [Context caching overview (Google Cloud)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) · [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) — Google, checked via search results 2026-09-29
 - [.claudeignore feature request #29455](https://github.com/anthropics/claude-code/issues/29455) — GitHub, checked via search results 2026-09-29

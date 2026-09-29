@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Explain what a token is and which line items you pay for, calculate why agent-loop cost compounds, and plan and measure savings in order, from free levers to trade-off levers.</p>
 </blockquote>
-<p>In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as &quot;how much to finish one feature&quot;, not &quot;how much per request&quot;. This document covers the principles; tool-by-tool practice is in &quot;Saving Tokens in Practice, Tool by Tool&quot;. Prices and features are <strong>as of 2026-09</strong> and include only what official documentation confirms. Dollar-to-won conversions use <strong>1 USD = 1,400 KRW (an assumption for easy arithmetic)</strong>.</p>
+<p>In a one-person studio that builds several products with Claude Code and Codex, AI cost should be read as &quot;how much to finish one feature&quot;, not &quot;how much per request&quot;. This document covers the principles; tool-by-tool practice is in &quot;Saving Tokens in Practice&quot;. Prices and features are <strong>as of 2026-09</strong> and include only what official documentation confirms. Dollar-to-won conversions use <strong>1 USD = 1,400 KRW (an assumption for easy arithmetic)</strong>.</p>
 <h2>Key Concepts</h2>
 <h3>Tokens and tokenizers</h3>
 <p>A <strong>token</strong> is the unit a model processes text in. The tokenizer cuts text into tokens, and billing, context limits and speed are all set in tokens. The same text yields different token counts under different tokenizers.</p>
@@ -401,7 +401,7 @@ output      = 30 * 800 = 24,000 tokens
 <td>$9.00 standard → $4.50 Batch</td>
 </tr>
 </tbody></table>
-<p>All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = <strong>$6.41</strong> (about 8,970 KRW). The lines to notice are not model prices but <strong>one cache miss</strong> (about 25x a hit) and <strong>work that could run overnight</strong> (halved by Batch). If the afternoon is for other work, end the session with <code>/clear</code> before lunch; if an API-key user must continue the same session after a long gap, consider the 1-hour TTL. Tool-by-tool methods are in &quot;Saving Tokens in Practice, Tool by Tool&quot;.</p>
+<p>All numbers are assumptions, and Claude is assumed to run on an API key, converted to dollars. The Claude total is $1.37 + $0.54 + $4.50 = <strong>$6.41</strong> (about 8,970 KRW). The lines to notice are not model prices but <strong>one cache miss</strong> (about 25x a hit) and <strong>work that could run overnight</strong> (halved by Batch). For gaps of 5 to 60 minutes the 1-hour TTL pays off, but past an hour, as here, neither TTL helps, so <code>/clear</code> before lunch or accept the cold miss. Tool-by-tool methods are in &quot;Saving Tokens in Practice&quot;.</p>
 <h2>Going Deeper</h2>
 <h3>A tokenizer change distorts price comparisons</h3>
 <p>Moving from Sonnet 4.6 ($3/$15) to Sonnet 5 ($2/$10) cuts the input price by 33%, but the new tokenizer produces about 30% more tokens for the same text. Text that was 1,000,000 tokens under the old tokenizer becomes about 1,300,000, so 1.3×$2 = $2.60: about 13% cheaper than $3. When switching models, compare <strong><code>usage</code> on the same task</strong>, not the price table.</p>

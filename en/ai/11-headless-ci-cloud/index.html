@@ -197,6 +197,7 @@
 codex exec --sandbox read-only --json -o summary.md &quot;Summarize the failing tests in test.log&quot;
 </code></pre>
 <ul>
+<li><code>--bare</code> does not read your subscription (claude.ai) login or OAuth credentials. Set <code>ANTHROPIC_API_KEY</code> before running it, and the run is billed as API usage, not against your subscription.</li>
 <li>Claude&#39;s <code>--output-format</code> is <code>text</code>, <code>json</code> or <code>stream-json</code>. A <code>json</code> result includes <code>result</code>, <code>session_id</code> and <code>total_cost_usd</code>, and <code>--json-schema</code> enforces a shape through <code>structured_output</code>. Follow up with <code>--resume &lt;session_id&gt;</code> or <code>--continue</code>; in Codex, <code>codex exec resume --last</code>.</li>
 <li>Codex&#39;s <code>--json</code> streams events as JSONL, and <code>-o</code> (<code>--output-last-message</code>) writes only the final answer to a file. Structured output uses <code>--output-schema &lt;file&gt;</code>. The <code>--full-auto</code> flag in older guides does not appear among the shared options in the main-branch source as of 2026-09, so set <code>--sandbox</code> directly. Use <code>--dangerously-bypass-approvals-and-sandbox</code> (Codex) and <code>bypassPermissions</code> (Claude) only on a disposable runner that is already isolated.</li>
 </ul>
@@ -228,13 +229,13 @@ jobs:
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           prompt-file: .github/codex/review.md
-          sandbox: read-only
+          permission-profile: &quot;:read-only&quot;
           safety-strategy: drop-sudo
           output-file: codex-review.md
 </code></pre>
 <ul>
 <li>With a <code>prompt</code>, the Claude action runs in automation mode and has neither shell nor GitHub API access beyond the tools you allow. To post results as PR comments, name the commenting tool in <code>--allowedTools</code> as the official examples do. <code>id-token: write</code> is needed for the default GitHub App authentication. The easiest install is <code>/install-github-app</code> inside Claude Code.</li>
-<li>The Codex action&#39;s default <code>safety-strategy</code>, <code>drop-sudo</code>, removes sudo rights before Codex runs. There are also interactive integrations where a person calls <code>@claude</code> or <code>@codex review</code> on a PR.</li>
+<li>The Codex action selects permissions with <code>permission-profile</code> (<code>:read-only</code>, <code>:workspace</code>, or a named profile). The <code>sandbox</code> input is legacy, and the two are mutually exclusive. The default <code>safety-strategy</code>, <code>drop-sudo</code>, removes sudo rights before Codex runs. There are also interactive integrations where a person calls <code>@claude</code> or <code>@codex review</code> on a PR.</li>
 <li>PRs from forks get no secrets. Working around that by checking out PR code under <code>pull_request_target</code> runs a stranger&#39;s code next to your secrets. Do not.</li>
 </ul>
 <h2>Going Deeper</h2>
@@ -383,11 +384,10 @@ asyncio.run(main())
 <h2>References</h2>
 <ul>
 <li><a href="https://code.claude.com/docs/en/headless">Run Claude Code programmatically</a>, <a href="https://code.claude.com/docs/en/cli-reference">CLI reference</a> — Claude Code Docs, accessed 2026-09-29</li>
-<li><a href="https://code.claude.com/docs/en/agent-sdk/overview">Agent SDK overview</a> — Claude Code Docs, accessed 2026-09-29</li>
-<li><a href="https://code.claude.com/docs/en/github-actions">Claude Code GitHub Actions</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/overview">Agent SDK overview</a>, <a href="https://code.claude.com/docs/en/github-actions">Claude Code GitHub Actions</a> — Claude Code Docs, accessed 2026-09-29</li>
 <li><a href="https://code.claude.com/docs/en/claude-code-on-the-web">Claude Code on the web</a>, <a href="https://code.claude.com/docs/en/cloud-environments">Configure cloud environments</a>, <a href="https://code.claude.com/docs/en/routines">Routines</a> — Claude Code Docs, accessed 2026-09-29</li>
 <li><a href="https://code.claude.com/docs/en/debug-your-config">Debug your configuration</a>, <a href="https://code.claude.com/docs/en/monitoring-usage">Monitoring</a> — Claude Code Docs, accessed 2026-09-29</li>
-<li><a href="https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs">codex exec CLI definition</a>, <a href="https://github.com/openai/codex-action">openai/codex-action</a> — OpenAI GitHub, accessed 2026-09-29</li>
+<li><a href="https://github.com/openai/codex-action/blob/main/action.yml">codex-action action.yml</a>, <a href="https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs">codex exec CLI definition</a>, <a href="https://github.com/openai/codex-action">openai/codex-action</a> — OpenAI GitHub, accessed 2026-09-29</li>
 <li><a href="https://developers.openai.com/codex/noninteractive">Non-interactive mode</a>, <a href="https://developers.openai.com/codex/cloud/environments">Cloud environments</a> — OpenAI Codex Docs, confirmed through search results, accessed 2026-09-29</li>
 </ul>
 </article>

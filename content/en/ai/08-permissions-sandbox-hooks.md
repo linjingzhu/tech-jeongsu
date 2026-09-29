@@ -2,7 +2,7 @@
 
 > **Learning goal**: Distinguish Claude Code's permission rules and permission modes from Codex's approval policy and sandbox mode. Use the hook input/output contract to implement a force-push block and a guard against ending with uncommitted work, and design risk-tiered permissions for a one-person studio.
 
-The advisory layer covered in "Instructions and memory" is what an agent *tries* to follow. This document covers the **enforced layer**, which the harness executes regardless of what the agent decides. Key names and behaviour were checked against official docs and the openai/codex source as of 2026-09.
+The advisory layer covered in "Instructions and Memory" is what an agent *tries* to follow. This document covers the **enforced layer**, which the harness executes regardless of what the agent decides. Key names and behaviour were checked against official docs and the openai/codex source as of 2026-09.
 
 ## Key Concepts
 

@@ -188,7 +188,7 @@
 <p>&quot;Never edit <code>.env</code>&quot; written only in CLAUDE.md is advice. If it must hold, it moves into a deny rule or a <code>PreToolUse</code> hook, and then it is enforcement. This distinction is where setup design starts.</p>
 <h2>Principles</h2>
 <h3>Claude Code: scopes and precedence</h3>
-<p>Claude Code settings files live in four scopes, and the higher one overrides the same key (as of 2026-09).</p>
+<p>Claude Code reads four settings files (user, project, local, managed), plus a command-line level that applies to one session only. For the same key, the higher level wins (as of 2026-09).</p>
 <table>
 <thead>
 <tr>
@@ -202,11 +202,11 @@
 <td>1</td>
 <td>Managed</td>
 <td><code>managed-settings.json</code>, MDM, server-managed settings</td>
-<td>Organization policy; users cannot override it</td>
+<td>Organization policy; as a rule it cannot be overridden (for a few security keys a stricter lower-level value wins)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Command line</td>
+<td>Command line (a level, not a file)</td>
 <td><code>claude --settings</code>, <code>--permission-mode</code>, etc.</td>
 <td>This session only</td>
 </tr>
@@ -239,6 +239,7 @@
 </ul>
 <h3>Codex: config layers and trust</h3>
 <p>Codex stacks TOML layers from lowest to highest precedence (per the config loader comments in the openai/codex source, as of 2026-09): system <code>/etc/codex/config.toml</code> → user <code>~/.codex/config.toml</code> → the selected profile → project <code>.codex/config.toml</code> → <code>--config</code> and flags at run time. Constraints an organization wants to enforce go in a separate <code>requirements.toml</code>.</p>
+<p>A <strong>profile</strong> is a bundle of settings chosen with <code>--profile &lt;name&gt;</code>. In the 2026-09 main source (<code>codex-rs/config/src/loader/mod.rs</code>), <code>--profile work</code> layers <code>~/.codex/work.config.toml</code> <strong>on top of</strong> the user <code>config.toml</code>, so the profile file only needs the values it changes. The older <code>profile = &quot;work&quot;</code> selector inside <code>config.toml</code> raises a &quot;no longer supported&quot; error, and using <code>--profile work</code> while a <code>[profiles.work]</code> table for the same name is still in <code>config.toml</code> is also an error. <code>profile</code> and <code>profiles</code>, along with keys such as <code>model_provider</code> and <code>notify</code>, are ignored in a project <code>.codex/config.toml</code>, so repository content cannot choose where a user&#39;s credentials go or which local commands run.</p>
 <p>The important difference is that <strong>project settings only take effect once the project is trusted</strong>. A <code>.codex/config.toml</code> in an untrusted directory is read but left disabled. Claude Code is similar: <code>permissions.allow</code> in a committed <code>.claude/settings.json</code> applies only after you accept the workspace trust dialog, while deny and ask rules, which only restrict, apply immediately.</p>
 <pre><code class="language-toml">model = &quot;gpt-6-sol&quot;
 model_reasoning_effort = &quot;medium&quot;
@@ -307,8 +308,8 @@ trust_level = &quot;trusted&quot;
 </tr>
 <tr>
 <td>Model</td>
-<td>only the dispatcher pins a model</td>
-<td>The reviewer is left open on purpose, so a model different from the implementer&#39;s can be chosen at spawn time</td>
+<td>only the Codex dispatcher and fast-explorer pin a model in TOML</td>
+<td>The Codex reviewer and both Claude agents leave it unset; the reviewer so that a model different from the implementer&#39;s can be chosen at spawn time</td>
 </tr>
 <tr>
 <td>Permissions · hooks · MCP</td>
@@ -316,7 +317,7 @@ trust_level = &quot;trusted&quot;
 <td>HARNESS.md says &quot;commit them&quot;, yet the enforced layer is still empty</td>
 </tr>
 </tbody></table>
-<p>The last row is this repository&#39;s biggest gap. Advice and role definitions are thorough, but the enforced layer is left to each person&#39;s private settings. The &quot;Permissions, sandbox, hooks&quot; document proposes a <code>.claude/settings.json</code> draft for this repository.</p>
+<p>The last row is this repository&#39;s biggest gap. Advice and role definitions are thorough, but the enforced layer is left to each person&#39;s private settings. The &quot;Permissions, Sandbox, Hooks&quot; document proposes a <code>.claude/settings.json</code> draft for this repository.</p>
 <h2>Going Deeper</h2>
 <h3>Minimum setup versus studio setup</h3>
 <table>
@@ -377,7 +378,7 @@ trust_level = &quot;trusted&quot;
 </ul>
 <p>The conclusion is the same each time: <strong>settings that must be identical across environments belong in the repository.</strong></p>
 <h3>Model and cost settings</h3>
-<p>Claude Code picks models through the <code>model</code> key (usually user scope), the <code>model</code> field in subagent files, and the organization-level <code>availableModels</code> allowlist. Codex uses <code>model</code>, <code>model_reasoning_effort</code> and the subagent default <code>[agents] default_subagent_model</code>. For the principles of assigning models to roles, see &quot;Multi-agent roles and model routing&quot;. The remaining layers are covered in detail in the documents that follow: &quot;Subagents, Skills, Commands and Plugins&quot;, &quot;MCP and External Tools&quot;, and &quot;Headless, CI and Cloud Runs&quot;.</p>
+<p>Claude Code picks models through the <code>model</code> key (usually user scope), the <code>model</code> field in subagent files, and the organization-level <code>availableModels</code> allowlist. Codex uses <code>model</code>, <code>model_reasoning_effort</code> and the subagent default <code>[agents] default_subagent_model</code>. For the principles of assigning models to roles, see &quot;Multi-agent roles and model routing&quot;. The remaining layers are covered in detail in the documents that follow: &quot;Subagents, Skills and Plugins&quot;, &quot;MCP and External Tools&quot;, and &quot;Headless, CI and Cloud Runs&quot;.</p>
 <h2>Common Misconceptions</h2>
 <ul>
 <li><strong>&quot;I wrote the prohibition in CLAUDE.md, so it is safe.&quot;</strong> Instructions are advice. Prohibitions are enforced with deny rules, hooks and the sandbox.</li>

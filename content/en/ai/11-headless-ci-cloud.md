@@ -55,6 +55,7 @@ claude --bare -p "Summarize the failing tests in test.log" --allowedTools "Read"
 codex exec --sandbox read-only --json -o summary.md "Summarize the failing tests in test.log"
 ```
 
+- `--bare` does not read your subscription (claude.ai) login or OAuth credentials. Set `ANTHROPIC_API_KEY` before running it, and the run is billed as API usage, not against your subscription.
 - Claude's `--output-format` is `text`, `json` or `stream-json`. A `json` result includes `result`, `session_id` and `total_cost_usd`, and `--json-schema` enforces a shape through `structured_output`. Follow up with `--resume <session_id>` or `--continue`; in Codex, `codex exec resume --last`.
 - Codex's `--json` streams events as JSONL, and `-o` (`--output-last-message`) writes only the final answer to a file. Structured output uses `--output-schema <file>`. The `--full-auto` flag in older guides does not appear among the shared options in the main-branch source as of 2026-09, so set `--sandbox` directly. Use `--dangerously-bypass-approvals-and-sandbox` (Codex) and `bypassPermissions` (Claude) only on a disposable runner that is already isolated.
 
@@ -90,13 +91,13 @@ jobs:
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           prompt-file: .github/codex/review.md
-          sandbox: read-only
+          permission-profile: ":read-only"
           safety-strategy: drop-sudo
           output-file: codex-review.md
 ```
 
 - With a `prompt`, the Claude action runs in automation mode and has neither shell nor GitHub API access beyond the tools you allow. To post results as PR comments, name the commenting tool in `--allowedTools` as the official examples do. `id-token: write` is needed for the default GitHub App authentication. The easiest install is `/install-github-app` inside Claude Code.
-- The Codex action's default `safety-strategy`, `drop-sudo`, removes sudo rights before Codex runs. There are also interactive integrations where a person calls `@claude` or `@codex review` on a PR.
+- The Codex action selects permissions with `permission-profile` (`:read-only`, `:workspace`, or a named profile). The `sandbox` input is legacy, and the two are mutually exclusive. The default `safety-strategy`, `drop-sudo`, removes sudo rights before Codex runs. There are also interactive integrations where a person calls `@claude` or `@codex review` on a PR.
 - PRs from forks get no secrets. Working around that by checking out PR code under `pull_request_target` runs a stranger's code next to your secrets. Do not.
 
 ## Going Deeper
@@ -172,9 +173,8 @@ In Claude Code, the setup script is for **preparing the VM** (installing tools),
 ## References
 
 - [Run Claude Code programmatically](https://code.claude.com/docs/en/headless), [CLI reference](https://code.claude.com/docs/en/cli-reference) — Claude Code Docs, accessed 2026-09-29
-- [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) — Claude Code Docs, accessed 2026-09-29
-- [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions) — Claude Code Docs, accessed 2026-09-29
+- [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview), [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions) — Claude Code Docs, accessed 2026-09-29
 - [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web), [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments), [Routines](https://code.claude.com/docs/en/routines) — Claude Code Docs, accessed 2026-09-29
 - [Debug your configuration](https://code.claude.com/docs/en/debug-your-config), [Monitoring](https://code.claude.com/docs/en/monitoring-usage) — Claude Code Docs, accessed 2026-09-29
-- [codex exec CLI definition](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs), [openai/codex-action](https://github.com/openai/codex-action) — OpenAI GitHub, accessed 2026-09-29
+- [codex-action action.yml](https://github.com/openai/codex-action/blob/main/action.yml), [codex exec CLI definition](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs), [openai/codex-action](https://github.com/openai/codex-action) — OpenAI GitHub, accessed 2026-09-29
 - [Non-interactive mode](https://developers.openai.com/codex/noninteractive), [Cloud environments](https://developers.openai.com/codex/cloud/environments) — OpenAI Codex Docs, confirmed through search results, accessed 2026-09-29

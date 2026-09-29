@@ -55,6 +55,7 @@ claude --bare -p "Summarize the failing tests in test.log" --allowedTools "Read"
 codex exec --sandbox read-only --json -o summary.md "Summarize the failing tests in test.log"
 ```
 
+- `--bare`는 구독(claude.ai) 로그인과 OAuth 자격 증명을 읽지 않는다. 실행 전에 `ANTHROPIC_API_KEY`를 설정해야 하고, 비용은 구독이 아니라 API 사용량으로 청구된다.
 - Claude의 `--output-format`은 `text` · `json` · `stream-json`이다. `json` 결과에는 `result`, `session_id`, `total_cost_usd`가 들어 있고, `--json-schema`를 주면 `structured_output`으로 형식을 강제한다. 후속 질문은 `--resume <session_id>` 또는 `--continue`, Codex는 `codex exec resume --last`.
 - Codex의 `--json`은 이벤트를 JSONL로 흘리고, `-o`(`--output-last-message`)는 마지막 답만 파일로 쓴다. 구조화 출력은 `--output-schema <file>`. 오래된 글의 `--full-auto`는 2026-09 현재 main 소스의 공통 옵션에 보이지 않으니 `--sandbox`를 직접 쓴다. `--dangerously-bypass-approvals-and-sandbox`(Codex)와 `bypassPermissions`(Claude)는 이미 격리된 일회용 Runner에서만 쓴다.
 
@@ -90,13 +91,13 @@ jobs:
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           prompt-file: .github/codex/review.md
-          sandbox: read-only
+          permission-profile: ":read-only"
           safety-strategy: drop-sudo
           output-file: codex-review.md
 ```
 
 - Claude Action은 `prompt`가 있으면 자동화 모드로 돌고, 허용한 도구 외에는 Shell도 GitHub API도 쓰지 못한다. 결과를 PR 댓글로 달려면 공식 예시처럼 댓글용 도구를 `--allowedTools`에 명시한다. `id-token: write`는 기본 GitHub App 인증에 필요하다. 가장 쉬운 설치는 Claude Code 안에서 `/install-github-app`이다.
-- Codex Action의 `safety-strategy` 기본값 `drop-sudo`는 Codex 실행 전에 sudo 권한을 뺀다. 사람이 PR에서 `@claude`나 `@codex review`로 부르는 대화형 연동도 있다.
+- Codex Action은 `permission-profile`(`:read-only`, `:workspace`, 또는 이름 붙인 Profile)로 권한을 고른다. `sandbox` 입력은 Legacy이며 둘은 함께 쓸 수 없다. `safety-strategy` 기본값 `drop-sudo`는 Codex 실행 전에 sudo 권한을 뺀다. 사람이 PR에서 `@claude`나 `@codex review`로 부르는 대화형 연동도 있다.
 - Fork에서 온 PR에는 Secret이 없다. 이를 피하려고 `pull_request_target`에서 PR 코드를 Checkout하면 남의 코드가 내 Secret과 함께 돈다. 하지 않는다.
 
 ## 심화
@@ -172,9 +173,8 @@ Claude Code에서 Setup Script는 **VM 준비**(도구 설치), SessionStart Hoo
 ## 참고 자료
 
 - [Run Claude Code programmatically](https://code.claude.com/docs/en/headless), [CLI reference](https://code.claude.com/docs/en/cli-reference) — Claude Code Docs, 접근일 2026-09-29
-- [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) — Claude Code Docs, 접근일 2026-09-29
-- [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions) — Claude Code Docs, 접근일 2026-09-29
+- [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview), [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions) — Claude Code Docs, 접근일 2026-09-29
 - [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web), [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments), [Routines](https://code.claude.com/docs/en/routines) — Claude Code Docs, 접근일 2026-09-29
 - [Debug your configuration](https://code.claude.com/docs/en/debug-your-config), [Monitoring](https://code.claude.com/docs/en/monitoring-usage) — Claude Code Docs, 접근일 2026-09-29
-- [codex exec CLI 정의](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs), [openai/codex-action](https://github.com/openai/codex-action) — OpenAI GitHub, 접근일 2026-09-29
+- [codex-action action.yml](https://github.com/openai/codex-action/blob/main/action.yml), [codex exec CLI 정의](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs), [openai/codex-action](https://github.com/openai/codex-action) — OpenAI GitHub, 접근일 2026-09-29
 - [Non-interactive mode](https://developers.openai.com/codex/noninteractive), [Cloud environments](https://developers.openai.com/codex/cloud/environments) — OpenAI Codex Docs, 검색 결과로 확인, 접근일 2026-09-29

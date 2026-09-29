@@ -2,7 +2,7 @@
 
 > **학습 목표**: Subagent, Skill, Command, Plugin이 각각 무엇을 담고 언제 Context에 들어오는지 구분하고, Claude Code와 Codex에서 파일로 정의하는 방법을 알며, 역할 하나당 파일 하나라는 원칙으로 이 저장소의 탐색자·검토자·자동 개발 Skill을 읽고 고칠 수 있다.
 
-기준일: 2026-09-29. 필드 이름과 경로는 Claude Code 공식 문서와 Codex 공개 소스·문서 기준이며 자주 바뀐다. 개념은 「Session, Agent, Subagent의 차이」와 「Multi-Agent 역할과 모델 라우팅」에 있고, 이 문서는 그 개념을 **실제 설정 파일**로 옮긴다. 지시문 파일은 「지시문과 메모리: CLAUDE.md · AGENTS.md」, 권한과 Hook은 「권한 · Sandbox · Hook: 강제 층 설계하기」에서 다룬다.
+기준일: 2026-09-29. 필드 이름과 경로는 Claude Code 공식 문서와 Codex 공개 소스·문서 기준이며 자주 바뀐다. 개념은 「Session · Agent · Subagent」와 「Multi-Agent 역할과 모델 라우팅」에 있고, 이 문서는 그 개념을 **실제 설정 파일**로 옮긴다. 지시문 파일은 「지시문과 메모리」, 권한과 Hook은 「권한 · Sandbox · Hook」에서 다룬다.
 
 ## 핵심 개념
 

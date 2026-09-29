@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Instructions and Memory: CLAUDE.md and AGENTS.md | MyAI</title>
-    <meta name="description" content="&quot;Agent setup map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
+    <meta name="description" content="&quot;Agent Setup Map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/07-instructions-memory/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI" />
     <meta property="og:title" content="Instructions and Memory: CLAUDE.md and AGENTS.md | MyAI" />
-    <meta property="og:description" content="&quot;Agent setup map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
+    <meta property="og:description" content="&quot;Agent Setup Map&quot; called instructions the advisory layer. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the offi…" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/07-instructions-memory/" />
     <meta property="og:locale" content="en_US" />
     <meta name="site-root" content="../../../" />
@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Explain where instruction files are discovered and in what order they enter context. Keep only content worth paying for on every turn, write rules agents actually follow, and check those files so they do not rot.</p>
 </blockquote>
-<p>&quot;Agent setup map&quot; called instructions the <strong>advisory layer</strong>. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the official Claude Code docs, the openai/codex source and the agents.md specification.</p>
+<p>&quot;Agent Setup Map&quot; called instructions the <strong>advisory layer</strong>. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the official Claude Code docs, the openai/codex source and the agents.md specification.</p>
 <h2>Key Concepts</h2>
 <p>An <strong>instruction file</strong> is Markdown that enters context automatically when a session starts. Conversation history disappears when the session ends, but a file survives into the next session and into other tools. That is why durable decisions go into files, not conversations (see &quot;Developing with Claude Code + Codex&quot;). <strong>Memory</strong>, by contrast, is a record the agent writes for itself rather than one a person writes. Claude Code&#39;s auto memory is the main example; it is machine-local and not shared.</p>
 <table>
@@ -177,7 +177,7 @@
 </code></pre>
 <p><strong>Imports</strong>: CLAUDE.md can pull in other files with <code>@path/to/file</code>. Relative paths resolve against <em>the importing file</em>, and imports recurse up to four hops. Imported files also load in full at start, so imports <strong>organize content but do not save tokens</strong>. <code>`@README`</code> inside a code span is not imported. Block-level HTML comments <code>&lt;!-- --&gt;</code> are stripped before content enters context, so they can hold notes for human maintainers.</p>
 <h3>How AGENTS.md relates to Claude Code</h3>
-<p>AGENTS.md is an open format that many coding agents read. The agents.md specification settles conflicts this way: &quot;the closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.&quot; Claude Code reads AGENTS.md directly from v2.1.277, but under the default (<code>claude-md-or-agents-md</code>) it reads <strong>only CLAUDE.md whenever any CLAUDE.md exists</strong>.</p>
+<p>AGENTS.md is an open format that many coding agents read. The agents.md specification settles conflicts this way: &quot;the closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.&quot; Claude Code reads AGENTS.md directly from v2.1.277, but by default it reads <strong>only CLAUDE.md whenever any CLAUDE.md exists</strong>. You change this with <strong>Project instructions</strong> in <code>/config</code>, or with the <code>options.instructionFiles</code> key under <code>&quot;agents-md@builtin&quot;</code> in the user settings&#39; <code>pluginConfigs</code>; the values are <code>claude-md-or-agents-md</code> (default), <code>claude-md-and-agents-md</code>, <code>claude-md</code> and <code>managed-only</code>. The key is ignored in project and local settings.</p>
 <table>
 <thead>
 <tr>
@@ -330,12 +330,12 @@ Load on demand:
 <li><code>InstructionsLoaded</code> hook: logs which file loaded, when and why. Useful when debugging path-scoped rules.</li>
 </ul>
 <h3>What a subagent inherits</h3>
-<p>An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can opt out with <code>omitClaudeMd: true</code>. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a <strong>Mission Packet</strong> instead of the whole <code>.ai/</code> folder: a subagent&#39;s context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.</p>
+<p>An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can skip the user, project and local CLAUDE.md files with <code>omitClaudeMd: true</code>. The organization&#39;s managed CLAUDE.md still loads even then. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a <strong>Mission Packet</strong> instead of the whole <code>.ai/</code> folder: a subagent&#39;s context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.</p>
 <h2>Common Misconceptions</h2>
 <ul>
 <li><strong>&quot;CLAUDE.md is the system prompt, so it is always obeyed.&quot;</strong> According to the Claude Code docs, CLAUDE.md is delivered as a user message after the system prompt, and strict compliance is not guaranteed.</li>
 <li><strong>&quot;Splitting with @imports saves tokens.&quot;</strong> Imports load at start too. To save, move content to <code>paths</code> rules or skills.</li>
-<li><strong>&quot;If AGENTS.md exists, Claude Code reads it.&quot;</strong> Not by default when a CLAUDE.md is also present.</li>
+<li><strong>&quot;If AGENTS.md exists, Claude Code reads it.&quot;</strong> Not under the default (<code>instructionFiles</code>: <code>claude-md-or-agents-md</code>) when a CLAUDE.md is also present.</li>
 <li><strong>&quot;Auto memory means decision records are unnecessary.&quot;</strong> Auto memory is machine-local and not shared with other tools.</li>
 </ul>
 <h2>Self-Check Questions</h2>

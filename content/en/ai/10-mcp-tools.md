@@ -2,7 +2,7 @@
 
 > **Learning goal**: Explain how MCP is built (host, client and server; tools, resources and prompts; stdio and Streamable HTTP), register MCP servers in Claude Code and Codex at the right scope, treat tool output as untrusted data, and choose between an MCP server, a CLI and a skill.
 
-As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (`codex-rs`). Permission rules themselves are in "Permissions, Sandboxes and Hooks: Designing the Enforced Layer", and packaging tool definitions for distribution is in "Subagents, Skills, Commands and Plugins".
+As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (`codex-rs`). Permission rules themselves are in "Permissions, Sandbox, Hooks", and packaging tool definitions for distribution is in "Subagents, Skills and Plugins".
 
 ## Key Concepts
 
@@ -48,7 +48,7 @@ Good: The step that reads issues gets read-only tools; the step that comments ne
 
 ### Context Cost
 
-Attaching a server spends context on tool definitions. Claude Code uses **tool search** by default: it loads only tool names and server instructions at startup and looks up definitions when needed. It warns when a tool result exceeds 10,000 tokens, and a result over the default cap of 25,000 tokens (`MAX_MCP_OUTPUT_TOKENS`) is saved to a file and replaced by its path. Even so, fewer servers mean less tool confusion for the model.
+Attaching a server spends context on tool definitions. Claude Code uses **tool search** by default: it loads only tool names and server instructions at startup and looks up definitions when needed. It warns when a tool result exceeds 10,000 tokens, and a result over the default cap of 25,000 tokens (`MAX_MCP_OUTPUT_TOKENS`; both the MCP and environment-variable pages state 25,000, checked 2026-09-29) is saved to a file and replaced by its path. Even so, fewer servers mean less tool confusion for the model.
 
 ## Applied: This Repository's Setup
 
@@ -171,7 +171,7 @@ These are categories and permission principles, not vendor recommendations.
 - [Specification 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28) — Model Context Protocol, accessed 2026-09-29
 - [2026-07-28 Changelog](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx) — MCP GitHub, accessed 2026-09-29
 - [Connect Claude Code to tools via MCP](https://code.claude.com/docs/en/mcp) — Claude Code Docs, accessed 2026-09-29
-- [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments) — Claude Code Docs, accessed 2026-09-29
+- [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments), [Environment variables](https://code.claude.com/docs/en/env-vars) — Claude Code Docs, accessed 2026-09-29
 - [codex-rs MCP config types](https://github.com/openai/codex/blob/main/codex-rs/config/src/mcp_types.rs), [mcp_cmd.rs](https://github.com/openai/codex/blob/main/codex-rs/cli/src/mcp_cmd.rs) — OpenAI Codex source, accessed 2026-09-29
 - [GitHub MCP Server: Remote Server](https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md) — GitHub, accessed 2026-09-29
 - [Playwright MCP](https://github.com/microsoft/playwright-mcp) — Microsoft, accessed 2026-09-29

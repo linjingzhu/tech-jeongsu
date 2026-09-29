@@ -2,7 +2,7 @@
 
 > **Learning goal**: Explain where instruction files are discovered and in what order they enter context. Keep only content worth paying for on every turn, write rules agents actually follow, and check those files so they do not rot.
 
-"Agent setup map" called instructions the **advisory layer**. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the official Claude Code docs, the openai/codex source and the agents.md specification.
+"Agent Setup Map" called instructions the **advisory layer**. This document goes deep on that layer. Behaviour described here follows, as of 2026-09, the official Claude Code docs, the openai/codex source and the agents.md specification.
 
 ## Key Concepts
 
@@ -42,7 +42,7 @@ flowchart TD
 
 ### How AGENTS.md relates to Claude Code
 
-AGENTS.md is an open format that many coding agents read. The agents.md specification settles conflicts this way: "the closest AGENTS.md to the edited file wins; explicit user chat prompts override everything." Claude Code reads AGENTS.md directly from v2.1.277, but under the default (`claude-md-or-agents-md`) it reads **only CLAUDE.md whenever any CLAUDE.md exists**.
+AGENTS.md is an open format that many coding agents read. The agents.md specification settles conflicts this way: "the closest AGENTS.md to the edited file wins; explicit user chat prompts override everything." Claude Code reads AGENTS.md directly from v2.1.277, but by default it reads **only CLAUDE.md whenever any CLAUDE.md exists**. You change this with **Project instructions** in `/config`, or with the `options.instructionFiles` key under `"agents-md@builtin"` in the user settings' `pluginConfigs`; the values are `claude-md-or-agents-md` (default), `claude-md-and-agents-md`, `claude-md` and `managed-only`. The key is ignored in project and local settings.
 
 | Repository has | What Claude Code reads (default) |
 |---|---|
@@ -153,13 +153,13 @@ Codex also has a `[memories]` settings group, but its detailed behaviour was not
 
 ### What a subagent inherits
 
-An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can opt out with `omitClaudeMd: true`. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a **Mission Packet** instead of the whole `.ai/` folder: a subagent's context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.
+An ordinary Claude Code subagent loads the CLAUDE.md hierarchy as is. The exceptions are the built-in Explore and Plan agents, and a custom agent can skip the user, project and local CLAUDE.md files with `omitClaudeMd: true`. The organization's managed CLAUDE.md still loads even then. It does not inherit the conversation history or auto memory. This is the same reason this repository gives a Worker a **Mission Packet** instead of the whole `.ai/` folder: a subagent's context is cheaper the smaller it is, and what it needs arrives reliably only when the packet states it.
 
 ## Common Misconceptions
 
 - **"CLAUDE.md is the system prompt, so it is always obeyed."** According to the Claude Code docs, CLAUDE.md is delivered as a user message after the system prompt, and strict compliance is not guaranteed.
 - **"Splitting with @imports saves tokens."** Imports load at start too. To save, move content to `paths` rules or skills.
-- **"If AGENTS.md exists, Claude Code reads it."** Not by default when a CLAUDE.md is also present.
+- **"If AGENTS.md exists, Claude Code reads it."** Not under the default (`instructionFiles`: `claude-md-or-agents-md`) when a CLAUDE.md is also present.
 - **"Auto memory means decision records are unnecessary."** Auto memory is machine-local and not shared with other tools.
 
 ## Self-Check Questions

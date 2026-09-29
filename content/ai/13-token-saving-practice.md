@@ -2,7 +2,7 @@
 
 > **학습 목표**: Claude Code, Codex, 직접 만든 API 앱에서 token이 새는 지점을 찾아 도구별 설정과 습관으로 줄이고, 절약 전후를 숫자로 비교할 수 있다.
 
-원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리: CLAUDE.md · AGENTS.md」, 권한과 hook은 「권한 · Sandbox · Hook: 강제 층 설계하기」, Subagent와 Skill은 「Subagent · Skill · Command · Plugin」, MCP는 「MCP와 외부 도구 연결」, headless·CI의 비용 통제는 11번 문서에서 자세히 다루므로 여기서는 token 관점만 짚는다. 명령과 설정 키는 **2026-09 기준** 공식 문서와 소스에서 확인한 것만 적었다. 달러→원 환산은 1 USD = 1,400원(가정)이다.
+원리(과금 항목, loop 누적, 레버 순서)는 「AI 토큰 효율화의 원리」에서 다뤘다. 이 문서는 도구별 실전 방법이다. 설정 파일의 위치와 우선순위는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리」, 권한과 hook은 「권한 · Sandbox · Hook」, Subagent와 Skill은 「Subagent · Skill · Plugin」, MCP는 「MCP와 외부 도구」, headless·CI의 비용 통제는 「Headless · CI · Cloud 실행」에서 자세히 다루므로 여기서는 token 관점만 짚는다. 명령과 설정 키는 **2026-09 기준** 공식 문서와 소스에서 확인한 것만 적었다. 달러→원 환산은 1 USD = 1,400원(가정)이다.
 
 ## 핵심 개념
 
@@ -45,12 +45,12 @@ flowchart TD
 | 작업이 바뀌면 `/clear`, 경계에서 `/compact <남길 것>`, 잘못 간 길은 `/rewind` | 이력 | `/autocompact 500k` |
 | 곁가지 질문은 이력에 남기지 않는다 | 이력 | `/btw` |
 | 세션 시작 때 모델과 effort를 정하고 도중에 바꾸지 않는다 | Cache miss | `/model`, `/effort` |
-| MCP tool 정의는 기본 지연 로드(tool search). 안 쓰는 서버는 끄고, CLI가 있으면 CLI를 쓴다 | 시작 context | `/mcp`, `ENABLE_TOOL_SEARCH` |
+| MCP tool 정의는 기본 지연 로드(tool search). 안 쓰는 서버는 끄고, CLI가 있으면 CLI를 쓴다 | 시작 context | `/mcp`, `/context`(`ENABLE_TOOL_SEARCH`는 proxy·base URL 경유 시에만 필요) |
 | 테스트 출력은 hook으로 실패 줄만 남긴다 | 도구 출력 | `PreToolUse` hook |
 | "코드베이스 개선해" 대신 파일과 함수를 지목한다 | 읽기량 | 구체적인 prompt, plan mode |
 | API 키 사용자가 긴 공백 뒤에도 같은 세션을 쓴다 | Cache miss | `promptCacheTtl: "1h"` |
 
-**`.claudeignore`는 공식 기능이 아니다**(2026-09 공식 문서에 없음, GitHub에는 기능 요청만 있다). 읽힐 필요 없는 파일은 `permissions.deny`의 `Read` 규칙으로 막는다. 이 규칙은 Claude의 파일 도구를 막을 뿐 보안 경계는 아니므로 권한 설계는 「권한 · Sandbox · Hook: 강제 층 설계하기」를 따른다.
+**`.claudeignore`는 공식 기능이 아니다**(2026-09 공식 문서에 없음, GitHub에는 기능 요청만 있다). 읽힐 필요 없는 파일은 `permissions.deny`의 `Read` 규칙으로 막는다. 이 규칙은 Claude의 파일 도구를 막을 뿐 보안 경계는 아니므로 권한 설계는 「권한 · Sandbox · Hook」을 따른다.
 
 ```json
 {
@@ -81,7 +81,7 @@ Cache를 깨는 행동과 지키는 행동을 구분해 둔다(Claude Code 「Ho
 | 사용량을 확인한다 | 측정 | `/status`, `/usage` |
 | 반복 작업은 비대화형으로 돌리고 결과 형식을 고정한다 | 이력 · 출력 | `codex exec --json`, `--output-schema` |
 
-`tool_output_token_limit`(도구 출력을 context에 저장할 때의 token 예산)과 `model_auto_compact_token_limit`(자동 compact 기준) 키도 있지만 기본값은 버전마다 달라 확인이 필요하다. 예전의 `profile = "..."` 설정은 더 이상 지원되지 않는다.
+`tool_output_token_limit`(도구 출력을 context에 저장할 때의 token 예산)과 `model_auto_compact_token_limit`(자동 compact 기준) 키도 있지만 기본값은 버전마다 달라 확인이 필요하다. config.toml 안의 `profile`·`[profiles.<name>]`는 legacy다. `--profile <name>`을 쓰면서 config.toml에도 `profile = "<name>"`이나 `[profiles.<name>]`가 있으면 오류가 나고, `$CODEX_HOME/<name>.config.toml`로 옮기라고 안내한다.
 
 ```bash
 codex exec --profile cheap --json "Summarize the last 10 commits into CHANGELOG.md" > run.jsonl
@@ -103,8 +103,8 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 |---|---|---|---|
 | 방식 | `cache_control` 명시 또는 top-level 자동 | 자동(1,024 token 이상 prefix) | Implicit 자동 + explicit 수동 |
 | Cache 읽기 | 입력의 0.1×(Opus 5.5 0.05×, Fable 5.1 0.025×) | 최대 90% 할인(모델별 cached input 단가) | Gemini 2.5 이상 90% 할인 |
-| Cache 쓰기 | 1.25×(5분), 2×(1시간) | GPT-6 계열 가격표에 1.25× cache write 항목 | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
-| 수명 | 5분 또는 1시간 | GPT-6 계열 30분(2026-09-22 발표) | Explicit는 TTL 지정 |
+| Cache 쓰기 | 1.25×(5분), 2×(1시간) | GPT-5.6 이후 모델은 1.25× cache write | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
+| 수명 | 5분 또는 1시간 | GPT-5.6 이후 모델 최소 30분(발표일 2026-09 하순, 정확한 날짜 확인 필요) | Explicit는 TTL 지정 |
 | Batch | 50% | 50% | 50% |
 
 ## 적용: 1인 스튜디오의 하루
@@ -113,7 +113,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 
 | 안티패턴 | 나쁜 예(가정) | 좋은 예(가정) | 차이 |
 |---|---|---|---|
-| 비대한 CLAUDE.md | 600줄 ≈ 12,000 token이 30턴 동안 실림 | 150줄 ≈ 3,000 token + Skill 2개 | 9,000×$5 + 270,000×$0.20 ≈ **$0.10/세션** |
+| 비대한 CLAUDE.md | 600줄 ≈ 12,000 token이 30턴 동안 실림 | 150줄 ≈ 3,000 token + Skill 2개 | 턴 1 쓰기 9,000×$5 + 턴 2~30 읽기 261,000×$0.20 ≈ **$0.10/세션** |
 | 테스트 로그 전체 | 40,000 token 로그가 이후 15턴 동안 실림 | Hook으로 실패 줄 1,500 token | 38,500×$5 + 577,500×$0.20 ≈ **$0.31/회** |
 | 메인에서 파일 20개 탐색 | 60,000 token이 이후 20턴 동안 실림: $0.30 + $0.24 = $0.54 | Haiku 4.5 Subagent가 탐색하고 1,000 token 요약만 반환 ≈ $0.14 | **약 $0.40/회** |
 | 곁가지 질문에 Sonnet으로 잠깐 전환 | 150,000 token context를 Sonnet 5.5가 새로 씀: $0.375 | 그대로 Opus에 묻기: 150,000×$0.20 = $0.03 | **약 12.5배** |
@@ -168,6 +168,6 @@ Prefix를 바꾸는 절약은 모두 cache를 한 번 깬다. Compaction, contex
 - [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) — Anthropic, 2026-09-29 확인
 - [openai/codex](https://github.com/openai/codex) — `codex-rs/core/src/config/mod.rs`, `codex-rs/exec/src/cli.rs`, `codex-rs/tui/src/slash_command.rs`, 2026-09-29 확인
 - [Codex configuration reference](https://developers.openai.com/codex/config-reference) — OpenAI, 2026-09-29 검색 결과로 확인
-- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) — OpenAI, 2026-09-29 검색 결과로 확인
+- [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) · [Pricing](https://developers.openai.com/api/docs/pricing) · [Better prompt caching for GPT-6](https://openai.com/index/better-prompt-caching-for-gpt-6/) — OpenAI, 2026-09-29 검색 결과로 확인(게시일 확인 필요)
 - [Context caching](https://ai.google.dev/gemini-api/docs/caching) · [Context caching overview(Google Cloud)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) · [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) — Google, 2026-09-29 검색 결과로 확인
 - [.claudeignore 기능 요청 #29455](https://github.com/anthropics/claude-code/issues/29455) — GitHub, 2026-09-29 검색 결과로 확인

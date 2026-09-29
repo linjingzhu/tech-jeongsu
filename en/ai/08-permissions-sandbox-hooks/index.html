@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Permissions, Sandboxes and Hooks: Designing the Enforced Layer | MyAI</title>
-    <meta name="description" content="The advisory layer covered in &quot;Instructions and memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
+    <meta name="description" content="The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI" />
     <meta property="og:title" content="Permissions, Sandboxes and Hooks: Designing the Enforced Layer | MyAI" />
-    <meta property="og:description" content="The advisory layer covered in &quot;Instructions and memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
+    <meta property="og:description" content="The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/" />
     <meta property="og:locale" content="en_US" />
     <meta name="site-root" content="../../../" />
@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Distinguish Claude Code&#39;s permission rules and permission modes from Codex&#39;s approval policy and sandbox mode. Use the hook input/output contract to implement a force-push block and a guard against ending with uncommitted work, and design risk-tiered permissions for a one-person studio.</p>
 </blockquote>
-<p>The advisory layer covered in &quot;Instructions and memory&quot; is what an agent <em>tries</em> to follow. This document covers the <strong>enforced layer</strong>, which the harness executes regardless of what the agent decides. Key names and behaviour were checked against official docs and the openai/codex source as of 2026-09.</p>
+<p>The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent <em>tries</em> to follow. This document covers the <strong>enforced layer</strong>, which the harness executes regardless of what the agent decides. Key names and behaviour were checked against official docs and the openai/codex source as of 2026-09.</p>
 <h2>Key Concepts</h2>
 <p>The three mechanisms are layered because each has different gaps. Permission rules look at command <strong>text</strong>, the sandbox at <strong>actual system calls</strong>, and hooks at <strong>context</strong> (branch, git state).</p>
 <table>

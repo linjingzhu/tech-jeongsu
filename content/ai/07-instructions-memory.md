@@ -42,7 +42,7 @@ flowchart TD
 
 ### AGENTS.md와 Claude Code의 관계
 
-AGENTS.md는 여러 coding agent가 함께 읽는 공개 형식이다. agents.md 명세는 충돌 시 "편집하는 파일에 가장 가까운 AGENTS.md가 이기고, 사용자의 명시적 채팅 지시가 모든 것을 이긴다"고 정한다. Claude Code는 v2.1.277부터 AGENTS.md를 직접 읽지만, 기본값(`claude-md-or-agents-md`)에서는 **CLAUDE.md가 하나라도 있으면 CLAUDE.md만** 읽는다.
+AGENTS.md는 여러 coding agent가 함께 읽는 공개 형식이다. agents.md 명세는 충돌 시 "편집하는 파일에 가장 가까운 AGENTS.md가 이기고, 사용자의 명시적 채팅 지시가 모든 것을 이긴다"고 정한다. Claude Code는 v2.1.277부터 AGENTS.md를 직접 읽지만, 기본값에서는 **CLAUDE.md가 하나라도 있으면 CLAUDE.md만** 읽는다. 이 동작은 `/config`의 **Project instructions** 항목, 또는 user 설정 `pluginConfigs`의 `"agents-md@builtin"` → `options.instructionFiles` 키로 바꾸며, 값은 `claude-md-or-agents-md`(기본), `claude-md-and-agents-md`, `claude-md`, `managed-only`다. project · local 설정에 둔 이 키는 무시된다.
 
 | 저장소 상태 | Claude Code가 읽는 것 (기본값) |
 |---|---|
@@ -153,13 +153,13 @@ Codex에도 `[memories]` 설정 묶음이 있지만 세부 동작은 이 문서�
 
 ### Subagent는 무엇을 물려받는가
 
-Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 `omitClaudeMd: true`로 끌 수 있다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 `.ai/` 전체 대신 **Mission Packet**만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.
+Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 `omitClaudeMd: true`로 user · project · local CLAUDE.md를 끌 수 있다. 이때도 조직의 managed CLAUDE.md는 로드된다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 `.ai/` 전체 대신 **Mission Packet**만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.
 
 ## 흔한 오해
 
 - **"CLAUDE.md는 system prompt라서 반드시 지켜진다."** Claude Code 문서에 따르면 CLAUDE.md는 system prompt 뒤의 user message로 전달되며, 엄격한 준수는 보장되지 않는다.
 - **"@import로 쪼개면 token이 준다."** import도 시작 시 로드된다. 줄이려면 `paths` 규칙이나 skill로 옮긴다.
-- **"AGENTS.md를 두면 Claude Code도 읽는다."** CLAUDE.md가 함께 있으면 기본값에서는 읽지 않는다.
+- **"AGENTS.md를 두면 Claude Code도 읽는다."** CLAUDE.md가 함께 있으면 기본값(`instructionFiles`: `claude-md-or-agents-md`)에서는 읽지 않는다.
 - **"auto memory가 있으니 결정 기록은 필요 없다."** auto memory는 기계 로컬이고 다른 도구와 공유되지 않는다.
 
 ## 자기 점검 질문

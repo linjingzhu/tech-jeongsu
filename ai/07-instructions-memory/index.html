@@ -177,7 +177,7 @@
 </code></pre>
 <p><strong>Import</strong>: CLAUDE.md는 <code>@path/to/file</code>로 다른 파일을 가져올 수 있다. 상대 경로는 <em>import하는 파일</em> 기준이고, 최대 4단계까지 재귀한다. 단, import한 파일도 시작 시 전부 로드되므로 <strong>정리는 되지만 token은 줄지 않는다</strong>. 코드 span 안의 <code>`@README`</code>는 import되지 않는다. 블록 단위 HTML 주석 <code>&lt;!-- --&gt;</code>은 context에 들어가기 전에 제거되므로 사람용 메모에 쓸 수 있다.</p>
 <h3>AGENTS.md와 Claude Code의 관계</h3>
-<p>AGENTS.md는 여러 coding agent가 함께 읽는 공개 형식이다. agents.md 명세는 충돌 시 &quot;편집하는 파일에 가장 가까운 AGENTS.md가 이기고, 사용자의 명시적 채팅 지시가 모든 것을 이긴다&quot;고 정한다. Claude Code는 v2.1.277부터 AGENTS.md를 직접 읽지만, 기본값(<code>claude-md-or-agents-md</code>)에서는 <strong>CLAUDE.md가 하나라도 있으면 CLAUDE.md만</strong> 읽는다.</p>
+<p>AGENTS.md는 여러 coding agent가 함께 읽는 공개 형식이다. agents.md 명세는 충돌 시 &quot;편집하는 파일에 가장 가까운 AGENTS.md가 이기고, 사용자의 명시적 채팅 지시가 모든 것을 이긴다&quot;고 정한다. Claude Code는 v2.1.277부터 AGENTS.md를 직접 읽지만, 기본값에서는 <strong>CLAUDE.md가 하나라도 있으면 CLAUDE.md만</strong> 읽는다. 이 동작은 <code>/config</code>의 <strong>Project instructions</strong> 항목, 또는 user 설정 <code>pluginConfigs</code>의 <code>&quot;agents-md@builtin&quot;</code> → <code>options.instructionFiles</code> 키로 바꾸며, 값은 <code>claude-md-or-agents-md</code>(기본), <code>claude-md-and-agents-md</code>, <code>claude-md</code>, <code>managed-only</code>다. project · local 설정에 둔 이 키는 무시된다.</p>
 <table>
 <thead>
 <tr>
@@ -330,12 +330,12 @@ Load on demand:
 <li><code>InstructionsLoaded</code> hook: 어떤 파일이 언제 왜 로드되었는지 기록. 경로 한정 규칙을 디버깅할 때 유용하다.</li>
 </ul>
 <h3>Subagent는 무엇을 물려받는가</h3>
-<p>Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 <code>omitClaudeMd: true</code>로 끌 수 있다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 <code>.ai/</code> 전체 대신 <strong>Mission Packet</strong>만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.</p>
+<p>Claude Code의 일반 subagent는 CLAUDE.md 계층을 그대로 로드한다. 예외는 기본 제공 Explore, Plan agent이며, 직접 만든 agent도 <code>omitClaudeMd: true</code>로 user · project · local CLAUDE.md를 끌 수 있다. 이때도 조직의 managed CLAUDE.md는 로드된다. 대화 기록과 auto memory는 물려받지 않는다. 이 저장소가 Worker에게 <code>.ai/</code> 전체 대신 <strong>Mission Packet</strong>만 주는 이유와 같다. Subagent의 context는 작을수록 싸고, 필요한 것은 packet에 명시해야 확실히 전달된다.</p>
 <h2>흔한 오해</h2>
 <ul>
 <li><strong>&quot;CLAUDE.md는 system prompt라서 반드시 지켜진다.&quot;</strong> Claude Code 문서에 따르면 CLAUDE.md는 system prompt 뒤의 user message로 전달되며, 엄격한 준수는 보장되지 않는다.</li>
 <li><strong>&quot;@import로 쪼개면 token이 준다.&quot;</strong> import도 시작 시 로드된다. 줄이려면 <code>paths</code> 규칙이나 skill로 옮긴다.</li>
-<li><strong>&quot;AGENTS.md를 두면 Claude Code도 읽는다.&quot;</strong> CLAUDE.md가 함께 있으면 기본값에서는 읽지 않는다.</li>
+<li><strong>&quot;AGENTS.md를 두면 Claude Code도 읽는다.&quot;</strong> CLAUDE.md가 함께 있으면 기본값(<code>instructionFiles</code>: <code>claude-md-or-agents-md</code>)에서는 읽지 않는다.</li>
 <li><strong>&quot;auto memory가 있으니 결정 기록은 필요 없다.&quot;</strong> auto memory는 기계 로컬이고 다른 도구와 공유되지 않는다.</li>
 </ul>
 <h2>자기 점검 질문</h2>

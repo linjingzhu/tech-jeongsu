@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Explain how MCP is built (host, client and server; tools, resources and prompts; stdio and Streamable HTTP), register MCP servers in Claude Code and Codex at the right scope, treat tool output as untrusted data, and choose between an MCP server, a CLI and a skill.</p>
 </blockquote>
-<p>As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (<code>codex-rs</code>). Permission rules themselves are in &quot;Permissions, Sandboxes and Hooks: Designing the Enforced Layer&quot;, and packaging tool definitions for distribution is in &quot;Subagents, Skills, Commands and Plugins&quot;.</p>
+<p>As of 2026-09-29. MCP follows the 2026-07-28 specification, Claude Code its official docs, and Codex its public source (<code>codex-rs</code>). Permission rules themselves are in &quot;Permissions, Sandbox, Hooks&quot;, and packaging tool definitions for distribution is in &quot;Subagents, Skills and Plugins&quot;.</p>
 <h2>Key Concepts</h2>
 <p>MCP (Model Context Protocol) is an open protocol that lets AI applications attach the data and functions of external systems <strong>in one uniform way</strong>. Messages are JSON-RPC. The <strong>host</strong> (an AI application such as Claude Code or Codex) keeps one <strong>client</strong> per server, and a <strong>server</strong> (GitHub, documentation search, browser automation and so on) offers the three features below.</p>
 <table>
@@ -158,7 +158,7 @@ Good: The step that reads issues gets read-only tools; the step that comments ne
 <li>OAuth is the default for remote servers. Under the specification a protected MCP server acts as an OAuth 2.1 resource server. Claude Code signs in with <code>/mcp</code> or <code>claude mcp login &lt;name&gt;</code>, Codex with <code>codex mcp login &lt;name&gt;</code>.</li>
 </ul>
 <h3>Context Cost</h3>
-<p>Attaching a server spends context on tool definitions. Claude Code uses <strong>tool search</strong> by default: it loads only tool names and server instructions at startup and looks up definitions when needed. It warns when a tool result exceeds 10,000 tokens, and a result over the default cap of 25,000 tokens (<code>MAX_MCP_OUTPUT_TOKENS</code>) is saved to a file and replaced by its path. Even so, fewer servers mean less tool confusion for the model.</p>
+<p>Attaching a server spends context on tool definitions. Claude Code uses <strong>tool search</strong> by default: it loads only tool names and server instructions at startup and looks up definitions when needed. It warns when a tool result exceeds 10,000 tokens, and a result over the default cap of 25,000 tokens (<code>MAX_MCP_OUTPUT_TOKENS</code>; both the MCP and environment-variable pages state 25,000, checked 2026-09-29) is saved to a file and replaced by its path. Even so, fewer servers mean less tool confusion for the model.</p>
 <h2>Applied: This Repository&#39;s Setup</h2>
 <p>As of 2026-09-29 this repository commits <strong>neither <code>.mcp.json</code> nor <code>.codex/config.toml</code></strong>. Its work (writing docs, Git, tests) is covered by CLIs and file tools. <code>.ai/HARNESS.md</code> requires &quot;a committed server configuration, with its scope written down&quot; for any external capability. If one is added, it looks like this.</p>
 <h3>Claude Code: Scopes and Files</h3>
@@ -325,7 +325,7 @@ codex mcp login docs
 <li><a href="https://modelcontextprotocol.io/specification/2026-07-28">Specification 2026-07-28</a> — Model Context Protocol, accessed 2026-09-29</li>
 <li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx">2026-07-28 Changelog</a> — MCP GitHub, accessed 2026-09-29</li>
 <li><a href="https://code.claude.com/docs/en/mcp">Connect Claude Code to tools via MCP</a> — Claude Code Docs, accessed 2026-09-29</li>
-<li><a href="https://code.claude.com/docs/en/cloud-environments">Configure cloud environments</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/cloud-environments">Configure cloud environments</a>, <a href="https://code.claude.com/docs/en/env-vars">Environment variables</a> — Claude Code Docs, accessed 2026-09-29</li>
 <li><a href="https://github.com/openai/codex/blob/main/codex-rs/config/src/mcp_types.rs">codex-rs MCP config types</a>, <a href="https://github.com/openai/codex/blob/main/codex-rs/cli/src/mcp_cmd.rs">mcp_cmd.rs</a> — OpenAI Codex source, accessed 2026-09-29</li>
 <li><a href="https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md">GitHub MCP Server: Remote Server</a> — GitHub, accessed 2026-09-29</li>
 <li><a href="https://github.com/microsoft/playwright-mcp">Playwright MCP</a> — Microsoft, accessed 2026-09-29</li>

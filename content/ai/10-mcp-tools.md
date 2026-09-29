@@ -2,7 +2,7 @@
 
 > **학습 목표**: MCP의 구성(Host · Client · Server, Tool · Resource · Prompt, stdio · Streamable HTTP)을 설명하고, Claude Code와 Codex에 MCP Server를 범위에 맞게 등록하며, Tool 결과를 신뢰할 수 없는 데이터로 다루고, MCP · CLI · Skill 중 무엇을 쓸지 고를 수 있다.
 
-기준일: 2026-09-29. MCP 사양은 2026-07-28 판, Claude Code는 공식 문서, Codex는 공개 소스(`codex-rs`) 기준이다. 권한 규칙 자체는 「권한 · Sandbox · Hook: 강제 층 설계하기」, 도구 정의를 묶어 나누는 방법은 「Subagent · Skill · Command · Plugin」에서 다룬다.
+기준일: 2026-09-29. MCP 사양은 2026-07-28 판, Claude Code는 공식 문서, Codex는 공개 소스(`codex-rs`) 기준이다. 권한 규칙 자체는 「권한 · Sandbox · Hook」, 도구 정의를 묶어 나누는 방법은 「Subagent · Skill · Plugin」에서 다룬다.
 
 ## 핵심 개념
 
@@ -48,7 +48,7 @@ MCP 사양은 Tool을 **임의 코드 실행**으로 보고 신중히 다루라�
 
 ### Context 비용
 
-Server를 붙이면 Tool 정의가 Context를 쓴다. Claude Code는 **Tool Search**가 기본이라 시작할 때 Tool 이름과 Server 안내만 싣고, 정의는 필요할 때 찾는다. Tool 결과가 1만 Token을 넘으면 경고하고, 기본 상한 2만 5천 Token(`MAX_MCP_OUTPUT_TOKENS`)을 넘는 결과는 파일로 저장해 경로만 넘긴다. 그래도 Server 수는 적을수록 Model이 도구를 덜 헷갈린다.
+Server를 붙이면 Tool 정의가 Context를 쓴다. Claude Code는 **Tool Search**가 기본이라 시작할 때 Tool 이름과 Server 안내만 싣고, 정의는 필요할 때 찾는다. Tool 결과가 1만 Token을 넘으면 경고하고, 기본 상한 2만 5천 Token(`MAX_MCP_OUTPUT_TOKENS`, MCP · 환경 변수 문서 모두 25,000으로 표기, 2026-09-29 확인)을 넘는 결과는 파일로 저장해 경로만 넘긴다. 그래도 Server 수는 적을수록 Model이 도구를 덜 헷갈린다.
 
 ## 적용: 이 저장소의 설정
 
@@ -171,7 +171,7 @@ flowchart TD
 - [Specification 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28) — Model Context Protocol, 접근일 2026-09-29
 - [2026-07-28 Changelog](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx) — MCP GitHub, 접근일 2026-09-29
 - [Connect Claude Code to tools via MCP](https://code.claude.com/docs/en/mcp) — Claude Code Docs, 접근일 2026-09-29
-- [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments) — Claude Code Docs, 접근일 2026-09-29
+- [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments), [Environment variables](https://code.claude.com/docs/en/env-vars) — Claude Code Docs, 접근일 2026-09-29
 - [codex-rs MCP config types](https://github.com/openai/codex/blob/main/codex-rs/config/src/mcp_types.rs), [mcp_cmd.rs](https://github.com/openai/codex/blob/main/codex-rs/cli/src/mcp_cmd.rs) — OpenAI Codex 소스, 접근일 2026-09-29
 - [GitHub MCP Server: Remote Server](https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md) — GitHub, 접근일 2026-09-29
 - [Playwright MCP](https://github.com/microsoft/playwright-mcp) — Microsoft, 접근일 2026-09-29

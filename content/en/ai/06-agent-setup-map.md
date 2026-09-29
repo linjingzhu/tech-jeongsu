@@ -33,12 +33,12 @@ An agent's capability is not decided by the model alone. The same model behaves 
 
 ### Claude Code: scopes and precedence
 
-Claude Code settings files live in four scopes, and the higher one overrides the same key (as of 2026-09).
+Claude Code reads four settings files (user, project, local, managed), plus a command-line level that applies to one session only. For the same key, the higher level wins (as of 2026-09).
 
 | Precedence | Scope | File | Use |
 |---|---|---|---|
-| 1 | Managed | `managed-settings.json`, MDM, server-managed settings | Organization policy; users cannot override it |
-| 2 | Command line | `claude --settings`, `--permission-mode`, etc. | This session only |
+| 1 | Managed | `managed-settings.json`, MDM, server-managed settings | Organization policy; as a rule it cannot be overridden (for a few security keys a stricter lower-level value wins) |
+| 2 | Command line (a level, not a file) | `claude --settings`, `--permission-mode`, etc. | This session only |
 | 3 | Project local | `.claude/settings.local.json` | Just me, just this project; kept out of git |
 | 4 | Shared project | `.claude/settings.json` | Everyone on the project; committed |
 | 5 | User | `~/.claude/settings.json` | Just me, every project |
@@ -54,6 +54,8 @@ Claude Code settings files live in four scopes, and the higher one overrides the
 ### Codex: config layers and trust
 
 Codex stacks TOML layers from lowest to highest precedence (per the config loader comments in the openai/codex source, as of 2026-09): system `/etc/codex/config.toml` → user `~/.codex/config.toml` → the selected profile → project `.codex/config.toml` → `--config` and flags at run time. Constraints an organization wants to enforce go in a separate `requirements.toml`.
+
+A **profile** is a bundle of settings chosen with `--profile <name>`. In the 2026-09 main source (`codex-rs/config/src/loader/mod.rs`), `--profile work` layers `~/.codex/work.config.toml` **on top of** the user `config.toml`, so the profile file only needs the values it changes. The older `profile = "work"` selector inside `config.toml` raises a "no longer supported" error, and using `--profile work` while a `[profiles.work]` table for the same name is still in `config.toml` is also an error. `profile` and `profiles`, along with keys such as `model_provider` and `notify`, are ignored in a project `.codex/config.toml`, so repository content cannot choose where a user's credentials go or which local commands run.
 
 The important difference is that **project settings only take effect once the project is trusted**. A `.codex/config.toml` in an untrusted directory is read but left disabled. Claude Code is similar: `permissions.allow` in a committed `.claude/settings.json` applies only after you accept the workspace trust dialog, while deny and ask rules, which only restrict, apply immediately.
 
@@ -116,10 +118,10 @@ tech-jeongsu/
 | Instructions | `CLAUDE.md` and `AGENTS.md` point into `.ai/` | Entry files are short contracts; the body loads on demand by trigger |
 | Subagents | two Claude agents, three Codex agents | All read-only: `permissionMode: plan`, `sandbox_mode = "read-only"` |
 | Skills | two editions of `auto-dev` | The Codex edition sets `allow_implicit_invocation: false`, so it never starts itself |
-| Model | only the dispatcher pins a model | The reviewer is left open on purpose, so a model different from the implementer's can be chosen at spawn time |
+| Model | only the Codex dispatcher and fast-explorer pin a model in TOML | The Codex reviewer and both Claude agents leave it unset; the reviewer so that a model different from the implementer's can be chosen at spawn time |
 | Permissions · hooks · MCP | no committed files | HARNESS.md says "commit them", yet the enforced layer is still empty |
 
-The last row is this repository's biggest gap. Advice and role definitions are thorough, but the enforced layer is left to each person's private settings. The "Permissions, sandbox, hooks" document proposes a `.claude/settings.json` draft for this repository.
+The last row is this repository's biggest gap. Advice and role definitions are thorough, but the enforced layer is left to each person's private settings. The "Permissions, Sandbox, Hooks" document proposes a `.claude/settings.json` draft for this repository.
 
 ## Going Deeper
 
@@ -148,7 +150,7 @@ The conclusion is the same each time: **settings that must be identical across e
 
 ### Model and cost settings
 
-Claude Code picks models through the `model` key (usually user scope), the `model` field in subagent files, and the organization-level `availableModels` allowlist. Codex uses `model`, `model_reasoning_effort` and the subagent default `[agents] default_subagent_model`. For the principles of assigning models to roles, see "Multi-agent roles and model routing". The remaining layers are covered in detail in the documents that follow: "Subagents, Skills, Commands and Plugins", "MCP and External Tools", and "Headless, CI and Cloud Runs".
+Claude Code picks models through the `model` key (usually user scope), the `model` field in subagent files, and the organization-level `availableModels` allowlist. Codex uses `model`, `model_reasoning_effort` and the subagent default `[agents] default_subagent_model`. For the principles of assigning models to roles, see "Multi-agent roles and model routing". The remaining layers are covered in detail in the documents that follow: "Subagents, Skills and Plugins", "MCP and External Tools", and "Headless, CI and Cloud Runs".
 
 ## Common Misconceptions
 
