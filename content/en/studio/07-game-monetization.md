@@ -57,9 +57,9 @@ flowchart LR
 
 ## Applied: The Example Studio
 
-The example studio (assumption) has three game prototypes: G1 roguelike puzzle (PC), G2 hyper-casual (mobile), G3 narrative adventure (PC).
+The example studio (assumption) has three game prototypes: GM1 roguelike puzzle (PC), GM2 hyper-casual (mobile), GM3 narrative adventure (PC).
 
-**If G1 sells on Steam at $9.99 (all assumptions)**
+**If GM1 sells on Steam at $9.99 (all assumptions)**
 
 ```text
 Assumed average net unit price after VAT, refunds, regional prices and discounts: $7
@@ -70,7 +70,7 @@ To earn KRW 3.5 million in the first week: 3,500,000 ÷ 6,860 = 510.2 → 511 un
 Wishlists needed = 511 ÷ 0.15 = 3,406.7 → about 3,407
 ```
 
-**If G2 runs ad-supported (all assumptions)**
+**If GM2 runs ad-supported (all assumptions)**
 
 ```text
 Target DAU 2,000 × ARPDAU $0.04 = $80 a day
@@ -78,15 +78,15 @@ Target DAU 2,000 × ARPDAU $0.04 = $80 a day
 Assume 3 active days per install on average → holding DAU 2,000 needs about 667 installs a day, 20,000 a month
 ```
 
-Without a channel that brings 20,000 installs a month without ads, G2 does not work on paper. G1 has wishlists as a **pre-launch leading indicator**, so the bet size can be adjusted.
+Without a channel that brings 20,000 installs a month without ads, GM2 does not work on paper. GM1 has wishlists as a **pre-launch leading indicator**, so the bet size can be adjusted.
 
 Bad example:
 
-> G3, now with an open-world editor and multiplayer, has been in production for two years. It still has no store page.
+> GM3, now with an open-world editor and multiplayer, has been in production for two years. It still has no store page.
 
 Good example:
 
-> Built a 20-minute demo containing only G1's core loop first, opened the store page, watched the pace of wishlist growth, then set the production scope.
+> Built a 20-minute demo containing only GM1's core loop first, opened the store page, watched the pace of wishlist growth, then set the production scope.
 
 ### Scope Control for a Solo Developer
 
