@@ -23,14 +23,13 @@ flowchart LR
     A --> O[산출물: Branch · PR · 댓글 · 보고서]
     O --> G{사람이 검토했는가}
     G -->|예| MG[Merge 또는 반영]
-    G -->|아니오| W[대기]
 ```
 
 ## 원리
 
 ### 사람이 없으면 설정이 대신 답한다
 
-대화형 Session에서는 사람이 권한 질문에 답하고, 멈추고, 비용을 본다. Headless에서는 그 답을 **미리 적어 두어야** 한다.
+대화형 Session에서는 사람이 권한 질문에 답하고, 멈추고, 비용을 본다. Headless에서는 그 답을 **미리 적어 두어야** 한다. `dontAsk`는 물어야 할 호출을 전부 거부하고 허용 규칙에 걸린 것만 실행하므로 잠근 CI에 맞다. 규칙 `Bash(git diff *)`의 공백은 중요하다. 공백 없이 `Bash(git diff*)`라 쓰면 `git diff-index`도 맞는다.
 
 | 질문 | Claude Code | Codex |
 |---|---|---|
@@ -38,40 +37,32 @@ flowchart LR
 | 어디까지 닿나 | Cloud Environment의 네트워크 수준, `--strict-mcp-config` | Sandbox, Cloud의 Agent 단계 인터넷 설정 |
 | 얼마나 쓰나 | `--max-turns`, `--max-budget-usd`, `--model` | `--model`, Workflow `timeout-minutes` |
 
-`dontAsk`는 물어야 할 호출을 전부 거부하고, 허용 규칙에 걸린 것만 실행한다. 잠근 CI에 맞다. 규칙 `Bash(git diff *)`의 공백은 중요하다. 공백 없이 `Bash(git diff*)`라 쓰면 `git diff-index`도 맞는다.
-
 ### 재현 가능한 실행은 암묵적 설정을 싫어한다
 
 `claude -p`는 기본적으로 대화형과 같은 설정(CLAUDE.md, Hook, Skill, Plugin, `.mcp.json`)을 읽고, **신뢰 확인 없이** 저장소의 Hook과 MCP Server를 실행한다. `--bare`는 이 자동 탐색을 모두 건너뛰며 Script용으로 권장되고, 앞으로 `-p`의 기본값이 될 예정이다. 대신 필요한 것을 `--append-system-prompt-file`, `--mcp-config`, `--agents`, `--settings`로 **명시적으로** 넘긴다. 남이 올린 코드를 도는 CI일수록 이쪽이 안전하다.
 
 ## 적용: 이 저장소의 설정
 
-2026-09-29 현재 이 저장소에는 `.github/workflows/`도 `.claude/settings.json`도 없다. 대신 `.ai/HARNESS.md`가 두 가지를 요구한다.
+2026-09-29 현재 이 저장소에는 `.github/workflows/`도 `.claude/settings.json`도 없으므로 아래 설정은 "도입한다면"의 형태다(Model 이름은 예시, `<commit-sha>`는 검토한 Action Commit). 도입 전에 `.ai/HARNESS.md`가 요구하는 두 가지:
 
 - **비용이 드는 자동화**는 켜기 전에 제공자, 과금 단위, 예상 상한, 소유자 승인, 만료일을 기록한다. 하나라도 모르면 켜지 않고 로컬 검증으로 대신한다.
 - **실행 재현**: 나중에 인용될 결과에는 기준 Commit, 정확한 명령, 명령이 의존한 도구 Version을 남긴다.
-
-그래서 아래 설정은 "도입한다면"의 형태다. Model 이름은 예시이고, `<commit-sha>`는 검토한 Action Commit으로 고정한다.
 
 ### Headless 한 줄
 
 ```bash
 claude --bare -p "Summarize the failing tests in test.log" --allowedTools "Read" --output-format json --max-turns 5 --max-budget-usd 1.00
 codex exec --sandbox read-only --json -o summary.md "Summarize the failing tests in test.log"
-codex exec resume --last "Now propose a fix for the first failure"
 ```
 
-- Claude의 `--output-format`은 `text` · `json` · `stream-json`이다. `json` 결과에는 `result`, `session_id`, `total_cost_usd`가 들어 있고, `--json-schema`를 주면 `structured_output`으로 형식을 강제한다. 후속 질문은 `--resume <session_id>` 또는 `--continue`.
-- Codex의 `--json`은 이벤트를 JSONL로 흘리고, `-o`(`--output-last-message`)는 마지막 답만 파일로 쓴다. 구조화 출력은 `--output-schema <file>`. 오래된 글의 `--full-auto`는 2026-09 현재 main 소스의 공통 옵션에 보이지 않으니 `--sandbox`를 직접 쓴다.
-- `--dangerously-bypass-approvals-and-sandbox`(Codex)와 `bypassPermissions`(Claude)는 이미 격리된 일회용 Runner에서만 쓴다.
+- Claude의 `--output-format`은 `text` · `json` · `stream-json`이다. `json` 결과에는 `result`, `session_id`, `total_cost_usd`가 들어 있고, `--json-schema`를 주면 `structured_output`으로 형식을 강제한다. 후속 질문은 `--resume <session_id>` 또는 `--continue`, Codex는 `codex exec resume --last`.
+- Codex의 `--json`은 이벤트를 JSONL로 흘리고, `-o`(`--output-last-message`)는 마지막 답만 파일로 쓴다. 구조화 출력은 `--output-schema <file>`. 오래된 글의 `--full-auto`는 2026-09 현재 main 소스의 공통 옵션에 보이지 않으니 `--sandbox`를 직접 쓴다. `--dangerously-bypass-approvals-and-sandbox`(Codex)와 `bypassPermissions`(Claude)는 이미 격리된 일회용 Runner에서만 쓴다.
 
 ### GitHub Actions
 
 ```yaml
 name: agent-review
-on:
-  pull_request:
-    types: [opened, synchronize]
+on: pull_request
 permissions:
   contents: read
   pull-requests: read
@@ -141,8 +132,7 @@ Claude Code에서 Setup Script는 **VM 준비**(도구 설치), SessionStart Hoo
 ### 예약 실행
 
 - **Claude Routines**: 일정 · API · GitHub 이벤트로 Cloud Session을 띄운다. CLI에서는 `/schedule`. 최소 간격은 1시간이고, 개인 계정 소속이라 Commit과 댓글이 **내 이름**으로 남는다.
-- **GitHub `schedule`**: 기본 Branch에서만 돌고, 공개 저장소는 60일간 활동이 없으면 일정이 꺼진다.
-- 예약 Prompt가 "무엇을 만들지 결정하는" Skill을 부르면 안 된다. 이 저장소의 `auto-dev`가 스스로 시작하지 않는 이유다.
+- **GitHub `schedule`**: 기본 Branch에서만 돌고, 공개 저장소는 60일간 활동이 없으면 일정이 꺼진다. 예약 Prompt가 "무엇을 만들지 결정하는" Skill을 부르면 안 된다. 이 저장소의 `auto-dev`가 스스로 시작하지 않는 이유다.
 
 ### 비용 통제와 관측
 
@@ -151,7 +141,6 @@ Claude Code에서 Setup Script는 **VM 준비**(도구 설치), SessionStart Hoo
 | Model | `--model`, Subagent `model: haiku` | 단순 분류 · 탐색을 싼 Model로 |
 | 턴 · 예산 | `--max-turns`, `--max-budget-usd`(print 모드, Subagent 사용량 포함) | 폭주 차단 |
 | 시간 · 동시성 | `timeout-minutes`, `concurrency` | 중복 실행 · 무한 대기 차단 |
-| Context | `--bare`, 짧은 CLAUDE.md | 매 실행 고정 비용 감소 |
 | 기록 | JSON의 `total_cost_usd`, `/usage`, `CLAUDE_CODE_ENABLE_TELEMETRY=1`(OpenTelemetry), Codex `[otel]` | 추정 비용 · 이벤트 수집. 청구서의 정답은 Console |
 
 ### 문제 해결 체크리스트
@@ -164,8 +153,7 @@ Claude Code에서 Setup Script는 **VM 준비**(도구 설치), SessionStart Hoo
 | Hook이 안 돈다 | `/hooks` | 별도 파일에 정의(설정 파일의 `"hooks"` 키여야 함), `matcher`를 배열로 씀, `--bare`, Cloud에 없는 사용자 설정 |
 | Cloud Session이 시작 안 됨 | Setup 단계 Log | Script가 0이 아닌 값으로 끝남, 네트워크 None에서 설치 시도 |
 | 429 · 529 오류 | 오류 Reference, `/usage` | 동시 Subagent · Job 과다. 동시성 제한, `--fallback-model` |
-
-마지막 수단은 `claude doctor` · `/doctor`와 `codex doctor`다.
+| 어디부터 볼지 모르겠다 | `/doctor` · `claude doctor`, `codex doctor` | 설치 · 인증 · 설정 파일 오류 |
 
 ## 흔한 오해
 
@@ -173,24 +161,20 @@ Claude Code에서 Setup Script는 **VM 준비**(도구 설치), SessionStart Hoo
 - **"CI의 Agent는 Secret을 볼 수 없다."** 같은 Job의 모든 Step은 Job 수준 환경 변수를 읽을 수 있다. Key는 필요한 Step에만 준다.
 - **"Cloud 환경 변수는 비밀 저장소다."** Environment를 쓰는 사람이 모두 읽는다.
 - **"`--max-budget-usd`면 청구액이 확정된다."** Client 쪽 추정치다. 정답은 청구 Console이다.
-- **"예약해 두면 알아서 좋아진다."** 사람이 검토하지 않는 산출물은 쌓이기만 한다. 예약 실행도 PR로 끝내고 사람이 Merge한다.
 
 ## 자기 점검 질문
 
 1. `claude -p`와 `claude --bare -p`는 저장소의 Hook과 `.mcp.json`을 어떻게 다르게 다루는가?
-2. 잠근 CI에서 `dontAsk`와 `--allowedTools`를 함께 쓰는 이유는?
-3. Fork PR을 리뷰하는 Workflow에서 `pull_request_target`이 위험한 이유를 설명하라.
-4. Cloud Setup Script와 SessionStart Hook에 각각 무엇을 넣어야 하는가?
-5. 에이전트 실행 결과를 나중에 인용하려면 무엇을 함께 기록해야 하는가?
+2. Fork PR을 리뷰하는 Workflow에서 `pull_request_target`이 위험한 이유를 설명하라.
+3. Cloud Setup Script와 SessionStart Hook에 각각 무엇을 넣어야 하는가?
+4. 에이전트 실행 결과를 나중에 인용하려면 무엇을 함께 기록해야 하는가?
 
 ## 참고 자료
 
-- [Run Claude Code programmatically](https://code.claude.com/docs/en/headless) — Claude Code Docs, 접근일 2026-09-29
-- [CLI reference](https://code.claude.com/docs/en/cli-reference) — Claude Code Docs, 접근일 2026-09-29
+- [Run Claude Code programmatically](https://code.claude.com/docs/en/headless), [CLI reference](https://code.claude.com/docs/en/cli-reference) — Claude Code Docs, 접근일 2026-09-29
 - [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) — Claude Code Docs, 접근일 2026-09-29
 - [Claude Code GitHub Actions](https://code.claude.com/docs/en/github-actions) — Claude Code Docs, 접근일 2026-09-29
 - [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web), [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments), [Routines](https://code.claude.com/docs/en/routines) — Claude Code Docs, 접근일 2026-09-29
 - [Debug your configuration](https://code.claude.com/docs/en/debug-your-config), [Monitoring](https://code.claude.com/docs/en/monitoring-usage) — Claude Code Docs, 접근일 2026-09-29
-- [codex exec CLI 정의](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs) — OpenAI Codex 소스, 접근일 2026-09-29
-- [openai/codex-action](https://github.com/openai/codex-action) — GitHub, 접근일 2026-09-29
+- [codex exec CLI 정의](https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs), [openai/codex-action](https://github.com/openai/codex-action) — OpenAI GitHub, 접근일 2026-09-29
 - [Non-interactive mode](https://developers.openai.com/codex/noninteractive), [Cloud environments](https://developers.openai.com/codex/cloud/environments) — OpenAI Codex Docs, 검색 결과로 확인, 접근일 2026-09-29
