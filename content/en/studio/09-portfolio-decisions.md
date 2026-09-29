@@ -4,6 +4,8 @@
 
 Where document 02 gave the theory that "products are bets", this document is **the operating procedure for re-evaluating those bets every week and month**. Without measurement, a portfolio is managed by mood.
 
+As of: 2026-09-29.
+
 ## Key Concepts
 
 ### Leading and Lagging Indicators
@@ -82,7 +84,9 @@ A dashboard assumed at day 60 of document 10's 90-day plan. All numbers are assu
 | T1 pixel art editor | Paid beta | Trial to payment 11% | KRW 450,000 | 64 hours | KRW 7,031 |
 | C2 tech docs site | Ad approval | 6,200 monthly page views | KRW 30,000 | 24 hours | KRW 1,250 |
 | GM1 roguelike puzzle | Store page | 7 wishlists a day on average, 600 total | KRW 0 | 32 hours | KRW 0 |
-| P1 habit tracker | Launched, maintained | 40 weekly active users | KRW 0 | 4 hours | KRW 0 |
+| P1 habit tracker | Launched, maintenance only (shipped before G4, verdict at D90) | 40 weekly active users | KRW 0 | 4 hours | KRW 0 |
+
+C2's KRW 30,000 covers about 30 days of live ads, so its measured Page RPM is 30,000 ÷ 6,200 × 1,000 ≈ KRW 4,839. That is higher than 05's assumed KRW 3,000, so recompute 05's table with this measured value (step 3 of 05's applied section). C2's monthly pageviews grew 24%, from 5,000 at D0 to 6,200.
 
 By realized revenue per hour alone, all fall short of KRW 21,875. These are early products, so look at expected value per hour too.
 
@@ -104,8 +108,11 @@ By realized revenue per hour alone, all fall short of KRW 21,875. These are earl
 | T1 | Trial to payment under 3% or fewer than 10 paying users | 3-10% | 10% or more and monthly net revenue KRW 400,000 or more → add 4 hours a week |
 | C2 | Under 3,000 monthly page views at day 90 | 3,000-10,000 | 10,000 or more → double the publishing pace |
 | GM1 | Under 500 total wishlists at day 90 | 500-1,500 | 1,500 or more → start Next Fest preparation |
+| P1 | Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive | Maintenance only, 1 hour a week, until the verdict | G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter's triage |
 
-Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2 and GM1 await their day-90 verdict.
+P1 shipped before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10's applied section). The criteria do not change before the verdict.
+
+Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2, GM1 and P1 await their day-90 verdict. P1's 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.
 
 ## Going Deeper
 
@@ -116,6 +123,12 @@ Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 45
 | Weekly (Monday) | 30 minutes | Record one primary metric per product, check this week's hour allocation, one blocker |
 | Monthly (first day of cooldown) | 2 hours | Gate verdicts, reallocate hours, recompute runway, review the decision journal |
 | Quarterly (90 days) | Half a day | Re-evaluate the whole portfolio, choose new bets (document 10) |
+
+Hour-logging rules (assumption). Hours are the denominator of realized revenue per hour, so settle them before the review.
+
+- Tool and format: one spreadsheet or a time-tracking app. Each row holds the date, a code, the hours and a one-line note.
+- Granularity and codes: log in 30-minute units, using only product codes (T1, C2, GM1, P1, P2) and shared codes (distribution, management).
+- What counts: only hours a person actually spent. Work for a single product (building, support, that product's marketing) goes to its product code; work spanning several products goes to a shared code. Time an agent ran alone does not count; time spent instructing and reviewing it does.
 
 ### Decision Journal
 
@@ -144,7 +157,7 @@ A bad outcome does not mean a bad decision. The journal **separates luck from ju
 1. Write one leading and one lagging indicator for one of your products, and explain how you would verify the link between them.
 2. What is the realized revenue per hour of a product with KRW 300,000 net revenue and 20 hours invested in the last 30 days? Compare it with the required KRW 21,875.
 3. A product has a 40% chance of KRW 10 million and a 60% chance of KRW 1 million and needs 200 hours. What is its expected value per hour?
-4. Translate Stage-Gate's four decisions into a solo studio's words and write when each is used.
+4. Give each of T1, C2, GM1 and P1 on the day-60 dashboard one of double down, kill, hold or rework (Go, Kill, Hold, Recycle), and write the number behind each. When would the decisions this dashboard does not use be the right call?
 5. Write your own product's kill criterion as one sentence in the "states and dates" form.
 
 ## References

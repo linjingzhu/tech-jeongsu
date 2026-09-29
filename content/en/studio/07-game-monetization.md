@@ -4,6 +4,8 @@
 
 Games are the highest-variance asset in a solo studio's portfolio: in document 02's terms, the aggressive end of the barbell. This document covers how to shrink that bet to a size you can calculate.
 
+As of: 2026-09-29.
+
 ## Key Concepts
 
 | Model | Who pays | Key metrics | Fit for a solo developer |
@@ -64,11 +66,13 @@ The example studio (assumption) has three game prototypes: GM1 roguelike puzzle 
 ```text
 Assumed average net unit price after VAT, refunds, regional prices and discounts: $7
 After Valve's 30% → 7 × 0.7 = $4.90 → KRW 6,860 at KRW 1,400
-Launch wishlists 3,000 × first week 15% (heuristic) = 450 units
-First-week revenue = 450 × 4.90 = $2,205 ≈ KRW 3.087 million
+Launch wishlists 1,500 (the D90 double-down bar in 09 and 10) × first week 15% (heuristic) = 225 units
+First-week revenue = 225 × 4.90 = $1,102.5 ≈ KRW 1.544 million (KRW 1,543,500)
 To earn KRW 3.5 million in the first week: 3,500,000 ÷ 6,860 = 510.2 → 511 units
 Wishlists needed = 511 ÷ 0.15 = 3,406.7 → about 3,407
 ```
+
+1,500 is the double-down bar for starting Next Fest preparation, not a launch target. Launching straight at 1,500 would bring first-week revenue of only about 44% of one month's burn (1.544 ÷ 3.5). So GM1's plan is to gather about 3,400 or more wishlists through Next Fest and launch after that.
 
 **If GM2 runs ad-supported (all assumptions)**
 
@@ -102,7 +106,7 @@ Good example:
 | Duty | Detail | What it means for a solo developer |
 |---|---|---|
 | Age rating | A game must be rated before distribution (Game Industry Promotion Act Article 21). Platforms designated as self-rating operators, such as Google and Apple, handle it through a store questionnaire | On mobile stores this often ends with the questionnaire |
-| Steam and other non-designated platforms | As of July 2024 reports, Valve was only considering designation as a self-rating operator | PC games rated All, 12+ or 15+ apply to the Game Contents Rating Board (GCRB), adults-only to the Game Rating and Administration Committee (GRAC). The fee table lists KRW 360,000 for PC, and a game production business registration certificate is required |
+| Steam and other non-designated platforms | As of 2026-09, no announcement of Valve's designation as a self-rating operator could be confirmed (latest report 2024-07, designation under consideration) | PC games rated All, 12+ or 15+ apply to the Game Contents Rating Board (GCRB), adults-only to the Game Rating and Administration Committee (GRAC). Fee = base amount per platform (PC KRW 360,000) × usage factor (networked 1.5, non-networked 1.0) × genre factor (group 1: 4.0, group 2: 2.0, group 3: 1.0) × localization factor (Korean 1.0, not Korean 1.5). Example: a Korean-language, non-networked group-3 PC game KRW 360,000; a Korean-language, networked group-1 game KRW 2,160,000. A game production business registration certificate is required |
 | Loot box probability disclosure | From 2024-03-22, a duty to display item types and probabilities (Enforcement Decree amendment) | If you add gacha or random boxes, show the odds in the game and on the website |
 | Damages for disclosure violations | In force from 2025-08-01: up to three times the damages for intentional violations, and the company must prove it was not at fault | Loot boxes carry large legal risk for one person |
 
@@ -118,11 +122,11 @@ Good example:
 
 ## Self-Check Questions
 
-1. For premium, F2P and ad-supported games, who pays and which metrics are central?
+1. GM2 (hyper-casual, mobile) must run as premium, F2P or ad-supported. For each model, write one key metric to track in the first month and the operating load the model demands, then pick the one that fits a solo studio with 160 hours a month.
 2. With a net unit price of $4.90 and 15% first-week conversion, how many wishlists does KRW 5 million in first-week revenue need? (KRW 1,400 per dollar)
 3. What does a mobile game with 22% D1 need to hold its DAU?
 4. Which rating path must a Korean solo developer releasing a PC game on Steam take?
-5. What duties arrived in 2024 and in 2025 for games with loot boxes?
+5. You decide to add random boxes to GM2. What must be ready in the game and on the website before launch, and what damages risk does a solo developer carry if the displayed odds are wrong?
 
 ## References
 

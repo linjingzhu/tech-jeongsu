@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Advertising Revenue in Depth | MyAI</title>
-    <meta name="description" content="As of: 2026-09-28. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
+    <meta name="description" content="As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/05-ad-revenue/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/05-ad-revenue/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI" />
     <meta property="og:title" content="Advertising Revenue in Depth | MyAI" />
-    <meta property="og:description" content="As of: 2026-09-28. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
+    <meta property="og:description" content="As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/05-ad-revenue/" />
     <meta property="og:locale" content="en_US" />
     <meta name="site-root" content="../../../" />
@@ -106,7 +106,7 @@
 <blockquote>
 <p><strong>Learning goal</strong>: Explain how ad revenue is built from impressions, CTR, CPC, CPM, RPM and fill rate, compute the pageviews a target amount needs, and tell apart what raises RPM from what loses you the account.</p>
 </blockquote>
-<p>As of: 2026-09-28. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide assumption of USD 1 = KRW 1,400 (the Seoul FX market close on 2026-09-09 was KRW 1,336.1).</p>
+<p>As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide assumption of USD 1 = KRW 1,400 (the Seoul FX market close on 2026-09-09 was KRW 1,336.1).</p>
 <h2>Key Concepts</h2>
 <table>
 <thead>
@@ -281,7 +281,7 @@
 </tbody></table>
 <p>How ads fit into a game&#39;s economy design is covered in 07.</p>
 <h2>Applied: The Example Studio</h2>
-<p>Assuming the technical documentation site preparing for AdSense currently gets 20,000 pageviews a month:</p>
+<p>Assuming the technical documentation site C2, preparing for AdSense, gets 5,000 pageviews a month at the plan&#39;s start (D0 in 10, 2026-10-05) (6,200 on 09&#39;s day-60 dashboard):</p>
 <table>
 <thead>
 <tr>
@@ -292,26 +292,27 @@
 </thead>
 <tbody><tr>
 <td>Monthly ad earnings at an RPM of KRW 3,000</td>
-<td>20,000 × 3,000 ÷ 1,000</td>
-<td>KRW 60,000</td>
+<td>5,000 × 3,000 ÷ 1,000</td>
+<td>KRW 15,000</td>
 </tr>
 <tr>
 <td>Multiple needed to reach the KRW 500,000 fixed cost</td>
-<td>166,667 ÷ 20,000</td>
-<td>about 8.3x</td>
+<td>166,667 ÷ 5,000</td>
+<td>about 33.3x</td>
 </tr>
 <tr>
 <td>Multiple needed to reach KRW 3,500,000 break-even</td>
-<td>1,166,667 ÷ 20,000</td>
-<td>about 58.3x</td>
+<td>1,166,667 ÷ 5,000</td>
+<td>about 233.3x</td>
 </tr>
 </tbody></table>
+<p>The D90 gate in 10 (double down at 10,000 or more, kill under 3,000) sets the double-down line at twice this baseline and the kill line at 60% of it.</p>
 <p>Conclusion: ads alone are unlikely to support the studio from this site. Its role is <strong>to earn a floor of ad revenue and to be the path through which the studio&#39;s other products are discovered</strong>. Order of work (assumption):</p>
 <ol>
 <li>Approval prep: merge or strengthen thin pages, and check navigation, the privacy policy and cookie notice.</li>
 <li>Ad placement: reserve slot sizes to prevent CLS, and start with few ads per page.</li>
 <li>Measurement: after four to eight weeks, recompute the table above with the real Page RPM (09).</li>
-<li>Linking: from each document, link to the related tool product (the combination example in 04).</li>
+<li>Linking: from each document, link to the related tool product and to the studio list sign-up (the combination example in 04, the shared audience in 02&#39;s Going Deeper).</li>
 </ol>
 <h2>Going Deeper</h2>
 <h3>Ad Management Companies Beyond AdSense</h3>

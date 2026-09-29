@@ -4,6 +4,8 @@
 
 This document adds no new theory. It is practice in using the earlier documents' tools **in order, in one pass**. All numbers are illustrative assumptions; sources for fees and benchmarks are in the relevant documents.
 
+As of: 2026-09-29.
+
 ## Key Concepts
 
 Starting point (assumption, the example studio from document 01):
@@ -15,8 +17,9 @@ Starting point (assumption, the example studio from document 01):
 | Money needed per month | Living costs KRW 3.0M + fixed costs KRW 0.5M = KRW 3.5M |
 | Operating funds | KRW 18M |
 | Runway | 1,800 ÷ 350 = 5.14 → about 5.1 months |
-| Prototypes | 12: 3 games, 4 creative tools, 3 productivity apps, 2 content sites |
-| Current revenue | 1 launched (P1), KRW 0 a month |
+| Prototypes | 12 (including the launched P1): 3 games, 4 creative tools, 3 productivity apps, 2 content sites |
+| Current revenue | 1 launched (P1, a productivity app), KRW 0 a month |
+| C2 traffic | 5,000 pageviews a month at D0 (05) |
 
 The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 bets (02) (3) allocate hours totaling 160 (01, 08) (4) validation experiments and thresholds (03, 09) (5) launch schedule (08) (6) revenue scenarios and runway (01, 04-07) (7) day 30, 60 and 90 checkpoints (09).
 
@@ -30,7 +33,7 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
   - R reach: is there already a channel to bring the first 100 users (08)
   - F fit: skills, interest, existing assets
 - **Tie-break rule**: on equal scores, pick **the one that adds more model diversity to the portfolio** (document 02's barbell).
-- **WIP limit**: following document 02's recommended starting point, at most two in building (T1, C2) and two in validation (GM1's store page, P2's fake door).
+- **WIP limit**: following document 02's recommended starting point, at most two in building (T1, C2) and two in validation (GM1's store page, P2's fake door). The operating P1 comes on top (02's operating slot).
 
 ## Applied: The Example Studio
 
@@ -43,7 +46,7 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 | GM1 | Roguelike puzzle (PC) | 3 | 4 | 2 | 3 | 5 | 17 | Small bet (wishlists) |
 | P2 | Freelancer quote generator | 4 | 4 | 3 | 3 | 3 | 17 | Validate: one fake door |
 | T3 | Font pairing tool | 2 | 2 | 5 | 3 | 2 | 14 | Archive |
-| P1 | Habit tracker (launched) | 2 | 2 | 5 | 2 | 3 | 14 | Maintenance only |
+| P1 | Habit tracker (launched) | 2 | 2 | 5 | 2 | 3 | 14 | Maintenance only, verdict at D90 |
 | T2 | Music sketch tool | 3 | 3 | 2 | 2 | 3 | 13 | Archive |
 | T4 | Video subtitle editor | 3 | 3 | 2 | 2 | 3 | 13 | Archive |
 | GM3 | Narrative adventure (PC) | 2 | 3 | 1 | 2 | 4 | 12 | Archive |
@@ -52,7 +55,9 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 | P3 | Budgeting app | 2 | 2 | 3 | 2 | 2 | 11 | Archive |
 
 - GM1 and P2 tie at 17. P2 uses the same "sell a tool on the web" model as T1, while GM1 adds a different model, a premium game. By the tie-break rule, GM1 gets 32 hours a month and is validated through a Steam store page, while P2 gets only a 4-hour-a-month fake door validation.
-- Document 02's default allocation gives 32 hours to operating the launched product, but P1 scores 14, so it gets 4 hours of maintenance and the rest goes to the bets.
+- **P1 and the G4 gate**: P1 shipped before G4 in 02 (60 days after launch: monthly net revenue of KRW 100,000 or more, or 100 weekly active users) existed, so it had no criteria set in advance. With KRW 0 revenue it already misses G4's revenue bar, but inventing criteria after seeing the result and ruling at once would also be judging after the fact. So at D0 the first date and state are written with **the same numbers** as G4: "At D90 (2027-01-03), if P1 has fewer than 100 weekly active users and under KRW 100,000 monthly net revenue, archive it and move its 4 maintenance hours to T1." Until then it gets only 4 hours of maintenance, and the criterion does not change again (the decision-rule table in 09).
+- **How P2 is validated**: 02 and 03 validate a productivity app candidate with interviews first (G1). P2 passed G1 last quarter when 4 of 5 interviewees said they had faced the problem recently (the basis of its D score of 4, assumption), so this quarter measures G2 with a fake door waitlist page. The method did not change; the gate moved one step forward.
+- The 7 archived prototypes (games GM2 and GM3, creative tools T2, T3 and T4, productivity app P3, content site C1) match 02's archive. 1 operating + 2 building + 2 validating + 7 archived = 12.
 - **Archive** is not deletion. The repository stays; only the time allocation goes to zero. It re-enters next quarter's triage.
 
 ### Steps 2-3: Bets and Hour Allocation
@@ -68,6 +73,16 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 | P1 maintenance | 1 hour | 4 hours | 2.5% |
 | Total | 40 hours | 160 hours | 100% |
 
+**Deviations from 02's default allocation** (02's table is the default)
+
+| 02 area | 02 default | This plan | Difference | Reason |
+|---|---|---|---|---|
+| Operate | 32 | 20 (shared distribution 16 + P1 4) | −12 | P1 is on maintenance only until its D90 verdict. What the 16 hours of shared distribution contain is in the table in 02's Going Deeper |
+| Build | 80 | 88 (T1 64 + C2 24) | +8 | T1 is the main bet, so 16 hours a week (08's 60-hour appetite in about 4 weeks) |
+| Validate | 24 | 36 (GM1 32 + P2 4) | +12 | By the tie-break rule, 32 hours go to GM1's store page and demo. P2 passed G1, so only 4 hours of fake door |
+| Manage | 24 | 16 (operations and reviews) | −8 | Only bookkeeping and the weekly and monthly reviews (09) remain; learning time is zero this quarter |
+| Total | 160 | 160 | 0 | |
+
 ### Step 4: Validation Experiments and Thresholds
 
 | Product | Experiment | Window | Double down or pass | Kill or rework |
@@ -76,7 +91,7 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 | T1 | Paid beta trial to payment | D42-D60 | 10% or more (document 09 rule) | Under 3% |
 | C2 | AdSense application, two articles a week | D7-D90 | 10,000 or more monthly page views at D90 | Under 3,000 |
 | GM1 | Steam store page goes live | D21-D90 | 1,500 or more total wishlists at D90 | Under 500 |
-| P2 | Fake door landing via community posts | D14-D28 | 10% or more of 300 visitors sign up → building candidate for next quarter | Below the bar → archive |
+| P2 | Fake door landing via community posts | D14-D28 | 10% or more of 300 visitors sign up (document 02's G2 gate) → building candidate for next quarter | Below the bar → archive |
 
 ### Step 5: Launch Schedule (D0 = Monday 2026-10-05)
 
@@ -124,9 +139,10 @@ Monthly net revenue (after fees) is assumed in units of KRW 10,000, and from mon
 |---|---|---|---|
 | D30 (11-04) | Is T1's waitlist filling, and what did P2's fake door show | T1 sign-up 10% or more, or 5 or more early-bird payments | Rework T1's message and price; the paid beta may slip one week (the date moves only once) |
 | D60 (12-04) | Are people paying | T1 trial to payment 10% or more, 30-day net revenue KRW 400,000 or more | 3-10% means continue; under 3% means consider killing T1 and make P2 the next bet candidate |
-| D90 (01-03) | Which scenario are we in | Base or better (month-3 net revenue KRW 800,000 or more) | If pessimistic, cut burn at once: shift 80 hours a month to contract income and shrink the bets to T1 alone |
+| D90 (01-03) | Which scenario are we in | Base or better (month-3 net revenue KRW 800,000 or more) | If rule R1 in Going Deeper fires (balance under KRW 7M or net revenue under KRW 300,000), shift 80 hours a month to contract work and shrink the bets to T1 alone |
 
 - If GM1 has 1,500 or more wishlists at D90, decide on joining the February 2027 Next Fest before its registration deadline (2027-01-10) (document 07). If it misses the bar, archive GM1.
+- At D90, P1 is judged by the rule written in step 1 (fewer than 100 weekly active users and under KRW 100,000 monthly net revenue → archive, its 4 hours go to T1).
 - Record every verdict in document 09's decision journal.
 
 Bad example:
@@ -144,6 +160,37 @@ Good example:
 - **The pessimistic scenario** is a default-dead signal. **Cutting burn is faster than raising revenue**. Reducing monthly net burn with certain income such as contract work or teaching extends the runway again.
 - **When numbers hover ambiguously near a bar**: follow the pre-set rule and "continue", running only the one experiment most likely to move the primary metric before the next gate.
 - **When a new idea appears**: write it on the archive list and let it compete on the same scoring table in next quarter's triage. Do not raise WIP mid-quarter.
+
+### Rules for Switching to Contract Work or a Job
+
+Write the studio-wide stop lines in advance too, in 09's "states and dates" form. All numbers are assumptions and taxes are left out (contract income is pre-tax).
+
+| Rule | When checked | State | Action |
+|---|---|---|---|
+| R1 switch to contract work | D90 (2027-01-03), then the first of every month | Balance < KRW 7M (two months of burn) or previous month's net revenue < KRW 300,000 | From the next month, 80 hours a month of contract work (assumed KRW 50,000 an hour = KRW 4M a month, the same rate as 04's service model). Product hours drop to 80, and T1 is the only bet |
+| R2 switch to full-time | Every Monday review (09) | Balance < KRW 3.5M (one month of burn) | Full-time contract or a job. Products are archived or kept on 4 hours a week of maintenance |
+| Scale contract work down | The first of every month | Product net revenue of KRW 1.75M (half the burn) or more for two months in a row | Cut contract work to 40 hours a month |
+
+Applying R1 to the scenarios in step 6 (KRW 10,000 units, contract rate KRW 50,000 an hour, product net revenue assumed to stay at the month-3 level during contract work):
+
+| Scenario | Balance at D90 | Month-3 net revenue | R1 | Monthly net burn after | Result |
+|---|---|---|---|---|---|
+| No revenue | 750 | 0 | Fires (revenue) | 350 − 0 − 400 = −50 | 50 surplus a month, no burn |
+| Pessimistic | 740 | 10 | Fires (revenue) | 350 − 10 − 400 = −60 | 60 surplus a month, no burn |
+| Base | 840 | 80 | Does not fire | 270 | Balance 570 < 700 at the start of month 5 → fires then (if revenue does not grow) |
+| Optimistic | 970 | 180 | Does not fire | 170 | Balance 630 < 700 at the start of month 6 → fires then (if revenue does not grow) |
+
+If the contract rate is lower than assumed (no-revenue scenario, balance KRW 7.5M at D90):
+
+| Contract rate | Monthly contract income | Monthly net burn | Runway |
+|---|---|---|---|
+| KRW 50,000 | KRW 4.0M | −KRW 0.5M | No burn |
+| KRW 40,000 | KRW 3.2M | KRW 0.3M | 750 ÷ 30 = 25 months |
+| KRW 30,000 | KRW 2.4M | KRW 1.1M | 750 ÷ 110 ≈ 6.8 months |
+
+- If the first payment arrives a month late (common with contract work), month 4 brings no income and month 5 starts at 750 − 350 = KRW 4M. That is only KRW 0.5M above the R2 line (KRW 3.5M), so if D60 already shows a miss on the base scenario, start looking for contract work early.
+- With no contract work and still no revenue, the balance reaches about KRW 3.3M (750 − 36 days × 350 ÷ 30) at D126 (2027-02-08, a Monday review), and R2 fires.
+- Contract work halves the product hours. This rule is not giving up on the studio; it rebuilds the safe end of 02's barbell.
 
 ## Common Misconceptions
 

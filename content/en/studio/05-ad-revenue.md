@@ -2,7 +2,7 @@
 
 > **Learning goal**: Explain how ad revenue is built from impressions, CTR, CPC, CPM, RPM and fill rate, compute the pageviews a target amount needs, and tell apart what raises RPM from what loses you the account.
 
-As of: 2026-09-28. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide assumption of USD 1 = KRW 1,400 (the Seoul FX market close on 2026-09-09 was KRW 1,336.1).
+As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide assumption of USD 1 = KRW 1,400 (the Seoul FX market close on 2026-09-09 was KRW 1,336.1).
 
 ## Key Concepts
 
@@ -96,20 +96,22 @@ How ads fit into a game's economy design is covered in 07.
 
 ## Applied: The Example Studio
 
-Assuming the technical documentation site preparing for AdSense currently gets 20,000 pageviews a month:
+Assuming the technical documentation site C2, preparing for AdSense, gets 5,000 pageviews a month at the plan's start (D0 in 10, 2026-10-05) (6,200 on 09's day-60 dashboard):
 
 | Item | Calculation | Result |
 |---|---|---|
-| Monthly ad earnings at an RPM of KRW 3,000 | 20,000 × 3,000 ÷ 1,000 | KRW 60,000 |
-| Multiple needed to reach the KRW 500,000 fixed cost | 166,667 ÷ 20,000 | about 8.3x |
-| Multiple needed to reach KRW 3,500,000 break-even | 1,166,667 ÷ 20,000 | about 58.3x |
+| Monthly ad earnings at an RPM of KRW 3,000 | 5,000 × 3,000 ÷ 1,000 | KRW 15,000 |
+| Multiple needed to reach the KRW 500,000 fixed cost | 166,667 ÷ 5,000 | about 33.3x |
+| Multiple needed to reach KRW 3,500,000 break-even | 1,166,667 ÷ 5,000 | about 233.3x |
+
+The D90 gate in 10 (double down at 10,000 or more, kill under 3,000) sets the double-down line at twice this baseline and the kill line at 60% of it.
 
 Conclusion: ads alone are unlikely to support the studio from this site. Its role is **to earn a floor of ad revenue and to be the path through which the studio's other products are discovered**. Order of work (assumption):
 
 1. Approval prep: merge or strengthen thin pages, and check navigation, the privacy policy and cookie notice.
 2. Ad placement: reserve slot sizes to prevent CLS, and start with few ads per page.
 3. Measurement: after four to eight weeks, recompute the table above with the real Page RPM (09).
-4. Linking: from each document, link to the related tool product (the combination example in 04).
+4. Linking: from each document, link to the related tool product and to the studio list sign-up (the combination example in 04, the shared audience in 02's Going Deeper).
 
 ## Going Deeper
 

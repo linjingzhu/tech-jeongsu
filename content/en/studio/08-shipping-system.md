@@ -4,6 +4,8 @@
 
 AI agents made building faster, but **shipping does not get faster on its own**. That is why the example studio (assumption) has twelve prototypes and one launch. Shipping is made by a system, not by willpower.
 
+As of: 2026-09-29.
+
 ## Key Concepts
 
 ### Five Reasons Prototypes Never Ship
@@ -129,7 +131,7 @@ Build the pipeline following the Platform track's "CI/CD Pipeline: From Commit t
 1. Pick which of the five causes kept one of your prototypes from shipping, and write down the system that would prevent it.
 2. With an 80-hour appetite, what is the most time Must can take under DSDM guidance?
 3. How does an appetite differ from an estimate?
-4. With an 8-week cycle, how many launch opportunities are there in a year, and what happens during cooldown?
+4. If the example studio used a 5-week cycle (4 weeks + 1-week cooldown) instead of the 8-week cycle (6 weeks + 2-week cooldown), how many launch chances would it have in a year? Considering the 30-day post-launch routine and the cooldown work (bug fixes, gate reviews, the next bet), argue which one fits this studio.
 5. Why should you not start a new prototype during the 30 days after launch?
 
 ## References

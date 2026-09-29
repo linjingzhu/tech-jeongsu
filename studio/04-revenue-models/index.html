@@ -104,9 +104,9 @@
       <div id="breadcrumb" aria-label="현재 문서"><span>1인 스튜디오 수익화</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>수익 모델 개론</span></div>
       <article id="content" aria-busy="false" data-prerendered="true"><h1>수익 모델 개론</h1>
 <blockquote>
-<p><strong>학습 목표</strong>: 9가지 수익 모델이 각각 무엇을 필요로 하는지 구분하고, 제품 유형별 적합도와 모델별 단위 경제를 계산하며, 2026-09-28 기준 주요 플랫폼·결제 수수료를 출처와 함께 읽을 수 있다.</p>
+<p><strong>학습 목표</strong>: 9가지 수익 모델이 각각 무엇을 필요로 하는지 구분하고, 제품 유형별 적합도와 모델별 단위 경제를 계산하며, 2026-09-29 기준 주요 플랫폼·결제 수수료를 출처와 함께 읽을 수 있다.</p>
 </blockquote>
-<p>기준일: 2026-09-28. 수수료는 자주 바뀌므로 실행 전에 표의 공식 문서를 다시 확인한다. 예시 숫자는 모두 가정이며 세금은 뺐다.</p>
+<p>기준일: 2026-09-29. 수수료는 자주 바뀌므로 실행 전에 표의 공식 문서를 다시 확인한다. 예시 숫자는 모두 가정이며 세금은 뺐다.</p>
 <h2>핵심 개념</h2>
 <table>
 <thead>
@@ -396,7 +396,7 @@
 </tr>
 </tbody></table>
 <p>구독의 가치는 월 매출보다 <strong>LTV</strong>로 본다. 월 해지율 8%(가정)라면 LTV ≈ 4,250 ÷ 0.08 = <strong>53,125원</strong>이다. 해지율 계산과 가격 설계는 06에서 깊이 다룬다.</p>
-<h3>플랫폼·결제 수수료 (기준 2026-09-28)</h3>
+<h3>플랫폼·결제 수수료 (기준 2026-09-29)</h3>
 <table>
 <thead>
 <tr>
@@ -408,17 +408,17 @@
 <tbody><tr>
 <td>Apple App Store</td>
 <td>표준 30%, Small Business Program 15%</td>
-<td>전년도 proceeds 100만 달러 이하 개발자·신규 개발자가 신청. 1년 넘게 유지된 자동 갱신 구독은 15%. 한국 제3자 결제(26%), EU, 미국 외부 링크 등 지역 예외는 06</td>
+<td>전년도 proceeds 100만 달러 이하 개발자·신규 개발자가 신청. 1년 넘게 유지된 자동 갱신 구독은 15%. 한국 제3자 결제 수수료는 26% (06). EU·미국의 외부 링크 규정은 이 트랙에서 다루지 않으므로 Apple 문서에서 직접 확인한다</td>
 </tr>
 <tr>
 <td>Google Play (한국, 현행)</td>
-<td>연 첫 100만 달러 15% (신청 필요), 초과분 30%, 자동 갱신 구독 15%</td>
-<td>2026-03-04 발표한 새 구조는 한국에 2026-12-31까지 적용 예정 (보도)</td>
+<td>연 첫 100만 달러 15% (신청 필요), 초과분 30%, 자동 갱신 구독 15%. 한국 대체 결제(개발자 자체 결제)를 쓰면 4%p 낮아져 11% (15% 구간)·26% (30% 구간)</td>
+<td>대체 결제 요율은 Play Console 도움말 기준. 2026-03-04 발표한 새 구조는 한국에 2026-12-31까지 적용 예정 (보도)</td>
 </tr>
 <tr>
 <td>Google Play (미국·영국·EEA, 2026-06-30부터)</td>
-<td>서비스 수수료: 첫 100만 달러와 자동 갱신 구독 10%, 프로그램 참여 시 비반복 상품 신규 설치 15%·기존 설치 20%. Google Play 결제를 쓰면 결제 수수료 5% 별도</td>
-<td>호주 2026-09-30, 일본·한국 2026-12-31, 그 외 2027-09-30까지 순차 적용 (보도)</td>
+<td>서비스 수수료: 연 첫 100만 달러와 자동 갱신 구독 10%. 100만 달러 초과분의 비반복 상품은 Apps Experience Program 참여 시 신규 설치 15%·기존 설치 20%, 비참여 시 20%·25%. Google Play 결제를 쓰면 결제 수수료 5% 별도</td>
+<td>프로그램 신청은 2026-09부터 Play Console에서. 호주 2026-09-30, 일본·한국 2026-12-31, 그 외 2027-09-30까지 순차 적용 (보도)</td>
 </tr>
 <tr>
 <td>Steam</td>
@@ -443,7 +443,12 @@
 <tr>
 <td>Lemon Squeezy (MoR)</td>
 <td>5% + 50센트, 해외 결제·PayPal·구독 등 추가 요율</td>
-<td>2024년 Stripe가 인수</td>
+<td>2024년 Stripe가 인수, Stripe Managed Payments로 이전 중. 신규 가입: 대기자 명단·초대제라는 보도 (2026-09 기준, 공식 확인 안 됨). 새로 시작한다면 Paddle 또는 Gumroad</td>
+</tr>
+<tr>
+<td>Stripe Managed Payments (MoR)</td>
+<td>Stripe 결제 수수료 + 거래당 3.5%</td>
+<td>약 35개국 판매자 대상, 대기자 명단으로 접근 (2026 보도). 한국 판매자 이용 가능 여부 확인 안 됨</td>
 </tr>
 <tr>
 <td>Gumroad</td>
@@ -501,13 +506,146 @@
 <h2>심화</h2>
 <h3>모델을 섞을 때의 비용</h3>
 <p>모델을 하나 더할 때마다 결제 연동, 환불 정책, 약관, 측정 지표가 하나씩 늘어난다. 1인 스튜디오에서는 <strong>제품당 주 모델 1개 + 보조 모델 최대 1개</strong>를 출발점으로 삼는다.</p>
+<p><strong>보조 모델을 더하는 규칙</strong>: 주 모델이 02의 G4(출시 60일: 월 순매출 10만 원 이상 또는 주간 활성 100명)를 통과하기 전에는 보조 모델을 붙이지 않는다. 주 모델이 신호를 내기 전에 모델을 더하면 어느 쪽이 효과를 냈는지 가를 수 없고, 결제·약관·지표 작업만 두 배가 된다. 통과한 뒤에도 03처럼 보조 모델의 임계값과 기간을 먼저 적고, 보조 모델이 주 모델의 핵심 지표(예: 체험 → 결제)를 떨어뜨리면 걷어 낸다. 예: T1은 일회성 판매가 G4를 통과한 뒤에만 구독형 에셋 팩을 시험한다. C2의 주 모델은 광고이며, C2에서 T1로 가는 링크는 수익 모델이 아니라 유통이다 (02 심화).</p>
+<h3>MoR과 직접 PG의 손익분기</h3>
+<p>&quot;MoR은 비싸다&quot;는 수수료만 보면 맞지만, 세무 시간까지 넣으면 판매량에 따라 답이 바뀐다. 06의 해외 일회성 판매($29, 1,400원 환율 가정 = 40,600원)로 계산한다. 모든 숫자는 가정이다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>Paddle (MoR)</th>
+<th>직접 PG (토스페이먼츠 3.4% 가정)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>건당 수수료</td>
+<td>$29 × 5% + $0.50 = $1.95 = 2,730원</td>
+<td>40,600 × 3.4% ≈ 1,380원</td>
+</tr>
+<tr>
+<td>해외 세무</td>
+<td>Paddle이 판매자로서 계산·징수·신고</td>
+<td>직접 한다. EU 소비자에게 파는 디지털 상품은 EU 밖 사업자도 첫 판매부터 EU 부가세 의무가 생기며, non-Union OSS로 한 나라에 모아 신고할 수 있다. 다른 나라는 나라마다 따로 확인</td>
+</tr>
+<tr>
+<td>월 고정 비용</td>
+<td>0</td>
+<td>세무 작업 월 4시간 × 21,875원 = 87,500원 + 연 관리비 11만 원 ÷ 12 ≈ 9,167원 = 약 96,667원</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>건당 차이 = 2,730 − 1,380.4 = 1,349.6원 → 손익분기 판매량 = 96,667 ÷ 1,349.6 ≈ <strong>월 72건</strong> (총매출 약 291만 원)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>월 세무 시간 (가정)</th>
+<th>월 고정 비용</th>
+<th>MoR이 더 싼 구간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2시간</td>
+<td>약 52,917원</td>
+<td>월 39건 이하</td>
+</tr>
+<tr>
+<td>4시간</td>
+<td>약 96,667원</td>
+<td>월 71건 이하</td>
+</tr>
+<tr>
+<td>8시간</td>
+<td>약 184,167원</td>
+<td>월 136건 이하</td>
+</tr>
+</tbody></table>
+<ul>
+<li>읽는 법: T1의 60일째 순매출 45만 원(09)은 06의 $29 판매로 환산하면 월 약 12건(450,000 ÷ 37,870)이다. 손익분기보다 훨씬 아래이므로 예시 스튜디오에는 MoR이 싸다.</li>
+<li>빠진 것: PG 가입비 22만 원, 세무사 비용, 차지백·사기 대응 시간, 국내 부가세 신고(두 경로 모두 필요). 해외 카드 결제 요율은 계약마다 다르며 3.4%보다 높을 수 있다 (확인 필요). 요율이 높을수록 손익분기 판매량이 올라가 MoR이 더 오래 유리하다.</li>
+</ul>
+<h3>모델·채널·플랫폼 상관관계 점검</h3>
+<p>02 심화의 세 축(수익 모델, 유입 채널, 플랫폼)으로 예시 스튜디오의 조합 예(광고 50만 + 창작 도구 일회성 150만 + 생산성 앱 구독 150만)를 점검한다. 두 경로가 축을 공유하면 1점, 일부 공유하면 0.5점, 공유하지 않으면 0점이다 (점수 기준은 가정).</p>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>수익 모델</th>
+<th>주 유입 채널</th>
+<th>플랫폼·결제 계정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A: C2 광고 (50만)</td>
+<td>광고</td>
+<td>Google 검색</td>
+<td>웹, AdSense 계정</td>
+</tr>
+<tr>
+<td>B: T1 일회성 (150만)</td>
+<td>사용자 직접 결제 (일회성)</td>
+<td>C2의 링크(검색 경유)와 커뮤니티</td>
+<td>웹, Paddle</td>
+</tr>
+<tr>
+<td>C: 생산성 앱 구독 (150만)</td>
+<td>사용자 직접 결제 (구독)</td>
+<td>커뮤니티와 스튜디오 뉴스레터</td>
+<td>웹, 토스페이먼츠</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>쌍</th>
+<th>모델</th>
+<th>채널</th>
+<th>플랫폼·결제</th>
+<th>합계 (최대 3)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A–B</td>
+<td>0</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>A–C</td>
+<td>0</td>
+<td>0.5 (뉴스레터 가입이 C2에서 온다)</td>
+<td>0.5</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>B–C</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>전체</td>
+<td></td>
+<td></td>
+<td></td>
+<td>3.5 / 9</td>
+</tr>
+</tbody></table>
+<p>같은 350만 원을 콘텐츠 사이트 광고 셋으로 만들면 모든 쌍이 3점이라 9 / 9다.</p>
+<ul>
+<li>충격 시험 (가정): Google 검색 유입이 50% 줄고 B 유입의 절반이 검색·C2 경유라면, A는 25만 원, B는 150 × (1 − 0.5 × 0.5) = 112.5만 원, C는 단기적으로 150만 원 그대로 → 합계 287.5만 원 (−17.9%). 광고 단일 경로였다면 175만 원 (−50%)이다.</li>
+<li>가장 큰 단일 위험은 결제 계정이다. Paddle 계정이 멈추면 B의 150만 원(전체의 42.9%)이 한꺼번에 빠진다. 그래서 B와 C를 서로 다른 결제 경로에 둔다.</li>
+<li>점검 순서: ① 경로마다 세 축을 적는다 ② 쌍마다 점수를 매긴다 ③ 가장 많이 공유된 축 하나로 충격 시험을 한다 ④ 한 축이 전체의 절반 이상을 흔들면, 다음 베팅은 그 축을 공유하지 않는 후보에서 고른다.</li>
+</ul>
 <h3>세금과 표시 가격</h3>
 <p>국내 소비자 판매가는 부가세를 포함해 표시하고, 앱스토어·해외 매출은 부가세 처리 방식이 다르다. 이 표의 순단가는 세금을 뺀 설명용 숫자다. 비즈니스 섹션의 「부가세 · 영세율 · 세금계산서」를 함께 본다.</p>
 <h2>흔한 오해</h2>
 <ul>
 <li><strong>&quot;무료로 풀고 광고를 붙이면 된다&quot;</strong> — 광고는 트래픽 요구량이 가장 큰 모델이다.</li>
 <li><strong>&quot;구독이 가장 좋은 모델이다&quot;</strong> — 반복 가치와 낮은 해지율이 없으면 구독은 환불과 해지만 늘린다.</li>
-<li><strong>&quot;수수료는 30%다&quot;</strong> — 2026년 기준 소규모 개발자는 15% 안팎이 흔하지만, 지역·설치 시점·결제 방식마다 다르다.</li>
+<li><strong>&quot;수수료는 30%다&quot;</strong> — 2026년 기준 소규모 개발자는 결제 방식에 따라 10~15%가 흔하다 (예: Google Play 미국 연 첫 100만 달러 10%에 Google Play 결제 시 결제 수수료 5% 별도, 한국 현행 15%, 한국 대체 결제 11%). 지역·설치 시점마다 또 다르다.</li>
 <li><strong>&quot;MoR은 비싸기만 하다&quot;</strong> — 해외 부가세 신고를 직접 할 때의 시간·세무 비용과 비교해야 한다.</li>
 <li><strong>&quot;수익 모델은 나중에 붙인다&quot;</strong> — 모델이 온보딩, 무료 범위, 측정 지표를 바꾼다.</li>
 </ul>
@@ -526,6 +664,8 @@
 <li><a href="https://www.apple.com/newsroom/2020/11/apple-announces-app-store-small-business-program/">Apple announces App Store Small Business Program — Apple Newsroom</a> (2020-11, 접속 2026-09-28)</li>
 <li><a href="https://developer.apple.com/support/storekit-external-entitlement-kr/">Distributing apps using a third-party payment provider in South Korea — Apple Developer</a> (접속 2026-09-28)</li>
 <li><a href="https://support.google.com/googleplay/android-developer/answer/112622?hl=en">Service fees — Play Console Help</a> (접속 2026-09-28)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/11222040?hl=en">Changes to Google Play&#39;s billing requirements for developers serving users in South Korea — Play Console Help</a> (대체 결제 4%p 인하, 접속 2026-09-29)</li>
+<li><a href="https://play.google.com/console/about/programs/appsexperience/">Google Play Apps Experience Program — Google Play Console</a> (100만 달러 초과분 프로그램 요율, 접속 2026-09-29)</li>
 <li><a href="https://support.google.com/googleplay/android-developer/answer/16954621?hl=en">Understanding Google Play&#39;s lower service fees — Play Console Help</a> (접속 2026-09-28)</li>
 <li><a href="https://android-developers.googleblog.com/2026/06/play-expanded-billing.html">Expanded billing choice and lower fees on Google Play — Android Developers Blog</a> (2026-06, 접속 2026-09-28)</li>
 <li><a href="https://techcrunch.com/2026/03/04/google-settles-with-epic-games-drops-its-play-store-commissions-to-20/">Google settles with Epic Games, drops its Play Store commissions to 20% — TechCrunch</a> (2026-03-04, 접속 2026-09-28)</li>
@@ -535,6 +675,9 @@
 <li><a href="https://stripe.com/pricing">Pricing — Stripe</a> / <a href="https://stripe.com/global">Global availability — Stripe</a> (접속 2026-09-28)</li>
 <li><a href="https://www.paddle.com/pricing">Pricing — Paddle</a> (접속 2026-09-28)</li>
 <li><a href="https://docs.lemonsqueezy.com/help/getting-started/fees">Fees — Lemon Squeezy Docs</a> (접속 2026-09-28)</li>
+<li><a href="https://www.lemonsqueezy.com/blog/2026-update">2026 Update: Lemon Squeezy + Stripe Managed Payments — Lemon Squeezy</a> (2026, 검색 결과로 확인, 접속 2026-09-29)</li>
+<li><a href="https://support.stripe.com/questions/managed-payments-pricing">Managed Payments pricing — Stripe Support</a> (접속 2026-09-29)</li>
+<li><a href="https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm">EU VAT One Stop Shop (OSS) — Your Europe</a> (non-Union OSS, 접속 2026-09-29)</li>
 <li><a href="https://gumroad.com/help/article/66-gumroads-fees">Gumroad&#39;s fees — Gumroad Help Center</a> (접속 2026-09-28)</li>
 <li><a href="https://support.patreon.com/hc/en-us/articles/36426991446797-A-standard-platform-fee-for-new-creators-effective-after-August-4-2025">A standard platform fee for new creators — Patreon Help Center</a> (2025, 접속 2026-09-28)</li>
 <li><a href="https://blog.google/products/adsense/evolving-how-publishers-monetize-with-adsense/">Updates to how publishers monetize with AdSense — Google</a> (2023-11, 접속 2026-09-28)</li>

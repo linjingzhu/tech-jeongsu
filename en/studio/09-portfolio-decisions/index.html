@@ -107,6 +107,7 @@
 <p><strong>Learning goal</strong>: Pick stage-appropriate metrics for each product, decide kill, continue or double down against thresholds set in advance, and compare products with different revenue models by value per hour.</p>
 </blockquote>
 <p>Where document 02 gave the theory that &quot;products are bets&quot;, this document is <strong>the operating procedure for re-evaluating those bets every week and month</strong>. Without measurement, a portfolio is managed by mood.</p>
+<p>As of: 2026-09-29.</p>
 <h2>Key Concepts</h2>
 <h3>Leading and Lagging Indicators</h3>
 <ul>
@@ -243,13 +244,14 @@ Example studio&#39;s required hourly rate = KRW 3.5 million a month ÷ 160 hours
 </tr>
 <tr>
 <td>P1 habit tracker</td>
-<td>Launched, maintained</td>
+<td>Launched, maintenance only (shipped before G4, verdict at D90)</td>
 <td>40 weekly active users</td>
 <td>KRW 0</td>
 <td>4 hours</td>
 <td>KRW 0</td>
 </tr>
 </tbody></table>
+<p>C2&#39;s KRW 30,000 covers about 30 days of live ads, so its measured Page RPM is 30,000 ÷ 6,200 × 1,000 ≈ KRW 4,839. That is higher than 05&#39;s assumed KRW 3,000, so recompute 05&#39;s table with this measured value (step 3 of 05&#39;s applied section). C2&#39;s monthly pageviews grew 24%, from 5,000 at D0 to 6,200.</p>
 <p>By realized revenue per hour alone, all fall short of KRW 21,875. These are early products, so look at expected value per hour too.</p>
 <table>
 <thead>
@@ -317,8 +319,15 @@ Example studio&#39;s required hourly rate = KRW 3.5 million a month ÷ 160 hours
 <td>500-1,500</td>
 <td>1,500 or more → start Next Fest preparation</td>
 </tr>
+<tr>
+<td>P1</td>
+<td>Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive</td>
+<td>Maintenance only, 1 hour a week, until the verdict</td>
+<td>G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter&#39;s triage</td>
+</tr>
 </tbody></table>
-<p>Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2 and GM1 await their day-90 verdict.</p>
+<p>P1 shipped before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10&#39;s applied section). The criteria do not change before the verdict.</p>
+<p>Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000), while C2, GM1 and P1 await their day-90 verdict. P1&#39;s 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.</p>
 <h2>Going Deeper</h2>
 <h3>Review Rituals</h3>
 <table>
@@ -345,6 +354,12 @@ Example studio&#39;s required hourly rate = KRW 3.5 million a month ÷ 160 hours
 <td>Re-evaluate the whole portfolio, choose new bets (document 10)</td>
 </tr>
 </tbody></table>
+<p>Hour-logging rules (assumption). Hours are the denominator of realized revenue per hour, so settle them before the review.</p>
+<ul>
+<li>Tool and format: one spreadsheet or a time-tracking app. Each row holds the date, a code, the hours and a one-line note.</li>
+<li>Granularity and codes: log in 30-minute units, using only product codes (T1, C2, GM1, P1, P2) and shared codes (distribution, management).</li>
+<li>What counts: only hours a person actually spent. Work for a single product (building, support, that product&#39;s marketing) goes to its product code; work spanning several products goes to a shared code. Time an agent ran alone does not count; time spent instructing and reviewing it does.</li>
+</ul>
 <h3>Decision Journal</h3>
 <p>The decision journal popularized by Farnam Street (Shane Parrish) records the following at the moment of deciding, to compare with the outcome later.</p>
 <pre><code class="language-text">Date and state: 2026-12-04, moderately tired
@@ -367,7 +382,7 @@ Review date: 2027-01-03
 <li>Write one leading and one lagging indicator for one of your products, and explain how you would verify the link between them.</li>
 <li>What is the realized revenue per hour of a product with KRW 300,000 net revenue and 20 hours invested in the last 30 days? Compare it with the required KRW 21,875.</li>
 <li>A product has a 40% chance of KRW 10 million and a 60% chance of KRW 1 million and needs 200 hours. What is its expected value per hour?</li>
-<li>Translate Stage-Gate&#39;s four decisions into a solo studio&#39;s words and write when each is used.</li>
+<li>Give each of T1, C2, GM1 and P1 on the day-60 dashboard one of double down, kill, hold or rework (Go, Kill, Hold, Recycle), and write the number behind each. When would the decisions this dashboard does not use be the right call?</li>
 <li>Write your own product&#39;s kill criterion as one sentence in the &quot;states and dates&quot; form.</li>
 </ol>
 <h2>References</h2>
