@@ -79,7 +79,7 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 |---|---|---|---|---|
 | Operate | 32 | 20 (shared distribution 16 + P1 4) | −12 | P1 is on maintenance only until its D90 verdict. What the 16 hours of shared distribution contain is in the table in 02's Going Deeper |
 | Build | 80 | 88 (T1 64 + C2 24) | +8 | T1 is the main bet, so 16 hours a week (08's 60-hour appetite in about 4 weeks) |
-| Validate | 24 | 36 (GM1 32 + P2 4) | +12 | By the tie-break rule, 32 hours go to GM1's store page and demo. 02's 16-hour cap assumes a web fake door; validating a Steam page needs a playable demo (07), so it gets 32 hours. P2 passed G1, so only 4 hours of fake door |
+| Validate | 24 | 36 (GM1 32 + P2 4) | +12 | By the tie-break rule, 32 hours go to GM1's store page and demo. 02's 16-hour cap presumes landing-page and fake door validation (G2: visit → sign-up); validating a Steam page needs a playable demo (03, 07), so it gets 32 hours. P2 passed G1, so only 4 hours of fake door |
 | Manage | 24 | 16 (management and reviews) | −8 | Only bookkeeping and the weekly and monthly reviews (09) remain; learning time is zero this quarter |
 | Total | 160 | 160 | 0 | |
 
@@ -87,11 +87,11 @@ The 90-day plan runs in seven steps: (1) triage the 12 (02, 03) (2) choose 2-3 b
 
 | Product | Experiment | Window | Double down or pass | Kill or rework |
 |---|---|---|---|---|
-| T1 | Waitlist page + Van Westendorp survey + early-bird pre-sale (03, 06) | D14-D42 | 10% or more of 300 visitors sign up, or 5 early-bird payments (document 02's G2 gate) | Below the pass bar → revise the message once and remeasure (03); if the remeasure also misses, the D60 verdict looks only at the payment rate |
+| T1 | Waitlist page + Van Westendorp survey + early-bird pre-sale (03, 06) | D14-D42 | 10% or more of 300 visitors sign up, or 5 early-bird payments (document 02's G2 gate) | Below the pass bar → revise the message once and remeasure (03). In 03 a second miss means archive, but T1 already holds a build slot (02) and its D42 paid beta is scheduled, so a missed remeasure passes T1 on to the D60 payment verdict |
 | T1 | Paid beta trial to payment | D42-D60 | 10% or more and net revenue KRW 400,000 or more (document 09 rule) | Under 3% (hold and continue per document 09 rule) |
 | C2 | AdSense application, two articles a week | D7-D90 | 10,000 or more monthly page views at D90 | Under 3,000 |
 | GM1 | Steam store page goes live | D21-D90 | 1,500 or more total wishlists at D90 | Under 500 |
-| P2 | Fake door landing via community posts | D14-D28 | 10% or more of 300 visitors sign up (document 02's G2 gate) → building candidate for next quarter | Below the bar → archive |
+| P2 | Fake door landing via community posts | D14-D28 | 10% or more of 300 visitors sign up (document 02's G2 gate) → building candidate for next quarter (from D60 if T1 is archived then) | Below the bar → archive |
 
 ### Step 5: Launch Schedule (D0 = Monday 2026-10-05)
 
@@ -126,10 +126,10 @@ Monthly net revenue (after fees) is assumed in units of KRW 10,000, and from mon
 |---|---|---|---|---|---|---|---|
 | No revenue (baseline) | 0 | 0 | 0 | 1,800 − 1,050 = 750 | 350 | 2.1 | 5.1 months |
 | Pessimistic | 0 | 0 | 10 | 1,800 − 1,050 + 10 − 20 = 740 | 350 − 10 = 340 | 740 ÷ 340 = 2.2 | 5.2 months |
-| Base (T1 held at D60) | 0 | 30 | 80 | 1,800 − 1,050 + 110 − 20 = 840 | 350 − 80 = 270 | 840 ÷ 270 = 3.1 | 6.1 months |
+| Base (T1 at an assumed 5% at D60 → held) | 0 | 30 | 80 | 1,800 − 1,050 + 110 − 20 = 840 | 350 − 80 = 270 | 840 ÷ 270 = 3.1 | 6.1 months |
 | Optimistic | 0 | 60 | 180 | 1,800 − 1,050 + 240 − 20 = 970 | 350 − 180 = 170 | 970 ÷ 170 = 5.7 | 8.7 months |
 
-- In the base row, month 2's KRW 300,000 minus about KRW 30,000 from C2 leaves about KRW 270,000 for T1, about 7 payments (270,000 ÷ 37,870 = 7.1). With fewer than 10 payments, 09's rule puts T1 on **hold** at D60, with a re-verdict at D90 after the D70 full launch. Month 3's KRW 800,000 gives T1 about KRW 770,000, about 20 payments. The optimistic row (600,000 − 30,000 = KRW 570,000, about 15 payments) is double down at D60 if the payment rate is 10% or more.
+- In the base row, month 2's KRW 300,000 minus about KRW 30,000 from C2 leaves about KRW 270,000 for T1, about 7 payments (270,000 ÷ 37,870 = 7.1). 09's rule checks kill first, so with a payment rate (5% assumed) of 3% or more and fewer than 10 payments, T1 goes on **hold** at D60, with a re-verdict at D90 after the D70 full launch. Month 3's KRW 800,000 gives T1 about KRW 770,000, about 20 payments. The optimistic row (600,000 − 30,000 = KRW 570,000, about 15 payments) is double down at D60 if the payment rate is 10% or more.
 - The baseline row is for comparison, so it leaves out the one-off cost. 750 ÷ 350 = 2.14 → 3 + 2.1 = 5.1 months.
 - No scenario reaches KRW 3.5M a month (default alive, document 01) within 90 days. The goal of the 90 days is not survival but **extending the runway while finding the product to double down on next quarter**.
 - Document 09's day-60 dashboard (T1 KRW 450,000 + C2 KRW 30,000 = KRW 480,000) sits between base (300,000) and optimistic (600,000).
@@ -139,8 +139,8 @@ Monthly net revenue (after fees) is assumed in units of KRW 10,000, and from mon
 | When | Question | Pass bar | If it fails |
 |---|---|---|---|
 | D30 (11-04) | Is T1's waitlist filling, and what did P2's fake door show | T1 sign-up 10% or more, or 5 or more early-bird payments | Rework T1's message and price; the paid beta may slip one week (the date moves only once) |
-| D60 (12-04) | Are people paying | 09's rule, first match only. Double down: 10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) (below) | Kill: At day 60, trial to payment under 3% (checked first) → archive (if T1 was archived at D60: one build slot (P2, within 02's 80-hour build cap) plus running C2 when P2 passed G2 at D28; if P2 also missed, zero bets, and the 80 hours go to running C2 and preparing next quarter's triage). Hold: Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch. Continue: 3-10%, or 10% or more with net revenue under KRW 400,000 |
-| D90 (01-03) | Which scenario are we in | Base or better (month-3 net revenue KRW 800,000 or more) | Net revenue of KRW 300,000-800,000 keeps the default allocation, with R1 rechecked on the first of next month. If rule R1 in Going Deeper fires (balance under KRW 7M or net revenue under KRW 300,000), shift 80 hours a month to contract work and keep only one bet that passed 09's gate (if T1 was archived at D60: one build slot (P2, within 02's 80-hour build cap) plus running C2 when P2 passed G2 at D28; if P2 also missed, zero bets, and the 80 hours go to running C2 and preparing next quarter's triage). A T1 held at D60 is re-judged by 09's rule on this day |
+| D60 (12-04) | Are people paying | 09's rule, first match only. Double down: 10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) (below) | Kill: At day 60, trial to payment under 3% (checked first) → archive (if T1 is archived at D60, its 64 hours a month move to building P2 when P2 passed G2 at D28, otherwise to running C2 and preparing next quarter's triage. GM1, C2 and P1 continue unchanged until their D90 verdicts). Hold: Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch. Continue: 3% or more and under 10%, or 10% or more with net revenue under KRW 400,000 |
+| D90 (01-03) | Which scenario are we in | Base or better (month-3 net revenue KRW 800,000 or more) | Net revenue of KRW 300,000-800,000 keeps the default allocation, with R1 rechecked on the first of next month. If rule R1 in Going Deeper fires (balance under KRW 7M or net revenue under KRW 300,000), shift 80 hours a month to contract work and keep only one bet that passed 09's gate (if T1 was archived at D60, the 80 product hours go by priority: (1) GM1 if it has 1,500 or more wishlists at D90 (it passed 09's gate) → GM1 56 hours + running C2 24 hours = 80 hours (2) otherwise P2 if it passed G2 at D28 → building P2 56 hours + running C2 24 hours = 80 hours (3) otherwise zero bets, and the 80 hours go to running C2 and preparing next quarter's triage). A T1 held at D60 is re-judged by 09's rule on this day |
 
 - If GM1 has 1,500 or more wishlists at D90, decide on joining the February 2027 Next Fest before its registration deadline (2027-01-10) (document 07). If it misses the bar, archive GM1.
 - If T1 is judged double down at D60, the monthly allocation for D60-D90 becomes T1 64 → 80, GM1 32 → 24, P2 4 → 0 (the fake door ended at D28), management and reviews 16 → 12. The total stays at 160 hours (09's decision journal).
@@ -169,7 +169,7 @@ Write the studio-wide stop lines in advance too, in 09's "states and dates" form
 
 | Rule | When checked | State | Action |
 |---|---|---|---|
-| R1 switch to contract work | D90 (2027-01-03), then the first of every month | Balance < KRW 7M (two months of burn) or previous month's net revenue < KRW 300,000 | From the next month, 80 hours a month of contract work (assumed KRW 50,000 an hour = KRW 4M a month, the same rate as 04's service model). Product hours drop to 80, and only one bet that passed 09's gate continues (if T1 was archived at D60: one build slot (P2, within 02's 80-hour build cap) plus running C2 when P2 passed G2 at D28; if P2 also missed, zero bets, and the 80 hours go to running C2 and preparing next quarter's triage) |
+| R1 switch to contract work | D90 (2027-01-03), then the first of every month | Balance < KRW 7M (two months of burn) or previous month's net revenue < KRW 300,000 | From the next month, 80 hours a month of contract work (assumed KRW 50,000 an hour = KRW 4M a month, the same rate as 04's service model). Product hours drop to 80, and only one bet that passed 09's gate continues (if T1 was archived at D60, the 80 product hours go by priority: (1) GM1 if it has 1,500 or more wishlists at D90 (it passed 09's gate) → GM1 56 hours + running C2 24 hours = 80 hours (2) otherwise P2 if it passed G2 at D28 → building P2 56 hours + running C2 24 hours = 80 hours (3) otherwise zero bets, and the 80 hours go to running C2 and preparing next quarter's triage) |
 | R2 switch to full-time | Every Monday review (09) | Balance < KRW 3.5M (one month of burn) | Full-time contract or a job. Products are archived or kept on 4 hours a week of maintenance |
 | Scale contract work down | The first of every month | Product net revenue of KRW 1.75M (half the burn) or more for two months in a row | Cut contract work to 40 hours a month |
 
@@ -182,7 +182,7 @@ Applying R1 to the scenarios in step 6 (KRW 10,000 units, contract rate KRW 50,0
 | Base | 840 | 80 | Does not fire | 270 | T1 on hold (fewer than 10 payments) → re-verdict at D90. Balance 570 < 700 at the start of month 5 → fires then (if revenue does not grow). With a late-paying contract, start looking for contract work on the first of month 4 (below) |
 | Optimistic | 970 | 180 | Does not fire | 170 | Balance 630 < 700 at the start of month 6 → fires then (if revenue does not grow) |
 
-In the no-revenue and pessimistic rows, T1 has already been archived by the D60 rule, so the remaining 80 hours follow the fallback: one build slot (P2, within 02's 80-hour build cap) plus running C2 when P2 passed G2 at D28; if P2 also missed, zero bets, and the 80 hours go to running C2 and preparing next quarter's triage.
+In the no-revenue and pessimistic rows, T1 has already been archived by the D60 rule, so the remaining 80 hours follow the fallback, by priority: (1) GM1 if it has 1,500 or more wishlists at D90 (it passed 09's gate) → GM1 56 hours + running C2 24 hours = 80 hours (2) otherwise P2 if it passed G2 at D28 → building P2 56 hours + running C2 24 hours = 80 hours (3) otherwise zero bets, and the 80 hours go to running C2 and preparing next quarter's triage.
 
 If the contract rate is lower than assumed (no-revenue scenario, balance KRW 7.5M at D90):
 
@@ -208,7 +208,7 @@ If the contract rate is lower than assumed (no-revenue scenario, balance KRW 7.5
 1. Score your own prototype list on D, M, S, R and F, and pick the top three by total. How do you break ties?
 2. If the main bet gets 40% of a 40-hour week, how many hours is that a month? Allocate the rest so the total is 160 hours.
 3. If month-3 net revenue is KRW 500,000 and holds after that, what is the total runway including the KRW 200,000 one-off cost? (Months 1 and 2 net revenue are 0 and KRW 200,000.)
-4. If T1's payment rate is 5% at the D60 checkpoint, what is the verdict under document 09's rules?
+4. If T1 has a 5% payment rate and 12 payments at the D60 checkpoint, what is the verdict under document 09's rules? And with the same rate but 8 payments?
 5. Use the runway formula to explain why, in the pessimistic scenario, you cut burn before raising revenue.
 
 ## References

@@ -105,7 +105,7 @@ By realized revenue per hour alone, all fall short of KRW 21,875. These are earl
 
 | Product | Kill | Hold | Continue | Double down |
 |---|---|---|---|---|
-| T1 | At day 60, trial to payment under 3% (checked first) → archive | Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch | 3-10%, or 10% or more with net revenue under KRW 400,000 | 10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) |
+| T1 | At day 60, trial to payment under 3% (checked first) → archive | Fewer than 10 payments → sample too small, hold, re-verdict at D90 after the D70 full launch | 3% or more and under 10%, or 10% or more with net revenue under KRW 400,000 | 10% or more and net revenue KRW 400,000 or more → add 4 hours a week (16 hours a month) |
 | C2 | Under 3,000 monthly page views at day 90 | — | 3,000-10,000 | 10,000 or more → double the publishing pace |
 | GM1 | Under 500 total wishlists at day 90 | — | 500-1,500 | 1,500 or more → start Next Fest preparation |
 | P1 | Under 100 weekly active users and under KRW 100,000 monthly net revenue at day 90 → archive | — | Maintenance only, 1 hour a week, until the verdict | G4 met (100 or more weekly active users, or KRW 100,000 or more monthly net revenue) → reassign operating hours in next quarter's triage |
@@ -140,7 +140,7 @@ The decision journal popularized by Farnam Street (Shane Parrish) records the fo
 Date and state: 2026-12-04, moderately tired
 Decision: add 4 hours a week to T1, P1 maintenance only
 Where the hours come from (D60-D90, per month): T1 64 → 80, GM1 32 → 24, P2 4 → 0 (the fake door ended at D28), management and reviews 16 → 12
-Numbers behind it: trial to payment 11%, monthly net revenue KRW 450,000
+Numbers behind it: trial to payment 11%, 12 payments (hold bar: 10 or more), monthly net revenue KRW 450,000
 Expected outcome: monthly net revenue KRW 800,000 at day 90, probability 60%
 Alternative rejected: pull GM1's demo work forward
 Review date: 2027-01-03
