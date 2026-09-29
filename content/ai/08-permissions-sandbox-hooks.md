@@ -103,35 +103,80 @@ flowchart TD
     "deny": ["Read(./.env)", "Read(./.env.*)", "Bash(git push --force *)", "Bash(git push -f *)"]
   },
   "hooks": {
+    "SessionStart": [{ "hooks": [{ "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-baseline.sh" }] }],
     "PreToolUse": [{ "matcher": "Bash", "hooks": [{ "type": "command", "if": "Bash(git *)", "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-force-push.sh" }] }],
     "Stop": [{ "hooks": [{ "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-if-dirty.sh" }] }]
   }
 }
 ```
 
-**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`, `jq` 필요). deny 규칙이 놓치는 `git -C . push --force`, `git push origin +main` 같은 표기까지 본다.
+**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운 뒤, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 `push` 뒤의 인자만** 검사한다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝나면 차단이 조용히 꺼지고, exit 0의 stderr는 debug log에만 남아 아무도 모른다.
 
 ```bash
-CMD=$(jq -r '.tool_input.command // empty')
-if printf '%s\n' "$CMD" | grep -Eq 'push.*(--force|[[:space:]]-f([[:space:]]|$)|[[:space:]]\+[^[:space:]])'; then
+command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
+CMD=$(jq -r '.tool_input.command // empty') || exit 2
+S=$(printf '%s\n' "$CMD" | sed -E "s/[\"']([^\"'[:space:]]*)[\"']/\1/g; s/\"[^\"]*\"|'[^']*'//g; s/(&&|\|\||[;&|])/\n/g")
+ARGS=$(printf '%s\n' "$S" | sed -nE 's/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p')
+if printf '%s\n' "$ARGS" | grep -Eq '[[:space:]]-[A-Za-z]*f[A-Za-z]*([[:space:]]|$)|[[:space:]]--force(-with-lease|-if-includes)?(=|[[:space:]]|$)|[[:space:]]--mirror([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]'; then
   echo "Blocked: force push is not allowed from an agent session. Ask the owner." >&2
   exit 2
 fi
 exit 0
 ```
 
-**Hook 2, 미커밋 변경을 남긴 채 끝내지 않기** (`.claude/hooks/stop-if-dirty.sh`). exit 2가 종료를 막고 stderr가 다음 지시가 된다. `stop_hook_active`가 `true`이면 이미 한 번 되돌려 보낸 것이므로 종료를 허용한다. 이 검사가 없으면 Claude Code는 8번 연속 차단된 뒤에야 hook을 무시하고 멈춘다.
+아래는 실제로 실행한 29개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
+
+| 명령 | 기대 | jq 있음 | jq 없음 |
+|---|---|---|---|
+| `git push origin main` | 0 | 0 | 2 |
+| `git push -u origin feature` | 0 | 0 | 2 |
+| `git push origin fix-foo` | 0 | 0 | 2 |
+| `git commit -m "push -f later" && git status` | 0 | 0 | 2 |
+| `git push -fu origin main` · `-uf` · `-nf` | 2 | 2 | 2 |
+| `git -C . push -f origin main` | 2 | 2 | 2 |
+| `git push origin "+main"` · `'+main'` · `HEAD:+main` | 2 | 2 | 2 |
+| `git push --force-with-lease=main:abc123 origin main` | 2 | 2 | 2 |
+| `git push --force-if-includes origin main` | 2 | 2 | 2 |
+| `git push --mirror origin` | 2 | 2 | 2 |
+| `git commit -m "push" && git push -f origin main` | 2 | 2 | 2 |
+
+**Hook 2 · 3, 이번 세션이 만든 변경을 커밋하지 않은 채 끝내지 않기**. 세션은 주인의 WIP가 남은 더러운 트리에서 시작할 수 있다. 그래서 `SessionStart`(`session-baseline.sh`)가 `git status --porcelain`을 세션별 기준선으로 저장하고, `Stop`(`stop-if-dirty.sh`)은 **새로 생긴 줄만** 문제 삼는다. 경로는 `$CLAUDE_PROJECT_DIR`이 아니라 stdin의 `cwd`를 쓴다. worktree에 들어가면 `CLAUDE_PROJECT_DIR`은 시작 위치에 머물고 `cwd`만 따라가기 때문이다. 기준선은 없을 때만 쓰므로 compact · resume으로 `SessionStart`가 다시 불려도 유지된다.
 
 ```bash
+command -v jq >/dev/null || exit 0
 INPUT=$(cat)
-if [ "$(printf '%s' "$INPUT" | jq -r '.stop_hook_active')" = "true" ]; then exit 0; fi
-cd "$CLAUDE_PROJECT_DIR" || exit 0
-if [ -n "$(git status --porcelain)" ]; then
-  echo "Uncommitted changes remain. Commit them in meaningful units, or state in the report why they stay uncommitted." >&2
+SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
+[ -e "$GITDIR/agent-baseline-$SID" ] || git status --porcelain > "$GITDIR/agent-baseline-$SID"
+exit 0
+```
+
+```bash
+command -v jq >/dev/null || { echo '{"systemMessage":"stop-if-dirty: jq is missing, uncommitted-work check skipped"}'; exit 0; }
+INPUT=$(cat)
+[ "$(printf '%s' "$INPUT" | jq -r '.stop_hook_active')" = "true" ] && exit 0
+SID=$(printf '%s' "$INPUT" | jq -r '.session_id'); DIR=$(printf '%s' "$INPUT" | jq -r '.cwd')
+cd "$DIR" 2>/dev/null && GITDIR=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
+BASE="$GITDIR/agent-baseline-$SID"
+[ -f "$BASE" ] || { echo '{"systemMessage":"stop-if-dirty: no session baseline, check skipped"}'; exit 0; }
+NEW=$(git status --porcelain | grep -vxF -f "$BASE")
+if [ -n "$NEW" ]; then
+  printf 'Files changed during this session are uncommitted:\n%s\nCommit your own changes in meaningful units, or say in the report why they stay uncommitted. Do not commit files that were already modified before the session.\n' "$NEW" >&2
   exit 2
 fi
 exit 0
 ```
+
+| 상황 | 기대 | 결과 |
+|---|---|---|
+| 깨끗한 트리 | 0 | 0 |
+| 세션 전부터 주인이 수정한 파일만 있음 | 0 | 0 |
+| agent가 tracked 파일 수정 / 새 파일 생성 | 2 | 2 |
+| 같은 상황, `stop_hook_active: true` | 0 | 0 |
+| agent는 commit했고 주인 WIP만 남음 | 0 | 0 |
+| 기준선 없음 · `jq` 없음 | 0 + 경고 | 0 + `systemMessage` |
+
+한계도 적어 둔다. 주인이 이미 수정한 파일을 agent가 더 고치면 `git status` 줄이 같아 잡지 못한다. 기준선이 없을 때(세션 도중 설치, 새 worktree)와 `jq`가 없을 때는 막지 않고 `systemMessage`로 알린다. Stop에서 닫힌 쪽으로 실패하면 세션을 끝낼 수 없기 때문이다. 기준선 파일은 `.git/` 안에 남으므로 필요하면 `SessionEnd` hook으로 지운다.
 
 ## 심화
 
@@ -148,13 +193,32 @@ exit 0
 
 ### Secrets 위생
 
-- `.env*`, `~/.ssh`, `~/.aws`는 권한 deny와 sandbox `denyRead`에 **둘 다** 적는다. 권한 규칙은 Read 도구를, sandbox는 `cat` 같은 Bash 경로를 막는다. `.claude/settings.local.json`과 `CLAUDE.local.md`는 commit하지 않는다.
-- 프로젝트 `.mcp.json`의 원격 `url` · `headers`에서는 `ANTHROPIC_API_KEY` 같은 자격 증명 변수가 빈 값으로 읽힌다. 남의 저장소가 내 key를 외부로 보내지 못하게 하는 장치다. Codex는 `shell_environment_policy`(`inherit`, `exclude`, `include_only`, `set`)로 명령에 전달할 환경 변수를 줄인다.
+- 권한 규칙은 Read 도구를, sandbox는 `cat` 같은 Bash 경로를 막으므로 **둘 다** 쓴다. sandbox의 `credentials`는 파일 읽기를 막고(`"mode": "deny"`), 나열한 환경 변수를 sandbox 명령 실행 전에 지운다. 기본 목록은 없으므로 직접 적는다. `permissions.blockReadsOutsideWorkingDirectories`는 file 도구가 작업 디렉터리 밖을 읽지 못하게 한다.
+- `.claude/settings.local.json`과 `CLAUDE.local.md`는 commit하지 않는다. 프로젝트 `.mcp.json`의 원격 `url` · `headers`에서는 일부 자격 증명 변수(문서의 예: `ANTHROPIC_AUTH_TOKEN`)가 빈 값으로 읽힌다. Codex는 `shell_environment_policy`(`inherit`, `exclude`, `include_only`, `set`)로 명령에 전달할 환경 변수를 줄인다.
+
+```json
+{
+  "permissions": { "blockReadsOutsideWorkingDirectories": true, "deny": ["Read(./.env)", "Read(./.env.*)"] },
+  "sandbox": {
+    "enabled": true,
+    "credentials": {
+      "files": [{ "path": "~/.ssh", "mode": "deny" }, { "path": "~/.aws/credentials", "mode": "deny" }],
+      "envVars": [{ "name": "GITHUB_TOKEN", "mode": "deny" }, { "name": "NPM_TOKEN", "mode": "deny" }]
+    }
+  }
+}
+```
 
 ### 흔한 실패 모드
 
-- **Hook이 조용히 통과시킨다**: 실행 권한이 없거나 `jq`가 없어 exit 1로 끝나면 non-blocking 오류라 행동이 진행된다. 차단 hook은 설치 직후 일부러 걸리는 입력으로 시험한다. 비슷하게 shell profile의 `echo`가 stdout 앞에 끼면 JSON 출력이 무시된다.
+- **Hook이 알림과 함께 꺼진다**: 스크립트 경로가 틀렸거나 실행할 수 없으면 셸이 127 같은 코드로 끝나고, transcript에 `Failed with non-blocking status code: …` 알림이 뜨지만 행동은 진행된다. 첫 실행에서 이 알림을 확인한다.
+- **Hook이 알림 없이 꺼진다**: 더 위험하다. `jq` 같은 도구가 없어 입력이 비고 스크립트가 exit 0으로 끝나면 아무 표시도 없다. 차단 hook은 도구가 없을 때 exit 2로 끝나게 쓰고, 설치 직후 도구가 있을 때와 없을 때를 모두 시험한다(둘 다 `exit=2`가 나와야 한다).
 - **project allow가 먹지 않는다**: workspace trust 전이거나, trust 대화상자가 없는 `claude -p` 실행이다. Codex도 신뢰하지 않은 프로젝트의 `.codex/config.toml`은 비활성이다.
+
+```bash
+printf '%s' '{"tool_input":{"command":"git push -f"}}' | bash .claude/hooks/block-force-push.sh; echo "exit=$?"
+printf '%s' '{"tool_input":{"command":"git push -f"}}' | env PATH=/nonexistent /bin/bash .claude/hooks/block-force-push.sh; echo "exit=$?"
+```
 
 ## 흔한 오해
 

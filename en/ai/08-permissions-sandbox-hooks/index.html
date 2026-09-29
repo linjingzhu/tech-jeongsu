@@ -282,29 +282,162 @@
     &quot;deny&quot;: [&quot;Read(./.env)&quot;, &quot;Read(./.env.*)&quot;, &quot;Bash(git push --force *)&quot;, &quot;Bash(git push -f *)&quot;]
   },
   &quot;hooks&quot;: {
+    &quot;SessionStart&quot;: [{ &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/session-baseline.sh&quot; }] }],
     &quot;PreToolUse&quot;: [{ &quot;matcher&quot;: &quot;Bash&quot;, &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;if&quot;: &quot;Bash(git *)&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/block-force-push.sh&quot; }] }],
     &quot;Stop&quot;: [{ &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/stop-if-dirty.sh&quot; }] }]
   }
 }
 </code></pre>
-<p><strong>Hook 1, block force push</strong> (<code>.claude/hooks/block-force-push.sh</code>, needs <code>jq</code>). It also catches spellings the deny rules miss, such as <code>git -C . push --force</code> and <code>git push origin +main</code>.</p>
-<pre><code class="language-bash">CMD=$(jq -r &#39;.tool_input.command // empty&#39;)
-if printf &#39;%s\n&#39; &quot;$CMD&quot; | grep -Eq &#39;push.*(--force|[[:space:]]-f([[:space:]]|$)|[[:space:]]\+[^[:space:]])&#39;; then
+<p><strong>Hook 1, block force push</strong> (<code>.claude/hooks/block-force-push.sh</code>). It unwraps single-token quotes, deletes multi-word quoted strings (commit messages and the like), splits the command on <code>&amp;&amp;</code> · <code>;</code> · <code>|</code> · newlines, and checks <strong>only the arguments after each <code>push</code></strong>. If <code>jq</code> is missing or the input cannot be read, it <strong>fails closed</strong> (exit 2). Had a <code>jq</code> failure left <code>CMD</code> empty and the script exited 0, the block would be silently off, and stderr at exit 0 only reaches the debug log, so nobody would know.</p>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || { echo &quot;Blocked: jq is missing, so the force-push check cannot run.&quot; &gt;&amp;2; exit 2; }
+CMD=$(jq -r &#39;.tool_input.command // empty&#39;) || exit 2
+S=$(printf &#39;%s\n&#39; &quot;$CMD&quot; | sed -E &quot;s/[\&quot;&#39;]([^\&quot;&#39;[:space:]]*)[\&quot;&#39;]/\1/g; s/\&quot;[^\&quot;]*\&quot;|&#39;[^&#39;]*&#39;//g; s/(&amp;&amp;|\|\||[;&amp;|])/\n/g&quot;)
+ARGS=$(printf &#39;%s\n&#39; &quot;$S&quot; | sed -nE &#39;s/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p&#39;)
+if printf &#39;%s\n&#39; &quot;$ARGS&quot; | grep -Eq &#39;[[:space:]]-[A-Za-z]*f[A-Za-z]*([[:space:]]|$)|[[:space:]]--force(-with-lease|-if-includes)?(=|[[:space:]]|$)|[[:space:]]--mirror([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]&#39;; then
   echo &quot;Blocked: force push is not allowed from an agent session. Ask the owner.&quot; &gt;&amp;2
   exit 2
 fi
 exit 0
 </code></pre>
-<p><strong>Hook 2, do not stop with uncommitted changes</strong> (<code>.claude/hooks/stop-if-dirty.sh</code>). Exit 2 prevents the stop, and stderr becomes the next instruction. When <code>stop_hook_active</code> is <code>true</code>, the hook has already sent Claude back once, so it lets the stop happen. Without that check, Claude Code only overrides the hook after it blocks eight times in a row.</p>
-<pre><code class="language-bash">INPUT=$(cat)
-if [ &quot;$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.stop_hook_active&#39;)&quot; = &quot;true&quot; ]; then exit 0; fi
-cd &quot;$CLAUDE_PROJECT_DIR&quot; || exit 0
-if [ -n &quot;$(git status --porcelain)&quot; ]; then
-  echo &quot;Uncommitted changes remain. Commit them in meaningful units, or state in the report why they stay uncommitted.&quot; &gt;&amp;2
+<p>Below is a subset of the 29 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). &quot;No jq&quot; means a run with <code>jq</code> removed from <code>PATH</code>. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Expected</th>
+<th>With jq</th>
+<th>No jq</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git push origin main</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -u origin feature</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin fix-foo</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;push -f later&quot; &amp;&amp; git status</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -fu origin main</code> · <code>-uf</code> · <code>-nf</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git -C . push -f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin &quot;+main&quot;</code> · <code>&#39;+main&#39;</code> · <code>HEAD:+main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --force-with-lease=main:abc123 origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --force-if-includes origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --mirror origin</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;push&quot; &amp;&amp; git push -f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p><strong>Hooks 2 · 3, do not stop with uncommitted changes this session made</strong>. A session can start on a dirty tree that holds the owner&#39;s WIP. So <code>SessionStart</code> (<code>session-baseline.sh</code>) saves <code>git status --porcelain</code> as a per-session baseline, and <code>Stop</code> (<code>stop-if-dirty.sh</code>) objects <strong>only to new lines</strong>. Paths come from <code>cwd</code> in the stdin JSON, not <code>$CLAUDE_PROJECT_DIR</code>: after Claude enters a worktree, <code>CLAUDE_PROJECT_DIR</code> stays where the session started and only <code>cwd</code> follows. The baseline is written only when absent, so it survives <code>SessionStart</code> firing again after compact or resume.</p>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || exit 0
+INPUT=$(cat)
+SID=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.session_id&#39;); DIR=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.cwd&#39;)
+cd &quot;$DIR&quot; 2&gt;/dev/null &amp;&amp; GITDIR=$(git rev-parse --absolute-git-dir 2&gt;/dev/null) || exit 0
+[ -e &quot;$GITDIR/agent-baseline-$SID&quot; ] || git status --porcelain &gt; &quot;$GITDIR/agent-baseline-$SID&quot;
+exit 0
+</code></pre>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || { echo &#39;{&quot;systemMessage&quot;:&quot;stop-if-dirty: jq is missing, uncommitted-work check skipped&quot;}&#39;; exit 0; }
+INPUT=$(cat)
+[ &quot;$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.stop_hook_active&#39;)&quot; = &quot;true&quot; ] &amp;&amp; exit 0
+SID=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.session_id&#39;); DIR=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.cwd&#39;)
+cd &quot;$DIR&quot; 2&gt;/dev/null &amp;&amp; GITDIR=$(git rev-parse --absolute-git-dir 2&gt;/dev/null) || exit 0
+BASE=&quot;$GITDIR/agent-baseline-$SID&quot;
+[ -f &quot;$BASE&quot; ] || { echo &#39;{&quot;systemMessage&quot;:&quot;stop-if-dirty: no session baseline, check skipped&quot;}&#39;; exit 0; }
+NEW=$(git status --porcelain | grep -vxF -f &quot;$BASE&quot;)
+if [ -n &quot;$NEW&quot; ]; then
+  printf &#39;Files changed during this session are uncommitted:\n%s\nCommit your own changes in meaningful units, or say in the report why they stay uncommitted. Do not commit files that were already modified before the session.\n&#39; &quot;$NEW&quot; &gt;&amp;2
   exit 2
 fi
 exit 0
 </code></pre>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Expected</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clean tree</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>only files the owner modified before the session</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>agent edits a tracked file / creates a new file</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>same, with <code>stop_hook_active: true</code></td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>agent committed; only the owner&#39;s WIP remains</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>no baseline · no <code>jq</code></td>
+<td>0 + warning</td>
+<td>0 + <code>systemMessage</code></td>
+</tr>
+</tbody></table>
+<p>The limits, stated plainly: if the agent further edits a file the owner had already modified, the <code>git status</code> line is unchanged and the hook misses it. With no baseline (installed mid-session, a new worktree) or no <code>jq</code>, it does not block but reports through <code>systemMessage</code>, because failing closed at Stop would leave a session unable to end. Baseline files stay in <code>.git/</code>, so remove them with a <code>SessionEnd</code> hook if you want.</p>
 <h2>Going Deeper</h2>
 <h3>Risk-tiered design for a one-person studio</h3>
 <p>Running many products alone means many approval prompts, and many prompts end with approvals nobody reads. So assign <strong>one mechanism per risk tier</strong>. This moves the safety loop from &quot;Claude Code as a Git client&quot; into configuration, and for T3 it adds a last line of defence outside the agent, such as GitHub branch protection.</p>
@@ -344,14 +477,29 @@ exit 0
 </tbody></table>
 <h3>Secrets hygiene</h3>
 <ul>
-<li>Put <code>.env*</code>, <code>~/.ssh</code> and <code>~/.aws</code> in <strong>both</strong> a permission deny and the sandbox <code>denyRead</code>. The permission rule stops the Read tool; the sandbox stops Bash paths such as <code>cat</code>. Never commit <code>.claude/settings.local.json</code> or <code>CLAUDE.local.md</code>.</li>
-<li>In a project <code>.mcp.json</code>, credential variables such as <code>ANTHROPIC_API_KEY</code> read as empty in a remote server&#39;s <code>url</code> and <code>headers</code>. This keeps someone else&#39;s repository from sending your key out. Codex narrows the environment passed to commands with <code>shell_environment_policy</code> (<code>inherit</code>, <code>exclude</code>, <code>include_only</code>, <code>set</code>).</li>
+<li>Permission rules stop the Read tool and the sandbox stops Bash paths such as <code>cat</code>, so use <strong>both</strong>. The sandbox <code>credentials</code> block denies reads of listed files (<code>&quot;mode&quot;: &quot;deny&quot;</code>) and unsets listed environment variables before each sandboxed command. There is no built-in list, so write your own. <code>permissions.blockReadsOutsideWorkingDirectories</code> makes the file tools refuse reads outside the working directories.</li>
+<li>Never commit <code>.claude/settings.local.json</code> or <code>CLAUDE.local.md</code>. In a project <code>.mcp.json</code>, some credential variables (the docs&#39; example: <code>ANTHROPIC_AUTH_TOKEN</code>) read as empty in a remote server&#39;s <code>url</code> and <code>headers</code>. Codex narrows the environment passed to commands with <code>shell_environment_policy</code> (<code>inherit</code>, <code>exclude</code>, <code>include_only</code>, <code>set</code>).</li>
 </ul>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: { &quot;blockReadsOutsideWorkingDirectories&quot;: true, &quot;deny&quot;: [&quot;Read(./.env)&quot;, &quot;Read(./.env.*)&quot;] },
+  &quot;sandbox&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;credentials&quot;: {
+      &quot;files&quot;: [{ &quot;path&quot;: &quot;~/.ssh&quot;, &quot;mode&quot;: &quot;deny&quot; }, { &quot;path&quot;: &quot;~/.aws/credentials&quot;, &quot;mode&quot;: &quot;deny&quot; }],
+      &quot;envVars&quot;: [{ &quot;name&quot;: &quot;GITHUB_TOKEN&quot;, &quot;mode&quot;: &quot;deny&quot; }, { &quot;name&quot;: &quot;NPM_TOKEN&quot;, &quot;mode&quot;: &quot;deny&quot; }]
+    }
+  }
+}
+</code></pre>
 <h3>Common failure modes</h3>
 <ul>
-<li><strong>A hook silently lets things through</strong>: if the script is not executable or <code>jq</code> is missing and it exits 1, that is a non-blocking error and the action proceeds. Test every blocking hook right after installing it with an input that should be caught. Similarly, an <code>echo</code> in a shell profile that lands before stdout makes JSON output be ignored.</li>
+<li><strong>A hook switches off with a notice</strong>: if the script path is wrong or not executable, the shell exits with a code such as 127 and the transcript shows <code>Failed with non-blocking status code: ...</code>, but the action proceeds. Look for that notice on the first run.</li>
+<li><strong>A hook switches off without a notice</strong>: worse. If a tool such as <code>jq</code> is missing, the input comes out empty and the script exits 0, nothing is shown at all. Write blocking hooks to exit 2 when a tool is missing, and test right after installing, both with and without the tool (both must print <code>exit=2</code>).</li>
 <li><strong>Project allow rules do not take effect</strong>: the workspace is not yet trusted, or this is a <code>claude -p</code> run, which has no trust dialog. In Codex too, an untrusted project&#39;s <code>.codex/config.toml</code> stays disabled.</li>
 </ul>
+<pre><code class="language-bash">printf &#39;%s&#39; &#39;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;git push -f&quot;}}&#39; | bash .claude/hooks/block-force-push.sh; echo &quot;exit=$?&quot;
+printf &#39;%s&#39; &#39;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;git push -f&quot;}}&#39; | env PATH=/nonexistent /bin/bash .claude/hooks/block-force-push.sh; echo &quot;exit=$?&quot;
+</code></pre>
 <h2>Common Misconceptions</h2>
 <ul>
 <li><strong>&quot;Grant broad allow rules and deny only the dangerous ones.&quot;</strong> A Bash deny is escaped by a change of spelling. Layer the sandbox under any broad allow.</li>

@@ -53,7 +53,7 @@ flowchart LR
 
 ### 모바일 게임의 숫자
 
-- GameAnalytics 2025 모바일 벤치마크(게임 약 11,600개)는 중앙값 D1 약 22%, D7 약 3.4~3.9%, D30 1% 미만, 상위 25%의 D1 약 26~28%를 보고했다 (2차 요약 기준).
+- GameAnalytics 2026 벤치마크(2025년 데이터, 월 활성 1,000명 이상 모바일 게임 16,000여 개)는 중앙값 D1 약 22%, D7 4% 미만, D30 약 0.7~0.8%, 상위 25%의 D1 30% 남짓을 보고했다 (2차 요약 기준).
 - 매출 = DAU × ARPDAU. DAU는 신규 설치와 리텐션의 곱으로 만들어지므로, 리텐션이 낮으면 매일 대량 설치(대개 유료 광고)가 필요하다.
 - IAP 매출에는 앱스토어 수수료가 붙는다 (06 문서). 광고 매출은 광고 네트워크 정산 기준이다 (05 문서).
 
@@ -140,7 +140,7 @@ Valve 30% 차감 → 7 × 0.7 = 4.90달러 → 1,400원 환율에서 6,860원
 - [How To Market A Game - Benchmarks](https://howtomarketagame.com/benchmarks/) (접근 2026-09-29)
 - [presskit.gg - How to Get More Steam Wishlists Before Launch](https://presskit.gg/field-guides/how-to-build-steam-wishlist) (접근 2026-09-29)
 - [Game World Observer - 41k games released on Steam over past 3 years (2023-10-06)](https://gameworldobserver.com/2023/10/06/steam-stats-41k-games-last-3-years-half-made-500-or-less) (접근 2026-09-29)
-- [GameAnalytics - 2025 Mobile Gaming Benchmarks](https://www.gameanalytics.com/reports/2025-mobile-gaming-benchmarks) (접근 2026-09-29)
+- [GameAnalytics - 2026 Mobile & PC Gaming Benchmarks](https://www.gameanalytics.com/reports/2026-mobile-pc-gaming-benchmarks) (2025년 데이터, 접근 2026-09-29)
 - [대한민국 정책브리핑 - 게임 확률형 아이템 정보, 3월 22일부터 공개](https://www.korea.kr/news/policyNewsView.do?newsId=148924297) (접근 2026-09-29)
 - [법률신문 - 확률형 아이템 표시의무 위반에 관한 소송 특례 시행](https://www.lawtimes.co.kr/news/articleView.html?idxno=210245) (접근 2026-09-29)
 - [아시아경제 - 스팀, 국내 자체등급분류 사업자 자격 획득 검토 (2024-07-03)](https://www.asiae.co.kr/article/2024070317305284345) (접근 2026-09-29)

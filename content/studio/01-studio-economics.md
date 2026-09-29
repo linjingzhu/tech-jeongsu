@@ -81,7 +81,7 @@ flowchart TD
 
 | 자료 | 내용 |
 |---|---|
-| RevenueCat, State of Subscription Apps 2025 | 새로 출시된 구독 앱 중 하위 25%는 첫해 매출이 19달러 이하, 상위 5%는 8,880달러 이상으로 400배 넘게 차이 |
+| RevenueCat, State of Subscription Apps 2025 | 새로 출시된 구독 앱의 출시 2년 뒤 앱당 매출(달러): 하위 25%는 19달러 이하, 상위 5%는 8,880달러 이상으로 400배 넘게 차이 |
 | VG Insights, Global Indie Games Market Report 2024 (Game World Observer 보도) | 2024년 1~9월 Steam 인디 출시작 12,000개 이상 중 0.5% 미만이 전체 매출의 약 80%를 차지할 것으로 추정 |
 | SteamDB (2025-12) | 2025년 Steam 출시작 19,000개 이상, 그중 거의 절반이 리뷰 10개 미만 |
 
@@ -140,5 +140,6 @@ Kevin Kelly는 2008년 에세이 "1,000 True Fans"에서 창작자가 해마다 
 - [Default Alive or Default Dead? — Paul Graham](https://paulgraham.com/aord.html) (2015-10, 접속 2026-09-28)
 - [1000 True Fans — Kevin Kelly, The Technium](https://kk.org/thetechnium/1000-true-fans/) (2008-03, 접속 2026-09-28)
 - [State of Subscription Apps 2025 — RevenueCat](https://www.revenuecat.com/state-of-subscription-apps-2025) (2025-03, 접속 2026-09-28)
+- [The State of Subscription Apps 2025: The year AI ate everything — RevenueCat Blog](https://www.revenuecat.com/blog/company/the-state-of-subscription-apps-2025-launch) (2025-03, "after two years" 기준 확인, 접속 2026-09-29)
 - [Indie games come close to AA/AAA games in revenue on Steam — Game World Observer](https://gameworldobserver.com/2024/10/16/indie-games-revenue-steam-vs-aaa-titles-vg-insights) (2024-10-16, VG Insights 보고서 인용, 접속 2026-09-28)
 - [More than 19,000 games launched on Steam this year—but almost half have fewer than 10 reviews — PC Gamer](https://www.pcgamer.com/gaming-industry/more-than-19-000-games-launched-on-steam-this-year-but-almost-half-have-fewer-than-10-reviews/) (2025-12, 접속 2026-09-28)
