@@ -73,6 +73,9 @@ window.UI_TEXT = {
         "Headless · CI · Cloud 실행",
         "AI 토큰 효율화의 원리",
         "토큰 절약 실전: 도구별 방법",
+        "AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스",
+        "루프 엔지니어링",
+        "리버스 엔지니어링: 법과 합법적 활용",
       ],
       [
         "Git 전체 구조",
@@ -238,6 +241,9 @@ window.UI_TEXT = {
         "Headless, CI and Cloud Runs",
         "Principles of AI Token Efficiency",
         "Saving Tokens in Practice",
+        "Layers of AI Engineering: Prompt, Context, Harness",
+        "Loop Engineering",
+        "Reverse Engineering: Law and Lawful Uses",
       ],
       [
         "The big picture of Git",

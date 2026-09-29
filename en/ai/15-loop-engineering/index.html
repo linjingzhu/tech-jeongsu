@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Loop Engineering: Designing the Repetition That Drives Your Agents | MyAI</title>
+    <meta name="description" content="&quot;Layers of AI Engineering: Prompt, Context, Harness&quot; covered the layers around a single agent run. This document covers the layer above: who strings many…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/15-loop-engineering/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/15-loop-engineering/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/15-loop-engineering/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/15-loop-engineering/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Loop Engineering: Designing the Repetition That Drives Your Agents | MyAI" />
+    <meta property="og:description" content="&quot;Layers of AI Engineering: Prompt, Context, Harness&quot; covered the layers around a single agent run. This document covers the layer above: who strings many…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/15-loop-engineering/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/15-loop-engineering.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-eng-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-eng-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link active" aria-current="page" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Loop Engineering</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Loop Engineering: Designing the Repetition That Drives Your Agents</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Design a loop that takes over prompting, verification, retries and stopping instead of prompting an agent by hand, tell the six building blocks and the loop shapes apart, set stop conditions and cost caps in numbers, and head off the common failure modes.</p>
+</blockquote>
+<p>&quot;Layers of AI Engineering: Prompt, Context, Harness&quot; covered the layers around a single agent run. This document covers the layer above: <strong>who strings many runs together, and how</strong>. Loop engineering is designing the control system that prompts an agent, verifies the result, feeds failures back for another try, and decides when to stop. Details of headless and scheduled runs are in &quot;Headless, CI and Cloud Runs&quot;, hooks and permissions in &quot;Permissions, Sandbox, Hooks&quot;, and token prices and the compounding formula in &quot;Principles of AI Token Efficiency&quot;, so here we cover only the loop angle. Tools and features are <strong>as of 2026-09</strong>; anything not confirmed in official documentation or source says so. Dollar-to-won conversions use 1 USD = 1,400 KRW (an assumption).</p>
+<h2>Key Concepts</h2>
+<h3>The name and its roots</h3>
+<p>On 2026-06-07 Peter Steinberger posted on X, in substance, that you should no longer be prompting coding agents but designing loops that prompt your agents (checked via search results; the post itself could not be opened). The same month Boris Cherny, who leads Claude Code, is widely quoted as saying, in substance, &quot;I don&#39;t prompt Claude anymore. Loops prompt it. My job is to write loops&quot;, but the original video or post was not checked; only secondary sources were. Around 2026-06-08 Addy Osmani&#39;s essay &quot;Loop Engineering&quot; framed a stack: prompt engineering, harness engineering above it, and loop engineering one floor above that (checked via search results; the essay itself could not be opened). If the harness decides what an agent can do <strong>within one run</strong>, the loop decides <strong>what to ask for next, what counts as a pass, and when to stop</strong>. The lower floors are covered in &quot;Layers of AI Engineering: Prompt, Context, Harness&quot;.</p>
+<ul>
+<li><strong>ReAct</strong> (Yao et al., arXiv 2022-10, ICLR 2023): the model alternates reasoning (thought) and action, and uses the environment&#39;s observation for the next thought. It is the prototype of the <strong>inner loop</strong> in which today&#39;s agents call tools and read results within one turn.</li>
+<li><strong>Ralph</strong> (Geoffrey Huntley, 2025): calling an agent again and again with the same prompt inside a shell <code>while</code> loop. Each iteration clears the context, and state lives on disk in a plan file and commits. Tests, type checks and lints act as <strong>backpressure</strong> that sends bad work back. The core is one line, <code>while :; do cat PROMPT.md | claude ; done</code> (ghuntley/how-to-ralph-wiggum). That the first example in 2025-07 used the Amp CLI was checked via search results only. The &quot;ralph-loop&quot; plugin in Anthropic&#39;s official plugin repository implements the same idea with a <strong>Stop hook</strong> instead of a shell: when the session tries to end, the hook blocks it and feeds the same prompt back in. <code>--max-iterations</code> defaults to unlimited, and the README says to <strong>always</strong> set it (because <code>--completion-promise</code> is a single exact string match).</li>
+</ul>
+<h3>The six building blocks</h3>
+<table>
+<thead>
+<tr>
+<th>Building block</th>
+<th>Design question</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Goal and done criteria</td>
+<td>What must be true for it to be finished? Can a machine judge it?</td>
+<td>&quot;<code>npm test</code> exits 0, and no existing test file changed&quot;</td>
+</tr>
+<tr>
+<td>Verifier</td>
+<td>Who judges a pass, with what? Is it separate from the maker?</td>
+<td>Tests, linters, type checks, evals, an adversarial reviewer on a different model</td>
+</tr>
+<tr>
+<td>Feedback injection</td>
+<td>Which part of the failure goes into the next iteration?</td>
+<td>Names of failing tests and the last 40 log lines, a list of review findings</td>
+</tr>
+<tr>
+<td>Stop conditions</td>
+<td>How many tries, how much money, how many minutes? What if nothing improves?</td>
+<td>3 attempts, <code>--max-budget-usd 3</code>, stop when the same failure text appears twice</td>
+</tr>
+<tr>
+<td>State and records</td>
+<td>What stays on disk between iterations?</td>
+<td>Commits, <code>PROGRESS.md</code>, a list of ruled-out causes</td>
+</tr>
+<tr>
+<td>Human checkpoints</td>
+<td>Where does a person approve?</td>
+<td>Before merge, deploy or anything irreversible; on a Blocked report</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. Loop shapes</h3>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>One turn of the loop</th>
+<th>What starts the next iteration</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inner loop (tool calls)</td>
+<td>Reason → call a tool → observe the result</td>
+<td>The model itself (the tool already runs it)</td>
+<td>Tool calls within one Claude Code turn, ReAct</td>
+</tr>
+<tr>
+<td>Outer loop</td>
+<td>One session → verify → next session</td>
+<td>A script, hook or scheduler</td>
+<td>Ralph, a <code>claude -p</code> shell loop, <code>/goal</code></td>
+</tr>
+<tr>
+<td>Retry loop</td>
+<td>Failure → feedback → retry</td>
+<td>The verifier&#39;s result</td>
+<td>Up to 3 tries until the tests pass</td>
+</tr>
+<tr>
+<td>Review loop</td>
+<td>Writer → reviewer → fixer</td>
+<td>Whether findings remain, and their severity</td>
+<td>Writing this site&#39;s documents (Applied section below)</td>
+</tr>
+<tr>
+<td>Scheduled or recurring loop</td>
+<td>Once per time slot or event</td>
+<td>Cron, a Routine, <code>/loop</code></td>
+<td>Morning PR cleanup, deploy checks</td>
+</tr>
+<tr>
+<td>Fan-out / fan-in</td>
+<td>Several workers in parallel → collect and integrate</td>
+<td>A manager</td>
+<td>Work packages per worktree, integration waves</td>
+</tr>
+</tbody></table>
+<h3>2. A loop cannot be better than its verifier</h3>
+<p>Anthropic&#39;s &quot;Building effective agents&quot; (2024-12) says an agent must get <strong>ground truth</strong> from the environment at each step (tool results, code execution) to assess its progress, and describes the <strong>evaluator-optimizer</strong> workflow in which one LLM generates and another evaluates and feeds back. The verifier is the loop&#39;s only evidence that it is &quot;done&quot;, so with a weak verifier the loop <strong>converges quickly on a wrong answer</strong>. So put <strong>deterministic checks</strong> (tests, type checks, lint, build) first, hand judgement calls to a <strong>fresh-context reviewer</strong> that sees only the diff and the evidence, never the maker&#39;s reasoning history, and use a <strong>different model</strong> where you can. LLM evaluators tend to recognise and rate their own output higher (self-preference; Panickssery et al., NeurIPS 2024), and models of the same kind share blind spots.</p>
+<h3>3. Set stop conditions in three layers</h3>
+<p>Any single condition leaks. Combine an <strong>attempt budget</strong> (how many), a <strong>cost and time budget</strong> (how much, how long) and <strong>no-progress detection</strong> (is the same failure repeating).</p>
+<pre><code class="language-mermaid">flowchart TD
+    G[Goal and done criteria] --&gt; O[Orient: read records and current state]
+    O --&gt; A[Act: smallest reversible change]
+    A --&gt; V{Verifier passes?}
+    V --&gt;|yes| D[Done: evidence and NOT VERIFIED list]
+    V --&gt;|no| R[Record: result and ruled-out causes]
+    R --&gt; S{Same failure a second time?}
+    S --&gt;|yes| H[Rebuild the diagnosis]
+    S --&gt;|no| B{Fewer than 3 attempts and budget left?}
+    H --&gt; B
+    B --&gt;|yes| F[Inject the failure signal into the next prompt]
+    F --&gt; O
+    B --&gt;|no| X[Budget spent: report ruled-out causes]
+    A -.-&gt;|needs a decision, access or credential| K[Blocked: human checkpoint]
+</code></pre>
+<h3>4. Keep state outside the context, on disk</h3>
+<p>Over a long loop the context degrades (context rot, &quot;Principles of AI Token Efficiency&quot;). So each iteration starts with a fresh context and whatever must carry over goes through files. Anthropic&#39;s &quot;Effective harnesses for long-running agents&quot; (2025-11) shows a first session that prepares the environment and later sessions that carry on through a progress log (<code>claude-progress.txt</code>), a JSON feature list with a <code>passes</code> field, and descriptive git commits. The same article observed agents declaring completion too early and marking features done without testing. Three records must carry over: <strong>what was done</strong> (commits), <strong>what remains</strong> (plan and progress files), and <strong>what was ruled out</strong> (causes tried and their results).</p>
+<h3>5. Building loops with the tools (2026-09)</h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep going until a condition holds</td>
+<td><code>/goal &lt;condition&gt;</code>: after every turn a small fast model (Haiku by default on the Claude API) judges it from evidence surfaced in the conversation. Conditions up to 4,000 characters, cleared with <code>/goal clear</code>. Write any turn limit into the condition itself</td>
+<td>Not checked</td>
+</tr>
+<tr>
+<td>Repeat on an interval</td>
+<td><code>/loop 5m &lt;prompt&gt;</code>. Without an interval, Claude picks between 1 minute and 1 hour. Recurring tasks expire after 7 days, up to 50 per session</td>
+<td>Not checked</td>
+</tr>
+<tr>
+<td>Block the agent from stopping</td>
+<td>A <code>Stop</code> hook returns <code>&quot;decision&quot;: &quot;block&quot;</code> with a <code>reason</code>, or a prompt hook returns <code>ok: false</code>. After 8 consecutive blocks without progress it is overridden (<code>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</code>)</td>
+<td>Not checked</td>
+</tr>
+<tr>
+<td>Scripted runs and caps</td>
+<td><code>claude -p</code>, <code>--output-format json</code> (<code>total_cost_usd</code>), <code>--resume &lt;id&gt;</code>. <code>--max-turns</code> (exits with an error at the limit) and <code>--max-budget-usd</code> (includes subagent spend) are print mode only</td>
+<td><code>codex exec</code>, <code>--json</code>, <code>-o &lt;file&gt;</code>, <code>--output-schema</code>, <code>codex exec resume --last</code>. Turn or cost cap flags not checked</td>
+</tr>
+<tr>
+<td>Review by a different model</td>
+<td>A fresh-context subagent or a separate session</td>
+<td><code>codex exec review --uncommitted</code>, <code>--base &lt;branch&gt;</code></td>
+</tr>
+<tr>
+<td>Scheduling outside a session</td>
+<td>Routines (<code>/schedule</code>, minimum 1 hour, research preview, acts as you), Desktop scheduled tasks</td>
+<td>Run <code>codex exec</code> from a CI <code>schedule</code></td>
+</tr>
+</tbody></table>
+<p>Under the hood <code>/goal</code> is a session-scoped, prompt-based Stop hook. The evaluator uses no tools, so a condition like &quot;the tests pass&quot; is judged only once the agent has run the tests and the result shows in the conversation. Follow &quot;Permissions, Sandbox, Hooks&quot; for permission and hook setup, and &quot;Headless, CI and Cloud Runs&quot; for headless authentication and CI. Below is the skeleton of an outer loop with all three layers of stop conditions.</p>
+<pre><code class="language-bash">#!/usr/bin/env bash
+set -u
+echo &quot;none&quot; &gt; prev-failure.txt
+for i in 1 2 3; do                                   # attempt budget
+  claude -p &quot;$(cat PROMPT.md)&quot; --permission-mode acceptEdits \
+    --allowedTools &quot;Bash(git add *)&quot; &quot;Bash(git commit *)&quot; \
+    --max-turns 30 --max-budget-usd 3 --output-format json &gt; &quot;run-$i.json&quot;   # turn and cost cap per run
+  if npm test &gt; &quot;test-$i.log&quot; 2&gt;&amp;1; then echo &quot;DONE at attempt $i&quot;; exit 0; fi
+  grep -E &quot;FAIL|Error&quot; &quot;test-$i.log&quot; | head -n 40 &gt; last-failure.txt       # feedback for PROMPT.md to read
+  cmp -s last-failure.txt prev-failure.txt &amp;&amp; { echo &quot;NO PROGRESS: rethink the diagnosis&quot;; exit 2; }
+  cp last-failure.txt prev-failure.txt
+done
+echo &quot;BUDGET SPENT: see PROGRESS.md for ruled-out causes&quot;; exit 1
+</code></pre>
+<p><code>PROMPT.md</code> says: &quot;Read <code>PROGRESS.md</code> and <code>last-failure.txt</code> first; at the end, write the causes you ruled out into <code>PROGRESS.md</code> and commit; do not edit test files.&quot; The key point is that the verifier (<code>npm test</code>) runs outside the agent.</p>
+<h2>Applied: This Repository&#39;s Loop</h2>
+<h3>The unit loop: <code>.ai/LOOP.md</code></h3>
+<p>This repository&#39;s agent rules in <code>.ai/LOOP.md</code> fix one attempt at four steps. <strong>Orient</strong> (read what you are about to change and the gate that decides whether the change is reached at all) → <strong>Act</strong> (the smallest reversible change that could settle the question) → <strong>Verify</strong> (the cheapest check that answers the question you actually have, and write down which question) → <strong>Record</strong> (the result, and what it did not answer). It warns that Record is the step dropped under time pressure, and dropping it turns three attempts into the same attempt three times.</p>
+<table>
+<thead>
+<tr>
+<th><code>.ai/LOOP.md</code> rule</th>
+<th>Building block</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The same failure twice means the diagnosis is wrong, not the value. Three attempts on one failure ends the attempt; report what was ruled out. Never repeat an action whose result you did not read</td>
+<td>No-progress detection, attempt budget, state and records, feedback injection</td>
+</tr>
+<tr>
+<td>Signs of non-convergence: the same error text, a growing diff with a same-sized failure, an edit that undoes an earlier edit, a verification target moving toward something easier, a new assumption each time the explanation is challenged</td>
+<td>No-progress and reward-hacking detection</td>
+</tr>
+<tr>
+<td>Waiting is not looping: where you can schedule a later check, schedule it and end the turn</td>
+<td>Scheduled loop</td>
+</tr>
+<tr>
+<td>A run ends in exactly one of Done, Blocked or Budget spent, and says which</td>
+<td>Stop conditions, human checkpoints</td>
+</tr>
+</tbody></table>
+<h3>The review loop that built this site</h3>
+<p>This site&#39;s documents were built with this review loop. A <strong>writer agent</strong> drafts → an <strong>adversarial reviewer on a different model</strong> reads the draft in a fresh context, attacks it, and grades each finding → a <strong>fixer</strong> addresses the findings. After three rounds of this comes a <strong>fix-verification pass</strong> that re-reads only what was fixed, and finally build, tests and deploy. The round cap (3) is the attempt budget, the fix verification plus build and tests are the final verifier, and merge and deploy are the human checkpoints. <code>.ai/EXECUTION.md</code> gives a reviewer only the requirements, relevant architecture, the diff, test and build evidence and the review rules, and <strong>never the implementer&#39;s reasoning history</strong>. Below is the per-round record format. <strong>The finding counts by severity are illustrative numbers</strong>; &quot;What changed&quot; is taken from this repository&#39;s commit log (AI documents 06 to 13).</p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th align="right">Critical</th>
+<th align="right">Major</th>
+<th align="right">Minor</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td>Hooks fail closed and catch every force-push form, a baseline-aware Stop hook, Codex profiles, bare-mode auth, TTL guidance, nav-title references</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td>Closed Hook 1 bypasses (digit-combined short flags, long-option prefixes, backslash escapes, <code>$</code> expansions, line continuations), sanitised <code>session_id</code>, corrected the Codex profile error and TOML fields, narrowed the keep-alive guidance</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td>Closed more Hook 1 bypasses (fail closed on brace expansion, 71 cases in the case table), documented branch deletion as out of scope (branch protection covers it)</td>
+</tr>
+<tr>
+<td>Fix verification</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td>(Example) Defer the remaining Minor to the next task, then build, test and deploy</td>
+</tr>
+</tbody></table>
+<p>One lesson stands out in the record. <strong>Hook 1 bypasses came back in rounds 1, 2 and 3.</strong> Blocking a new bypass form each round is the shape of &quot;the same failure repeated with parameter tweaks&quot;. Applying the <code>.ai/LOOP.md</code> rule, the second recurrence was the moment to question the diagnosis (that string-matching shell commands can catch every form). Handing part of it to branch protection in round 3 can be read as that change of diagnosis.</p>
+<h3>Loop design checklist: what to decide before starting</h3>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Question to ask</th>
+<th>This repository&#39;s answer (example)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Done criteria and final report</td>
+<td>Is it a sentence a machine can judge? Which end state will be reported?</td>
+<td>Build and tests pass, no unresolved Critical or Major review findings. One of Done, Blocked or Budget spent, plus a NOT VERIFIED list</td>
+</tr>
+<tr>
+<td>Verifier</td>
+<td>Is it separate from the maker? Does it fail a deliberately broken change?</td>
+<td>A fresh-context reviewer on a different model, plus build and tests</td>
+</tr>
+<tr>
+<td>Feedback</td>
+<td>What goes into the next iteration, and how much?</td>
+<td>Only the graded list of findings, never the full log</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>After how many tries, how much money, how many minutes?</td>
+<td>3 attempts per failure, 3 review rounds, <code>--max-budget-usd</code> and <code>--max-turns</code> per run, the overall cap computed as in the cost section below</td>
+</tr>
+<tr>
+<td>No-progress detection</td>
+<td>What being the same counts as no progress?</td>
+<td>The same failure text twice, the same kind of finding in every round</td>
+</tr>
+<tr>
+<td>State and records</td>
+<td>What is kept between iterations?</td>
+<td>Commits, the per-round findings table, ruled-out causes</td>
+</tr>
+<tr>
+<td>Forbidden changes</td>
+<td>How do you stop changes that weaken the verifier?</td>
+<td>Changes to tests or check scripts need separate approval, checked in the diff</td>
+</tr>
+<tr>
+<td>Human checkpoints</td>
+<td>Where does a person look?</td>
+<td>Before merge and deploy, on a Blocked report</td>
+</tr>
+</tbody></table>
+<h2>Going Deeper</h2>
+<h3>Iteration multiplies token cost</h3>
+<p>We reuse the assumptions of &quot;Principles of AI Token Efficiency&quot; (fixed prefix S = 20,000, growth D = 3,000 per turn, 800 output tokens per turn, caching on, Opus 5.5 and Sonnet 5.5 prices). With a fresh session per role, loop cost grows <strong>in proportion to the number of iterations</strong>; packed into one session, it grows <strong>close to the square of the turn count</strong> because the history is resent. The reviewer is priced as Sonnet 5.5 for convenience; for a model from another vendor, plug in that vendor&#39;s prices.</p>
+<pre><code class="language-text">writes = S + (N-1)*D ; reads = N*S + D*N*(N-1)/2 - writes
+writer   Opus 5.5,   N=30: 107,000*$5   + 1,798,000*$0.20 + 24,000*$20 = $1.3746
+reviewer Sonnet 5.5, N=10:  47,000*$2.5 +   288,000*$0.20 +  8,000*$10 = $0.2551
+fixer    Opus 5.5,   N=15:  62,000*$5   +   553,000*$0.20 + 12,000*$20 = $0.6606
+3 rounds + fix check = 1.3746 + 3*(0.2551 + 0.6606) + 0.2551 = $4.3768
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Design (assumed)</th>
+<th align="right">Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Write once and stop (writer only)</td>
+<td align="right">$1.37 (1,924 KRW)</td>
+</tr>
+<tr>
+<td>Retry loop at $1.37 per attempt, using all 3 attempts</td>
+<td align="right">$4.12 (5,773 KRW)</td>
+</tr>
+<tr>
+<td>3 review rounds plus fix verification, a fresh session per role</td>
+<td align="right">$4.38 (6,128 KRW)</td>
+</tr>
+<tr>
+<td>The same work packed into one Opus 5.5 session of 115 turns (30 + 3×(10 + 15) + 10): writes 362,000×$5 + reads 21,603,000×$0.20 + output 92,000×$20</td>
+<td align="right">$7.97 (11,159 KRW)</td>
+</tr>
+</tbody></table>
+<p>The review loop costs about 3.2 times a single write, but stacking the same work in one session costs about 1.8 times more again. A loop with no cap multiplies this by however many iterations it runs. The rule from &quot;Principles of AI Token Efficiency&quot;, <strong>cost per task = cost per attempt ÷ success rate</strong>, still applies: a weak verifier overstates the success rate and so understates the cost per task. <code>/goal</code> evaluation is billed on the small fast model, and the official docs say it is typically negligible next to the main work.</p>
+<h3>Failure modes</h3>
+<table>
+<thead>
+<tr>
+<th>Failure mode</th>
+<th>Symptom</th>
+<th>Countermeasure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>False convergence on a weak verifier</td>
+<td>Green arrives fast, but a person finds it wrong</td>
+<td>Verify the verifier first: check that a deliberately broken change fails</td>
+</tr>
+<tr>
+<td>Cost runaway</td>
+<td>It never ends, and each iteration costs the same or more</td>
+<td><code>--max-budget-usd</code> and <code>--max-turns</code> per run, an overall attempt cap, a fresh session per iteration</td>
+</tr>
+<tr>
+<td>The same failure repeated with value tweaks</td>
+<td>The same error text, only the diff grows</td>
+<td>On the second identical failure change the diagnosis; on the third, stop and report what was ruled out</td>
+</tr>
+<tr>
+<td>Reward hacking</td>
+<td>Tests deleted, weakened or skipped, scoring code edited</td>
+<td>Put &quot;test files unchanged&quot; in the done criteria and check the diff, add a protected-path hook. METR (2025-06) reported frontier models trying to raise scores by editing tests or scoring code</td>
+</tr>
+<tr>
+<td>Context drift</td>
+<td>After a long loop, the original constraints are forgotten</td>
+<td>A fresh context per iteration, the goal and constraints re-injected every time, records on disk</td>
+</tr>
+<tr>
+<td>Shared blind spots of writer and reviewer</td>
+<td>Both miss the same thing</td>
+<td>A reviewer on a different model (from a different vendor where possible), given the diff and evidence instead of the reasoning history</td>
+</tr>
+</tbody></table>
+<p>If a loop will run against someone else&#39;s software or service, check the legal boundaries in &quot;Reverse Engineering: Law and Lawful Uses&quot; before you start.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Run the loop long enough and it will get it right.&quot;</strong> A loop converges on whatever the verifier says. With a weak verifier it converges quickly on a wrong answer.</li>
+<li><strong>&quot;Just run it once more.&quot;</strong> The same failure twice means the diagnosis is wrong. A list of ruled-out causes is worth more than a third try.</li>
+<li><strong>&quot;A reviewer on the same model is enough.&quot;</strong> There is self-preference bias and shared blind spots. A fresh context and a different model are the default.</li>
+<li><strong>&quot;<code>/loop</code> and <code>/goal</code> are the same thing.&quot;</strong> <code>/loop</code> starts the next turn on a time interval; <code>/goal</code> does so until a condition holds. For anything that must run outside a session, use Routines.</li>
+<li><strong>&quot;One long session is cheaper than several short ones.&quot;</strong> Resending the history grows close to the square of the turn count. Keeping records on disk and cutting to fresh sessions is usually both cheaper and more accurate.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Write the done criteria for one task you are working on as a single sentence a machine can judge. What is the easiest change that would weaken that sentence, and how would you prevent it?</li>
+<li>In the shell loop above, which line handles each of the three layers of stop conditions (attempts, cost and time, no progress)?</li>
+<li>If the same kind of finding appears in three consecutive review rounds, what would you ask the fixer to do differently?</li>
+<li>With writer N = 30, reviewer N = 10 and fixer N = 15, what does the loop cost with only 2 review rounds and no fix verification (same assumptions as above)?</li>
+<li>How does the fact that the <code>/goal</code> evaluator never reads files itself change the way you write a done condition?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/scheduled-tasks">Run prompts on a schedule</a> · <a href="https://code.claude.com/docs/en/goal">Keep Claude working toward a goal</a> · <a href="https://code.claude.com/docs/en/hooks-guide">Automate actions with hooks</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/routines">Automate work with routines</a> · <a href="https://code.claude.com/docs/en/headless">Run Claude Code programmatically</a> · <a href="https://code.claude.com/docs/en/cli-reference">CLI reference</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://github.com/openai/codex">openai/codex <code>codex-rs/exec/src/cli.rs</code>, <code>codex-rs/utils/cli/src/shared_options.rs</code></a> — OpenAI, checked 2026-09-29</li>
+<li><a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a> (2024-12-19) · <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a> (2025-11-26) — Anthropic Engineering, checked 2026-09-29</li>
+<li><a href="https://github.com/ghuntley/how-to-ralph-wiggum">ghuntley/how-to-ralph-wiggum</a> · <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop">anthropics/claude-plugins-official <code>plugins/ralph-loop</code></a> — GitHub, checked 2026-09-29</li>
+<li><a href="https://ghuntley.com/ralph/">Ralph Wiggum as a &quot;software engineer&quot;</a> — Geoffrey Huntley, 2025 · <a href="https://x.com/steipete/status/2063697162748260627">Peter Steinberger&#39;s post on X</a> — 2026-06-07 · <a href="https://addyo.substack.com/p/loop-engineering">Loop Engineering</a> — Addy Osmani, 2026-06 (also published on O&#39;Reilly Radar). All checked via search results 2026-09-29</li>
+<li><a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a> — Yao et al., 2022-10, ICLR 2023, checked via search results 2026-09-29</li>
+<li><a href="https://metr.org/blog/2025-06-05-recent-reward-hacking/">Recent Frontier Models Are Reward Hacking</a> — METR, 2025-06-05 · <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/7f1f0218e45f5414c79c0679633e47bc-Abstract-Conference.html">LLM Evaluators Recognize and Favor Their Own Generations</a> — Panickssery et al., NeurIPS 2024. Both checked via search results 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/14-engineering-layers/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Layers of AI Engineering: Prompt, Context, Harness</span></a><a class="page-link next" href="../../../en/ai/16-reverse-engineering/"><span><small>Next</small>Reverse Engineering: Law and Lawful Uses</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

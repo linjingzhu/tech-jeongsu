@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Reverse Engineering: Law and Lawful Uses | MyAI</title>
+    <meta name="description" content="A solo studio runs into reverse engineering too: when it studies a competitor&#39;s pricing, and when it has to reread its own code and data files that were l…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/16-reverse-engineering/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/16-reverse-engineering/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/16-reverse-engineering/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/16-reverse-engineering/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Reverse Engineering: Law and Lawful Uses | MyAI" />
+    <meta property="og:description" content="A solo studio runs into reverse engineering too: when it studies a competitor&#39;s pricing, and when it has to reread its own code and data files that were l…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/16-reverse-engineering/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/16-reverse-engineering.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-eng-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-eng-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link active" aria-current="page" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Reverse Engineering: Law and Lawful Uses</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Reverse Engineering: Law and Lawful Uses</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain what reverse engineering is and why people do it, tell apart the boundaries set by Korean, US and EU law and by contracts, and carry out competitor product analysis and your own legacy decoding within lawful limits, verifying as you go.</p>
+</blockquote>
+<p>A solo studio runs into reverse engineering too: when it studies a competitor&#39;s pricing, and when it has to reread its own code and data files that were left without documentation. This document covers <strong>the legal boundaries and lawful uses</strong>, not analysis techniques. Permissions to give an agent are in &quot;Permissions, Sandbox, Hooks&quot;; what to show the model in &quot;Layers of AI Engineering: Prompt, Context, Harness&quot;; the repeating structure that feeds verification back in &quot;Loop Engineering&quot;; and who owns outsourced code in &quot;Contracts · IP · Open Source&quot;. Statutes and cases are <strong>as of 2026-09</strong>; items confirmed only through search results, because the original could not be opened directly, are marked in the references.</p>
+<blockquote>
+<p><strong>This document is general information, not legal advice.</strong> Legal interpretation depends on the facts and on timing. Consult a lawyer before analysing anyone else&#39;s software or service.</p>
+</blockquote>
+<h2>Key Concepts</h2>
+<h3>Definition</h3>
+<p><strong>Forward engineering</strong> goes from requirements through design and implementation to a finished product. <strong>Reverse engineering</strong> runs the other way. It starts from a finished product and recovers its design, structure and behaviour. A good output is not a copy of the original but <strong>an explanation with evidence</strong>. Sentences such as &quot;the payment screen appears after the 7-day free trial&quot; or &quot;the first field of this save file is a version number&quot;, together with a way to check them again, are the result.</p>
+<h3>Why people do it</h3>
+<ul>
+<li><strong>Interoperability</strong>: to let your program exchange information with other programs or files.</li>
+<li><strong>Maintaining your own legacy</strong>: to understand again your own code and data formats whose documents and authors are gone.</li>
+<li><strong>Studying competitors&#39; products</strong>: to learn onboarding, pricing and feature structure by using them as a normal customer.</li>
+<li><strong>Security research</strong>: for authorised professionals to find and fix flaws.</li>
+</ul>
+<p>Even with the same purpose, the target and the method decide whether it is lawful. The principles below cover that boundary.</p>
+<h2>Principles</h2>
+<h3>Korea: reverse analysis of program code under the Copyright Act</h3>
+<ul>
+<li><strong>Definition (Article 2, item 34)</strong>: copying or converting program code to obtain the information needed for an independently created program to interoperate with other programs.</li>
+<li><strong>Conditions (Article 101-4(1), &quot;Reverse Analysis of Program Code&quot;)</strong>: (1) a person using the program with legitimate authority, or a person they authorise, (2) where the information needed for interoperability cannot readily be obtained and obtaining it is unavoidable, (3) limited to the parts needed for interoperability.</li>
+<li><strong>Limits on use (Article 101-4(2))</strong>: the information obtained may not be used for purposes other than interoperability or given to third parties, and may not be used to develop, produce or sell a program substantially similar in expression to the target, or for any other copyright infringement.</li>
+<li><strong>Technological protection measures (Article 104-2, &quot;Prohibition of Circumvention of Technological Protection Measures&quot;)</strong>: circumventing protection measures without legitimate authority is prohibited. The same article lists a few exceptions, including reverse analysis of program code for interoperability, but they are narrow. Do not decide on your own whether an exception applies.</li>
+</ul>
+<h3>Korea: trade secrets and information networks</h3>
+<ul>
+<li><strong>Trade secrets (Unfair Competition Prevention and Trade Secret Protection Act, Article 2, items 2 and 3)</strong>: technical or business information that is not publicly known, has independent economic value and is kept secret is a trade secret. Acquiring it by theft, deception or other improper means, or using or disclosing what was acquired that way, is infringement.</li>
+<li><strong>Reverse engineering and trade secrets (Supreme Court Decision 96Da16605, 1996-12-23)</strong>: the Supreme Court set the injunction period on the premise that a trade secret can be acquired by lawful means such as independent development or reverse engineering. This reads as not treating the lawful purchase and analysis of a product on the market as an improper means in itself. Individual cases may still be judged differently.</li>
+<li><strong>Network intrusion (Network Act, Article 48(1))</strong>: entering an information network without legitimate access rights, or beyond the access permitted, is prohibited, and a violation can be a criminal offence. This document does not settle which penalty article applies.</li>
+<li><strong>The crawling case (Supreme Court Decision 2021Do1533, 2022-05-12)</strong>: in a case where a competitor&#39;s private app API was used to collect accommodation listings, acquittal on the criminal charges, including network intrusion, became final. On the same facts, <strong>a civil first-instance ruling was reported that awarded about 1 billion won for unfair competition by unauthorised use of another&#39;s work product (the catch-all provision in Article 2, item 1 of the Unfair Competition Prevention Act).</strong> The appeal outcome could not be confirmed. A criminal acquittal does not mean you are safe.</li>
+</ul>
+<h3>The US and the EU</h3>
+<ul>
+<li><strong>US DMCA §1201(f)</strong>: a person with the right to use a program lawfully may circumvent a technological measure solely to identify elements needed for an independently created program to interoperate, where those elements were not previously readily available. The condition is that this does not amount to copyright infringement.</li>
+<li><strong>Sega v. Accolade (9th Cir. 1992)</strong>: reverse analysis to make compatible games was fair use when it was the only way to reach unprotected elements and there was a legitimate reason.</li>
+<li><strong>Bowers v. Baystate (Fed. Cir. 2003)</strong>: a licence clause prohibiting reverse engineering was enforced. It shows that in the US a contract can narrow what the statute allows.</li>
+<li><strong>EU Directive 2009/24/EC</strong>: Article 6 lets a licensee or similar person decompile, when interoperability information is not readily available, only the parts needed, and bars using the information for other goals, giving it to others or developing a similar program. Article 8 makes contract terms contrary to Article 6 null and void.</li>
+</ul>
+<h3>Contracts: EULAs and ToS</h3>
+<p>Software EULAs and service terms of service (ToS) commonly prohibit reverse engineering, automated collection and unofficial clients. How far such clauses can narrow what Article 101-4 allows in Korea was not confirmed for this document. Apart from the legal answer, the practical risk is clear: account bans, loss of app store or API access, breach-of-contract claims and broken partnerships. For a solo studio, a single account ban can halt the business.</p>
+<h3>&quot;May I do this?&quot;</h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[What you want to analyse] --&gt; B{Is it your own code or data}
+    B --&gt;|Yes| C[Proceed: verify explanations with tests]
+    B --&gt;|No| D{Does it need bypassing protection or private server access}
+    D --&gt;|Yes| X[Do not do it]
+    D --&gt;|No| E{Are you only observing as a normal customer}
+    E --&gt;|Yes| F{Do the terms prohibit it}
+    F --&gt;|No| G[Generally fine: internal reference only]
+    F --&gt;|Yes| L[Stop and consult a lawyer]
+    E --&gt;|No| H{Is it for interoperability with no other source of the information}
+    H --&gt;|Yes| L
+    H --&gt;|No| X
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Conditions under which it is allowed</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Signing up to a competitor normally and recording screens, pricing and onboarding</td>
+<td>Normal sign-up and payment, terms followed, manual observation, internal use</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Integrating through public docs, public APIs or SDKs</td>
+<td>Follow the documented terms and rate limits</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Decoding your own code, outsourced code whose rights you received, or your own data files</td>
+<td>Ownership confirmed by contract</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Analysing purchased software to build a compatible tool</td>
+<td>Article 101-4 conditions met, EULA checked, advice first</td>
+<td>Medium to high</td>
+</tr>
+<tr>
+<td>Authorised security testing</td>
+<td>Only within written permission or a bug bounty scope</td>
+<td>High without permission</td>
+</tr>
+<tr>
+<td>Analysing a competitor&#39;s app to carry over features or code</td>
+<td>Not for interoperability; may hit the similar-program ban</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Automated collection of a competitor&#39;s data through a private API</td>
+<td>ToS breach; Network Act and unfair competition issues</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Defeating DRM or licence checks</td>
+<td>Prohibited outside the narrow exceptions of Article 104-2</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Reusing or redistributing extracted images, audio or fonts</td>
+<td>Not without the rights holder&#39;s permission</td>
+<td>High</td>
+</tr>
+</tbody></table>
+<p>The risk levels are this document&#39;s general judgement, not legal conclusions.</p>
+<h2>Applied: Lawful Reverse Engineering in a Solo Studio</h2>
+<h3>Competitor teardown: use it as a customer and record</h3>
+<p>Sign up as a normal customer and pay if needed. Record only what a person sees while using the product, with no automation tools and no private paths.</p>
+<table>
+<thead>
+<tr>
+<th>What to record</th>
+<th>What to write down</th>
+<th>Where it is used</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Onboarding</td>
+<td>Number of sign-up steps, time to first value, information requested</td>
+<td>Activation design</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>Plan names, prices, free limits, trial length, annual discount, cancellation steps</td>
+<td>Pricing design</td>
+</tr>
+<tr>
+<td>Funnel</td>
+<td>When payment is prompted, paywall placement, order and spacing of emails and pushes</td>
+<td>Lifecycle design</td>
+</tr>
+<tr>
+<td>Feature structure</td>
+<td>Menu structure, feature differences by plan, missing features</td>
+<td>Positioning, roadmap</td>
+</tr>
+<tr>
+<td>Customer voice</td>
+<td>Recurring complaints and praise in public reviews</td>
+<td>Differentiation hypotheses</td>
+</tr>
+</tbody></table>
+<ol>
+<li>Collect the records in one table with dates and screenshots. Prices and terms change often.</li>
+<li>Compare several competitors in the same columns and mark what everyone does and what nobody does.</li>
+<li>Turn the gaps into customer problems, test them in interviews from &quot;Market &amp; Customer Research · Segmentation&quot;, and put them into &quot;Discovery · Strategy · Roadmaps&quot;.</li>
+<li>Turn the confirmed differences into a positioning statement using &quot;Positioning · Messaging · Brand&quot;. Set prices with the framework in &quot;Paid Sales, Subscriptions and Pricing&quot;.</li>
+<li>Before naming a competitor in ads, read &quot;Law · Ethics · Ad Disclosure&quot;. Keep screenshots and copy as internal material and do not publish them.</li>
+</ol>
+<h3>Reading your own legacy code and data files with an AI agent</h3>
+<p>When you need to understand your own undocumented code, or save files your own app produced, an AI agent is a fast assistant. But the agent&#39;s explanation is a <strong>hypothesis</strong>, not a fact. A plausible but wrong explanation is the most dangerous kind.</p>
+<ol>
+<li><strong>Confirm ownership</strong>: check by contract that the code is yours or that its rights were transferred to you.</li>
+<li><strong>Separate the workspace</strong>: work on a copy, not the original, and narrow the agent&#39;s write and network permissions (&quot;Permissions, Sandbox, Hooks&quot;). Use only sample files your own app produced, and anonymise them first if customer data is mixed in.</li>
+<li><strong>One question at a time</strong>: ask narrowly, such as &quot;how does this function write the version field of the save file&quot;, rather than &quot;what does this module do&quot;.</li>
+<li><strong>Record explanations as hypotheses</strong>: attach one line on how to check each agent explanation.</li>
+<li><strong>Verify by running</strong>: run the existing tests, add characterization tests that pin current behaviour, and compare the outputs of the old program and the new code on the same input. If it fails, revise the hypothesis and ask again (&quot;Loop Engineering&quot;).</li>
+<li><strong>Document only what is confirmed</strong>: move only explanations that passed verification into the README or format documentation.</li>
+</ol>
+<pre><code class="language-python"># Characterization test: pin today&#39;s behaviour before trusting any explanation
+import json
+import subprocess
+
+
+def test_new_reader_matches_legacy_output(tmp_path):
+    out = tmp_path / &quot;new.json&quot;
+    subprocess.run([&quot;python&quot;, &quot;new_reader.py&quot;, &quot;samples/save_001.dat&quot;, str(out)], check=True)
+    legacy = json.loads(open(&quot;samples/save_001.legacy.json&quot;, encoding=&quot;utf-8&quot;).read())
+    assert json.loads(out.read_text(encoding=&quot;utf-8&quot;)) == legacy
+</code></pre>
+<h2>Going Deeper</h2>
+<h3>Where the lines blur</h3>
+<ul>
+<li><strong>Collecting public pages versus private APIs</strong>: public pages anyone can see and private APIs reached by imitating an app&#39;s internal traffic may be assessed differently in law. That a civil first-instance damages ruling was reported after the criminal acquittal in 2021Do1533 shows the gap.</li>
+<li><strong>Contract versus statute</strong>: the EU, through Article 8, does not let contracts remove the decompilation allowance, while the US Bowers case enforced a contractual ban. Korea&#39;s position was not settled for this document.</li>
+<li><strong>Services across borders</strong>: foreign services&#39; terms usually set the governing law and jurisdiction. Something that looks lawful in Korea may be disputed under the law of the country the terms name.</li>
+</ul>
+<h3>When to call a lawyer</h3>
+<ul>
+<li>When you plan to analyse someone else&#39;s software for interoperability</li>
+<li>When protection measures, licence checks or private servers are involved even slightly</li>
+<li>When you receive a warning letter or a notice of terms violation from a competitor</li>
+<li>When you plan to use analysis results in a product, an ad or a public post</li>
+</ul>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;I bought it, so I can analyse it however I like.&quot;</strong> Ownership aside, the Article 101-4 conditions and limits on use, and the contract terms, still apply.</li>
+<li><strong>&quot;If the app is public, its private API is public too.&quot;</strong> Being inside an app does not make an API public. Terms and Network Act issues remain.</li>
+<li><strong>&quot;A criminal acquittal means no problem.&quot;</strong> Civil liability and account bans are separate.</li>
+<li><strong>&quot;Saying it is for interoperability is enough.&quot;</strong> What is examined is whether it was really limited to the parts needed and whether the information could not be obtained otherwise.</li>
+<li><strong>&quot;The AI explained it, so it is right.&quot;</strong> An unverified explanation is a hypothesis. Confirm it with tests and output comparison.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Can you explain the three conditions in Article 101-4(1) and the limits on use in Article 101-4(2)?</li>
+<li>In a competitor teardown, name one permitted observation and one action to avoid.</li>
+<li>How did the criminal judgment in 2021Do1533 differ from the reported civil first-instance ruling, and what is the lesson for a studio?</li>
+<li>How do EU Article 8 and Bowers v. Baystate differ on the effect of contract clauses?</li>
+<li>When an AI agent explains a legacy file format, what would you use to verify that explanation before putting it in documentation?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%80%EC%9E%91%EA%B6%8C%EB%B2%95/%EC%A0%9C101%EC%A1%B0%EC%9D%984">Copyright Act, Article 101-4 (Reverse Analysis of Program Code)</a> — Korea Law Information Center, checked via search results 2026-09-29</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%80%EC%9E%91%EA%B6%8C%EB%B2%95/%EC%A0%9C2%EC%A1%B0">Copyright Act, Article 2 (Definitions)</a> · <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%80%EC%9E%91%EA%B6%8C%EB%B2%95/%EC%A0%9C104%EC%A1%B0%EC%9D%982">Article 104-2 (Prohibition of Circumvention of Technological Protection Measures)</a> — Korea Law Information Center, checked via search results 2026-09-29</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%B6%80%EC%A0%95%EA%B2%BD%EC%9F%81%EB%B0%A9%EC%A7%80%EB%B0%8F%EC%98%81%EC%97%85%EB%B9%84%EB%B0%80%EB%B3%B4%ED%98%B8%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C2%EC%A1%B0">Unfair Competition Prevention and Trade Secret Protection Act, Article 2 (Definitions)</a> — Korea Law Information Center, checked via search results 2026-09-29</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C48%EC%A1%B0">Act on Promotion of Information and Communications Network Utilization and Information Protection, Article 48</a> — Korea Law Information Center, checked via search results 2026-09-29</li>
+<li><a href="https://law.go.kr/LSW/precInfoP.do?evtNo=96%EB%8B%A416605">Supreme Court Decision 96Da16605 (1996-12-23)</a> — Korea Law Information Center, checked via search results 2026-09-29</li>
+<li><a href="https://casenote.kr/%EB%8C%80%EB%B2%95%EC%9B%90/2021%EB%8F%841533">Supreme Court Decision 2021Do1533 (2022-05-12)</a> — CaseNote, checked via search results 2026-09-29</li>
+<li><a href="https://v.daum.net/v/kpTVF0ahwV">News report on the Yanolja v. Yeogi Eottae civil first-instance ruling</a> — press report, checked via search results 2026-09-29 (judgment text and appeal outcome not checked)</li>
+<li><a href="https://www.law.cornell.edu/uscode/text/17/1201">17 U.S. Code § 1201</a> — Cornell LII, checked via search results 2026-09-29</li>
+<li><a href="https://law.justia.com/cases/federal/appellate-courts/F2/977/1510/305345/">Sega Enterprises Ltd. v. Accolade, Inc., 977 F.2d 1510 (9th Cir. 1992)</a> — Justia, checked via search results 2026-09-29</li>
+<li><a href="https://law.justia.com/cases/federal/appellate-courts/F3/320/1317/615628/">Bowers v. Baystate Technologies, Inc., 320 F.3d 1317 (Fed. Cir. 2003)</a> — Justia, checked via search results 2026-09-29</li>
+<li><a href="https://eur-lex.europa.eu/eli/dir/2009/24/oj/eng">Directive 2009/24/EC on the legal protection of computer programs</a> — EUR-Lex, checked via search results 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/15-loop-engineering/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Loop Engineering</span></a><a class="page-link next" href="../../../en/git/00-overview/"><span><small>Next</small>The big picture of Git</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>
