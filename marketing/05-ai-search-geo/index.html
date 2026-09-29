@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>AI 검색 · Answer Engine · GEO/AEO | MyAI(마이아이)</title>
+    <meta name="description" content="2024–2026년 검색의 가장 큰 변화는 링크 목록 대신 AI가 요약한 답변이 먼저 보이는 화면이 늘어난 것이다. 업계에서는 이에 대응하는 활동을 GEO(Generative Engine Optimization) 또는 AEO(Answer Engine Optimization)라…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/05-ai-search-geo/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="AI 검색 · Answer Engine · GEO/AEO | MyAI(마이아이)" />
+    <meta property="og:description" content="2024–2026년 검색의 가장 큰 변화는 링크 목록 대신 AI가 요약한 답변이 먼저 보이는 화면이 늘어난 것이다. 업계에서는 이에 대응하는 활동을 GEO(Generative Engine Optimization) 또는 AEO(Answer Engine Optimization)라…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/marketing/05-ai-search-geo/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/marketing/05-ai-search-geo.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link active" aria-current="page" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Marketing</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>AI 검색 · GEO/AEO</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>AI 검색 · Answer Engine · GEO/AEO</h1>
+<p>2024–2026년 검색의 가장 큰 변화는 <strong>링크 목록 대신 AI가 요약한 답변이 먼저 보이는 화면</strong>이 늘어난 것이다. 업계에서는 이에 대응하는 활동을 GEO(Generative Engine Optimization) 또는 AEO(Answer Engine Optimization)라고 부른다.</p>
+<h2>현재 상황 (2026-09-28 기준, 출처 날짜 명시)</h2>
+<table>
+<thead>
+<tr>
+<th>서비스</th>
+<th>확인된 사실</th>
+<th>출처 시점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google AI Overviews</td>
+<td>200개 이상 국가·지역, 40개 이상 언어로 제공</td>
+<td>2025-05 Google 발표</td>
+</tr>
+<tr>
+<td>Google AI Mode</td>
+<td>한국어 등 5개 언어 추가</td>
+<td>2025-09 Google 발표</td>
+</tr>
+<tr>
+<td>Google AI Mode</td>
+<td>출시 1년 만에 월 사용자 10억 명 돌파라고 Google이 발표</td>
+<td>2026-05 Google I/O</td>
+</tr>
+<tr>
+<td>Search Console</td>
+<td>생성형 AI 성과 보고서: 2026-06-03 영국 일부 사이트에 도입, 2026-08-31경 전체 사이트로 확대. AI Overviews·AI Mode 등의 <strong>노출, 페이지, 국가, 기기만</strong> 제공하며 클릭·CTR·검색어는 없다. 데이터는 2026-05-18부터</td>
+<td>2026-06 Google 발표, 2026-08 확대</td>
+</tr>
+<tr>
+<td>ChatGPT search</td>
+<td>웹 출처 링크와 함께 답변 제공 시작</td>
+<td>2024-10 OpenAI 발표</td>
+</tr>
+<tr>
+<td>ChatGPT 광고</td>
+<td>2026-01 미국 테스트 발표. 한국은 2026-05 도입 예고, 2026-06-19 파일럿 발표·보도, OpenAI 공지 기준 2026-08-11 영국·멕시코·브라질·일본과 함께 출시. <strong>로그인한 성인 Free·Go 이용자</strong>에게만 표시되고 Plus·Pro·Business·Enterprise·Edu는 광고 없음</td>
+<td>2026-01, 2026-06, 2026-08 OpenAI·언론</td>
+</tr>
+<tr>
+<td>Naver AI 브리핑</td>
+<td>통합검색에 AI 요약 답변과 출처 표시 도입</td>
+<td>2025-03 보도</td>
+</tr>
+<tr>
+<td>Naver AI 브리핑</td>
+<td>적용 범위를 2026년 말까지 약 2배로 넓히겠다고 실적 발표에서 밝힘</td>
+<td>2026-02 실적 발표 보도</td>
+</tr>
+</tbody></table>
+<p>사용자 수·국가 수는 <strong>제공사 자체 발표</strong>이며 자주 바뀐다. 계획을 세우기 전에 원문을 다시 확인한다. ChatGPT 광고의 한국 시작 시점은 국내 보도(2026-06)와 OpenAI 공지(2026-08-11)가 다르게 적혀 있으므로, 집행 전 OpenAI 광고 안내를 기준으로 확인한다.</p>
+<p>한국 소비자 대상 제품이라면 <strong>Naver AI 브리핑 노출을 Google AI Overviews와 같은 비중으로 점검</strong>한다. 네이버는 AI 브리핑이 적용되는 검색 범위를 계속 넓히고 있다.</p>
+<h2>클릭은 줄 수 있다</h2>
+<p>Pew Research Center가 미국 성인 900명의 2025-03 브라우징 데이터를 분석한 결과(2025-07-22 발표), AI 요약이 있는 Google 검색 페이지에서 결과 링크를 클릭한 비율은 8%, AI 요약이 없는 페이지에서는 15%였다. AI 요약 안의 출처 링크 클릭은 매우 드물었다.</p>
+<p>이것은 <strong>한 연구의 관찰 결과</strong>이며 업종·질의 유형별로 다를 수 있다. 다만 방향성은 분명하다.</p>
+<ul>
+<li>&quot;정보형 질의 → 블로그 유입 → 전환&quot; 모델은 약해질 수 있다</li>
+<li>노출(Impression)과 클릭의 차이가 커진다</li>
+<li><strong>답변 안에서 언급·인용되는 것</strong> 자체가 목표 중 하나가 된다</li>
+</ul>
+<p>Gartner는 2024-02에 &quot;2026년까지 전통적 검색엔진 검색량이 25% 줄 것&quot;이라고 <strong>예측</strong>했다. 예측이지 측정값이 아니다.</p>
+<h2>Google이 공식적으로 말하는 것</h2>
+<p>Google Search Central의 안내(2025-05 블로그, 2026-05 최적화 가이드)는 요약하면 다음과 같다.</p>
+<ul>
+<li>AI Overviews·AI Mode에 나오기 위한 <strong>별도 기술 요건은 없다.</strong> 색인되고 Snippet 표시가 가능하면 후보가 된다</li>
+<li>기존 SEO 기본기가 그대로 기반이다</li>
+<li>새 기계용 파일, AI 전용 텍스트 파일, 특별한 Schema는 <strong>필요 없다</strong></li>
+<li>콘텐츠를 억지로 잘게 쪼갤(Chunking) 필요가 없다</li>
+<li>흔한 정보가 아닌 <strong>고유하고 경험에 기반한(Non-commodity) 콘텐츠</strong>가 중요하다</li>
+<li>&quot;AEO/GEO 요령&quot;(인위적 언급 만들기 등)보다 SEO 기본을 우선하라고 권고한다</li>
+</ul>
+<p>주의: 이것은 <strong>Google Search에 대한</strong> 안내다. 다른 Answer Engine의 동작은 각 사업자 문서를 따로 확인해야 한다.</p>
+<h2>ChatGPT search와 Crawler</h2>
+<p>OpenAI 문서에 따르면 Crawler 역할이 나뉘어 있다.</p>
+<table>
+<thead>
+<tr>
+<th>User-agent</th>
+<th>역할</th>
+<th>막으면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OAI-SearchBot</td>
+<td>ChatGPT 검색 결과 노출용</td>
+<td>ChatGPT 검색 답변·Snippet에 나오기 어려움</td>
+</tr>
+<tr>
+<td>GPTBot</td>
+<td>생성형 모델 학습용 수집</td>
+<td>학습 사용을 원하지 않는다는 의사 표시</td>
+</tr>
+<tr>
+<td>ChatGPT-User</td>
+<td>사용자가 ChatGPT에 특정 페이지를 열어 달라고 요청할 때 등 사용자 요청에 따른 방문</td>
+<td>사용자 요청 기반이라 robots.txt 규칙이 적용되지 않을 수 있다고 OpenAI는 설명</td>
+</tr>
+<tr>
+<td>OAI-AdsBot</td>
+<td>ChatGPT 광고로 제출된 Landing Page를 방문해 광고 정책 준수와 관련성 확인</td>
+<td>ChatGPT 광고를 집행한다면 심사 경로이므로 광고 운영과 함께 결정</td>
+</tr>
+</tbody></table>
+<p>즉 <strong>검색 노출은 허용하고 학습 수집은 거부</strong>하는 조합이 가능하다. robots.txt 설정은 법무·콘텐츠 정책과 함께 결정한다.</p>
+<h2>실무 체크리스트</h2>
+<pre><code class="language-mermaid">flowchart LR
+    Q[Customer Questions] --&gt; C[Unique Content]
+    C --&gt; T[Technical Access]
+    T --&gt; E[Entity Consistency]
+    E --&gt; M[Measure Mentions]
+    M --&gt; Q
+</code></pre>
+<ol>
+<li><strong>질문 목록 만들기</strong>: 고객이 AI에 물을 법한 질문을 인터뷰·영업·CS 기록에서 모은다.</li>
+<li><strong>고유한 답 만들기</strong>: 가격, 제한, 비교, 설정 절차, 실제 사례처럼 우리만 정확히 아는 정보를 공개한다.</li>
+<li><strong>접근 가능하게 하기</strong>: 색인, 크롤링 허용 여부, 렌더링, 페이지 속도를 점검한다.</li>
+<li><strong>일관성 유지</strong>: 제품명·가격·기능 설명이 사이트, 문서, 마켓플레이스, 리뷰 사이트에서 서로 맞는지 확인한다. AI 답변은 여러 출처를 합치므로 불일치가 오답으로 이어질 수 있다.</li>
+<li><strong>측정하기</strong>: Search Console의 생성형 AI 보고서로 <strong>노출 쪽</strong>을 본다. 이 보고서에는 클릭·CTR·검색어가 없으므로, <strong>클릭 쪽</strong>은 Landing Page의 Referrer(chatgpt.com, perplexity.ai 등)와 UTM으로 따로 집계한다. 여기에 주요 질문을 정기적으로 AI 서비스에 물어 언급·정확도를 기록하는 수동 점검을 더한다.</li>
+</ol>
+<h2>나쁜 예 / 좋은 예</h2>
+<p>나쁜 예:</p>
+<blockquote>
+<p>AI에 잘 나오도록 FAQ 페이지 100개를 자동 생성하고, 커뮤니티에 우리 제품 칭찬 글을 부탁한다.</p>
+</blockquote>
+<p>좋은 예:</p>
+<blockquote>
+<p>고객이 실제로 묻는 &quot;기존 도구에서 옮길 때 데이터는 어떻게 되나요?&quot;에 대해, 이전 절차·제한·소요 시간을 정확히 적은 문서를 만들고, 가격 페이지와 문서의 수치를 일치시킨다.</p>
+</blockquote>
+<p>나쁜 예의 두 번째 행동은 Google이 권하지 않는 인위적 언급이며, 대가가 있다면 광고 표시 문제로도 이어진다 (09 문서).</p>
+<h2>아직 불확실한 것</h2>
+<ul>
+<li>AI 답변의 출처 선택 방식은 공개되지 않은 부분이 많다</li>
+<li>서비스마다 측정 도구 수준이 다르다</li>
+<li>AI 답변 안 광고의 형식·규칙은 계속 바뀌고 있다</li>
+</ul>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://blog.google/products-and-platforms/products/search/ai-overview-expansion-may-2025-update/">AI Overviews are now available in over 200 countries and territories — Google</a> (2025-05, 접속 2026-09-28)</li>
+<li><a href="https://blog.google/products/search/ai-mode-expands-more-languages/">AI Mode is now available in five new languages — Google</a> (2025-09, 접속 2026-09-28)</li>
+<li><a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google Search&#39;s I/O 2026 updates — Google</a> (2026-05, 접속 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI Features and Your Website — Google Search Central</a> (접속 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">Top ways to ensure your content performs well in Google&#39;s AI experiences on Search — Google Search Central</a> (2025-05, 접속 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2026/05/a-new-resource-for-optimizing">A new resource for optimizing for generative AI in Google Search — Google Search Central</a> (2026-05, 접속 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Introducing Search Generative AI performance reports in Search Console — Google Search Central</a> (2026-06, 접속 2026-09-28)</li>
+<li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Google users are less likely to click on links when an AI summary appears — Pew Research Center</a> (2025-07-22, 접속 2026-09-28)</li>
+<li><a href="https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents">Gartner Predicts Search Engine Volume Will Drop 25% by 2026 — Gartner</a> (2024-02-19, 접속 2026-09-28)</li>
+<li><a href="https://openai.com/index/introducing-chatgpt-search/">Introducing ChatGPT search — OpenAI</a> (2024-10, 접속 2026-09-28)</li>
+<li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI Crawlers — OpenAI</a> (접속 2026-09-28, ChatGPT-User·OAI-AdsBot 포함)</li>
+<li><a href="https://openai.com/index/testing-ads-in-chatgpt/">Testing ads in ChatGPT — OpenAI</a> (2026-01-16 게시, 2026-08-11 갱신, 접속 2026-09-28)</li>
+<li><a href="https://www.koreatimes.co.kr/business/companies/20260619/openai-brings-chatgpt-ads-to-korea-keeps-paid-plans-ad-free">OpenAI brings ChatGPT ads to Korea, keeps paid plans ad-free — The Korea Times</a> (2026-06-19, 접속 2026-09-28)</li>
+<li><a href="https://en.sedaily.com/technology/2026/06/19/openai-brings-chatgpt-ads-to-korea-for-free-and-go-tiers">OpenAI Brings ChatGPT Ads to Korea for Free and Go Tiers — 서울경제</a> (2026-06-19, 접속 2026-09-28)</li>
+<li><a href="https://support.google.com/webmasters/answer/16984139?hl=en">Generative AI performance report (Search) — Search Console Help</a> (접속 2026-09-28)</li>
+<li><a href="https://www.seroundtable.com/google-search-console-ai-report-live-41850.html">Google Search Console Generative AI Performance Report Live For All — Search Engine Roundtable</a> (2026-08, 접속 2026-09-28)</li>
+<li><a href="https://www.sentv.co.kr/article/view/sentv202602060034">네이버 &quot;AI 브리핑 연말까지 2배 확대&quot; — 서울경제TV</a> (2026-02-06, 접속 2026-09-28)</li>
+<li><a href="https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html">Naver introduces AI Briefing in search — NewDaily</a> (2025-03-24, 접속 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../marketing/04-channels/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>채널 · Content · Paid · Lifecycle</span></a><a class="page-link next" href="../../marketing/06-measurement-privacy/"><span><small>다음 문서</small>측정 · Attribution · Privacy</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

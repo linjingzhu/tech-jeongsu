@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>측정과 포트폴리오 의사결정 | MyAI(마이아이)</title>
+    <meta name="description" content="02 문서가 &quot;제품은 베팅&quot;이라는 이론을 줬다면, 이 문서는 그 베팅을 매주·매달 다시 평가하는 운영 절차다. 측정이 없으면 포트폴리오는 기분으로 관리된다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/studio/09-portfolio-decisions/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/09-portfolio-decisions/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/09-portfolio-decisions/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/09-portfolio-decisions/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="측정과 포트폴리오 의사결정 | MyAI(마이아이)" />
+    <meta property="og:description" content="02 문서가 &quot;제품은 베팅&quot;이라는 이론을 줬다면, 이 문서는 그 베팅을 매주·매달 다시 평가하는 운영 절차다. 측정이 없으면 포트폴리오는 기분으로 관리된다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/studio/09-portfolio-decisions/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/studio/09-portfolio-decisions.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link active" aria-current="page" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>1인 스튜디오 수익화</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>측정과 포트폴리오 의사결정</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>측정과 포트폴리오 의사결정</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: 제품마다 단계에 맞는 지표를 고르고, 미리 정한 임계값으로 중단·유지·확대를 결정하며, 수익 모델이 다른 제품을 시간당 가치로 비교할 수 있다.</p>
+</blockquote>
+<p>02 문서가 &quot;제품은 베팅&quot;이라는 이론을 줬다면, 이 문서는 그 베팅을 <strong>매주·매달 다시 평가하는 운영 절차</strong>다. 측정이 없으면 포트폴리오는 기분으로 관리된다.</p>
+<p>기준일: 2026-09-29.</p>
+<h2>핵심 개념</h2>
+<h3>선행 지표와 후행 지표</h3>
+<ul>
+<li><strong>후행 지표(lagging)</strong>: 결과. 매출, MRR, 순이익. 확실하지만 늦게 온다.</li>
+<li><strong>선행 지표(leading)</strong>: 결과보다 먼저 움직이는 신호. 대기자 가입률, 활성화율, Wishlist 증가 속도. 빨리 오지만 결과와의 연결을 검증해야 한다.</li>
+<li>초기 제품은 후행 지표가 0이므로 <strong>선행 지표로 판단하고, 후행 지표로 선행 지표를 검증</strong>한다.</li>
+</ul>
+<h3>단계별 지표</h3>
+<p>Dave McClure의 AARRR(2007, Acquisition·Activation·Retention·Referral·Revenue)을 1인 스튜디오의 단계에 맞춰 줄이면 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>질문</th>
+<th>지표 예</th>
+<th>종류</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>검증</td>
+<td>원하는 사람이 있나</td>
+<td>랜딩 방문 → 대기자 가입률, 사전 판매 수, fake door 클릭률</td>
+<td>선행</td>
+</tr>
+<tr>
+<td>활성화</td>
+<td>처음 온 사람이 가치를 경험하나</td>
+<td>가입 → 핵심 작업 완료율</td>
+<td>선행</td>
+</tr>
+<tr>
+<td>유지</td>
+<td>다시 오나</td>
+<td>주간·월간 리텐션, 게임은 D1/D7, Steam은 Wishlist 속도</td>
+<td>선행</td>
+</tr>
+<tr>
+<td>매출</td>
+<td>돈이 되나</td>
+<td>월 순매출, MRR, Churn, RPM</td>
+<td>후행</td>
+</tr>
+</tbody></table>
+<h3>Vanity Metric과 Actionable Metric</h3>
+<p>Eric Ries는 누적 가입자·페이지뷰처럼 <strong>기분은 좋지만 행동을 바꾸지 못하는 숫자</strong>를 vanity metric, 원인과 결과가 분명해 결정을 바꾸는 숫자를 actionable metric이라고 불렀다 (2009 기고, 『The Lean Startup』 2011).</p>
+<table>
+<thead>
+<tr>
+<th>나쁜 예 (vanity)</th>
+<th>좋은 예 (actionable)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>누적 가입자 3,000명</td>
+<td>이번 주 가입자 중 핵심 작업 완료 비율 34%</td>
+</tr>
+<tr>
+<td>총 페이지뷰</td>
+<td>유입 경로별 대기자 가입률</td>
+</tr>
+<tr>
+<td>Wishlist 총합</td>
+<td>최근 7일 하루 평균 Wishlist 증가</td>
+</tr>
+<tr>
+<td>GitHub star 수</td>
+<td>결제 페이지 도달 → 결제 완료율</td>
+</tr>
+</tbody></table>
+<h2>원리</h2>
+<h3>게이트는 투자 결정이다</h3>
+<p>Robert G. Cooper의 Stage-Gate(1986년 제안, 1988년 용어 출간)는 단계 사이 관문에서 <strong>Go·Kill·Hold·Recycle</strong> 네 가지 중 하나를 고른다. 1인 스튜디오에서는 이것을 확대·중단·보류·재작업으로 번역한다. 관문의 질문은 &quot;이 제품에 다음 단계의 시간을 줄 것인가&quot;이다.</p>
+<h3>임계값은 미리 정한다</h3>
+<p>Annie Duke는 『Quit』(2022)에서 중단 기준(kill criteria)을 **상태와 날짜(states and dates)**로 미리 적으라고 권한다: &quot;(날짜)까지 (상태)에 도달하지 못하면 그만둔다.&quot; 데이터를 본 뒤에 기준을 정하면 매몰비용과 애착이 기준을 옮긴다.</p>
+<ul>
+<li>확대 신호의 예: Sean Ellis의 설문에서 &quot;이 제품을 더 못 쓰면 매우 실망&quot; 응답이 40% 이상이면 제품-시장 적합의 신호로 본다.</li>
+<li>한 번의 게이트에 <strong>한 개의 주 지표</strong>와 최대 두 개의 보조 지표만 쓴다.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart TD
+    S[월간 게이트 검토] --&gt; Q{사전에 정한 임계값}
+    Q --&gt;|확대 기준 충족| U[확대: 시간 추가]
+    Q --&gt;|유지 범위| K[유지: 다음 실험 1개]
+    Q --&gt;|중단 기준 충족| X[중단 또는 보관]
+    Q --&gt;|데이터 부족| H[보류: 측정 보강]
+    U --&gt; J[결정 일지 기록]
+    K --&gt; J
+    X --&gt; J
+    H --&gt; J
+</code></pre>
+<h3>수익 모델이 다른 제품을 비교하는 법</h3>
+<p>광고 사이트의 RPM과 구독 앱의 MRR과 게임의 Wishlist는 단위가 다르다. 공통 단위는 <strong>1인의 시간</strong>이다.</p>
+<pre><code class="language-text">실현 시간당 매출 = 최근 30일 순매출 ÷ 최근 30일 투입 시간
+기대 시간당 가치 = 12개월 기대 순매출 ÷ 앞으로 12개월 필요 시간
+기대 순매출 = Σ (시나리오 확률 × 시나리오 순매출)
+예시 스튜디오의 필요 시급 = 월 350만 원 ÷ 160시간 = 21,875원
+</code></pre>
+<p>참고로 2026년 최저임금은 시간급 10,320원이다 (고용노동부 고시). 기회비용의 바닥을 떠올리는 기준으로만 쓴다.</p>
+<h2>적용: 예시 스튜디오</h2>
+<p>10 문서의 90일 계획 중 60일째라고 가정한 대시보드다. 모든 숫자는 가정이다.</p>
+<table>
+<thead>
+<tr>
+<th>제품</th>
+<th>단계</th>
+<th>주 지표 (현재)</th>
+<th>최근 30일 순매출</th>
+<th>투입 시간</th>
+<th>실현 시간당 매출</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1 픽셀 아트 편집기</td>
+<td>유료 베타</td>
+<td>체험 → 결제 11%</td>
+<td>45만 원</td>
+<td>64시간</td>
+<td>7,031원</td>
+</tr>
+<tr>
+<td>C2 기술 문서 사이트</td>
+<td>광고 승인</td>
+<td>월 페이지뷰 6,200</td>
+<td>3만 원</td>
+<td>24시간</td>
+<td>1,250원</td>
+</tr>
+<tr>
+<td>GM1 로그라이크 퍼즐</td>
+<td>스토어 페이지</td>
+<td>하루 평균 Wishlist 7개, 누적 600</td>
+<td>0원</td>
+<td>32시간</td>
+<td>0원</td>
+</tr>
+<tr>
+<td>P1 습관 추적 앱</td>
+<td>출시·유지보수 (G4 이전 출시, D90 판정)</td>
+<td>주간 활성 40명</td>
+<td>0원</td>
+<td>4시간</td>
+<td>0원</td>
+</tr>
+</tbody></table>
+<p>C2의 3만 원은 광고 게재 약 30일분이고, 실측 Page RPM은 30,000 ÷ 6,200 × 1,000 ≈ 4,839원이다. 05의 가정 3,000원보다 높으므로 05의 표를 이 실측값으로 다시 계산한다 (05 적용의 3단계). C2의 월 페이지뷰는 D0의 5,000에서 6,200으로 24% 늘었다.</p>
+<p>실현 시간당 매출만 보면 모두 21,875원에 못 미친다. 초기 제품이므로 기대 시간당 가치를 함께 본다.</p>
+<table>
+<thead>
+<tr>
+<th>제품</th>
+<th>12개월 시나리오 (가정)</th>
+<th>기대 순매출</th>
+<th>필요 시간</th>
+<th>기대 시간당 가치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GM1</td>
+<td>60%: 200만 / 30%: 800만 / 10%: 3,000만</td>
+<td>120 + 240 + 300 = 660만 원</td>
+<td>400시간</td>
+<td>16,500원</td>
+</tr>
+<tr>
+<td>T1</td>
+<td>50%: 월 50만 × 12 / 30%: 월 150만 × 12 / 20%: 0</td>
+<td>300 + 540 + 0 = 840만 원</td>
+<td>768시간</td>
+<td>10,938원</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>70%: 월 5만 × 12 / 30%: 월 20만 × 12</td>
+<td>42 + 72 = 114만 원</td>
+<td>288시간</td>
+<td>3,958원</td>
+</tr>
+</tbody></table>
+<ul>
+<li>GM1의 기대 시간당 가치가 가장 높지만 <strong>분산이 크고 돈이 출시 후에 온다</strong>. 출시가 9개월 뒤라면 5.1개월 runway 안에는 한 푼도 들어오지 않는다 (01 문서).</li>
+<li>T1은 중간 기대값에 <strong>지금 매출이 생기는</strong> 제품이다. runway를 늘리는 역할이다.</li>
+<li>C2는 기대값이 낮지만 시간이 적게 들고 안정적이다. 광고 단가(RPM)의 근거는 05 문서를 본다.</li>
+<li>결론(가정): T1을 주력으로 유지하고, GM1은 Wishlist라는 선행 지표가 기준을 넘을 때만 시간을 늘린다. 02 문서의 barbell 배분과 같다.</li>
+</ul>
+<h3>사전 결정 규칙 (D60 검토, 판정일은 행마다 표기)</h3>
+<table>
+<thead>
+<tr>
+<th>제품</th>
+<th>중단</th>
+<th>보류</th>
+<th>유지</th>
+<th>확대</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>60일째 체험 → 결제 3% 미만 (먼저 확인) → 보관</td>
+<td>결제 10건 미만 → 표본 부족, 보류, D70 정식 출시 후 D90 재판정</td>
+<td>3% 이상 10% 미만, 또는 10% 이상이고 순매출 40만 원 미만</td>
+<td>10% 이상이고 순매출 40만 원 이상 → 주 4시간 (월 16시간) 추가</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>90일째 월 페이지뷰 3,000 미만</td>
+<td>—</td>
+<td>3,000~10,000</td>
+<td>10,000 이상 → 글 발행 주기 2배</td>
+</tr>
+<tr>
+<td>GM1</td>
+<td>90일째 누적 Wishlist 500 미만</td>
+<td>—</td>
+<td>500~1,500</td>
+<td>1,500 이상 → Next Fest 준비 착수</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>90일째 주간 활성 100명 미만이고 월 순매출 10만 원 미만 → 보관</td>
+<td>—</td>
+<td>판정일까지 유지보수 주 1시간만</td>
+<td>G4 충족 (주간 활성 100명 이상 또는 월 순매출 10만 원 이상) → 다음 분기 트리아지에서 운영 시간 재배정</td>
+</tr>
+</tbody></table>
+<p>판정은 중단 → 보류 → 유지 → 확대 순서로 보고, 처음 맞는 하나만 쓴다. 그래서 T1의 네 칸은 겹치지도 비지도 않는다. 보류된 T1은 D90에 같은 규칙으로 다시 판정하되, 그때도 결제 10건 미만이면 중단한다. 보류는 위 흐름도의 &quot;데이터 부족 → 보류: 측정 보강&quot;이다.</p>
+<p>P1은 2026-06-15에 출시되어(가정) G4의 60일 창은 2026-08-14에 이미 지났지만, 02의 G4 관문을 만들기 전이라 사전 기준이 없었다. 10의 D0에 G4와 같은 숫자로 기준을 처음 적었고, 판정일만 D90으로 두었다 (10 적용 1단계). 이 기준은 판정 전까지 바꾸지 않는다.</p>
+<p>60일째 대시보드를 규칙에 대면 T1은 확대(11%, 45만 원, 결제 약 12건 = 450,000 ÷ 37,870), C2와 GM1과 P1은 90일째 판정 대기다. P1의 주간 활성 40명은 기준 100명의 40%라 지금 추세로는 보관 쪽이다.</p>
+<h2>심화</h2>
+<h3>검토 의식</h3>
+<table>
+<thead>
+<tr>
+<th>주기</th>
+<th>시간</th>
+<th>안건</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>매주 (월요일)</td>
+<td>30분</td>
+<td>제품별 주 지표 1개 기록, 이번 주 시간 배분 확인, 막힌 것 1개</td>
+</tr>
+<tr>
+<td>매달 (cooldown 첫날)</td>
+<td>2시간</td>
+<td>게이트 판정, 시간 재배분, runway 재계산, 결정 일지 복기</td>
+</tr>
+<tr>
+<td>분기 (90일)</td>
+<td>반나절</td>
+<td>포트폴리오 전체 재평가, 새 베팅 선정 (10 문서)</td>
+</tr>
+</tbody></table>
+<p>시간 기록 규칙 (가정). 실현 시간당 매출의 분모이므로 검토 전에 먼저 맞춘다.</p>
+<ul>
+<li>도구와 형식: 스프레드시트 한 장 또는 시간 추적 앱. 한 행에 날짜, 코드, 시간, 한 줄 메모를 적는다.</li>
+<li>단위와 코드: 30분 단위로 적고, 코드는 제품 코드(T1, C2, GM1, P1, P2)와 공통 코드(유통, 관리) 두 종류만 쓴다.</li>
+<li>세는 것: 사람이 실제로 쓴 시간만 센다. 한 제품만을 위한 일(제작, 지원, 그 제품의 마케팅)은 제품 코드, 여러 제품에 걸친 일은 공통 코드에 넣는다. 에이전트가 혼자 돈 시간은 세지 않고 지시·검토한 시간은 센다.</li>
+</ul>
+<h3>결정 일지 (Decision Journal)</h3>
+<p>Farnam Street(Shane Parrish)가 소개한 결정 일지는 결정하는 순간에 다음을 적고, 나중에 결과와 비교한다.</p>
+<pre><code class="language-text">날짜와 상태: 2026-12-04, 피곤함 보통
+결정: T1에 주 4시간 추가, P1은 유지보수만
+시간 출처 (D60~D90, 월): T1 64 → 80, GM1 32 → 24, P2 4 → 0 (fake door는 D28에 끝남), 관리·검토 16 → 12
+근거가 된 숫자: 체험 → 결제 11%, 결제 12건 (보류 기준 10건 이상), 월 순매출 45만 원
+예상 결과: 90일째 월 순매출 80만 원, 확률 60%
+버린 대안: GM1 데모 제작 앞당기기
+복기 날짜: 2027-01-03
+</code></pre>
+<p>결과가 나쁘다고 결정이 나빴던 것은 아니다. 일지는 <strong>운과 판단을 분리</strong>해 다음 베팅의 확률 추정을 고친다.</p>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;숫자가 많을수록 잘 보인다.&quot;</strong> 지표가 많으면 좋은 숫자만 골라 보게 된다. 제품당 주 지표 1개가 기본이다.</li>
+<li><strong>&quot;매출이 0이면 실패다.&quot;</strong> 검증 단계의 제품은 선행 지표로 판단한다. 다만 선행 지표가 매출로 이어지는지는 반드시 확인한다.</li>
+<li><strong>&quot;조금만 더 기다리면 올라온다.&quot;</strong> 기준을 사후에 바꾸면 모든 제품이 영원히 유지된다. 날짜와 상태를 미리 적는다.</li>
+<li><strong>&quot;기대값이 가장 큰 제품에 전부 건다.&quot;</strong> runway 안에 돈이 들어오는지, 분산을 버틸 수 있는지를 같이 본다.</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>자기 제품 하나의 선행 지표와 후행 지표를 하나씩 적고, 둘의 연결을 어떻게 검증할지 설명하라.</li>
+<li>최근 30일 순매출 30만 원, 투입 20시간인 제품의 실현 시간당 매출은? 필요 시급 21,875원과 비교하라.</li>
+<li>확률 40%로 1,000만 원, 60%로 100만 원인 제품에 200시간이 필요하다면 기대 시간당 가치는?</li>
+<li>60일째 대시보드의 T1, C2, GM1, P1에 확대·중단·보류·재작업(Go·Kill·Hold·Recycle) 중 하나씩을 붙이고, 각각 근거가 된 숫자를 적어라. 네 결정 중 이 대시보드에서 쓰이지 않은 것은 어떤 상황에서 쓰는가?</li>
+<li>&quot;states and dates&quot; 형식으로 자기 제품의 중단 기준을 한 문장으로 써 보라.</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://tim.blog/2009/05/19/vanity-metrics-vs-actionable-metrics/">Tim Ferriss 블로그 - Vanity Metrics vs. Actionable Metrics (Eric Ries 기고, 2009)</a> (접근 2026-09-29)</li>
+<li><a href="https://en.wikipedia.org/wiki/Dave_McClure">Wikipedia - Dave McClure (Startup Metrics for Pirates, 2007)</a> (접근 2026-09-29)</li>
+<li><a href="https://www.stage-gate.com/blog/the-stage-gate-model-an-overview/">Stage-Gate International - The Stage-Gate Model: An Overview</a> (접근 2026-09-29)</li>
+<li><a href="https://behavioralscientist.org/annie-duke-quit-mental-models-to-help-you-cut-your-losses/">Behavioral Scientist - Annie Duke, Mental Models to Help You Cut Your Losses</a> (접근 2026-09-29)</li>
+<li><a href="https://en.wikipedia.org/wiki/Product-market_fit">Wikipedia - Product-market fit</a> (접근 2026-09-29)</li>
+<li><a href="https://fs.blog/decision-journal/">Farnam Street - Decision Journal</a> (접근 2026-09-29)</li>
+<li><a href="https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18144">고용노동부 - 2026년 적용 최저임금 시간급 10,320원</a> (접근 2026-09-29)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../studio/08-shipping-system/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>출시 시스템</span></a><a class="page-link next" href="../../studio/10-90-day-plan/"><span><small>다음 문서</small>90일 실행 계획 사례</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

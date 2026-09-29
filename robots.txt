@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /tech-jeongsu/.ai/
+Disallow: /tech-jeongsu/.agents/
+Disallow: /tech-jeongsu/.claude/
+Disallow: /tech-jeongsu/.codex/
+Disallow: /tech-jeongsu/content/
+Disallow: /tech-jeongsu/docs/
+Disallow: /tech-jeongsu/tests/
+Disallow: /tech-jeongsu/tools/
+Disallow: /tech-jeongsu/AGENTS.md
+Disallow: /tech-jeongsu/CLAUDE.md
+Disallow: /tech-jeongsu/LESSONS_FROM_PRACTICE.md
+Disallow: /tech-jeongsu/README.md
+Disallow: /tech-jeongsu/site.config.json
+Allow: /tech-jeongsu/
+
+Sitemap: https://linjingzhu.github.io/tech-jeongsu/sitemap.xml

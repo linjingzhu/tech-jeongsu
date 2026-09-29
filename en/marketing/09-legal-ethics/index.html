@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Law · Ethics · Ad Disclosure | MyAI</title>
+    <meta name="description" content="This document is not legal advice. It is a map to help developers and POs notice &quot;this needs checking&quot;. Confirm actual application through legal review an…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/09-legal-ethics/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/09-legal-ethics/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Law · Ethics · Ad Disclosure | MyAI" />
+    <meta property="og:description" content="This document is not legal advice. It is a map to help developers and POs notice &quot;this needs checking&quot;. Confirm actual application through legal review an…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/marketing/09-legal-ethics/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/marketing/09-legal-ethics.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link active" aria-current="page" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Marketing</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Law · Ethics · Ad Disclosure</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Law · Ethics · Ad Disclosure</h1>
+<p>This document is not legal advice. It is <strong>a map to help developers and POs notice &quot;this needs checking&quot;</strong>. Confirm actual application through legal review and the latest original texts.</p>
+<h2>Three Questions</h2>
+<pre><code class="language-mermaid">flowchart TD
+    Q[Marketing Activity] --&gt; D{Personal Data?}
+    Q --&gt; A{Is it an Ad?}
+    Q --&gt; G{AI Generated?}
+    D --&gt;|Yes| C[Consent and Purpose]
+    A --&gt;|Yes| L[Ad Disclosure]
+    G --&gt;|Yes| T[AI Labeling]
+    C --&gt; R[Legal Review]
+    L --&gt; R
+    T --&gt; R
+</code></pre>
+<ol>
+<li><strong>Do you use personal data?</strong> → Consent for collection and use, purpose limitation, consent for targeted advertising</li>
+<li><strong>Is it an ad?</strong> → Ad labeling, disclosure of material connections, opt-in consent to receive, truthfulness and substantiation of claims</li>
+<li><strong>Is it AI-generated?</strong> → Labeling of AI-generated content and virtual people</li>
+</ol>
+<p>If you are building checkout, cancellation, or pricing screens, add one more: <strong>does the screen design distort the consumer&#39;s choice?</strong> → Korea&#39;s E-Commerce Act dark-pattern rules.</p>
+<h2>Korea: Sending Advertising Information (Network Act)</h2>
+<p>Article 50 of Korea&#39;s Act on Promotion of Information and Communications Network Utilization and Information Protection (Network Act) and its Enforcement Decree set the rules for sending commercial advertising information through electronic transmission media (text messages, email, app push, etc.).</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prior opt-in consent</td>
+<td>In principle, the recipient&#39;s explicit prior consent is required</td>
+</tr>
+<tr>
+<td>Night-time sending</td>
+<td>From 9 p.m. to 8 a.m. the next day, separate prior consent is required</td>
+</tr>
+<tr>
+<td>Labeling duty</td>
+<td>An &quot;(Ad)&quot; label where the advertising information begins, the sender&#39;s name and contact, and opt-out instructions</td>
+</tr>
+<tr>
+<td>Refusal and withdrawal</td>
+<td>No sending after the recipient refuses or withdraws consent</td>
+</tr>
+<tr>
+<td>Consent reconfirmation</td>
+<td>Reconfirm consent every two years from the date it was given (Enforcement Decree Article 62-3)</td>
+</tr>
+</tbody></table>
+<p>Bad example:</p>
+<blockquote>
+<p>Bundle marketing consent into the mandatory signup terms and send an event push at 10 p.m.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Separate marketing consent as an optional item and send night-time messages only to those who gave separate consent. Put &quot;(Ad)&quot; at the start of every message and include an opt-out path.</p>
+</blockquote>
+<h2>Korea: Personal Data and Targeted Advertising (PIPA)</h2>
+<ul>
+<li>Article 22 of the Personal Information Protection Act requires that, when obtaining consent to process personal data for promoting goods or services or soliciting sales, you <strong>inform data subjects so they can clearly recognize it</strong> before obtaining consent. You may not refuse service because someone declined an optional consent.</li>
+<li>In 2022-09 the Personal Information Protection Commission (PIPC) fined Google (KRW 69.2 billion) and Meta (KRW 30.8 billion) for collecting and using third-party behavioral data without user consent, and on 2025-01-23 the Seoul Administrative Court upheld the sanctions.</li>
+<li>In 2024-01 the PIPC announced a policy plan for protecting online behavioral data used in targeted advertising and signaled a revision of its guidelines. Whether the revised guidelines were finalized, and their content, must be checked in the original sources.</li>
+</ul>
+<h2>Korea: Labeling and Advertising Act (Unfair Labeling and Advertising)</h2>
+<p>Article 3(1) of Korea&#39;s Act on Fair Labeling and Advertising prohibits four kinds of labeling or advertising that are likely to deceive or mislead consumers and to harm fair trade.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+<th>Easy-to-trip claims for the example product</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>False or exaggerated</td>
+<td>Stating things contrary to fact, or overstating facts</td>
+<td>Advertising an integration still in beta as &quot;fully supported&quot;</td>
+</tr>
+<tr>
+<td>Deceptive</td>
+<td>Concealing or downplaying facts</td>
+<td>Advertising a &quot;free plan&quot; while hiding its 7-day retention limit</td>
+</tr>
+<tr>
+<td>Unfairly comparative</td>
+<td>Comparing without stating what is compared and on what basis, or claiming superiority without objective grounds</td>
+<td>&quot;3x faster than competitors&quot; with no conditions</td>
+</tr>
+<tr>
+<td>Disparaging</td>
+<td>Belittling another business or product without objective grounds, or advertising only unfavorable facts about it</td>
+<td>&quot;Company A&#39;s tool goes dark during incidents&quot;</td>
+</tr>
+</tbody></table>
+<p>Article 5 sets a <strong>duty to substantiate</strong>. A business must be able to substantiate the factual claims in its labeling and advertising, and must submit substantiating material within 15 days when the KFTC requests it. In practice, to say &quot;first&quot;, &quot;No. 1&quot;, or &quot;N times&quot;, you need the evidence before the ad runs.</p>
+<p>Bad example:</p>
+<blockquote>
+<p>Korea&#39;s first and industry-leading incident analysis tool</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>In-house benchmark as of 2026-06: with 100,000 log lines and 20 deploys, finding candidate causes was 1.8x faster than manual searching. (Method published)</p>
+</blockquote>
+<p>The number in the good example is an assumption for illustration. The point is to state <strong>the date, conditions, comparison baseline, and measurement method</strong> together and to keep the evidence. AI-generated ad copy and images are held to the same standard.</p>
+<h2>Korea: E-Commerce Act Dark-Pattern Rules (in Force Since 2025-02-14)</h2>
+<p>With the amended E-Commerce Act taking effect on 2025-02-14, six types of online dark patterns became <strong>subject to statutory regulation</strong>. The KFTC published a Q&amp;A just before the rules took effect, and an amended Enforcement Decree set fines and business-suspension criteria for violations. The rules cover online transactions with consumers; a SaaS that individual developers pay for by card may be covered, so confirm with legal review.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hidden renewal</td>
+<td>Raising a subscription price or converting free to paid without the consumer consent and notice procedure</td>
+<td>Act Article 13(6), Enforcement Decree</td>
+</tr>
+<tr>
+<td>Drip pricing</td>
+<td>Showing only part of the price at first and revealing extra charges during checkout</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Preselected options</td>
+<td>Preselecting options that favor the business so the consumer pays with them</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>False hierarchy</td>
+<td>Making one choice stand out by size, color, or position so consumers are misled</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Obstructing cancellation or withdrawal</td>
+<td>Cancellation or account deletion harder than signup; restricted ways to cancel</td>
+<td>Act Article 21-2(1)</td>
+</tr>
+<tr>
+<td>Nagging</td>
+<td>Repeatedly asking, via pop-ups and the like, to change a choice already made; excepted if the consumer can opt not to be asked again for at least 7 days</td>
+<td>Act Article 21-2(1), Enforcement Decree</td>
+</tr>
+</tbody></table>
+<p><strong>Rule for paid conversions and price increases</strong>: when a subscription price increases or a free service converts to paid, the business must obtain the consumer&#39;s consent <strong>within the 30 days before</strong> the increase or conversion, and must tell the consumer the conditions and methods for withdrawing that consent (Enforcement Decree).</p>
+<ul>
+<li><strong>Subscriptions billed through app stores</strong>: since 2025-02-14, for subscriptions paid through the App Store or Google Play, the platform itself asks Korean users to consent to the first paid charge before a free trial or discounted price ends, and automatically cancels the subscription if the user does not consent. Google Play temporarily let developers who collect consent in their own app opt out of this flow, but stopped accepting opt-outs from 2026-02-03. For app subscriptions, forecast conversion and churn assuming the platform flow, not your own consent screen.</li>
+</ul>
+<p>Bad example:</p>
+<blockquote>
+<p>When the 14-day free trial ends, charge the card automatically without notice, and accept cancellations only by email to support.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Within the 30 days before conversion, tell the user the conversion date, amount, and how to cancel, and get explicit consent. Without consent, the account stays on the free plan. Cancellation happens in the same settings screen as signup, in the same number of steps.</p>
+</blockquote>
+<h2>Korea: Endorsements and AI Virtual People (Korea Fair Trade Commission)</h2>
+<ul>
+<li>The KFTC&#39;s guidelines on endorsements and testimonials in labeling and advertising require that <strong>material connections such as payments, discounts, or sponsorship be disclosed so consumers can easily notice them</strong> in influencer posts, reviews, and similar content. Disclosure should be in an easily seen place such as the title or the beginning; hiding it mid-text, in comments, or behind &quot;more&quot; is not considered adequate.</li>
+<li>After an administrative notice in 2026-04, the KFTC put the amended guidelines into force on 2026-06-01. Ads in which <strong>a virtual person created with generative AI or similar technology endorses a product must clearly state that it is a &quot;virtual person&quot;</strong>.</li>
+</ul>
+<h2>Korea: AI Basic Act</h2>
+<ul>
+<li>Korea&#39;s Framework Act on the Development of Artificial Intelligence and Establishment of Trust took effect on 2026-01-22.</li>
+<li>The transparency duties in Article 31 consist of advance notice, labeling of generative AI output, and clear notice and labeling of deepfake output.</li>
+<li><strong>The duty-holder is the AI business operator</strong> (one who develops AI or provides AI products or services). The Ministry of Science and ICT&#39;s AI transparency guideline (2026-01) treats someone who merely uses AI as a tool to produce their own work or content as a <strong>user</strong>, who is not subject to these duties.</li>
+<li>The Ministry of Science and ICT said it would run a grace period of at least one year for administrative fines. Check the original sources for the exact period and approach.</li>
+</ul>
+<p>In marketing practice, split the cases like this.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Rules to check first</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>You make ad images, copy, or virtual models with AI tools (a user)</td>
+<td>Virtual-person disclosure under the KFTC endorsement guidelines; the Labeling and Advertising Act&#39;s ban on unfair ads</td>
+</tr>
+<tr>
+<td>Your product provides a generative AI feature (e.g., it shows customers incident-cause summaries written by generative AI)</td>
+<td>As an AI business operator, advance notice and output labeling under AI Basic Act Article 31</td>
+</tr>
+</tbody></table>
+<p>Even when you are a user with no AI Basic Act duty, AI output used in ads still carries the disclosure duties of other laws.</p>
+<h2>EU</h2>
+<ul>
+<li><strong>Consent</strong>: To keep using Google ad measurement and personalization features for EEA users, you must obtain consent and pass Consent Mode signals (since 2024-03).</li>
+<li><strong>AI Act Article 50</strong>: Transparency obligations apply from 2026-08-02. Deployers who publish deepfakes must disclose this clearly at the latest at the time of first exposure. The European Commission FAQ mentions a limited grace period until 2026-12-02, only for the marking obligation for AI-generated content from systems placed on the market before 2026-08-02.</li>
+</ul>
+<h2>United States</h2>
+<ul>
+<li>In 2023-06 the FTC revised its Endorsement Guides, updating the rules for endorsements in social media and review environments.</li>
+<li>The FTC&#39;s Consumer Reviews and Testimonials Rule took effect on 2024-10-21 and prohibits creating or selling reviews attributed to people who do not exist (including AI-generated fake reviews) or to people with no actual experience.</li>
+</ul>
+<h2>Practical Checklist</h2>
+<ul>
+<li>Is marketing consent separated from mandatory service consent</li>
+<li>Are consent records (time, scope, channel) kept</li>
+<li>Do ad message templates include &quot;(Ad)&quot;, the sender, and opt-out by default</li>
+<li>Does every factual claim in ads (&quot;first&quot;, &quot;No. 1&quot;, &quot;N times&quot;) have substantiating evidence with its date and conditions</li>
+<li>Do checkout, cancellation, and pricing screens avoid the six dark-pattern types</li>
+<li>Is there a consent and notice step within the 30 days before a paid conversion or price increase</li>
+<li>Do influencer and affiliate contracts state the disclosure duty</li>
+<li>Are there rules for using AI-generated people, images, and reviews</li>
+<li>If you target users abroad, have you checked that country&#39;s rules</li>
+</ul>
+<h2>Ethics: Lines to Hold Before the Law</h2>
+<ul>
+<li>Do not use data in ways customers would find offensive if they knew</li>
+<li>Even when a design does not fit one of the six statutory dark-pattern types exactly, do not make cancelling or opting out harder than signing up</li>
+<li>Even where the duty to substantiate does not reach, do not create impressions that cannot be verified</li>
+<li>Do not pressure vulnerable users (such as minors)</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C50%EC%A1%B0">Network Act Article 50 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C62%EC%A1%B0%EC%9D%983">Network Act Enforcement Decree Article 62-3 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%91%9C%EC%8B%9C%EA%B4%91%EA%B3%A0%EC%9D%98%EA%B3%B5%EC%A0%95%ED%99%94%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0">Act on Fair Labeling and Advertising — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.consumer.go.kr/user/bbs/consumer/380/940/bbsDataView/2813.do">Types of unfair labeling and advertising under the Act — Consumer24 (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=31411">Amended E-Commerce Act rules on dark patterns take effect, with KFTC Q&amp;A — Kim &amp; Chang (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
+<li><a href="https://news.seoul.go.kr/economy/archives/566114">KFTC distributes Q&amp;A on six types of online dark patterns — Seoul Metropolitan Government (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156674112">KFTC distributes Q&amp;A on six types of online dark patterns — Korea.kr (in Korean)</a> (2025-02-13, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148939436">Consumer consent required within 30 days before a subscription price increase or paid conversion — Korea.kr (in Korean)</a> (2025-02, accessed 2026-09-28)</li>
+<li><a href="https://developer.apple.com/news/?id=bo1b122z">Upcoming changes to offers and trials for subscriptions in South Korea — Apple Developer</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/15722617?hl=en">Changes to Google Play&#39;s subscription functionality in South Korea — Play Console Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/16514827?hl=en">South Korea Subscriptions Developer Opt-Out Period Ending — Play Console Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95/%EC%A0%9C22%EC%A1%B0">Personal Information Protection Act Article 22 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://m.korea.kr/news/policyNewsView.do?newsId=148905887">PIPC fines Google and Meta for unlawful collection of behavioral data — Korea.kr</a> (2022-09, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156671852">PIPC wins administrative lawsuit by Google and Meta — Korea.kr</a> (2025-01, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/briefing/policyBriefingView.do?newsId=156613321">PIPC briefing on online behavioral advertising policy — Korea.kr</a> (2024-01, accessed 2026-09-28)</li>
+<li><a href="https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547">KFTC amended guidelines on endorsements and testimonials take effect — KFTC</a> (2026, accessed 2026-09-28)</li>
+<li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148958380">AI Basic Act takes effect with labeling duty for generative AI output — Korea.kr</a> (2026-01, accessed 2026-09-28)</li>
+<li><a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=217123">The AI Basic Act and the content industry: transparency duties — Law Times (in Korean)</a> (2026, accessed 2026-09-28)</li>
+<li><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=276195">MSIT publishes AI transparency guideline — KDI Economic Information and Education Center (in Korean)</a> (2026-01, accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/google-ads/answer/13695607?hl=en">Updates to consent mode for traffic in the EEA — Google Ads Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act">Transparency obligations under Article 50 of the AI Act — European Commission</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.ftc.gov/news-events/news/press-releases/2023/06/federal-trade-commission-announces-updated-advertising-guides-combat-deceptive-reviews-endorsements">FTC Announces Updated Advertising Guides to Combat Deceptive Reviews and Endorsements — FTC</a> (2023-06, accessed 2026-09-28)</li>
+<li><a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials">FTC Announces Final Rule Banning Fake Reviews and Testimonials — FTC</a> (2024-08, accessed 2026-09-28)</li>
+<li><a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers">The Consumer Reviews and Testimonials Rule: Questions and Answers — FTC</a> (accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/08-ai-workflows/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>AI Workflows · Risks</span></a><a class="page-link next" href="../../../en/platform/00-overview/"><span><small>Next</small>Platform Deployment Overview</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

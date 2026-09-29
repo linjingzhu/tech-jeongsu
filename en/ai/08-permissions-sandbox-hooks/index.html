@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Permissions, Sandboxes and Hooks: Designing the Enforced Layer | MyAI</title>
+    <meta name="description" content="The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/08-permissions-sandbox-hooks/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Permissions, Sandboxes and Hooks: Designing the Enforced Layer | MyAI" />
+    <meta property="og:description" content="The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent tries to follow. This document covers the enforced layer, which the harness execu…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/08-permissions-sandbox-hooks/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/08-permissions-sandbox-hooks.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link active" aria-current="page" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Permissions, Sandbox, Hooks</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Permissions, Sandboxes and Hooks: Designing the Enforced Layer</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Distinguish Claude Code&#39;s permission rules and permission modes from Codex&#39;s approval policy and sandbox mode. Use the hook input/output contract to implement a force-push block and a guard against ending with uncommitted work, and design risk-tiered permissions for a one-person studio.</p>
+</blockquote>
+<p>The advisory layer covered in &quot;Instructions and Memory&quot; is what an agent <em>tries</em> to follow. This document covers the <strong>enforced layer</strong>, which the harness executes regardless of what the agent decides. Key names and behaviour were checked against official docs and the openai/codex source as of 2026-09.</p>
+<h2>Key Concepts</h2>
+<p>The three mechanisms are layered because each has different gaps. Permission rules look at command <strong>text</strong>, the sandbox at <strong>actual system calls</strong>, and hooks at <strong>context</strong> (branch, git state).</p>
+<table>
+<thead>
+<tr>
+<th>Mechanism</th>
+<th>What it stops</th>
+<th>Basis for the decision</th>
+<th>Limit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Permission rules (allow · ask · deny)</td>
+<td>tool calls</td>
+<td>tool name and argument text</td>
+<td>Bash can slip past through another spelling of the same program</td>
+</tr>
+<tr>
+<td>Permission mode · approval policy</td>
+<td>what runs without asking</td>
+<td>session-wide default</td>
+<td>rules sit on top of the mode</td>
+</tr>
+<tr>
+<td>Sandbox</td>
+<td>filesystem · network access</td>
+<td>OS level (Seatbelt, bubblewrap)</td>
+<td>covers shell commands only</td>
+</tr>
+<tr>
+<td>Hook</td>
+<td>behaviour at a lifecycle point</td>
+<td>code you write</td>
+<td>stops only what the code sees</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>Claude Code permission rules</h3>
+<p>Rules are evaluated in the order <strong>deny → ask → allow</strong>, and the first match decides. Specificity does not change the order, so a <code>Bash(aws *)</code> deny always comes before a <code>Bash(aws s3 ls)</code> allow. A deny in any scope blocks an allow in any other.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Bash(npm run *)</code></td>
+<td>commands starting with <code>npm run</code>. Put <code>*</code> after the subcommand (a trailing <code>:*</code> means the same)</td>
+</tr>
+<tr>
+<td><code>Read(./.env)</code>, <code>Edit(/src/**/*.ts)</code></td>
+<td>gitignore syntax. <code>/</code> is relative to the settings file, <code>//</code> is absolute, <code>~/</code> is home</td>
+</tr>
+<tr>
+<td><code>WebFetch(domain:*.example.com)</code></td>
+<td>fetches to subdomains</td>
+</tr>
+<tr>
+<td><code>mcp__github__get_*</code></td>
+<td>tools from one MCP server</td>
+</tr>
+</tbody></table>
+<p>Claude Code checks each subcommand of a command joined with <code>&amp;&amp;</code>, <code>;</code> or <code>|</code>, and strips wrappers such as <code>timeout</code> and <code>nice</code> before matching. Even so, <strong>Bash rules are not a security boundary</strong>. In the official docs&#39; own example, a <code>Bash(git push *)</code> deny does not stop <code>git -C . push origin main</code>. Also, <code>allow</code> in a committed <code>.claude/settings.json</code> applies only after workspace trust is accepted, while <code>deny</code> and <code>ask</code> apply immediately.</p>
+<h3>Permission modes</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Runs without asking</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>default</code> (labelled Manual in the UI)</td>
+<td>reads only</td>
+<td>sensitive work</td>
+</tr>
+<tr>
+<td><code>acceptEdits</code></td>
+<td>reads, file edits in the working directory, common file commands such as <code>mkdir</code> · <code>mv</code></td>
+<td>iterating while you review</td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td>reads (plus classifier-approved commands when auto mode is available)</td>
+<td>exploring before changing</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>everything, with a classifier checking in the background</td>
+<td>long tasks</td>
+</tr>
+<tr>
+<td><code>dontAsk</code></td>
+<td>only pre-approved tools; everything else is denied</td>
+<td>CI, scripts</td>
+</tr>
+<tr>
+<td><code>bypassPermissions</code></td>
+<td>everything</td>
+<td>isolated containers · VMs only</td>
+</tr>
+</tbody></table>
+<p>Cycle with <code>Shift+Tab</code>; set the starting mode with <code>--permission-mode</code>. <code>auto</code> and <code>bypassPermissions</code> cannot be set as the default from project or local settings. Writes to <strong>protected paths</strong> such as <code>.git</code>, <code>.claude</code>, <code>.husky</code> and <code>.mcp.json</code> are, as a rule, auto-approved only in <code>bypassPermissions</code>. Deny rules block in every mode.</p>
+<h3>Sandbox</h3>
+<p>Claude Code&#39;s sandbox puts an OS boundary around Bash · PowerShell · Monitor commands and their child processes. macOS uses Seatbelt; Linux and WSL2 use <code>bubblewrap</code> and <code>socat</code>. Turn it on with <code>/sandbox</code> or in settings. Writes are limited by default to the working directory and temp directories, but reads are broad, so block paths such as <code>~/.ssh</code> yourself. The <code>allowUnsandboxedCommands: false</code> below closes the escape hatch of retrying outside the sandbox. Because <code>autoAllowBashIfSandboxed</code> defaults to on, Bash inside the sandbox runs without asking, but content-specific ask rules such as <code>Bash(git push *)</code> and deny rules still apply.</p>
+<pre><code class="language-json">{
+  &quot;sandbox&quot;: {
+    &quot;enabled&quot;: true, &quot;allowUnsandboxedCommands&quot;: false,
+    &quot;filesystem&quot;: { &quot;denyRead&quot;: [&quot;~/.ssh&quot;, &quot;~/.aws&quot;] },
+    &quot;network&quot;: { &quot;allowedDomains&quot;: [&quot;github.com&quot;, &quot;registry.npmjs.org&quot;] }
+  }
+}
+</code></pre>
+<h3>Codex: approval policy and sandbox mode</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sandbox_mode</code></td>
+<td><code>read-only</code> · <code>workspace-write</code> · <code>danger-full-access</code></td>
+<td>network is off by default in <code>workspace-write</code> (<code>[sandbox_workspace_write] network_access</code>)</td>
+</tr>
+<tr>
+<td><code>approval_policy</code></td>
+<td><code>on-request</code> (default; <code>on-failure</code> is an alias)</td>
+<td>the model asks for approval when it needs it</td>
+</tr>
+<tr>
+<td><code>approval_policy</code></td>
+<td><code>never</code></td>
+<td>never asks; failures go straight back to the model</td>
+</tr>
+<tr>
+<td><code>approval_policy</code></td>
+<td><code>{ granular = { ... } }</code></td>
+<td>per-category allow or automatic rejection</td>
+</tr>
+</tbody></table>
+<p>So Codex separates <strong>what it can do</strong> (<code>sandbox_mode</code>) from <strong>when it asks</strong> (<code>approval_policy</code>). The value <code>untrusted</code> raises a &quot;no longer supported&quot; error in the 2026-09 main source. On the CLI, change the sandbox with <code>-s</code>/<code>--sandbox</code>; the interactive TUI also accepts <code>-a</code>/<code>--ask-for-approval</code> (<code>-a</code> is a TUI flag defined in <code>codex-rs/tui/src/cli.rs</code> in the 2026-09 main source, not one of the shared options that <code>codex exec</code> also takes); <code>--dangerously-bypass-approvals-and-sandbox</code> (alias <code>--yolo</code>) is only for environments already isolated from outside. Per-command rules are written in Starlark in <code>rules/*.rules</code> under a config folder (for example <code>~/.codex/rules/default.rules</code>), such as <code>prefix_rule(pattern = [&quot;git&quot;, &quot;push&quot;, [&quot;--force&quot;, &quot;-f&quot;]], decision = &quot;forbidden&quot;)</code>. The rule matches tokens <strong>from the front</strong>, so <code>git push origin --force</code> is not caught.</p>
+<h3>Hooks: events and the input/output contract</h3>
+<p>A Claude Code hook is a command · http · mcp_tool · prompt · agent handler that runs at a lifecycle event. As of 2026-09 there are more than thirty events; the common ones are <code>SessionStart</code>, <code>UserPromptSubmit</code>, <code>PreToolUse</code>, <code>PermissionRequest</code>, <code>PostToolUse</code>, <code>Stop</code>, <code>SubagentStop</code>, <code>PreCompact</code> and <code>SessionEnd</code>.</p>
+<ul>
+<li><strong>Input</strong>: JSON on stdin. The common fields <code>session_id</code>, <code>transcript_path</code>, <code>cwd</code>, <code>permission_mode</code> and <code>hook_event_name</code> are joined by event-specific fields (<code>tool_name</code>, <code>tool_input</code>, <code>stop_hook_active</code>, and so on).</li>
+<li><strong>Exit code</strong>: 0 is success, and stdout JSON is read. 2 is a block, and stderr goes to Claude as the reason. Exit 2 in <code>PreToolUse</code> stops the call before permission rules are evaluated. <strong>Other values are, for most events, non-blocking errors, and the action goes ahead.</strong></li>
+<li><strong>JSON output</strong>: <code>PreToolUse</code> uses <code>hookSpecificOutput.permissionDecision</code> (<code>allow</code> · <code>deny</code> · <code>ask</code> · <code>defer</code>); <code>Stop</code> uses a top-level <code>&quot;decision&quot;: &quot;block&quot;</code> with <code>reason</code>. A hook&#39;s <code>allow</code> cannot override deny or ask rules either.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart TD
+    C[Tool call requested] --&gt; H{PreToolUse hook}
+    H --&gt;|exit 2| B[Blocked, reason passed to Claude]
+    H --&gt;|passes| D{Deny rule matches}
+    D --&gt;|yes| B
+    D --&gt;|no| A{Ask rule matches}
+    A --&gt;|yes| Q[Ask the human]
+    A --&gt;|no| L{Allow rule or mode permits}
+    L --&gt;|yes| S[Run inside the sandbox]
+    L --&gt;|no| Q
+    Q --&gt;|approved| S
+    Q --&gt;|rejected| B
+</code></pre>
+<h2>Applied: This Repository&#39;s Setup</h2>
+<p>This repository bakes permissions into its role agents. The two Claude agents declare <code>tools: Read, Grep, Glob, Bash</code> and <code>permissionMode: plan</code>; the three Codex agents declare <code>sandbox_mode = &quot;read-only&quot;</code>. The Claude agents, though, are read-only only when the parent is in default, plan or dontAsk. When the parent conversation is in <code>acceptEdits</code>, <code>auto</code> or <code>bypassPermissions</code>, the subagent runs in the parent&#39;s mode and <code>permissionMode</code> is ignored, and since both agents have <code>Bash</code>, they are not read-only then. <code>.ai/HARNESS.md</code> adds that a parent runtime override can supersede a file&#39;s sandbox setting, so the effective permissions must be verified. But <strong>there is no committed <code>.claude/settings.json</code> and no hook</strong>. Below is a draft that fills that gap; this repository&#39;s test command is <code>node --test tests/*.test.cjs</code>.</p>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [&quot;Bash(node --test *)&quot;, &quot;Bash(python3 .ai/tools/check_policy_set.py)&quot;, &quot;Bash(git diff *)&quot;, &quot;Bash(git log *)&quot;, &quot;Bash(git commit *)&quot;],
+    &quot;ask&quot;: [&quot;Bash(git push *)&quot;, &quot;Bash(git reset --hard *)&quot;, &quot;WebFetch&quot;],
+    &quot;deny&quot;: [&quot;Read(./.env)&quot;, &quot;Read(./.env.*)&quot;, &quot;Bash(git push --force *)&quot;, &quot;Bash(git push -f *)&quot;]
+  },
+  &quot;hooks&quot;: {
+    &quot;SessionStart&quot;: [{ &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/session-baseline.sh&quot; }] }],
+    &quot;PreToolUse&quot;: [{ &quot;matcher&quot;: &quot;Bash&quot;, &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;if&quot;: &quot;Bash(git *)&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/block-force-push.sh&quot; }] }],
+    &quot;Stop&quot;: [{ &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR\&quot;/.claude/hooks/stop-if-dirty.sh&quot; }] }]
+  }
+}
+</code></pre>
+<p><strong>Hook 1, block force push</strong> (<code>.claude/hooks/block-force-push.sh</code>). It joins lines continued with a trailing <code>\</code>, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains <code>$</code> or a backtick is kept, not deleted. It then deletes comments (from a <code>#</code> at the start of a word to the end of the line), splits the command on <code>&amp;&amp;</code> · <code>;</code> · <code>|</code> · newlines, and checks **only the arguments after each <code>push</code>**. It blocks bundled short options containing <code>f</code> (<code>-uf</code>, <code>-4f</code>), every long option starting with <code>--force</code> (including abbreviations such as <code>--force-w</code>), <code>--mirror</code> and its abbreviations (down to <code>--m</code>), <code>+</code> refspecs, and **every argument containing <code>$</code> or a backtick**. Variables and command substitutions have no value until they run, so it blocks them without looking, failing closed. If <code>jq</code> is missing or the input cannot be read, it **fails closed** (exit 2). Had a <code>jq</code> failure left <code>CMD</code> empty and the script exited 0, the block would have been silently off, and stderr at exit 0 only reaches the debug log, so nobody would have known.</p>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || { echo &quot;Blocked: jq is missing, so the force-push check cannot run.&quot; &gt;&amp;2; exit 2; }
+CMD=$(jq -r &#39;.tool_input.command // empty&#39;) || exit 2
+CMD=${CMD//$&#39;\\\n&#39;/}
+S=$(printf &#39;%s\n&#39; &quot;$CMD&quot; | sed -E &quot;s/\\\\//g; s/[\&quot;&#39;]([^\&quot;&#39;[:space:]#]*)[\&quot;&#39;]/\1/g; s/\&quot;[^\&quot;\$\`]*\&quot;|&#39;[^&#39;]*&#39;//g; s/(^|[[:space:];&amp;|])#.*$//; s/(&amp;&amp;|\|\||[;&amp;|])/\n/g&quot;)
+ARGS=$(printf &#39;%s\n&#39; &quot;$S&quot; | sed -nE &#39;s/^(.*[[:space:]])?push([[:space:]].*)?$/ \2 /p&#39;)
+if printf &#39;%s\n&#39; &quot;$ARGS&quot; | grep -Eq &#39;[[:space:]]-[A-Za-z0-9]*f[A-Za-z0-9]*([[:space:]]|$)|[[:space:]]--force[^[:space:]=]*|[[:space:]]--m(i(r(r(o(r)?)?)?)?)?([[:space:]]|$)|([[:space:]]|:)\+[^[:space:]]|[$`]&#39;; then
+  echo &quot;Blocked: force push is not allowed from an agent session. Ask the owner.&quot; &gt;&amp;2
+  exit 2
+fi
+exit 0
+</code></pre>
+<p>Below is a subset of the 53 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). That <code>-4f</code>, <code>--force-w</code>, <code>--mirr</code>, <code>\-f</code> and <code>--forc$&#39;e&#39;</code> really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. &quot;No jq&quot; means a run with <code>jq</code> removed from <code>PATH</code>. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Expected</th>
+<th>With jq</th>
+<th>No jq</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git push origin main</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -u origin feature</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin fix-foo</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;push -f later&quot; &amp;&amp; git status</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin main # -f</code> · <code>git commit -m &quot;fix #12&quot; &amp;&amp; git push origin main</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -o ci.skip origin main</code> · <code>origin force</code> · <code>origin mirror</code> · <code>origin fix-force</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --no-force</code> · <code>--no-force-with-lease</code> · <code>--porcelain</code> · <code>--prune</code> · <code>--follow-tags</code> · <code>--push-option=x</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -fu origin main</code> · <code>-uf</code> · <code>-nf</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git -C . push -f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin &quot;+main&quot;</code> · <code>&#39;+main&#39;</code> · <code>HEAD:+main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --force-with-lease=main:abc123 origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --force-if-includes origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --mirror origin</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;push&quot; &amp;&amp; git push -f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push -4f origin main</code> · <code>-f4</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --force-w origin main</code> · <code>--force-with-l</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push --mirr origin</code> · <code>--mir</code> · <code>--mi</code> · <code>--m</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push \-f origin main</code> · <code>--forc\e</code> · <code>--forc$&#39;e&#39;</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>F=-f; git push $F origin main</code> · <code>git push -$(echo f) origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push origin fix#1 -f</code> · <code>git commit -m &#39;#&#39; &amp;&amp; git push -f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>git push \</code> then a newline, next line <code>-f origin main</code></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Limit: <code>git p -f origin main</code> · <code>git -c alias.p=push p -f origin main</code></td>
+<td>2</td>
+<td><strong>0</strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td>Limit: <code>echo push -f</code></td>
+<td>0</td>
+<td><strong>2</strong></td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>Comment removal targets only a <code>#</code> <strong>at the start of a word</strong>, and a single-token quote containing <code>#</code> is deleted rather than unwrapped. Deleting every <code>#</code> on the line would let <code>git push origin fix#1 -f</code> and <code>git commit -m &#39;#&#39; &amp;&amp; git push -f origin main</code> through (checked with the two cases above). Conversely, as in bash, the tail of <code>git status;# note &amp;&amp; git push -f</code> is a comment, so it passes.</p>
+<p>The limits of Hook 1, stated plainly: aliases are expanded by git at run time, so they are not caught (<code>git p -f</code>, <code>git -c alias.p=push p -f</code>). Neither are strings wrapped in <code>eval</code> or <code>sh -c</code>, a push inside a script file, or force set in git config (a <code>+</code> refspec in <code>remote.&lt;name&gt;.push</code>, <code>remote.&lt;name&gt;.mirror</code>). In the other direction, other commands where <code>-f</code> follows the word <code>push</code>, such as <code>echo push -f</code>, and every push argument containing <code>$</code>, such as <code>git push origin $BRANCH</code>, are blocked as false positives. So this hook cuts down common mistakes; it is not a security boundary. The real boundary is a server-side rule outside the agent, such as the GitHub branch protection in the T3 row of the risk-tier table below.</p>
+<p><strong>Hooks 2 · 3, do not stop with uncommitted changes this session made</strong>. A session can start on a dirty tree that holds the owner&#39;s WIP. So <code>SessionStart</code> (<code>session-baseline.sh</code>) saves <code>git status --porcelain</code> as a per-session baseline, and <code>Stop</code> (<code>stop-if-dirty.sh</code>) objects <strong>only to new lines</strong>. Paths come from <code>cwd</code> in the stdin JSON, not <code>$CLAUDE_PROJECT_DIR</code>: after Claude enters a worktree, <code>CLAUDE_PROJECT_DIR</code> stays where the session started and only <code>cwd</code> follows. The baseline is written only when absent, so it survives <code>SessionStart</code> firing again after compact or resume. <code>session_id</code> goes into a file name, so any character other than letters, digits, <code>.</code>, <code>_</code> and <code>-</code> becomes <code>_</code>, and if the value is empty or <code>null</code> the script does nothing and exits.</p>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || exit 0
+INPUT=$(cat)
+SID=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -j &#39;.session_id&#39; | tr -c &#39;A-Za-z0-9._-&#39; &#39;_&#39;); DIR=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.cwd&#39;)
+[ -n &quot;$SID&quot; ] &amp;&amp; [ &quot;$SID&quot; != null ] || exit 0
+cd &quot;$DIR&quot; 2&gt;/dev/null &amp;&amp; GITDIR=$(git rev-parse --absolute-git-dir 2&gt;/dev/null) || exit 0
+[ -e &quot;$GITDIR/agent-baseline-$SID&quot; ] || git status --porcelain &gt; &quot;$GITDIR/agent-baseline-$SID&quot;
+exit 0
+</code></pre>
+<pre><code class="language-bash">command -v jq &gt;/dev/null || { echo &#39;{&quot;systemMessage&quot;:&quot;stop-if-dirty: jq is missing, uncommitted-work check skipped&quot;}&#39;; exit 0; }
+INPUT=$(cat)
+[ &quot;$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.stop_hook_active&#39;)&quot; = &quot;true&quot; ] &amp;&amp; exit 0
+SID=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -j &#39;.session_id&#39; | tr -c &#39;A-Za-z0-9._-&#39; &#39;_&#39;); DIR=$(printf &#39;%s&#39; &quot;$INPUT&quot; | jq -r &#39;.cwd&#39;)
+[ -n &quot;$SID&quot; ] &amp;&amp; [ &quot;$SID&quot; != null ] || exit 0
+cd &quot;$DIR&quot; 2&gt;/dev/null &amp;&amp; GITDIR=$(git rev-parse --absolute-git-dir 2&gt;/dev/null) || exit 0
+BASE=&quot;$GITDIR/agent-baseline-$SID&quot;
+[ -f &quot;$BASE&quot; ] || { echo &#39;{&quot;systemMessage&quot;:&quot;stop-if-dirty: no session baseline, check skipped&quot;}&#39;; exit 0; }
+NEW=$(git status --porcelain | grep -vxF -f &quot;$BASE&quot;)
+if [ -n &quot;$NEW&quot; ]; then
+  printf &#39;Files changed during this session are uncommitted:\n%s\nCommit your own changes in meaningful units, or say in the report why they stay uncommitted. Do not commit files that were already modified before the session.\n&#39; &quot;$NEW&quot; &gt;&amp;2
+  exit 2
+fi
+exit 0
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Expected</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clean tree</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>only files the owner modified before the session</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>agent edits a tracked file / creates a new file</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>same, with <code>stop_hook_active: true</code></td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>agent committed; only the owner&#39;s WIP remains</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>no baseline · no <code>jq</code></td>
+<td>0 + warning</td>
+<td>0 + <code>systemMessage</code></td>
+</tr>
+<tr>
+<td><code>session_id</code> is <code>../../evil</code> · <code>a b/c</code></td>
+<td>a file inside <code>.git/</code></td>
+<td><code>agent-baseline-.._.._evil</code> · <code>agent-baseline-a_b_c</code></td>
+</tr>
+<tr>
+<td><code>session_id</code> missing · <code>null</code> · empty string</td>
+<td>0, no file</td>
+<td>0, no file</td>
+</tr>
+<tr>
+<td>Limit: agent adds a new file inside <code>u/</code>, which the owner left untracked</td>
+<td>2</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody></table>
+<p>The limits, stated plainly: if the agent further edits a file the owner had already modified, the <code>git status</code> line is unchanged and the hook misses it. If the agent adds a file inside a directory the owner left untracked, <code>git status --porcelain</code> still shows the single line <code>?? u/</code>, so the hook misses that too (the last row of the table above). With no baseline (installed mid-session, a new worktree) or no <code>jq</code>, it does not block but reports through <code>systemMessage</code>, because failing closed at Stop would leave a session unable to end. Baseline files stay in <code>.git/</code>, so remove them with a <code>SessionEnd</code> hook if you want.</p>
+<h2>Going Deeper</h2>
+<h3>Risk-tiered design for a one-person studio</h3>
+<p>Running many products alone means many approval prompts, and many prompts end with approvals nobody reads. So assign <strong>one mechanism per risk tier</strong>. This moves the safety loop from &quot;Claude Code as a Git client&quot; into configuration, and for T3 it adds a last line of defence outside the agent, such as GitHub branch protection.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Examples</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T0 inspect</td>
+<td>reading, searching, <code>git diff</code></td>
+<td>allowed by default</td>
+<td><code>read-only</code></td>
+</tr>
+<tr>
+<td>T1 local · reversible</td>
+<td>edits, tests, local commits</td>
+<td><code>acceptEdits</code> or allow + sandbox</td>
+<td><code>workspace-write</code> + <code>on-request</code></td>
+</tr>
+<tr>
+<td>T2 shared state</td>
+<td>push, PRs, installing dependencies, network</td>
+<td>ask</td>
+<td>approve requests to leave the sandbox</td>
+</tr>
+<tr>
+<td>T3 irreversible · external cost</td>
+<td>force push, deploys, payment APIs, mass deletion</td>
+<td>deny + hook + human</td>
+<td><code>forbidden</code> rules + server-side protection</td>
+</tr>
+</tbody></table>
+<h3>Secrets hygiene</h3>
+<ul>
+<li>Permission rules stop the Read tool and the sandbox stops Bash paths such as <code>cat</code>, so use <strong>both</strong>. The sandbox <code>credentials</code> block denies reads of listed files (<code>&quot;mode&quot;: &quot;deny&quot;</code>) and unsets listed environment variables before each sandboxed command. There is no built-in list, so write your own. <code>permissions.blockReadsOutsideWorkingDirectories</code> makes the file tools refuse reads outside the working directories.</li>
+<li>Never commit <code>.claude/settings.local.json</code> or <code>CLAUDE.local.md</code>. In a project <code>.mcp.json</code>, some credential variables (the docs&#39; example: <code>ANTHROPIC_AUTH_TOKEN</code>) read as empty in a remote server&#39;s <code>url</code> and <code>headers</code>. Codex narrows the environment passed to commands with <code>shell_environment_policy</code> (<code>inherit</code>, <code>exclude</code>, <code>include_only</code>, <code>set</code>).</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;permissions&quot;: { &quot;blockReadsOutsideWorkingDirectories&quot;: true, &quot;deny&quot;: [&quot;Read(./.env)&quot;, &quot;Read(./.env.*)&quot;] },
+  &quot;sandbox&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;credentials&quot;: {
+      &quot;files&quot;: [{ &quot;path&quot;: &quot;~/.ssh&quot;, &quot;mode&quot;: &quot;deny&quot; }, { &quot;path&quot;: &quot;~/.aws/credentials&quot;, &quot;mode&quot;: &quot;deny&quot; }],
+      &quot;envVars&quot;: [{ &quot;name&quot;: &quot;GITHUB_TOKEN&quot;, &quot;mode&quot;: &quot;deny&quot; }, { &quot;name&quot;: &quot;NPM_TOKEN&quot;, &quot;mode&quot;: &quot;deny&quot; }]
+    }
+  }
+}
+</code></pre>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>A hook switches off with a notice</strong>: if the script path is wrong or not executable, the shell exits with a code such as 127 and the transcript shows <code>Failed with non-blocking status code: ...</code>, but the action proceeds. Look for that notice on the first run.</li>
+<li><strong>A hook switches off without a notice</strong>: worse. If a tool such as <code>jq</code> is missing, the input comes out empty and the script exits 0, nothing is shown at all. Write blocking hooks to exit 2 when a tool is missing, and test right after installing, both with and without the tool (both must print <code>exit=2</code>).</li>
+<li><strong>Project allow rules do not take effect</strong>: the workspace is not yet trusted, or this is a <code>claude -p</code> run, which has no trust dialog. In Codex too, an untrusted project&#39;s <code>.codex/config.toml</code> stays disabled.</li>
+</ul>
+<pre><code class="language-bash">printf &#39;%s&#39; &#39;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;git push -f&quot;}}&#39; | bash .claude/hooks/block-force-push.sh; echo &quot;exit=$?&quot;
+printf &#39;%s&#39; &#39;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;git push -f&quot;}}&#39; | env PATH=/nonexistent /bin/bash .claude/hooks/block-force-push.sh; echo &quot;exit=$?&quot;
+</code></pre>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Grant broad allow rules and deny only the dangerous ones.&quot;</strong> A Bash deny is escaped by a change of spelling. Layer the sandbox under any broad allow.</li>
+<li><strong>&quot;Protected paths are protected even in bypassPermissions.&quot;</strong> That mode allows protected-path writes too. Do not use it outside a container.</li>
+<li><strong>&quot;Codex <code>never</code> is a safe mode.&quot;</strong> It only stops asking; safety is decided by <code>sandbox_mode</code>.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li><code>Bash(git push *)</code> is in ask and <code>Bash(git push origin main)</code> is in allow. How is <code>git push origin main</code> handled?</li>
+<li>What happens when a blocking hook exits with 1, and why is that dangerous?</li>
+<li>What happens if a Stop hook does not check <code>stop_hook_active</code>?</li>
+<li>In Codex, with <code>approval_policy = &quot;never&quot;</code> and <code>sandbox_mode = &quot;workspace-write&quot;</code> together, what is allowed and what is blocked?</li>
+<li>Why is agent configuration alone not enough to stop a T3 action?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li>Claude Code, <a href="https://code.claude.com/docs/en/permissions">Configure permissions</a> · <a href="https://code.claude.com/docs/en/permission-modes">Permission modes</a> · <a href="https://code.claude.com/docs/en/sandboxing">Sandboxing</a> (checked 2026-09-29)</li>
+<li>Claude Code, <a href="https://code.claude.com/docs/en/hooks">Hooks reference</a> · <a href="https://code.claude.com/docs/en/hooks-guide">Hooks guide</a> (checked 2026-09-29)</li>
+<li>OpenAI Codex, <a href="https://developers.openai.com/codex/agent-approvals-security">Agent approvals &amp; security</a> · <a href="https://developers.openai.com/codex/concepts/sandboxing">Sandbox</a> (2026-09-29, cross-checked against source <code>protocol.rs</code>, <code>config.schema.json</code>, <code>execpolicy/README.md</code>)</li>
+<li>This repository: <code>.ai/HARNESS.md</code>, <code>.claude/agents/*.md</code>, <code>.codex/agents/*.toml</code></li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/07-instructions-memory/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Instructions and Memory</span></a><a class="page-link next" href="../../../en/ai/09-subagents-skills/"><span><small>Next</small>Subagents, Skills and Plugins</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

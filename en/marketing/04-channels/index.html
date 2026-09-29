@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Channel Strategy · Content · Paid · Lifecycle · Community | MyAI</title>
+    <meta name="description" content="A channel is not a strategy but a path for executing one. Segment and positioning come first; then you choose where those customers actually are." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/04-channels/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/04-channels/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Channel Strategy · Content · Paid · Lifecycle · Community | MyAI" />
+    <meta property="og:description" content="A channel is not a strategy but a path for executing one. Segment and positioning come first; then you choose where those customers actually are." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/marketing/04-channels/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/marketing/04-channels.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link active" aria-current="page" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Marketing</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Channels · Content · Paid · Lifecycle</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Channel Strategy · Content · Paid · Lifecycle · Community</h1>
+<p>A channel is not a strategy but <strong>a path for executing one</strong>. Segment and positioning come first; then you choose where those customers actually are.</p>
+<h2>Channel Map</h2>
+<pre><code class="language-mermaid">flowchart TD
+    S[Segment and Positioning] --&gt; O[Owned]
+    S --&gt; E[Earned]
+    S --&gt; P[Paid]
+    O --&gt; O1[Website and Docs]
+    O --&gt; O2[Email and CRM]
+    O --&gt; O3[Community]
+    E --&gt; E1[SEO and AI Search]
+    E --&gt; E2[PR and Reviews]
+    E --&gt; E3[Partners]
+    P --&gt; P1[Paid Search]
+    P --&gt; P2[Paid Social]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Characteristics</th>
+<th>Cost structure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Owned</td>
+<td>Assets we control</td>
+<td>Production and operating cost, compounding effect</td>
+</tr>
+<tr>
+<td>Earned</td>
+<td>Others mention or recommend us</td>
+<td>Cannot be bought directly, high credibility</td>
+</tr>
+<tr>
+<td>Paid</td>
+<td>Exposure bought with money</td>
+<td>Immediate effect, stops when spending stops</td>
+</tr>
+</tbody></table>
+<h2>Questions for Choosing Channels</h2>
+<ul>
+<li>When our ICP feels the problem, where do they search or ask, and what do they ask?</li>
+<li>Whose word do they trust before buying? (Peers, communities, reviews, AI answers)</li>
+<li>What CAC can our price and LTV sustain? (Document 07)</li>
+<li>Can we measure effectiveness in this channel? (Document 06)</li>
+</ul>
+<p>Early on, it is better to <strong>prove repeatable results in one or two channels</strong> than to spread across many.</p>
+<h2>Content · SEO</h2>
+<p>Search traffic is a compounding asset, but it is slow.</p>
+<p>Google&#39;s official position (Search Central) is consistent.</p>
+<ul>
+<li>What matters is <strong>whether content is helpful to people</strong>, not whether AI was used</li>
+<li>Automated generation whose primary purpose is manipulating rankings violates spam policies</li>
+<li>In 2024-03 Google announced scaled content abuse, site reputation abuse, and expired domain abuse as new spam policies</li>
+</ul>
+<p>Bad example:</p>
+<blockquote>
+<p>Auto-generate and publish 500 AI articles, one per keyword.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Pick 20 questions that recur in customer interviews and turn them into documents with real settings screens and error cases.</p>
+</blockquote>
+<h2>Paid Search · Paid Social</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Paid Search</th>
+<th>Paid Social</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User state</td>
+<td>Already aware of the problem and searching</td>
+<td>Consuming a feed; demand is latent</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td>High purchase intent</td>
+<td>Demand creation, precise reach</td>
+</tr>
+<tr>
+<td>Weakness</td>
+<td>Cannot grow beyond search volume</td>
+<td>Creative fatigue, longer path to conversion</td>
+</tr>
+<tr>
+<td>Key variables</td>
+<td>Keywords and queries, bids, landing page</td>
+<td>Creative, targeting, frequency</td>
+</tr>
+</tbody></table>
+<h3>The Spread of Automated Campaigns</h3>
+<p>Major ad platforms now put campaign types that automate targeting, bidding, and creative combinations with AI front and center. Examples: Google&#39;s Performance Max and AI Max for Search campaigns (announced 2025), and Meta&#39;s Advantage+ campaigns.</p>
+<p>Working principles:</p>
+<ul>
+<li>Automation is only as smart as <strong>the quality of its input signals (conversion data)</strong></li>
+<li>Conversions reported by a platform are attributed by that platform&#39;s rules (document 06)</li>
+<li>People set exclusions, brand safety, and budget caps</li>
+<li>Auto-generated creative is subject to the same disclosure and advertising rules (document 09)</li>
+</ul>
+<h2>Email · CRM · Lifecycle</h2>
+<p>This is the channel for customers you already have a relationship with. It contributes to <strong>activation, retention, and expansion</strong> more than acquisition.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Example message</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Onboarding</td>
+<td>Guide to the first value experience</td>
+<td>Right after signup, incomplete steps</td>
+</tr>
+<tr>
+<td>Activation</td>
+<td>Encourage use of a core feature</td>
+<td>A specific action has not happened</td>
+</tr>
+<tr>
+<td>Retention</td>
+<td>Usage summary, new value</td>
+<td>Signals of declining use</td>
+</tr>
+<tr>
+<td>Expansion</td>
+<td>Higher plan, team invites</td>
+<td>Approaching a limit</td>
+</tr>
+<tr>
+<td>Win-back</td>
+<td>Reasons to return</td>
+<td>Cancellation, long inactivity</td>
+</tr>
+</tbody></table>
+<p>Onboarding and activation messages should aim at an <strong>activation event</strong>, and that event is not set by guesswork. Compare the first one to two weeks of behavior of users still active months later with those who left, and pick the behavior most strongly associated with staying. For the example product, a candidate would be &quot;connects one service and opens the root-cause screen from one alert within the first week&quot; (assumption). This is a correlation, so confirm causality with onboarding experiments. The method is the same as in document 03, where <strong>PQL criteria are derived from the behavior of accounts that actually converted to paid</strong>.</p>
+<h3>Sending Infrastructure Requirements</h3>
+<ul>
+<li>Since 2024-02, Gmail has required senders of 5,000 or more messages a day to Gmail accounts to use SPF and DKIM authentication, DMARC, and one-click unsubscribe for marketing mail (RFC 8058). Its guidance is to <strong>keep the spam rate reported in Postmaster Tools below 0.10% and never reach 0.30%</strong>. Google said it would ramp up enforcement on non-compliant traffic from 2025-11.</li>
+<li>Apple Mail Privacy Protection (announced 2021-06) downloads remote content in advance so senders cannot tell whether a message was opened. As a result, <strong>open rate is an unreliable metric</strong>. Look at clicks, conversions, and unsubscribe rates.</li>
+<li>In Korea, advertising messages require prior opt-in consent, an &quot;(Ad)&quot; label, and instructions for opting out, among other things (document 09).</li>
+</ul>
+<h2>Community</h2>
+<p>A community is not an ad channel but <strong>a structure in which customers help each other</strong>.</p>
+<ul>
+<li>Effects: lower support costs, product feedback, trust, referrals</li>
+<li>Conditions: steady operating staff, clear rules, the company not monopolizing the conversation</li>
+<li>Metrics: active participants, answer rate per question, signups and retention via the community (causality is hard to confirm)</li>
+</ul>
+<h2>Partnerships</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+<th>Caution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Integration / Marketplace</td>
+<td>Listing in another product&#39;s integration directory</td>
+<td>Risk of the partner platform changing its policies</td>
+</tr>
+<tr>
+<td>Reseller / Agency</td>
+<td>Sales through agencies and resellers</td>
+<td>Margin, ownership of the customer relationship</td>
+</tr>
+<tr>
+<td>Co-marketing</td>
+<td>Joint webinars, joint content</td>
+<td>Do the target customers actually overlap</td>
+</tr>
+<tr>
+<td>Affiliate / Referral</td>
+<td>Referral rewards</td>
+<td>Duty to disclose material connections (document 09)</td>
+</tr>
+</tbody></table>
+<h2>Korean Channel Specifics</h2>
+<p>When targeting Korean customers, a global channel list is not enough. Naver and Kakao each bundle search, messaging, and commerce under one company, so <strong>each channel has a different character and different applicable rules.</strong></p>
+<p>The advertising-information rules in Network Act Article 50 (prior opt-in consent, an &quot;(Ad)&quot; label, separate consent for night-time sending, opt-out instructions) apply to <strong>channels that send to a recipient, such as text messages, email, app push, and messenger messages</strong>. Ads shown in search results or feeds are not transmissions, so Article 50 does not apply to them, but their copy and sponsorship disclosures follow the Labeling and Advertising Act and the KFTC endorsement guidelines (document 09).</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Character</th>
+<th>Network Act Article 50 applies?</th>
+<th>Measurability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naver search ads (Power Link and others)</td>
+<td>Search ads with keyword bidding and pay-per-click; capture Korean-language search demand</td>
+<td>No; display-type</td>
+<td>Clicks and cost in the ad system; signups and payments linked via UTM and your own analytics</td>
+</tr>
+<tr>
+<td>Naver Blog and Cafe</td>
+<td>Reviews and community content shown alongside search results (earned and owned)</td>
+<td>Posts: no. Sponsored or product-trial posts must disclose material connections under the endorsement guidelines</td>
+<td>Only some traffic visible via UTM; impact through indirect signals such as branded search trends</td>
+</tr>
+<tr>
+<td>Naver Smart Store</td>
+<td>A sales channel connected to Naver Shopping and Naver Pay (mostly B2C goods)</td>
+<td>Yes, if you send advertising notices to buyers</td>
+<td>Mostly Seller Center statistics; merging with your own analytics needs separate design</td>
+</tr>
+<tr>
+<td>KakaoTalk Channel</td>
+<td>An owned channel built on follows (chat, posts, messages)</td>
+<td>Yes, when sending ad messages: &quot;(Ad)&quot; label, contact details, opt-out method</td>
+<td>Send and click metrics, follower count</td>
+</tr>
+<tr>
+<td>AlimTalk</td>
+<td>Only for <strong>informational</strong> messages needed for transactions and service use, such as orders, payments, and signups; cannot be sent if any advertising content is mixed in</td>
+<td>Within the informational scope it is an exception to the advertising rules; mixed-in ads make it advertising</td>
+<td>Delivery reported by the sending vendor; later behavior via link UTM</td>
+</tr>
+<tr>
+<td>Brand Message (replaces FriendTalk)</td>
+<td><strong>Advertising</strong> messages. FriendTalk ended on 2025-12-31 and was replaced by Brand Message from 2026-01-01. Sent to channel followers by default; sending to non-followers who consented to marketing requires Kakao&#39;s extra conditions, such as a channel with at least 50,000 followers, plus proof of consent. Sending is allowed only <strong>08:00–20:50 KST</strong></td>
+<td>Yes: prior opt-in consent, &quot;(Ad)&quot; label, opt-out instructions. Night-time sending is not possible under Kakao&#39;s policy</td>
+<td>Sends and clicks, link UTM</td>
+</tr>
+<tr>
+<td>Kakao Moment</td>
+<td>Ad platform for Bizboard (a banner at the top of the chat tab), display, video, and message ads</td>
+<td>Display-type: no; message ads: yes</td>
+<td>Platform-reported conversions (the attribution limits in document 06 apply)</td>
+</tr>
+<tr>
+<td>Daangn (Biz Profile, Daangn ads)</td>
+<td>A neighborhood-based local channel; Biz Profile is free, ads target by area, age, and interests</td>
+<td>Display ads: no</td>
+<td>Ad manager metrics; area-level targeting makes it a geo-experiment candidate</td>
+</tr>
+<tr>
+<td>Instagram · YouTube</td>
+<td>Global platforms, but channels routinely considered for Korean B2C and creator marketing</td>
+<td>Feed and video ads: no. Sponsored content follows the endorsement guidelines</td>
+<td>Platform-reported conversions, platform lift tools</td>
+</tr>
+</tbody></table>
+<p>Example judgment: for the example product (an incident-monitoring tool for developers), Naver and Google search ads, a technical blog, and AlimTalk for signup and billing notices are the first candidates, while Daangn and Instagram rank low. For a local shop or B2C commerce, the order is almost reversed.</p>
+<p>Product names and policies change often. The table summarizes each provider&#39;s guidance as of 2026-09-28, so re-check the originals before running campaigns.</p>
+<h2>Budget Allocation</h2>
+<p>The <strong>order in which you add money</strong> matters more than the number of channels.</p>
+<ol>
+<li><strong>Prove one channel first.</strong> Do not add channels before you have a repeatable CAC.</li>
+<li><strong>Cap the test budget.</strong> Give new-channel experiments an amount and duration (e.g., 10–20% of the total for 6–8 weeks, assumption) and write down stop criteria in advance.</li>
+<li><strong>Scale only after an incrementality read.</strong> Judge by lift or geo experiments, not platform-reported ROAS (document 06).</li>
+<li><strong>Look at marginal CAC, not average CAC.</strong> Most channels become less efficient as spend grows (diminishing returns), because the cheapest demand (branded search, high-intent keywords) is used up first.</li>
+</ol>
+<p>The numbers below are a generic illustration unrelated to the example product. See document 07 for the example product&#39;s paying-customer scale.</p>
+<pre><code class="language-text">Marginal CAC example (assumption)
+KRW 2.0M per month → 20 new customers   average CAC KRW 100,000
+KRW 3.0M per month → 25 new customers   average CAC KRW 120,000
+Extra KRW 1.0M     → 5 extra customers  marginal CAC KRW 200,000
+</code></pre>
+<p>An average CAC of KRW 120,000 looks fine, but the last KRW 1.0M is spending KRW 200,000 per customer. Base scaling decisions on this number.</p>
+<h3>Channel Mix Example: 5-Person B2B SaaS, KRW 5M per Month (Assumption)</h3>
+<p>An allocation assuming the 5-person team behind the example product spends KRW 5M a month. The amounts are <strong>assumptions</strong> that show how to read the table.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Monthly budget</th>
+<th>Role</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naver and Google search ads (problem keywords such as &quot;errors after deploy&quot;, &quot;log monitoring&quot;)</td>
+<td>KRW 2.0M</td>
+<td>Capture demand from people who already feel the problem</td>
+<td>Signup-to-activation conversion by query, paid CAC, a quarterly on/off or geo test</td>
+</tr>
+<tr>
+<td>Content, SEO, AI search (incident write-ups, setup guides)</td>
+<td>KRW 1.5M</td>
+<td>Compounding asset, candidate for citation in AI answers</td>
+<td>Organic signups, Search Console (including the generative AI report), AI-service referrers</td>
+</tr>
+<tr>
+<td>Lifecycle email and in-app (onboarding, PQL nurture)</td>
+<td>KRW 0.5M</td>
+<td>Activation and paid conversion</td>
+<td>Activation rate, free-to-paid conversion, comparison with a no-send holdout group</td>
+</tr>
+<tr>
+<td>Community and partners (developer community sponsorship, integration marketplaces)</td>
+<td>KRW 0.5M</td>
+<td>Trust and referrals</td>
+<td>Signups via community (UTM), signup survey &quot;Where did you hear about us?&quot;</td>
+</tr>
+<tr>
+<td>Test budget (next channel candidate)</td>
+<td>KRW 0.5M</td>
+<td>Validate a new channel</td>
+<td>Stop criteria and duration set in advance</td>
+</tr>
+</tbody></table>
+<h2>Common Mistakes</h2>
+<ul>
+<li>Entering a channel because competitors are there</li>
+<li>Comparing channel results using different standards</li>
+<li>Feeding automated campaigns a sloppy conversion definition</li>
+<li>Judging email performance by open rate</li>
+<li>Using the community as an announcement board</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">What web creators should know about our March 2024 core update and new spam policies — Google Search Central</a> (2024-03, accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content">Google Search&#39;s guidance about AI-generated content — Google Search Central</a> (2023-02, accessed 2026-09-28)</li>
+<li><a href="https://blog.google/products/ads-commerce/google-ai-max-for-search-campaigns/">Unlock next-level performance with AI Max for Search campaigns — Google</a> (2025, accessed 2026-09-28)</li>
+<li><a href="https://www.facebook.com/business/ads/meta-advantage-plus">Meta Advantage+ — Meta for Business</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/a/answer/81126?hl=en">Email sender guidelines — Gmail Help</a> (accessed 2026-09-28, 0.10% and 0.30% spam-rate thresholds checked)</li>
+<li><a href="https://support.google.com/mail/answer/14229414?hl=en">Email sender guidelines FAQ — Gmail Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.apple.com/legal/privacy/data/en/mail-privacy-protection/">Mail Privacy Protection &amp; Privacy — Apple</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.apple.com/newsroom/2021/06/apple-advances-its-privacy-leadership-with-ios-15-ipados-15-macos-monterey-and-watchos-8/">Apple advances its privacy leadership with iOS 15 — Apple Newsroom</a> (2021-06, accessed 2026-09-28)</li>
+<li><a href="https://searchad.naver.com/">Naver Search Ads — NAVER</a> (accessed 2026-09-28)</li>
+<li><a href="https://inside.ampm.co.kr/insight/10860">How marketers actually set up Power Link campaigns — Marketing Inside (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://sell.smartstore.naver.com/">Naver Smart Store Center — NAVER</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/infotalk">AlimTalk — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/infotalk/operations">AlimTalk sending rules — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/moment/start/messagead/operations">Channel message sending rules — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://solapi.com/notices/notices-2025-12-04">FriendTalk shutdown and automatic replacement by Brand Message — SOLAPI (in Korean)</a> (2025-12-04, accessed 2026-09-28)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/brandmessage">Brand Message — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28, sending hours 08:00–20:50)</li>
+<li><a href="https://solapi.com/kakao-bms-guide">Kakao Brand Message — SOLAPI (in Korean)</a> (accessed 2026-09-28, non-follower sending conditions such as at least 50,000 followers)</li>
+<li><a href="https://kakaobusiness.gitbook.io/main/ad/moment">Kakao Moment — Kakao Business Guide (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://bizschool.daangn.com/ads">Introducing Daangn ads — Daangn Biz School (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://business.daangn.com/">Daangn Business — Daangn (in Korean)</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%EB%B0%8F%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0/%EC%A0%9C50%EC%A1%B0">Network Act Article 50 — Korea National Law Information Center</a> (accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/03-go-to-market/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Go-to-Market · Launch · PLG/SLG</span></a><a class="page-link next" href="../../../en/marketing/05-ai-search-geo/"><span><small>Next</small>AI Search · GEO/AEO</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -8,6 +8,14 @@ const DOCS = [
       ["Multi-Agent 역할과 모델 라우팅", "content/ai/03-multi-agent.md"],
       ["스스로 개선되는 개발 프로세스", "content/ai/04-self-improving.md"],
       ["Claude Code를 Git Client처럼 쓰기", "content/ai/05-git-operator.md"],
+      ["AI Agent 세팅 지도", "content/ai/06-agent-setup-map.md"],
+      ["지시문과 메모리", "content/ai/07-instructions-memory.md"],
+      ["권한 · Sandbox · Hook", "content/ai/08-permissions-sandbox-hooks.md"],
+      ["Subagent · Skill · Plugin", "content/ai/09-subagents-skills.md"],
+      ["MCP와 외부 도구", "content/ai/10-mcp-tools.md"],
+      ["Headless · CI · Cloud 실행", "content/ai/11-headless-ci-cloud.md"],
+      ["AI 토큰 효율화의 원리", "content/ai/12-token-efficiency.md"],
+      ["토큰 절약 실전: 도구별 방법", "content/ai/13-token-saving-practice.md"],
     ],
   },
   {
@@ -57,7 +65,83 @@ const DOCS = [
       ["AI 시대의 Product Owner", "content/po/09-ai-product-owner.md"],
     ],
   },
+  {
+    title: "Marketing",
+    items: [
+      ["Marketing 전체 개요", "content/marketing/00-overview.md"],
+      ["시장·고객 리서치 · Segmentation", "content/marketing/01-customer-research.md"],
+      ["Positioning · Messaging · Brand", "content/marketing/02-positioning-messaging.md"],
+      ["Go-to-Market · Launch · PLG/SLG", "content/marketing/03-go-to-market.md"],
+      ["채널 · Content · Paid · Lifecycle", "content/marketing/04-channels.md"],
+      ["AI 검색 · GEO/AEO", "content/marketing/05-ai-search-geo.md"],
+      ["측정 · Attribution · Privacy", "content/marketing/06-measurement-privacy.md"],
+      ["Marketing Metrics · Unit Economics", "content/marketing/07-metrics.md"],
+      ["AI 활용 Workflow · 리스크", "content/marketing/08-ai-workflows.md"],
+      ["법 · 윤리 · 광고 표시", "content/marketing/09-legal-ethics.md"],
+    ],
+  },
+  {
+    title: "Platform 배포와 서비스",
+    items: [
+      ["Platform 배포 전체 개요", "content/platform/00-overview.md"],
+      ["배포 대상 · Static · Serverless", "content/platform/01-deployment-targets.md"],
+      ["Cloud · Kubernetes · 국내 Cloud", "content/platform/02-cloud-kubernetes.md"],
+      ["CI/CD · OIDC · GitOps", "content/platform/03-ci-cd-pipeline.md"],
+      ["Canary · Blue-Green · Flag · Rollback", "content/platform/04-release-strategies.md"],
+      ["App Store · Google Play", "content/platform/05-mobile-app-stores.md"],
+      ["Domain · DNS · TLS · CDN", "content/platform/06-domain-dns-tls-cdn.md"],
+      ["SLO · On-call · Postmortem", "content/platform/07-observability-incident.md"],
+      ["Secret · SBOM · SLSA", "content/platform/08-security-supply-chain.md"],
+      ["FinOps · Platform Engineering", "content/platform/09-finops-platform-engineering.md"],
+      ["작은 팀 실전 가이드", "content/platform/10-small-team-playbook.md"],
+    ],
+  },
+  {
+    title: "비즈니스",
+    items: [
+      ["비즈니스 트랙 개요", "content/business/00-overview.md"],
+      ["개인 · 법인 · 과세유형", "content/business/01-entity-choice.md"],
+      ["사업자 등록 · 통신판매업", "content/business/02-registration.md"],
+      ["약관 · 개인정보 · 전자상거래", "content/business/03-online-service-law.md"],
+      ["계약 · 지식재산 · 오픈소스", "content/business/04-contracts-ip.md"],
+      ["채용 · 4대보험 · 프리랜서", "content/business/05-hiring-freelancers.md"],
+      ["부가세 · 영세율 · 세금계산서", "content/business/06-vat-invoices.md"],
+      ["소득세 · 법인세 · 원천징수 · 장부", "content/business/07-income-tax-books.md"],
+      ["창업 감면 · 세무 달력 · 세무사", "content/business/08-tax-benefits-calendar.md"],
+      ["창업 지원사업", "content/business/09-startup-support.md"],
+    ],
+  },
+  {
+    title: "1인 스튜디오 수익화",
+    items: [
+      ["1인 스튜디오 수익화 전체 개요", "content/studio/00-overview.md"],
+      ["1인 스튜디오의 경제학", "content/studio/01-studio-economics.md"],
+      ["제품 포트폴리오 이론", "content/studio/02-portfolio-theory.md"],
+      ["기회 선택과 수요 검증", "content/studio/03-opportunity-validation.md"],
+      ["수익 모델 개론", "content/studio/04-revenue-models.md"],
+      ["광고 수익 심화", "content/studio/05-ad-revenue.md"],
+      ["유료 판매·구독과 가격 설계", "content/studio/06-paid-and-subscription.md"],
+      ["게임 수익화", "content/studio/07-game-monetization.md"],
+      ["출시 시스템", "content/studio/08-shipping-system.md"],
+      ["측정과 포트폴리오 의사결정", "content/studio/09-portfolio-decisions.md"],
+      ["90일 실행 계획 사례", "content/studio/10-90-day-plan.md"],
+    ],
+  },
 ];
+const SITE_PAGES = ["content/site/about.md", "content/site/privacy.md", "content/site/contact.md"];
+// Every document has its own crawlable address, relative to the site root.
+// Korean pages live at the root and English pages under en/.
+function pagePath(path) {
+  if (!path) return "";
+  if (path.startsWith("@ai-map:")) return "ai-map/" + path.slice(8).replace(/:/g, "/") + "/";
+  const match = path.match(/^content\/(?:site\/)?(.+)\.md$/);
+  return match ? match[1] + "/" : "";
+}
+function pageHref(path, lang) {
+  return (lang === "en" ? "en/" : "") + pagePath(path);
+}
+// One icon per DOCS group, in the same order.
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase", "coins"];
 
 const $ = (id) => document.getElementById(id);
 const escapeHtml = (value) =>
@@ -79,11 +163,17 @@ const storage = {
     } catch {}
   },
 };
-let language = storage.get("jt-language", "ko") === "en" ? "en" : "ko";
+let language = document.documentElement.lang === "en" ? "en" : "ko";
 const t = (key) => window.UI_TEXT[language][key];
+const ROOT = new URL(
+  document.querySelector('meta[name="site-root"]')?.content || "./",
+  location.href,
+);
+const asset = (rel) => new URL(rel, ROOT).pathname;
+const DOC_PATH = document.querySelector('meta[name="doc-path"]')?.content ?? "";
 const allPaths = DOCS.flatMap((g) => g.items.map((item) => item[1]));
-const groupIcons = ["book", "cube", "layout-grid", "users"];
-const icon = (name) => '<img src="./assets/icons/' + name + '.svg" alt="" aria-hidden="true">';
+const icon = (name) =>
+  '<img src="' + asset("assets/icons/" + name + ".svg") + '" alt="" aria-hidden="true">';
 let currentPath = "",
   loadVersion = 0,
   fetchController,
@@ -95,14 +185,11 @@ let drawer = null,
   scrollFrame = 0;
 const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const route = () => {
-  let value;
+  let section = "";
   try {
-    value = decodeURIComponent(location.hash.slice(1));
-  } catch {
-    value = "invalid";
-  }
-  const [path, section = ""] = value.split("::");
-  return { path: path || allPaths[0], section };
+    section = decodeURIComponent(location.hash.slice(1));
+  } catch {}
+  return { path: DOC_PATH, section };
 };
 function titleFor(path) {
   for (let g = 0; g < DOCS.length; g++) {
@@ -111,8 +198,22 @@ function titleFor(path) {
   }
   return ["", "", -1, -1];
 }
-function routeUrl(path, section = "") {
-  return "#" + path + (section ? "::" + section : "");
+function routeUrl(path, section = "", lang = language) {
+  return asset(pageHref(path, lang)) + (section ? "#" + section : "");
+}
+// Addresses from the former single-page version (#content/…::section-N) keep working.
+function legacyRedirect() {
+  let value;
+  try {
+    value = decodeURIComponent(location.hash.slice(1));
+  } catch {
+    return false;
+  }
+  if (!/^(content\/|@ai-map:)/.test(value)) return false;
+  const [path, section = ""] = value.split("::");
+  const lang = storage.get("jt-language", "ko") === "en" ? "en" : "ko";
+  location.replace(routeUrl(path, section, lang));
+  return true;
 }
 function applyLanguage() {
   document.documentElement.lang = language;
@@ -150,7 +251,9 @@ function buildTree() {
       icon(groupIcons[g]) +
       "<span>" +
       escapeHtml(t("groups")[g]) +
-      '</span><img class="chevron" src="./assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-' +
+      '</span><img class="chevron" src="' +
+      asset("assets/icons/chevron-down.svg") +
+      '" alt=""></button><div class="tree-items" id="group-' +
       g +
       '">' +
       group.items
@@ -312,7 +415,17 @@ function renderMap(path) {
                 (s) =>
                   '<section class="ai-map-guide-step"><h3>' +
                   escapeHtml(s.heading) +
-                  "</h3><p>" +
+                  "</h3>" +
+                  (s.summary
+                    ? '<div class="ai-map-flow"><p>' +
+                      escapeHtml(s.summary) +
+                      '</p><p class="ai-map-flow-output"><span>' +
+                      t("output") +
+                      "</span><strong>" +
+                      escapeHtml(s.output) +
+                      "</strong></p></div>"
+                    : "") +
+                  "<p>" +
                   escapeHtml(s.body) +
                   "</p>" +
                   (s.tools?.length
@@ -323,6 +436,9 @@ function renderMap(path) {
                   "</section>",
               )
               .join("") +
+            (g.finish
+              ? '<p class="ai-map-flow-finish">' + icon("check") + escapeHtml(g.finish) + "</p>"
+              : "") +
             "</article>",
         )
         .join("") +
@@ -520,7 +636,7 @@ function updatePosition() {
   $("toc")
     .querySelectorAll("a")
     .forEach((link) => {
-      const activeLink = link.hash.endsWith("::" + currentHeading);
+      const activeLink = link.hash === "#" + currentHeading;
       link.classList.toggle("active", activeLink);
       if (activeLink) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
@@ -547,7 +663,8 @@ function enhanceContent() {
   $("content")
     .querySelectorAll("a[href]")
     .forEach((a) => {
-      if (a.href.startsWith("http")) {
+      // Only links that leave this site open in a new tab.
+      if (a.protocol.startsWith("http") && a.origin !== location.origin) {
         a.target = "_blank";
         a.rel = "noopener noreferrer";
       }
@@ -645,59 +762,39 @@ async function renderDiagrams(version) {
     }
   }
 }
-async function loadDocument({ force = false, preserve = false } = {}) {
+async function loadDocument() {
   const requested = route();
-  if (!force && requested.path === currentPath) {
-    closeDrawer(false);
-    if (requested.section) jumpSection(requested.section, true);
-    else window.scrollTo({ top: 0, behavior: "instant" });
-    return;
-  }
-  const previousSection = preserve && scrollY > 100 ? currentHeading : "";
-  const oldRatio = maxScroll() ? scrollY / maxScroll() : 0;
   const version = ++loadVersion;
   fetchController?.abort();
   fetchController = new AbortController();
   currentPath = requested.path;
   headings = [];
   currentHeading = "";
-  $("toc").innerHTML = "";
-  $("readingTicks").innerHTML = "";
-  $("pageNav").innerHTML = "";
   closeDrawer(false);
   updateTree(currentPath);
-  const [group, title] = titleFor(currentPath);
-  $("breadcrumb").innerHTML =
-    "<span>" +
-    escapeHtml(group) +
-    "</span>" +
-    icon("chevron-right") +
-    "<span>" +
-    escapeHtml(title) +
-    "</span>";
-  document.title = (title ? title + " · " : "") + "Jeongsu Tech";
-  $("content").setAttribute("aria-busy", "true");
-  $("content").innerHTML = '<p class="loading" role="status">' + t("loading") + "</p>";
-  if (!preserve) window.scrollTo({ top: 0, behavior: "instant" });
+  // Documents arrive pre-rendered in the page; only AI Map views are built here.
+  const prerendered = $("content").dataset.prerendered === "true";
   try {
-    if (!allPaths.includes(currentPath)) throw new Error("Unknown document");
-    let html;
-    if (currentPath.startsWith("@ai-map:")) html = renderMap(currentPath);
-    else {
-      const file =
-        language === "en" ? currentPath.replace(/^content\//, "content/en/") : currentPath;
-      const res = await fetch("./" + file, { signal: fetchController.signal });
-      if (!res.ok) throw new Error("Document unavailable");
-      const md = await res.text();
-      html = DOMPurify.sanitize(marked.parse(md, { gfm: true, breaks: false }));
+    if (!prerendered) {
+      if (!allPaths.includes(currentPath)) throw new Error("Unknown document");
+      $("content").setAttribute("aria-busy", "true");
+      let html;
+      if (currentPath.startsWith("@ai-map:")) html = renderMap(currentPath);
+      else {
+        const file =
+          language === "en" ? currentPath.replace(/^content\//, "content/en/") : currentPath;
+        const res = await fetch(asset(file), { signal: fetchController.signal });
+        if (!res.ok) throw new Error("Document unavailable");
+        html = DOMPurify.sanitize(marked.parse(await res.text(), { gfm: true, breaks: false }));
+      }
+      if (version !== loadVersion) return;
+      $("content").innerHTML = html;
     }
-    if (version !== loadVersion) return;
-    $("content").innerHTML = html;
     enhanceContent();
     buildToc();
     bindCatalog();
     pageNavigation();
-    // Mermaid owns a shared renderer; serialize jobs and ignore obsolete routes.
+    // Mermaid owns a shared renderer; serialize jobs and ignore obsolete loads.
     renderTask = renderTask
       .catch(() => {})
       .then(async () => {
@@ -713,10 +810,7 @@ async function loadDocument({ force = false, preserve = false } = {}) {
     if (version !== loadVersion) return;
     $("content").setAttribute("aria-busy", "false");
     refreshNavigation();
-    const section = requested.section || previousSection;
-    if (section) jumpSection(section);
-    else if (preserve) window.scrollTo({ top: maxScroll() * oldRatio, behavior: "instant" });
-    $("announcement").textContent = title;
+    if (requested.section) jumpSection(requested.section);
   } catch (error) {
     if (error.name === "AbortError" || version !== loadVersion) return;
     $("content").innerHTML =
@@ -728,7 +822,7 @@ async function loadDocument({ force = false, preserve = false } = {}) {
       t("retry") +
       "</button></section>";
     $("content").setAttribute("aria-busy", "false");
-    $("retryDocument").onclick = () => loadDocument({ force: true });
+    $("retryDocument").onclick = () => location.reload();
     refreshNavigation();
   }
 }
@@ -777,7 +871,7 @@ function catalogSearchEntries(locale) {
         entries.push({
           title: copy.titles[gi][i],
           text: "",
-          href: routeUrl(path),
+          href: routeUrl(path, "", locale),
           context: copy.groups[gi],
         });
     }),
@@ -808,15 +902,15 @@ function catalogSearchEntries(locale) {
   data.guides.forEach((guide) => {
     entries.push({
       title: guide.title,
-      text: guide.summary,
-      href: routeUrl("@ai-map:guides", "section-" + section++),
+      text: [guide.summary, guide.finish].filter(Boolean).join(" "),
+      href: routeUrl("@ai-map:guides", "section-" + section++, locale),
       context: copy.guides,
     });
     guide.sections.forEach((step) => {
       entries.push({
         title: step.heading,
-        text: step.body,
-        href: routeUrl("@ai-map:guides", "section-" + section++),
+        text: [step.summary, step.output, step.body].filter(Boolean).join(" "),
+        href: routeUrl("@ai-map:guides", "section-" + section++, locale),
         context: copy.guides + " · " + guide.title,
       });
       (step.tools || []).forEach((tool) =>
@@ -858,12 +952,18 @@ function searchIndex(locale) {
           const timeout = setTimeout(() => controller.abort(), 12000);
           try {
             const file = locale === "en" ? doc.path.replace(/^content\//, "content/en/") : doc.path;
-            const response = await fetch("./" + file, { signal: controller.signal });
+            const response = await fetch(asset(file), { signal: controller.signal });
             if (!response.ok) throw new Error("Search document unavailable");
-            results[index] = DocumentSearch.sections(doc, searchBlocks(await response.text()));
+            results[index] = DocumentSearch.sections(
+              doc,
+              searchBlocks(await response.text()),
+              (path, section) => routeUrl(path, section, locale),
+            );
           } catch {
             failures++;
-            results[index] = [{ ...doc, text: "", context: doc.group, href: routeUrl(doc.path) }];
+            results[index] = [
+              { ...doc, text: "", context: doc.group, href: routeUrl(doc.path, "", locale) },
+            ];
           } finally {
             clearTimeout(timeout);
           }
@@ -952,21 +1052,20 @@ $("searchResults").addEventListener("keydown", (event) => {
 $("searchResults").addEventListener("click", (event) => {
   const link = event.target.closest("a");
   if (!link) return;
-  const href = link.getAttribute("href");
+  const url = new URL(link.href);
   closeSiteSearch(true);
+  // Another page loads normally; a section of this page scrolls in place.
   if (
-    href.startsWith("#") &&
+    !link.target &&
+    url.pathname === location.pathname &&
     !event.ctrlKey &&
     !event.metaKey &&
     !event.shiftKey &&
     !event.altKey
   ) {
     event.preventDefault();
-    history.pushState(null, "", href);
-    loadDocument().then(() => {
-      if (location.hash === href)
-        (document.getElementById(route().section) || $("main")).focus({ preventScroll: true });
-    });
+    history.pushState(null, "", url.hash || url.pathname);
+    jumpSection(url.hash.slice(1) || "main", true);
   }
 });
 $("retrySearch").onclick = () => {
@@ -986,15 +1085,17 @@ $("tree").addEventListener("click", (event) => {
   const link = event.target.closest(".tree-link");
   if (link) {
     closeDrawer();
-    if (link.dataset.path === currentPath && !route().section)
+    if (link.dataset.path === currentPath) {
+      event.preventDefault();
       window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }
 });
 $("toc").addEventListener("click", (event) => {
   const link = event.target.closest("a");
   if (link) {
     event.preventDefault();
-    const section = link.hash.split("::")[1];
+    const section = link.hash.slice(1);
     history.pushState(null, "", routeUrl(currentPath, section));
     closeDrawer(false);
     jumpSection(section, true);
@@ -1049,15 +1150,18 @@ document.querySelectorAll("[data-language]").forEach(
   (btn) =>
     (btn.onclick = () => {
       if (btn.dataset.language === language) return;
-      language = btn.dataset.language;
-      storage.set("jt-language", language);
-      closeSiteSearch();
-      applyLanguage();
-      buildTree();
-      loadDocument({ force: true, preserve: true });
+      storage.set("jt-language", btn.dataset.language);
+      location.href = routeUrl(
+        currentPath,
+        scrollY > 100 ? currentHeading : "",
+        btn.dataset.language,
+      );
     }),
 );
-window.addEventListener("hashchange", () => loadDocument());
+window.addEventListener("hashchange", () => {
+  const { section } = route();
+  if (section) jumpSection(section, true);
+});
 window.addEventListener(
   "scroll",
   () => {
@@ -1079,6 +1183,8 @@ document.querySelector(".skip-link").addEventListener("click", (event) => {
   event.preventDefault();
   $("main").focus();
 });
-applyLanguage();
-buildTree();
-loadDocument();
+if (!legacyRedirect()) {
+  applyLanguage();
+  buildTree();
+  loadDocument();
+}

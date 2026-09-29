@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Measurement · Attribution · Incrementality · Privacy | MyAI</title>
+    <meta name="description" content="&quot;Did this ad create revenue?&quot; is the hardest question in marketing. The key is distinguishing correlation from causation." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/06-measurement-privacy/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/06-measurement-privacy/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Measurement · Attribution · Incrementality · Privacy | MyAI" />
+    <meta property="og:description" content="&quot;Did this ad create revenue?&quot; is the hardest question in marketing. The key is distinguishing correlation from causation." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/marketing/06-measurement-privacy/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/marketing/06-measurement-privacy.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link active" aria-current="page" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Marketing</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Measurement · Attribution · Privacy</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Measurement · Attribution · Incrementality · Privacy</h1>
+<p>&quot;Did this ad create revenue?&quot; is the hardest question in marketing. The key is <strong>distinguishing correlation from causation</strong>.</p>
+<h2>Three Measurement Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Question</th>
+<th>Strength</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Attribution (MTA, last-click, etc.)</td>
+<td>Which touchpoints came before the conversion</td>
+<td>Fast, granular</td>
+<td>Not causal; sees only trackable touchpoints</td>
+</tr>
+<tr>
+<td>Incrementality test (lift, geo experiments)</td>
+<td>How much would conversions drop without the ads</td>
+<td>Estimates causality</td>
+<td>Cost and time; one question at a time</td>
+</tr>
+<tr>
+<td>MMM (Marketing Mix Modeling)</td>
+<td>How much did each channel&#39;s budget contribute to results</td>
+<td>No individual tracking; includes offline</td>
+<td>Needs a long data history; sensitive to model assumptions</td>
+</tr>
+</tbody></table>
+<pre><code class="language-mermaid">flowchart LR
+    A[Attribution] --&gt;|Hypothesis| T[Incrementality Test]
+    T --&gt;|Calibration| M[MMM]
+    M --&gt;|Budget Plan| B[Budget]
+    B --&gt; A
+</code></pre>
+<p>The IAB&#39;s State of Data 2026 report also discusses how privacy changes, closed platform-specific measurement, and cross-channel inconsistency make it hard to connect media exposure to business outcomes, and treats AI as a tool to strengthen attribution, incrementality, and MMM.</p>
+<p>In practice, no one uses just one. The recommended combination is to <strong>form hypotheses with attribution, validate them with experiments, and calibrate MMM with experiment results</strong>. Meta&#39;s Robyn documentation also describes calibrating MMM with lift-experiment results.</p>
+<h2>Limits of Attribution</h2>
+<ul>
+<li><strong>Last-click</strong> overvalues touchpoints right before conversion, such as search and retargeting</li>
+<li><strong>Platform-reported conversions</strong> are calculated by each platform&#39;s own rules, so adding them up tends to exceed reality</li>
+<li>Credit piles up on <strong>customers who would have bought anyway</strong> (brand search, existing customers)</li>
+<li>Users whose tracking is blocked (declined consent, declined app tracking) are invisible</li>
+</ul>
+<p>Bad example:</p>
+<blockquote>
+<p>Brand keyword ads show a 20x ROAS. Let&#39;s double the budget.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>Turn off brand keyword ads in some regions for four weeks and compare the change in total conversions to estimate the incremental effect.</p>
+</blockquote>
+<h2>Incrementality Tests</h2>
+<pre><code class="language-text">Test group: exposed to ads
+Control group: not exposed (randomized or by region)
+Lift = (Test conversion rate - Control conversion rate) / Control conversion rate
+</code></pre>
+<ul>
+<li>User-level experiments: platform conversion lift tools (e.g., Google Ads, Meta)</li>
+<li>Region-level experiments: geo experiments (e.g., Meta GeoLift, Google Meridian GeoX)</li>
+<li>Google Meridian GeoX: an open-source geo-experiment library previewed in 2026-05. It splits regions into test and control groups independently of the ad publisher, measures the incremental effect, and is designed to feed those results into Meridian MMM calibration. General availability was reported on 2026-09-09</li>
+<li>Google stated that in 2025 it lowered the minimum budget for Google Ads incrementality experiments (a USD 5,000 minimum, per Google Ads Help)</li>
+</ul>
+<p>Caution: small samples produce unstable results. Before the experiment, decide <strong>the observation period, the minimum effect size, and the decision criteria</strong>.</p>
+<h3>A Worked Example</h3>
+<p>This is a <strong>generic illustration</strong> of how to read a user-level lift experiment. It does not use the example product from documents 04 and 07 (KRW 2M a month in search ads, 10 paying accounts a quarter); it assumes a service with much larger ad reach. Here a <strong>conversion is a free signup</strong>. Every number is illustrative.</p>
+<pre><code class="language-text">Conversion = free signup
+50,000 people per group (randomly assigned)
+Control conversion rate 2.0%  → 1,000 conversions
+Test    conversion rate 2.4%  → 1,200 conversions
+
+Lift                    = (2.4 - 2.0) / 2.0 = 20%
+Incremental conversions = 50,000 × (2.4% - 2.0%) = 200
+Test ad spend           = KRW 10,000,000
+Incremental CAC         = KRW 10,000,000 / 200 = KRW 50,000
+</code></pre>
+<p>If the platform credits all 1,200 test-group conversions to the ads, CAC looks like about KRW 8,333. The conversions the ads <strong>added</strong> are 200, and budget decisions use the incremental CAC of KRW 50,000. That is a cost per free signup; to turn it into a cost per paying customer, divide once more by the signup-to-paid conversion rate.</p>
+<p>At the scale of the example product in documents 04 and 07, this design is <strong>underpowered</strong>. As calculated below, detecting 2.0% → 2.4% needs about 21,000 people per group; with KRW 2M a month in search ads and about 10 paying accounts a quarter, the sample is hard to fill even for signups, and a difference in paid conversions cannot be detected at all. That is why the channel mix in document 04 checks this channel with <strong>a quarterly on/off or geo test</strong>.</p>
+<h3>Decide Before the Experiment</h3>
+<ul>
+<li><strong>MDE (minimum detectable effect)</strong>: Set the smallest lift you want to detect first. The required sample grows with the inverse square of the MDE, so halving the MDE needs roughly four times the sample.</li>
+<li><strong>Minimum sample and number of regions</strong>: In the example above, detecting 2.0% → 2.4% with 80% power and a 5% two-sided significance level needs about 21,000 people per group (normal approximation). In geo experiments, too few regions let region-to-region variation swamp the effect, so set the number of regions and the duration with the power analysis in GeoLift or GeoX.</li>
+<li><strong>A fixed, pre-registered duration</strong>: Write down the duration, metrics, and decision criteria before the experiment. Use whole weeks so day-of-week effects do not leak in.</li>
+<li><strong>No peeking</strong>: Checking results daily and stopping on the day they look significant pushes the false-positive rate well above the nominal 5%. If you need interim looks, use a method designed for them from the start, such as a sequential test.</li>
+</ul>
+<h2>MMM</h2>
+<ul>
+<li>Google Meridian: open-source Bayesian MMM made available to everyone on 2025-01-29</li>
+<li>Meta Robyn: open-source MMM package from Meta Marketing Science</li>
+</ul>
+<p>MMM does not need individual-level tracking, so it is resilient to privacy changes. In exchange, meaningful results often require <strong>at least one to two years of weekly data and enough budget variation</strong>.</p>
+<h2>Privacy Changes: What Actually Changed</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status (dates)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chrome third-party cookies</td>
+<td>2024-07 shifted from a scheduled phase-out to a user-choice approach → 2025-04 announced it would not roll out a separate choice prompt either. Users control it in existing settings</td>
+</tr>
+<tr>
+<td>Privacy Sandbox</td>
+<td>2025-10-17 announced retirement of most APIs, including Topics, Protected Audience, and Attribution Reporting. CHIPS, FedCM, and Private State Tokens remain</td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>2020-03 WebKit announced full third-party cookie blocking by default</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>2022-06 Total Cookie Protection (per-site cookie partitioning) made the default worldwide</td>
+</tr>
+<tr>
+<td>iOS ATT</td>
+<td>Since 2021, apps need user permission to track. France&#39;s competition authority fined Apple EUR 150 million (2025-03-31), Italy&#39;s AGCM about EUR 98.6 million (2025-12), and Germany&#39;s Bundeskartellamt made commitments binding, including neutral prompts (2026-08-17)</td>
+</tr>
+<tr>
+<td>iOS ad measurement</td>
+<td>AdAttributionKit (2024) follows SKAdNetwork, with aggregated postbacks and no individual identification</td>
+</tr>
+<tr>
+<td>Google Consent Mode v2</td>
+<td>Since 2024-03, consent signals for ad measurement and personalization (ad_user_data, ad_personalization) must be passed for EEA users</td>
+</tr>
+</tbody></table>
+<p>In summary:</p>
+<ul>
+<li>&quot;Cookies are going away&quot; is <strong>no longer true for Chrome.</strong></li>
+<li>But because of Safari and Firefox blocking, iOS ATT, and declined consent, <strong>the trackable share is already incomplete</strong>.</li>
+<li>Legal consent requirements (e.g., the EU ePrivacy rules, Korea&#39;s Personal Information Protection Act) remain regardless of browser policy.</li>
+</ul>
+<h2>First-Party Data and Server-Side Sending</h2>
+<p>To reduce tracking loss, platforms offer ways to send consented first-party data from the server.</p>
+<ul>
+<li>Meta Conversions API: sends events from servers and CRM directly to Meta</li>
+<li>Google Ads Enhanced Conversions: sends first-party data such as email addresses hashed with SHA256 to improve conversion matching</li>
+</ul>
+<p>This is <strong>not a way to bypass consent.</strong> Use it only within the scope of consent.</p>
+<h2>Common Mistakes</h2>
+<ul>
+<li>Adding up platform-reported conversions and reporting them as total results</li>
+<li>Reallocating budget based on attribution numbers without experiments</li>
+<li>Keeping an old plan built on the assumption that &quot;cookies are ending&quot;</li>
+<li>Adopting server-side sending without consent settings</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://privacysandbox.google.com/blog/update-on-plans-for-privacy-sandbox-technologies">Update on Plans for Privacy Sandbox Technologies — Google Privacy Sandbox</a> (2025-10-17, accessed 2026-09-28)</li>
+<li><a href="https://privacysandbox.google.com/blog/privacy-sandbox-next-steps">Next steps for Privacy Sandbox and tracking protections in Chrome — Google Privacy Sandbox</a> (2025-04, accessed 2026-09-28)</li>
+<li><a href="https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/">Full Third-Party Cookie Blocking and More — WebKit</a> (2020-03, accessed 2026-09-28)</li>
+<li><a href="https://blog.mozilla.org/en/mozilla/firefox-rolls-out-total-cookie-protection-by-default-to-all-users-worldwide/">Firefox Rolls Out Total Cookie Protection By Default — Mozilla</a> (2022-06, accessed 2026-09-28)</li>
+<li><a href="https://www.autoritedelaconcurrence.fr/en/press-release/targeted-advertising-autorite-de-la-concurrence-imposes-fine-eu150000000-apple">Autorité de la concurrence fines Apple for the ATT framework — Autorité de la concurrence</a> (2025-03-31, accessed 2026-09-28)</li>
+<li><a href="https://en.agcm.it/en/media/press-releases/2025/12/A561">The Italian Competition Authority fines Apple over 98 million euro — AGCM</a> (2025-12, accessed 2026-09-28)</li>
+<li><a href="https://www.bundeskartellamt.de/SharedDocs/Meldung/EN/Pressemitteilungen/2026/08_17_2026_Apple_ATTF.html">Apple changes its rules for personalised advertising in apps — Bundeskartellamt</a> (2026-08-17, accessed 2026-09-28)</li>
+<li><a href="https://developer.apple.com/documentation/AdAttributionKit">AdAttributionKit — Apple Developer Documentation</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/google-ads/answer/13695607?hl=en">Updates to consent mode for traffic in the EEA — Google Ads Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://blog.google/products/ads-commerce/meridian-marketing-mix-model-open-to-everyone/">Meridian is now available to everyone — Google</a> (2025-01-29, accessed 2026-09-28)</li>
+<li><a href="https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/">An Analyst&#39;s Guide to MMM — Meta Robyn</a> (accessed 2026-09-28)</li>
+<li><a href="https://business.google.com/us/accelerate/announcements/meridian-geox-googles-new-open-source-geo-incrementality-solution/">Meridian GeoX: Google&#39;s new open-source Geo incrementality solution — Google</a> (2026-05, accessed 2026-09-28)</li>
+<li><a href="https://github.com/google/meridian-geox">google/meridian-geox — GitHub</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.searchenginejournal.com/google-launches-meridian-geox-globally/589030/">Google Launches Meridian GeoX Globally — Search Engine Journal</a> (2026-09, accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/google-ads/answer/16719772?hl=en">Strengthen media measurement with incrementality testing improvements — Google Ads Help</a> (2025, accessed 2026-09-28)</li>
+<li><a href="https://developers.facebook.com/docs/marketing-api/conversions-api/">Conversions API — Meta for Developers</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/google-ads/answer/9888656?hl=en">About enhanced conversions — Google Ads Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.iab.com/insights/2026-state-of-data-report/">State of Data 2026: The AI-Powered Measurement Transformation — IAB</a> (2026, accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/05-ai-search-geo/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>AI Search · GEO/AEO</span></a><a class="page-link next" href="../../../en/marketing/07-metrics/"><span><small>Next</small>Marketing Metrics · Unit Economics</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

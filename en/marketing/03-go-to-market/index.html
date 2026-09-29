@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Go-to-Market · Launch · PLG and SLG | MyAI</title>
+    <meta name="description" content="Go-to-market (GTM) is not a &quot;launch event&quot;. It is the design of how a product meets customers, gets bought, and expands." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/marketing/03-go-to-market/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/marketing/03-go-to-market/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Go-to-Market · Launch · PLG and SLG | MyAI" />
+    <meta property="og:description" content="Go-to-market (GTM) is not a &quot;launch event&quot;. It is the design of how a product meets customers, gets bought, and expands." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/marketing/03-go-to-market/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/marketing/03-go-to-market.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group" data-group="4"><button aria-expanded="true" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link active" aria-current="page" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Marketing</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Go-to-Market · Launch · PLG/SLG</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Go-to-Market · Launch · PLG and SLG</h1>
+<p>Go-to-market (GTM) is not a &quot;launch event&quot;. It is <strong>the design of how a product meets customers, gets bought, and expands</strong>.</p>
+<h2>Components of a GTM Plan</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Target</td>
+<td>Which segment / ICP do we pursue first</td>
+</tr>
+<tr>
+<td>Value Proposition</td>
+<td>What do we promise that segment</td>
+</tr>
+<tr>
+<td>Pricing &amp; Packaging</td>
+<td>Free/paid boundary, pricing unit, plan structure</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>Product-led, sales-led, or a mix</td>
+</tr>
+<tr>
+<td>Channels</td>
+<td>Where are we discovered and where do people buy</td>
+</tr>
+<tr>
+<td>Enablement</td>
+<td>What do sales, support, and partners need to know</td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td>How do we judge success</td>
+</tr>
+</tbody></table>
+<h2>Comparing GTM Motions</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Product-Led (PLG)</th>
+<th>Sales-Led (SLG)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>First value experience</td>
+<td>Self-serve use after signup</td>
+<td>Demo, PoC, sales conversation</td>
+</tr>
+<tr>
+<td>Purchase decision</td>
+<td>The user pays directly</td>
+<td>Organizational procurement</td>
+</tr>
+<tr>
+<td>Fits when</td>
+<td>Value shows quickly, low price, self-onboarding possible</td>
+<td>High price, complex adoption, many stakeholders</td>
+</tr>
+<tr>
+<td>Key metrics</td>
+<td>Activation, free-to-paid conversion, expansion</td>
+<td>Pipeline, win rate, sales cycle</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>Free users grow but revenue does not</td>
+<td>High sales cost leads to high CAC</td>
+</tr>
+</tbody></table>
+<p>Atlassian and OpenView describe PLG as <strong>a go-to-market strategy in which the product itself is the primary driver of acquisition, activation, retention, and expansion</strong>.</p>
+<h3>Hybrid: Product-Led Sales</h3>
+<p>In practice, the two are often combined: product usage data identifies accounts likely to buy, and sales steps in.</p>
+<pre><code class="language-text">MQL (Marketing Qualified Lead)
+= Judged by response to marketing activity (e.g., downloading a resource)
+
+PQL (Product Qualified Lead)
+= Judged by behavior in the product (e.g., inviting 5 teammates, repeated use of a core feature)
+</code></pre>
+<p>Do not set PQL criteria by guesswork; derive them from <strong>the behavior patterns of accounts that actually converted to paid</strong>.</p>
+<pre><code class="language-mermaid">flowchart LR
+    S[Signup] --&gt; A[Activation]
+    A --&gt; H[Habit]
+    H --&gt; Q{PQL?}
+    Q --&gt;|Yes| R[Sales Assist]
+    Q --&gt;|No| N[Nurture]
+    R --&gt; P[Paid]
+    N --&gt; H
+    P --&gt; X[Expansion]
+</code></pre>
+<h2>B2B Buyers Research Alone, and Use AI Too</h2>
+<p>According to a Gartner survey published on 2026-05-20 (645 B2B buyers, August–September 2025), buyers used an average of seven information sources in a recent purchase, and 45% said they used generative AI. In the same survey, 69% said they prefer to validate AI-generated insights with sales reps.</p>
+<p>The share preferring a rep-free buying experience was 61% in the survey published on 2025-06-25 and 67% in the one published on 2026-03-09 (see document 01).</p>
+<p>Implications:</p>
+<ul>
+<li>Websites, documentation, and pricing pages are read before any sales conversation</li>
+<li>If the website and sales say different things, trust is lost</li>
+<li>How AI answers summarize your product also becomes part of GTM (document 05)</li>
+</ul>
+<h2>Pricing · Packaging</h2>
+<p>Pricing is not a single number; it is a decision about <strong>what you charge for (the value metric)</strong> and <strong>where free ends (packaging)</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Value metric</th>
+<th>Advantage</th>
+<th>Disadvantage</th>
+<th>Applied to the incident-monitoring tool</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Seat (number of users)</td>
+<td>Easy for buyers to understand and forecast</td>
+<td>Makes people hesitate to invite teammates, slowing spread</td>
+<td>Small amounts for teams of 1–5; a poor fit if team invites are the core behavior</td>
+</tr>
+<tr>
+<td>Usage (log volume, events, alerts)</td>
+<td>Price moves with value; customers can start small</td>
+<td>Bills are hard to predict</td>
+<td>Logs spike during incidents, so bills spike too and cause anxiety; a cap is needed</td>
+</tr>
+<tr>
+<td>Tier (bundles of features and limits)</td>
+<td>Simple, with a clear upgrade path</td>
+<td>A badly placed boundary leaks value or causes frustration</td>
+<td>Split tiers by log retention, number of connected services, and team size</td>
+</tr>
+</tbody></table>
+<p>Place the free-plan boundary <strong>after activation and before PQL</strong>.</p>
+<pre><code class="language-text">Signup → Activation (first value experience)   ← free, and generously so, up to here
+       → PQL signals (team invites, repeated use, nearing limits)  ← paid boundary here
+       → Paid
+</code></pre>
+<ul>
+<li>Block before activation and people leave before experiencing value.</li>
+<li>Give everything free past the PQL signals and there is no reason to pay.</li>
+</ul>
+<p>Bad example:</p>
+<blockquote>
+<p>The free plan blocks log integrations and only sends alerts. Signups leave without ever seeing the root-cause screen.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>The free plan allows one connected service and 7-day retention, enough to experience the first root-cause investigation. The paid boundary sits where teams need more than 3 members, 30-day retention, or several connected services. (The numbers are assumptions, to be adjusted using the behavior of accounts that actually converted.)</p>
+</blockquote>
+<p>Treat a price change as a <strong>Tier 1 launch</strong> (table below). It needs existing-customer notices, sales and support scripts, and pricing pages that match the docs. If it raises a subscription price or converts free to paid, also check the E-Commerce Act&#39;s prior consent and notice requirements. For subscriptions billed through the App Store or Google Play in Korea, the platform collects this consent itself and auto-cancels without it, so build that into conversion forecasts (document 09).</p>
+<h2>Tiering Launches</h2>
+<p>If every launch is the same size, the team burns out and customers become numb.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Example criteria</th>
+<th>Example activities</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tier 1</td>
+<td>New product, new market, pricing change</td>
+<td>Press release, campaign, sales training, event</td>
+</tr>
+<tr>
+<td>Tier 2</td>
+<td>Major feature, major integration</td>
+<td>Blog, email, in-app announcement, sales briefing</td>
+</tr>
+<tr>
+<td>Tier 3</td>
+<td>Improvements, small features</td>
+<td>Changelog, in-app tooltip</td>
+</tr>
+</tbody></table>
+<h3>Launch Checklist</h3>
+<ul>
+<li>Who the launch is for and what changes (one sentence)</li>
+<li>Positioning and messaging document</li>
+<li>Impact on pricing, permissions, and plans</li>
+<li>Documentation, FAQ, support scripts</li>
+<li>Sales and support briefing</li>
+<li>Measurement plan (baseline, target, observation period)</li>
+<li>Criteria for rollback or rescheduling</li>
+</ul>
+<p>A default schedule for Tier 1 and Tier 2 launches:</p>
+<pre><code class="language-text">T-4 weeks  Finalize positioning and message, finalize measurement plan (baseline, target)
+T-2 weeks  Brief sales and support; prepare docs, FAQ, and support scripts
+T-0        Launch, send through each channel
+T+14 days  Review results → expand / adjust / roll back
+</code></pre>
+<h2>Bad Example / Good Example</h2>
+<p>Bad example:</p>
+<blockquote>
+<p>The feature is done, so we will announce it on every channel next Tuesday.</p>
+</blockquote>
+<p>Good example:</p>
+<blockquote>
+<p>We promise the small-team admin segment &quot;invitations done in 3 minutes&quot;. As a Tier 2 launch we use an in-app announcement and email; the goal is to improve the 7-day teammate invitation rate of new workspaces. After two weeks we review results and decide whether to expand.</p>
+</blockquote>
+<h2>Common Mistakes</h2>
+<ul>
+<li>Starting GTM right before launch</li>
+<li>Misreading PLG as &quot;it sells itself without sales&quot;</li>
+<li>Setting the free-plan boundary once and never revisiting it</li>
+<li>Reporting launch activity volume (emails sent, posts published) as results</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.atlassian.com/agile/product-management/product-led-growth">What is product-led growth? — Atlassian</a> (accessed 2026-09-28)</li>
+<li><a href="https://openviewpartners.com/product-led-growth/">Product-Led Growth — OpenView</a> (accessed 2026-09-28)</li>
+<li><a href="https://openviewpartners.com/blog/your-guide-to-product-qualified-leads-pqls/">Your Guide to Product Qualified Leads (PQLs) — OpenView</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sixty-nine-percent-of-b-two-b-buyers-turn-to-sales-reps-to-validate-ai-generated-insights">Gartner Survey Finds 69% of B2B Buyers Turn to Sales Reps to Validate AI-Generated Insights — Gartner</a> (2026-05-20, accessed 2026-09-28)</li>
+<li><a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience">Gartner Sales Survey Finds 61% of B2B Buyers Prefer a Rep-Free Buying Experience — Gartner</a> (2025-06-25, accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/marketing/02-positioning-messaging/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Positioning · Messaging · Brand</span></a><a class="page-link next" href="../../../en/marketing/04-channels/"><span><small>Next</small>Channels · Content · Paid · Lifecycle</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

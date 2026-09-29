@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>CI/CD Pipeline: From Commit to Production | MyAI</title>
+    <meta name="description" content="CI/CD is not &quot;a script that deploys automatically&quot;; it is the quality gates a change passes on its way to production, written as code." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03-ci-cd-pipeline/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/03-ci-cd-pipeline/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="CI/CD Pipeline: From Commit to Production | MyAI" />
+    <meta property="og:description" content="CI/CD is not &quot;a script that deploys automatically&quot;; it is the quality gates a change passes on its way to production, written as code." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/03-ci-cd-pipeline.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link active" aria-current="page" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>CI/CD · OIDC · GitOps</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>CI/CD Pipeline: From Commit to Production</h1>
+<p>CI/CD is not &quot;a script that deploys automatically&quot;; it is <strong>the quality gates a change passes on its way to production, written as code</strong>.</p>
+<h2>Terms</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CI (Continuous Integration)</td>
+<td>Merge changes often and run build and tests automatically on every merge</td>
+</tr>
+<tr>
+<td>Continuous Delivery</td>
+<td>Keep the system always releasable to production. A human may approve the final deploy</td>
+</tr>
+<tr>
+<td>Continuous Deployment</td>
+<td>Changes that pass the gates reach production without human intervention</td>
+</tr>
+<tr>
+<td>Artifact</td>
+<td>The build output: a container image, an app bundle, a set of static files, and so on</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>A place where artifacts run, such as Dev, Staging, Production</td>
+</tr>
+</tbody></table>
+<h2>The Standard Flow</h2>
+<pre><code class="language-mermaid">flowchart LR
+    P[Push / PR] --&gt; B[Build]
+    B --&gt; T[Test / Lint]
+    T --&gt; S[Security Scan]
+    S --&gt; A[Artifact + Attestation]
+    A --&gt; ST[Deploy Staging]
+    ST --&gt; V{Checks passed?}
+    V --&gt;|Yes| PR[Deploy Production]
+    V --&gt;|No| X[Stop / Notify]
+    PR --&gt; M[Observe / Ready to roll back]
+</code></pre>
+<p>The core principle is <strong>promoting an artifact built once through every environment</strong>. Rebuilding per environment means what you verified in staging may differ from what reached production.</p>
+<h2>Configuration Lives Outside the Code</h2>
+<p>The Twelve-Factor App recommends keeping values that differ per deploy (database addresses, credentials for external services, hostnames) <strong>in the environment, not in the code</strong>. The same artifact should run in many places by changing only the environment. Mounting secrets as volumes is now discussed as well.</p>
+<h2>Environment Design</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Preview (per PR)</th>
+<th>Staging</th>
+<th>Production</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Purpose</td>
+<td>See and review the change</td>
+<td>Verify the deploy procedure, migrations and integrations</td>
+<td>Real users</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Seed or fake data</td>
+<td>Synthetic data or an anonymized subset</td>
+<td>Real data</td>
+</tr>
+<tr>
+<td>Who deploys</td>
+<td>Automatic when a PR opens</td>
+<td>Automatic on merge to main</td>
+<td>CI only, after approval</td>
+</tr>
+<tr>
+<td>Protection rules</td>
+<td>Short-lived, deleted when the PR closes, payments / email / push go to sandboxes</td>
+<td>Internal access only, no production secrets</td>
+<td>Required reviewers, wait timer, restricted deployment branches</td>
+</tr>
+</tbody></table>
+<h3>Per-Environment Configuration and Secrets</h3>
+<ul>
+<li>Inject only different environment variables into the same artifact. Do not add code branches on the environment name (<code>if (env === &quot;staging&quot;)</code>).</li>
+<li>Keep secrets separate per environment. A GitHub environment secret can be read only by jobs that reference that environment, and if the environment requires approval, not before a reviewer approves.</li>
+<li>Separate cloud accounts or projects when you can, so a staging mistake cannot touch production resources.</li>
+<li>Depending on your GitHub plan, protection rules such as required reviewers and wait timers may not be available for private repositories. Check what your plan includes first.</li>
+</ul>
+<h3>The Trap of Production-Like Data</h3>
+<ul>
+<li>Do not copy the production database as is. Personal data ends up in an environment with weaker protection. If you need it, use the minimum, anonymized or pseudonymized.</li>
+<li>If copied data still holds real email addresses or phone numbers, a notification test in staging reaches real customers. Route outbound messages to sandbox accounts.</li>
+</ul>
+<h3>When a Small Team Can Skip Staging</h3>
+<p>You can go straight from preview to production when <strong>all</strong> of these are true.</p>
+<ol>
+<li>Every PR gets a preview with the same artifact and configuration structure as production.</li>
+<li>Database migrations stay backward compatible via expand → contract (document 04).</li>
+<li>You can roll back within minutes and have actually done it.</li>
+<li>Risky features are exposed through feature flags.</li>
+</ol>
+<p>If any one is false, keep staging. It is essential if you often ship irreversible migrations or changes to payments, authentication or external integrations.</p>
+<h2>GitHub Actions Example</h2>
+<pre><code class="language-yaml">name: deploy
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@&lt;commit-sha&gt;
+      - run: npm ci &amp;&amp; npm test
+      - run: npm run build
+      - run: ./scripts/deploy.sh
+</code></pre>
+<ul>
+<li>Declare minimal <code>permissions</code>. <code>id-token: write</code> is only needed when authenticating to a cloud via OIDC.</li>
+<li><code>environment: production</code> lets you attach protection rules (approvers, wait timers).</li>
+<li>Pin third-party actions <strong>to a commit SHA</strong> instead of a tag (see the incident below).</li>
+</ul>
+<h2>OIDC Instead of Long-Lived Secrets</h2>
+<p>With GitHub Actions OpenID Connect, each workflow run obtains a <strong>short-lived token</strong> from the cloud provider. AWS, Azure, Google Cloud, HashiCorp Vault and others support it.</p>
+<pre><code class="language-text">Bad:  Store a cloud access key as a repository secret and never rotate it for years.
+Good: Narrow the OIDC trust to &quot;this repository&#39;s main branch, production environment&quot;
+      and use only tokens that expire when the job ends.
+</code></pre>
+<p>An AWS example. The workflow holds only <code>id-token: write</code> and a role; there is no access key.</p>
+<pre><code class="language-yaml">permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: aws-actions/configure-aws-credentials@&lt;commit-sha&gt;
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/deploy-production
+          aws-region: ap-northeast-2
+      - run: aws sts get-caller-identity
+</code></pre>
+<p>The IAM role&#39;s trust policy narrows <strong>which workflows may assume the role</strong> through the <code>sub</code> claim.</p>
+<pre><code class="language-json">{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Principal&quot;: {
+        &quot;Federated&quot;: &quot;arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com&quot;
+      },
+      &quot;Action&quot;: &quot;sts:AssumeRoleWithWebIdentity&quot;,
+      &quot;Condition&quot;: {
+        &quot;StringEquals&quot;: {
+          &quot;token.actions.githubusercontent.com:aud&quot;: &quot;sts.amazonaws.com&quot;,
+          &quot;token.actions.githubusercontent.com:sub&quot;: &quot;repo:ORG/REPO:environment:production&quot;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>A <code>sub</code> of the form <code>environment:production</code> is issued only when the job declares <code>environment: production</code>, so the token is available only after the environment protection rules (approval, deployment branch restrictions) pass.</li>
+<li><strong>Failure mode</strong>: if <code>sub</code> is opened with <code>StringLike</code> and a wildcard such as <code>repo:ORG/*</code> or <code>repo:ORG/REPO:*</code>, a workflow in any repository of that organization, or on any branch, receives the production role. Anyone with push access can create a new branch and bypass code review, branch protection and environment approval. With no <code>sub</code> condition at all, <strong>any repository on GitHub</strong> can request the role.</li>
+<li>Repositories created, renamed or transferred after 2026-07-15 get immutable owner and repository IDs in the default <code>sub</code> (in the form <code>repo:ORG@&lt;owner-id&gt;/REPO@&lt;repo-id&gt;:...</code>). Check the actual <code>sub</code> of a token before writing the trust policy.</li>
+</ul>
+<h2>Incident: CI Is an Attack Surface Too</h2>
+<ul>
+<li>In 2025-03 the widely used <code>tj-actions/changed-files</code> action was tampered with so that secrets could be exposed in workflow logs (CVE-2025-30066). CISA advised checking affected repositories and <strong>rotating every secret that may have been exposed</strong>.</li>
+<li>In 2025-08 GitHub began supporting <strong>enforced SHA pinning and blocking specific actions</strong> in Actions policies.</li>
+</ul>
+<h2>GitOps: Pull-Based Deployment</h2>
+<p>The OpenGitOps principles are four.</p>
+<ol>
+<li><strong>Declarative</strong>: express the desired state declaratively.</li>
+<li><strong>Versioned and Immutable</strong>: store the desired state where versions and full history are kept.</li>
+<li><strong>Pulled Automatically</strong>: agents pull the desired state automatically.</li>
+<li><strong>Continuously Reconciled</strong>: agents keep observing the actual state and bring it to the desired state.</li>
+</ol>
+<p>Instead of CI pushing directly to a cluster, an agent inside the cluster watches Git and follows it, so <strong>drift</strong> (settings someone changed by hand) surfaces automatically.</p>
+<h2>Infrastructure as Code Too</h2>
+<p>Infrastructure created by hand in a console (click-ops) leaves no record of who changed what and why, and the same environment cannot be recreated. <strong>IaC (Infrastructure as Code)</strong> lets you review, version and reproduce infrastructure like application code.</p>
+<table>
+<thead>
+<tr>
+<th>Manage with IaC</th>
+<th>Fine to leave as click-ops</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Networking (VPC, subnets), DNS records, databases · queues · buckets, IAM roles and policies, per-environment service settings, alerts and dashboards</td>
+<td>One-time bootstrap (state storage, management account), billing and organization settings, emergency fixes during an incident (then reflect them in code), personal exploration sandboxes</td>
+</tr>
+</tbody></table>
+<h3>Tools in One Line Each</h3>
+<ul>
+<li><strong>Terraform</strong>: declarative HCL with the broadest provider ecosystem. In 2023-08 its license changed from MPL 2.0 to the BSL (Business Source License).</li>
+<li><strong>OpenTofu</strong>: an open-source fork of Terraform from before the license change. It is hosted by the Linux Foundation and became a CNCF Sandbox project in 2025-04. It uses the same HCL and providers.</li>
+<li><strong>Pulumi</strong>: write infrastructure in general-purpose languages such as TypeScript, Python and Go.</li>
+<li><strong>AWS CDK</strong>: write in TypeScript, Python and others, then synthesize a CloudFormation template. AWS only.</li>
+</ul>
+<h3>Remote State and Locking</h3>
+<p>State maps code to real resources. Kept on a laptop, teammates overwrite each other, and secrets held in resource attributes can sit there in plain text. Keep it in a <strong>remote backend</strong>, encrypted, with restricted access. Two people running <code>apply</code> at once corrupt the state, so also take a <strong>lock</strong>. Terraform&#39;s S3 backend introduced S3-native locking (<code>use_lockfile</code>) in 1.10; when it became generally available in 1.11, DynamoDB-based locking was deprecated.</p>
+<ul>
+<li>Turn on <strong>bucket versioning</strong> for the state bucket. HashiCorp highly recommends it; it is how you restore a previous version when the state is accidentally deleted or overwritten.</li>
+</ul>
+<pre><code class="language-hcl">terraform {
+  backend &quot;s3&quot; {
+    bucket       = &quot;acme-tfstate&quot;
+    key          = &quot;prod/network.tfstate&quot;
+    region       = &quot;ap-northeast-2&quot;
+    encrypt      = true
+    use_lockfile = true
+  }
+}
+
+resource &quot;aws_s3_bucket&quot; &quot;assets&quot; {
+  bucket = &quot;acme-prod-assets&quot;
+}
+</code></pre>
+<h3>plan as a PR Check</h3>
+<pre><code class="language-mermaid">flowchart LR
+    PR[Open PR] --&gt; PL[Post plan output to the PR]
+    PL --&gt; RV{Review approved?}
+    RV --&gt;|Yes| AP[CI applies after merge]
+    RV --&gt;|No| FX[Fix the code]
+    FX --&gt; PL
+    AP --&gt; DR[Daily drift check]
+</code></pre>
+<p>Run <code>plan</code> on every PR and attach &quot;what will be created, changed and destroyed&quot; to the review. Stop if you see a <code>destroy</code>. Only CI runs <code>apply</code>, after merge, using the role obtained through OIDC (section above).</p>
+<pre><code class="language-yaml">      - run: terraform init -input=false
+      - run: terraform plan -input=false -out=tfplan
+</code></pre>
+<h3>Drift Detection</h3>
+<p>Main should hold no unapplied code, so run <code>terraform plan -detailed-exitcode</code> on main every day. Exit code 0 means no changes, 1 an error, 2 differences present. A 2 means someone changed something in the console: reflect it in code or revert it. Giving people read-only production console access reduces drift in the first place.</p>
+<h2>Measuring Results: DORA Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Deployment Frequency</td>
+<td>How often you deploy to production successfully</td>
+</tr>
+<tr>
+<td>Change Lead Time</td>
+<td>Time from commit to a successful production deployment</td>
+</tr>
+<tr>
+<td>Failed Deployment Recovery Time</td>
+<td>Time to recover from a failure caused by a deployment</td>
+</tr>
+<tr>
+<td>Change Fail Rate</td>
+<td>Share of deployments needing immediate intervention such as a rollback or hotfix</td>
+</tr>
+<tr>
+<td>Deployment Rework Rate</td>
+<td>Share of deployments that are unplanned (bug-fix) work</td>
+</tr>
+</tbody></table>
+<p>DORA uses Change Fail Rate and Deployment Rework Rate as the two measures of <strong>instability</strong>; Deployment Rework Rate was added as the fifth metric in 2024. Use the metrics not as a leaderboard between teams but as <strong>signals that show where to improve</strong>.</p>
+<h2>Designing Staged Checks</h2>
+<pre><code class="language-text">PR Check     Fast lint and unit tests (within minutes)
+Main Merge   Integration tests, image build, staging deploy
+Release      Smoke tests, approval, production deploy
+Nightly      Heavy E2E, performance, dependency scans
+</code></pre>
+<p>Running every check on every PR is slow; running nothing is dangerous. Put <strong>fast checks first and heavy ones later</strong>.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://12factor.net/config">Store config in the environment</a> — The Twelve-Factor App, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/openid-connect">OpenID Connect</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/en/actions/reference/security/secure-use">Secure use reference</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction">Supply Chain Compromise of Third-Party tj-actions/changed-files (CVE-2025-30066)</a> — CISA, 2025-03-18, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-08-15-github-actions-policy-now-supports-blocking-and-sha-pinning-actions/">GitHub Actions policy now supports blocking and SHA pinning actions</a> — GitHub Changelog, 2025-08-15, accessed 2026-09-28</li>
+<li><a href="https://github.com/open-gitops/documents/blob/main/PRINCIPLES.md">OpenGitOps Principles</a> — OpenGitOps, accessed 2026-09-28</li>
+<li><a href="https://dora.dev/guides/dora-metrics/">DORA&#39;s software delivery performance metrics</a> — DORA, accessed 2026-09-28</li>
+<li><a href="https://dora.dev/insights/dora-metrics-history/">A history of DORA&#39;s software delivery metrics</a> — DORA, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments">Deployments and environments</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services">Configuring OpenID Connect in Amazon Web Services</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://www.wiz.io/blog/avoiding-mistakes-with-aws-oidc-integration-conditions">Avoiding mistakes with AWS OIDC integration conditions</a> — Wiz Blog, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/">Immutable subject claims for GitHub Actions OIDC tokens</a> — GitHub Changelog, 2026-04-23, accessed 2026-09-28</li>
+<li><a href="https://developer.hashicorp.com/terraform/language/backend/s3">Backend Type: s3</a> — HashiCorp Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.hashicorp.com/terraform/cli/commands/plan">terraform plan command</a> — HashiCorp Developer, accessed 2026-09-28</li>
+<li><a href="https://www.hashicorp.com/blog/hashicorp-adopts-business-source-license">HashiCorp adopts Business Source License</a> — HashiCorp Blog, 2023-08-10, accessed 2026-09-28</li>
+<li><a href="https://www.linuxfoundation.org/press/announcing-opentofu">Linux Foundation Launches OpenTofu</a> — Linux Foundation, 2023-09-20, accessed 2026-09-28</li>
+<li><a href="https://www.cncf.io/projects/opentofu/">OpenTofu</a> — CNCF, accessed 2026-09-28</li>
+<li><a href="https://www.pulumi.com/docs/">Pulumi Docs</a> — Pulumi, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">What is the AWS CDK?</a> — AWS Docs, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/02-cloud-kubernetes/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Cloud · Kubernetes · Korean Clouds</span></a><a class="page-link next" href="../../../en/platform/04-release-strategies/"><span><small>Next</small>Canary · Blue-Green · Flags · Rollback</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

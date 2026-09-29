@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Security and Supply Chain: Secrets · SBOM · SLSA · Dependencies | MyAI</title>
+    <meta name="description" content="Today&#39;s products contain far more borrowed code and tools than code the team wrote itself. Attackers aim at the weakest link: dependency packages, CI acti…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/08-security-supply-chain/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/08-security-supply-chain/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Security and Supply Chain: Secrets · SBOM · SLSA · Dependencies | MyAI" />
+    <meta property="og:description" content="Today&#39;s products contain far more borrowed code and tools than code the team wrote itself. Attackers aim at the weakest link: dependency packages, CI acti…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/08-security-supply-chain/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/08-security-supply-chain.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link active" aria-current="page" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Secrets · SBOM · SLSA</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Security and Supply Chain: Secrets · SBOM · SLSA · Dependencies</h1>
+<p>Today&#39;s products contain far more <strong>borrowed code and tools</strong> than code the team wrote itself. Attackers aim at the weakest link: dependency packages, CI actions, developer tokens.</p>
+<h2>Map of Attack Points</h2>
+<pre><code class="language-mermaid">flowchart LR
+    DEV[Developer accounts / tokens] --&gt; SRC[Source Repository]
+    DEP[External packages / actions] --&gt; BLD[CI Build]
+    SRC --&gt; BLD
+    BLD --&gt; ART[Artifact / Registry]
+    ART --&gt; RUN[Production]
+    SEC[Secret store] --&gt; BLD
+    SEC --&gt; RUN
+</code></pre>
+<p>Every arrow is an attack path. Put defenses at the same points.</p>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Typical risk</th>
+<th>Basic defense</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Developer accounts</td>
+<td>Token leaks, takeover</td>
+<td>2FA, short-lived tokens</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>Malicious commits, unauthorized changes</td>
+<td>Branch protection, required review</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Tampered packages</td>
+<td>Lockfiles, vulnerability scans, pinned versions</td>
+</tr>
+<tr>
+<td>CI</td>
+<td>Tampered actions, secret exposure</td>
+<td>SHA pinning, least privilege, OIDC</td>
+</tr>
+<tr>
+<td>Artifact</td>
+<td>Substitution</td>
+<td>Signing, provenance verification</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>Hard-coded secrets</td>
+<td>Secret manager, regular rotation</td>
+</tr>
+</tbody></table>
+<h2>Learning from Real Incidents</h2>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>Incident</th>
+<th>Lesson</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2025-03</td>
+<td>The <code>tj-actions/changed-files</code> action was tampered with (CVE-2025-30066); secrets could leak through workflow logs</td>
+<td>Pin actions by SHA, rotate exposed secrets immediately</td>
+</tr>
+<tr>
+<td>2025-09</td>
+<td>npm ecosystem worm (&quot;Shai-Hulud&quot;): stolen developer credentials used to inject malicious code into other packages and republish them</td>
+<td>Remove long-lived publish tokens, minimize publish rights</td>
+</tr>
+</tbody></table>
+<p>npm had already made <strong>Trusted Publishing (OIDC)</strong> generally available on 2025-07-31, before the incident. After it, on 2025-11-05 npm capped write-enabled granular tokens at a 90-day maximum lifetime and set a 7-day default for new granular tokens, and on 2025-12-09 it revoked all remaining classic tokens. Publish with Trusted Publishing instead of long-lived tokens.</p>
+<h2>Managing Secrets</h2>
+<pre><code class="language-text">Bad:  Commit a .env file to the repository, and after the leak just revert the commit.
+Good: Store it in a secret manager and inject it at runtime. If it leaks, &quot;rotate&quot;, don&#39;t just &quot;delete&quot;.
+</code></pre>
+<ul>
+<li>A secret that has entered Git history once should be treated as <strong>already leaked</strong>.</li>
+<li>Since 2024-03 GitHub enables secret scanning and <strong>push protection</strong> by default on new public repositories owned by personal accounts. Push protection blocks pushes that contain supported secrets.</li>
+<li>For cloud access from CI, use short-lived tokens obtained via OIDC (document 03).</li>
+</ul>
+<h2>SBOM: What Is Inside</h2>
+<p>An SBOM (Software Bill of Materials) is a list of the components in a product. When a new vulnerability is announced, it lets you answer &quot;do we ship this library?&quot; <strong>within minutes</strong>.</p>
+<ul>
+<li>Main formats: <strong>SPDX</strong> and <strong>CycloneDX</strong>. Both are machine-processable.</li>
+<li>On 2026-07-29 US CISA and partners published the <strong>2026 Minimum Elements for an SBOM</strong>, replacing the 2021 NTIA minimum elements. New elements include Component Hash Algorithm, Component License, SBOM Tool Name and SBOM Generation Context, and they apply to all software, including open source, AI software and SaaS.</li>
+</ul>
+<h2>SLSA: Who Built It, and How</h2>
+<p>SLSA is a specification that splits supply chain security into <strong>tracks and levels</strong>. <strong>v1.2</strong>, announced 2025-11-24, is the latest and is backward compatible with v1.1.</p>
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Build Track</td>
+<td>Verify that an artifact was built as expected. The lowest level only requires provenance to exist; higher levels add protection against tampering with the build and provenance</td>
+</tr>
+<tr>
+<td>Source Track (new in v1.2)</td>
+<td>Threats in authoring, reviewing and managing source. Level 2 covers history and provenance; Level 3 covers continuous enforcement of technical controls</td>
+</tr>
+</tbody></table>
+<p>GitHub Artifact Attestations produce build provenance and, per GitHub&#39;s documentation, provide <strong>SLSA v1.0 Build Level 2</strong>.</p>
+<p>Produce the SBOM and provenance together in the release build job.</p>
+<pre><code class="language-yaml">permissions:
+  contents: read
+  id-token: write
+  attestations: write
+steps:
+  - uses: actions/checkout@&lt;commit-sha&gt;
+  - run: npm ci &amp;&amp; npm run build
+  - run: mkdir -p dist &amp;&amp; tar -czf dist/app.tar.gz build
+  - run: npm sbom --sbom-format cyclonedx &gt; dist/sbom.cdx.json
+  - uses: actions/attest-build-provenance@&lt;commit-sha&gt;
+    with:
+      subject-path: dist/app.tar.gz
+</code></pre>
+<ul>
+<li><code>npm sbom</code> builds a CycloneDX or SPDX SBOM from the installed dependencies. For mixed languages or container images, use a tool such as syft (<code>syft &lt;image&gt; -o spdx-json</code>).</li>
+<li><code>attest-build-provenance</code> signs with an OIDC token (<code>id-token: write</code>) and stores the attestation with the <code>attestations: write</code> permission.</li>
+</ul>
+<p>The consumer verifies before deploying.</p>
+<pre><code class="language-bash">gh attestation verify ./dist/app.tar.gz --repo my-org/my-app
+</code></pre>
+<h2>Dependency Health</h2>
+<ul>
+<li>Commit a <strong>lockfile</strong> and install exactly from it in CI (<code>npm ci</code>, etc.).</li>
+<li>Use tools such as Dependabot for vulnerability alerts and update PRs.</li>
+<li><strong>OpenSSF Scorecard</strong> automatically checks an open source project&#39;s security practices (branch protection, signing, dependency management, etc.) and scores them 0–10. Check it before adopting a new dependency.</li>
+</ul>
+<h2>Regulation: EU Cyber Resilience Act</h2>
+<p>If you sell products with digital elements in the EU, check the CRA.</p>
+<ul>
+<li><strong>From 2026-09-11</strong> manufacturers must report actively exploited vulnerabilities and severe security incidents.</li>
+<li>Deadlines: an early warning within 24 hours of becoming aware, a notification within 72 hours, and a final report within 14 days after a corrective measure is available for vulnerabilities, or within one month of the notification for severe incidents.</li>
+<li>Reports go through ENISA&#39;s Single Reporting Platform. The remaining obligations apply from 2027-12-11.</li>
+</ul>
+<h2>Minimum Practice List</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 2FA on every account; tokens short-lived with least privilege</li>
+<li><input disabled="" type="checkbox"> Secret scanning / push protection enabled</li>
+<li><input disabled="" type="checkbox"> Lockfiles committed, dependency vulnerability alerts on</li>
+<li><input disabled="" type="checkbox"> CI actions pinned by SHA, workflow <code>permissions</code> minimized</li>
+<li><input disabled="" type="checkbox"> SBOM and provenance attached to release artifacts</li>
+<li><input disabled="" type="checkbox"> A vulnerability reporting channel (security policy) and response procedure documented</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction">Supply Chain Compromise of Third-Party tj-actions/changed-files</a> — CISA, 2025-03-18, accessed 2026-09-28</li>
+<li><a href="https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem">Widespread Supply Chain Compromise Impacting npm Ecosystem</a> — CISA, 2025-09-23, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/">npm trusted publishing with OIDC is generally available</a> — GitHub Changelog, 2025-07-31, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-11-05-npm-security-update-classic-token-creation-disabled-and-granular-token-changes/">npm security update: Classic token creation disabled and granular token changes</a> — GitHub Changelog, 2025-11-05, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2025-12-09-npm-classic-tokens-revoked-session-based-auth-and-cli-token-management-now-available/">npm classic tokens revoked, session-based auth and CLI token management now available</a> — GitHub Changelog, 2025-12-09, accessed 2026-09-28</li>
+<li><a href="https://github.blog/changelog/2024-03-11-secret-scanning-and-push-protection-are-enabled-by-default-on-new-public-repositories/">Secret scanning and push protection are enabled by default on new public repositories</a> — GitHub Changelog, 2024-03-11, accessed 2026-09-28</li>
+<li><a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom">2026 Minimum Elements for a Software Bill of Materials (SBOM)</a> — CISA, 2026-07-29, accessed 2026-09-28</li>
+<li><a href="https://slsa.dev/blog/2025/11/announce-slsa-v1.2">Announcing SLSA v1.2</a> — SLSA, 2025-11-24, accessed 2026-09-28</li>
+<li><a href="https://slsa.dev/spec/v1.2/">SLSA specification v1.2</a> — SLSA, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations">Artifact attestations</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://openssf.org/projects/scorecard/">OpenSSF Scorecard</a> — OpenSSF, accessed 2026-09-28</li>
+<li><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting">Cyber Resilience Act - Reporting obligations</a> — European Commission, accessed 2026-09-28</li>
+<li><a href="https://docs.npmjs.com/cli/v11/commands/npm-sbom/">npm-sbom</a> — npm Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds">Using artifact attestations to establish provenance for builds</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://github.com/actions/attest-build-provenance">actions/attest-build-provenance</a> — GitHub, accessed 2026-09-28</li>
+<li><a href="https://github.com/anchore/syft">anchore/syft</a> — Anchore, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/07-observability-incident/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>SLO · On-call · Postmortem</span></a><a class="page-link next" href="../../../en/platform/09-finops-platform-engineering/"><span><small>Next</small>FinOps · Platform Engineering</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

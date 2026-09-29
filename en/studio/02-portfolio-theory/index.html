@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Product Portfolio Theory | MyAI</title>
+    <meta name="description" content="As of: 2026-09-29. All probabilities and amounts are illustrative assumptions." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/02-portfolio-theory/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/02-portfolio-theory/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/02-portfolio-theory/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/02-portfolio-theory/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Product Portfolio Theory | MyAI" />
+    <meta property="og:description" content="As of: 2026-09-29. All probabilities and amounts are illustrative assumptions." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/02-portfolio-theory/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/02-portfolio-theory.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link active" aria-current="page" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Product Portfolio Theory</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Product Portfolio Theory</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Treat products as bets, compute Expected Value and variance, and design a portfolio for 160 hours a month using small bets, the barbell, Stage-Gate, kill criteria set in advance and WIP limits.</p>
+</blockquote>
+<p>As of: 2026-09-29. All probabilities and amounts are illustrative assumptions.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Definition</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bet</td>
+<td>Putting limited resources on something with an uncertain outcome</td>
+<td>General decision theory</td>
+</tr>
+<tr>
+<td>Expected Value</td>
+<td>The sum of (probability × value) over outcomes</td>
+<td>Probability theory</td>
+</tr>
+<tr>
+<td>Variance</td>
+<td>How widely outcomes scatter around the expected value</td>
+<td>Probability theory</td>
+</tr>
+<tr>
+<td>Small bets</td>
+<td>Instead of staking everything on one product, look for signal through many small bets</td>
+<td>Daniel Vassallo</td>
+</tr>
+<tr>
+<td>Barbell strategy</td>
+<td>Hold a very safe side and a very aggressive side together and avoid the middling middle</td>
+<td>Nassim Nicholas Taleb, <em>Antifragile</em> (2012)</td>
+</tr>
+<tr>
+<td>Stage-Gate</td>
+<td>A new-product development model that places gates between stages and decides Go/Kill/Hold/Recycle against criteria set in advance</td>
+<td>Robert G. Cooper (research in the 1980s, formalized from 1986)</td>
+</tr>
+<tr>
+<td>Kill criteria</td>
+<td>A condition written before starting: &quot;if we fall short of this number, we stop&quot;</td>
+<td>A one-person version of Stage-Gate gate criteria</td>
+</tr>
+<tr>
+<td>Sunk-cost fallacy</td>
+<td>The tendency to continue because of costs already spent</td>
+<td>Arkes &amp; Blumer (1985)</td>
+</tr>
+<tr>
+<td>WIP limit</td>
+<td>A cap on the number of work items in progress at once</td>
+<td>Kanban (David J. Anderson, 2010), Little&#39;s Law</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>Expected Value and Variance</h3>
+<blockquote>
+<p>Expected Value = Σ (probability of an outcome × value of the outcome)</p>
+</blockquote>
+<p>Suppose the same 480 hours (160 hours a month × 3 months) are spent in two ways. The value is monthly net revenue on success (all assumptions).</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Setup</th>
+<th>Success probability</th>
+<th>Monthly net revenue on success</th>
+<th>Monthly Expected Value</th>
+<th>Standard deviation</th>
+<th>Chance at least one succeeds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Big bet</td>
+<td>480 hours × 1</td>
+<td>10%</td>
+<td>KRW 3,000,000</td>
+<td>KRW 300,000</td>
+<td>about KRW 900,000</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>Small bets</td>
+<td>80 hours × 6 (assumed independent)</td>
+<td>15% each</td>
+<td>KRW 500,000 each</td>
+<td>6 × 75,000 = KRW 450,000</td>
+<td>about KRW 437,000</td>
+<td>62.3%</td>
+</tr>
+</tbody></table>
+<p>How it is computed (in units of KRW 10,000):</p>
+<ul>
+<li>Big bet variance = 0.1 × (300 − 30)² + 0.9 × (0 − 30)² = 7,290 + 810 = 8,100 → standard deviation 90</li>
+<li>Variance of one small bet = 0.15 × (50 − 7.5)² + 0.85 × (0 − 7.5)² = 270.94 + 47.81 = 318.75; six together 1,912.5 → standard deviation about 43.7</li>
+<li>At least one success = 1 − 0.85⁶ = 1 − 0.3771 = 0.6229</li>
+</ul>
+<p>How to read it: under these assumptions small bets have both a higher expected value and less scatter. But the key point is that <strong>the probabilities and payoff sizes are assumptions</strong>. If each small bet had a 5% success probability, the expected value would be 6 × 0.05 × 50 = 15 (KRW 150,000), lower than the big bet. The purpose of this table is not the conclusion but the habit of writing numbers down and comparing them.</p>
+<h3>Small Bets and the Barbell</h3>
+<p>Daniel Vassallo said &quot;Don&#39;t build a product. Build a portfolio of small bets,&quot; recommending that you only bet more once you see a signal (2020). Taleb&#39;s barbell strategy keeps one side very safe and takes large risks only on the other side, <strong>avoiding the middling middle.</strong></p>
+<p>Translated to a solo studio:</p>
+<table>
+<thead>
+<tr>
+<th>Side</th>
+<th>Example</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Safe side</td>
+<td>Reliable cash flow: operating a product that already earns, contract or service work</td>
+<td>Protect the Runway</td>
+</tr>
+<tr>
+<td>Aggressive side</td>
+<td>Several small bets with capped losses</td>
+<td>Exposure to big wins in the tail</td>
+</tr>
+<tr>
+<td>Middle to avoid</td>
+<td>A mid-sized product that takes six months without validation</td>
+<td>Large losses and an unclear upside</td>
+</tr>
+</tbody></table>
+<h3>Stage-Gate and Kill Criteria Set in Advance</h3>
+<p>Cooper&#39;s Stage-Gate is a model for new-product development in large companies, but its core idea, <strong>&quot;decide Go/Kill at each gate against criteria set in advance&quot;</strong>, carries over directly to a solo studio. The threshold numbers below are examples (assumptions); 03 and 09 set them again per product.</p>
+<pre><code class="language-mermaid">flowchart LR
+    I[Idea] --&gt; G1{G1 problem check: at least 3 of 5 interviewees faced it recently}
+    G1 --&gt;|Go| V[Demand validation, max 16 hours]
+    G1 --&gt;|Kill| K[Archive]
+    V --&gt; G2{G2 demand signal: 10% sign-ups from 300 visitors or 5 pre-sales}
+    G2 --&gt;|Go| B[Build, max 80 hours]
+    G2 --&gt;|Kill| K
+    B --&gt; G3{G3 launch readiness: core flow and payments connected}
+    G3 --&gt;|Go| L[Launch]
+    G3 --&gt;|Recycle| B
+    L --&gt; G4{G4 at 60 days: monthly net revenue KRW 100k or 100 weekly actives}
+    G4 --&gt;|grow| S[Keep in operating slot and invest]
+    G4 --&gt;|Kill| K
+</code></pre>
+<p>Criteria are <strong>written before starting and not changed after seeing the results.</strong> Criteria changed after the fact are rationalization, not criteria.</p>
+<h3>The Sunk-Cost Fallacy</h3>
+<p>Arkes and Blumer (1985) showed, among other studies, in a field experiment that people who paid more for a theater season ticket attended more plays over the following months than people who received discounts: money already spent drags later decisions along. In products it looks like &quot;I&#39;ve already spent 200 hours, just a little more.&quot;</p>
+<ul>
+<li><strong>Bad example</strong>: &quot;I&#39;ve already spent 200 hours on this app, I can&#39;t throw it away. Let&#39;s add three more features.&quot;</li>
+<li><strong>Good example</strong>: &quot;What changes if I spend 40 more hours (KRW 875,000 worth)? Is there evidence it can reach the G4 criteria? If not, move it to the archive and write down what I learned.&quot;</li>
+</ul>
+<h3>WIP Limits and Little&#39;s Law</h3>
+<p>Little&#39;s Law states that in a stable flow, <strong>average lead time = average WIP ÷ throughput</strong>. Kanban uses this relationship to limit the number of items in progress.</p>
+<blockquote>
+<p>Example studio: WIP 12, throughput 0.5 launches per month (assumption) → lead time = 12 ÷ 0.5 = <strong>24 months</strong>
+Cut WIP to 2 with the same throughput → 2 ÷ 0.5 = <strong>4 months</strong></p>
+</blockquote>
+<p>In practice, reducing WIP often raises throughput too, because there is less context switching. Suggested starting point (assumption): at most 2 in build, at most 2 in validation, and products in operation managed by an hour budget rather than a count.</p>
+<h2>Applied: The Example Studio</h2>
+<p><strong>Hour allocation (160 hours a month, assumption)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Hours</th>
+<th>Share</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operate</td>
+<td>32</td>
+<td>20%</td>
+<td>Improving and supporting the launched product (P1), plus distribution shared by several products (the shared audience in Going Deeper)</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>80</td>
+<td>50%</td>
+<td>Taking the 2 WIP items to launch</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td>24</td>
+<td>15%</td>
+<td>Checking demand signals for 2 new candidates (03)</td>
+</tr>
+<tr>
+<td>Manage</td>
+<td>24</td>
+<td>15%</td>
+<td>Tax, measurement, learning, next month&#39;s plan</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>160</td>
+<td>100%</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>This table is the track&#39;s default allocation. The 90-day plan in 10 starts from it and lists every deviation with its reason.</p>
+<p><strong>Sorting the 12 prototypes (assumption)</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Count</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operating slot</td>
+<td>1</td>
+<td>P1 habit tracker (launched, one of the 3 productivity apps)</td>
+</tr>
+<tr>
+<td>Build slots</td>
+<td>2</td>
+<td>C2 technical documentation site (preparing for AdSense), creative tool T1 with pre-sale inquiries and waitlist signals (its G2 is measured at D14-D42 in 10)</td>
+</tr>
+<tr>
+<td>Validation slots</td>
+<td>2</td>
+<td>Game GM1 (Steam page signal, 07), productivity app P2 (passed G1 through interviews, G2 measured with a waitlist and fake door page, 03)</td>
+</tr>
+<tr>
+<td>Archive</td>
+<td>7</td>
+<td>2 games (GM2, GM3), 3 creative tools (T2–T4), 1 productivity app (P3), 1 content site (C1)</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>12</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>The archive is not deletion. Tidy the repository, write one line on &quot;the condition for taking it back out&quot;, and leave it alone. The launched P1 sits in the operating slot. P1 shipped before the G4 gate existed and so had no criteria set in advance; document 10 writes its first date and state, using the same numbers as G4.</p>
+<h2>Going Deeper</h2>
+<p><strong>Correlation within the portfolio.</strong> As with financial portfolios, products that move together lose the benefit of diversification. If four products all depend on Google search traffic and AdSense, one change in the search algorithm shakes all of them at once. The axes to diversify are <strong>acquisition channel</strong> (search, stores, communities), <strong>revenue model</strong> (ads, sales, subscriptions) and <strong>platform</strong> (web, iOS, Android, Steam). Look at the fit table in 04 again from this angle, and use the checklist in 04&#39;s Going Deeper to score the example studio&#39;s three-path combination.</p>
+<p><strong>Validation buys information.</strong> If 16 hours of validation can avoid 80 hours of building, those 16 hours (KRW 350,000 worth) are insurance that can save up to 64 hours (KRW 1,400,000 worth).</p>
+<h3>The Portfolio&#39;s Shared Asset: One Audience</h3>
+<p>Products can be archived or killed, but the people who found them can stay with the studio. To avoid gathering the first 100 users (08) from scratch for every bet, design <strong>the audience as an asset of the studio rather than of one product</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Rule (assumption)</th>
+<th>Related documents</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>One email list</td>
+<td>Waitlists, the newsletter and buyer notices go into a single studio list, split by product tags. A new product&#39;s waitlist page only adds a tag to the same list</td>
+<td>03, 08</td>
+</tr>
+<tr>
+<td>Cross-links between products</td>
+<td>Link only where relevant: C2&#39;s image and asset articles → T1, T1&#39;s export-complete screen → GM1&#39;s Steam page, every product&#39;s footer → the studio list sign-up</td>
+<td>05</td>
+</tr>
+<tr>
+<td>Bundles</td>
+<td>Bundle only after each product has passed G4 on its own. Pricing rule in 06</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Build in public</td>
+<td>Post one number and one decision a week as a public log. When a product is archived, the log and the followers remain</td>
+<td>08, 09</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Consent: collect consent for the waitlist and consent to receive promotional messages (newsletter, new-product notices) separately. See the Business section&#39;s &quot;Terms · Privacy · E-Commerce&quot;.</li>
+<li>Correlation: a shared audience makes products share an acquisition channel. It is an asset and a common risk at once, so measure how much with the checklist in 04&#39;s Going Deeper.</li>
+</ul>
+<p><strong>What the 16 hours a month of &quot;shared distribution&quot; in 10 contain (assumption)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Work</th>
+<th>Hours a month</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Build-in-public log, 1 post a week × 4 weeks</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Studio newsletter once a month (news from each product)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Community participation and posts (each product&#39;s first-100 source, 08)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Checking and updating cross-links and sign-up forms</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Replying to waitlisted people and subscribers, tidying tags</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>16</td>
+</tr>
+</tbody></table>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Small bets always beat big bets&quot;</strong> — It flips depending on probabilities and payoff sizes. Write the numbers down and compare.</li>
+<li><strong>&quot;The barbell means splitting half and half&quot;</strong> — The point is not the ratio but a structure that avoids middling risk.</li>
+<li><strong>&quot;Kill criteria can be set after seeing results&quot;</strong> — Criteria set after the results are rationalization.</li>
+<li><strong>&quot;Running many things at once finishes them sooner&quot;</strong> — By Little&#39;s Law, the more WIP, the longer each product&#39;s lead time.</li>
+<li><strong>&quot;Moving something to the archive is failure&quot;</strong> — An explicit stop is a decision that wins back time.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>If each of the six small bets had an 8% success probability, what would the monthly Expected Value and the &quot;chance at least one succeeds&quot; be?</li>
+<li>Sort your current products into the barbell&#39;s safe side, aggressive side and middle to avoid.</li>
+<li>For one product in progress, what should its G4 criteria have been if you had written them before starting?</li>
+<li>Compute your lead time from your current WIP and monthly launch throughput.</li>
+<li>Which acquisition channel do your products share, and how many would be hit at once if that channel closed?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://twitter.com/dvassallo/status/1258518741106618368">Daniel Vassallo, &quot;Don&#39;t build a product. Build a portfolio of small bets.&quot; — X</a> (2020-05, accessed 2026-09-28)</li>
+<li><a href="https://dvassallo.com/">Daniel Vassallo — dvassallo.com</a> (accessed 2026-09-28)</li>
+<li><a href="https://en.wikipedia.org/wiki/Antifragile_%28book%29">Antifragile (book) — Wikipedia</a> (Taleb, 2012, accessed 2026-09-28)</li>
+<li><a href="https://www.stage-gate.com/blog/the-stage-gate-model-an-overview/">The Stage-Gate Model: An Overview — Stage-Gate International</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/0749597885900494">The psychology of sunk cost — Arkes &amp; Blumer, Organizational Behavior and Human Decision Processes 35(1)</a> (1985, accessed 2026-09-28)</li>
+<li><a href="https://getnave.com/blog/kanban-littles-law/">Stable Systems: Little&#39;s Law and Kanban — Nave</a> (accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/01-studio-economics/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>The Economics of a Solo Studio</span></a><a class="page-link next" href="../../../en/studio/03-opportunity-validation/"><span><small>Next</small>Choosing Opportunities and Validating Demand</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

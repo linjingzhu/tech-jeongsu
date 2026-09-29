@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>부가세 · 영세율 · 세금계산서 | MyAI(마이아이)</title>
+    <meta name="description" content="부가가치세는 매출에서 받은 세금에서 매입 때 낸 세금을 빼서 내는 세금이다. 소프트웨어 사업자에게는 해외 매출(영세율)과 앱마켓 매출 처리 방식이 특히 중요하다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/06-vat-invoices/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="부가세 · 영세율 · 세금계산서 | MyAI(마이아이)" />
+    <meta property="og:description" content="부가가치세는 매출에서 받은 세금에서 매입 때 낸 세금을 빼서 내는 세금이다. 소프트웨어 사업자에게는 해외 매출(영세율)과 앱마켓 매출 처리 방식이 특히 중요하다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/business/06-vat-invoices/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/business/06-vat-invoices.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group" data-group="6"><button aria-expanded="true" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link active" aria-current="page" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>비즈니스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>부가세 · 영세율 · 세금계산서</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>부가세 · 영세율 · 세금계산서</h1>
+<blockquote>
+<p>이 문서는 일반 정보이며 법률·세무 자문이 아닙니다. 제도는 자주 바뀌므로 실행 전에 공식 출처나 세무사·변호사에게 확인하세요.</p>
+</blockquote>
+<p>부가가치세는 <strong>매출에서 받은 세금에서 매입 때 낸 세금을 빼서</strong> 내는 세금이다. 소프트웨어 사업자에게는 해외 매출(영세율)과 앱마켓 매출 처리 방식이 특히 중요하다.</p>
+<h2>과세기간과 신고 시기</h2>
+<ul>
+<li>부가가치세는 6개월 단위 과세기간으로 신고·납부하고, 각 과세기간을 3개월씩 나눠 예정신고 기간을 둔다.</li>
+<li>확정신고는 <strong>과세기간이 끝난 후 25일 이내</strong>에 한다 (부가가치세법 제49조). 폐업하면 폐업일이 속한 달의 다음 달 25일 이내.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>사업자</th>
+<th>연간 흐름 (1월~12월 과세기간 기준)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>개인 일반과세자</td>
+<td>1월 확정신고(전년 2기), 4월 예정고지 납부, 7월 확정신고(1기), 10월 예정고지 납부</td>
+</tr>
+<tr>
+<td>법인</td>
+<td>원칙적으로 1·4·7·10월 연 4회 신고. 직전 과세기간 공급가액 1억5천만원 미만 소규모 법인은 4·10월 예정고지</td>
+</tr>
+<tr>
+<td>간이과세자</td>
+<td>1월 확정신고(전년 1<del>12월분). 7월: 세무서가 1</del>6월분 예정부과세액을 고지해 7월 25일까지 납부. 단, <strong>1~6월에 세금계산서를 발급한 간이과세자는 7월 25일까지 예정신고</strong>를 해야 한다 (부가가치세법 제66조 제3항)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>개인 일반과세자는 예정신고 대신 **직전 과세기간 납부세액의 50%**를 4월·10월에 고지받아 낸다 (국세청 안내). 고지할 금액이 <strong>50만원 미만</strong>이면 예정고지를 하지 않고 확정신고 때 한꺼번에 낸다 (개인 일반과세자와 소규모 법인 공통).</li>
+<li>간이과세자의 7월 예정신고 때는 매출·매입처별 세금계산서 합계표도 함께 낸다 (국세청 국세상담센터 Q&amp;A). 7월 1일에 간이→일반으로 바뀌는 사업자도 1월 1일~6월 30일분을 7월 25일까지 신고·납부한다.</li>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+    J[1월 확정신고] --&gt; A[4월 예정]
+    A --&gt; L[7월 확정신고]
+    L --&gt; O[10월 예정]
+    O --&gt; J
+</code></pre>
+<h2>매출을 올바르게 잡기</h2>
+<ul>
+<li>앱마켓 매출은 <strong>용역의 공급</strong>으로 부가세 과세 대상이라는 것이 일반적인 설명이다.</li>
+<li>조세심판원 사례를 소개한 보도와 세무 전문가 해설에 따르면, 매출은 <strong>플랫폼 수수료를 빼기 전 결제총액</strong>으로 신고하고 수수료는 비용으로 처리해야 한다는 판단이 있었다. 거래 구조에 따라 달라질 수 있으므로 세무사와 확인한다 (확인 필요).</li>
+<li>앱마켓·결제대행사 정산서에서 <strong>국가별 매출</strong>을 분리해 보관한다. 국내·해외 구분이 세율을 가른다.</li>
+<li><strong>외화 환산</strong>: 대가를 외화로 받으면 공급시기가 되기 전에 원화로 바꾼 경우 <strong>바꾼 금액</strong>을, 공급시기 이후에도 외화로 갖고 있거나 받는 경우 <strong>공급시기의 기준환율 또는 재정환율</strong>로 계산한 금액을 과세표준으로 한다 (부가가치세법 시행령 제59조). 앱마켓 정산에서 공급시기를 언제로 볼지는 세무사와 확인한다 (확인 필요).</li>
+</ul>
+<h2>영세율: 해외 매출</h2>
+<p>영세율은 세율 0%를 적용하는 제도다. 매출세액은 0이지만 매입세액은 공제·환급받을 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>검토할 근거</th>
+<th>요점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>국내사업장이 없는 외국법인·비거주자에게 용역 공급</td>
+<td>부가가치세법 시행령 제33조 (외화 획득 용역 등)</td>
+<td>대가를 외국환은행을 통해 받는 등 요건 충족 필요</td>
+</tr>
+<tr>
+<td>해외 소비자가 앱마켓에서 앱을 구매</td>
+<td>세무 전문가 해설은 해외 소비자분 영세율, 국내 소비자분 10% 과세로 설명</td>
+<td>공식 해석과 거래 구조 확인 필요</td>
+</tr>
+<tr>
+<td>해외 결제대행사(Stripe 등)로 받는 SaaS 구독</td>
+<td>공급받는 자와 대금 수령 경로에 따라 판단</td>
+<td>세무사 확인 필요</td>
+</tr>
+</tbody></table>
+<ul>
+<li>영세율을 적용해 신고할 때는 국세청장이 정하는 <strong>외화획득명세서, 영세율 증빙서류</strong> 등을 제출해야 할 수 있다.</li>
+<li>영세율 매출로 환급이 생기면 <strong>조기환급</strong>을 신청할 수 있는 경우가 있다.</li>
+<li>간이과세자는 매입세액을 환급받는 구조가 아니다. 해외 매출 비중이 크고 매입이 많다면 일반과세자 선택을 검토한다 (01 문서).</li>
+</ul>
+<h3>계산 예시: 1인 개발자의 한 과세기간 (설명용)</h3>
+<p>2026년 제1기(1월~6월) 개인 일반과세자 가정이다. 금액은 설명을 위해 만든 숫자이고, 앱마켓 매출의 과세 방식은 아래 &quot;확인 필요&quot;를 전제로 한다.</p>
+<table>
+<thead>
+<tr>
+<th>거래</th>
+<th>금액 (공급가액)</th>
+<th>적용</th>
+<th>세액</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>국내 B2B 고객 외주 개발 (전자세금계산서 발급)</td>
+<td>2,000만원</td>
+<td>10% 과세</td>
+<td>매출세액 200만원</td>
+</tr>
+<tr>
+<td>앱마켓 매출 중 해외 소비자분</td>
+<td>1,000만원</td>
+<td>영세율 가정 (확인 필요)</td>
+<td>0원</td>
+</tr>
+<tr>
+<td>앱마켓 매출 중 국내 소비자분 (결제총액 550만원, 부가세 포함 가정)</td>
+<td>500만원</td>
+<td>10% 과세 가정 (확인 필요)</td>
+<td>매출세액 50만원</td>
+</tr>
+<tr>
+<td>국내 업체에서 산 개발 장비 (세금계산서 수취)</td>
+<td>300만원</td>
+<td>매입세액 공제</td>
+<td>매입세액 30만원</td>
+</tr>
+<tr>
+<td>해외 클라우드 인보이스 (부가세 없이 청구되었다고 가정)</td>
+<td>외화 결제액</td>
+<td>공제할 매입세액 없음</td>
+<td>0원</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">매출세액 = 200만 + 0 + 50만 = 250만원
+매입세액 = 30만원
+납부세액 = 250만 − 30만 = 220만원 (전자신고세액공제 등 공제 전)
+</code></pre>
+<ul>
+<li>해외 매출 비중이 더 크고 장비 매입이 많으면 매입세액이 매출세액보다 커져 <strong>환급</strong>이 생길 수 있다.</li>
+<li><strong>앱마켓 매출 확인 필요</strong>: 해외 앱마켓(Google, Apple 등)이 국내 소비자에게 부가세를 걷어 내는 구조인지, 개발자의 공급 상대방이 소비자인지 앱마켓 사업자인지에 따라 국내분의 과세 방식이 달라질 수 있다. 공식 해석을 찾지 못했으므로 신고 전에 반드시 세무사와 확인한다.</li>
+<li><strong>국외사업자 용역의 대리납부</strong>: 국내사업장이 없는 외국법인·비거주자에게서 용역을 공급받으면 공급받는 자가 부가세를 징수해 납부하는 대리납부 제도가 있다. 다만 그 용역을 <strong>과세사업에 쓰는 경우는 제외</strong>된다 (부가가치세법 제52조, 매입세액 불공제 대상은 포함). 과세사업자인 개발자가 사업용으로 쓰는 해외 클라우드는 보통 대리납부 대상이 아니지만, 면세사업·개인 용도가 섞이면 확인한다.</li>
+<li>해외 인보이스 비용은 부가세 공제는 없어도 소득세 경비로는 처리한다 (07 문서).</li>
+</ul>
+<p>나쁜 예:</p>
+<blockquote>
+<p>앱마켓 입금액 전체를 한 줄로 &quot;해외 매출&quot;로 신고했다. 국내 소비자 매출이 섞여 있었다.</p>
+</blockquote>
+<p>좋은 예:</p>
+<blockquote>
+<p>매월 정산 리포트를 국가별로 내려받아 국내분과 해외분을 나누고, 영세율 증빙과 함께 보관했다.</p>
+</blockquote>
+<h2>세금계산서와 전자세금계산서</h2>
+<table>
+<thead>
+<tr>
+<th>사업자</th>
+<th>발급 의무</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>법인</td>
+<td>전자세금계산서 의무 발급</td>
+</tr>
+<tr>
+<td>개인 일반과세자</td>
+<td>직전 연도 사업장별 공급가액(면세 포함) <strong>8천만원 이상</strong>이면 전자 발급 의무 (2024년 7월 1일부터 확대 적용)</td>
+</tr>
+<tr>
+<td>간이과세자</td>
+<td>직전 연도 공급대가 <strong>4,800만원 이상</strong>이면 세금계산서 발급 의무 (2021년 7월 1일 이후 공급분부터). 신규·4,800만원 미만은 영수증</td>
+</tr>
+</tbody></table>
+<ul>
+<li>개인은 기준을 넘은 해의 **다음 해 제2기 과세기간 시작일(7월 1일)**부터 전자 발급 의무가 생긴다.</li>
+<li>원칙: 공급할 때마다 공급시기를 작성일자로 발급.</li>
+<li>예외: 거래처별로 한 달 공급가액을 합쳐 <strong>그 달 말일자로, 다음 달 10일까지</strong> 발급 가능 (10일이 토요일·공휴일이면 다음 영업일).</li>
+<li>발급 기한과 국세청 전송 기한을 넘기면 가산세가 있다. 대표적인 요율은 아래 표와 같다.</li>
+</ul>
+<h3>가산세 요율</h3>
+<table>
+<thead>
+<tr>
+<th>가산세</th>
+<th>요율</th>
+<th>근거</th>
+<th>이런 상황</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사업자 미등록</td>
+<td>사업 개시일~등록 신청 전날 공급가액의 1% (간이과세자는 공급대가의 0.5%)</td>
+<td>부가가치세법 제60조 제1항, 간이과세자는 제68조의2</td>
+<td>3월에 외주 매출이 생겼는데 사업자 등록을 6월에야 신청했다</td>
+</tr>
+<tr>
+<td>세금계산서 미발급</td>
+<td>공급가액의 2%</td>
+<td>부가가치세법 제60조 제2항</td>
+<td>발급 기한이 지나고 그 과세기간 확정신고 기한까지도 발급하지 않았다</td>
+</tr>
+<tr>
+<td>세금계산서 지연발급</td>
+<td>공급가액의 1%</td>
+<td>부가가치세법 제60조 제2항</td>
+<td>3월 용역분을 4월 10일이 지나 발급했지만 7월 25일 전에는 발급했다</td>
+</tr>
+<tr>
+<td>전자세금계산서 지연전송</td>
+<td>공급가액의 0.3%</td>
+<td>부가가치세법 제60조 제2항</td>
+<td>전송 기한은 넘겼지만 확정신고 기한까지는 전송했다</td>
+</tr>
+<tr>
+<td>전자세금계산서 미전송</td>
+<td>공급가액의 0.5%</td>
+<td>부가가치세법 제60조 제2항</td>
+<td>확정신고 기한까지도 국세청에 전송하지 않았다</td>
+</tr>
+<tr>
+<td>무신고 (일반)</td>
+<td>납부할 세액의 20%</td>
+<td>국세기본법 제47조의2</td>
+<td>7월 확정신고를 잊고 넘겼다 (부정행위는 40%)</td>
+</tr>
+<tr>
+<td>납부지연</td>
+<td>미납세액 × 경과일수 × 0.022%</td>
+<td>국세기본법 제47조의4</td>
+<td>신고는 했지만 납부를 30일 늦게 했다 (2022년 2월 15일 이후 1일 10만분의 22)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>요율과 적용 순서(중복 적용 배제 등)는 국세청 &quot;부가가치세 가산세&quot; 페이지와 조문으로 확인한다. 간이과세자는 2021년 7월 1일 이후 공급분부터 세금계산서 관련 가산세가 적용된다.</li>
+</ul>
+<pre><code class="language-text">B2B 계약 체결
+→ 공급시기 확인 (용역 완료일 / 대가 지급일 등)
+→ 홈택스 또는 ERP로 전자세금계산서 발급
+→ 국세청 전송 완료 확인 (전송 기한은 국세청 안내 확인)
+→ 부가세 신고 때 합계표 자동 반영 확인
+</code></pre>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2273&cntntsId=7694">국세청 - 부가가치세 신고납부기한</a> (접근 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2402&cntntsId=238927">국세청 - 법인 부가가치세 신고납부기한</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=1000920200&lsId=001571&chrClsCd=010202&print=print">국가법령정보센터 - 부가가치세법 제49조 확정신고와 납부</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/lsLawLinkInfo.do?lsJoLnkSeq=900327125&chrClsCd=010202">국가법령정보센터 - 부가가치세법 시행령 제33조</a> (접근 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2461&cntntsId=7787">국세청 - 전자(세금)계산서 발급의무대상자</a> (접근 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2463&cntntsId=7789">국세청 - 전자(세금)계산서 발급시기 및 발급·전송기한</a> (접근 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2464&cntntsId=7790">국세청 - 전자(세금)계산서 혜택과 가산세</a> (접근 2026-09-28)</li>
+<li><a href="https://nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2276&cntntsId=7697">국세청 - 부가가치세 가산세 (개인)</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsLawLinkInfo.do?lsJoLnkSeq=900317806&lsId=001571&chrClsCd=010202&print=print">국가법령정보센터 - 부가가치세법 제60조 가산세</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsId=001586&lsJoLnkSeq=1000819702&print=print">국가법령정보센터 - 국세기본법 제47조의2 무신고가산세</a> (접근 2026-09-28)</li>
+<li><a href="https://www.nts.go.kr/gmt/cm/cntnts/cntntsView.do?mi=41010&cntntsId=239059">국세청 - 가산세·과태료 (납부지연가산세)</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900331724&lsId=003666&print=print">국가법령정보센터 - 부가가치세법 시행령 제59조 외화의 환산</a> (접근 2026-09-28)</li>
+<li><a href="https://www.law.go.kr/LSW//lsSideInfoP.do?lsiSeq=269797&joNo=0052&joBrNo=00&docCls=jo&urlMode=lsScJoRltInfoR">국가법령정보센터 - 부가가치세법 제52조 대리납부</a> (접근 2026-09-28)</li>
+<li><a href="https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11937">국세상담센터 - 간이과세 Q&amp;A (예정신고)</a> (접근 2026-09-28)</li>
+<li><a href="https://call.nts.go.kr/call/qna/selectQnaInfo.do?mi=1329&ctgId=CTG11943">국세상담센터 - 부가가치세 신고 관련 주요 질의</a> (접근 2026-09-28)</li>
+<li><a href="https://www.taxwatch.co.kr/article/tax/2022/05/16/0002">택스워치 - 앱 개발 매출은 플랫폼 수수료 포함해 신고해야 (언론 보도, 비공식)</a> (2022-05-16 보도, 접근 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../business/05-hiring-freelancers/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>채용 · 4대보험 · 프리랜서</span></a><a class="page-link next" href="../../business/07-income-tax-books/"><span><small>다음 문서</small>소득세 · 법인세 · 원천징수 · 장부</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

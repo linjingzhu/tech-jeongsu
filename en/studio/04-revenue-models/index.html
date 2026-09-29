@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Revenue Models: An Introduction | MyAI</title>
+    <meta name="description" content="As of: 2026-09-29. Fees change often, so re-check the official documents in the table before acting. All example numbers are assumptions, and taxes are le…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/04-revenue-models/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/04-revenue-models/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/04-revenue-models/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/04-revenue-models/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Revenue Models: An Introduction | MyAI" />
+    <meta property="og:description" content="As of: 2026-09-29. Fees change often, so re-check the official documents in the table before acting. All example numbers are assumptions, and taxes are le…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/04-revenue-models/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/04-revenue-models.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link active" aria-current="page" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Revenue Models: An Introduction</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Revenue Models: An Introduction</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Distinguish what each of nine revenue models needs, compute fit by product type and unit economics by model, and read the main platform and payment fees as of 2026-09-29 together with their sources.</p>
+</blockquote>
+<p>As of: 2026-09-29. Fees change often, so re-check the official documents in the table before acting. All example numbers are assumptions, and taxes are left out.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Who pays for what</th>
+<th>Typical example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Advertising</td>
+<td>Advertisers pay for users&#39; attention</td>
+<td>Content sites, free mobile games</td>
+</tr>
+<tr>
+<td>One-time purchase</td>
+<td>Users pay once</td>
+<td>Paid apps, Steam games, templates</td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td>Users pay on a cycle</td>
+<td>Productivity apps, memberships</td>
+</tr>
+<tr>
+<td>Freemium</td>
+<td>Some free users pay for paid features</td>
+<td>Free tool + Pro plan</td>
+</tr>
+<tr>
+<td>Usage-based</td>
+<td>Pay for what you use</td>
+<td>AI generation credits, API calls</td>
+</tr>
+<tr>
+<td>Commission / marketplace</td>
+<td>A percentage of each transaction</td>
+<td>Asset markets, brokerage platforms</td>
+</tr>
+<tr>
+<td>Licensing</td>
+<td>Companies or developers pay for usage rights</td>
+<td>Commercial licenses for fonts, assets, source code</td>
+</tr>
+<tr>
+<td>Sponsorship / donation</td>
+<td>Fans pay creators</td>
+<td>Patreon, donation buttons</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Customers pay for your time</td>
+<td>Contract work, setup and onboarding help, courses</td>
+</tr>
+</tbody></table>
+<p><strong>Merchant of Record (MoR)</strong>: A payment arrangement in which the provider legally becomes &quot;the seller&quot; and handles payment, per-country VAT and sales-tax calculation and remittance, and refunds on your behalf. Its fees are higher than an ordinary payment processor&#39;s, but it reduces the burden of foreign tax compliance.</p>
+<h2>Principles</h2>
+<h3>Each Model Needs Different Things</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Traffic</th>
+<th>Trust</th>
+<th>Retention</th>
+<th>Payment infrastructure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Advertising</td>
+<td>Very high</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Low (an ad network account)</td>
+</tr>
+<tr>
+<td>One-time purchase</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td>Medium</td>
+<td>High</td>
+<td>Very high</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Freemium</td>
+<td>High</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Usage-based</td>
+<td>Medium</td>
+<td>High</td>
+<td>Medium</td>
+<td>High (including cost control)</td>
+</tr>
+<tr>
+<td>Commission / marketplace</td>
+<td>High on both sides</td>
+<td>Very high</td>
+<td>High</td>
+<td>Very high (settlement)</td>
+</tr>
+<tr>
+<td>Licensing</td>
+<td>Low</td>
+<td>High</td>
+<td>Low</td>
+<td>Low (contracts)</td>
+</tr>
+<tr>
+<td>Sponsorship / donation</td>
+<td>Low (a few fans)</td>
+<td>Very high</td>
+<td>High</td>
+<td>Low (use a platform)</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Low</td>
+<td>High</td>
+<td>Low</td>
+<td>Low (tax invoices)</td>
+</tr>
+</tbody></table>
+<p>The most common solo-studio mistake is attaching <strong>ads to a product with no traffic, and a subscription to a product whose retention is unproven</strong>.</p>
+<h3>Fit by Product Type</h3>
+<p>The table below is an example (assumption) that shows the reasoning. Game details are in 07 and pricing design in 06.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Game</th>
+<th>Creative tool</th>
+<th>Productivity app</th>
+<th>Content site</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Advertising</td>
+<td>Medium (high for casual mobile)</td>
+<td>Low</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>One-time purchase</td>
+<td>High (PC)</td>
+<td>High</td>
+<td>Medium</td>
+<td>Medium (ebooks, templates)</td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td>Low</td>
+<td>Medium</td>
+<td>High</td>
+<td>Medium (membership)</td>
+</tr>
+<tr>
+<td>Freemium</td>
+<td>Medium (F2P, heavy to operate)</td>
+<td>High</td>
+<td>High</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Usage-based</td>
+<td>Low</td>
+<td>Medium (AI generation features)</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Commission / marketplace</td>
+<td>Low</td>
+<td>Medium (templates, assets)</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Licensing</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Sponsorship / donation</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Low</td>
+<td>Low</td>
+<td>Medium (onboarding help)</td>
+<td>Medium (courses, advice)</td>
+</tr>
+</tbody></table>
+<pre><code class="language-mermaid">flowchart TD
+    Q1{Is the problem painful enough that users pay directly} --&gt;|yes| Q2{Does the value recur every time}
+    Q1 --&gt;|no| Q3{Can you gather hundreds of thousands of pageviews a month}
+    Q2 --&gt;|yes| SUB[Subscription or usage-based]
+    Q2 --&gt;|no| ONE[One-time purchase]
+    Q3 --&gt;|yes| ADS[Advertising]
+    Q3 --&gt;|no| Q4{Do you have a small group of devoted fans}
+    Q4 --&gt;|yes| SP[Sponsorship or membership]
+    Q4 --&gt;|no| RV[Go back to 03 and revalidate the problem]
+    SUB --&gt; FM{Do free users become a discovery path}
+    ONE --&gt; FM
+    FM --&gt;|yes| FR[Combine with freemium]
+    FM --&gt;|no| DIR[Paid only]
+</code></pre>
+<h3>Unit Economics by Model: The Scale Needed for KRW 3,500,000 of Monthly Net Revenue</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Formula</th>
+<th>Assumption</th>
+<th>Scale needed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Advertising</td>
+<td>pageviews × RPM ÷ 1,000</td>
+<td>RPM KRW 3,000</td>
+<td>3,500,000 ÷ 3,000 × 1,000 ≈ <strong>1,166,667 PV a month</strong></td>
+</tr>
+<tr>
+<td>One-time purchase</td>
+<td>units × price × (1 − fee rate)</td>
+<td>KRW 10,000, 15% fee → KRW 8,500</td>
+<td>3,500,000 ÷ 8,500 ≈ <strong>412 units a month</strong></td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td>retained subscribers × monthly price × (1 − fee rate)</td>
+<td>KRW 5,000 a month, 15% → KRW 4,250</td>
+<td>3,500,000 ÷ 4,250 ≈ <strong>824 retained</strong></td>
+</tr>
+<tr>
+<td>Freemium</td>
+<td>active free users × paid conversion × net paid price</td>
+<td>3% conversion, net price KRW 4,250</td>
+<td>824 ÷ 0.03 ≈ <strong>27,467 active</strong></td>
+</tr>
+<tr>
+<td>Usage-based</td>
+<td>usage revenue × (1 − cost ratio)</td>
+<td>40% cost ratio (AI API)</td>
+<td>3,500,000 ÷ 0.6 ≈ <strong>KRW 5.83M of usage</strong></td>
+</tr>
+<tr>
+<td>Marketplace</td>
+<td>GMV × take rate</td>
+<td>10% take rate</td>
+<td><strong>KRW 35M GMV a month</strong></td>
+</tr>
+<tr>
+<td>Licensing</td>
+<td>contracts × contract amount</td>
+<td>KRW 500,000 each</td>
+<td><strong>7 a month</strong></td>
+</tr>
+<tr>
+<td>Sponsorship</td>
+<td>sponsors × amount × (1 − platform fee)</td>
+<td>KRW 5,000 a month, 10% → KRW 4,500</td>
+<td>3,500,000 ÷ 4,500 ≈ <strong>778 people</strong> (payment processing fees extra)</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>hours sold × hourly rate</td>
+<td>KRW 50,000 an hour</td>
+<td><strong>70 hours a month</strong> (44% of 160 hours)</td>
+</tr>
+</tbody></table>
+<p>Judge a subscription by <strong>LTV</strong> rather than monthly revenue. With 8% monthly churn (assumption), LTV ≈ 4,250 ÷ 0.08 = <strong>KRW 53,125</strong>. Churn math and pricing design are covered in depth in 06.</p>
+<h3>Platform and Payment Fees (as of 2026-09-29)</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Fee</th>
+<th>Conditions and notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apple App Store</td>
+<td>Standard 30%, Small Business Program 15%</td>
+<td>For developers with up to USD 1M in proceeds in the prior year and new developers who apply. Auto-renewing subscriptions retained for more than a year: 15%. South Korea&#39;s third-party payment commission is 26% (06). EU and US external-link rules are outside this track, so check Apple&#39;s documents directly</td>
+</tr>
+<tr>
+<td>Google Play (South Korea, current)</td>
+<td>15% on the first USD 1M a year (enrollment required), 30% above, 15% on auto-renewing subscriptions. With Korean alternative billing (the developer&#39;s own billing) the fee drops by 4 percentage points: 11% (15% tier), 26% (30% tier)</td>
+<td>Alternative-billing rates per Play Console Help. The new structure announced 2026-03-04 is scheduled to reach South Korea by 2026-12-31 (reported)</td>
+</tr>
+<tr>
+<td>Google Play (US, UK, EEA, from 2026-06-30)</td>
+<td>Service fee: 10% on the first USD 1M a year and on auto-renewing subscriptions. Above USD 1M, non-recurring products pay 15% on new installs and 20% on existing installs in the Apps Experience Program, 20% and 25% outside it. A separate 5% billing fee applies when using Google Play billing</td>
+<td>Program enrollment in Play Console from 2026-09. Rolling out to Australia by 2026-09-30, Japan and South Korea by 2026-12-31, the rest by 2027-09-30 (reported)</td>
+</tr>
+<tr>
+<td>Steam</td>
+<td>30% on each game&#39;s revenue up to USD 10M, 25% from USD 10M to 50M, 20% above</td>
+<td>For revenue from 2018-10-01. A USD 100 Steam Direct fee per app, recouped in payouts after USD 1,000 adjusted gross revenue (07)</td>
+</tr>
+<tr>
+<td>itch.io</td>
+<td>The developer chooses 0–100%, default 10%</td>
+<td>Open revenue sharing, introduced in 2015</td>
+</tr>
+<tr>
+<td>Stripe (US)</td>
+<td>Domestic cards 2.9% + 30 cents</td>
+<td>South Korea is not on Stripe&#39;s list of supported merchant countries</td>
+</tr>
+<tr>
+<td>Paddle (MoR)</td>
+<td>5% + 50 cents</td>
+<td>Paddle calculates, collects and remits taxes as the seller</td>
+</tr>
+<tr>
+<td>Lemon Squeezy (MoR)</td>
+<td>5% + 50 cents, plus extra rates for international payments, PayPal, subscriptions and more</td>
+<td>Acquired by Stripe in 2024, migrating to Stripe Managed Payments. New sign-ups: reported as waitlist or invite-only, not officially confirmed. In 2026-06 an announcement that invite-free public sign-up for Stripe Managed Payments was coming soon was reported, but its opening is not confirmed (accessed 2026-09-29). If starting now, use Paddle or Gumroad</td>
+</tr>
+<tr>
+<td>Stripe Managed Payments (MoR)</td>
+<td>Stripe processing fees + 3.5% per transaction. The 3.5% applies to the full transaction amount including indirect taxes such as VAT (Stripe Support)</td>
+<td>Public preview from 2026-02, invite-free public sign-up announced as coming in 2026-06 (reported). <strong>Not available to sellers in South Korea</strong>: Stripe does not list South Korea as a supported merchant country, and 2026 secondary sources list it among excluded countries (the official country list could not be checked directly, accessed 2026-09-29)</td>
+</tr>
+<tr>
+<td>Gumroad</td>
+<td>Direct sales 10% + 50 cents, via Discover 30%</td>
+<td>MoR since 2025-01</td>
+</tr>
+<tr>
+<td>Patreon</td>
+<td>10% for new creators after 2025-08-04, plus payment processing fees</td>
+<td>Earlier creators keep their existing rates</td>
+</tr>
+<tr>
+<td>Google AdSense (content)</td>
+<td>Publisher share 80% (after the buy-side platform fee)</td>
+<td>About 68% of advertiser spend for ads bought through Google Ads (05)</td>
+</tr>
+</tbody></table>
+<h2>Applied: The Example Studio</h2>
+<p>For each prototype type, pick <strong>only one model to test first</strong> (assumption).</p>
+<table>
+<thead>
+<tr>
+<th>Type (count)</th>
+<th>First model</th>
+<th>Why</th>
+<th>Deep dive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Games (3)</td>
+<td>PC one-time purchase</td>
+<td>Steam has a mature paid-sales structure, and wishlists show an advance signal</td>
+<td>07</td>
+</tr>
+<tr>
+<td>Creative tools (4)</td>
+<td>One-time purchase or freemium, via an MoR</td>
+<td>Stripe is hard to use directly from South Korea, and an MoR reduces foreign tax work</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Productivity apps (3)</td>
+<td>Subscription (free trial)</td>
+<td>Only when there is recurring value</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Content sites (2)</td>
+<td>Advertising + a supporting model</td>
+<td>The technical documentation site is preparing for AdSense</td>
+<td>05</td>
+</tr>
+</tbody></table>
+<p><strong>Combination example (assumption)</strong>: ads KRW 500,000 (166,667 PV at an RPM of KRW 3,000) + creative tool one-time sales KRW 1,500,000 (KRW 8,500 × 177) + productivity app subscriptions KRW 1,500,000 (KRW 4,250 × 353) = <strong>about KRW 3,500,000</strong> (KRW 3,504,750). Stacking three small paths is also safer, from the correlation angle of 02, than gathering 1,166,667 PV or 824 subscribers through a single model.</p>
+<h2>Going Deeper</h2>
+<h3>The Cost of Mixing Models</h3>
+<p>Every added model adds one more payment integration, refund policy, set of terms and metric. For a solo studio, start from <strong>one main model per product plus at most one supporting model</strong>.</p>
+<p><strong>Rule for adding a supporting model</strong>: do not attach a supporting model until the main model has passed G4 in 02 (60 days after launch: monthly net revenue of KRW 100,000 or more, or 100 weekly active users). Adding a model before the main one has produced a signal makes it impossible to tell which one worked, and only doubles the payment, terms and metrics work. Even after it passes, write the supporting model&#39;s threshold and period first, as in 03, and remove it if it lowers the main model&#39;s key metric (for example, trial to payment). Example: T1 tests a subscription asset pack only after its one-time sales pass G4. C2&#39;s main model is ads, and the link from C2 to T1 is not a revenue model but distribution (02, Going Deeper).</p>
+<h3>Break-Even Between an MoR and a Direct PG</h3>
+<p>&quot;An MoR is expensive&quot; is true if you look only at fees; once tax work is counted, the answer depends on sales volume. The calculation uses 06&#39;s overseas one-time sale ($29, KRW 40,600 at an assumed KRW 1,400). All numbers are assumptions.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Paddle (MoR)</th>
+<th>Direct PG (Toss Payments, 3.4% assumed)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fee per sale</td>
+<td>$29 × 5% + $0.50 = $1.95 = KRW 2,730</td>
+<td>40,600 × 3.4% ≈ KRW 1,380</td>
+</tr>
+<tr>
+<td>Overseas tax</td>
+<td>Paddle, as the seller, calculates, collects and files</td>
+<td>You do it. Digital products sold to EU consumers carry EU VAT from the first sale even for sellers outside the EU, which can be filed in one country through the non-Union OSS. Other countries must be checked one by one</td>
+</tr>
+<tr>
+<td>Monthly fixed cost</td>
+<td>0</td>
+<td>Tax work 4 hours a month × KRW 21,875 = KRW 87,500 + annual fee KRW 110,000 ÷ 12 ≈ KRW 9,167 = about KRW 96,667</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Difference per sale = 2,730 − 1,380.4 = KRW 1,349.6 → break-even = 96,667 ÷ 1,349.6 ≈ 71.6 sales → the MoR is cheaper up to 71 sales a month, and <strong>the direct PG is cheaper from the 72nd sale</strong> (break-even gross about KRW 2.91M)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Monthly tax hours (assumption)</th>
+<th>Monthly fixed cost</th>
+<th>Break-even</th>
+<th>MoR cheaper</th>
+<th>Direct PG cheaper</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2 hours</td>
+<td>about KRW 52,917</td>
+<td>39.2 sales</td>
+<td>39 a month or fewer</td>
+<td>From the 40th sale</td>
+</tr>
+<tr>
+<td>4 hours</td>
+<td>about KRW 96,667</td>
+<td>71.6 sales</td>
+<td>71 a month or fewer</td>
+<td>From the 72nd sale</td>
+</tr>
+<tr>
+<td>8 hours</td>
+<td>about KRW 184,167</td>
+<td>136.5 sales</td>
+<td>136 a month or fewer</td>
+<td>From the 137th sale</td>
+</tr>
+</tbody></table>
+<ul>
+<li>How to read it: T1&#39;s day-60 net revenue of KRW 450,000 (09) is about 12 sales a month at 06&#39;s $29 price (450,000 ÷ 37,870). That is far below break-even, so the MoR is cheaper for the example studio.</li>
+<li>Left out: the PG sign-up fee of KRW 220,000, tax adviser fees, time spent on chargebacks and fraud, and domestic VAT filing (needed on both paths). Foreign-card rates differ by contract and may exceed 3.4% (to be confirmed). The higher the rate, the higher the break-even volume, and the longer the MoR stays ahead.</li>
+<li>VAT itself: VAT on digital products sold to consumers abroad, such as in the EU, arises on either path. An MoR calculates and collects it at checkout automatically; with a direct PG the seller must add each country&#39;s VAT at checkout or, failing that, absorb it. Absorbing 20% VAT on a $29 sale costs 29 × 20% × 1,400 = KRW 8,120 per sale, about six times the fee gap above (KRW 1,349.6). Without checkout set up to add each country&#39;s VAT, the direct PG is more expensive at any volume.</li>
+</ul>
+<h3>Checking Model, Channel and Platform Correlation</h3>
+<p>Use the three axes from 02&#39;s Going Deeper (revenue model, acquisition channel, platform) to check the example studio&#39;s combination (ads KRW 0.5M + creative tool one-time sales KRW 1.5M + productivity app subscriptions KRW 1.5M). Two paths score 1 when they share an axis, 0.5 when they partly share it and 0 when they do not (the scoring is an assumption).</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Revenue model</th>
+<th>Main acquisition channel</th>
+<th>Platform and payment account</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A: C2 ads (KRW 0.5M)</td>
+<td>Ads</td>
+<td>Google search</td>
+<td>Web, AdSense account</td>
+</tr>
+<tr>
+<td>B: T1 one-time (KRW 1.5M)</td>
+<td>Paid by users directly (one-time)</td>
+<td>Links from C2 (via search) and communities</td>
+<td>Web, Paddle</td>
+</tr>
+<tr>
+<td>C: Productivity app subscription (KRW 1.5M)</td>
+<td>Paid by users directly (subscription)</td>
+<td>Communities and the studio newsletter</td>
+<td>Web, Toss Payments</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Pair</th>
+<th>Model</th>
+<th>Channel</th>
+<th>Platform and payment</th>
+<th>Total (max 3)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A–B</td>
+<td>0</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>A–C</td>
+<td>0</td>
+<td>0.5 (newsletter sign-ups come from C2)</td>
+<td>0.5</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>B–C</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td></td>
+<td></td>
+<td></td>
+<td>3.5 / 9</td>
+</tr>
+</tbody></table>
+<p>Making the same KRW 3.5M with three ad-supported content sites would score 3 on every pair: 9 / 9.</p>
+<ul>
+<li>Shock test (assumption): if Google search traffic falls 50% and half of B&#39;s traffic comes via search and C2, A becomes KRW 0.25M, B becomes 1.5 × (1 − 0.5 × 0.5) = KRW 1.125M, and C stays at KRW 1.5M in the short run → KRW 2.875M in total (−17.9%). A single ad path would have fallen to KRW 1.75M (−50%).</li>
+<li>The biggest single risk is the payment account. If the Paddle account stops, B&#39;s KRW 1.5M (42.9% of the total) disappears at once. That is why B and C sit on different payment paths.</li>
+<li>Order of the check: (1) write the three axes for each path (2) score each pair (3) run a shock test on the most shared axis (4) if one axis can shake half or more of the total, choose the next bet from candidates that do not share it.</li>
+</ul>
+<h3>Taxes and Displayed Prices</h3>
+<p>Prices to Korean consumers are displayed including VAT, while app-store and overseas revenue are handled differently for VAT. The net prices in these tables are illustrative numbers without tax. Read the Business section&#39;s &quot;VAT · Zero Rate · Tax Invoices&quot; alongside.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Make it free and add ads&quot;</strong> — Advertising is the model with the largest traffic requirement.</li>
+<li><strong>&quot;Subscription is the best model&quot;</strong> — Without recurring value and low churn, a subscription only adds refunds and cancellations.</li>
+<li><strong>&quot;The fee is 30%&quot;</strong> — In 2026, 10-15% is common for small developers depending on the payment method (for example, Google Play US: 10% on the first USD 1M a year plus a separate 5% billing fee with Google Play billing; South Korea currently 15%, 11% with alternative billing). It also varies by region and install date.</li>
+<li><strong>&quot;An MoR is just expensive&quot;</strong> — Compare it with the time and tax cost of filing foreign VAT yourself.</li>
+<li><strong>&quot;Add the revenue model later&quot;</strong> — The model changes onboarding, the free tier and the metrics.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Pick one of your products and name the weakest of the four requirements in the table above.</li>
+<li>With a KRW 9,900 monthly subscription and a 15% fee, how many retained subscribers produce KRW 3,500,000 of monthly net revenue?</li>
+<li>With 10,000 active free users, 2% paid conversion and a net price of KRW 4,250, what is the monthly net revenue?</li>
+<li>When Stripe is hard to use directly from South Korea, what are two payment options to consider for overseas sales?</li>
+<li>In the example studio&#39;s combination, what would you have to grow, and by how much, to make the same KRW 3,500,000 without ads?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://developer.apple.com/app-store/small-business-program/">App Store Small Business Program — Apple Developer</a> (accessed 2026-09-28)</li>
+<li><a href="https://developer.apple.com/programs/whats-included/">Membership details — Apple Developer Program</a> (15% on subscription renewals after one year, accessed 2026-09-28)</li>
+<li><a href="https://www.apple.com/newsroom/2020/11/apple-announces-app-store-small-business-program/">Apple announces App Store Small Business Program — Apple Newsroom</a> (2020-11, accessed 2026-09-28)</li>
+<li><a href="https://developer.apple.com/support/storekit-external-entitlement-kr/">Distributing apps using a third-party payment provider in South Korea — Apple Developer</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/112622?hl=en">Service fees — Play Console Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/11222040?hl=en">Changes to Google Play&#39;s billing requirements for developers serving users in South Korea — Play Console Help</a> (4-point cut for alternative billing, accessed 2026-09-29)</li>
+<li><a href="https://play.google.com/console/about/programs/appsexperience/">Google Play Apps Experience Program — Google Play Console</a> (program rates above USD 1M, accessed 2026-09-29)</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/16954621?hl=en">Understanding Google Play&#39;s lower service fees — Play Console Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://android-developers.googleblog.com/2026/06/play-expanded-billing.html">Expanded billing choice and lower fees on Google Play — Android Developers Blog</a> (2026-06, accessed 2026-09-28)</li>
+<li><a href="https://techcrunch.com/2026/03/04/google-settles-with-epic-games-drops-its-play-store-commissions-to-20/">Google settles with Epic Games, drops its Play Store commissions to 20% — TechCrunch</a> (2026-03-04, accessed 2026-09-28)</li>
+<li><a href="https://www.gamedeveloper.com/business/valve-creates-new-rev-share-tiers-to-give-big-sellers-a-break">Valve creates new rev share tiers to give big sellers a break — Game Developer</a> (2018-11, accessed 2026-09-28)</li>
+<li><a href="https://partner.steamgames.com/doc/gettingstarted/appfee">Steam Direct Fee — Steamworks Documentation</a> (accessed 2026-09-28)</li>
+<li><a href="https://itch.io/updates/introducing-open-revenue-sharing">Introducing open revenue sharing — itch.io</a> (2015, accessed 2026-09-28)</li>
+<li><a href="https://stripe.com/pricing">Pricing — Stripe</a> / <a href="https://stripe.com/global">Global availability — Stripe</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.paddle.com/pricing">Pricing — Paddle</a> (accessed 2026-09-28)</li>
+<li><a href="https://docs.lemonsqueezy.com/help/getting-started/fees">Fees — Lemon Squeezy Docs</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.lemonsqueezy.com/blog/2026-update">2026 Update: Lemon Squeezy + Stripe Managed Payments — Lemon Squeezy</a> (2026, confirmed through search results, accessed 2026-09-29)</li>
+<li><a href="https://support.stripe.com/questions/managed-payments-pricing">Managed Payments pricing — Stripe Support</a> (charged on the tax-inclusive total, accessed 2026-09-29)</li>
+<li><a href="https://www.paddle.com/resources/stripe-managed-payments">Stripe&#39;s Merchant of Record (Stripe Managed Payments): How Does it Work? — Paddle</a> (secondary source from a competitor, states South Korea is excluded, accessed 2026-09-29)</li>
+<li><a href="https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm">EU VAT One Stop Shop (OSS) — Your Europe</a> (non-Union OSS, accessed 2026-09-29)</li>
+<li><a href="https://gumroad.com/help/article/66-gumroads-fees">Gumroad&#39;s fees — Gumroad Help Center</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.patreon.com/hc/en-us/articles/36426991446797-A-standard-platform-fee-for-new-creators-effective-after-August-4-2025">A standard platform fee for new creators — Patreon Help Center</a> (2025, accessed 2026-09-28)</li>
+<li><a href="https://blog.google/products/adsense/evolving-how-publishers-monetize-with-adsense/">Updates to how publishers monetize with AdSense — Google</a> (2023-11, accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/03-opportunity-validation/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Choosing Opportunities and Validating Demand</span></a><a class="page-link next" href="../../../en/studio/05-ad-revenue/"><span><small>Next</small>Advertising Revenue in Depth</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

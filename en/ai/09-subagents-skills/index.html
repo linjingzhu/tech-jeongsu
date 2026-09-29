@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Subagents, Skills, Commands and Plugins | MyAI</title>
+    <meta name="description" content="As of 2026-09-29. Field names and paths follow the official Claude Code docs and Codex&#39;s public source and docs, and both change often. The concepts live…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Subagents, Skills, Commands and Plugins | MyAI" />
+    <meta property="og:description" content="As of 2026-09-29. Field names and paths follow the official Claude Code docs and Codex&#39;s public source and docs, and both change often. The concepts live…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/09-subagents-skills.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link active" aria-current="page" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Subagents, Skills and Plugins</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Subagents, Skills, Commands and Plugins</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Tell apart what subagents, skills, commands and plugins hold and when each enters the context, define them as files in Claude Code and Codex, and read and change this repository&#39;s explorer, reviewer and automatic-development skill using the rule of one role per file.</p>
+</blockquote>
+<p>As of 2026-09-29. Field names and paths follow the official Claude Code docs and Codex&#39;s public source and docs, and both change often. The concepts live in &quot;Session · Agent · Subagent&quot; and &quot;Multi-agent roles and model routing&quot;; this document turns them into <strong>actual configuration files</strong>. Instruction files are covered in &quot;Instructions and Memory&quot;, permissions and hooks in &quot;Permissions, Sandbox, Hooks&quot;.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>One-line definition</th>
+<th>When it enters the context</th>
+<th>Claude Code location</th>
+<th>Codex location</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Subagent</td>
+<td>Definition of a <strong>worker</strong> that runs in its own context (instructions + tools + model)</td>
+<td>When delegated to, in a fresh context</td>
+<td><code>.claude/agents/*.md</code></td>
+<td><code>.codex/agents/*.toml</code></td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>A <strong>procedure and reference material</strong> pulled in when needed</td>
+<td>Description always, body when invoked</td>
+<td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+<td><code>.agents/skills/&lt;name&gt;/SKILL.md</code></td>
+</tr>
+<tr>
+<td>Command</td>
+<td>A <strong>trigger</strong> a person pulls with <code>/name</code></td>
+<td>When a person types it</td>
+<td><code>.claude/commands/*.md</code> (merged into skills)</td>
+<td>Invoke a skill explicitly with <code>$name</code></td>
+</tr>
+<tr>
+<td>Plugin</td>
+<td>A <strong>distribution unit</strong> bundling the above with hooks and MCP servers</td>
+<td>Every session where it is enabled</td>
+<td><code>.claude-plugin/plugin.json</code> + marketplace</td>
+<td><code>codex plugin</code> command (details need checking)</td>
+</tr>
+</tbody></table>
+<p>In one sentence: <strong>a subagent answers &quot;who&quot;, a skill &quot;how&quot;, a command &quot;when a person says so&quot;, and a plugin &quot;how do I hand this out&quot;</strong>. In Claude Code, custom commands have been merged into skills. <code>.claude/commands/deploy.md</code> and <code>.claude/skills/deploy/SKILL.md</code> both create <code>/deploy</code>; for new work a skill is better, since it adds supporting files and invocation-control fields.</p>
+<p>SKILL.md follows the open <a href="https://agentskills.io">Agent Skills</a> standard. The standard fields are <code>name</code>, <code>description</code>, <code>license</code>, <code>compatibility</code>, <code>metadata</code> and <code>allowed-tools</code>; fields such as <code>disable-model-invocation</code> and <code>context: fork</code> are Claude Code extensions. When both tools read the same SKILL.md, <strong>expect the extension fields to work only in Claude Code</strong>.</p>
+<h2>Principles</h2>
+<h3>Context Isolation: What It Saves and What It Spends</h3>
+<p>A subagent that is not a fork <strong>starts from an empty context</strong>. It does not know the conversation or the files already read; it gets the delegation message and its own definition file. The tool results of a long investigation stay out of the main context, but there is a price. The subagent&#39;s requests count against <strong>the same usage limits</strong> as the main conversation, it spends time gathering facts again, and without a fixed summary format it returns a narrative of its process that spends the context it was meant to save. By default Claude Code allows nesting three layers deep (<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code>) and 20 concurrent subagents.</p>
+<p>The official guidance: use the <strong>main conversation</strong> when the task needs frequent back-and-forth, when phases share a lot of context, for a quick targeted change, or when latency matters. Hand a <strong>subagent</strong> the investigations whose result is all you need, whose process is long, or that are independent of each other.</p>
+<h3>Progressive Disclosure: Why Skills Are Cheap</h3>
+<ol>
+<li><strong>Listing</strong>: every skill&#39;s name and description are always present. Claude Code spends about 1% of the context window on the listing and truncates each skill&#39;s <code>description</code> + <code>when_to_use</code> at 1,536 characters. On overflow, descriptions of the least-used skills drop first. That is why <strong>putting &quot;when to use it&quot; in the first sentence of the description</strong> is half of skill design.</li>
+<li><strong>Body</strong>: the SKILL.md body loads when the skill is invoked. The official advice is to keep it under 500 lines.</li>
+<li><strong>Supporting files</strong>: reference documents and scripts the body points to are read only when needed.</li>
+</ol>
+<h3>Who Invokes It</h3>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Only a person invokes it (procedures with big side effects, such as deploys or automatic development)</td>
+<td><code>disable-model-invocation: true</code> — the description also leaves the listing</td>
+<td><code>policy.allow_implicit_invocation: false</code> in <code>agents/openai.yaml</code> — invoked only as <code>$name</code></td>
+</tr>
+</tbody></table>
+<h3>What Goes Where</h3>
+<pre><code class="language-mermaid">flowchart TD
+    Q[Something new to define] --&gt; A{Needed every turn}
+    A --&gt;|Yes| M[CLAUDE.md or AGENTS.md]
+    A --&gt;|No| B{Must it always hold}
+    B --&gt;|Yes| H[Permission or hook]
+    B --&gt;|No| C{Only the result matters}
+    C --&gt;|Yes| S[Subagent]
+    C --&gt;|No| K[Skill]
+    K --&gt; P{Shared across repositories}
+    S --&gt; P
+    P --&gt;|Yes| G[Bundle as a plugin]
+</code></pre>
+<h2>Applied: This Repository&#39;s Setup</h2>
+<h3>Claude Code Subagent: A Read-Only Explorer</h3>
+<p>The front matter of <code>.claude/agents/fast-explorer.md</code>:</p>
+<pre><code class="language-yaml">---
+name: fast-explorer
+description: Read-only search across the repository. Use when finding where something already exists would cost the main context more than the answer is worth.
+tools: Read, Grep, Glob, Bash
+permissionMode: plan
+maxTurns: 6
+---
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tools</code></td>
+<td>No Edit or Write</td>
+<td>Omitting the field <strong>inherits every tool</strong>. The list is an allowlist</td>
+</tr>
+<tr>
+<td><code>permissionMode</code></td>
+<td><code>plan</code></td>
+<td>Starts in read-only exploration (plan mode). If the parent conversation is in acceptEdits, auto or bypassPermissions, though, this value is ignored and the parent&#39;s mode applies</td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td><code>6</code></td>
+<td>At the limit it stops and returns a partial result</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>Unset</td>
+<td>The cheapest capable model wins this role, so the harness decides</td>
+</tr>
+</tbody></table>
+<p>The body fixes the return format to <code>FILES / FINDINGS / RISK</code>, under 150 tokens. <strong>The return format is the context budget.</strong> <code>adversarial-reviewer.md</code> has the same tools and <code>plan</code> mode with <code>maxTurns: 8</code>, but leaves the model unset for a different reason: independent review is defined as &quot;a model <strong>different</strong> from the implementer&#39;s&quot;, which cannot be chosen before you know who implemented.</p>
+<h3>Codex Custom Agent: The Same Role Translated to TOML</h3>
+<p><code>.codex/agents/dispatcher.toml</code> (excerpt):</p>
+<pre><code class="language-toml">name = &quot;dispatcher&quot;
+description = &quot;Low-cost first-pass request router. Classifies intent, risk, repository, cost exposure, required tools and the next agent; never edits or merges.&quot;
+model = &quot;gpt-5.6-luna&quot;
+model_reasoning_effort = &quot;low&quot;
+sandbox_mode = &quot;read-only&quot;
+developer_instructions = &#39;&#39;&#39;
+You are the first-pass Dispatcher. You classify and route; you do not edit,
+implement, choose product scope, approve paid automation, or merge.
+&#39;&#39;&#39;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Claude Code field</th>
+<th>Codex counterpart</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code>, <code>description</code>, body</td>
+<td><code>name</code>, <code>description</code>, <code>developer_instructions</code></td>
+<td><code>name</code> and <code>developer_instructions</code> are required. <code>description</code> may be left out of the file, but if present it must not be blank, and if no role of the same name in another config layer supplies one either, the role is dropped with a warning (<code>codex-rs/agent-roles/src/</code>, 2026-09-29 main)</td>
+</tr>
+<tr>
+<td><code>tools</code> allowlist</td>
+<td>None</td>
+<td><code>sandbox_mode</code> and the instructions stand in for it</td>
+</tr>
+<tr>
+<td><code>permissionMode: plan</code></td>
+<td><code>sandbox_mode = &quot;read-only&quot;</code></td>
+<td>The parent or runtime can override either side. Claude follows the parent&#39;s mode when the parent is in acceptEdits, auto or bypassPermissions; Codex follows a parent runtime override. Check the effective permissions</td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td>None</td>
+<td>&quot;At most eight rounds&quot; in the instructions is not an enforced counter</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>model</code>, <code>model_reasoning_effort</code></td>
+<td>A model in the agent file takes precedence over the spawn request, so the reviewer file leaves it empty on purpose</td>
+</tr>
+</tbody></table>
+<p>Codex spawns subagents <strong>only when explicitly asked</strong>. Unlike Claude Code, which delegates from descriptions alone, Codex needs its instructions to say which agent to call and when.</p>
+<h3>Skill: Automatic Development That Never Starts Itself</h3>
+<p><code>auto-dev</code> holds the same procedure on both platforms. The Codex side enforces its invocation policy in <code>.agents/skills/auto-dev/agents/openai.yaml</code>.</p>
+<pre><code class="language-yaml">policy:
+  allow_implicit_invocation: false
+</code></pre>
+<p>The Claude side stops it with its description (&quot;Invoke ONLY when the user explicitly asks…&quot;) and the body&#39;s first section, <em>This mode never starts itself</em>. To enforce it mechanically as well, <code>disable-model-invocation: true</code> could be added. That field also prevents preloading into subagents and running when a scheduled task uses the skill as its prompt.</p>
+<h2>Going Deeper</h2>
+<h3>Writing a Command-Style Skill</h3>
+<pre><code class="language-markdown">---
+name: release-notes
+description: Draft release notes from commits since a tag. Use only when the owner asks for release notes.
+disable-model-invocation: true
+argument-hint: [since-tag]
+allowed-tools: Bash(git log *) Bash(git tag *)
+---
+
+Draft release notes for commits since $ARGUMENTS, grouped by user-visible change.
+</code></pre>
+<p>Substitutions such as <code>$ARGUMENTS</code>, <code>$0</code> and <code>${CLAUDE_SKILL_DIR}</code> are available. Put a script in the skill folder and call it as <code>${CLAUDE_SKILL_DIR}/scripts/…</code> so it works from any working directory. <code>context: fork</code> runs the skill in a subagent context, which suits long investigative procedures.</p>
+<h3>Plugins and Marketplaces</h3>
+<p>A plugin is a folder holding a <code>.claude-plugin/plugin.json</code> manifest plus <code>skills/</code>, <code>agents/</code>, <code>hooks/hooks.json</code> and <code>.mcp.json</code>. A marketplace is a repository with a <code>.claude-plugin/marketplace.json</code> file: <strong>a catalog, not a hosted store</strong>. While developing, load the folder directly with <code>--plugin-dir</code>.</p>
+<p>An enabled plugin&#39;s skill and agent descriptions enter the context <strong>every turn</strong>, even in sessions that never use them, and what a plugin runs, it runs <strong>with your privileges</strong>. Cloud sessions do not install plugins declared in repository settings, so anything a cloud session needs is committed under <code>.claude/</code> directly. For a one-person studio: first <strong>commit <code>.claude/</code> in each repository</strong>, and move to a plugin when you copy the same files into a third repository.</p>
+<h3>Design Rules</h3>
+<ol>
+<li><strong>One responsibility per agent.</strong> &quot;Explore, fix and review&quot; is three agents.</li>
+<li><strong>Reviewers are read-only.</strong> A reviewer that can edit implements its own opinion and then passes it.</li>
+<li><strong>Review with a different model.</strong> When that is impossible, label the result <code>FALLBACK REVIEW</code>.</li>
+<li><strong>Fix the return format.</strong> A subagent without one returns a process report.</li>
+<li><strong>Commit capabilities.</strong> An agent that exists only in a home folder is absent from other runs and cloud sessions.</li>
+</ol>
+<pre><code class="language-text">Bad:  description: Helps with code.
+Good: description: Independent review of a diff against its requirement.
+        Use at MEDIUM and HIGH risk, after build and tests, before merge.
+</code></pre>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Leaving <code>tools</code> empty is safe.&quot;</strong> Omission means inheriting everything. Write the list to restrict.</li>
+<li><strong>&quot;Many skills fill the context.&quot;</strong> Only descriptions are always present. The real problem is descriptions getting truncated so the skill is <strong>never invoked</strong>.</li>
+<li><strong>&quot;More subagents are cheaper and faster.&quot;</strong> Each rereads in a fresh context, and usage accumulates against the same limits.</li>
+<li><strong>&quot;Codex reads Claude&#39;s setup as is.&quot;</strong> The SKILL.md format is shared, but the folders (<code>.claude/skills</code> vs <code>.agents/skills</code>) and agent formats (Markdown vs TOML) differ.</li>
+<li><strong>&quot;<code>permissionMode</code>/<code>sandbox_mode</code> in the agent file is the effective permission.&quot;</strong> In Claude Code, if the parent conversation is in acceptEdits, auto or bypassPermissions, <code>permissionMode</code> is ignored and the subagent runs in the parent&#39;s mode. The file&#39;s mode applies only when the parent is in default, dontAsk or plan. Codex&#39;s <code>sandbox_mode</code> can likewise be overridden by a parent runtime setting. Check what actually applies.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>What is the difference between omitting a subagent&#39;s <code>tools</code> field and writing only <code>Read, Grep</code>?</li>
+<li>What symptom appears when a skill description exceeds 1,536 characters or the listing budget overflows?</li>
+<li>Explain why this repository&#39;s <code>adversarial-reviewer</code> pins no model, including Codex&#39;s precedence rule.</li>
+<li>State the criterion for putting a deploy procedure in CLAUDE.md, a skill or a hook.</li>
+<li>When a plugin&#39;s skill does not appear in a cloud session, what do you suspect first?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/sub-agents">Create custom subagents</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/skills">Extend Claude with skills</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/plugins">Plugins overview</a> — Claude Code Docs, accessed 2026-09-29</li>
+<li><a href="https://agentskills.io">Agent Skills</a> — Agent Skills open standard, accessed 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/subagents">Subagents</a> — OpenAI Codex Docs, confirmed through search results, accessed 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/skills">Build skills</a> — OpenAI Codex Docs, confirmed through search results, accessed 2026-09-29</li>
+<li>This repository&#39;s <code>.claude/agents/</code>, <code>.codex/agents/</code>, <code>.agents/skills/auto-dev/</code> and <code>.ai/HARNESS.md</code> — as of 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/08-permissions-sandbox-hooks/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Permissions, Sandbox, Hooks</span></a><a class="page-link next" href="../../../en/ai/10-mcp-tools/"><span><small>Next</small>MCP and External Tools</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

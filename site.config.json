@@ -1,0 +1,13 @@
+{
+  "siteUrl": "https://linjingzhu.github.io/tech-jeongsu/",
+  "siteName": {
+    "ko": "MyAI(마이아이)",
+    "en": "MyAI"
+  },
+  "adsensePublisherId": "",
+  "contactEmail": "",
+  "githubProfile": "https://github.com/linjingzhu",
+  "noindexPrefixes": [
+    "@ai-map:"
+  ]
+}

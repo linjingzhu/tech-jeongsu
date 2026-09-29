@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Advertising Revenue in Depth | MyAI</title>
+    <meta name="description" content="As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/05-ad-revenue/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/05-ad-revenue/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/05-ad-revenue/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/studio/05-ad-revenue/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Advertising Revenue in Depth | MyAI" />
+    <meta property="og:description" content="As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide a…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/studio/05-ad-revenue/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/studio/05-ad-revenue.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group" data-group="7"><button aria-expanded="true" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link active" aria-current="page" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Solo Studio Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Advertising Revenue in Depth</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Advertising Revenue in Depth</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain how ad revenue is built from impressions, CTR, CPC, CPM, RPM and fill rate, compute the pageviews a target amount needs, and tell apart what raises RPM from what loses you the account.</p>
+</blockquote>
+<p>As of: 2026-09-29. Revenue shares and policies follow the official documents, and all RPM figures are assumptions. The exchange rate uses the track-wide assumption of USD 1 = KRW 1,400 (the Seoul FX market close on 2026-09-09 was KRW 1,336.1).</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Impression</td>
+<td>The number of times an ad is shown on a page</td>
+<td>ad requests × fill rate</td>
+</tr>
+<tr>
+<td>Fill rate</td>
+<td>The share of ad requests actually filled with an ad</td>
+<td>filled requests ÷ all requests</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td>Clicks as a share of impressions</td>
+<td>clicks ÷ impressions</td>
+</tr>
+<tr>
+<td>CPC</td>
+<td>Advertiser cost per click</td>
+<td>ad spend ÷ clicks</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td>Advertiser cost per 1,000 impressions</td>
+<td>ad spend ÷ impressions × 1,000</td>
+</tr>
+<tr>
+<td>Page RPM</td>
+<td>Publisher&#39;s estimated earnings per 1,000 pageviews</td>
+<td>estimated earnings ÷ pageviews × 1,000</td>
+</tr>
+<tr>
+<td>Viewability</td>
+<td>How much of an ad was actually visible on screen</td>
+<td>Definitions differ by measurement tool</td>
+</tr>
+<tr>
+<td>Invalid traffic</td>
+<td>Clicks or impressions that do not reflect genuine user interest</td>
+<td>A policy violation; grounds for deductions and suspension</td>
+</tr>
+</tbody></table>
+<p>CPM and CPC are <strong>what advertisers pay</strong>; RPM is <strong>what publishers receive</strong>. Google&#39;s help example: earning USD 0.15 from 25 pageviews gives a Page RPM = (0.15 ÷ 25) × 1,000 = USD 6.00 (KRW 8,400 at the assumed KRW 1,400 rate).</p>
+<h2>Principles</h2>
+<h3>How Ad Spend Reaches the Publisher</h3>
+<p>In November 2023 Google announced that from early 2024 AdSense would split its revenue share into buy-side and sell-side rates and pay mainly per impression. <strong>AdSense for content publishers receive 80% of the amount left after the advertiser platform&#39;s fee.</strong> For ads bought through Google Ads, Google Ads keeps on average about 15% of advertiser spend, so the publisher&#39;s share is about 68% of advertiser spend.</p>
+<pre><code class="language-mermaid">flowchart LR
+    AD[Advertiser spend 100] --&gt; BUY[Buy side, Google Ads keeps about 15 on average]
+    BUY --&gt; NET[85 remains]
+    NET --&gt; SELL[AdSense sell side keeps 20%]
+    SELL --&gt; PUB[Publisher share about 68]
+    PUB --&gt; RPM[Observed as Page RPM]
+</code></pre>
+<blockquote>
+<p>100 × (1 − 0.15) × 0.80 = 68</p>
+</blockquote>
+<h3>Decomposing Page RPM</h3>
+<blockquote>
+<p>Page RPM ≈ ad requests per page × fill rate × publisher earnings per 1,000 impressions</p>
+</blockquote>
+<p>Example (assumption): 3 ads per page, 90% fill rate, publisher earnings of KRW 1,000 per 1,000 impressions.</p>
+<ul>
+<li>1,000 pageviews → 3,000 ad requests → 2,700 impressions</li>
+<li>Earnings = 2,700 × 1,000 ÷ 1,000 = KRW 2,700 → <strong>Page RPM KRW 2,700</strong></li>
+</ul>
+<p>Adding more ads raises requests, but can lower viewability and user experience, and with them earnings per impression and return visits. The three terms of the formula are not independent.</p>
+<h3>Traffic Math: Pageviews Needed for a Target Amount</h3>
+<blockquote>
+<p>Monthly pageviews needed = target monthly earnings ÷ Page RPM × 1,000</p>
+</blockquote>
+<p>Google explains that AdSense earnings vary with content category and visitor region, and it publishes no fixed average RPM. The RPM values below are therefore <strong>assumptions for seeing the range</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Target monthly earnings</th>
+<th>RPM KRW 1,000 (assumption)</th>
+<th>RPM KRW 3,000 (assumption)</th>
+<th>RPM KRW 6,000 (assumption)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>KRW 500,000 (example studio fixed cost)</td>
+<td>500,000 PV</td>
+<td>166,667 PV</td>
+<td>83,333 PV</td>
+</tr>
+<tr>
+<td>KRW 3,500,000 (break-even)</td>
+<td>3,500,000 PV</td>
+<td>1,166,667 PV</td>
+<td>583,333 PV</td>
+</tr>
+</tbody></table>
+<p>Even just covering the KRW 500,000 fixed cost at an RPM of KRW 3,000 takes about 5,556 PV a day (166,667 ÷ 30). For real planning, recompute this table with <strong>your own site&#39;s Page RPM</strong> four to eight weeks after ads go live.</p>
+<h3>What Raises RPM</h3>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>How it works</th>
+<th>What you can do</th>
+<th>Caution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Topic</td>
+<td>Advertiser competition differs by topic</td>
+<td>Cover topics with buying intent (tool comparisons, adoption guides) within your expertise</td>
+<td>Writing on topics you don&#39;t know just for RPM lowers quality</td>
+</tr>
+<tr>
+<td>Geography</td>
+<td>Ad demand differs by visitor country</td>
+<td>Reach readers in other regions with English pages</td>
+<td>Pages at machine-translation quality create quality problems</td>
+</tr>
+<tr>
+<td>Layout</td>
+<td>Ads that are not seen are worth little</td>
+<td>Place a moderate number of ads within the flow of the text</td>
+<td>Placements that make ads look like content violate policy</td>
+</tr>
+<tr>
+<td>Core Web Vitals</td>
+<td>Slow, jumpy pages hurt both search and users</td>
+<td>Reserve ad slot sizes to prevent CLS</td>
+<td>LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 is the &quot;good&quot; bar</td>
+</tr>
+</tbody></table>
+<p>Google Search Central recommends good Core Web Vitals and explains that this aligns with what its core ranking systems seek to reward. If ads slow the page down, <strong>search traffic can fall and total earnings with it.</strong></p>
+<h3>How to Lose the Account: Invalid Traffic and Policy</h3>
+<p>AdSense forbids artificially inflating ad impressions or clicks, including clicking your own ads, asking for clicks, and automated impressions or clicks. With high invalid traffic an account can be suspended or closed; on closure, unpaid earnings are not paid out and are refunded to advertisers.</p>
+<ul>
+<li><strong>Bad example</strong>: &quot;I clicked my own ads a few times to test them.&quot; / &quot;I wrote &#39;please click an ad&#39; at the end of posts.&quot; / &quot;I bought cheap traffic to raise pageviews.&quot;</li>
+<li><strong>Good example</strong>: &quot;I check ads with the preview tool, split traffic by channel and watch for odd spikes. I attract visitors with content.&quot;</li>
+</ul>
+<p>At the approval stage, the rejection &quot;your site isn&#39;t ready to show ads (low value content)&quot; is common. Google asks for original, useful content and a good user experience and navigation.</p>
+<h3>Why Content Sites Need Search and AI-Search Traffic</h3>
+<p>The ad model assumes large, repeated visits. For a one-person content site, traffic at that scale mostly comes from search. Yet in a Pew Research Center study (2025-07-22), visits where a Google results page showed an AI summary produced clicks on traditional result links 8% of the time versus 15% without one, and clicks on source links inside the AI summary 1% of the time. For search-traffic strategy, read the Marketing section&#39;s &quot;AI Search · GEO/AEO&quot; document alongside.</p>
+<h3>Ads in Apps and Games</h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Characteristics</th>
+<th>Core AdMob policy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Banner</td>
+<td>Stays visible on part of the screen</td>
+<td>Do not overlap content or buttons in ways that invite accidental clicks</td>
+</tr>
+<tr>
+<td>Interstitial</td>
+<td>Full screen at transition points</td>
+<td>Only at natural transition points. Loading unexpectedly, showing after every click, or showing during gameplay is prohibited</td>
+</tr>
+<tr>
+<td>Rewarded</td>
+<td>The user chooses it to earn a reward</td>
+<td>Show only after the user clearly opts in. Rewarded interstitials need an intro screen with an option to decline</td>
+</tr>
+</tbody></table>
+<p>How ads fit into a game&#39;s economy design is covered in 07.</p>
+<h2>Applied: The Example Studio</h2>
+<p>Assuming the technical documentation site C2, preparing for AdSense, gets 5,000 pageviews a month at the plan&#39;s start (D0 in 10, 2026-10-05) (6,200 on 09&#39;s day-60 dashboard):</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Calculation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Monthly ad earnings at an RPM of KRW 3,000</td>
+<td>5,000 × 3,000 ÷ 1,000</td>
+<td>KRW 15,000</td>
+</tr>
+<tr>
+<td>Multiple needed to reach the KRW 500,000 fixed cost</td>
+<td>166,667 ÷ 5,000</td>
+<td>about 33.3x</td>
+</tr>
+<tr>
+<td>Multiple needed to reach KRW 3,500,000 break-even</td>
+<td>1,166,667 ÷ 5,000</td>
+<td>about 233.3x</td>
+</tr>
+</tbody></table>
+<p>The D90 gate in 10 (double down at 10,000 or more, kill under 3,000) sets the double-down line at twice this baseline and the kill line at 60% of it.</p>
+<p>Conclusion: ads alone are unlikely to support the studio from this site. Its role is <strong>to earn a floor of ad revenue and to be the path through which the studio&#39;s other products are discovered</strong>. Order of work (assumption):</p>
+<ol>
+<li>Approval prep: merge or strengthen thin pages, and check navigation, the privacy policy and cookie notice.</li>
+<li>Ad placement: reserve slot sizes to prevent CLS, and start with few ads per page.</li>
+<li>Measurement: after four to eight weeks, recompute the table above with the real Page RPM (09).</li>
+<li>Linking: from each document, link to the related tool product and to the studio list sign-up (the combination example in 04, the shared audience in 02&#39;s Going Deeper).</li>
+</ol>
+<h2>Going Deeper</h2>
+<h3>Ad Management Companies Beyond AdSense</h3>
+<p>As you grow, consider an ad management company. Raptive lowered its entry bar to 25,000 monthly pageviews on 2025-10-16, but sites between 25,000 and 99,999 pageviews need at least 50% of traffic from the US, UK, Canada, New Zealand or Australia. Mediavine&#39;s Journey says that from 2026-01-15 sites can apply with at least 1,000 sessions from Tier 1 countries in 30 days. Both assume <strong>English-speaking traffic</strong>, so for a Korean site the traffic of its English pages decides eligibility.</p>
+<h3>Ads Are the Floor, Not the Ceiling</h3>
+<p>Ad revenue per visitor is small, so it earns less per person than selling ebooks, templates or tools to the same visitors. Ads are the easiest first step for turning traffic into money; once traffic is confirmed, layer the other models from 04 on top.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;AdSense 80% means I get 80% of what advertisers spend&quot;</strong> — It is 80% after the buy-side fee. For ads via Google Ads it is about 68%.</li>
+<li><strong>&quot;More ads mean more earnings&quot;</strong> — If viewability, Core Web Vitals and return visits drop, earnings can fall.</li>
+<li><strong>&quot;Once approved, the money comes&quot;</strong> — Approval is the start. Earnings are pageviews × RPM.</li>
+<li><strong>&quot;One accidental click on my own ad is fine&quot;</strong> — Clicking your own ads is prohibited. Check ads with the preview tool.</li>
+<li><strong>&quot;If rankings rise, traffic follows&quot;</strong> — Studies show fewer clicks on results that include an AI summary.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>With 2 ads per page, an 80% fill rate and publisher earnings of KRW 1,500 per 1,000 impressions, what is the Page RPM?</li>
+<li>At a Page RPM of KRW 2,000, how many pageviews a day on average are needed to earn KRW 1,000,000 a month?</li>
+<li>If an advertiser spends KRW 1,000,000 through Google Ads, roughly how much is the AdSense publisher&#39;s share?</li>
+<li>Name two moments when an interstitial must not be shown.</li>
+<li>Besides ads, what value can your content site give the studio?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://blog.google/products/adsense/evolving-how-publishers-monetize-with-adsense/">Updates to how publishers monetize with AdSense — Google</a> (2023-11, accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/180195?hl=en">AdSense revenue share — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/112030?hl=en">Page RPM — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/9902?hl=en">How much will you earn with AdSense? — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/16737?hl=en">Invalid traffic — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/2660562?hl=en">Top invalid traffic and policy violations that lead to account closure — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/adsense/answer/12176698?hl=en">What to do when your site is not ready to show ads — Google AdSense Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://developers.google.com/search/docs/appearance/core-web-vitals">Understanding Core Web Vitals and Google search results — Google Search Central</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Google users are less likely to click on links when an AI summary appears in the results — Pew Research Center</a> (2025-07-22, accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/admob/answer/6066980?hl=en">Interstitial ad guidance — Google AdMob Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://support.google.com/admob/answer/7313578?hl=en">Policies for ad units that offer rewards — Google AdMob Help</a> (accessed 2026-09-28)</li>
+<li><a href="https://www.searchenginejournal.com/raptive-drops-traffic-requirement-by-75-to-25000-views/558780/">Raptive Drops Traffic Requirement By 75% To 25,000 Views — Search Engine Journal</a> (2025-10, accessed 2026-09-28)</li>
+<li><a href="https://journeymv.zendesk.com/hc/en-us/articles/24633185741723-Journey-Minimum-Requirements">Journey Minimum Requirements — Journey by Mediavine</a> (accessed 2026-09-28)</li>
+<li><a href="https://view.asiae.co.kr/article/2026090915324235252">Won-dollar rate falls KRW 9.5 to 1,336.1 — Asia Economy (Korean)</a> (2026-09-09, accessed 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/studio/04-revenue-models/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Revenue Models: An Introduction</span></a><a class="page-link next" href="../../../en/studio/06-paid-and-subscription/"><span><small>Next</small>Paid Sales, Subscriptions and Pricing</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

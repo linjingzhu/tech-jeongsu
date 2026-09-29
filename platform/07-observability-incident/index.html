@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Observability와 Incident: SLO · Error Budget · On-call · Postmortem | MyAI(마이아이)</title>
+    <meta name="description" content="&quot;서버가 떠 있다&quot;와 &quot;사용자가 원하는 일을 할 수 있다&quot;는 다른 문장이다. 운영의 목표는 두 번째 문장을 숫자로 약속하고 지키는 것이다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="Observability와 Incident: SLO · Error Budget · On-call · Postmortem | MyAI(마이아이)" />
+    <meta property="og:description" content="&quot;서버가 떠 있다&quot;와 &quot;사용자가 원하는 일을 할 수 있다&quot;는 다른 문장이다. 운영의 목표는 두 번째 문장을 숫자로 약속하고 지키는 것이다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/platform/07-observability-incident.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link active" aria-current="page" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Platform 배포와 서비스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>SLO · On-call · Postmortem</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Observability와 Incident: SLO · Error Budget · On-call · Postmortem</h1>
+<p>&quot;서버가 떠 있다&quot;와 &quot;사용자가 원하는 일을 할 수 있다&quot;는 다른 문장이다. 운영의 목표는 두 번째 문장을 <strong>숫자로 약속하고 지키는 것</strong>이다.</p>
+<h2>SLI · SLO · SLA</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>정의 (Google SRE Book 기준)</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLI</td>
+<td>서비스 수준을 측정하는 지표</td>
+<td>정상 응답 요청 수 / 전체 요청 수</td>
+</tr>
+<tr>
+<td>SLO</td>
+<td>SLI가 도달해야 하는 목표 값 또는 범위</td>
+<td>30일 동안 99.9%</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>목표 미달 시 결과(환불 등)가 따르는 고객과의 약속</td>
+<td>월 가용성 미달 시 Credit 제공</td>
+</tr>
+</tbody></table>
+<ul>
+<li>SLA는 사업·계약 결정이다. 엔지니어는 SLA보다 <strong>엄격한 SLO</strong>를 내부 목표로 둔다.</li>
+<li>100%는 목표가 아니다. 사용자가 체감하지 못하는 수준 이상의 신뢰성은 <strong>기능 개발 속도를 희생</strong>한다.</li>
+</ul>
+<h2>Error Budget</h2>
+<p>Error Budget은 <strong>1 − SLO</strong>다. SLO가 99.9%면 Budget은 0.1%다.</p>
+<pre><code class="language-text">4주 동안 요청 1,000,000건, SLO 99.9%
+→ 허용 실패 = 1,000건
+→ Budget이 남아 있으면: 새 기능 배포 계속
+→ Budget을 다 쓰면: 배포 속도를 늦추고 안정성 작업 우선
+</code></pre>
+<pre><code class="language-mermaid">flowchart LR
+    S[SLO 설정] --&gt; M[SLI 측정]
+    M --&gt; B{Error Budget 남았나?}
+    B --&gt;|예| F[기능 배포 계속]
+    B --&gt;|아니오| R[안정성 작업 우선]
+    F --&gt; M
+    R --&gt; M
+</code></pre>
+<p>Error Budget은 개발과 운영이 &quot;배포해도 되나?&quot;를 <strong>감정이 아니라 숫자로</strong> 합의하게 해 준다. 이를 문서로 합의한 것이 Error Budget Policy다.</p>
+<h2>경보는 SLO에서 출발한다</h2>
+<p>CPU 80% 같은 원인 지표로 사람을 깨우면 오탐이 많다. SRE Workbook은 <strong>Burn Rate</strong>(Budget을 소모하는 속도)로 경보하고, 여러 시간 창을 함께 보는 <strong>Multiwindow, Multi-burn-rate</strong> 방식을 권장한다.</p>
+<pre><code class="language-text">Burn Rate = 실제 Error 비율 / SLO가 허용하는 Error 비율
+예) 30일(720시간) Budget의 2%를 1시간에 쓰면
+    Burn Rate = 0.02 × 720 / 1 = 14.4
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>경보 등급</th>
+<th>의미</th>
+<th>대응</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Page</td>
+<td>Budget이 빠르게 타고 있다</td>
+<td>즉시 대응</td>
+</tr>
+<tr>
+<td>Ticket</td>
+<td>천천히 새고 있다</td>
+<td>업무 시간에 처리</td>
+</tr>
+</tbody></table>
+<p>SRE Workbook이 권장하는 시작값(30일 SLO 기준)은 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>소모한 Budget</th>
+<th>Long Window</th>
+<th>Short Window</th>
+<th>Burn Rate</th>
+<th>경보</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2%</td>
+<td>1시간</td>
+<td>5분</td>
+<td>14.4</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>5%</td>
+<td>6시간</td>
+<td>30분</td>
+<td>6</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>3일</td>
+<td>6시간</td>
+<td>1</td>
+<td>Ticket</td>
+</tr>
+</tbody></table>
+<p>두 창이 <strong>모두</strong> 기준을 넘을 때만 울린다. Long Window는 잠깐 튄 Error로 사람을 깨우지 않게 하고, Short Window는 이미 끝난 사고로 경보가 몇 시간씩 계속 울리지 않게 한다.</p>
+<p>Prometheus 경보 규칙 예시(99.9% SLO, 즉 허용 Error 비율 0.001). <code>job:slo_errors_per_request:ratio_rate1h</code> 같은 Recording Rule이 창별 Error 비율을 미리 계산해 둔다고 가정한다.</p>
+<pre><code class="language-yaml">groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors_per_request:ratio_rate1h{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate5m{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+          )
+          or
+          (
+            job:slo_errors_per_request:ratio_rate6h{job=&quot;api&quot;} &gt; (6 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate30m{job=&quot;api&quot;} &gt; (6 * 0.001)
+          )
+        labels:
+          severity: page
+</code></pre>
+<h2>Observability의 세 신호</h2>
+<table>
+<thead>
+<tr>
+<th>신호</th>
+<th>답하는 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Metrics</td>
+<td>얼마나, 얼마나 자주? (요청 수, Error Rate, Latency 분포)</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>무슨 일이 있었나? (개별 Event와 Context)</td>
+</tr>
+<tr>
+<td>Traces</td>
+<td>어디서 느려졌나? (Service 사이 요청 경로)</td>
+</tr>
+</tbody></table>
+<p><strong>OpenTelemetry</strong>는 Metrics, Logs, Traces를 공급사 중립적으로 수집·전송하는 표준이며, 2026-05 CNCF Graduated 단계가 되었다. Instrumentation을 OpenTelemetry로 해 두면 Backend(Monitoring 제품)를 바꿀 때 코드 수정이 줄어든다.</p>
+<h2>On-call</h2>
+<ul>
+<li>Google SRE Book은 <strong>12시간 On-call 교대당 최대 2건의 Incident</strong>를 목표로 제시한다. 사고 하나에 원인 분석, 복구, Postmortem 작성과 Bug 수정 같은 후속 작업까지 평균 약 6시간이 든다는 계산에서 나온 숫자다. 교대가 더 짧으면 그만큼 줄여 잡는다.</li>
+<li>경보마다 <strong>Runbook</strong>(무엇을 확인하고 무엇을 해 볼지)을 연결한다.</li>
+<li>대응하지 않아도 되는 경보는 지운다. 무시되는 경보는 진짜 경보까지 무시하게 만든다.</li>
+</ul>
+<h2>Incident 대응 흐름</h2>
+<pre><code class="language-mermaid">flowchart LR
+    D[감지] --&gt; T[Triage / 심각도 결정]
+    T --&gt; C[지휘자 지정 / 소통 채널]
+    C --&gt; MI[완화: Rollback, Flag Off]
+    MI --&gt; RS[복구 확인]
+    RS --&gt; P[Postmortem]
+    P --&gt; A[Action Item 추적]
+</code></pre>
+<p>원인 분석보다 <strong>완화가 먼저</strong>다. 원인을 몰라도 Rollback이나 Flag Off로 사용자 영향을 먼저 멈춘다.</p>
+<h2>Backup과 복구 목표</h2>
+<p>코드는 다시 배포하면 되지만 <strong>Data는 Backup에서만 돌아온다</strong>. 먼저 얼마나 잃고 얼마나 멈춰도 되는지 숫자로 정한다.</p>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>정의</th>
+<th>묻는 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RPO (Recovery Point Objective)</td>
+<td>마지막 복구 지점 이후 허용 가능한 최대 시간. 잃어도 되는 Data의 양</td>
+<td>최악의 경우 몇 분치 Data를 잃어도 되나?</td>
+</tr>
+<tr>
+<td>RTO (Recovery Time Objective)</td>
+<td>서비스 중단부터 복구까지 허용 가능한 최대 지연</td>
+<td>몇 분 · 몇 시간 안에 다시 열려야 하나?</td>
+</tr>
+</tbody></table>
+<h3>Managed DB의 PITR</h3>
+<p>PITR(Point-in-Time Recovery)은 Backup과 Transaction Log로 보존 기간 안의 임의 시점을 복원한다.</p>
+<ul>
+<li><strong>Amazon RDS</strong>: 자동 Backup 보존 기간은 1–35일. Transaction Log를 5분마다 S3에 올리므로 복원 가능한 최신 시점은 보통 현재보다 약 5분 전이다. 복원하면 기존 Instance를 덮지 않고 <strong>새 DB Instance</strong>가 생기며, Security Group · Parameter Group 같은 설정은 기본값으로 만들어질 수 있다.</li>
+<li><strong>Cloud SQL</strong>: PITR Log 보존 기간은 Enterprise Plus 1–35일(기본 14일), Enterprise 1–7일(기본 7일).</li>
+<li>새 Instance로 복원되므로 <strong>연결 주소 교체와 설정 복구</strong>가 Runbook에 있어야 RTO를 지킬 수 있다.</li>
+</ul>
+<h3>복구 연습 절차</h3>
+<ol>
+<li>복원할 시점(예: 어제 14:00)과 목표 RTO를 정한다.</li>
+<li>Production과 분리된 곳에 PITR로 새 Instance를 만든다. Production은 건드리지 않는다.</li>
+<li>Row 수, 가장 최근 Record 시각, 핵심 Query를 확인하고 App을 붙여 Smoke Test를 한다.</li>
+<li>요청부터 App이 다시 쓸 수 있을 때까지 걸린 시간이 <strong>측정된 RTO</strong>, 복원된 마지막 Record 시각과 목표 시점의 차이가 <strong>측정된 RPO</strong>다.</li>
+<li>막힌 단계(권한, Network, Parameter, Secret)를 Runbook에 적는다.</li>
+<li>복원한 Instance를 지운다. 비용과 개인정보 노출을 줄인다.</li>
+</ol>
+<h3>Cross-Region 복사는 언제 값어치가 있나</h3>
+<ul>
+<li>계약이나 규제가 Region 전체 장애에서도 복구를 요구할 때</li>
+<li>유료 핵심 서비스라 Region 장애에도 RPO · RTO를 지켜야 할 때</li>
+<li>계정 탈취나 실수 삭제에 대비해 <strong>분리된 곳</strong>에 사본이 필요할 때(다른 계정으로의 복사도 함께 검토)</li>
+</ul>
+<p>Amazon RDS는 Snapshot과 Transaction Log를 다른 Region으로 복제하는 Cross-Region 자동 Backup을 제공한다. 초기 제품이거나 Data를 다시 만들 수 있다면 저장 · 전송 비용만큼의 가치가 없는 경우가 많다. 개인정보를 해외 Region으로 복사한다면 국외 이전 요건도 검토한다.</p>
+<h2>Blameless Postmortem</h2>
+<p>Google은 <strong>비난 없는(Blameless) Postmortem</strong> 문화를 운영한다. 사고에 관련된 사람들은 당시 가진 정보로 최선의 판단을 했다고 전제하고, <strong>사람이 아니라 환경과 System을 고친다</strong>.</p>
+<pre><code class="language-text">나쁜 예: &quot;배포한 사람이 확인을 안 해서 장애가 났다. 앞으로 주의할 것.&quot;
+좋은 예: &quot;배포 전 Migration 호환성 검사가 없었다.
+         CI에 Schema 호환성 검사를 추가한다 (담당자, 기한).&quot;
+</code></pre>
+<p>Postmortem 기본 항목: 요약, 영향(사용자·시간·Budget 소모), Timeline, 근본 원인과 기여 요인, 잘된 점, 운이 좋았던 점, Action Item(담당자·기한).</p>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://sre.google/sre-book/service-level-objectives/">Service Level Objectives</a> — Google SRE Book, 접근일 2026-09-28</li>
+<li><a href="https://sre.google/workbook/implementing-slos/">Implementing SLOs</a> — Google SRE Workbook, 접근일 2026-09-28</li>
+<li><a href="https://sre.google/workbook/error-budget-policy/">Error Budget Policy</a> — Google SRE Workbook, 접근일 2026-09-28</li>
+<li><a href="https://sre.google/workbook/alerting-on-slos/">Alerting on SLOs</a> — Google SRE Workbook, 접근일 2026-09-28</li>
+<li><a href="https://sre.google/sre-book/being-on-call/">Being On-Call</a> — Google SRE Book, 접근일 2026-09-28</li>
+<li><a href="https://sre.google/sre-book/postmortem-culture/">Postmortem Culture: Learning from Failure</a> — Google SRE Book, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html">Disaster Recovery (DR) objectives</a> — AWS Well-Architected Reliability Pillar, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html">Restoring a DB instance to a specified time for Amazon RDS</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html">Replicating automated backups to another AWS Region</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/configure-pitr">Configure point-in-time recovery (PITR)</a> — Cloud SQL for PostgreSQL Docs, 접근일 2026-09-28</li>
+<li><a href="https://www.cncf.io/announcements/2026/05/21/cloud-native-computing-foundation-announces-opentelemetrys-graduation-solidifying-status-as-the-de-facto-observability-standard/">CNCF Announces OpenTelemetry&#39;s Graduation</a> — CNCF, 2026-05-21, 접근일 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../platform/06-domain-dns-tls-cdn/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>Domain · DNS · TLS · CDN</span></a><a class="page-link next" href="../../platform/08-security-supply-chain/"><span><small>다음 문서</small>Secret · SBOM · SLSA</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

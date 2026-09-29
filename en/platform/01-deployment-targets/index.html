@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Choosing a Deployment Target: From Static to Serverless | MyAI</title>
+    <meta name="description" content="&quot;Where should we run it?&quot; is not a matter of technical taste; it is a decision about who carries the operational burden." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/01-deployment-targets/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Choosing a Deployment Target: From Static to Serverless | MyAI" />
+    <meta property="og:description" content="&quot;Where should we run it?&quot; is not a matter of technical taste; it is a decision about who carries the operational burden." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/01-deployment-targets/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/01-deployment-targets.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link active" aria-current="page" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Targets · Static · Serverless</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Choosing a Deployment Target: From Static to Serverless</h1>
+<p>&quot;Where should we run it?&quot; is not a matter of technical taste; it is a decision about <strong>who carries the operational burden</strong>.</p>
+<h2>The Abstraction Ladder</h2>
+<pre><code class="language-mermaid">flowchart TD
+    V[VM / IaaS] --&gt; K[Container / Kubernetes]
+    K --&gt; P[PaaS / Managed Container]
+    P --&gt; F[Functions / FaaS]
+    F --&gt; S[Static / Edge Hosting]
+</code></pre>
+<ul>
+<li>The further down you go, the less you <strong>manage yourself</strong> (OS, patching, scaling, load balancers).</li>
+<li>In exchange, <strong>constraints</strong> grow (execution time, languages, networking, how state is stored).</li>
+<li>A good choice is not &quot;the most powerful option&quot; but <strong>the lowest rung that meets the requirements</strong>.</li>
+</ul>
+<h2>Comparison by Type</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Examples</th>
+<th>Good fit</th>
+<th>Watch out for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static / Edge</td>
+<td>GitHub Pages, Cloudflare Workers Static Assets, Netlify, Vercel</td>
+<td>Docs, landing pages, SPAs</td>
+<td>No server logic, or limited to edge functions</td>
+</tr>
+<tr>
+<td>PaaS</td>
+<td>Heroku, Azure App Service</td>
+<td>Standard web apps, fast start</td>
+<td>Tied to the provider&#39;s roadmap</td>
+</tr>
+<tr>
+<td>Managed / Serverless Container</td>
+<td>Google Cloud Run, Azure Container Apps, Amazon ECS Express Mode</td>
+<td>APIs that already have a container image</td>
+<td>Cold starts, request time limits</td>
+</tr>
+<tr>
+<td>Functions (FaaS)</td>
+<td>AWS Lambda, Cloud Run functions, Azure Functions</td>
+<td>Event handling, short tasks</td>
+<td>Time and memory limits, stateless</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Amazon EKS, GKE, AKS, Korean NKS</td>
+<td>Many services, dedicated operators</td>
+<td>High learning and operating cost</td>
+</tr>
+<tr>
+<td>VM</td>
+<td>Amazon EC2, Compute Engine, Azure VM</td>
+<td>Special software, full control</td>
+<td>Patching and incidents are all yours</td>
+</tr>
+</tbody></table>
+<h2>Decision Flow</h2>
+<pre><code class="language-mermaid">flowchart TD
+    Q1{Is server logic needed?} --&gt;|No| ST[Static / Edge Hosting]
+    Q1 --&gt;|Yes| Q2{Long-running or stateful?}
+    Q2 --&gt;|No, per request or event| Q3{Is it built as a container image?}
+    Q3 --&gt;|No| FN[Functions / FaaS]
+    Q3 --&gt;|Yes| SC[Serverless Container]
+    Q2 --&gt;|Yes| Q4{Dedicated platform staff?}
+    Q4 --&gt;|No| PA[PaaS / Managed Container]
+    Q4 --&gt;|Yes| K8[Kubernetes]
+</code></pre>
+<h2>Major Hosting Platforms Today (checked 2026-09-28)</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Verified facts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub Pages</td>
+<td>Published site up to 1 GB, 100 GB/month soft bandwidth limit, soft limit of 10 builds per hour (the build limit does not apply when publishing with a custom GitHub Actions workflow)</td>
+</tr>
+<tr>
+<td>Vercel</td>
+<td>The Hobby plan is for personal, non-commercial use only and cannot buy usage beyond its caps. Pro includes a credit plus pay-as-you-go overage. Functions use Fluid compute Active CPU pricing (billed only while code actually uses CPU; memory billed separately)</td>
+</tr>
+<tr>
+<td>Netlify</td>
+<td>New accounts since 2025-09-04 use credit-based plans. Production deploys, compute, bandwidth, web requests and more consume credits. Earlier accounts may stay on legacy plans</td>
+</tr>
+<tr>
+<td>Cloudflare</td>
+<td>New projects are advised to use Workers instead of Pages (Pages keeps working, but new features focus on Workers). Workers bills requests + CPU time, no egress charges, and static asset requests are free and unlimited</td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>On 2026-02-06 Heroku (Salesforce) announced on its official blog a move to a &quot;sustaining engineering&quot; model. Security and stability work continues, but new feature development and new Enterprise contracts stopped</td>
+</tr>
+<tr>
+<td>AWS App Runner</td>
+<td>Closed to new customers from 2026-04-30. Existing customers can keep using it, with no new features planned. AWS recommends Amazon ECS Express Mode as the alternative</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Lesson: platforms have <strong>lifecycles</strong> too. Alongside &quot;is it convenient now?&quot;, ask &quot;will this platform still be growing in three years?&quot;</p>
+</blockquote>
+<h2>The Shape of Serverless Pricing</h2>
+<p>Unit prices change, but <strong>what you pay for</strong> rarely does.</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Billing unit</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AWS Lambda</td>
+<td>Requests + duration (allocated memory × time, GB-seconds)</td>
+<td>Billed per 1 ms since 2020-12</td>
+</tr>
+<tr>
+<td>Google Cloud Run</td>
+<td>Request-based (default) or instance-based</td>
+<td>Request-based is recommended for spiky traffic, instance-based for steady traffic. Scales to zero with no requests</td>
+</tr>
+<tr>
+<td>Azure Container Apps</td>
+<td>Resources used while running</td>
+<td>KEDA-based autoscaling, most apps can scale to zero, no usage charges at zero</td>
+</tr>
+<tr>
+<td>Vercel Functions</td>
+<td>Active CPU + provisioned memory</td>
+<td>CPU billing pauses while waiting on I/O</td>
+</tr>
+<tr>
+<td>Cloudflare Workers</td>
+<td>Requests + CPU time</td>
+<td>Time spent waiting on outbound calls does not count as CPU time</td>
+</tr>
+</tbody></table>
+<p>Scale to zero lowers cost, but the first request may wait for an instance to start: a <strong>cold start</strong>. For latency-sensitive APIs, compare this with the cost of keeping a minimum number of instances.</p>
+<p>There is a trap in the other direction too. When serverless scales out, <strong>each instance opens its own database connections</strong>. Under a traffic spike the connection count multiplies past the relational database&#39;s connection limit, and the outage happens in the database, not the app. Put a pooler or proxy in front, such as RDS Proxy, Cloud SQL connectors with a per-instance connection pool, or PgBouncer, or cap max instances so that <strong>max instances × connections per instance</strong> stays within the database limit.</p>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad:  Spin up a VM for an internal docs site and manage Nginx, certificates and OS patches by hand.
+Good: Put the docs site on static hosting and spend operating time on product features.
+</code></pre>
+<pre><code class="language-text">Bad:  Run a commercial service on a free non-commercial plan without reading the terms.
+Good: Before revenue starts, check plan terms, caps and how overage is billed.
+</code></pre>
+<h2>Selection Checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Does the plan allow commercial use?</li>
+<li><input disabled="" type="checkbox"> Which billing unit (requests, CPU time, bandwidth, credits) grows with my traffic?</li>
+<li><input disabled="" type="checkbox"> Has the provider announced a feature freeze or a stop to new customers?</li>
+<li><input disabled="" type="checkbox"> Have we kept a <strong>migration path</strong> via a container image or standard build output?</li>
+<li><input disabled="" type="checkbox"> Is there a region or edge location near our users and data?</li>
+<li><input disabled="" type="checkbox"> Is there a status page and a support channel for outages?</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub Pages limits</a> — GitHub Docs, accessed 2026-09-28</li>
+<li><a href="https://vercel.com/docs/plans/hobby">Vercel Hobby Plan</a> — Vercel Docs, accessed 2026-09-28</li>
+<li><a href="https://vercel.com/docs/functions/usage-and-pricing">Fluid compute pricing</a> — Vercel Docs, accessed 2026-09-28</li>
+<li><a href="https://www.netlify.com/changelog/netlify-pricing-update-introducing-credit-based-plans/">Netlify pricing update: Introducing credit-based plans</a> — Netlify Changelog, 2025-09, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/">Migrate from Pages to Workers</a> — Cloudflare Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/workers/platform/pricing/">Cloudflare Workers Pricing</a> — Cloudflare Docs, accessed 2026-09-28</li>
+<li><a href="https://www.heroku.com/blog/an-update-on-heroku/">An Update on Heroku</a> — Heroku Blog, 2026-02-06, accessed 2026-09-28</li>
+<li><a href="https://devops.com/salesforce-freezes-heroku-feature-development-signals-long-term-shift/">Salesforce Freezes Heroku Feature Development</a> — DevOps.com, 2026-02, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html">AWS App Runner availability change</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2025/11/announcing-amazon-ecs-express-mode/">Announcing Amazon ECS Express Mode</a> — AWS, 2025-11, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda Pricing</a> — AWS, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/blogs/compute/using-amazon-rds-proxy-with-aws-lambda/">Using Amazon RDS Proxy with AWS Lambda</a> — AWS Compute Blog, accessed 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/connect-run">Connect from Cloud Run</a> — Cloud SQL Docs, accessed 2026-09-28</li>
+<li><a href="https://www.pgbouncer.org/">PgBouncer</a> — PgBouncer, accessed 2026-09-28</li>
+<li><a href="https://aws.amazon.com/blogs/aws/new-for-aws-lambda-1ms-billing-granularity-adds-cost-savings/">New for AWS Lambda – 1ms Billing Granularity</a> — AWS News Blog, 2020-12, accessed 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/run/docs/configuring/billing-settings">Cloud Run billing settings for services</a> — Google Cloud Docs, accessed 2026-09-28</li>
+<li><a href="https://learn.microsoft.com/en-us/azure/container-apps/scale-app">Scaling in Azure Container Apps</a> — Microsoft Learn, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/00-overview/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Platform Deployment Overview</span></a><a class="page-link next" href="../../../en/platform/02-cloud-kubernetes/"><span><small>Next</small>Cloud · Kubernetes · Korean Clouds</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

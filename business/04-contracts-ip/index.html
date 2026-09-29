@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>계약 · 지식재산 · 오픈소스 | MyAI(마이아이)</title>
+    <meta name="description" content="소프트웨어 사업의 자산은 대부분 코드, 이름, 데이터, 관계다. 이 문서는 그 자산을 누가 갖는지 정하는 계약과 권리를 다룬다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/business/04-contracts-ip/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="계약 · 지식재산 · 오픈소스 | MyAI(마이아이)" />
+    <meta property="og:description" content="소프트웨어 사업의 자산은 대부분 코드, 이름, 데이터, 관계다. 이 문서는 그 자산을 누가 갖는지 정하는 계약과 권리를 다룬다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/business/04-contracts-ip/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/business/04-contracts-ip.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group" data-group="6"><button aria-expanded="true" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link active" aria-current="page" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>비즈니스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>계약 · 지식재산 · 오픈소스</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>계약 · 지식재산 · 오픈소스</h1>
+<blockquote>
+<p>이 문서는 일반 정보이며 법률·세무 자문이 아닙니다. 제도는 자주 바뀌므로 실행 전에 공식 출처나 세무사·변호사에게 확인하세요.</p>
+</blockquote>
+<p>소프트웨어 사업의 자산은 대부분 <strong>코드, 이름, 데이터, 관계</strong>다. 이 문서는 그 자산을 누가 갖는지 정하는 계약과 권리를 다룬다.</p>
+<h2>용역계약 기본</h2>
+<p>외주를 받거나 줄 때 최소한 다음을 문서로 남긴다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>정할 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>범위</td>
+<td>기능 목록, 제외 범위, 변경 요청 절차</td>
+</tr>
+<tr>
+<td>검수</td>
+<td>검수 기준, 기간, 검수 간주 조건</td>
+</tr>
+<tr>
+<td>대금</td>
+<td>금액, 부가세 포함 여부, 지급 시기, 지연 시 처리</td>
+</tr>
+<tr>
+<td>권리 귀속</td>
+<td>결과물 저작권, 기존 코드·라이브러리의 권리</td>
+</tr>
+<tr>
+<td>하자 보수</td>
+<td>기간과 범위</td>
+</tr>
+<tr>
+<td>비밀유지</td>
+<td>대상 정보, 기간, 반환·폐기</td>
+</tr>
+<tr>
+<td>해지</td>
+<td>해지 사유, 해지 시 정산</td>
+</tr>
+</tbody></table>
+<p>과학기술정보통신부는 소프트웨어진흥법 제38조(공정계약의 원칙)에 근거해 <strong>SW 분야 표준계약서 6종</strong>(SW 사업자 간 4종, SW 종사자와 사업자 간 2종)을 2020년 12월 31일부터 보급했다. 초안을 쓸 때 출발점으로 쓸 수 있다.</p>
+<p>나쁜 예:</p>
+<blockquote>
+<p>메신저로 &quot;앱 하나 500&quot;이라고 합의하고 착수했다. 검수 기준이 없어 잔금 지급이 6개월 밀렸다.</p>
+</blockquote>
+<p>좋은 예:</p>
+<blockquote>
+<p>표준계약서를 바탕으로 기능 목록과 검수 기간을 부속서로 붙이고, 변경 요청은 별도 견적으로 처리한다고 적었다.</p>
+</blockquote>
+<h2>NDA와 기술자료 보호</h2>
+<ul>
+<li>비밀유지계약서에는 <strong>기술자료의 명칭·범위, 사용기간, 접근 인원, 목적 외 사용 금지, 위반 시 배상, 반환·폐기 방법</strong>을 넣는다.</li>
+<li>중소벤처기업부 등 공공기관이 <strong>표준비밀유지계약서</strong> 양식을 배포하므로 초안으로 쓸 수 있다.</li>
+<li>거래 상대에게 핵심 소스코드를 넘겨야 한다면 <strong>기술자료 임치제도</strong>(대·중소기업·농어업협력재단)를 검토할 수 있다 (대·중소기업 상생협력 촉진에 관한 법률 제24조의2).</li>
+</ul>
+<h2>저작권: 코드는 누구의 것인가</h2>
+<pre><code class="language-mermaid">flowchart TD
+    A[코드 작성] --&gt; B{누가 작성했는가}
+    B --&gt;|직원이 업무로| C{계약이나 근무규칙에 다른 정함이 있는가}
+    C --&gt;|아니오| D[법인 등이 저작자가 될 수 있음]
+    C --&gt;|예| E[정한 바에 따름]
+    B --&gt;|외주 개발자| F{계약서에 권리 양도 조항이 있는가}
+    F --&gt;|예| G[계약에 따라 이전]
+    F --&gt;|아니오| H[원칙적으로 개발자에게 남을 수 있음]
+</code></pre>
+<ul>
+<li>업무상저작물은 요건을 갖추면 법인 등이 저작자가 된다 (저작권법 제9조). 컴퓨터프로그램은 &quot;법인 명의 공표&quot; 요건이 적용되지 않는다.</li>
+<li>판례는 제9조를 <strong>예외 규정으로 좁게 해석</strong>하며, 외주(도급) 관계에 확장 적용하지 않는다. 외주 결과물의 권리는 <strong>계약서에 명시</strong>해야 한다.</li>
+<li>권리를 넘기더라도 개발자가 기존에 가진 라이브러리·템플릿은 제외하는 경우가 많다. 그 범위를 목록으로 남긴다.</li>
+</ul>
+<h2>상표: 서비스 이름 지키기</h2>
+<ul>
+<li>2025년 10월 1일 특허청이 <strong>지식재산처</strong>로 승격 개편되었다. 출원 창구는 계속 <strong>특허로</strong>(patent.go.kr)다.</li>
+<li>전자출원 전에 특허고객번호를 받고 인증서를 등록한다.</li>
+<li>출원료 (지식재산처 안내 기준): 전자출원 1상품류 구분마다 52,000원, 지정상품이 10개를 넘으면 초과 1개마다 2,000원 가산. 고시된 상품명칭만으로 지정하면 1상품류마다 46,000원. 등록료와 감면은 별도 확인한다.</li>
+<li>상표권 존속기간은 설정등록일부터 <strong>10년</strong>이고, 10년씩 갱신할 수 있다 (상표법 제83조).</li>
+</ul>
+<p>상표 출원 전 확인:</p>
+<ul>
+<li><input disabled="" type="checkbox"> 키프리스 등에서 동일·유사 상표 검색</li>
+<li><input disabled="" type="checkbox"> 앱 이름, 도메인, SNS 계정명이 같은 방향인지</li>
+<li><input disabled="" type="checkbox"> 지정상품: 소프트웨어, SaaS 제공 서비스 등 실제 사업 범위</li>
+<li><input disabled="" type="checkbox"> 출원인 명의: 개인인지 법인인지 (법인 전환 시 이전 필요)</li>
+</ul>
+<h2>오픈소스 라이선스 준수</h2>
+<p>한국저작권위원회는 <strong>OLIS</strong>(오픈소스SW 라이선스 종합정보시스템)에서 라이선스 가이드, 비교표, 검사 도구를 제공한다. 가이드 5.0은 2025년 6월에 발표되었다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>예</th>
+<th>배포 시 핵심 의무</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>퍼미시브</td>
+<td>MIT, BSD, Apache-2.0</td>
+<td>저작권·라이선스 고지 유지 (Apache-2.0은 NOTICE 등 추가 조건)</td>
+</tr>
+<tr>
+<td>약한 카피레프트</td>
+<td>LGPL, MPL</td>
+<td>해당 라이브러리·파일 수정분 공개 등</td>
+</tr>
+<tr>
+<td>강한 카피레프트</td>
+<td>GPL, AGPL</td>
+<td>결합 저작물 소스 공개 의무 가능. AGPL은 네트워크 서비스 제공도 고려</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">의존성 목록 추출 (SBOM)
+→ 라이선스 식별
+→ 배포 형태 확인 (앱 배포 / SaaS / 온프레미스)
+→ 고지 파일 생성
+→ 카피레프트 결합 여부 검토
+→ 릴리스 체크리스트에 포함
+</code></pre>
+<p>라이선스 위반은 저작권 침해나 계약 위반 문제가 될 수 있다.</p>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.nipa.kr/home/2-1/7817">NIPA - SW종사자 표준계약서(6종) 활용 안내</a> (접근 2026-09-28)</li>
+<li><a href="https://www.msit.go.kr/bbs/view.do?sCode=user&mPid=122&mId=123&bbsSeqNo=96&nttSeqNo=3179216">과학기술정보통신부 - SW 분야 표준계약서 보도</a> (접근 2026-09-28)</li>
+<li><a href="https://mss.go.kr/site/smba/ex/bbs/View.do?cbIdx=81&bcIdx=1031902">중소벤처기업부 - 표준비밀유지계약서</a> (접근 2026-09-28)</li>
+<li><a href="https://www.ultari.go.kr/portal/psi/techData.do">중소기업 기술보호울타리 - 기술자료 임치</a> (접근 2026-09-28)</li>
+<li><a href="https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=695&ccfNo=1&cciNo=1&cnpClsNo=2">찾기쉬운 생활법령정보 - 저작자</a> (접근 2026-09-28)</li>
+<li><a href="https://www.copyright.or.kr/information-materials/dictionary/view.do?glossaryNo=400">한국저작권위원회 - 업무상저작물</a> (접근 2026-09-28)</li>
+<li><a href="https://kipo.go.kr/kcall/faqRead.do?curMenuCd=SCD0300093&pgmSeq=60&pgmId=PGM0000014&sysCd=60&urlDo=/cFaqChargeList.do">지식재산처 - 상표 전자출원 절차 FAQ</a> (접근 2026-09-28)</li>
+<li><a href="https://www.patent.go.kr/smart/jsp/ka/menu/fee/main/FeeMain01.do">특허로 - 수수료 안내</a> (접근 2026-09-28)</li>
+<li><a href="https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0200209">지식재산처 - 존속기간갱신등록</a> (접근 2026-09-28)</li>
+<li><a href="https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0200442">지식재산처 - 주요연혁</a> (접근 2026-09-28)</li>
+<li><a href="https://www.olis.or.kr/license/licenseGuide.do">OLIS - 라이선스 가이드</a> (접근 2026-09-28)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../business/03-online-service-law/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>약관 · 개인정보 · 전자상거래</span></a><a class="page-link next" href="../../business/05-hiring-freelancers/"><span><small>다음 문서</small>채용 · 4대보험 · 프리랜서</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

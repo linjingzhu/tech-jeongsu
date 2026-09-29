@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Subagent · Skill · Command · Plugin | MyAI(마이아이)</title>
+    <meta name="description" content="한 문장으로 줄이면 Subagent는 &quot;누가&quot;, Skill은 &quot;어떻게&quot;, Command는 &quot;언제 사람이&quot;, Plugin은 &quot;어떻게 나눠 줄까&quot; 에 답한다. Claude Code에서 Custom Command는 Skill로 합쳐졌다. .claude/commands/deploy.…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/09-subagents-skills/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="Subagent · Skill · Command · Plugin | MyAI(마이아이)" />
+    <meta property="og:description" content="한 문장으로 줄이면 Subagent는 &quot;누가&quot;, Skill은 &quot;어떻게&quot;, Command는 &quot;언제 사람이&quot;, Plugin은 &quot;어떻게 나눠 줄까&quot; 에 답한다. Claude Code에서 Custom Command는 Skill로 합쳐졌다. .claude/commands/deploy.…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/ai/09-subagents-skills/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/ai/09-subagents-skills.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link active" aria-current="page" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>AI 사용방법</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Subagent · Skill · Plugin</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Subagent · Skill · Command · Plugin</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: Subagent, Skill, Command, Plugin이 각각 무엇을 담고 언제 Context에 들어오는지 구분하고, Claude Code와 Codex에서 파일로 정의하는 방법을 알며, 역할 하나당 파일 하나라는 원칙으로 이 저장소의 탐색자·검토자·자동 개발 Skill을 읽고 고칠 수 있다.</p>
+</blockquote>
+<p>기준일: 2026-09-29. 필드 이름과 경로는 Claude Code 공식 문서와 Codex 공개 소스·문서 기준이며 자주 바뀐다. 개념은 「Session · Agent · Subagent」와 「Multi-Agent 역할과 모델 라우팅」에 있고, 이 문서는 그 개념을 <strong>실제 설정 파일</strong>로 옮긴다. 지시문 파일은 「지시문과 메모리」, 권한과 Hook은 「권한 · Sandbox · Hook」에서 다룬다.</p>
+<h2>핵심 개념</h2>
+<table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>한 줄 정의</th>
+<th>Context에 들어오는 시점</th>
+<th>Claude Code 위치</th>
+<th>Codex 위치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Subagent</td>
+<td>별도 Context에서 일하는 <strong>작업자</strong> 정의 (지시문 + 도구 + 모델)</td>
+<td>위임될 때, 새 Context로</td>
+<td><code>.claude/agents/*.md</code></td>
+<td><code>.codex/agents/*.toml</code></td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>필요할 때 꺼내 쓰는 <strong>절차와 참고 자료</strong></td>
+<td>설명은 늘, 본문은 호출될 때</td>
+<td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+<td><code>.agents/skills/&lt;name&gt;/SKILL.md</code></td>
+</tr>
+<tr>
+<td>Command</td>
+<td>사람이 <code>/이름</code>으로 당기는 <strong>방아쇠</strong></td>
+<td>사람이 입력할 때</td>
+<td><code>.claude/commands/*.md</code> (Skill로 통합됨)</td>
+<td>Skill을 <code>$이름</code>으로 명시 호출</td>
+</tr>
+<tr>
+<td>Plugin</td>
+<td>위 구성요소와 Hook · MCP Server를 묶은 <strong>배포 단위</strong></td>
+<td>활성화된 모든 Session</td>
+<td><code>.claude-plugin/plugin.json</code> + Marketplace</td>
+<td><code>codex plugin</code> 명령 (세부는 확인 필요)</td>
+</tr>
+</tbody></table>
+<p>한 문장으로 줄이면 <strong>Subagent는 &quot;누가&quot;, Skill은 &quot;어떻게&quot;, Command는 &quot;언제 사람이&quot;, Plugin은 &quot;어떻게 나눠 줄까&quot;</strong> 에 답한다. Claude Code에서 Custom Command는 Skill로 합쳐졌다. <code>.claude/commands/deploy.md</code>와 <code>.claude/skills/deploy/SKILL.md</code>는 둘 다 <code>/deploy</code>를 만들고, 새로 만든다면 보조 파일과 호출 제어 필드를 쓸 수 있는 Skill이 낫다.</p>
+<p>SKILL.md는 <a href="https://agentskills.io">Agent Skills</a> 공개 표준을 따른다. 표준 필드는 <code>name</code>, <code>description</code>, <code>license</code>, <code>compatibility</code>, <code>metadata</code>, <code>allowed-tools</code>이고, <code>disable-model-invocation</code>이나 <code>context: fork</code>는 Claude Code 확장이다. 같은 SKILL.md를 두 도구가 읽어도 <strong>확장 필드의 효과는 Claude Code에서만</strong> 기대한다.</p>
+<h2>원리</h2>
+<h3>Context 격리: 아끼는 것과 쓰는 것</h3>
+<p>Subagent(Fork가 아닌 것)는 <strong>빈 Context에서 시작</strong>한다. 대화 이력도, 이미 읽은 파일도 모르고, 위임 메시지와 자기 정의 파일만 받는다. 조사 과정의 Tool 결과가 Main Context에 쌓이지 않는 대신 대가가 있다. Subagent의 요청도 Main 대화와 <strong>같은 사용량 한도</strong>에 합산되고, 필요한 사실을 다시 모으느라 시간이 걸리며, 요약 형식을 정하지 않으면 과정 설명이 돌아와 절약한 Context를 다시 쓴다. Claude Code는 기본적으로 3단계까지 중첩(<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code>)과 동시 20개를 허용한다.</p>
+<p>공식 문서의 기준: 주고받기가 잦거나, 단계들이 Context를 많이 공유하거나, 작은 수정이거나, 지연이 중요하면 <strong>Main 대화</strong>에서 한다. 결과만 필요하고 과정이 길거나 서로 독립적인 조사는 <strong>Subagent</strong>에 맡긴다.</p>
+<h3>Progressive Disclosure: Skill이 싼 이유</h3>
+<ol>
+<li><strong>목록</strong>: 모든 Skill의 이름과 설명이 늘 들어간다. Claude Code는 목록에 Context Window의 약 1%를 쓰고, Skill 하나의 <code>description</code> + <code>when_to_use</code>를 1,536자에서 자른다. 넘치면 덜 쓰는 Skill의 설명부터 빠진다. 그래서 <strong>설명 첫 문장에 &quot;언제 쓰는지&quot;를 넣는 것</strong>이 Skill 설계의 절반이다.</li>
+<li><strong>본문</strong>: 호출될 때 SKILL.md 본문이 들어온다. 공식 권장은 500줄 이하다.</li>
+<li><strong>보조 파일</strong>: 본문이 가리키는 참고 문서와 Script는 필요할 때만 읽는다.</li>
+</ol>
+<h3>누가 호출하는가</h3>
+<table>
+<thead>
+<tr>
+<th>목적</th>
+<th>Claude Code</th>
+<th>Codex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사람만 호출 (배포, 자동 개발처럼 부작용이 큰 절차)</td>
+<td><code>disable-model-invocation: true</code> — 설명도 목록에서 빠진다</td>
+<td><code>agents/openai.yaml</code>의 <code>policy.allow_implicit_invocation: false</code> — <code>$이름</code>으로만 호출</td>
+</tr>
+</tbody></table>
+<h3>무엇을 어디에 둘까</h3>
+<pre><code class="language-mermaid">flowchart TD
+    Q[새로 정하고 싶은 것] --&gt; A{매 Turn 필요한가}
+    A --&gt;|예| M[CLAUDE.md 또는 AGENTS.md]
+    A --&gt;|아니오| B{반드시 지켜야 하는가}
+    B --&gt;|예| H[권한 또는 Hook]
+    B --&gt;|아니오| C{과정 없이 결과만 필요한가}
+    C --&gt;|예| S[Subagent]
+    C --&gt;|아니오| K[Skill]
+    K --&gt; P{여러 저장소에서 같이 쓰는가}
+    S --&gt; P
+    P --&gt;|예| G[Plugin으로 묶기]
+</code></pre>
+<h2>적용: 이 저장소의 설정</h2>
+<h3>Claude Code Subagent: 읽기 전용 탐색자</h3>
+<p><code>.claude/agents/fast-explorer.md</code>의 Front Matter:</p>
+<pre><code class="language-yaml">---
+name: fast-explorer
+description: Read-only search across the repository. Use when finding where something already exists would cost the main context more than the answer is worth.
+tools: Read, Grep, Glob, Bash
+permissionMode: plan
+maxTurns: 6
+---
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>값</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tools</code></td>
+<td>Edit · Write 없음</td>
+<td>생략하면 <strong>모든 도구를 상속</strong>한다. 목록은 허용 목록이다</td>
+</tr>
+<tr>
+<td><code>permissionMode</code></td>
+<td><code>plan</code></td>
+<td>읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 대화가 acceptEdits · auto · bypassPermissions면 이 값은 무시되고 부모 mode를 따른다</td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td><code>6</code></td>
+<td>한도에 닿으면 멈추고 부분 결과를 돌려준다</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>없음</td>
+<td>가장 싼 유능한 Model이 이기는 역할이라 Harness에 맡긴다</td>
+</tr>
+</tbody></table>
+<p>본문은 반환 형식을 <code>FILES / FINDINGS / RISK</code>, 150 Token 이하로 고정한다. <strong>반환 형식이 곧 Context 예산</strong>이다. <code>adversarial-reviewer.md</code>도 같은 도구 · <code>plan</code> 모드에 <code>maxTurns: 8</code>인데, Model을 고정하지 않는 이유는 다르다. 독립 검토는 &quot;구현자와 <strong>다른</strong> Model&quot;로 정의되므로 누가 구현했는지 알기 전에는 정할 수 없다.</p>
+<h3>Codex Custom Agent: 같은 역할의 TOML 번역</h3>
+<p><code>.codex/agents/dispatcher.toml</code> (발췌):</p>
+<pre><code class="language-toml">name = &quot;dispatcher&quot;
+description = &quot;Low-cost first-pass request router. Classifies intent, risk, repository, cost exposure, required tools and the next agent; never edits or merges.&quot;
+model = &quot;gpt-5.6-luna&quot;
+model_reasoning_effort = &quot;low&quot;
+sandbox_mode = &quot;read-only&quot;
+developer_instructions = &#39;&#39;&#39;
+You are the first-pass Dispatcher. You classify and route; you do not edit,
+implement, choose product scope, approve paid automation, or merge.
+&#39;&#39;&#39;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Claude Code 필드</th>
+<th>Codex 대응</th>
+<th>차이</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code>, <code>description</code>, 본문</td>
+<td><code>name</code>, <code>description</code>, <code>developer_instructions</code></td>
+<td><code>name</code>과 <code>developer_instructions</code>는 필수다. <code>description</code>은 파일에서 생략할 수 있지만 적었다면 비어 있으면 안 되고, 다른 설정 층의 같은 이름 역할도 설명을 채우지 않으면 그 역할은 경고와 함께 무시된다(<code>codex-rs/agent-roles/src/</code>, 2026-09-29 main)</td>
+</tr>
+<tr>
+<td><code>tools</code> 허용 목록</td>
+<td>없음</td>
+<td><code>sandbox_mode</code>와 지시문으로 대신한다</td>
+</tr>
+<tr>
+<td><code>permissionMode: plan</code></td>
+<td><code>sandbox_mode = &quot;read-only&quot;</code></td>
+<td>양쪽 모두 부모나 Runtime이 덮어쓸 수 있다. Claude는 부모가 acceptEdits · auto · bypassPermissions면 부모 mode를, Codex는 상위 Runtime override를 따르므로 실효 권한을 확인한다</td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td>없음</td>
+<td>지시문의 &quot;at most eight rounds&quot;는 강제되는 카운터가 아니다</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>model</code>, <code>model_reasoning_effort</code></td>
+<td>Agent 파일의 <code>model</code>이 Spawn 요청보다 우선하므로 검토자 파일은 일부러 비운다</td>
+</tr>
+</tbody></table>
+<p>Codex는 <strong>명시적으로 요청받을 때만</strong> Subagent를 띄운다. 설명만 보고 자동 위임하는 Claude Code와 다르므로, Codex 쪽 지시문에는 &quot;언제 어떤 Agent를 부를지&quot;를 적어야 한다.</p>
+<h3>Skill: 스스로 시작하지 않는 자동 개발</h3>
+<p><code>auto-dev</code>는 두 플랫폼에 같은 절차로 들어 있다. Codex 쪽은 <code>.agents/skills/auto-dev/agents/openai.yaml</code>로 호출 정책을 강제한다.</p>
+<pre><code class="language-yaml">policy:
+  allow_implicit_invocation: false
+</code></pre>
+<p>Claude 쪽은 설명문(&quot;Invoke ONLY when the user explicitly asks…&quot;)과 본문 첫 절 <em>This mode never starts itself</em>로 막는다. 기계적으로도 막고 싶다면 <code>disable-model-invocation: true</code>를 더할 수 있다. 이 필드는 Subagent 사전 로드와, 이 Skill을 Prompt로 쓰는 예약 작업 실행도 막는다.</p>
+<h2>심화</h2>
+<h3>Command형 Skill 작성</h3>
+<pre><code class="language-markdown">---
+name: release-notes
+description: Draft release notes from commits since a tag. Use only when the owner asks for release notes.
+disable-model-invocation: true
+argument-hint: [since-tag]
+allowed-tools: Bash(git log *) Bash(git tag *)
+---
+
+Draft release notes for commits since $ARGUMENTS, grouped by user-visible change.
+</code></pre>
+<p><code>$ARGUMENTS</code>, <code>$0</code>, <code>${CLAUDE_SKILL_DIR}</code> 같은 치환을 쓸 수 있다. Script를 Skill 폴더에 넣고 <code>${CLAUDE_SKILL_DIR}/scripts/…</code>로 부르면 작업 위치와 무관하게 동작한다. <code>context: fork</code>를 주면 Skill이 Subagent Context에서 돌아 긴 조사형 절차에 맞다.</p>
+<h3>Plugin과 Marketplace</h3>
+<p>Plugin은 <code>.claude-plugin/plugin.json</code> Manifest와 <code>skills/</code>, <code>agents/</code>, <code>hooks/hooks.json</code>, <code>.mcp.json</code>을 담은 폴더다. Marketplace는 <code>.claude-plugin/marketplace.json</code>이 있는 저장소로, <strong>호스팅 상점이 아니라 목록</strong>이다. 개발 중에는 <code>--plugin-dir</code>로 폴더를 바로 불러 시험한다.</p>
+<p>활성화된 Plugin의 Skill · Agent 설명은 쓰지 않는 Session에서도 <strong>매 Turn</strong> Context에 들어가고, Plugin이 실행하는 것은 <strong>내 권한으로</strong> 실행된다. Cloud Session은 저장소 설정에 적힌 Plugin을 설치하지 않으므로 Cloud에서 필요한 것은 <code>.claude/</code> 아래에 직접 커밋한다. 1인 스튜디오라면 처음에는 <strong>저장소마다 <code>.claude/</code>를 커밋</strong>하고, 같은 파일을 세 번째 저장소에 복사할 때 Plugin으로 옮긴다.</p>
+<h3>설계 규칙</h3>
+<ol>
+<li><strong>Agent 하나에 책임 하나.</strong> &quot;탐색하고 고치고 검토한다&quot;는 세 Agent다.</li>
+<li><strong>검토자는 읽기 전용.</strong> 고칠 수 있는 검토자는 자기 의견을 구현하고 통과시킨다.</li>
+<li><strong>검토는 다른 Model로.</strong> 불가능하면 결과에 <code>FALLBACK REVIEW</code>라고 붙인다.</li>
+<li><strong>반환 형식을 고정한다.</strong> 형식 없는 Subagent는 과정 보고서를 돌려준다.</li>
+<li><strong>능력은 커밋한다.</strong> 홈 폴더에만 있는 Agent는 다른 Run과 Cloud Session에 없다.</li>
+</ol>
+<pre><code class="language-text">나쁜 예: description: Helps with code.
+좋은 예: description: Independent review of a diff against its requirement.
+        Use at MEDIUM and HIGH risk, after build and tests, before merge.
+</code></pre>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;<code>tools</code>를 비워 두면 안전하다.&quot;</strong> 생략은 전부 상속이다. 제한하려면 적는다.</li>
+<li><strong>&quot;Skill이 많으면 Context가 가득 찬다.&quot;</strong> 늘 들어가는 것은 설명뿐이다. 문제는 설명이 잘려 <strong>호출이 안 되는</strong> 쪽이다.</li>
+<li><strong>&quot;Subagent를 늘리면 싸고 빠르다.&quot;</strong> 각자 새 Context에서 다시 읽고, 사용량은 같은 한도에 쌓인다.</li>
+<li><strong>&quot;Claude 설정을 Codex가 그대로 읽는다.&quot;</strong> SKILL.md 형식은 공유하지만 폴더(<code>.claude/skills</code> vs <code>.agents/skills</code>)와 Agent 형식(Markdown vs TOML)이 다르다.</li>
+<li><strong>&quot;Agent 파일의 <code>permissionMode</code>/<code>sandbox_mode</code>가 곧 실효 권한이다.&quot;</strong> Claude Code에서는 부모 대화가 acceptEdits · auto · bypassPermissions면 <code>permissionMode</code>가 무시되고 부모 mode로 돈다. 파일의 mode가 적용되는 것은 부모가 default · dontAsk · plan일 때뿐이다. Codex의 <code>sandbox_mode</code>도 상위 Runtime 설정이 덮어쓸 수 있다. 실제로 확인한다.</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>Subagent의 <code>tools</code> 필드를 생략했을 때와 <code>Read, Grep</code>만 적었을 때 무엇이 다른가?</li>
+<li>Skill 설명이 1,536자를 넘거나 목록 예산을 넘으면 어떤 증상이 나타나는가?</li>
+<li>이 저장소의 <code>adversarial-reviewer</code>가 Model을 고정하지 않는 이유를 Codex의 우선순위 규칙과 함께 설명하라.</li>
+<li>배포 절차를 CLAUDE.md, Skill, Hook 중 어디에 두어야 하는지 판단 기준을 말하라.</li>
+<li>Cloud Session에서 Plugin의 Skill이 보이지 않을 때 가장 먼저 의심할 것은?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/sub-agents">Create custom subagents</a> — Claude Code Docs, 접근일 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/skills">Extend Claude with skills</a> — Claude Code Docs, 접근일 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/plugins">Plugins overview</a> — Claude Code Docs, 접근일 2026-09-29</li>
+<li><a href="https://agentskills.io">Agent Skills</a> — Agent Skills 공개 표준, 접근일 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/subagents">Subagents</a> — OpenAI Codex Docs, 검색 결과로 확인, 접근일 2026-09-29</li>
+<li><a href="https://developers.openai.com/codex/skills">Build skills</a> — OpenAI Codex Docs, 검색 결과로 확인, 접근일 2026-09-29</li>
+<li>이 저장소의 <code>.claude/agents/</code>, <code>.codex/agents/</code>, <code>.agents/skills/auto-dev/</code>, <code>.ai/HARNESS.md</code> — 2026-09-29 기준</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../ai/08-permissions-sandbox-hooks/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>권한 · Sandbox · Hook</span></a><a class="page-link next" href="../../ai/10-mcp-tools/"><span><small>다음 문서</small>MCP와 외부 도구</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

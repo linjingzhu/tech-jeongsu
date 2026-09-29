@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Mobile Store Distribution: App Store and Google Play | MyAI</title>
+    <meta name="description" content="The web reaches every user as soon as you deploy, but a mobile app passes two gates: store review and users updating. That is why schedules, policies and…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/05-mobile-app-stores/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/05-mobile-app-stores/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Mobile Store Distribution: App Store and Google Play | MyAI" />
+    <meta property="og:description" content="The web reaches every user as soon as you deploy, but a mobile app passes two gates: store review and users updating. That is why schedules, policies and…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/05-mobile-app-stores/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/05-mobile-app-stores.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link active" aria-current="page" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>App Store · Google Play</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Mobile Store Distribution: App Store and Google Play</h1>
+<p>The web reaches every user as soon as you deploy, but a mobile app passes two gates: <strong>store review</strong> and <strong>users updating</strong>. That is why schedules, policies and gradual releases must be designed in advance.</p>
+<h2>The Whole Flow</h2>
+<pre><code class="language-mermaid">flowchart LR
+    B[Build / Sign] --&gt; UP[Upload]
+    UP --&gt; T[Test Track / TestFlight]
+    T --&gt; R{Store Review}
+    R --&gt;|approved| P[Gradual release]
+    R --&gt;|rejected| F[Fix / Resubmit]
+    F --&gt; UP
+    P --&gt; M[Watch crashes / metrics]
+    M --&gt;|anomaly| H[Halt / Hotfix]
+    M --&gt;|healthy| A[Release to 100%]
+</code></pre>
+<h2>Accounts and Cost Model</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Apple</th>
+<th>Google</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Developer account</td>
+<td>Apple Developer Program annual membership</td>
+<td>Play Console one-time registration fee</td>
+</tr>
+<tr>
+<td>Review tool</td>
+<td>App Store Connect</td>
+<td>Play Console</td>
+</tr>
+<tr>
+<td>Pre-release testing</td>
+<td>TestFlight</td>
+<td>Internal / Closed / Open testing tracks</td>
+</tr>
+</tbody></table>
+<p>Amounts vary by region and over time, so check them on the enrollment screen.</p>
+<h2>Apple: Review and Testing</h2>
+<ul>
+<li><strong>TestFlight</strong>: up to 100 internal testers and up to 10,000 external testers. External testing requires the first build to be approved by App Review. A TestFlight build expires <strong>90 days after upload</strong> and can no longer be tested, so upload fresh builds regularly during a long beta.</li>
+<li><strong>App Review</strong>: Apple states that on average 90% of submissions are reviewed in less than 24 hours. You can request an <strong>expedited review</strong> for a critical bug fix or an event deadline.</li>
+<li><strong>Phased Release</strong>: rolls an update out to automatic-update users over 7 days. It can be paused for up to 30 days, and anyone can still download manually at any time.</li>
+<li>Common rejection points (App Review Guidelines):<ul>
+<li>2.1 App Completeness: a finished build without placeholders, a demo account or demo mode for apps with login, and the backend running during review</li>
+<li>5.1.1: if the app supports account creation, it must also offer <strong>account deletion inside the app</strong></li>
+</ul>
+</li>
+</ul>
+<h2>Apple: Requirements Verified for 2026</h2>
+<table>
+<thead>
+<tr>
+<th>Effective</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2024-05-01</td>
+<td>If you use listed APIs (required reason APIs), declare approved reasons in the privacy manifest</td>
+</tr>
+<tr>
+<td>2026-01-31</td>
+<td>Answer the new age rating questions so update submissions are not interrupted</td>
+</tr>
+<tr>
+<td>2026-04-28</td>
+<td>Builds must use Xcode 26 or later with a 26 SDK (e.g. iOS 26) to upload</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>iOS · iPadOS apps must target iOS 13 or later to upload</td>
+</tr>
+<tr>
+<td>2026-09 (in force)</td>
+<td>Submitting new apps and updates, and notarization for alternative distribution, require answers to the <strong>social media capability questions</strong> in the age rating questionnaire. Apps that declare the capability go into the Time Allowance &quot;Social Media&quot; category with a minimum age rating of 13+. Apps that disable it for users under 13 must check age ranges with the Declared Age Range API</td>
+</tr>
+<tr>
+<td>2027-04 (announced)</td>
+<td>iOS · iPadOS apps must be built with the iOS 27 · iPadOS 27 SDK or later (Xcode 27) to upload. tvOS, visionOS and watchOS need their 27 SDKs too</td>
+</tr>
+</tbody></table>
+<ul>
+<li>If you include a commonly used third-party SDK (on Apple&#39;s list), that SDK&#39;s <strong>privacy manifest and signature</strong> are required.</li>
+<li>Apps distributed in the EU need a <strong>trader status</strong> under the DSA (Digital Services Act).</li>
+</ul>
+<h2>Google Play: Tracks and New-Account Conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Internal testing</td>
+<td>Up to 100 testers, fast internal QA</td>
+</tr>
+<tr>
+<td>Closed testing</td>
+<td>Chosen tester groups, multiple tracks allowed</td>
+</tr>
+<tr>
+<td>Open testing</td>
+<td>Anyone can join; the test version is visible on the Play Store</td>
+</tr>
+<tr>
+<td>Production</td>
+<td>General release, staged rollout available</td>
+</tr>
+</tbody></table>
+<p><strong>Personal developer accounts created on or after 2023-11-13</strong> must run <strong>a closed test with at least 12 testers opted in for 14 consecutive days</strong> before applying for production access. Meeting the conditions does not guarantee approval. Organization accounts and older personal accounts are not affected.</p>
+<h2>Google Play: Requirements Verified for 2026</h2>
+<table>
+<thead>
+<tr>
+<th>Effective</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-08-31</td>
+<td>New apps and updates must target Android 16 (API 36) or higher. Wear OS · Automotive: API 35; TV · XR: API 34</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>Existing apps must target API 35 or higher to stay available to new users on newer Android versions</td>
+</tr>
+<tr>
+<td>2026-11-01</td>
+<td>Latest date available when requesting an extension to the above</td>
+</tr>
+<tr>
+<td>2026-09-30</td>
+<td>Android developer verification starts in Brazil, Indonesia, Singapore and Thailand (certified devices, participating stores)</td>
+</tr>
+<tr>
+<td>2025-11-01 (in force)</td>
+<td>New apps and updates targeting Android 15+ must support 16 KB page sizes on 64-bit devices. This affects apps with native (C/C++) code or native libraries; apps using only Kotlin or Java are already compatible</td>
+</tr>
+<tr>
+<td>2027-02-01</td>
+<td>Final deadline for updates to existing apps after the extension period: updates without 16 KB page size support cannot be released</td>
+</tr>
+</tbody></table>
+<pre><code class="language-kotlin">android {
+    defaultConfig {
+        targetSdk = 36
+    }
+}
+</code></pre>
+<ul>
+<li><strong>Data safety</strong> form: every app on closed, open or production tracks must complete it, with a privacy policy link. Apps that collect nothing still fill it in.</li>
+<li><strong>Developer verification</strong> also applies to apps distributed outside Play and is planned to expand worldwide in 2027. Limited distribution accounts (up to 20 devices) are described for students and hobbyists.</li>
+<li>Google Play is not the only Android channel in Korea. The Korean app market <strong>ONE store</strong> offers Android app registration and sales plus an in-app payment SDK through its own developer center, and Samsung&#39;s <strong>Galaxy Store</strong> is on the participating-store list for Android developer verification.</li>
+</ul>
+<h2>Signing and Key Management</h2>
+<p>For a mobile app, <strong>the signing key is the app&#39;s identity</strong>. Lose the key or miss an expiry and you cannot ship updates, even with perfectly good code.</p>
+<h3>Android: Play App Signing</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Held by</th>
+<th>Purpose</th>
+<th>If lost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App signing key</td>
+<td>Google</td>
+<td>Signs the APKs installed on user devices. Never changes during the app&#39;s lifetime</td>
+<td>Google holds it, so the developer cannot lose it</td>
+</tr>
+<tr>
+<td>Upload key</td>
+<td>Developer</td>
+<td>Signs the AAB before uploading to Play Console</td>
+<td>Request an <strong>upload key reset</strong> in Play Console; only the account owner can request it. You can keep updating the same app</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Play App Signing is required for distribution on Google Play. Only apps created before 2021-08 may keep distributing self-signed builds.</li>
+<li>If you lose a signing key you manage yourself, <strong>you cannot publish updates to the existing app</strong>, and the same key cannot be regenerated.</li>
+</ul>
+<h3>Apple: Certificates and Provisioning Profiles</h3>
+<ul>
+<li>Distribution builds are signed with the team&#39;s <strong>distribution certificate</strong> and a <strong>provisioning profile</strong> that ties an App ID to that certificate.</li>
+<li>If a certificate expires or is revoked while the membership is valid, <strong>apps already on the App Store are not affected</strong>. But new builds signed with it cannot be uploaded to App Store Connect, and uploaded builds not yet submitted for review may be marked Invalid Binary if signed with a revoked certificate.</li>
+<li>In-house (internal distribution) certificates are different: once expired or revoked, <strong>users can no longer run the app</strong>.</li>
+<li>Cloud-managed certificates used by Xcode cloud signing are recreated automatically 90 days before expiry when new signing requests arrive. If you manage certificates yourself, schedule creating a new certificate and regenerating the profiles that reference it.</li>
+</ul>
+<h3>Where Keys Live in CI</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CI secret</td>
+<td>Store the keystore · p12 as Base64 in a secret and restore it to a temp file in the job. Most common, but rotation and auditing are manual</td>
+</tr>
+<tr>
+<td>fastlane match</td>
+<td>Encrypts certificates and profiles in a separate store (Git and others) shared by the team and CI. Use <code>readonly</code> mode on CI so it never creates new certificates</td>
+</tr>
+<tr>
+<td>EAS (Expo)</td>
+<td>Keeps the keystore and distribution certificate encrypted on EAS servers and uses them at build time</td>
+</tr>
+<tr>
+<td>Xcode Cloud</td>
+<td>Apple&#39;s CI/CD. Cloud signing hands certificate and profile management to Apple</td>
+</tr>
+</tbody></table>
+<p>Release automation tools: <strong>fastlane</strong> (<code>upload_to_play_store</code> / <code>supply</code>, actions for App Store and TestFlight upload), <strong>EAS Submit</strong>, <strong>Xcode Cloud</strong> (distribution to TestFlight and App Store Connect), and the <strong>Google Play Developer API</strong> (upload AABs in an edit, set track and rollout).</p>
+<h3>Costly Failures</h3>
+<table>
+<thead>
+<tr>
+<th>Mistake</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Losing a self-managed Android signing key</td>
+<td>No more updates to the existing app</td>
+</tr>
+<tr>
+<td>Upload key or keystore password in the repository or build files</td>
+<td>Treat it as leaked and reset the upload key. Keep passwords outside build files (environment variables, a separate file)</td>
+</tr>
+<tr>
+<td>Discovering an expired distribution certificate on launch day</td>
+<td>Uploads fail and the launch slips. Put expiry dates on a calendar and in alerts</td>
+</tr>
+<tr>
+<td>Expired in-house certificate</td>
+<td>Every internal app stops launching at once</td>
+</tr>
+<tr>
+<td>Keys only on one person&#39;s laptop</td>
+<td>A resignation or lost laptop halts releases</td>
+</tr>
+</tbody></table>
+<h3>CI Upload Example (Android → Internal Track)</h3>
+<pre><code class="language-yaml">jobs:
+  android-release:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@&lt;commit-sha&gt;
+      - run: echo &quot;$UPLOAD_KEYSTORE_B64&quot; | base64 -d &gt; &quot;$RUNNER_TEMP/upload.jks&quot;
+        env:
+          UPLOAD_KEYSTORE_B64: ${{ secrets.UPLOAD_KEYSTORE_B64 }}
+      - run: ./gradlew bundleRelease
+        env:
+          UPLOAD_KEYSTORE_PATH: ${{ runner.temp }}/upload.jks
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
+      - run: &gt;-
+          fastlane supply
+          --aab app/build/outputs/bundle/release/app-release.aab
+          --package_name com.example.app
+          --track internal
+          --json_key_data &quot;$PLAY_JSON&quot;
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+</code></pre>
+<ul>
+<li>Make <code>signingConfigs</code> in <code>build.gradle</code> read these environment variables and never write the password into the file.</li>
+<li>The service account key used to upload to Play is also a long-lived secret. Limit its permissions to release management and keep it behind the <code>environment: production</code> protection rules.</li>
+<li>Upload to the <code>internal</code> track first, and promote separately in Play Console or through the API.</li>
+</ul>
+<p>For iOS → TestFlight, write a fastlane lane. It authenticates with an App Store Connect API key, and match runs <code>readonly</code> so it only downloads existing certificates and profiles.</p>
+<pre><code class="language-ruby">lane :beta do
+  key = app_store_connect_api_key(key_id: ENV[&quot;ASC_KEY_ID&quot;], issuer_id: ENV[&quot;ASC_ISSUER_ID&quot;], key_content: ENV[&quot;ASC_KEY_P8&quot;])
+  match(type: &quot;appstore&quot;, readonly: true, api_key: key)
+  build_app(scheme: &quot;App&quot;)
+  upload_to_testflight(api_key: key)
+end
+</code></pre>
+<ul>
+<li>Put the API key values such as <code>ASC_KEY_P8</code> and the match storage passphrase (<code>MATCH_PASSWORD</code>) in CI secrets.</li>
+</ul>
+<h2>Running a Staged Rollout</h2>
+<ul>
+<li>A Google Play staged rollout percentage <strong>does not increase automatically</strong>. A person raises it after checking metrics.</li>
+<li>If something goes wrong, <strong>halt</strong>: no additional users receive the version, and users who already have it stay on it.</li>
+<li>You can halt even after a 100% rollout; the previous version is then served to new users again.</li>
+<li>Halting a rollout or pausing a phased release does not undo the build on <strong>devices that already have it</strong>. The only way to retire that build is for the app to fetch a <strong>minimum supported version</strong> from your server at startup and, if it is older, show a <strong>force-update screen</strong>. That path must already be in your first release build, and you must test it before launch. On Android, Play&#39;s in-app updates (immediate flow) can implement the screen.</li>
+</ul>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad:  First submission the day before launch. A login-only app without a demo account is rejected; launch slips.
+Good: Start TestFlight and a closed test two weeks early, prepare a demo account for review,
+      and use phased release plus server feature flags to limit exposure if problems appear.
+</code></pre>
+<h2>Pre-Submission Checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Checked the latest SDK and target API deadlines</li>
+<li><input disabled="" type="checkbox"> Privacy manifest / Data safety matches what is actually collected (including SDKs)</li>
+<li><input disabled="" type="checkbox"> Demo account and backend ready for review</li>
+<li><input disabled="" type="checkbox"> An in-app account deletion path exists</li>
+<li><input disabled="" type="checkbox"> Answered the social media capability questions in the age rating questionnaire (required from 2026-09)</li>
+<li><input disabled="" type="checkbox"> Tested the server-checked minimum supported version and the force-update screen</li>
+<li><input disabled="" type="checkbox"> Rollout percentages and halt criteria (crash rate, etc.) are defined</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://developer.apple.com/news/upcoming-requirements/">Upcoming Requirements</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/testflight/">TestFlight</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/distribute/app-review/">App Review</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/app-store/review/guidelines/">App Review Guidelines</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/app-store-connect/update-your-app/release-a-version-update-in-phases/">Release a version update in phases</a> — App Store Connect Help, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/support/third-party-SDK-requirements/">Third-party SDK requirements</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/programs/whats-included/">Membership Details - Apple Developer Program</a> — Apple Developer, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/google/play/requirements/target-sdk">Target API level requirements for Google Play apps</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/guide/practices/page-sizes">Support 16 KB page sizes</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/developer-verification">Android developer verification</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/9845334?hl=en">Set up an open, closed, or internal test</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/14151465?hl=en">App testing requirements for new personal developer accounts</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/6346149?hl=en">Release app updates with staged rollouts</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/10787469?hl=en">Provide information for Google Play&#39;s Data safety section</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://support.google.com/googleplay/android-developer/answer/9842756?hl=en">Use Play App Signing</a> — Play Console Help, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/studio/publish/app-signing">Sign your app</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/support/certificates/">Certificates</a> — Apple Developer Support, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/account/certificates/cloud-managed-certificates">Cloud-managed certificates</a> — Apple Developer Account Help, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/account/certificates/certificates-overview/">Certificates overview</a> — Apple Developer Account Help, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/documentation/xcode/xcode-cloud">Xcode Cloud</a> — Apple Developer Documentation, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/match/">match</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/upload_to_play_store/">upload_to_play_store</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.expo.dev/app-signing/managed-credentials/">Using automatically managed credentials</a> — Expo Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.google.com/android-publisher">Google Play Developer API</a> — Google for Developers, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=0d2gpmml">Introducing Time Allowances</a> — Apple Developer News, 2026-06-08, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=tlur8uvi">Age rating questionnaire now includes social media questions</a> — Apple Developer News, 2026-07-09, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/news/?id=k1mtkt1k">App Store submissions now open for the latest OS releases</a> — Apple Developer News, 2026-09-09, accessed 2026-09-28</li>
+<li><a href="https://developer.apple.com/help/app-store-connect/reference/app-uploads/app-build-statuses/">App build statuses</a> — App Store Connect Help, accessed 2026-09-28</li>
+<li><a href="https://developer.android.com/guide/playcore/in-app-updates">In-app updates</a> — Android Developers, accessed 2026-09-28</li>
+<li><a href="https://android-developers.googleblog.com/2025/05/prepare-play-apps-for-devices-with-16kb-page-size.html">Prepare your apps for Google Play&#39;s 16 KB page size compatibility requirement</a> — Android Developers Blog, 2025-05, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/app-store-connect-api/">Using App Store Connect API</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://docs.fastlane.tools/actions/upload_to_testflight/">upload_to_testflight</a> — fastlane docs, accessed 2026-09-28</li>
+<li><a href="https://onestore-dev.gitbook.io/dev">ONE store developer center</a> — ONE store, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/04-release-strategies/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Canary · Blue-Green · Flags · Rollback</span></a><a class="page-link next" href="../../../en/platform/06-domain-dns-tls-cdn/"><span><small>Next</small>Domain · DNS · TLS · CDN</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

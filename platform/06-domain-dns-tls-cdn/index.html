@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Domain · DNS · TLS · CDN: 사용자가 도달하는 경로 | MyAI(마이아이)</title>
+    <meta name="description" content="사용자가 주소창에 Domain을 입력한 순간부터 첫 Byte를 받기까지, 여러 계층이 차례로 관여한다. 어느 한 곳이 틀리면 서비스는 멀쩡해도 사용자는 접속하지 못한다." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="Domain · DNS · TLS · CDN: 사용자가 도달하는 경로 | MyAI(마이아이)" />
+    <meta property="og:description" content="사용자가 주소창에 Domain을 입력한 순간부터 첫 Byte를 받기까지, 여러 계층이 차례로 관여한다. 어느 한 곳이 틀리면 서비스는 멀쩡해도 사용자는 접속하지 못한다." />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/platform/06-domain-dns-tls-cdn.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link active" aria-current="page" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Platform 배포와 서비스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Domain · DNS · TLS · CDN</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Domain · DNS · TLS · CDN: 사용자가 도달하는 경로</h1>
+<p>사용자가 주소창에 Domain을 입력한 순간부터 첫 Byte를 받기까지, 여러 계층이 차례로 관여한다. 어느 한 곳이 틀리면 <strong>서비스는 멀쩡해도 사용자는 접속하지 못한다</strong>.</p>
+<h2>요청이 도달하는 경로</h2>
+<pre><code class="language-mermaid">flowchart LR
+    U[Browser / App] --&gt; D[DNS 조회]
+    D --&gt; C[CDN Edge]
+    C --&gt; T[TLS Handshake]
+    T --&gt; K{Cache Hit?}
+    K --&gt;|예| R[Edge에서 응답]
+    K --&gt;|아니오| O[Origin: App / Storage]
+    O --&gt; R
+</code></pre>
+<h2>Domain과 DNS 기본</h2>
+<table>
+<thead>
+<tr>
+<th>Record</th>
+<th>용도</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A / AAAA</td>
+<td>이름 → IPv4 / IPv6 주소</td>
+<td><code>api.example.com → 203.0.113.10</code></td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>이름 → 다른 이름</td>
+<td><code>www → mysite.hosting-provider.net</code></td>
+</tr>
+<tr>
+<td>TXT</td>
+<td>소유 확인, SPF 등</td>
+<td>Hosting 제공사 인증 문자열</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>Mail Server 지정</td>
+<td>Mail 서비스 제공사</td>
+</tr>
+<tr>
+<td>CAA</td>
+<td>이 Domain의 인증서를 발급할 수 있는 CA 지정</td>
+<td><code>0 issue &quot;letsencrypt.org&quot;</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>TTL</strong>은 변경이 퍼지는 속도를 정한다. 이전·전환 전에 TTL을 미리 낮춰 두면 되돌리기가 빨라진다.</li>
+<li>Domain 등록 계정에는 <strong>2FA</strong>와 <strong>자동 갱신</strong>을 켠다. Domain 만료는 가장 어이없고 가장 치명적인 장애다.</li>
+<li>Apex Domain(<code>example.com</code>)은 표준상 CNAME을 둘 수 없어서, 제공사가 ALIAS · ANAME · CNAME Flattening 같은 기능을 따로 제공하는 경우가 많다.</li>
+</ul>
+<h2>TLS 인증서: 수명이 짧아진다</h2>
+<p>CA/Browser Forum은 2025-04 Ballot SC-081v3를 통과시켜 공개 TLS 인증서의 최대 유효 기간을 단계적으로 줄였다.</p>
+<table>
+<thead>
+<tr>
+<th>발급 시점</th>
+<th>최대 유효 기간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-03-15 이후</td>
+<td>200일</td>
+</tr>
+<tr>
+<td>2027-03-15 이후</td>
+<td>100일</td>
+</tr>
+<tr>
+<td>2029-03-15 이후</td>
+<td>47일</td>
+</tr>
+</tbody></table>
+<p>Let&#39;s Encrypt의 공지된 일정(2026-09-28 확인):</p>
+<ul>
+<li>2026-01: 6일짜리 단기 인증서와 IP 주소 인증서 정식 제공</li>
+<li>2026-05-13: Opt-in <code>tlsserver</code> Profile을 45일 인증서로 전환</li>
+<li>2027-02-10: 기본 Profile 64일로 단축</li>
+<li>2028-02-16: 기본 Profile 45일로 단축</li>
+</ul>
+<p>결론은 하나다. <strong>인증서 갱신은 사람이 하는 일이 아니라 자동화(ACME)되어야 하는 일</strong>이다.</p>
+<pre><code class="language-text">나쁜 예: 1년짜리 인증서를 수동 발급하고 Calendar 알림으로 갱신한다.
+좋은 예: Hosting / CDN / Ingress의 자동 발급을 쓰거나 ACME Client로 자동 갱신하고,
+        만료 임박을 Monitoring 경보로 받는다.
+</code></pre>
+<p><strong>어떻게 자동화하나</strong></p>
+<ul>
+<li><strong>VM · 단일 Server</strong>: certbot 같은 ACME Client가 발급하고 갱신 작업을 예약한다. Web Server를 Caddy로 두면 인증서 발급 · 갱신과 HTTP → HTTPS 전환이 기본 동작이다.</li>
+<li><strong>Kubernetes</strong>: cert-manager가 <code>Certificate</code> Resource를 보고 ACME로 발급 · 갱신해 Secret에 저장하고, Ingress · Gateway가 그 Secret을 쓴다.</li>
+<li><strong>Managed Platform</strong>: 대부분의 Hosting · CDN · Serverless Platform은 Custom Domain을 연결하면 인증서를 자동 발급 · 갱신한다. 할 일은 DNS와 CAA Record를 맞게 두는 것이다.</li>
+</ul>
+<p>Let&#39;s Encrypt의 <code>shortlived</code>(6일)와 <code>tlsserver</code> Profile은 <strong>Opt-in</strong>이다. ACME Client가 Profile을 명시적으로 요청해야 하고, 요청하지 않으면 기본 <code>classic</code> Profile로 발급된다. Profile 선택을 지원하지 않는 Client도 있다.</p>
+<h2>HTTPS 강제: HSTS</h2>
+<p>HSTS(RFC 6797)는 <code>Strict-Transport-Security</code> Header로 &quot;이 사이트는 HTTPS로만 접속하라&quot;고 Browser에 알린다.</p>
+<pre><code class="language-http">Strict-Transport-Security: max-age=31536000; includeSubDomains
+</code></pre>
+<ul>
+<li>처음에는 짧은 <code>max-age</code>로 시작해 문제가 없으면 늘린다.</li>
+<li><code>includeSubDomains</code>는 모든 Subdomain이 HTTPS를 지원할 때만 켠다.</li>
+</ul>
+<h2>CDN과 Cache</h2>
+<p>CDN은 사용자 가까운 Edge에서 응답해 <strong>지연 시간과 Origin 부하</strong>를 줄인다. Cache 동작은 HTTP Caching 표준(RFC 9111)의 <code>Cache-Control</code> Header로 제어한다.</p>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>권장 Header 예</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hash가 붙은 정적 파일 (<code>app.3f9a.js</code>)</td>
+<td><code>public, max-age=31536000, immutable</code></td>
+<td>내용이 바뀌면 파일명이 바뀐다</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td><code>no-cache</code> 또는 짧은 <code>max-age</code></td>
+<td>새 배포가 바로 보여야 한다</td>
+</tr>
+<tr>
+<td>개인화 API 응답</td>
+<td><code>private, no-store</code></td>
+<td>다른 사용자에게 Cache되면 사고</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">나쁜 예: 파일명을 그대로 두고 긴 Cache를 걸어, 배포 후에도 사용자가 옛 JS를 받는다.
+좋은 예: Build 시 파일명에 Content Hash를 넣고, HTML만 짧게 Cache한다.
+</code></pre>
+<h2>Edge에서 막는 것</h2>
+<p>CDN · Edge는 캐시뿐 아니라 <strong>나쁜 요청을 Origin 앞에서 거르는 곳</strong>이다.</p>
+<ul>
+<li><strong>Rate Limit</strong>: 로그인, 회원가입, 비밀번호 재설정, API Key 발급처럼 남용되기 쉬운 경로에 Client(IP, API Key 등)별 요청 수 제한을 건다. Cloudflare Rate Limiting Rules, AWS WAF Rate-based Rule 등이 있다.</li>
+<li><strong>Managed WAF Rule</strong>: 제공사가 관리하고 갱신하는 규칙 묶음(Cloudflare Managed Ruleset, AWS Managed Rules)으로 알려진 공격 유형을 막는다. 처음에는 기록(Log / Count) 모드로 켜서 오탐을 확인한다.</li>
+<li><strong>Bot 필터링</strong>: 알려진 Bot 패턴을 차단하거나 Challenge를 건다(Cloudflare Bot Fight Mode, AWS WAF Bot Control). 결제 Webhook이나 외부 연동처럼 정상 자동 요청은 예외로 둔다.</li>
+</ul>
+<h2>전환(Cutover) 절차</h2>
+<ol>
+<li>전환 며칠 전 DNS TTL을 낮춘다.</li>
+<li>새 환경에서 인증서 발급과 HTTPS 응답을 먼저 확인한다.</li>
+<li>DNS Record를 바꾸고 여러 지역에서 조회 결과를 확인한다.</li>
+<li>옛 환경은 TTL이 충분히 지날 때까지 유지한다.</li>
+<li>안정되면 TTL을 원래 값으로 돌린다.</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.rfc-editor.org/info/rfc8659/">RFC 8659: DNS Certification Authority Authorization (CAA) Resource Record</a> — IETF, 2019-11, 접근일 2026-09-28</li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc6797.html">RFC 6797: HTTP Strict Transport Security (HSTS)</a> — IETF, 2012-11, 접근일 2026-09-28</li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc9111">RFC 9111: HTTP Caching</a> — IETF, 2022-06, 접근일 2026-09-28</li>
+<li><a href="https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/">Ballot SC081v3: Introduce Schedule of Reducing Validity and Data Reuse Periods</a> — CA/Browser Forum, 2025-04-11, 접근일 2026-09-28</li>
+<li><a href="https://letsencrypt.org/2025/12/02/from-90-to-45">Decreasing Certificate Lifetimes to 45 Days</a> — Let&#39;s Encrypt, 2025-12-02, 접근일 2026-09-28</li>
+<li><a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability">6-day and IP Address Certificates are Generally Available</a> — Let&#39;s Encrypt, 2026-01-15, 접근일 2026-09-28</li>
+<li><a href="https://letsencrypt.org/docs/cert-lifetimes/">Certificate Lifetime Rationale and Plans</a> — Let&#39;s Encrypt, 접근일 2026-09-28</li>
+<li><a href="https://letsencrypt.org/docs/profiles/">Profiles</a> — Let&#39;s Encrypt, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/rate-limiting-rules/">Rate limiting rules</a> — Cloudflare WAF Docs, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> — Cloudflare WAF Docs, 접근일 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/bots/get-started/bot-fight-mode/">Get started with Bot Fight Mode</a> — Cloudflare Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html">Using rate-based rule statements in AWS WAF</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html">Using managed rule groups in AWS WAF</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html">AWS WAF Bot Control</a> — AWS Docs, 접근일 2026-09-28</li>
+<li><a href="https://certbot.eff.org/">Certbot</a> — EFF, 접근일 2026-09-28</li>
+<li><a href="https://caddyserver.com/docs/automatic-https">Automatic HTTPS</a> — Caddy Docs, 접근일 2026-09-28</li>
+<li><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> — cert-manager Docs, 접근일 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../platform/05-mobile-app-stores/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>App Store · Google Play</span></a><a class="page-link next" href="../../platform/07-observability-incident/"><span><small>다음 문서</small>SLO · On-call · Postmortem</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

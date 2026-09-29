@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Observability and Incidents: SLO · Error Budget · On-call · Postmortem | MyAI</title>
+    <meta name="description" content="&quot;The server is up&quot; and &quot;users can do what they came to do&quot; are different sentences. The goal of operations is to promise the second one in numbers and kee…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/07-observability-incident/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Observability and Incidents: SLO · Error Budget · On-call · Postmortem | MyAI" />
+    <meta property="og:description" content="&quot;The server is up&quot; and &quot;users can do what they came to do&quot; are different sentences. The goal of operations is to promise the second one in numbers and kee…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/07-observability-incident/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/07-observability-incident.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link active" aria-current="page" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>SLO · On-call · Postmortem</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Observability and Incidents: SLO · Error Budget · On-call · Postmortem</h1>
+<p>&quot;The server is up&quot; and &quot;users can do what they came to do&quot; are different sentences. The goal of operations is to <strong>promise the second one in numbers and keep that promise</strong>.</p>
+<h2>SLI · SLO · SLA</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition (per the Google SRE Book)</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLI</td>
+<td>An indicator that measures the level of service</td>
+<td>Successful requests / total requests</td>
+</tr>
+<tr>
+<td>SLO</td>
+<td>A target value or range the SLI should reach</td>
+<td>99.9% over 30 days</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>A promise to customers with consequences (refunds, etc.) if missed</td>
+<td>Credits when monthly availability falls short</td>
+</tr>
+</tbody></table>
+<ul>
+<li>An SLA is a business and contract decision. Engineers keep an internal <strong>SLO stricter than the SLA</strong>.</li>
+<li>100% is not a goal. Reliability beyond what users can notice <strong>sacrifices feature velocity</strong>.</li>
+</ul>
+<h2>Error Budget</h2>
+<p>The error budget is <strong>1 − SLO</strong>. With an SLO of 99.9%, the budget is 0.1%.</p>
+<pre><code class="language-text">1,000,000 requests over 4 weeks, SLO 99.9%
+→ allowed failures = 1,000
+→ budget remaining: keep shipping new features
+→ budget exhausted: slow releases and prioritize reliability work
+</code></pre>
+<pre><code class="language-mermaid">flowchart LR
+    S[Set SLO] --&gt; M[Measure SLI]
+    M --&gt; B{Error budget left?}
+    B --&gt;|Yes| F[Keep shipping features]
+    B --&gt;|No| R[Prioritize reliability work]
+    F --&gt; M
+    R --&gt; M
+</code></pre>
+<p>An error budget lets development and operations agree on &quot;can we deploy?&quot; <strong>with numbers instead of feelings</strong>. Writing that agreement down gives you an error budget policy.</p>
+<h2>Alerts Start from the SLO</h2>
+<p>Waking people for cause metrics such as &quot;CPU at 80%&quot; produces many false alarms. The SRE Workbook recommends alerting on <strong>burn rate</strong> (how fast the budget is being consumed) and looking at several time windows together: the <strong>multiwindow, multi-burn-rate</strong> approach.</p>
+<pre><code class="language-text">Burn rate = actual error ratio / error ratio allowed by the SLO
+e.g. spending 2% of a 30-day (720-hour) budget in 1 hour
+     burn rate = 0.02 × 720 / 1 = 14.4
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Alert level</th>
+<th>Meaning</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Page</td>
+<td>The budget is burning fast</td>
+<td>Respond now</td>
+</tr>
+<tr>
+<td>Ticket</td>
+<td>It is leaking slowly</td>
+<td>Handle during working hours</td>
+</tr>
+</tbody></table>
+<p>The SRE Workbook recommends these starting values (for a 30-day SLO).</p>
+<table>
+<thead>
+<tr>
+<th>Budget consumed</th>
+<th>Long window</th>
+<th>Short window</th>
+<th>Burn rate</th>
+<th>Alert</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2%</td>
+<td>1 hour</td>
+<td>5 minutes</td>
+<td>14.4</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>5%</td>
+<td>6 hours</td>
+<td>30 minutes</td>
+<td>6</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>3 days</td>
+<td>6 hours</td>
+<td>1</td>
+<td>Ticket</td>
+</tr>
+</tbody></table>
+<p>An alert fires only when <strong>both</strong> windows exceed the threshold. The long window keeps a brief error spike from waking people; the short window stops an alert from firing for hours after the incident is already over.</p>
+<p>A Prometheus alert rule example (99.9% SLO, so the allowed error ratio is 0.001). It assumes recording rules such as <code>job:slo_errors_per_request:ratio_rate1h</code> precompute the error ratio for each window.</p>
+<pre><code class="language-yaml">groups:
+  - name: slo-burn-rate
+    rules:
+      - alert: ErrorBudgetBurn
+        expr: |
+          (
+            job:slo_errors_per_request:ratio_rate1h{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate5m{job=&quot;api&quot;} &gt; (14.4 * 0.001)
+          )
+          or
+          (
+            job:slo_errors_per_request:ratio_rate6h{job=&quot;api&quot;} &gt; (6 * 0.001)
+            and
+            job:slo_errors_per_request:ratio_rate30m{job=&quot;api&quot;} &gt; (6 * 0.001)
+          )
+        labels:
+          severity: page
+</code></pre>
+<h2>The Three Signals of Observability</h2>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Metrics</td>
+<td>How much, how often? (request count, error rate, latency distribution)</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>What happened? (individual events and context)</td>
+</tr>
+<tr>
+<td>Traces</td>
+<td>Where did it slow down? (request path across services)</td>
+</tr>
+</tbody></table>
+<p><strong>OpenTelemetry</strong> is a vendor-neutral standard for collecting and exporting metrics, logs and traces, and it reached CNCF Graduated status in 2026-05. Instrumenting with OpenTelemetry means fewer code changes when you switch backends (monitoring products).</p>
+<h2>On-call</h2>
+<ul>
+<li>The Google SRE Book sets a target of <strong>at most two incidents per 12-hour on-call shift</strong>. The number comes from the estimate that one incident, including root-cause analysis, remediation and follow-up such as the postmortem and bug fixes, takes about 6 hours on average. Scale it down for shorter shifts.</li>
+<li>Link a <strong>runbook</strong> (what to check, what to try) to every alert.</li>
+<li>Delete alerts that need no action. Ignored alerts teach people to ignore the real ones too.</li>
+</ul>
+<h2>Incident Response Flow</h2>
+<pre><code class="language-mermaid">flowchart LR
+    D[Detect] --&gt; T[Triage / set severity]
+    T --&gt; C[Assign commander / comms channel]
+    C --&gt; MI[Mitigate: rollback, flag off]
+    MI --&gt; RS[Confirm recovery]
+    RS --&gt; P[Postmortem]
+    P --&gt; A[Track action items]
+</code></pre>
+<p><strong>Mitigation comes before root-cause analysis.</strong> Even without knowing the cause, stop the user impact first with a rollback or a flag off.</p>
+<h2>Backups and Recovery Objectives</h2>
+<p>Code can be redeployed, but <strong>data comes back only from backups</strong>. First decide, in numbers, how much you can lose and how long you can be down.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+<th>Question it asks</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RPO (Recovery Point Objective)</td>
+<td>The maximum acceptable time since the last recovery point: how much data you can lose</td>
+<td>In the worst case, how many minutes of data can we lose?</td>
+</tr>
+<tr>
+<td>RTO (Recovery Time Objective)</td>
+<td>The maximum acceptable delay between the interruption and restoration of service</td>
+<td>Within how many minutes or hours must we be back?</td>
+</tr>
+</tbody></table>
+<h3>PITR on Managed Databases</h3>
+<p>PITR (point-in-time recovery) restores any moment within the retention period from backups and transaction logs.</p>
+<ul>
+<li><strong>Amazon RDS</strong>: automated backup retention is 1–35 days. Transaction logs are uploaded to S3 every 5 minutes, so the latest restorable time is usually about 5 minutes before now. A restore does not overwrite the existing instance; it creates a <strong>new DB instance</strong>, and settings such as security groups and parameter groups may be created with defaults.</li>
+<li><strong>Cloud SQL</strong>: PITR log retention is 1–35 days (default 14) on Enterprise Plus and 1–7 days (default 7) on Enterprise.</li>
+<li>Because the restore lands on a new instance, your runbook needs <strong>switching the connection address and restoring settings</strong> to meet the RTO.</li>
+</ul>
+<h3>Restore Drill</h3>
+<ol>
+<li>Pick the point to restore (e.g. yesterday 14:00) and the target RTO.</li>
+<li>Create a new instance with PITR, separate from production. Do not touch production.</li>
+<li>Check row counts, the latest record timestamp and key queries, then attach the app and run a smoke test.</li>
+<li>The time from request until the app can use it again is your <strong>measured RTO</strong>; the gap between the last restored record and the target point is your <strong>measured RPO</strong>.</li>
+<li>Write down every step that blocked you (permissions, networking, parameters, secrets) in the runbook.</li>
+<li>Delete the restored instance to cut cost and personal-data exposure.</li>
+</ol>
+<h3>When Cross-Region Copies Are Worth It</h3>
+<ul>
+<li>A contract or regulation requires recovery from a full-region outage</li>
+<li>A paid core service must meet its RPO and RTO even during a region outage</li>
+<li>You need a copy in a <strong>separate place</strong> against account takeover or accidental deletion (also consider copying to another account)</li>
+</ul>
+<p>Amazon RDS offers cross-Region automated backups that replicate snapshots and transaction logs to another region. For an early product, or data you can regenerate, it is often not worth the storage and transfer cost. If you copy personal data to an overseas region, also review cross-border transfer requirements.</p>
+<h2>Blameless Postmortem</h2>
+<p>Google runs a <strong>blameless postmortem</strong> culture. It assumes the people involved made the best decisions they could with the information they had at the time, and it <strong>fixes the environment and the system, not the people</strong>.</p>
+<pre><code class="language-text">Bad:  &quot;The person who deployed didn&#39;t check, so it broke. Be careful next time.&quot;
+Good: &quot;There was no pre-deploy migration compatibility check.
+       Add a schema compatibility check to CI (owner, due date).&quot;
+</code></pre>
+<p>Basic postmortem sections: summary, impact (users, duration, budget spent), timeline, root cause and contributing factors, what went well, where we got lucky, action items (owner, due date).</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://sre.google/sre-book/service-level-objectives/">Service Level Objectives</a> — Google SRE Book, accessed 2026-09-28</li>
+<li><a href="https://sre.google/workbook/implementing-slos/">Implementing SLOs</a> — Google SRE Workbook, accessed 2026-09-28</li>
+<li><a href="https://sre.google/workbook/error-budget-policy/">Error Budget Policy</a> — Google SRE Workbook, accessed 2026-09-28</li>
+<li><a href="https://sre.google/workbook/alerting-on-slos/">Alerting on SLOs</a> — Google SRE Workbook, accessed 2026-09-28</li>
+<li><a href="https://sre.google/sre-book/being-on-call/">Being On-Call</a> — Google SRE Book, accessed 2026-09-28</li>
+<li><a href="https://sre.google/sre-book/postmortem-culture/">Postmortem Culture: Learning from Failure</a> — Google SRE Book, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html">Disaster Recovery (DR) objectives</a> — AWS Well-Architected Reliability Pillar, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html">Restoring a DB instance to a specified time for Amazon RDS</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html">Replicating automated backups to another AWS Region</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/configure-pitr">Configure point-in-time recovery (PITR)</a> — Cloud SQL for PostgreSQL Docs, accessed 2026-09-28</li>
+<li><a href="https://www.cncf.io/announcements/2026/05/21/cloud-native-computing-foundation-announces-opentelemetrys-graduation-solidifying-status-as-the-de-facto-observability-standard/">CNCF Announces OpenTelemetry&#39;s Graduation</a> — CNCF, 2026-05-21, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/06-domain-dns-tls-cdn/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Domain · DNS · TLS · CDN</span></a><a class="page-link next" href="../../../en/platform/08-security-supply-chain/"><span><small>Next</small>Secrets · SBOM · SLSA</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

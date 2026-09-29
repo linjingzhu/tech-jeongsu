@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Domain · DNS · TLS · CDN: The Path Users Take | MyAI</title>
+    <meta name="description" content="From the moment a user types a domain into the address bar until the first byte arrives, several layers take part in turn. If any one of them is wrong, us…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/06-domain-dns-tls-cdn/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Domain · DNS · TLS · CDN: The Path Users Take | MyAI" />
+    <meta property="og:description" content="From the moment a user types a domain into the address bar until the first byte arrives, several layers take part in turn. If any one of them is wrong, us…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/06-domain-dns-tls-cdn/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/06-domain-dns-tls-cdn.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-setup-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-setup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link active" aria-current="page" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Domain · DNS · TLS · CDN</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Domain · DNS · TLS · CDN: The Path Users Take</h1>
+<p>From the moment a user types a domain into the address bar until the first byte arrives, several layers take part in turn. If any one of them is wrong, <strong>users cannot connect even though the service itself is fine</strong>.</p>
+<h2>The Path of a Request</h2>
+<pre><code class="language-mermaid">flowchart LR
+    U[Browser / App] --&gt; D[DNS lookup]
+    D --&gt; C[CDN Edge]
+    C --&gt; T[TLS Handshake]
+    T --&gt; K{Cache hit?}
+    K --&gt;|Yes| R[Respond from edge]
+    K --&gt;|No| O[Origin: App / Storage]
+    O --&gt; R
+</code></pre>
+<h2>Domain and DNS Basics</h2>
+<table>
+<thead>
+<tr>
+<th>Record</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A / AAAA</td>
+<td>Name → IPv4 / IPv6 address</td>
+<td><code>api.example.com → 203.0.113.10</code></td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>Name → another name</td>
+<td><code>www → mysite.hosting-provider.net</code></td>
+</tr>
+<tr>
+<td>TXT</td>
+<td>Ownership checks, SPF, etc.</td>
+<td>Verification string from the hosting provider</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>Designates mail servers</td>
+<td>Mail service provider</td>
+</tr>
+<tr>
+<td>CAA</td>
+<td>Specifies which CAs may issue certificates for this domain</td>
+<td><code>0 issue &quot;letsencrypt.org&quot;</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>TTL</strong> sets how fast a change spreads. Lowering TTL ahead of a migration or cutover makes rolling back faster.</li>
+<li>Turn on <strong>2FA</strong> and <strong>auto-renewal</strong> for the domain registrar account. An expired domain is the silliest and most fatal outage.</li>
+<li>The apex domain (<code>example.com</code>) cannot hold a CNAME by the standard, so providers often offer features such as ALIAS · ANAME · CNAME flattening.</li>
+</ul>
+<h2>TLS Certificates: Lifetimes Are Shrinking</h2>
+<p>In 2025-04 the CA/Browser Forum passed Ballot SC-081v3, reducing the maximum validity of public TLS certificates in steps.</p>
+<table>
+<thead>
+<tr>
+<th>Issued</th>
+<th>Maximum validity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>On or after 2026-03-15</td>
+<td>200 days</td>
+</tr>
+<tr>
+<td>On or after 2027-03-15</td>
+<td>100 days</td>
+</tr>
+<tr>
+<td>On or after 2029-03-15</td>
+<td>47 days</td>
+</tr>
+</tbody></table>
+<p>Let&#39;s Encrypt&#39;s announced schedule (checked 2026-09-28):</p>
+<ul>
+<li>2026-01: 6-day short-lived certificates and IP address certificates generally available</li>
+<li>2026-05-13: the opt-in <code>tlsserver</code> profile switches to 45-day certificates</li>
+<li>2027-02-10: default profile shortened to 64 days</li>
+<li>2028-02-16: default profile shortened to 45 days</li>
+</ul>
+<p>The conclusion is simple: <strong>certificate renewal is not a human task; it must be automated (ACME)</strong>.</p>
+<pre><code class="language-text">Bad:  Issue a one-year certificate by hand and renew it from a calendar reminder.
+Good: Use automatic issuance in your hosting / CDN / ingress, or renew with an ACME client,
+      and receive monitoring alerts when expiry approaches.
+</code></pre>
+<p><strong>How to automate it</strong></p>
+<ul>
+<li><strong>VM · single server</strong>: an ACME client such as certbot issues the certificate and schedules renewal. With Caddy as the web server, issuance, renewal and HTTP → HTTPS redirects are the default behavior.</li>
+<li><strong>Kubernetes</strong>: cert-manager watches <code>Certificate</code> resources, issues and renews through ACME, stores the result in a Secret, and the ingress or gateway uses that Secret.</li>
+<li><strong>Managed platforms</strong>: most hosting, CDN and serverless platforms issue and renew certificates automatically once you attach a custom domain. Your job is to keep the DNS and CAA records right.</li>
+</ul>
+<p>Let&#39;s Encrypt&#39;s <code>shortlived</code> (6-day) and <code>tlsserver</code> profiles are <strong>opt-in</strong>. The ACME client must request a profile explicitly; without a request, certificates come from the default <code>classic</code> profile. Some clients do not support profile selection.</p>
+<h2>Forcing HTTPS: HSTS</h2>
+<p>HSTS (RFC 6797) uses the <code>Strict-Transport-Security</code> header to tell browsers &quot;connect to this site only over HTTPS.&quot;</p>
+<pre><code class="language-http">Strict-Transport-Security: max-age=31536000; includeSubDomains
+</code></pre>
+<ul>
+<li>Start with a short <code>max-age</code> and increase it once nothing breaks.</li>
+<li>Turn on <code>includeSubDomains</code> only when every subdomain supports HTTPS.</li>
+</ul>
+<h2>CDN and Caching</h2>
+<p>A CDN answers from an edge close to the user, reducing <strong>latency and origin load</strong>. Caching is controlled with the <code>Cache-Control</code> header from the HTTP Caching standard (RFC 9111).</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Example header</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hashed static files (<code>app.3f9a.js</code>)</td>
+<td><code>public, max-age=31536000, immutable</code></td>
+<td>The file name changes when content changes</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td><code>no-cache</code> or a short <code>max-age</code></td>
+<td>New deploys must show up immediately</td>
+</tr>
+<tr>
+<td>Personalized API responses</td>
+<td><code>private, no-store</code></td>
+<td>Caching them for other users is an incident</td>
+</tr>
+</tbody></table>
+<pre><code class="language-text">Bad:  Keep file names unchanged with a long cache, so users still get old JS after a deploy.
+Good: Put a content hash in file names at build time and cache only HTML briefly.
+</code></pre>
+<h2>What to Block at the Edge</h2>
+<p>A CDN or edge is not only a cache; it is <strong>where bad requests are filtered before they reach the origin</strong>.</p>
+<ul>
+<li><strong>Rate limits</strong>: limit requests per client (IP, API key, etc.) on paths that are easy to abuse, such as login, signup, password reset and API key issuance. Examples: Cloudflare rate limiting rules, AWS WAF rate-based rules.</li>
+<li><strong>Managed WAF rules</strong>: rule sets maintained and updated by the provider (Cloudflare Managed Ruleset, AWS Managed Rules) block known attack types. Start in log (count) mode to check for false positives.</li>
+<li><strong>Bot filtering</strong>: block or challenge known bot patterns (Cloudflare Bot Fight Mode, AWS WAF Bot Control). Exempt legitimate automation such as payment webhooks and external integrations.</li>
+</ul>
+<h2>Cutover Procedure</h2>
+<ol>
+<li>Lower the DNS TTL a few days before the cutover.</li>
+<li>Confirm certificate issuance and HTTPS responses on the new environment first.</li>
+<li>Change the DNS record and check lookups from several regions.</li>
+<li>Keep the old environment until the TTL has fully passed.</li>
+<li>Once stable, restore the TTL to its original value.</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.rfc-editor.org/info/rfc8659/">RFC 8659: DNS Certification Authority Authorization (CAA) Resource Record</a> — IETF, 2019-11, accessed 2026-09-28</li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc6797.html">RFC 6797: HTTP Strict Transport Security (HSTS)</a> — IETF, 2012-11, accessed 2026-09-28</li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc9111">RFC 9111: HTTP Caching</a> — IETF, 2022-06, accessed 2026-09-28</li>
+<li><a href="https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/">Ballot SC081v3: Introduce Schedule of Reducing Validity and Data Reuse Periods</a> — CA/Browser Forum, 2025-04-11, accessed 2026-09-28</li>
+<li><a href="https://letsencrypt.org/2025/12/02/from-90-to-45">Decreasing Certificate Lifetimes to 45 Days</a> — Let&#39;s Encrypt, 2025-12-02, accessed 2026-09-28</li>
+<li><a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability">6-day and IP Address Certificates are Generally Available</a> — Let&#39;s Encrypt, 2026-01-15, accessed 2026-09-28</li>
+<li><a href="https://letsencrypt.org/docs/cert-lifetimes/">Certificate Lifetime Rationale and Plans</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
+<li><a href="https://letsencrypt.org/docs/profiles/">Profiles</a> — Let&#39;s Encrypt, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/rate-limiting-rules/">Rate limiting rules</a> — Cloudflare WAF Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> — Cloudflare WAF Docs, accessed 2026-09-28</li>
+<li><a href="https://developers.cloudflare.com/bots/get-started/bot-fight-mode/">Get started with Bot Fight Mode</a> — Cloudflare Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html">Using rate-based rule statements in AWS WAF</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html">Using managed rule groups in AWS WAF</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html">AWS WAF Bot Control</a> — AWS Docs, accessed 2026-09-28</li>
+<li><a href="https://certbot.eff.org/">Certbot</a> — EFF, accessed 2026-09-28</li>
+<li><a href="https://caddyserver.com/docs/automatic-https">Automatic HTTPS</a> — Caddy Docs, accessed 2026-09-28</li>
+<li><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> — cert-manager Docs, accessed 2026-09-28</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/05-mobile-app-stores/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>App Store · Google Play</span></a><a class="page-link next" href="../../../en/platform/07-observability-incident/"><span><small>Next</small>SLO · On-call · Postmortem</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

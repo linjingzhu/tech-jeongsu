@@ -64,6 +64,16 @@ test("catalog translations preserve identity, links, chronological data and sche
   );
   assert.ok(!/[가-힣]/.test(JSON.stringify(en)));
 });
+test("workflow guides keep every step's summary, output and completion line in both languages", () => {
+  for (const data of [ko, en]) {
+    const flows = data.guides.filter((g) => ["image-workflow", "coding-workflow"].includes(g.id));
+    assert.equal(flows.length, 2);
+    flows.forEach((g) => {
+      assert.ok(g.finish, g.id + ": finish");
+      g.sections.forEach((s) => assert.ok(s.summary && s.output, g.id + ": " + s.heading));
+    });
+  }
+});
 test("all local entry-point assets exist and both locales expose the same interface strings", () => {
   const html = read("index.html");
   for (const [, asset] of html.matchAll(/(?:src|href)="\.\/([^"#]+)"/g))
