@@ -16,6 +16,9 @@ const DOCS = [
       ["Headless · CI · Cloud 실행", "content/ai/11-headless-ci-cloud.md"],
       ["AI 토큰 효율화의 원리", "content/ai/12-token-efficiency.md"],
       ["토큰 절약 실전: 도구별 방법", "content/ai/13-token-saving-practice.md"],
+      ["AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스", "content/ai/14-engineering-layers.md"],
+      ["루프 엔지니어링", "content/ai/15-loop-engineering.md"],
+      ["리버스 엔지니어링: 법과 합법적 활용", "content/ai/16-reverse-engineering.md"],
     ],
   },
   {

@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Layers of AI Engineering: Prompt, Context, Harness | MyAI</title>
+    <meta name="description" content="When the same model given the same job produces different results, what differs is everything outside the model. This document splits that outside into fo…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Layers of AI Engineering: Prompt, Context, Harness | MyAI" />
+    <meta property="og:description" content="When the same model given the same job produces different results, what differs is everything outside the model. This document splits that outside into fo…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/ai/14-engineering-layers/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/ai/14-engineering-layers.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-eng-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-eng-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link active" aria-current="page" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Using AI</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Layers of AI Engineering: Prompt, Context, Harness</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Layers of AI Engineering: Prompt, Context, Harness</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Tell apart what prompt, context, harness and loop engineering each design, decide which layer a failure in front of you belongs to, and then design your own repository&#39;s harness, and measure changes to it, on the principle &quot;instructions request; hooks and permissions enforce&quot;.</p>
+</blockquote>
+<p>When the same model given the same job produces different results, what differs is everything outside the model. This document splits that outside into four layers: this message (prompt), everything the model sees (context), the system between the model and the task (harness), and the repetition that runs until the work is done (loop). Where configuration files live is in &quot;Agent Setup Map&quot;; writing instructions in &quot;Instructions and Memory&quot;; implementing permissions and hooks in &quot;Permissions, Sandbox, Hooks&quot;; subagents and skills in &quot;Subagents, Skills and Plugins&quot;; and external tools in &quot;MCP and External Tools&quot;. Here we stay at the level of concepts, principles and design decisions. The loop layer gets its own in-depth treatment in &quot;Loop Engineering&quot;, and &quot;Reverse Engineering: Law and Lawful Uses&quot;, despite the shared word, covers legal questions rather than this layer structure. Term origins and case studies are <strong>as of 2026-09</strong>, limited to what could be confirmed, and sources whose originals could not be opened directly are marked as such.</p>
+<h2>Key Concepts</h2>
+<h3>Four layers wrap from the inside out</h3>
+<pre><code class="language-mermaid">flowchart TB
+    subgraph LOOP[Loop: repetition that runs until done]
+        subgraph HAR[Harness: the system between model and task]
+            subgraph CTX[Context: everything the model sees]
+                PR[Prompt: this message]
+                KN[Instructions · memory · search results · tool output]
+            end
+            AL[Agent loop]
+            TI[Tool interface]
+            CM[Context management: compaction · subagents]
+            CT[Controls: permissions · sandbox · approvals · hooks]
+        end
+        VE[Verification · completion criteria · attempt budget]
+    end
+    MO[Model]
+    CTX --&gt; MO
+    MO --&gt; AL
+    AL --&gt; TI
+    TI --&gt; CT
+    CT --&gt; KN
+    CM --&gt; CTX
+    AL --&gt; VE
+    VE --&gt; AL
+</code></pre>
+<p>Each outer layer contains the inner ones. A good prompt is useless if the context lacks the facts it needs; good context still ends in an incident if the harness cannot stop a dangerous action; and a sturdy harness still yields false completion if the loop cannot verify &quot;done&quot;.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What is designed</th>
+<th>Scope</th>
+<th>Failure it prevents</th>
+<th>Typical artefacts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompt</td>
+<td>The wording, examples and output format of this request</td>
+<td>One message</td>
+<td>Wrong format, ambiguous requests, off tone</td>
+<td>Prompt templates, few-shot examples, output schemas</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>The makeup of every token the model sees in one inference</td>
+<td>One request (one window)</td>
+<td>Unknown facts, stale information, lost focus from context rot</td>
+<td>CLAUDE.md and AGENTS.md, document indexes, search tools, compaction rules</td>
+</tr>
+<tr>
+<td>Harness</td>
+<td>The agent loop, tools, context management and controls</td>
+<td>Session and repository</td>
+<td>Forbidden actions, the same mistake repeated, tool misuse</td>
+<td>Permission rules, sandbox, hooks, subagent definitions, linters, structural tests</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>Completion criteria, verification and stop rules for the repetition</td>
+<td>Until one task is finished</td>
+<td>Never finishing, false claims of success, repeating the same attempt</td>
+<td>Completion criteria, verification commands, attempt budget, state files</td>
+</tr>
+</tbody></table>
+<h3>The order in which the names arrived</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>When it spread</th>
+<th>Trigger</th>
+<th>Confirmation level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompt</td>
+<td>Early 2020s</td>
+<td>Spread of conversational LLMs</td>
+<td>Common knowledge</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>Around June 2025</td>
+<td>Tobi Lütke and Andrej Karpathy spoke of &quot;context engineering rather than prompt engineering&quot;. Anthropic &quot;Effective context engineering for AI agents&quot; (2025-09-29)</td>
+<td>Anthropic post read in the original; the June remarks confirmed via search results</td>
+</tr>
+<tr>
+<td>Harness</td>
+<td>February 2026</td>
+<td>Anthropic already used &quot;harness&quot; in the title of its 2025-11-26 post &quot;Effective harnesses for long-running agents&quot; (original checked); the discipline name &quot;harness engineering&quot; spread in February 2026. Mitchell Hashimoto listed &quot;Engineer the Harness&quot; as a step in a post (early February). OpenAI, Ryan Lopopolo, &quot;Harness engineering: leveraging Codex in an agent-first world&quot; (2026-02-11 per secondary sources). Birgitta Böckeler systematised it on martinfowler.com (2026-04)</td>
+<td>Anthropic post: original checked; the rest confirmed via search results (originals not checked)</td>
+</tr>
+</tbody></table>
+<p>The Anthropic post separates the two like this. Prompt engineering is &quot;methods for writing and organizing LLM instructions for optimal outcomes&quot;; context engineering is the &quot;set of strategies for curating and maintaining the optimal set of tokens (information) during LLM inference&quot;. The goal is &quot;the smallest possible set of high-signal tokens that maximize the likelihood of some desired outcome&quot;.</p>
+<h3>The four parts of a harness</h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it decides</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Agent loop</td>
+<td>The cycle of model call → tool execution → feeding results back, and when it ends</td>
+<td>&quot;Session · Agent · Subagent&quot;</td>
+</tr>
+<tr>
+<td>Tool interface</td>
+<td>What the model can do, and what shape the results come back in</td>
+<td>&quot;MCP and External Tools&quot;</td>
+</tr>
+<tr>
+<td>Context management</td>
+<td>What stays resident, when to load more, and when to summarise or isolate</td>
+<td>&quot;Instructions and Memory&quot;, &quot;Subagents, Skills and Plugins&quot;</td>
+</tr>
+<tr>
+<td>Controls</td>
+<td>Permissions, sandbox, approvals, hooks: what runs regardless of the model&#39;s judgement</td>
+<td>&quot;Permissions, Sandbox, Hooks&quot;</td>
+</tr>
+</tbody></table>
+<p>Böckeler is reported to divide a harness into <strong>guides</strong> (feedforward that steers before the agent acts) and <strong>sensors</strong> (feedback that observes after it acts so it can self-correct), and to split each again into deterministic <strong>computational</strong> controls (linters, tests) and model-judged <strong>inferential</strong> ones (LLM review) (confirmed via search results). The same framework separates the inner harness built by the tool vendor from the outer harness the user adds on top. A solo studio designs the outer harness.</p>
+<h2>Principles</h2>
+<h3>1. Requests ask; enforcement blocks</h3>
+<table>
+<thead>
+<tr>
+<th>Means</th>
+<th>Nature</th>
+<th>If it is broken</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompts, CLAUDE.md and AGENTS.md, skill bodies</td>
+<td><strong>Request</strong>: the model reads it and tries to follow it</td>
+<td>If the model forgets or reinterprets it, the action happens anyway</td>
+</tr>
+<tr>
+<td>Permission rules, sandbox, approvals, hooks, tests in CI</td>
+<td><strong>Enforcement</strong>: the harness or the OS executes it</td>
+<td>The tool call is refused or the merge is blocked</td>
+</tr>
+</tbody></table>
+<p>The Claude Code documentation calls CLAUDE.md and auto memory &quot;context, not enforced configuration&quot;, and says to use a <code>PreToolUse</code> hook to block an action regardless of what the model decides. Permission rules in settings are &quot;enforced by the client regardless of what Claude decides to do&quot;, and hooks give &quot;deterministic control&quot; that does not rely on the LLM choosing to run them. The design rule is one line: <strong>a request broken twice gets promoted to enforcement.</strong> Conversely, making everything enforced blocks work that needs judgement. Keep enforcement for &quot;must never happen&quot; and &quot;a machine can decide it&quot;.</p>
+<h3>2. Fix the environment, not the prompt</h3>
+<p>Adding &quot;be careful next time&quot; to the prompt after an agent&#39;s mistake is a request that lasts one session. Harness engineering starts by reading the mistake as <strong>a signal of a defect in the environment</strong>. The OpenAI team reportedly asked, whenever the agent got stuck, &quot;what capability is missing, and how do we make it both legible and enforceable&quot;, then added the missing tool, document or check to the repository, with Codex writing that fix too. The team reportedly produced about 1,500 PRs and about a million lines over about five months with no hand-written code (starting with three engineers; per secondary sources, original not checked). What is worth copying is the order rather than the numbers: mistake → decide the layer → permanent fix in the repository → confirm the same mistake is now structurally impossible.</p>
+<h3>3. AGENTS.md is a map, not a manual</h3>
+<p>The entry file is loaded into context every turn, so the longer it is, the more it costs and the less it is followed. The Claude Code documentation recommends keeping each CLAUDE.md under 200 lines. After one big AGENTS.md failed, the OpenAI team reportedly decided to &quot;give Codex a map, not a 1,000-page instruction manual&quot;: an AGENTS.md of roughly 100 lines pointing to design docs, architecture maps and execution plans under <code>docs/</code> (confirmed via search results). An entry file holds only the role, what to read first, and when to read what else.</p>
+<h3>4. Let machines check the rules</h3>
+<p>Writing &quot;respect the layer direction&quot; as a sentence is a request; writing a structural test that checks dependency direction is enforcement. The OpenAI team reportedly checked architecture rules with custom linters and structural tests and <strong>put remediation instructions into the linter error messages</strong> so they landed straight in the agent&#39;s context (confirmed via search results). The error message effectively becomes the next prompt. A solo studio can start by making the failure messages of its existing type checker, linter and tests easy for an agent to read.</p>
+<h3>5. Tool output becomes feedback</h3>
+<p>An agent can only fix what it can see. The OpenAI team reportedly let the agent query a browser (Chrome DevTools Protocol) and logs and metrics directly, so it could confirm UI and performance problems itself (per secondary sources). Two principles follow. Return verification results <strong>in a form the agent can read</strong>, and return <strong>only the lines needed for a decision</strong>, not the whole log. The second is also a cost issue (&quot;Principles of AI Token Efficiency&quot;).</p>
+<h3>6. Deciding which layer a failure belongs to</h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Layer</th>
+<th>Check first</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prose instead of JSON, length or tone not as requested</td>
+<td>Prompt</td>
+<td>Were the format and examples specified?</td>
+</tr>
+<tr>
+<td>Does not know repository rules, uses a stale API</td>
+<td>Context</td>
+<td>Was that fact in <code>/context</code>, and was there a tool to find it?</td>
+</tr>
+<tr>
+<td>Forgets earlier decisions after a long session</td>
+<td>Context</td>
+<td>Is the history too long; compaction and state notes</td>
+</tr>
+<tr>
+<td>A forbidden action such as editing <code>.env</code> or a force push</td>
+<td>Harness</td>
+<td>Was the prohibition a request or enforcement?</td>
+</tr>
+<tr>
+<td>The same rule violation in every session</td>
+<td>Harness</td>
+<td>Is there a linter or test that checks it?</td>
+</tr>
+<tr>
+<td>&quot;Done&quot; without running tests, or endless retries</td>
+<td>Loop</td>
+<td>Is completion decided mechanically; is there an attempt cap?</td>
+</tr>
+</tbody></table>
+<p>Read the table from the top and start at the first row that fits. One more rule: <strong>if a fix in one layer is followed by the same failure, suspect the next layer out.</strong> If it recurs after two prompt fixes, it is a context or harness problem.</p>
+<h3>7. Loop engineering at a glance</h3>
+<p>The loop layer designs &quot;when can we say it is finished&quot;. Let a machine decide the completion criteria, as a test does; cap retries of the same failure; and for work that spans sessions, leave progress in files and in git. Anthropic&#39;s post on long-running agents (2025-11-26) reports the failure where Claude &quot;declares victory on the entire project too early&quot;, and answers it with a feature list file, a progress log, finishing one feature at a time, and end-to-end tests. How to design this is in &quot;Loop Engineering&quot;.</p>
+<h2>Applied: Reading This Repository&#39;s Harness by Layer</h2>
+<p>The file layout is in &quot;Agent Setup Map&quot;. Here we map <strong>what actually exists</strong> in this site&#39;s repository onto the four layers.</p>
+<h3>Layer by layer</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What this repository has</th>
+<th>Request / enforcement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompt</td>
+<td>No committed prompt templates. The <code>adversarial-reviewer</code> and <code>fast-explorer</code> definitions fix the return format (<code>PASS</code>/<code>FAIL</code> blocks; <code>FILES:</code>, <code>FINDINGS:</code>, <code>RISK:</code>)</td>
+<td>Request</td>
+</tr>
+<tr>
+<td>Context</td>
+<td><code>CLAUDE.md</code> (31 lines) and <code>AGENTS.md</code> (34 lines) point to three <code>.ai/</code> files to read at the start and to files to load per trigger. <code>.ai/HARNESS.md</code> defines entry files as &quot;contracts, not manuals&quot;</td>
+<td>Request</td>
+</tr>
+<tr>
+<td>Harness: delegation</td>
+<td>Two Claude agents (<code>tools</code> allowlist, <code>permissionMode: plan</code>, <code>maxTurns</code> 6 and 8) and three Codex agents (<code>sandbox_mode = &quot;read-only&quot;</code>)</td>
+<td>Partly enforced</td>
+</tr>
+<tr>
+<td>Harness: invocation control</td>
+<td>Two editions of the <code>auto-dev</code> skill. The Codex edition has <code>allow_implicit_invocation: false</code>; the Claude edition blocks only through its description and first section</td>
+<td>Enforced in Codex, requested in Claude</td>
+</tr>
+<tr>
+<td>Harness: checks</td>
+<td><code>tests/*.test.cjs</code> (nav title counts in both languages, heading order, fences, leftover Korean, Mermaid edge comparison) and <code>.ai/tools/check_policy_set.py</code></td>
+<td>Checks with teeth, but nothing runs them automatically</td>
+</tr>
+<tr>
+<td>Harness: permissions and hooks</td>
+<td>No committed <code>.claude/settings.json</code>, hook scripts, <code>.mcp.json</code> or CI configuration (<code>.github/</code>)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>The attempt budget in <code>.ai/LOOP.md</code> (stop after three attempts on one failure) and its non-convergence signs; <code>auto-dev</code>&#39;s propose → challenge → execute → verify order</td>
+<td>Request</td>
+</tr>
+</tbody></table>
+<h3>Three visible gaps</h3>
+<ol>
+<li><strong>The same rule has different force in different tools.</strong> The explorer&#39;s &quot;at most six rounds&quot; is enforced in Claude as <code>maxTurns: 6</code> but is a sentence in the instructions for Codex. <code>.ai/HARNESS.md</code> admits that &quot;Claude&#39;s tool allowlists and <code>maxTurns</code> are not Codex configuration keys&quot;. And a Claude agent&#39;s <code>permissionMode: plan</code> is ignored when the parent session is in <code>acceptEdits</code>, <code>auto</code> or <code>bypassPermissions</code> (&quot;Permissions, Sandbox, Hooks&quot;).</li>
+<li><strong>The checks exist, but they do not run unless someone calls them.</strong> The tests are a good sensor that mechanically checks the structure of Korean and English pairs such as this document. With no hook and no CI, though, whether they run depends on the agent following an instruction. A check with teeth is being invoked by request.</li>
+<li><strong>The two entry contracts read the same situation differently.</strong> This repository has no <code>.ai/PROJECT_CONTEXT.md</code>, only its template. When it is missing, <code>CLAUDE.md</code> says &quot;the set is not adopted here: stop and run <code>python3 .ai/tools/adopt.py</code>&quot;, while <code>AGENTS.md</code> says that when maintaining the policy template itself (<code>LESSONS_FROM_PRACTICE.md</code> is present), &quot;project instance files are intentionally absent; do not create them&quot;. <code>check_policy_set.py</code> also reads this state as &quot;the set as shipped&quot; and passes. When human-written requests disagree, different models behave differently. This is a defect in the context layer.</li>
+</ol>
+<p><strong>Next step.</strong> Do not fill every gap at once. Pick the request broken most often, move it to enforcement, and compare before and after as in the <em>Measuring a harness change</em> section below. In this repository the candidate is moving &quot;run <code>node --test tests/*.test.cjs</code> before finishing&quot; into a <code>Stop</code> hook or CI. The hook settings format and a <code>Stop</code> hook example are in &quot;Permissions, Sandbox, Hooks&quot;, and the CI draft is in &quot;Headless, CI and Cloud Runs&quot;. Neither has a hook that runs the tests, so build one from those examples.</p>
+<h2>Going Deeper</h2>
+<h3>Harness investment versus model upgrades</h3>
+<p>Models improve every few months, and an upgrade is usually one line of configuration. A harness has to be built and maintained by you. So sort harness parts into two kinds. <strong>Parts that hold the project&#39;s facts and rules</strong> (tests, architecture checks, permissions, the document map) keep their value when the model changes, and a better model makes better use of them. <strong>Parts that compensate for a model&#39;s weaknesses</strong> (long prompts that dictate every step, workaround instructions for a specific mistake) may become unnecessary or even get in the way when the model changes. At each upgrade, remove the latter one at a time and check against a fixed task set. This split is this document&#39;s design judgement, not a conclusion confirmed by published measurement.</p>
+<h3>Harness lock-in</h3>
+<p>Permission syntax, hook event schemas and agent definition formats differ from tool to tool. This repository writes the same roles twice, as <code>.claude/agents/*.md</code> and <code>.codex/agents/*.toml</code>, and the same skill twice, under <code>.claude/skills/</code> and <code>.agents/skills/</code>, and in the process it gained rules such as <code>maxTurns</code> that are enforced on one side only: a real example of lock-in cost. The response is to keep the substance of each rule in a <strong>portable layer</strong> (tests, scripts, Markdown documents) and keep the tool-specific files as thin wrappers that call it. For example, write a prohibition once as a script and have both the Claude hook and the Codex hook call that script.</p>
+<h3>Measuring a harness change</h3>
+<p>Confirm the effect of a harness change with <strong>a before/after comparison on a fixed task set</strong>, not a feeling. Anthropic&#39;s &quot;Demystifying evals for AI agents&quot; (2026-01-09, original checked) breaks agent evaluation into tasks, trials, graders and transcripts, among other parts, and says it is often better to grade the result the agent produced than the path it took, such as the order of tool calls (&quot;grade what the agent produced, not the path it took&quot;). The counts below are a starting point, not a recommendation; with a small task set it is easy to mistake a chance difference for an effect, so hold off on conclusions when the difference is small.</p>
+<pre><code class="language-text">1. Task set: 10-20 tasks from past bugs and feature requests, each with a mechanical pass criterion (test, check command)
+2. Fix: model, effort, base commit, tool versions
+3. Change: one harness element only (e.g. add a Stop hook)
+4. Repeat: several runs per task (model output differs every run)
+5. Record: pass rate per task, human interventions, turns, token usage
+6. Decide: keep it if the pass rate rises at an acceptable cost; otherwise revert
+</code></pre>
+<h3>Neighbouring engineering disciplines</h3>
+<table>
+<thead>
+<tr>
+<th>Discipline</th>
+<th>One-line definition</th>
+<th>Use in a solo studio</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Eval engineering</td>
+<td>Measuring an AI system&#39;s quality repeatedly with tasks and graders</td>
+<td>The pass/fail call on harness, prompt and model changes; the fixed task set above is its minimal form</td>
+</tr>
+<tr>
+<td>SRE</td>
+<td>Running service reliability with SLOs and error budgets</td>
+<td>Start with one SLO line and one alert per product</td>
+</tr>
+<tr>
+<td>Chaos engineering</td>
+<td>Experiments that inject failures on purpose to confirm resilience</td>
+<td>Less a full programme than actually testing a backup restore and handling of external API failures</td>
+</tr>
+<tr>
+<td>Platform engineering</td>
+<td>Building the shared tools and paths developers use as a product</td>
+<td>A template repository and harness shared by several products is a one-person platform</td>
+</tr>
+<tr>
+<td>Release engineering</td>
+<td>Making builds, versions and deployments reproducible</td>
+<td>Automate tags, the changelog and the rollback procedure</td>
+</tr>
+<tr>
+<td>Data engineering</td>
+<td>Designing pipelines that collect, move and clean data</td>
+<td>A minimal pipeline that brings usage logs and payment data into one place</td>
+</tr>
+<tr>
+<td>Feature engineering</td>
+<td>ML work designing features as model inputs</td>
+<td>Only when training your own ML model; in LLM apps, context engineering takes its place</td>
+</tr>
+<tr>
+<td>Growth engineering</td>
+<td>Engineering that improves acquisition, conversion and retention through experiments</td>
+<td>Instrumenting the sign-up and payment flows, and small A/B tests</td>
+</tr>
+</tbody></table>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Writing &#39;never&#39; in CLAUDE.md blocks it.&quot;</strong> Instructions are requests. If something must be blocked, move it into permission rules or a hook.</li>
+<li><strong>&quot;Context engineering means putting in lots of context.&quot;</strong> The opposite: it means finding the smallest set of high-signal tokens that produces the result.</li>
+<li><strong>&quot;Harnesses are for big teams.&quot;</strong> A short entry file, one test and one deny rule are a harness too. The payoff is larger in a solo studio, where human review time is the most expensive resource.</li>
+<li><strong>&quot;A better model makes the harness unnecessary.&quot;</strong> Parts that compensate for model weaknesses shrink, but parts that hold the project&#39;s facts and rules remain.</li>
+<li><strong>&quot;If the tests are in the repository, they are enforced.&quot;</strong> Only when a hook or CI decides who runs them and when.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>&quot;Do not modify the deploy script&quot; has been broken twice. Into what, in which layer, would you move it, and how would you confirm the effect?</li>
+<li>An agent keeps using an old function name that no longer exists in the repository. Which do you suspect first, the prompt layer or the context layer, and why?</li>
+<li>Using this repository&#39;s files, explain why the same &quot;at most six rounds&quot; rule is enforced in Claude and only requested in Codex.</li>
+<li>After a model upgrade, name one harness part you would try removing first and one you would keep to the end.</li>
+<li>To measure the effect of adding a Stop hook, what must you hold fixed and what must you record?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> — Anthropic Engineering, published 2025-09-29, checked 2026-09-29</li>
+<li><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a> — Anthropic Engineering, published 2025-11-26, checked 2026-09-29</li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a> — Anthropic Engineering, published 2026-01-09, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/memory">How Claude remembers your project</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://code.claude.com/docs/en/hooks-guide">Automate actions with hooks</a> — Claude Code Docs, checked 2026-09-29</li>
+<li><a href="https://openai.com/index/harness-engineering/">Harness engineering: leveraging Codex in an agent-first world</a> — OpenAI, Ryan Lopopolo, checked via search results 2026-09-29 (published 2026-02-11 per secondary sources; original not checked)</li>
+<li><a href="https://github.com/celesteanders/harness/blob/main/docs/research/260211_openai_harness_engineering_codex.md">Notes on OpenAI&#39;s harness engineering post</a> — GitHub (secondary source), checked 2026-09-29</li>
+<li><a href="https://martinfowler.com/articles/harness-engineering.html">Harness engineering for coding agent users</a> — martinfowler.com, Birgitta Böckeler, checked via search results 2026-09-29</li>
+<li><a href="https://mitchellh.com/writing/my-ai-adoption-journey">My AI Adoption Journey</a> — Mitchell Hashimoto, checked via search results 2026-09-29</li>
+<li><a href="https://simonwillison.net/2025/Jun/27/context-engineering/">Context engineering</a> — Simon Willison, 2025-06-27, checked via search results 2026-09-29</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/ai/13-token-saving-practice/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Saving Tokens in Practice</span></a><a class="page-link next" href="../../../en/ai/15-loop-engineering/"><span><small>Next</small>Loop Engineering</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

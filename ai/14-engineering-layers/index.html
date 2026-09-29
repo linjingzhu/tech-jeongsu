@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스 | MyAI(마이아이)</title>
+    <meta name="description" content="같은 모델에게 같은 일을 시켜도 결과가 다른 것은 모델 바깥이 다르기 때문이다. 이 문서는 그 바깥을 네 층으로 나눈다. 이번 메시지(프롬프트), 모델이 보는 것 전체(컨텍스트), 모델과 과제 사이의 시스템(하네스), 끝날 때까지 도는 반복(루프)이다. 설정 파일의 위치는 「…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/ai/14-engineering-layers/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스 | MyAI(마이아이)" />
+    <meta property="og:description" content="같은 모델에게 같은 일을 시켜도 결과가 다른 것은 모델 바깥이 다르기 때문이다. 이 문서는 그 바깥을 네 층으로 나눈다. 이번 메시지(프롬프트), 모델이 보는 것 전체(컨텍스트), 모델과 과제 사이의 시스템(하네스), 끝날 때까지 도는 반복(루프)이다. 설정 파일의 위치는 「…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/ai/14-engineering-layers/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/ai/14-engineering-layers.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-eng-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-eng-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group" data-group="0"><button aria-expanded="true" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link active" aria-current="page" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>AI 사용방법</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: 프롬프트 · 컨텍스트 · 하네스 · 루프 엔지니어링이 각각 무엇을 설계하는지 구분하고, 눈앞의 실패가 어느 층의 문제인지 가려낸 뒤, &quot;지시는 요청하고 hook과 권한은 강제한다&quot;는 원칙으로 자기 저장소의 하네스를 설계하고 그 변경을 측정할 수 있다.</p>
+</blockquote>
+<p>같은 모델에게 같은 일을 시켜도 결과가 다른 것은 모델 바깥이 다르기 때문이다. 이 문서는 그 바깥을 네 층으로 나눈다. 이번 메시지(프롬프트), 모델이 보는 것 전체(컨텍스트), 모델과 과제 사이의 시스템(하네스), 끝날 때까지 도는 반복(루프)이다. 설정 파일의 위치는 「AI Agent 세팅 지도」, 지시문 작성은 「지시문과 메모리」, 권한과 hook 구현은 「권한 · Sandbox · Hook」, Subagent와 Skill은 「Subagent · Skill · Plugin」, 외부 도구는 「MCP와 외부 도구」에서 자세히 다룬다. 여기서는 개념, 원칙, 설계 판단만 다룬다. 루프 층은 「루프 엔지니어링」에서 따로 깊게 다루며, 이름에 같은 말이 들어가는 「리버스 엔지니어링: 법과 합법적 활용」은 이 층 구조가 아니라 법적 쟁점을 다룬다. 용어의 기원과 사례는 <strong>2026-09 기준</strong>으로 확인한 것만 적었고, 원문을 직접 열지 못한 출처는 그렇다고 표시했다.</p>
+<h2>핵심 개념</h2>
+<h3>네 층은 안쪽에서 바깥쪽으로 감싼다</h3>
+<pre><code class="language-mermaid">flowchart TB
+    subgraph LOOP[루프: 끝날 때까지 도는 반복]
+        subgraph HAR[하네스: 모델과 과제 사이의 시스템]
+            subgraph CTX[컨텍스트: 모델이 보는 것 전체]
+                PR[프롬프트: 이번 메시지]
+                KN[지시문 · 메모리 · 검색 결과 · 도구 출력]
+            end
+            AL[Agent loop]
+            TI[도구 인터페이스]
+            CM[Context 관리: compaction · Subagent]
+            CT[통제: 권한 · Sandbox · 승인 · Hook]
+        end
+        VE[검증 · 완료 조건 · 시도 예산]
+    end
+    MO[모델]
+    CTX --&gt; MO
+    MO --&gt; AL
+    AL --&gt; TI
+    TI --&gt; CT
+    CT --&gt; KN
+    CM --&gt; CTX
+    AL --&gt; VE
+    VE --&gt; AL
+</code></pre>
+<p>바깥 층은 안쪽 층을 포함한다. 좋은 프롬프트도 context에 필요한 사실이 없으면 소용없고, 좋은 context도 하네스가 위험한 행동을 막지 못하면 사고가 난다. 하네스가 튼튼해도 루프가 &quot;다 됐다&quot;를 검증하지 못하면 거짓 완료가 나온다.</p>
+<table>
+<thead>
+<tr>
+<th>층</th>
+<th>설계하는 것</th>
+<th>범위</th>
+<th>막는 실패</th>
+<th>대표 산출물</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>프롬프트</td>
+<td>이번 요청의 문장, 예시, 출력 형식</td>
+<td>메시지 한 개</td>
+<td>형식 오류, 모호한 요청, 엉뚱한 톤</td>
+<td>프롬프트 템플릿, few-shot 예시, 출력 스키마</td>
+</tr>
+<tr>
+<td>컨텍스트</td>
+<td>모델이 한 번의 추론에서 보는 token 전체의 구성</td>
+<td>요청 한 번(창 하나)</td>
+<td>모르는 사실, 낡은 정보, context rot로 초점 상실</td>
+<td>CLAUDE.md·AGENTS.md, 문서 색인, 검색 도구, compaction 규칙</td>
+</tr>
+<tr>
+<td>하네스</td>
+<td>Agent loop, 도구, context 관리, 통제 장치</td>
+<td>세션과 저장소</td>
+<td>금지된 행동, 반복되는 같은 실수, 도구 오용</td>
+<td>권한 규칙, Sandbox, hook, Subagent 정의, linter, 구조 테스트</td>
+</tr>
+<tr>
+<td>루프</td>
+<td>반복의 완료 조건, 검증, 중단 규칙</td>
+<td>과제 하나가 끝날 때까지</td>
+<td>끝나지 않음, 거짓 성공 선언, 같은 시도의 반복</td>
+<td>완료 기준, 검증 명령, 시도 예산, 상태 기록 파일</td>
+</tr>
+</tbody></table>
+<h3>이름이 붙은 순서</h3>
+<table>
+<thead>
+<tr>
+<th>층</th>
+<th>널리 쓰인 시점</th>
+<th>계기</th>
+<th>확인 수준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>프롬프트</td>
+<td>2020년대 초</td>
+<td>대화형 LLM 보급</td>
+<td>일반 통념</td>
+</tr>
+<tr>
+<td>컨텍스트</td>
+<td>2025년 6월 무렵</td>
+<td>Tobi Lütke와 Andrej Karpathy가 &quot;prompt engineering 대신 context engineering&quot;을 말함. Anthropic 「Effective context engineering for AI agents」(2025-09-29)</td>
+<td>Anthropic 글은 원문 확인, 6월 발언은 검색 결과로 확인</td>
+</tr>
+<tr>
+<td>하네스</td>
+<td>2026년 2월</td>
+<td>Anthropic이 2025-11-26 글 「Effective harnesses for long-running agents」 제목에 이미 &#39;harness&#39;를 썼고(원문 확인), &#39;harness engineering&#39;이라는 분야 이름은 2026년 2월에 퍼졌다. Mitchell Hashimoto가 글에서 &quot;Engineer the Harness&quot;를 한 단계로 꼽음(2월 초). OpenAI Ryan Lopopolo 「Harness engineering: leveraging Codex in an agent-first world」(2차 출처상 2026-02-11). Birgitta Böckeler가 martinfowler.com에 체계화(2026-04)</td>
+<td>Anthropic 글은 원문 확인, 나머지는 검색 결과로 확인(원문 미확인)</td>
+</tr>
+</tbody></table>
+<p>Anthropic 글은 둘을 이렇게 구분한다. 프롬프트 엔지니어링은 &quot;최적의 결과를 위해 LLM 지시를 쓰고 조직하는 방법&quot;이고, 컨텍스트 엔지니어링은 &quot;추론 중 최적의 token(정보) 집합을 선별하고 유지하는 전략&quot;이다. 목표는 &quot;원하는 결과의 가능성을 최대화하는, 가능한 가장 작은 고신호 token 집합&quot;이다.</p>
+<h3>하네스의 네 부품</h3>
+<table>
+<thead>
+<tr>
+<th>부품</th>
+<th>결정하는 것</th>
+<th>자세히</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Agent loop</td>
+<td>모델 호출 → 도구 실행 → 결과를 다시 넣기의 반복과 종료</td>
+<td>「Session · Agent · Subagent」</td>
+</tr>
+<tr>
+<td>도구 인터페이스</td>
+<td>모델이 무엇을 할 수 있고, 결과가 어떤 모양으로 돌아오는가</td>
+<td>「MCP와 외부 도구」</td>
+</tr>
+<tr>
+<td>Context 관리</td>
+<td>무엇을 상주시키고, 언제 불러오고, 언제 요약·격리하는가</td>
+<td>「지시문과 메모리」, 「Subagent · Skill · Plugin」</td>
+</tr>
+<tr>
+<td>통제 장치</td>
+<td>권한, Sandbox, 승인, hook: 모델의 판단과 무관하게 실행되는 것</td>
+<td>「권한 · Sandbox · Hook」</td>
+</tr>
+</tbody></table>
+<p>Böckeler는 하네스를 <strong>guide</strong>(행동 전에 방향을 주는 feedforward)와 <strong>sensor</strong>(행동 뒤에 관찰해 스스로 고치게 하는 feedback)로 나누고, 각각을 결정적인 <strong>computational</strong>(linter, 테스트)과 모델이 판단하는 <strong>inferential</strong>(LLM 리뷰)로 다시 나눈다고 소개된다(검색 결과로 확인). 도구 제작사가 만든 안쪽 하네스와 사용자가 그 위에 얹는 바깥 하네스를 구분하는 것도 같은 글의 틀이다. 1인 스튜디오가 설계하는 것은 바깥 하네스다.</p>
+<h2>원리</h2>
+<h3>1. 요청은 묻고, 강제는 막는다</h3>
+<table>
+<thead>
+<tr>
+<th>수단</th>
+<th>성격</th>
+<th>어긴다면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>프롬프트, CLAUDE.md·AGENTS.md, Skill 본문</td>
+<td><strong>요청</strong>: 모델이 읽고 따르려 노력한다</td>
+<td>모델이 잊거나 다르게 해석하면 그대로 일어난다</td>
+</tr>
+<tr>
+<td>권한 규칙, Sandbox, 승인, hook, CI의 테스트</td>
+<td><strong>강제</strong>: harness나 OS가 실행한다</td>
+<td>도구 호출이 거부되거나 merge가 막힌다</td>
+</tr>
+</tbody></table>
+<p>Claude Code 문서는 CLAUDE.md와 auto memory를 &quot;context, not enforced configuration&quot;이라 부르고, 모델의 판단과 무관하게 막으려면 <code>PreToolUse</code> hook을 쓰라고 한다. 설정의 권한 규칙은 &quot;Claude가 무엇을 하기로 하든 client가 강제&quot;하고, hook은 LLM이 실행하기로 고르는 데 기대지 않는 &quot;deterministic control&quot;이다. 설계 규칙은 하나다. <strong>두 번 어겨진 요청은 강제로 승격한다.</strong> 반대로 모든 것을 강제로 만들면 판단이 필요한 일까지 막힌다. 강제는 &quot;절대 일어나면 안 되는 것&quot;과 &quot;기계가 판정할 수 있는 것&quot;에만 쓴다.</p>
+<h3>2. 프롬프트가 아니라 환경을 고친다</h3>
+<p>Agent가 실수했을 때 프롬프트에 &quot;다음엔 조심해&quot;를 더하는 것은 그 세션에만 듣는 요청이다. 하네스 엔지니어링의 출발점은 실수를 <strong>환경의 결함 신호</strong>로 읽는 것이다. OpenAI 팀은 agent가 막히면 &quot;무슨 능력이 빠졌고, 그것을 어떻게 읽을 수 있고 강제할 수 있게 만들까&quot;를 물었고, 빠진 도구·문서·검사를 저장소에 넣되 그 수정도 Codex가 쓰게 했다고 소개된다. 이 팀은 약 5개월 동안 손으로 쓴 코드 없이 약 1,500개 PR, 약 100만 줄을 만들었다고 한다(세 명으로 시작, 2차 출처 기준이며 원문 미확인). 숫자보다 옮길 만한 것은 순서다. 실수 → 원인 층 판정 → 저장소에 영구 수정 → 같은 실수가 구조적으로 불가능해졌는지 확인.</p>
+<h3>3. AGENTS.md는 매뉴얼이 아니라 지도다</h3>
+<p>진입 파일은 매 턴 context에 실리므로 길수록 비싸고, 길수록 덜 지켜진다. Claude Code 문서는 CLAUDE.md 한 파일을 200줄 아래로 두라고 권한다. OpenAI 팀은 큰 AGENTS.md 하나가 실패한 뒤 &quot;1,000쪽짜리 매뉴얼이 아니라 지도&quot;를 주기로 했고, 약 100줄의 AGENTS.md가 <code>docs/</code> 아래의 설계 문서·아키텍처 지도·실행 계획을 가리키게 했다고 전해진다(검색 결과로 확인). 진입 파일에는 역할, 처음 읽을 것, 언제 무엇을 더 읽을지만 둔다.</p>
+<h3>4. 규칙은 기계가 검사하게 한다</h3>
+<p>&quot;레이어 방향을 지켜라&quot;를 문장으로 쓰면 요청이고, 의존 방향을 검사하는 구조 테스트로 쓰면 강제다. OpenAI 팀은 custom linter와 구조 테스트로 아키텍처 규칙을 검사하고, <strong>linter 오류 메시지에 고치는 방법을 담아</strong> agent context에 바로 들어가게 했다고 한다(검색 결과로 확인). 오류 메시지가 곧 다음 프롬프트가 되는 셈이다. 1인 스튜디오라면 이미 있는 type checker, linter, 테스트의 실패 메시지를 agent가 읽기 좋게 다듬는 것부터 한다.</p>
+<h3>5. 도구 출력이 피드백이 된다</h3>
+<p>Agent는 볼 수 있는 것만 고친다. OpenAI 팀은 agent가 브라우저(Chrome DevTools Protocol)와 로그·지표를 직접 조회하게 해 UI와 성능 문제를 스스로 확인하게 했다고 소개된다(2차 출처 기준). 원칙은 두 가지다. 검증 결과를 <strong>agent가 읽을 수 있는 형태</strong>로 돌려주고, 로그 전체가 아니라 <strong>판단에 필요한 줄</strong>만 돌려준다. 뒤쪽은 비용 문제이기도 하다(「AI 토큰 효율화의 원리」).</p>
+<h3>6. 실패가 속한 층 가리기</h3>
+<table>
+<thead>
+<tr>
+<th>증상</th>
+<th>층</th>
+<th>먼저 볼 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON 대신 산문, 요청과 다른 길이·톤</td>
+<td>프롬프트</td>
+<td>형식 지정과 예시가 있었나</td>
+</tr>
+<tr>
+<td>저장소 규칙을 모름, 낡은 API를 씀</td>
+<td>컨텍스트</td>
+<td><code>/context</code>에 그 사실이 들어 있었나, 찾을 도구가 있었나</td>
+</tr>
+<tr>
+<td>긴 세션 뒤 앞의 결정을 잊음</td>
+<td>컨텍스트</td>
+<td>이력이 너무 길지 않나, compaction과 상태 기록</td>
+</tr>
+<tr>
+<td><code>.env</code> 수정, force push 같은 금지 행동</td>
+<td>하네스</td>
+<td>그 금지가 요청이었나 강제였나</td>
+</tr>
+<tr>
+<td>같은 규칙 위반이 세션마다 반복</td>
+<td>하네스</td>
+<td>검사하는 linter나 테스트가 있나</td>
+</tr>
+<tr>
+<td>테스트를 안 돌리고 &quot;완료&quot;, 끝없이 재시도</td>
+<td>루프</td>
+<td>완료 조건이 기계적으로 판정되나, 시도 상한이 있나</td>
+</tr>
+</tbody></table>
+<p>표는 위에서부터 차례로 확인하고, 처음 들어맞는 줄에서 시작한다. 판정 규칙 하나를 더한다. <strong>한 층에서 고쳤는데 같은 실패가 다시 나면 한 층 바깥을 의심한다.</strong> 프롬프트를 두 번 고쳐도 반복되면 컨텍스트나 하네스의 문제다.</p>
+<h3>7. 루프 엔지니어링 한눈에</h3>
+<p>루프 층은 &quot;언제 끝났다고 말할 수 있는가&quot;를 설계한다. 완료 조건을 테스트처럼 기계가 판정하게 하고, 같은 실패의 재시도에 상한을 두고, 세션을 넘는 일은 진행 상태를 파일과 git에 남긴다. Anthropic의 장기 실행 agent 글(2025-11-26)은 Claude가 &quot;프로젝트 전체에 대해 너무 일찍 승리를 선언&quot;하는 실패를 보고하고, 기능 목록 파일, 진행 기록, 기능 하나씩 끝내기, end-to-end 테스트로 대응했다. 설계 방법은 「루프 엔지니어링」에서 다룬다.</p>
+<h2>적용: 이 저장소의 하네스를 층으로 읽기</h2>
+<p>파일 배치는 「AI Agent 세팅 지도」에 있다. 여기서는 이 사이트의 저장소에 <strong>실제로 있는 것</strong>을 네 층에 대응시킨다.</p>
+<h3>층별 대응</h3>
+<table>
+<thead>
+<tr>
+<th>층</th>
+<th>이 저장소에 있는 것</th>
+<th>요청 / 강제</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>프롬프트</td>
+<td>커밋된 프롬프트 템플릿은 없다. <code>adversarial-reviewer</code>와 <code>fast-explorer</code> 정의가 반환 형식(<code>PASS</code>/<code>FAIL</code> 블록, <code>FILES:</code>·<code>FINDINGS:</code>·<code>RISK:</code>)을 고정한다</td>
+<td>요청</td>
+</tr>
+<tr>
+<td>컨텍스트</td>
+<td><code>CLAUDE.md</code>(31줄)·<code>AGENTS.md</code>(34줄)가 시작 때 읽을 <code>.ai/</code> 파일 세 개와 trigger별로 불러올 파일을 가리킨다. <code>.ai/HARNESS.md</code>는 진입 파일을 &quot;contracts, not manuals&quot;로 규정한다</td>
+<td>요청</td>
+</tr>
+<tr>
+<td>하네스: 위임</td>
+<td>Claude agent 2개(<code>tools</code> 허용 목록, <code>permissionMode: plan</code>, <code>maxTurns</code> 6·8), Codex agent 3개(<code>sandbox_mode = &quot;read-only&quot;</code>)</td>
+<td>부분 강제</td>
+</tr>
+<tr>
+<td>하네스: 호출 통제</td>
+<td><code>auto-dev</code> Skill 두 판. Codex 판은 <code>allow_implicit_invocation: false</code>, Claude 판은 설명문과 본문 첫 절로만 막는다</td>
+<td>Codex 강제, Claude 요청</td>
+</tr>
+<tr>
+<td>하네스: 검사</td>
+<td><code>tests/*.test.cjs</code>(한·영 제목 수, heading 순서, fence, 한글 누락, Mermaid edge 비교), <code>.ai/tools/check_policy_set.py</code></td>
+<td>강제력 있는 검사지만 자동 실행 경로가 없다</td>
+</tr>
+<tr>
+<td>하네스: 권한 · hook</td>
+<td>커밋된 <code>.claude/settings.json</code>, hook 스크립트, <code>.mcp.json</code>, CI 설정(<code>.github/</code>)이 없다</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>루프</td>
+<td><code>.ai/LOOP.md</code>의 시도 예산(같은 실패에 세 번이면 멈춤)과 수렴 실패 신호, <code>auto-dev</code>의 제안→도전→실행→검증 순서</td>
+<td>요청</td>
+</tr>
+</tbody></table>
+<h3>보이는 빈칸 세 가지</h3>
+<ol>
+<li><strong>같은 규칙이 도구마다 강제력이 다르다.</strong> 탐색자의 &quot;최대 6라운드&quot;는 Claude에서는 <code>maxTurns: 6</code>으로 강제되지만 Codex에서는 지시문의 문장이다. <code>.ai/HARNESS.md</code>도 &quot;Claude의 도구 허용 목록과 <code>maxTurns</code>는 Codex 설정 키가 아니다&quot;라고 인정한다. 또 Claude agent의 <code>permissionMode: plan</code>은 부모 세션이 <code>acceptEdits</code>·<code>auto</code>·<code>bypassPermissions</code>면 무시된다(「권한 · Sandbox · Hook」).</li>
+<li><strong>검사는 있지만 아무도 부르지 않으면 돌지 않는다.</strong> 테스트는 이 문서 같은 한·영 쌍의 구조를 기계적으로 검사하는 좋은 sensor다. 하지만 hook도 CI도 없으니 실행 여부는 agent가 지시를 따르느냐에 달려 있다. 강제력 있는 검사가 요청으로 호출되는 셈이다.</li>
+<li><strong>진입 계약 두 개가 같은 상황을 다르게 읽는다.</strong> 이 저장소에는 <code>.ai/PROJECT_CONTEXT.md</code>가 없고 템플릿만 있다. <code>CLAUDE.md</code>는 없을 때 &quot;the set is not adopted here: stop and run <code>python3 .ai/tools/adopt.py</code>&quot;라고 하고, <code>AGENTS.md</code>는 정책 템플릿 자체를 관리할 때(<code>LESSONS_FROM_PRACTICE.md</code>가 있을 때) &quot;project instance files are intentionally absent; do not create them&quot;이라고 한다. <code>check_policy_set.py</code>도 이 상태를 &quot;the set as shipped&quot;로 읽고 통과시킨다. 사람이 쓴 요청끼리 어긋나면 모델마다 다르게 행동한다. 이것은 컨텍스트 층의 결함이다.</li>
+</ol>
+<p><strong>다음 한 걸음.</strong> 모든 빈칸을 한 번에 채우지 않는다. 가장 자주 어겨진 요청 하나를 골라 강제로 옮기고, 아래 <em>하네스 변경을 측정하기</em> 절의 방식으로 전후를 비교한다. 이 저장소라면 후보는 &quot;끝내기 전에 <code>node --test tests/*.test.cjs</code>를 돌린다&quot;를 <code>Stop</code> hook이나 CI로 옮기는 것이다. hook 설정 형식과 <code>Stop</code> hook 예시는 「권한 · Sandbox · Hook」, CI 초안은 「Headless · CI · Cloud 실행」에 있다. 테스트를 돌리는 hook 자체는 두 문서에 없으니 그 예시를 바탕으로 직접 만든다.</p>
+<h2>심화</h2>
+<h3>하네스 투자와 모델 업그레이드</h3>
+<p>모델은 몇 달마다 좋아지고 업그레이드는 대개 설정 한 줄이다. 하네스는 직접 만들고 유지해야 한다. 그래서 하네스 부품을 두 종류로 나눠 본다. <strong>프로젝트의 사실과 규칙을 담은 부품</strong>(테스트, 아키텍처 검사, 권한, 문서 지도)은 모델이 바뀌어도 가치가 남고, 더 좋은 모델일수록 더 잘 활용한다. <strong>모델의 약점을 메우는 부품</strong>(단계를 잘게 지시하는 긴 프롬프트, 특정 실수를 피하는 우회 지시)은 모델이 바뀌면 불필요해지거나 오히려 방해가 될 수 있다. 모델을 올릴 때마다 뒤쪽 부품을 하나씩 빼 보고 고정 과제 세트로 확인한다. 이 구분은 이 문서의 설계 판단이며 공개 측정으로 확인한 결론은 아니다.</p>
+<h3>하네스 잠금</h3>
+<p>권한 문법, hook 이벤트 스키마, agent 정의 형식은 도구마다 다르다. 이 저장소가 같은 역할을 <code>.claude/agents/*.md</code>와 <code>.codex/agents/*.toml</code>로, 같은 Skill을 <code>.claude/skills/</code>와 <code>.agents/skills/</code>로 두 번 쓰고, 그 과정에서 <code>maxTurns</code>처럼 한쪽에만 강제되는 규칙이 생긴 것이 잠금 비용의 실례다. 대응은 규칙의 본체를 <strong>이식 가능한 층</strong>(테스트, 스크립트, Markdown 문서)에 두고, 도구별 파일은 그것을 부르는 얇은 포장으로 유지하는 것이다. 예를 들어 금지 규칙은 스크립트 하나에 쓰고, Claude hook과 Codex hook이 같은 스크립트를 호출하게 한다.</p>
+<h3>하네스 변경을 측정하기</h3>
+<p>하네스 변경의 효과는 느낌이 아니라 <strong>고정 과제 세트의 전후 비교</strong>로 확인한다. Anthropic 「Demystifying evals for AI agents」(2026-01-09, 원문 확인)는 agent 평가를 과제, 시도(trial), 채점기(grader), 기록(transcript) 등으로 나누고, 도구 호출 순서 같은 경로보다 agent가 만든 결과를 채점하는 편이 대개 낫다고 쓴다(&quot;grade what the agent produced, not the path it took&quot;). 아래 과제 수는 출발점일 뿐 권장값이 아니며, 과제 세트가 작으면 우연한 차이를 효과로 오해하기 쉬우니 차이가 작을 때는 결론을 미룬다.</p>
+<pre><code class="language-text">1. 과제 세트: 지난 버그와 기능 요청에서 10~20개, 각각 기계적 합격 기준(테스트, 검사 명령)
+2. 고정: 모델, effort, 기준 commit, 도구 버전
+3. 변경: 하네스 한 가지만(예: Stop hook 추가)
+4. 반복: 과제마다 여러 번 실행(모델 출력이 매번 다르므로)
+5. 기록: 과제별 합격률, 사람 개입 횟수, 턴 수, token 사용량
+6. 판정: 합격률이 오르고 비용이 감당 가능하면 유지, 아니면 되돌림
+</code></pre>
+<h3>이웃 엔지니어링 분야</h3>
+<table>
+<thead>
+<tr>
+<th>분야</th>
+<th>한 줄 정의</th>
+<th>1인 스튜디오에서의 쓰임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Eval engineering</td>
+<td>AI 시스템의 품질을 과제·채점기로 반복 측정하는 일</td>
+<td>하네스·프롬프트·모델 변경의 합격 판정. 위의 고정 과제 세트가 최소형이다</td>
+</tr>
+<tr>
+<td>SRE</td>
+<td>서비스 신뢰성을 SLO와 오류 예산으로 운영하는 일</td>
+<td>제품 하나에 SLO 한 줄과 알림 하나부터</td>
+</tr>
+<tr>
+<td>Chaos engineering</td>
+<td>장애를 일부러 주입해 복원력을 확인하는 실험</td>
+<td>대규모 도입보다 백업 복구와 외부 API 실패 처리를 직접 시험해 보는 정도</td>
+</tr>
+<tr>
+<td>Platform engineering</td>
+<td>개발자가 쓰는 공통 도구·경로를 제품처럼 만드는 일</td>
+<td>여러 제품이 공유하는 템플릿 저장소와 하네스가 곧 1인 플랫폼</td>
+</tr>
+<tr>
+<td>Release engineering</td>
+<td>빌드·버전·배포를 재현 가능하게 만드는 일</td>
+<td>태그, 변경 기록, 되돌리기 절차를 자동화</td>
+</tr>
+<tr>
+<td>Data engineering</td>
+<td>데이터를 모으고 옮기고 정제하는 파이프라인 설계</td>
+<td>사용 로그와 결제 데이터를 한곳에 모으는 최소 파이프라인</td>
+</tr>
+<tr>
+<td>Feature engineering</td>
+<td>모델 입력용 특징을 설계하는 ML 작업</td>
+<td>자체 ML 모델을 학습할 때만. LLM 앱에서는 컨텍스트 엔지니어링이 그 자리를 대신한다</td>
+</tr>
+<tr>
+<td>Growth engineering</td>
+<td>획득·전환·유지를 실험으로 개선하는 엔지니어링</td>
+<td>가입·결제 흐름의 계측과 작은 A/B 실험</td>
+</tr>
+</tbody></table>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;CLAUDE.md에 &#39;절대&#39;라고 쓰면 막힌다.&quot;</strong> 지시문은 요청이다. 반드시 막아야 하면 권한 규칙이나 hook으로 옮긴다.</li>
+<li><strong>&quot;컨텍스트 엔지니어링은 context를 많이 넣는 일이다.&quot;</strong> 반대다. 결과를 낼 가장 작은 고신호 token 집합을 찾는 일이다.</li>
+<li><strong>&quot;하네스는 큰 팀이나 만드는 것이다.&quot;</strong> 짧은 진입 파일, 테스트 하나, deny 규칙 하나도 하네스다. 1인 스튜디오일수록 사람의 검토 시간이 가장 비싸서 이득이 크다.</li>
+<li><strong>&quot;더 좋은 모델이 나오면 하네스는 필요 없다.&quot;</strong> 모델의 약점을 메우는 부품은 줄어도, 프로젝트의 사실과 규칙을 담은 부품은 남는다.</li>
+<li><strong>&quot;테스트가 저장소에 있으면 강제된다.&quot;</strong> 누가 언제 실행하는지가 hook이나 CI로 정해져 있을 때만 강제다.</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>&quot;배포 스크립트는 수정하지 마&quot;가 두 번 어겨졌다. 어느 층의 무엇으로 옮기고, 무엇으로 효과를 확인하겠는가?</li>
+<li>Agent가 저장소에 없는 옛 함수 이름을 계속 쓴다. 프롬프트 층과 컨텍스트 층 중 어디를 먼저 의심하고, 그 근거는?</li>
+<li>같은 &quot;최대 6라운드&quot; 규칙이 Claude에서는 강제되고 Codex에서는 요청인 이유를 이 저장소의 파일로 설명하라.</li>
+<li>모델을 업그레이드한 뒤 하네스에서 먼저 빼 볼 부품과 끝까지 남길 부품을 하나씩 들어 보라.</li>
+<li>Stop hook을 추가하는 변경의 효과를 측정하려면 무엇을 고정하고 무엇을 기록해야 하는가?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> — Anthropic Engineering, 2025-09-29 게시, 2026-09-29 확인</li>
+<li><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a> — Anthropic Engineering, 2025-11-26 게시, 2026-09-29 확인</li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a> — Anthropic Engineering, 2026-01-09 게시, 2026-09-29 확인</li>
+<li><a href="https://code.claude.com/docs/en/memory">How Claude remembers your project</a> — Claude Code Docs, 2026-09-29 확인</li>
+<li><a href="https://code.claude.com/docs/en/hooks-guide">Automate actions with hooks</a> — Claude Code Docs, 2026-09-29 확인</li>
+<li><a href="https://openai.com/index/harness-engineering/">Harness engineering: leveraging Codex in an agent-first world</a> — OpenAI, Ryan Lopopolo, 2026-09-29 검색 결과로 확인(2차 출처상 2026-02-11 게시, 원문 미확인)</li>
+<li><a href="https://github.com/celesteanders/harness/blob/main/docs/research/260211_openai_harness_engineering_codex.md">OpenAI harness engineering 정리 노트</a> — GitHub(2차 출처), 2026-09-29 확인</li>
+<li><a href="https://martinfowler.com/articles/harness-engineering.html">Harness engineering for coding agent users</a> — martinfowler.com, Birgitta Böckeler, 2026-09-29 검색 결과로 확인</li>
+<li><a href="https://mitchellh.com/writing/my-ai-adoption-journey">My AI Adoption Journey</a> — Mitchell Hashimoto, 2026-09-29 검색 결과로 확인</li>
+<li><a href="https://simonwillison.net/2025/Jun/27/context-engineering/">Context engineering</a> — Simon Willison, 2025-06-27, 2026-09-29 검색 결과로 확인</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../ai/13-token-saving-practice/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>토큰 절약 실전: 도구별 방법</span></a><a class="page-link next" href="../../ai/15-loop-engineering/"><span><small>다음 문서</small>루프 엔지니어링</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>
