@@ -24,7 +24,7 @@ This document ties the whole section into one production flow. The craft of writ
 | Blog images and tables | Naver | Recording captures, template | Step-by-step screenshots, comparison tables | Post comprehension |
 | Community post, pinned comment | YouTube | The outline's core question | Poll or question, links to the post and template | Engagement and linking |
 | Email or KakaoTalk channel message | Own list | This week's summary, template | One paragraph just for list readers | List relationship |
-| Product module | Marketplace | 12 weeks of sources | Organisation, manual, support | Revenue |
+| Product module | Marketplace | Sources from W1-W12 (W13 excluded, as it falls just before D90) | Organisation, manual, support | Revenue |
 
 ```mermaid
 flowchart LR
@@ -39,7 +39,7 @@ flowchart LR
     BP --> TPL
     TPL --> MSG["Email and KakaoTalk channel list"]
     MSG --> PROD["Product modules: template pack, e-book chapter, course lesson"]
-    SRC -. 12 weeks of accumulation .-> PROD
+    SRC -. W1-W12 accumulation .-> PROD
 ```
 
 ## Principles
@@ -96,7 +96,7 @@ Cutting a 20-step setup process into a Short conveys nothing, so that week you m
 
 ## Applied: Example creator J's weekly source package
 
-J's week 1 (D0 = 2026-10-05) source is "cleaning up duplicate data in Excel". The hours split the 10-hour weekly assumption from "Blog & YouTube Monetization Overview" into steps.
+J's week 1 (D0 = 2026-10-05) source is "cleaning up duplicate data in Excel". This table is the canonical allocation for the whole section, and the hours in other documents follow it.
 
 | Order | Step | Output | Hours (assumed) |
 |---|---|---|---|
@@ -122,14 +122,14 @@ If the same outputs were made separately for each platform (an illustrative calc
 | Community, message, tidy-up | 0.5 | 0.5 | Same |
 | Total | **10.0** | **14.5** | |
 
-Working separately overshoots the 10 weekly hours by 4.5, so J would have to give up either Shorts or the blog. Most of the saving comes from **doing research and recording only once**. Over 12 weeks the sources accumulate like this (the product schedule follows the ladder in "Own Products: Courses, E-books and Templates").
+Working separately overshoots the 10 weekly hours by 4.5, so J would have to give up either Shorts or the blog. Most of the saving comes from **doing research and recording only once**. Over W1-W12 the sources accumulate like this (W13 excluded, as it falls just before D90). The product schedule follows "Own Products: Courses, E-books and Templates" and "A 90-day Channel Plan".
 
 | When | Accumulated sources | Product module built from them |
 |---|---|---|
 | Weeks 1-2 (D0-D13) | 2 outlines, 2 sheets | The best-received sheet → free template (D14) |
 | Weeks 3-5 (to D34) | 5 outlines, 5-8 sheets | Paid template pack list from the sheets with the most downloads and comment requests, waitlist opens (D35) |
-| Weeks 6-9 (to D62) | 9 weeks of recording masters | Masters re-edited short into the pack's "how to use" videos, presale (D49) and delivery (D63) |
-| Weeks 10-12 (to D83) | 12 outlines | 12 outlines grouped into 4 parts × 3 chapters as the e-book table of contents, waitlist after D90 |
+| Weeks 6-10 (to D69) | 10 weeks of recording masters | Masters re-edited short into the pack's "how to use" videos, presale (D49-D60, judged at the D60 review) and delivery (D63) |
+| Weeks 11-12 (to D83) | 12 outlines from W1-W12 (W13 excluded, as it falls just before D90) | 12 outlines grouped into 4 parts × 3 chapters as the e-book table of contents, waitlist after D90 |
 
 A paid pack needs more than a bundle of free sheets. It needs **value on top of what buyers already got for free**, such as a manual, an integrated sheet and a promise of updates. In the illustrative calculation in "Ad Revenue: AdPost and the YouTube Partner Program", J reaches the YPP ad tier in month 11 to 26, so in the first 90 days the OSMU payoff is not ads but **time saved, product modules and learning which topics get a response**.
 
