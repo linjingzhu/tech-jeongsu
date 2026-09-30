@@ -4,6 +4,7 @@
 
 ## 연락 방법
 
+- 질문과 오류 제보: 이 사이트 저장소의 [GitHub Issues](https://github.com/linjingzhu/tech-jeongsu/issues)에 새 이슈를 열어 주세요. 이슈는 누구나 볼 수 있으므로 개인정보는 적지 마세요.
 {{contact}}
 
 ## 제보할 때 알려 주시면 좋은 것

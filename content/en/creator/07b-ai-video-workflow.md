@@ -14,7 +14,7 @@ This document gathers **how to do the production craft from "Planning and Produc
 | Voice cloning | Building an AI voice from samples of your own voice | Only for a test on one Short. Wrong words in long-form are re-recorded. Disclosure rules are in doc 07 |
 | Generative video | Models that make short clips from a prompt (Veo, Runway, Kling and others) | Explanatory B-roll only |
 | Auto dubbing | YouTube translates a video's speech and creates an audio track in another language | An optional after-publish stage |
-| Tutorial | A vendor's official help or course, or a lesson video from a vetted creator | Invest 20-30 minutes when you first use a tool |
+| Tutorial | The meaning and the selection criteria follow "Writing Blog Posts with AI: Tools and Tutorials" | Invest 20-30 minutes when you first use a tool |
 
 ## Principles
 
@@ -103,7 +103,7 @@ Auto zoom is especially useful when cutting vertical Shorts. But J decides the z
 | CapCut | Auto captions, templates, background removal | Reports say auto captions and more moved to paid plans. Check music and template commercial terms | [Caption recognition help (Korean)](https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles) |
 | Descript | Edit like a document, the Underlord AI co-editor, audio cleanup | A third-party review lists Korean among transcription languages | [Six steps to start (English)](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started) |
 | Premiere Pro | Text-based editing, speech-to-text captions, Generative Extend, media intelligence search | Subscription. Check Korean transcription in your installed version | [Text-Based Editing (English)](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html) |
-| DaVinci Resolve | 20: AI IntelliScript (rough cut from a script), AI animated subtitles, AI Audio Assistant. 21 (final 2026-06): more AI tools | Reports say many AI features are in the paid Studio edition | [Official training (English)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
+| DaVinci Resolve | 20: AI IntelliScript (rough cut from a script), AI animated subtitles, AI Audio Assistant. 21 (final 2026-06): more AI tools | Reports say many AI features are in the paid Studio edition. Studio is a one-time purchase (listed at USD 295, confirmed via search results) | [Official training (English)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
 | YouTube Edit with AI | A first cut from Shorts footage. As announced, it also adds an AI voice-over; J turns it off, or discloses synthetic voice if kept | Announced including Korea, rolling out gradually | [Help (English)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (English)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
 
 In screen-recorded lessons, AI editing gets **function names, menu names and numbers** wrong most often. "VLOOKUP" comes out as a phonetic spelling and "filter" as a similar-sounding word. Keep a list of words to batch-replace in auto captions. Stick to **one tool**, as in the tool tiers of "Planning and Producing Long-form Video".
@@ -160,7 +160,7 @@ At Made On YouTube 2026 on 2026-09-23, YouTube announced conversational editing,
 
 ### How to choose tutorials
 
-(1) Official help and courses first, (2) Korean material when it exists, (3) material from the last year, (4) avoid channels with titles like "earn money with AI in one day". Tool screens change within months, so pair one video with one official help page. YouTube's official training material is gathered at [YouTube Creators (Korean)](https://www.youtube.com/intl/ko_ALL/creators/) and [AI for Creators](https://www.youtube.com/creators/create/ai-for-creators/).
+The selection criteria follow the Going Deeper section of "Writing Blog Posts with AI: Tools and Tutorials". YouTube's official training material is gathered at [YouTube Creators (Korean)](https://www.youtube.com/intl/ko_ALL/creators/) and [AI for Creators](https://www.youtube.com/creators/create/ai-for-creators/).
 
 ### Tool costs and shutdown risk
 
@@ -172,7 +172,6 @@ As the Sora app and web closing in 2026-04 shows, AI tools change plans and even
 - **"The Inspiration tab is the idea tool"** — It is being phased out from 2026-08. The conversational Ask Studio replaces it.
 - **"AI editing means no caption fixes"** — Function names, menu names and numbers are almost always wrong. A person fixes them.
 - **"An AI clone of my own voice needs no disclosure"** — No official source confirmed that exception, so disclose conservatively ("AI-assisted Production and Platform Policy").
-- **"More tools make you faster"** — Savings add up only when each stage has one fixed tool. Learning a new tool is production time too.
 
 ## Self-Check Questions
 
@@ -219,7 +218,7 @@ Every link was confirmed in search results on 2026-09-30 (not opened directly).
 - [How are captions recognised?](https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles) — CapCut Help (Korean); [CapCut captions aren't free anymore](https://www.descript.com/blog/article/capcut-captions-arent-free-anymore-heres-a-better-option) — Descript blog (a competitor's post)
 - [Descript Tutorial for Beginners: 6 Steps to Start](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started), [How to Get Started with Underlord: An AI Video Editor Primer](https://www.descript.com/blog/article/underlord-ai-video-editor-primer) — Descript blog
 - [Text-Based Editing overview in Premiere](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html), [What's new in Adobe Premiere](https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html) — Adobe Help
-- [DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) — Blackmagic Design; [DaVinci Resolve 20 Released with a Handful of AI-assisted Features](https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/) — CineD; [DaVinci Resolve 21 Officially Released](https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/) — PetaPixel, 2026-06-03
+- [DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training), [DaVinci Resolve Studio](https://www.blackmagicdesign.com/products/davinciresolve/studio) — Blackmagic Design; [DaVinci Resolve 20 Released with a Handful of AI-assisted Features](https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/) — CineD; [DaVinci Resolve 21 Officially Released](https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/) — PetaPixel, 2026-06-03
 
 **Generative video, thumbnails, scripts**
 - [Veo](https://deepmind.google/models/veo/) — Google DeepMind; [[I/O 2025] Introducing Flow, an AI filmmaking tool built on Veo 3](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) — Google Korea blog (Korean); [You can now make your images talk with Veo 3 in Flow, plus we're expanding to more countries](https://blog.google/innovation-and-ai/models-and-research/google-labs/flow-adds-speech-expands/) — Google Blog

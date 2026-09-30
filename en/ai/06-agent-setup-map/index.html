@@ -299,7 +299,7 @@ trust_level = &quot;trusted&quot;
 <tr>
 <td>Subagents</td>
 <td>two Claude agents, three Codex agents</td>
-<td>Read-only when the parent is in default, plan or dontAsk: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code>. Under an acceptEdits, auto or bypassPermissions parent the Claude agents follow the parent&#39;s mode, and a parent runtime override can win over the Codex agents too</td>
+<td><code>permissionMode: plan</code> (plan mode: mostly reads, plus classifier-approved commands when auto mode is available), <code>sandbox_mode = &quot;read-only&quot;</code>. The parent&#39;s mode or a runtime override can supersede these (see &quot;Subagents, Skills and Plugins&quot;)</td>
 </tr>
 <tr>
 <td>Skills</td>

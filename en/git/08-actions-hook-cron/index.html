@@ -124,6 +124,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: cmake -S . -B build
       - run: cmake --build build
 </code></pre>
 <p>The long string after <code>uses:</code> pins the action to a commit SHA instead of a tag; the reasons and method are in &quot;GitHub Actions in Practice&quot;.</p>
@@ -183,6 +184,7 @@ Push if successful
   schedule:
     - cron: &#39;0 18 * * *&#39;
 </code></pre>
+<p>GitHub Actions <code>schedule</code> runs on UTC, so 03:00 KST every day is <code>&#39;0 18 * * *&#39;</code>.</p>
 <p>In other words:</p>
 <pre><code class="language-text">YAML
 └─ schedule

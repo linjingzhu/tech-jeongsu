@@ -39,13 +39,15 @@ If you write a good prompt from scratch every time, quality changes by the day o
 
 Project memory loads your style guide and reference files into every chat. But within the single month of September 2026, two vendors changed the shape of this feature. The conclusion is simple: **keep the original style guide as one file, `style_guide.md`, that you own, and put copies into each tool.** When you switch tools, you paste the file again and you are done.
 
-| Feature | Status as of 2026-09 (confirmed via search results) | J's use | Tutorials |
-|---|---|---|---|
-| Claude Projects | Each project has instructions and knowledge files. Help-centre search results say the free plan can use it within a count limit (five projects) | A "weekly production" project with the style guide plus past outlines | [How can I create and manage projects?](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects) (English, official), [How to use Claude Projects](https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects) (Korean blog) |
-| ChatGPT Projects | Projects share instructions and files. Free allows 5 files per project, Go and Plus 25 | The same setup if ChatGPT is your main tool | [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) (English) |
-| Custom GPTs | Personal accounts (Free, Go, Plus, Pro) cannot create new GPTs, and a retirement with migration to plugins was announced on 2026-09-11. The FAQ gives 2026-12-11 as the planned retirement date | **Do not build new ones.** If you have an existing GPT, move its instructions into `style_guide.md` | [Custom GPT retirement and migration FAQ](https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq) (English) |
-| Gemini Gems → Skills | Gems on personal accounts migrate automatically to Skills from 2026-11-17. Reports say Skills are expanding to free personal accounts (18 and over) | One "fact-check" Skill if Gemini is your cross-check model | [About the transition from Gems to skills](https://support.google.com/gemini/answer/18560919) (English), [Write effective skills](https://support.google.com/gemini/answer/17102773?hl=en) (English) |
-| Gemini Notebook (formerly NotebookLM) | Renamed on 2026-07-16. Answers from the sources you upload and cites them. Secondary sources give free limits of 100 notebooks and 50 sources per notebook | A "research notebook" of official docs, help pages and reference videos | [Quick Tips: How to use NotebookLM](https://www.youtube.com/watch?v=mX39MYEhqCU) (English video, official Google Workspace), [The complete NotebookLM guide](https://brunch.co.kr/@eunjongseong/242) (Korean blog) |
+| Feature | J's use |
+|---|---|
+| Claude Projects | A "weekly production" project with the style guide plus past outlines |
+| ChatGPT Projects | The same setup if ChatGPT is your main tool |
+| Custom GPTs | **Do not build new ones.** If you have an existing GPT, move its instructions into `style_guide.md` |
+| Gemini Gems → Skills | One "fact-check" Skill if Gemini is your cross-check model |
+| Gemini Notebook (formerly NotebookLM) | A "research notebook" of official docs, help pages and reference videos |
+
+Each tool's 2026-09 status and tutorials are in "Writing Blog Posts with AI: Tools and Tutorials".
 
 ```text
 # style_guide.md template — J's original style guide v1 (2026-10-05)
@@ -59,7 +61,7 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J's own scre
 
 ### 4. The originality layer: what only J can add
 
-AI drafts come out similar for everyone. What makes the output J's is **evidence AI cannot have**: screens recorded on real Excel files, example files with company data removed, the formula J first got wrong and how it was fixed, measurements such as "cleaning 3,200 rows: 40 minutes by hand → 2 minutes with a function", and reader questions from comments. The `[J's mistake/measurement]` blank in the templates is left on purpose so that AI cannot fill it. Platforms point the same way. In 2026-07 YouTube described inauthentic content as three types: "template-based and repetitive", "off-putting or distressing" and "AI personas discussing sensitive topics such as health or finance" (TechCrunch report and a Creator Insider video, confirmed via search results), and Google Search says it rewards [people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) that shows experience and expertise, regardless of how it was made. The definitions and boundaries of the policies are in "AI-assisted Production and Platform Policy", and how Naver evaluates posts is in "Naver Blog and How Naver Search Works".
+AI drafts come out similar for everyone. What makes the output J's is **evidence AI cannot have**: screens recorded on real Excel files, example files with company data removed, the formula J first got wrong and how it was fixed, measurements such as "cleaning 3,200 rows: 40 minutes by hand → 2 minutes with a function", and reader questions from comments. The `[J's mistake/measurement]` blank in the templates is left on purpose so that AI cannot fill it. Platforms point the same way. YouTube's definition of inauthentic content, including the three types described in 2026-07, follows "AI-assisted Production and Platform Policy", and Google Search says it rewards [people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) that shows experience and expertise, regardless of how it was made. How Naver evaluates posts is in "Naver Blog and How Naver Search Works".
 
 ### 5. The review protocol: the original source decides
 

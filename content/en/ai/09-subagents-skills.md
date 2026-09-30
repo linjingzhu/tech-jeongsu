@@ -72,7 +72,7 @@ maxTurns: 6
 | Field | Value | Why |
 |---|---|---|
 | `tools` | No Edit or Write | Omitting the field **inherits every tool**. The list is an allowlist |
-| `permissionMode` | `plan` | Starts in read-only exploration (plan mode). The parent's mode can override it, though (see Common Misconceptions below) |
+| `permissionMode` | `plan` | Starts in plan mode (mostly read-only exploration and planning). The parent's mode can override it, though (see Common Misconceptions below) |
 | `maxTurns` | `6` | At the limit it stops and returns a partial result |
 | `model` | Unset | The cheapest capable model wins this role, so the harness decides |
 

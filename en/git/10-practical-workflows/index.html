@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Practical Git Workflows | MyAI</title>
-    <meta name="description" content="Current state: Leave A untouched. Result:" />
+    <meta name="description" content="Current state: Leave A untouched. Result: Details: &quot;Understanding worktrees&quot;" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/git/10-practical-workflows/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI" />
     <meta property="og:title" content="Practical Git Workflows | MyAI" />
-    <meta property="og:description" content="Current state: Leave A untouched. Result:" />
+    <meta property="og:description" content="Current state: Leave A untouched. Result: Details: &quot;Understanding worktrees&quot;" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/git/10-practical-workflows/" />
     <meta property="og:locale" content="en_US" />
     <meta name="site-root" content="../../../" />
@@ -117,6 +117,7 @@ git worktree add ../worktrees/b -b feature/b origin/stable
 WT A    → feature/a  WIP unchanged
 WT B    → feature/b  Based on the latest origin/stable
 </code></pre>
+<p>Details: &quot;Understanding worktrees&quot;</p>
 <h2>2. Your Current Feature Is 73 Commits Behind stable</h2>
 <p>First update your view of the remote state.</p>
 <pre><code class="language-bash">git fetch origin
@@ -143,11 +144,13 @@ A ─ B
 <p>First push:</p>
 <pre><code class="language-bash">git push -u origin feature/a
 </code></pre>
+<p>Details: &quot;Collaboration · PR · Code review&quot;</p>
 <h2>5. Briefly Inspect Another Developer’s Remote Branch</h2>
 <pre><code class="language-bash">git fetch origin
 git switch --detach origin/feature/a
 </code></pre>
 <p>Create a local branch if you intend to continue by making changes.</p>
+<p>Details: &quot;HEAD · Checkout · Detached HEAD&quot;</p>
 <h2>6. Before Running Merge / Rebase / Cherry-pick</h2>
 <p>Always write down three things.</p>
 <pre><code class="language-text">Current Branch:
@@ -190,18 +193,7 @@ git worktree prune
 <blockquote>
 <p>Create a feature/camera branch and a separate worktree from the latest origin/stable. Do not change the current session’s branch or worktree.</p>
 </blockquote>
-<h3>Rebase</h3>
-<blockquote>
-<p>Before rebasing the current feature branch onto origin/stable, show me the acting branch, the base, and the commits that will change. If conflicts occur, stop instead of resolving them automatically.</p>
-</blockquote>
-<h3>Cherry-pick</h3>
-<blockquote>
-<p>Before bringing in only this commit, use git show to check its changes and prerequisite dependencies.</p>
-</blockquote>
-<h3>PR</h3>
-<blockquote>
-<p>Review the current branch’s diff and commits, and write a PR description targeting stable. Mark anything not verified by build/test as NOT VERIFIED.</p>
-</blockquote>
+<p>Example instructions for commit, pull, push, rebase, merge, cherry-pick and PRs are collected in &quot;Claude Code as a Git client&quot;.</p>
 <h2>Key Concepts to Remember in Practice</h2>
 <pre><code class="language-text">Repository
 = Git records

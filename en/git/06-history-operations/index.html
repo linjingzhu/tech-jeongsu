@@ -117,18 +117,19 @@
 <li>Target: <code>stable</code></li>
 <li>Meaning: merge stable’s history into feature.</li>
 </ul>
-<pre><code class="language-mermaid">gitGraph
+<pre><code class="language-mermaid">%%{init: { &#39;gitGraph&#39;: { &#39;mainBranchName&#39;: &#39;stable&#39; } } }%%
+gitGraph
    commit id:&quot;A&quot;
    commit id:&quot;B&quot;
    branch feature
    checkout feature
    commit id:&quot;E&quot;
    commit id:&quot;F&quot;
-   checkout main
+   checkout stable
    commit id:&quot;C&quot;
    commit id:&quot;D&quot;
    checkout feature
-   merge main id:&quot;M&quot;
+   merge stable id:&quot;M&quot;
 </code></pre>
 <p>Existing commits are preserved, and branching and merging remain visible in history.</p>
 <h2>Rebase</h2>

@@ -28,6 +28,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: cmake -S . -B build
       - run: cmake --build build
 ```
 
@@ -80,6 +81,8 @@ on:
   schedule:
     - cron: '0 18 * * *'
 ```
+
+GitHub Actions `schedule` runs on UTC, so 03:00 KST every day is `'0 18 * * *'`.
 
 In other words:
 

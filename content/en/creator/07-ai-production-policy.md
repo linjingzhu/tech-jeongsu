@@ -61,7 +61,7 @@ Both rules are **YPP monetization policies**. A channel can lose monetization wi
 
 | | Inauthentic content | Reused content |
 |---|---|---|
-| What it looks at | Mass production and repetition: videos that look template-made with little variation | Source: content that is not your own creation and already exists elsewhere |
+| What it looks at | Mass production and repetition: videos that look template-made with little variation. In 2026-07 YouTube was reported to describe it as three types: "template-based and repetitive", "off-putting or distressing" and "AI personas discussing sensitive topics such as health or finance" ([TechCrunch, 2026-07-20](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/), confirmed via search results) | Source: content that is not your own creation and already exists elsewhere |
 | History | Renamed from "repetitious content" on 2025-07-15 and clarified to include mass-produced content | An existing rule |
 | Examples | Hundreds of synthetic-voice videos from one template with only the sentences changed | Compilations of other people's clips, reactions with no commentary, re-uploads of other channels' videos |
 | When it is allowed | Each video has its own content and production decisions | Significant original commentary, substantive modification, or educational or entertainment value is added |
@@ -157,6 +157,7 @@ For each video, write one line: tools used, plan, the date you checked the terms
 - [YouTube channel monetization policies](https://support.google.com/youtube/answer/1311392?hl=en) — YouTube Help, confirmed via search results (2026-09-30)
 - [YouTube clarifies "inauthentic content" policy changes](https://ppc.land/youtube-clarifies-inauthentic-content-policy-changes/) — PPC Land, 2025-07, checked 2026-09-30
 - [Understanding YouTube's reused content policy](https://ppc.land/understanding-youtubes-reused-content-policy/) — PPC Land, checked 2026-09-30
+- [YouTube clarifies policies around AI slop and upsetting videos](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/) — TechCrunch, 2026-07-20, confirmed via search results (2026-09-30)
 - [Likeness detection on YouTube](https://support.google.com/youtube/answer/16440338?hl=en) — YouTube Help, confirmed via search results (2026-09-30)
 - [YouTube Rolls Out Likeness Detection To All Creators Over 18](https://www.mediapost.com/publications/article/415170/youtube-rolls-out-likeness-detection-to-all-creato.html) — MediaPost, 2026-05-19, checked 2026-09-30
 - [Unlocking a global audience with auto dubbing](https://blog.youtube/news-and-events/youtube-auto-dubbing-expressive-speech/) — YouTube Blog, confirmed via search results (2026-09-30)

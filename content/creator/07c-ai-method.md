@@ -39,13 +39,15 @@ flowchart LR
 
 프로젝트 메모리 기능은 스타일 가이드와 참고 파일을 매 대화에 자동으로 불러와 준다. 다만 2026년 9월 한 달 사이에 두 회사가 이 기능의 형태를 바꿨다. 결론은 하나다. **스타일 가이드의 원본은 `style_guide.md` 한 파일로 내가 갖고, 각 도구에는 복사본을 넣는다.** 도구를 바꿔도 파일을 다시 붙여 넣으면 끝난다.
 
-| 기능 | 2026-09 상태 (검색 결과로 확인) | J의 용도 | 튜토리얼 |
-|---|---|---|---|
-| Claude Projects | 프로젝트마다 지시문(instructions)과 지식 파일(knowledge)을 둔다. 무료 플랜도 개수 제한(도움말 검색 결과상 5개) 안에서 쓸 수 있다고 안내된다 | 스타일 가이드 + 지난 개요 모음으로 "주간 제작" 프로젝트 | [프로젝트 만들기와 관리](https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects)(영어, 공식), [클로드 프로젝트 사용법](https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects)(한국어 블로그) |
-| ChatGPT Projects | 프로젝트 지시문과 파일을 공유한다. 무료는 프로젝트당 파일 5개, Go·Plus는 25개 | ChatGPT를 주력으로 쓸 때 같은 구성 | [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt)(영어) |
-| custom GPTs | 개인 계정(Free·Go·Plus·Pro)은 새 GPT를 만들 수 없고, 2026-09-11 은퇴와 plugins 이전 계획이 발표됐다. FAQ상 은퇴 예정일은 2026-12-11 | **새로 만들지 않는다**. 기존 GPT가 있으면 지시문을 `style_guide.md`로 옮긴다 | [Custom GPT retirement and migration FAQ](https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq)(영어) |
-| Gemini Gems → Skills | 개인 계정의 Gems는 2026-11-17부터 Skills로 자동 이전된다. Skills가 무료 개인 계정(만 18세 이상)으로 확대된다는 보도가 있다 | Gemini를 교차 점검용으로 쓸 때 "팩트체크" Skill 하나 | [Gems에서 skills로의 전환](https://support.google.com/gemini/answer/18560919)(영어), [Write effective skills](https://support.google.com/gemini/answer/17102773?hl=en)(영어) |
-| Gemini Notebook (옛 NotebookLM) | 2026-07-16 이름 변경. 올린 자료 안에서 답하고 출처를 인용한다. 무료 한도는 노트북 100개·노트북당 소스 50개라는 2차 자료가 있다 | 공식 문서·도움말·참고 영상을 모은 "조사 노트북" | [Quick Tips: How to use NotebookLM](https://www.youtube.com/watch?v=mX39MYEhqCU)(영어 영상, Google Workspace 공식), [노트북LM 완벽가이드](https://brunch.co.kr/@eunjongseong/242)(한국어 블로그) |
+| 기능 | J의 용도 |
+|---|---|
+| Claude Projects | 스타일 가이드 + 지난 개요 모음으로 "주간 제작" 프로젝트 |
+| ChatGPT Projects | ChatGPT를 주력으로 쓸 때 같은 구성 |
+| custom GPTs | **새로 만들지 않는다**. 기존 GPT가 있으면 지시문을 `style_guide.md`로 옮긴다 |
+| Gemini Gems → Skills | Gemini를 교차 점검용으로 쓸 때 "팩트체크" Skill 하나 |
+| Gemini Notebook (옛 NotebookLM) | 공식 문서·도움말·참고 영상을 모은 "조사 노트북" |
+
+도구별 2026-09 상태와 튜토리얼은 「AI로 블로그 글 만들기: 도구와 튜토리얼」을 본다.
 
 ```text
 # style_guide.md 템플릿 — J의 스타일 가이드 원본 v1 (2026-10-05)
@@ -59,7 +61,7 @@ flowchart LR
 
 ### 4. 독창성 레이어: J만 더할 수 있는 것
 
-AI 초안은 누구에게나 비슷하게 나온다. 결과물을 J의 것으로 만드는 것은 **AI가 가질 수 없는 증거**다: 실제 엑셀 파일로 직접 녹화한 화면, 회사 자료를 지운 예제 파일, 처음에 틀렸던 수식과 고친 과정, "3,200행 정리에 수작업 40분 → 함수 2분" 같은 측정값, 댓글로 받은 독자 질문. 템플릿의 `[J의 실수/측정값]` 빈칸은 AI가 채우지 못하게 일부러 남긴 자리다. 플랫폼도 같은 방향이다. YouTube는 2026-07 inauthentic content를 "템플릿형·반복", "불쾌감·자극 유발", "건강·금융 등 민감 주제를 말하는 AI 페르소나" 세 유형으로 설명했고 (TechCrunch 보도와 Creator Insider 영상, 검색 결과로 확인), Google 검색은 만드는 방법보다 경험과 전문성이 드러나는 [사람 중심 콘텐츠](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)를 보상한다고 안내한다. 정책의 정의와 경계는 「AI 활용 제작과 플랫폼 정책」, 네이버의 평가 방식은 「네이버 블로그와 검색 구조」를 본다.
+AI 초안은 누구에게나 비슷하게 나온다. 결과물을 J의 것으로 만드는 것은 **AI가 가질 수 없는 증거**다: 실제 엑셀 파일로 직접 녹화한 화면, 회사 자료를 지운 예제 파일, 처음에 틀렸던 수식과 고친 과정, "3,200행 정리에 수작업 40분 → 함수 2분" 같은 측정값, 댓글로 받은 독자 질문. 템플릿의 `[J의 실수/측정값]` 빈칸은 AI가 채우지 못하게 일부러 남긴 자리다. 플랫폼도 같은 방향이다. YouTube의 inauthentic content 정의와 2026-07에 설명된 세 유형은 「AI 활용 제작과 플랫폼 정책」을 따르고, Google 검색은 만드는 방법보다 경험과 전문성이 드러나는 [사람 중심 콘텐츠](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)를 보상한다고 안내한다. 네이버의 평가 방식은 「네이버 블로그와 검색 구조」를 본다.
 
 ### 5. 검수 프로토콜: 판정은 원 출처가 한다
 

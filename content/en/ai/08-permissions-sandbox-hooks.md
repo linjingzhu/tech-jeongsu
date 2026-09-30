@@ -93,7 +93,7 @@ flowchart TD
 
 ## Applied: This Repository's Setup
 
-This repository bakes permissions into its role agents. The two Claude agents declare `tools: Read, Grep, Glob, Bash` and `permissionMode: plan`; the three Codex agents declare `sandbox_mode = "read-only"`. The Claude agents, though, are read-only only when the parent is in default, plan or dontAsk. When the parent conversation is in `acceptEdits`, `auto` or `bypassPermissions`, the subagent runs in the parent's mode and `permissionMode` is ignored, and since both agents have `Bash`, they are not read-only then. `.ai/HARNESS.md` adds that a parent runtime override can supersede a file's sandbox setting, so the effective permissions must be verified. But **there is no committed `.claude/settings.json` and no hook**. Below is a draft that fills that gap; this repository's test command is `node --test tests/*.test.cjs`.
+This repository bakes permissions into its role agents. The two Claude agents declare `tools: Read, Grep, Glob, Bash` and `permissionMode: plan` (plan mode: mostly reads, plus classifier-approved commands when auto mode is available); the three Codex agents declare `sandbox_mode = "read-only"`. The parent's mode can supersede `permissionMode`, though (see "Subagents, Skills and Plugins"). `.ai/HARNESS.md` adds that a parent runtime override can supersede a file's sandbox setting, so the effective permissions must be verified. But **there is no committed `.claude/settings.json` and no hook**. Below is a draft that fills that gap; this repository's test command is `node --test tests/*.test.cjs`.
 
 ```json
 {
@@ -110,11 +110,12 @@ This repository bakes permissions into its role agents. The two Claude agents de
 }
 ```
 
-**Hook 1, block force push** (`.claude/hooks/block-force-push.sh`). It joins lines continued with a trailing `\`, turns an escaped `\#` into `_`, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains `$` or a backtick is kept, not deleted. It then deletes comments (from a `#` at the start of a word to the end of the line), splits the command on `&&` · `;` · `|` · newlines, and checks **every argument after the first `push` in each command**. Anchoring on the last `push` instead would let a trailing word `push`, as in `git push -f origin main push`, hide every option before it. It blocks bundled short options containing `f` (`-uf`, `-4f`), every long option starting with `--force` (including abbreviations such as `--force-w`), `--mirror` and its abbreviations (down to `--m`), refspecs starting with `+`, and **every argument containing `$`, a backtick, `{` or `}`**. Variables, command substitutions and brace expansions (`-{f,v}`) have no value until they run, so it blocks them without looking, failing closed. It also blocks any command that contains `remote.<name>.mirror` or a `remote.<name>.push` value starting with `+`, whether set once with `git -c ...` or saved with `git config`. If `jq` is missing or the input cannot be read, it **fails closed** (exit 2). Had a `jq` failure left `CMD` empty and the script exited 0, the block would have been silently off, and stderr at exit 0 only reaches the debug log, so nobody would have known.
+**Hook 1, block force push** (`.claude/hooks/block-force-push.sh`). It joins lines continued with a trailing `\`, turns an escaped `\#` into `_`, deletes every backslash, unwraps single-token quotes and deletes multi-word quoted strings (commit messages and the like). A double-quoted string that contains `$` or a backtick is kept, not deleted. It then deletes comments (from a `#` at the start of a word to the end of the line), splits the command on `&&` · `;` · `|` · newlines, and checks **every argument after the first `push` in each command**. Anchoring on the last `push` instead would let a trailing word `push`, as in `git push -f origin main push`, hide every option before it. It blocks bundled short options containing `f` (`-uf`, `-4f`), every long option starting with `--force` (including abbreviations such as `--force-w`), `--mirror` and its abbreviations (down to `--m`), refspecs starting with `+`, and **every argument containing `$`, a backtick, `{` or `}`**. Variables, command substitutions and brace expansions (`-{f,v}`) have no value until they run, so it blocks them without looking, failing closed. It also blocks any command that contains `remote.<name>.mirror` or a `remote.<name>.push` value starting with `+`, whether set once with `git -c ...` or saved with `git config`. If `jq` is missing, the input cannot be read, or the input has no command (empty stdin, `{}`, a `tool_input` without `command`), it **fails closed** (exit 2). If an empty `CMD` ended in exit 0, the block would be silently off, and stderr at exit 0 only reaches the debug log, so nobody would know.
 
 ```bash
 command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
 CMD=$(jq -r '.tool_input.command // empty') || exit 2
+[ -n "$CMD" ] || { echo "Blocked: hook input had no command" >&2; exit 2; }
 CMD=${CMD//$'\\\n'/}
 S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\#/_/g; s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
 ARGS=$(printf '%s\n' "$S" | grep -oE '(^|[[:space:]])push([[:space:]].*)?$' | sed -E 's/^[[:space:]]?push//; s/^/ /; s/$/ /')
@@ -126,7 +127,7 @@ fi
 exit 0
 ```
 
-Below is a subset of the 71 cases actually run (2026-09-29, bash 5 · GNU grep/sed · jq 1.7). That `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`, `-{f,v}` and `git -c remote.x.push=+HEAD:refs/heads/main push x` really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. "No jq" means a run with `jq` removed from `PATH`. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.
+Below is a subset of the 77 cases actually run (2026-09-30, bash 5 · GNU grep/sed · jq 1.7). That `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`, `-{f,v}` and `git -c remote.x.push=+HEAD:refs/heads/main push x` really do produce a forced update or a mirror push was checked separately with git 2.43 against a local bare remote. "No jq" means a run with `jq` removed from `PATH`. The newline substitution uses GNU sed syntax, so test separately with the default macOS sed.
 
 | Command | Expected | With jq | No jq |
 |---|---|---|---|
@@ -159,6 +160,8 @@ Below is a subset of the 71 cases actually run (2026-09-29, bash 5 · GNU grep/s
 | `git branch \# && git push origin main \# -f` · `git push origin main -o \# -f` | 2 | 2 | 2 |
 | `git -c remote.origin.mirror=true push origin` · `git -c Remote.Origin.Mirror push origin` | 2 | 2 | 2 |
 | `git -c remote.origin.push=+refs/heads/main:refs/heads/main push origin` · `git config remote.origin.push +refs/heads/main:refs/heads/main && git push origin` | 2 | 2 | 2 |
+| Input with no command: empty stdin · `{}` · `{"tool_input":{}}` · `{"tool_input":{"command":""}}` · `{"tool_input":{"command":null}}` | 2 | 2 | 2 |
+| Input that is not JSON | 2 | 2 | 2 |
 | Limit: `git p -f origin main` · `git -c alias.p=push p -f origin main` | 2 | **0** | 2 |
 | Limit: `echo push -f` | 0 | **2** | 2 |
 | Out of scope: `git push origin :main` · `--delete origin main` · `-d origin main` | 0 | 0 | 2 |

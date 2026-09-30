@@ -92,10 +92,12 @@ Recording habits:
 | Tier | Tool (example) | Features | What to check |
 |---|---|---|---|
 | Recording | OBS Studio | Free and open source; Windows, macOS, Linux | Recording format and audio track settings |
-| Beginner | Vrew | Turns speech into text so you cut like editing a document; auto captions | Reported to have moved to a unified credit pricing model in 2026-04 (confirmed via search results) |
-| Beginner | CapCut | Templates, auto captions | Reports say a 2025 pricing overhaul cut free features. Check commercial-use terms for templates and music |
+| Beginner | Vrew | Turns speech into text so you cut like editing a document; auto captions | Pricing: see the note below the table |
+| Beginner | CapCut | Templates, auto captions | Commercial-use terms for templates and music. Pricing: see the note below the table |
 | Intermediate | DaVinci Resolve (free version) | Free version with no watermark; editing, color, audio | High hardware requirements |
-| Paid | DaVinci Resolve Studio, Premiere Pro, Final Cut Pro, Camtasia | Advanced features, collaboration, screen-recording focus (Camtasia) | Resolve Studio is a one-time purchase (listed at USD 295, confirmed via search results); Premiere Pro is a subscription |
+| Paid | DaVinci Resolve Studio, Premiere Pro, Final Cut Pro, Camtasia | Advanced features, collaboration, screen-recording focus (Camtasia) | Pricing: see the note below the table |
+
+Price notes for the editing tools are in "Making YouTube Videos with AI: Tools and Tutorials"; check the official pricing page again before you pay.
 
 Using **one tool all the way** is faster. Start with a beginner tool and move once a missing feature becomes clear.
 

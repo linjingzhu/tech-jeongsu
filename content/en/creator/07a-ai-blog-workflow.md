@@ -45,8 +45,7 @@ flowchart LR
 
 ### 2. Topic and keywords: numbers from Naver's tools, clustering by AI
 
-- **Naver DataLab search trends**: shows the **relative trend** of up to five search terms by period, device, gender and age. The highest point in the period is 100, and absolute volumes are not given (confirmed via search results).
-- **Naver search-ad keyword tool**: guides describe it as showing related keywords, monthly PC and mobile query counts and competition level to anyone with a search-ad account, even without running ads (confirmed via search results).
+- **Tools**: the tool descriptions of Naver DataLab search trends and the search-ad keyword tool are in "Choosing a Topic and Audience". This section covers only the order in which to use the two tools with AI.
 - **How to**: (1) In the keyword tool, download the related keywords for a seed term such as "Excel duplicates". (2) Paste the list into an AI and ask it to "group these by search intent and turn each group into one reader question". (3) Check the seasonality of the top two or three groups in DataLab. (4) Copy the numbers **from the tool screens**, not from the AI.
 - **Tutorials**: [Naver DataLab guide](https://www.ascentkorea.com/naver-datalab-guide/) (Korean, Ascent Korea), [Using the Naver keyword tool effectively](https://www.theegg.com/ko/insights/naver-keyword-tool-explained/) (Korean, The Egg), video [Comparing four Naver search-volume tools](https://www.youtube.com/watch?v=PjvqZZoZVLg) (Korean, a marketer's lesson).
 
@@ -89,7 +88,7 @@ If you retype instructions such as "friendly, answer first" every time, results 
 | Naver Mate | Beta from 2026-06. Reported to pick about 3,000 creators a month by AI Briefing citations, topic expertise and activity, and pay them an activity grant | Citations are a new reward metric. Revenue as a whole is in "Ad Revenue: AdPost and the YouTube Partner Program" |
 | AI-use label | A label for AI-generated images and videos. Voluntary on the blog | The labelling standard is in "AI-assisted Production and Platform Policy" |
 
-- **Posts that get cited**: reports say that in May 2026 Naver set out content principles of first-hand knowledge, a consistent topic, honest authenticity, easy-to-read structure and keeping content current, and said that mechanically generated posts, patchworks with unclear sources and overly promotional posts are excluded from citation (confirmed via search results; Naver's original could not be opened).
+- **Posts that get cited**: the content principles and citation exclusions Naver was reported to set out in 2026-05 are covered in the AI Briefing and source selection section of "Naver Blog and How Naver Search Works".
 - **Conclusion**: a post that reads as AI-written moves away from citation. How AI Briefing chooses documents is in "Naver Blog and How Naver Search Works", and generative search in general is in "AI Search · GEO/AEO".
 
 ### 6. Images and diagrams: capture real screens, use AI only for concepts
@@ -115,21 +114,15 @@ If you retype instructions such as "friendly, answer first" every time, results 
 
 ### 8. Fact-check and the human edit pass
 
-1. Have the AI list the **claims to check** in the draft (function names and arguments, menu names, versions, numbers).
-2. Check each item against the original source. For Excel functions the standard is an official page such as [Excel functions (alphabetical)](https://support.microsoft.com/en-us/excel/excel-functions-alphabetical) plus your own screen.
-3. Give the same draft to another vendor's AI and ask it to find only "wrong or exaggerated sentences". Even if both AIs agree, the official documentation wins.
-4. Fill the `[experience]` slots: the errors you hit, the time it took, real numbers such as the file size.
-5. Read it aloud and delete, or rewrite in your own words, any "sentence anyone could have written".
+1. Use the P7 template to list the **claims to check** in the draft (function names and arguments, menu names, versions, numbers).
+2. Check that list following the review protocol and the pre-publish checklist in section 5 of "An AI Production Method: Prompts, Review and Automation". The `[experience]` slots count as placeholders under that checklist. For Excel functions the standard is an official page such as [Excel functions (alphabetical)](https://support.microsoft.com/en-us/excel/excel-functions-alphabetical) plus your own screen.
 
 ### 9. Publishing checklist (the AI parts)
 
-- [ ] Every factual claim the AI wrote is checked against the original source, and the check date is at the end of the post.
-- [ ] Every real screen was captured by you, with personal data hidden.
 - [ ] You decided whether to add the "AI-use" label to AI-made images (standard in "AI-assisted Production and Platform Policy").
 - [ ] You checked the image tool's plan and commercial-use terms.
 - [ ] Any affiliate or sponsored link is disclosed on the first screen ("Disclosure, Copyright and Tax").
 - [ ] Links to official docs and videos in the post open, and you added a link to your own video on the same topic.
-- [ ] Not a single `[experience]` slot is left empty.
 
 ## Applied: One Post by Example Creator J (the AI Version)
 

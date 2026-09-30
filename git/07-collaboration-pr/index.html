@@ -162,7 +162,7 @@ Remote
 <h3>Local Branch만 삭제</h3>
 <p>Remote Branch가 남아 있다면 PR에는 보통 영향이 없다.</p>
 <h3>Remote Head Branch 삭제</h3>
-<p>PR의 Source가 사라지므로 정상적인 업데이트/통합 흐름이 깨진다.</p>
+<p>GitHub UI에서는 열린 PR의 Head Branch를 삭제할 수 없다. <code>git push origin --delete &lt;branch&gt;</code>처럼 <code>git push</code>로 삭제하면 그 PR은 닫힌다.</p>
 <p>따라서 기본 순서:</p>
 <pre><code class="language-text">개발
 → Push

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fcfcfd" />
     <title>Git 실전 작업 흐름 모음 | MyAI(마이아이)</title>
-    <meta name="description" content="현재: A를 건드리지 않는다. 결과:" />
+    <meta name="description" content="현재: A를 건드리지 않는다. 결과: 자세히: 「Worktree 완전 이해」" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/" />
     <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/" />
@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="MyAI(마이아이)" />
     <meta property="og:title" content="Git 실전 작업 흐름 모음 | MyAI(마이아이)" />
-    <meta property="og:description" content="현재: A를 건드리지 않는다. 결과:" />
+    <meta property="og:description" content="현재: A를 건드리지 않는다. 결과: 자세히: 「Worktree 완전 이해」" />
     <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/git/10-practical-workflows/" />
     <meta property="og:locale" content="ko_KR" />
     <meta name="site-root" content="../../" />
@@ -117,6 +117,7 @@ git worktree add ../worktrees/b -b feature/b origin/stable
 WT A    → feature/a  WIP 그대로
 WT B    → feature/b  최신 origin/stable 기반
 </code></pre>
+<p>자세히: 「Worktree 완전 이해」</p>
 <h2>2. 현재 Feature가 stable보다 73 Commit 뒤처짐</h2>
 <p>먼저 Remote 상태를 갱신한다.</p>
 <pre><code class="language-bash">git fetch origin
@@ -143,11 +144,13 @@ A ─ B
 <p>첫 Push:</p>
 <pre><code class="language-bash">git push -u origin feature/a
 </code></pre>
+<p>자세히: 「협업 · Push · PR · Code Review」</p>
 <h2>5. 다른 개발자의 Remote Branch를 잠깐 보기</h2>
 <pre><code class="language-bash">git fetch origin
 git switch --detach origin/feature/a
 </code></pre>
 <p>수정까지 이어갈 거라면 Local Branch를 만든다.</p>
+<p>자세히: 「HEAD · Checkout · Detached HEAD」</p>
 <h2>6. Merge / Rebase / Cherry-pick을 실행하기 전</h2>
 <p>항상 세 가지를 적어 본다.</p>
 <pre><code class="language-text">Current Branch:
@@ -190,18 +193,7 @@ git worktree prune
 <blockquote>
 <p>최신 origin/stable에서 feature/camera Branch와 별도 Worktree를 만들어. 현재 Session의 Branch와 Worktree는 변경하지 마.</p>
 </blockquote>
-<h3>Rebase</h3>
-<blockquote>
-<p>현재 Feature Branch를 origin/stable 위로 rebase하기 전에 주체와 base, 변경될 Commit을 보여줘. Conflict가 있으면 자동 해결하지 말고 중단해.</p>
-</blockquote>
-<h3>Cherry-pick</h3>
-<blockquote>
-<p>이 Commit만 가져오기 전에 git show로 변경과 선행 의존성을 확인해.</p>
-</blockquote>
-<h3>PR</h3>
-<blockquote>
-<p>현재 Branch의 diff와 commit을 검토하고 stable 대상으로 PR 설명을 작성해. Build/Test에서 검증하지 않은 항목은 NOT VERIFIED로 표시해.</p>
-</blockquote>
+<p>Commit · Pull · Push · Rebase · Merge · Cherry-pick · PR 지시 예시는 「Claude Code를 Git Client처럼 쓰기」에 모아 두었다.</p>
 <h2>실전에서 기억할 핵심</h2>
 <pre><code class="language-text">Repository
 = Git 기록

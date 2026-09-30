@@ -170,12 +170,7 @@ origin/feature/camera
 upstream           downstream
 </code></pre>
 <h2>다른 사람이 Push한 Branch를 공동 작업</h2>
-<pre><code class="language-bash">git fetch origin
-git switch --track origin/feature/camera
-</code></pre>
-<p>가능하다.</p>
-<p>하지만 둘이 같은 Branch를 동시에 Push하면 non-fast-forward 충돌이 자주 생긴다.</p>
-<p>일반적으로는 각자 Branch를 분리하고 PR로 통합하는 편이 관리가 쉽다.</p>
+<p>다른 사람이 Push한 Branch도 <code>git fetch origin</code> 후 <code>git switch --track origin/&lt;branch&gt;</code>로 받아 함께 작업할 수 있으며, 동시에 Push할 때 생기는 문제와 Branch를 나누는 방법은 「협업 · Push · PR · Code Review」에서 다룬다.</p>
 </article>
       <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../git/03-worktree/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>Worktree 완전 이해</span></a><a class="page-link next" href="../../git/05-recovery/"><span><small>다음 문서</small>Stash · Restore · Revert · Discard</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
       <footer class="site-footer">

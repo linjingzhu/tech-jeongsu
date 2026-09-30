@@ -299,7 +299,7 @@ trust_level = &quot;trusted&quot;
 <tr>
 <td>Subagent</td>
 <td>두 Claude agent, 세 Codex agent</td>
-<td>부모가 default·plan·dontAsk일 때 읽기 전용: <code>permissionMode: plan</code>, <code>sandbox_mode = &quot;read-only&quot;</code>. 부모가 acceptEdits · auto · bypassPermissions면 Claude agent는 부모 mode를 따르고, Codex agent도 상위 runtime override가 이길 수 있다</td>
+<td><code>permissionMode: plan</code>(plan mode: 읽기 위주, auto mode가 있으면 classifier 승인 명령 포함), <code>sandbox_mode = &quot;read-only&quot;</code>. 부모 mode나 상위 runtime override가 이 값을 덮어쓸 수 있다(「Subagent · Skill · Plugin」 참고)</td>
 </tr>
 <tr>
 <td>Skill</td>

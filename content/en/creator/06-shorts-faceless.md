@@ -67,7 +67,7 @@ The related video link, introduced in September 2023, connects a Short to **one 
 
 ### Where faceless channels run into policy
 
-On 2025-07-15 YouTube renamed its "repetitious content" policy to **"inauthentic content"** and made clear that it covers repetitive or mass-produced content: content that looks made from a template with little variation between videos, or content easily replicable at scale. YouTube described this as a rename and clarification of an existing policy. Separately, the **reused content** rule blocks re-uploading other people's content without significant original commentary, modification or educational value. It applies even with the original creator's permission, and it is judged separately from copyright.
+The definitions, history and allowances of YouTube's **"inauthentic content"** (mass-produced, repetitive content) and **reused content** rules are covered in "AI-assisted Production and Platform Policy"; this section only looks at the signals that bring a faceless channel close to those lines.
 
 Having no face is not the problem. The problem is **a production method that gives the same result whoever uses it**.
 

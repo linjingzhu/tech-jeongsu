@@ -19,6 +19,7 @@ git merge stable
 - 의미: stable의 History를 feature에 합친다.
 
 ```mermaid
+%%{init: { 'gitGraph': { 'mainBranchName': 'stable' } } }%%
 gitGraph
    commit id:"A"
    commit id:"B"
@@ -26,11 +27,11 @@ gitGraph
    checkout feature
    commit id:"E"
    commit id:"F"
-   checkout main
+   checkout stable
    commit id:"C"
    commit id:"D"
    checkout feature
-   merge main id:"M"
+   merge stable id:"M"
 ```
 
 기존 Commit들은 유지되고 분기와 합류가 History에 남는다.

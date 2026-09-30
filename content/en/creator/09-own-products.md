@@ -25,7 +25,7 @@ Ads pay only once views pile up, and they pay nothing until you pass the thresho
 
 > Product revenue = visitors × conversion rate × price − fees
 
-Ad revenue is counted per 1,000 views (RPM); for RPM assumptions use the ranges in "Ad Revenue: AdPost and the YouTube Partner Program" and "Advertising Revenue in Depth". Products earn a large share from a few buyers. Example (assumption): if 0.5% of 3,000 monthly visitors buy a KRW 14,900 template, that is 15 sales, about KRW 220,000. To earn that from the same visitors through ads, the RPM would have to be about KRW 70,000, far outside the site's shared assumption range. The 0.5% conversion rate is also an assumption; replace it with your own number after the first sales.
+Ad revenue is counted per 1,000 views (RPM); for RPM assumptions use the ranges in "Ad Revenue: AdPost and the YouTube Partner Program" and "Advertising Revenue in Depth". Products earn a large share from a few buyers. Example (assumption): if 0.5% of 3,000 monthly visitors buy a KRW 14,900 template, that is 15 sales, about KRW 220,000. To earn that from the same visitors through ads, the RPM would have to be about KRW 75,000, far outside the site's shared assumption range. The 0.5% conversion rate is also an assumption; replace it with your own number after the first sales.
 
 ### 2. How content creates demand
 
@@ -44,7 +44,7 @@ The rules for splitting one piece of content into a blog post, a video, Shorts a
 2. **Pre-sale**: open a payment link at an early-bird price. If it misses the bar (for example 10 sales in a pre-sale window of about 12 days, an assumption), refund everyone in full and change the topic or format.
 3. **Minimum delivery**: deliver to pre-sale buyers first, then strengthen the full edition with the questions they send.
 
-The rate at which waitlist sign-ups turn into payments varies widely by product, so no published benchmark is used here. Use your own list's actual rate as the first baseline. A pre-sale is still subject to the E-Commerce Act's disclosure and refund duties (section 7 below).
+The fuller "evidence ladder" of validation steps is in "Choosing Opportunities and Validating Demand". The rate at which waitlist sign-ups turn into payments varies widely by product, so no published benchmark is used here. Use your own list's actual rate as the first baseline. A pre-sale is still subject to the E-Commerce Act's disclosure and refund duties (section 7 below).
 
 ### 4. Price by value and alternatives
 

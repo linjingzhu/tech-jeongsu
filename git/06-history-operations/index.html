@@ -117,18 +117,19 @@
 <li>객체: <code>stable</code></li>
 <li>의미: stable의 History를 feature에 합친다.</li>
 </ul>
-<pre><code class="language-mermaid">gitGraph
+<pre><code class="language-mermaid">%%{init: { &#39;gitGraph&#39;: { &#39;mainBranchName&#39;: &#39;stable&#39; } } }%%
+gitGraph
    commit id:&quot;A&quot;
    commit id:&quot;B&quot;
    branch feature
    checkout feature
    commit id:&quot;E&quot;
    commit id:&quot;F&quot;
-   checkout main
+   checkout stable
    commit id:&quot;C&quot;
    commit id:&quot;D&quot;
    checkout feature
-   merge main id:&quot;M&quot;
+   merge stable id:&quot;M&quot;
 </code></pre>
 <p>기존 Commit들은 유지되고 분기와 합류가 History에 남는다.</p>
 <h2>Rebase</h2>

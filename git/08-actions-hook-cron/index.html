@@ -124,6 +124,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: cmake -S . -B build
       - run: cmake --build build
 </code></pre>
 <p><code>uses:</code> 뒤의 긴 문자열은 Action을 Tag 대신 Commit SHA로 고정한 것이다. 이유와 방법은 「GitHub Actions 실전」에 있다.</p>
@@ -183,6 +184,7 @@ Local Build / Test
   schedule:
     - cron: &#39;0 18 * * *&#39;
 </code></pre>
+<p>GitHub Actions의 <code>schedule</code>은 UTC 기준으로 실행된다. 그래서 매일 한국 시간(KST) 03:00은 <code>&#39;0 18 * * *&#39;</code>이다.</p>
 <p>즉:</p>
 <pre><code class="language-text">YAML
 └─ schedule

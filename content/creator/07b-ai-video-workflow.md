@@ -14,7 +14,7 @@
 | 보이스 클로닝 | 내 목소리 샘플로 AI 음성을 만드는 기능 | Shorts 한 편의 시험에만. 롱폼의 틀린 단어는 다시 녹음한다. 표시 기준은 07 문서 |
 | 생성형 영상 | 프롬프트로 짧은 영상 클립을 만드는 모델 (Veo, Runway, Kling 등) | 설명용 B-roll 한정 |
 | 자동 더빙 | YouTube가 영상 음성을 다른 언어로 번역해 오디오 트랙을 만드는 기능 | 게시 후 선택 단계 |
-| 튜토리얼 | 도구 회사의 공식 도움말·강좌, 또는 검증된 제작자의 강의 영상 | 도구를 처음 쓸 때 20~30분 투자 |
+| 튜토리얼 | 뜻과 고르는 기준은 「AI로 블로그 글 만들기: 도구와 튜토리얼」을 따른다 | 도구를 처음 쓸 때 20~30분 투자 |
 
 ## 원리
 
@@ -103,7 +103,7 @@ J의 기준: 본 영상은 본인 목소리로 녹음하고, 틀린 함수 이�
 | CapCut | 자동 캡션, 템플릿, 배경 제거 | 자동 캡션 등이 유료 요금제로 옮겨졌다는 보도. 음원·템플릿 상업 조건 확인 | [자막 인식 도움말 (한국어)](https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles) |
 | Descript | 문서처럼 편집, AI 공동 편집자 Underlord, 음질 보정 | 한국어 전사 지원 언어에 포함된다는 제3자 리뷰 | [입문 6단계 (영어)](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started) |
 | Premiere Pro | 텍스트 기반 편집, 음성→텍스트 자막, Generative Extend, 미디어 인텔리전스 검색 | 구독형. 한국어 전사는 설치 버전에서 확인 | [Text-Based Editing (영어)](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html) |
-| DaVinci Resolve | 20: AI IntelliScript(대본으로 가편집), AI 애니메이션 자막, AI 오디오 어시스턴트. 21(2026-06 정식): AI 도구 추가 | AI 기능 상당수가 유료판(Studio) 기능이라는 보도 | [공식 트레이닝 (영어)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
+| DaVinci Resolve | 20: AI IntelliScript(대본으로 가편집), AI 애니메이션 자막, AI 오디오 어시스턴트. 21(2026-06 정식): AI 도구 추가 | AI 기능 상당수가 유료판(Studio) 기능이라는 보도. Studio는 일회성 구매(295달러로 안내, 검색 결과로 확인) | [공식 트레이닝 (영어)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
 | YouTube Edit with AI | Shorts 촬영본으로 첫 편집본. 발표 시점 기준 AI 보이스오버도 넣는다 — J는 끄거나, 남기면 합성 음성 표시 | 한국 포함 발표, 순차 제공 | [도움말 (영어)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (영어)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
 
 화면 녹화 강의에서 AI 편집이 가장 많이 틀리는 곳은 **함수 이름·메뉴 이름·숫자**다. "VLOOKUP"이 "브이 룩업"으로, "필터"가 "피터"로 받아 적히는 식이다. 자동 자막은 한 번에 일괄 수정할 단어 목록을 만들어 두면 빨라진다. 도구는 「롱폼 영상 기획과 제작」의 등급표처럼 **하나로 고정**한다.
@@ -160,7 +160,7 @@ J의 한 주 배분은 「원소스 멀티유즈(OSMU) 전략」의 기준표를
 
 ### 튜토리얼을 고르는 기준
 
-① 공식 도움말·강좌를 먼저, ② 한국어 자료가 있으면 한국어를, ③ 최근 1년 안의 자료를, ④ "AI로 하루 만에 수익" 같은 제목의 채널은 피한다. 도구 화면은 몇 달 만에 바뀌므로 영상 하나와 공식 도움말 하나를 같이 둔다. YouTube 공식 교육 자료는 [YouTube 크리에이터 (한국어)](https://www.youtube.com/intl/ko_ALL/creators/)와 [AI for Creators](https://www.youtube.com/creators/create/ai-for-creators/)에 모여 있다.
+고르는 기준은 「AI로 블로그 글 만들기: 도구와 튜토리얼」의 심화 절을 따른다. YouTube 공식 교육 자료는 [YouTube 크리에이터 (한국어)](https://www.youtube.com/intl/ko_ALL/creators/)와 [AI for Creators](https://www.youtube.com/creators/create/ai-for-creators/)에 모여 있다.
 
 ### 도구 비용과 중단 위험
 
@@ -172,7 +172,6 @@ Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존�
 - **"영감 탭이 아이디어 도구다"** — 2026-08부터 단계적으로 종료된다. 대화형 Ask Studio가 대신한다.
 - **"AI 편집이면 자막 교정이 필요 없다"** — 함수·메뉴 이름과 숫자는 거의 항상 틀린다. 교정은 사람이 한다.
 - **"내 목소리를 복제한 AI 음성은 표시할 필요가 없다"** — 공식 문서로 예외를 확인하지 못했으므로 보수적으로 표시한다(「AI 활용 제작과 플랫폼 정책」).
-- **"도구를 많이 쓸수록 빨라진다"** — 단계마다 하나로 고정해야 절약이 쌓인다. 새 도구 학습 시간도 제작 시간이다.
 
 ## 자기 점검 질문
 
@@ -219,7 +218,7 @@ Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존�
 - [자막을 어떻게 인식합니까?](https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles) — CapCut 도움말; [CapCut captions aren't free anymore](https://www.descript.com/blog/article/capcut-captions-arent-free-anymore-heres-a-better-option) — Descript 블로그 (경쟁사 글)
 - [Descript Tutorial for Beginners: 6 Steps to Start](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started), [How to Get Started with Underlord: An AI Video Editor Primer](https://www.descript.com/blog/article/underlord-ai-video-editor-primer) — Descript 블로그
 - [Text-Based Editing overview in Premiere](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html), [What's new in Adobe Premiere](https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html) — Adobe 도움말
-- [DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) — Blackmagic Design; [DaVinci Resolve 20 Released with a Handful of AI-assisted Features](https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/) — CineD; [DaVinci Resolve 21 Officially Released](https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/) — PetaPixel, 2026-06-03
+- [DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training), [DaVinci Resolve Studio](https://www.blackmagicdesign.com/products/davinciresolve/studio) — Blackmagic Design; [DaVinci Resolve 20 Released with a Handful of AI-assisted Features](https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/) — CineD; [DaVinci Resolve 21 Officially Released](https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/) — PetaPixel, 2026-06-03
 
 **생성형 영상, 썸네일, 대본**
 - [Veo](https://deepmind.google/models/veo/) — Google DeepMind; [[I/O 2025] 비오 3 기반 AI 영화 제작 툴 '플로우(Flow)'](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) — Google 코리아 블로그; [You can now make your images talk with Veo 3 in Flow, plus we're expanding to more countries](https://blog.google/innovation-and-ai/models-and-research/google-labs/flow-adds-speech-expands/) — Google 블로그

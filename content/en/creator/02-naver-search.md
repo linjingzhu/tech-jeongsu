@@ -58,6 +58,8 @@ D.I.A. (Deep Intent Analysis) was presented as a model that uses Naver's data to
 
 Naver has not published figures on how AI Briefing picks its sources. There are two public signals, though. One is that "Naver Mate", piloted from 2026-06, selects creators by **AI Briefing citation count, topic expertise and activity**; the other is that Naver repeatedly frames the direction of search as "trustworthy sources" (confirmed via search results). Being cited in AI Briefing is separate from whether users click through to the original. Google-side research showing fewer clicks on results with a summary is introduced in "Advertising Revenue in Depth".
 
+Beyond those two signals, principle-level criteria have also been reported. Reports say that in May 2026 Naver set out content principles of first-hand knowledge, a consistent topic, honest authenticity, easy-to-read structure and keeping content current, and said that mechanically generated posts, patchworks with unclear sources and overly promotional posts are excluded from citation ([Daum News report (Korean)](https://v.daum.net/v/6X1XvAe4cP), confirmed via search results; Naver's original could not be opened).
+
 ### What Naver Treats as Low Quality or Abuse
 
 The Naver Blog operating policy and search help pages could not be opened directly, so below are the **categories** confirmed from the D.I.A. factor descriptions and from reports on the operating policy.
@@ -148,6 +150,7 @@ Be clear about what cannot be measured too. **Your ranking score, a C-Rank value
 - ["Can I trust this?" Naver AI tells you who is behind a blog (Korean)](https://www.newsis.com/view/NISX20260507_0003620731) — Newsis, 2026-05-07, confirmed via search results (2026-09-30)
 - [Naver focuses on search trust, using AI to pick trustworthy sources (Korean)](https://www.news1.kr/it-science/general-it/6164096) — News1, confirmed via search results (2026-09-30)
 - [Naver names 3,000 creators cited by AI and launches Naver Mate (Korean)](https://www.edaily.co.kr/News/Read?newsId=03466966645478440) — Edaily, 2026-06, confirmed via search results (2026-09-30)
+- [Which content does AI choose? A look at Naver Mate selection criteria (Korean)](https://v.daum.net/v/6X1XvAe4cP) — Daum News, report on the content principles, confirmed via search results (2026-09-30)
 - [Naver's latest ranking logic: D.I.A. (Korean)](https://www.twinword.co.kr/blog/naver-seo-d-i-a/) — Twinword, confirmed via search results (2026-09-30). Commentary quoting Naver Search's official blog
 - [Naver SEO part 2: algorithms and search engine systems (Korean)](https://www.ascentkorea.com/naver_seo_strategies_2/) — Ascent Korea, confirmed via search results (2026-09-30). Quotes the C-Rank and D.I.A.+ descriptions
 - ["This content was made with AI": Naver introduces the "AI used" label (Korean)](https://news.nate.com/view/20250520n29594) — Nate News, 2025-05-20, confirmed via search results (2026-09-30)

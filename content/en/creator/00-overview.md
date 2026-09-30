@@ -1,6 +1,6 @@
 # Blog & YouTube Monetization Overview
 
-> **Learning goal**: Compare how Naver Blog and YouTube reach readers and how each turns into money, explain why ads and own products, the two revenue engines, should be planned together from day one, decide the order in which to read the 13 documents in this section, and estimate in numbers how long the monetization thresholds take.
+> **Learning goal**: Compare how Naver Blog and YouTube reach readers and how each turns into money, explain why ads and own products, the two revenue engines, should be planned together from day one, decide the order in which to read the 16 documents in this section, and estimate in numbers how long the monetization thresholds take.
 
 This section is a textbook for someone new to both blogging and YouTube. On the blog side it covers only Naver Blog; on the YouTube side it covers long-form, Shorts, faceless channels and AI-assisted production. Revenue centres on advertising (Naver AdPost, the YouTube Partner Program) and own products (courses, e-books, templates). All policies and figures are **as of 2026-09**, and facts whose official page could not be opened directly are marked "confirmed via search results". The basics of ad metrics are already covered in "Advertising Revenue in Depth" and pricing in "Paid Sales, Subscriptions and Pricing", so they are not repeated here. The exchange rate uses the site-wide assumption USD 1 = KRW 1,400.
 
@@ -71,6 +71,9 @@ flowchart TD
     D05 --> D11
     D06 --> D11
     D07["07 AI-assisted Production and Platform Policy"] --> D11
+    D07 --> D07a["07a Writing Blog Posts with AI"]
+    D07 --> D07b["07b Making YouTube Videos with AI"]
+    D07 --> D07c["07c An AI Production Method"]
     D11 --> D08["08 Ad Revenue"]
     D11 --> D09["09 Own Products"]
     D08 --> D10["10 Disclosure, Copyright and Tax"]
@@ -83,13 +86,13 @@ flowchart TD
 | 1. Direction | "Blog & YouTube Monetization Overview", "Choosing a Topic and Audience" | What will you make, and for whom? |
 | 2. Blog | "Naver Blog and How Naver Search Works", "Writing and Running a Blog" | How are you found on Naver, and how will you keep writing? |
 | 3. YouTube | "How YouTube Recommends and Channel Design", "Planning and Producing Long-form Video", "Shorts and Faceless Channels" | How do recommendations work, and how will you make videos? |
-| 4. Tools and rules | "AI-assisted Production and Platform Policy" | How far can you use AI and keep monetization safe? |
+| 4. Tools and rules | "AI-assisted Production and Platform Policy", "Writing Blog Posts with AI: Tools and Tutorials", "Making YouTube Videos with AI: Tools and Tutorials", "An AI Production Method: Prompts, Review and Automation" | How far can you use AI and keep monetization safe, and which tools and working method fit each stage? |
 | 5. Connection | "One Source, Multi Use (OSMU) Strategy" | How will you split one outline into several outputs and products? |
 | 6. Revenue | "Ad Revenue: AdPost and the YouTube Partner Program", "Own Products: Courses, E-books and Templates" | How will you switch on and grow both engines? |
 | 7. Rules | "Disclosure, Copyright and Tax" | What must you disclose, what must you not use, and how do you pay tax? |
 | 8. Execution | "A 90-day Channel Plan" | How will you spend the first 90 days, week by week? |
 
-It is safer to read 07 before you start using tools. If you plan to use an AI voice or automated editing in 05 or 06, read 07 first.
+It is safer to read 07 before you start using tools. If you plan to use an AI voice or automated editing in 05 or 06, read 07 first. Read 07a and 07b alongside 03, 05 and 06 (07a for blog posts, 07b for video), and 07c after them.
 
 ## Applied: Example Creator J's Starting Point
 
@@ -123,22 +126,7 @@ Over 13 weeks J makes 13 long-form videos, 39 Shorts (38 published by D90) and 1
 
 ### Realistic Expectations: Time to the Thresholds
 
-YouTube announced changes to the YPP thresholds in August 2026 (confirmed via search results). **For channels applying from 2027-02-01**, the ads-tier bar doubles. The parts that matter for a channel not yet in the program, like J's, are these.
-
-| Tier | Applying until 2027-01-31 | Applying from 2027-02-01 |
-|---|---|---|
-| Ads tier (with 1,000 subscribers) | 4,000 valid watch hours in 12 months or 10M valid Shorts views in 90 days | 8,000 valid watch hours in 365 days or 20M valid Shorts views in 90 days |
-| Fan-funding tier (no ad revenue sharing) | 500 subscribers, 3 public uploads in the last 90 days, 3,000 valid watch hours in the last 12 months or 3M valid Shorts views in the last 90 days | Unchanged |
-
-Channels already in YPP keep their status, but from the same date an activity requirement and a Shorts revenue requirement (at least 10M valid Shorts views in the last 90 days for Shorts revenue sharing) are reported to apply. The lower tier (500 subscribers) launched first in 2023-06 in a set of countries that included South Korea. The revenue shares are 55% for long-form and 45% of the creator-pool allocation for Shorts. Details are in "Ad Revenue: AdPost and the YouTube Partner Program".
-
-Converting watch hours into views shows the scale. **Assuming** an average view duration of **4 minutes**:
-
-- 4,000 hours = 240,000 minutes → about 60,000 views over 12 months. At one video a week, about 1,150 views per video on average.
-- 8,000 hours → about 120,000 views. About 2,300 views per video on average.
-- 20M Shorts views in 90 days → about 222,000 views a day on average.
-
-J's D90 (2027-01-03) falls before the change, but reaching the old 4,000-hour bar before 2027-01-31 would take about 60,000 cumulative views in the first 4 months. So J **plans against the new bar (1,000 subscribers + 8,000 hours)**. In the illustrative model in "Ad Revenue: AdPost and the YouTube Partner Program" (monthly views growing steadily; not a forecast), the fan-funding tier arrives in month 7–14 and the ads tier in month 11–26. No scenario reaches the fan-funding tier by D90. Meanwhile J looks to products for revenue. AdPost is described as reviewing operating period, public content count, visitor numbers and more together, but no numeric bar could be confirmed in the official help. The widely repeated "90 days, 50 posts, 100 visitors" is folklore not confirmed on any official page (confirmed via search results).
+The YPP ads tier needs 1,000 subscribers together with valid watch hours, and under the August 2026 announcement (confirmed via search results) **channels applying from 2027-02-01 need 8,000 valid watch hours in 365 days**. In J's illustrative model built on that new bar (monthly views growing steadily; not a forecast), the ads tier arrives in month 11–26, so J looks to products for revenue in the meantime; the threshold table, the watch-hour-to-view conversion and the AdPost review are covered in "Ad Revenue: AdPost and the YouTube Partner Program".
 
 ### The Distribution of Outcomes
 
@@ -155,7 +143,6 @@ Affiliate commissions and brand sponsorships are possible but are not the focus 
 
 - **"Running a blog and YouTube doubles the work"** — Built from one outline, research and structure happen once. Only format-specific polishing is separate.
 - **"Ads first, products later"** — The ad gates open late. Product potential is already decided when you choose the topic.
-- **"Pass 1,000 subscribers and you are monetized"** — You also need the watch-hour or Shorts-view bar, and channels applying from 2027-02-01 need 8,000 hours or 20M Shorts views. The 500-subscriber fan-funding tier has no ad revenue sharing.
 - **"The average YouTuber earns KRW 71 million, so I will too"** — That is the average of people who had income to report. The top 1% pulls the average up.
 - **"AdPost approves you at 90 days and 50 posts"** — No numeric bar could be confirmed in the official help. It is folklore not confirmed on any official page.
 
@@ -171,8 +158,6 @@ Affiliate commissions and brand sponsorships are possible but are not the focus 
 
 - [New opportunities to earn and changes to the YouTube Partner Program — YouTube Official Blog](https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/) — YouTube, 2026-08-10, confirmed via search results (2026-09-30)
 - [Changes to the YouTube Partner Program — YouTube Help](https://support.google.com/youtube/answer/12843009?hl=en) — Google, confirmed via search results (2026-09-30)
-- [YouTube partner earnings overview — YouTube Help](https://support.google.com/youtube/answer/72902?hl=en) — Google, confirmed via search results (2026-09-30)
-- [YouTube Lowers Barriers To Join Partner Program In More Countries](https://www.searchenginejournal.com/youtube-lowers-barriers-to-join-partner-program-in-more-countries/495220/) — Search Engine Journal, 2023-06, confirmed via search results (2026-09-30)
 - [YouTube monetization threshold change: doubled from February 2027 (Korean)](https://www.digitalmarketer.co.kr/insights/youtube-ypp-2027-threshold-change) — Digital Marketer, confirmed via search results (2026-09-30)
 - [YouTube channels, uploads and views: A statistical analysis of the past 10 years](https://journals.sagepub.com/doi/abs/10.1177/1354856517736979) — Mathias Bärtl, Convergence, 2018, confirmed via search results (2026-09-30)
 - [YouTubers' average annual income: bottom 50% KRW 24.63M, top 1% KRW 1.3B (Korean)](https://www.mediatoday.co.kr/news/articleView.html?idxno=332451) — Media Today, 2026-02, confirmed via search results (2026-09-30)

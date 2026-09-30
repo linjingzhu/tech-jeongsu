@@ -72,7 +72,7 @@ maxTurns: 6
 | 필드 | 값 | 이유 |
 |---|---|---|
 | `tools` | Edit · Write 없음 | 생략하면 **모든 도구를 상속**한다. 목록은 허용 목록이다 |
-| `permissionMode` | `plan` | 읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 mode가 덮어쓸 수 있다(아래 흔한 오해 참고) |
+| `permissionMode` | `plan` | Plan Mode(읽기 위주로 탐색하고 계획을 세우는 mode)로 시작한다. 단, 부모 mode가 덮어쓸 수 있다(아래 흔한 오해 참고) |
 | `maxTurns` | `6` | 한도에 닿으면 멈추고 부분 결과를 돌려준다 |
 | `model` | 없음 | 가장 싼 유능한 Model이 이기는 역할이라 Harness에 맡긴다 |
 

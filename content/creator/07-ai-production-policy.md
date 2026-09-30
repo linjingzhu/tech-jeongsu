@@ -61,7 +61,7 @@ YouTube는 시청자가 **실제 사람·장소·사건으로 쉽게 오인할 �
 
 | 구분 | inauthentic content | 재사용 콘텐츠 |
 |---|---|---|
-| 무엇을 보나 | 대량 생산·반복: 템플릿으로 만든 듯 영상 간 차이가 거의 없는 콘텐츠 | 출처: 내 창작물이 아니고 이미 다른 곳에 있는 콘텐츠 |
+| 무엇을 보나 | 대량 생산·반복: 템플릿으로 만든 듯 영상 간 차이가 거의 없는 콘텐츠. 2026-07에는 YouTube가 이를 "템플릿형·반복", "불쾌감·자극 유발", "건강·금융 등 민감 주제를 말하는 AI 페르소나" 세 유형으로 설명했다고 보도됐다 ([TechCrunch, 2026-07-20](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/), 검색 결과로 확인) | 출처: 내 창작물이 아니고 이미 다른 곳에 있는 콘텐츠 |
 | 역사 | 2025-07-15 "repetitious content"에서 이름을 바꾸고 대량 생산 콘텐츠를 포함한다고 명확히 함 | 기존 규정 |
 | 예시 | 같은 틀에 문장만 바꾼 합성 음성 영상 수백 개 | 남의 영상 클립 모음, 해설 없는 반응 영상, 다른 채널 영상 재업로드 |
 | 허용되는 경우 | 영상마다 고유한 내용과 제작 판단이 있을 때 | 의미 있는 해설, 실질적 수정, 교육·오락 가치를 더했을 때 |
@@ -157,6 +157,7 @@ YouTube 도움말은 표시를 한다고 해서 영상의 도달 범위나 수�
 - [YouTube channel monetization policies](https://support.google.com/youtube/answer/1311392?hl=en) — YouTube Help, 검색 결과로 확인 (2026-09-30)
 - [YouTube clarifies "inauthentic content" policy changes](https://ppc.land/youtube-clarifies-inauthentic-content-policy-changes/) — PPC Land, 2025-07, 2026-09-30 확인
 - [Understanding YouTube's reused content policy](https://ppc.land/understanding-youtubes-reused-content-policy/) — PPC Land, 2026-09-30 확인
+- [YouTube clarifies policies around AI slop and upsetting videos](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/) — TechCrunch, 2026-07-20, 검색 결과로 확인 (2026-09-30)
 - [Likeness detection on YouTube](https://support.google.com/youtube/answer/16440338?hl=en) — YouTube Help, 검색 결과로 확인 (2026-09-30)
 - [YouTube Rolls Out Likeness Detection To All Creators Over 18](https://www.mediapost.com/publications/article/415170/youtube-rolls-out-likeness-detection-to-all-creato.html) — MediaPost, 2026-05-19, 2026-09-30 확인
 - [Unlocking a global audience with auto dubbing](https://blog.youtube/news-and-events/youtube-auto-dubbing-expressive-speech/) — YouTube Blog, 검색 결과로 확인 (2026-09-30)
