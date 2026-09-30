@@ -272,7 +272,7 @@
 <td>Replace with contract tests or a fake server</td>
 </tr>
 </tbody></table>
-<p><strong>Detection</strong>: if a failed test passes when rerun <strong>on the same commit</strong>, record it as flaky. Playwright classifies tests that pass on retry as &quot;flaky&quot;, and <code>--fail-on-flaky-tests</code> fails the run if any exist. The Node.js test runner shuffles execution order with <code>--test-randomize</code> from v26.1.0, which exposes order dependency. Only a per-test pass and fail history lets you find &quot;the test that flaked three times this week&quot;.</p>
+<p><strong>Detection</strong>: if a failed test passes when rerun <strong>on the same commit</strong>, record it as flaky. Playwright classifies tests that pass on retry as &quot;flaky&quot;, and <code>--fail-on-flaky-tests</code> fails the run if any exist. The Node.js test runner shuffles execution order with <code>--test-randomize</code> from v26.1.0 and v24.16.0, which exposes order dependency. Only a per-test pass and fail history lets you find &quot;the test that flaked three times this week&quot;.</p>
 <p><strong>Policy</strong></p>
 <ol>
 <li>A flaky test is <strong>a real bug</strong>. It may be a bug in the test or a race condition in the product. Open an issue with an owner and a deadline.</li>

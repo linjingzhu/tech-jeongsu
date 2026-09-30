@@ -174,7 +174,10 @@
 <p>Plan conditions change. Check commercial-use permission, billing units and provider roadmaps with the checklist in document 01.</p>
 <h2>Minimum Pipeline</h2>
 <pre><code class="language-yaml">name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:

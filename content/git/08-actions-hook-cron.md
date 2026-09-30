@@ -27,9 +27,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: cmake --build build
 ```
+
+`uses:` 뒤의 긴 문자열은 Action을 Tag 대신 Commit SHA로 고정한 것이다. 이유와 방법은 「GitHub Actions 실전」에 있다.
 
 ## 가장 흔한 Trigger
 

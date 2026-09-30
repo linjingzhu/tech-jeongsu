@@ -115,7 +115,7 @@ CI의 Agent는 PR 제목 · 본문, Commit 메시지, Issue와 댓글, PR이 바
 | 테스트 동반 | 필수 Status check, AI 리뷰 지시 | 동작을 바꾸는 PR에 테스트 변경이 없으면 표시 |
 | 변경 줄 Coverage | diff-cover, Coverage 서비스의 Patch coverage | 전체 Coverage가 아니라 **이번에 바뀐 줄**의 Coverage. 목표치가 아니라 신호(「CI 기초와 테스트 전략」) |
 | SAST | CodeQL, Semgrep 등 | 새 High 이상 경보 0건. Private 저장소의 CodeQL은 유료 보안 제품이 필요할 수 있으니 요금제 확인 |
-| 의존성 · License | `actions/dependency-review-action`(`fail-on-severity`, `allow-licenses`, `deny-licenses`) | 알려진 취약점과 금지 License 차단. 공개 저장소는 무료, Private은 유료 보안 License 필요(Action README 기준). AI가 **존재하지 않는 Package 이름**을 제안하는 문제도 여기서 걸린다 |
+| 의존성 · License | `actions/dependency-review-action`(`fail-on-severity`, `allow-licenses`) | 알려진 취약점과 금지 License 차단. 공개 저장소는 무료, Private은 유료 보안 License 필요(Action README 기준). AI가 **존재하지 않는 Package 이름**을 제안하는 문제도 여기서 걸린다 |
 | Secret 검사 | Push protection, Secret scanning | 「Secret · SBOM · SLSA」 |
 | 사람 승인 | CODEOWNERS + Ruleset의 "Require review from Code Owners", "Require approval of the most recent reviewable push" | 인증 · 결제 · Migration · `tests/` · `.github/`는 담당자 승인. 마지막 Push 뒤 승인을 요구하면 승인 뒤 Agent가 얹은 Commit이 그대로 Merge되지 않는다 |
 

@@ -115,7 +115,7 @@ The defaults around `pull_request_target` kept tightening through 2025–2026. F
 | Tests with changes | Required status checks, AI review instructions | Flag a behaviour-changing PR that has no test changes |
 | Changed-line coverage | diff-cover, patch coverage in a coverage service | Coverage of **the lines this PR changed**, not overall coverage. A signal, not a target ("CI Fundamentals and Test Strategy") |
 | SAST | CodeQL, Semgrep and similar | Zero new alerts at High or above. CodeQL on private repositories may need a paid security product; check your plan |
-| Dependencies · licenses | `actions/dependency-review-action` (`fail-on-severity`, `allow-licenses`, `deny-licenses`) | Block known vulnerabilities and forbidden licenses. Free for public repositories; private ones need a paid security licence (per the action's README). This is also where AI suggestions of **package names that do not exist** get caught |
+| Dependencies · licenses | `actions/dependency-review-action` (`fail-on-severity`, `allow-licenses`) | Block known vulnerabilities and forbidden licenses. Free for public repositories; private ones need a paid security licence (per the action's README). This is also where AI suggestions of **package names that do not exist** get caught |
 | Secret checks | Push protection, secret scanning | "Secrets · SBOM · SLSA" |
 | Human approval | CODEOWNERS + the ruleset options "Require review from Code Owners" and "Require approval of the most recent reviewable push" | Owners approve auth, payments, migrations, `tests/` and `.github/`. Requiring approval after the last push stops commits an agent adds after approval from merging unreviewed |
 

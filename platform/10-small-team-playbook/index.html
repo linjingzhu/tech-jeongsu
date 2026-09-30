@@ -174,7 +174,10 @@
 <p>플랜 조건은 바뀐다. 상업적 사용 허용 여부, 과금 단위, 제공사 로드맵은 01 문서의 Checklist로 확인한다.</p>
 <h2>최소 Pipeline</h2>
 <pre><code class="language-yaml">name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:

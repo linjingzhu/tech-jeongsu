@@ -67,7 +67,7 @@ Google calls **a test that both passes and fails on the same code** a flaky test
 | Time and dates | Fails at midnight, month end, in some time zones | Inject the clock (fake clock) |
 | External network | Fails when an outside API is slow or down | Replace with contract tests or a fake server |
 
-**Detection**: if a failed test passes when rerun **on the same commit**, record it as flaky. Playwright classifies tests that pass on retry as "flaky", and `--fail-on-flaky-tests` fails the run if any exist. The Node.js test runner shuffles execution order with `--test-randomize` from v26.1.0, which exposes order dependency. Only a per-test pass and fail history lets you find "the test that flaked three times this week".
+**Detection**: if a failed test passes when rerun **on the same commit**, record it as flaky. Playwright classifies tests that pass on retry as "flaky", and `--fail-on-flaky-tests` fails the run if any exist. The Node.js test runner shuffles execution order with `--test-randomize` from v26.1.0 and v24.16.0, which exposes order dependency. Only a per-test pass and fail history lets you find "the test that flaked three times this week".
 
 **Policy**
 

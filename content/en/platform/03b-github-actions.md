@@ -133,7 +133,7 @@ Standard runners in public repositories, GitHub Pages and Dependabot runs are fr
 |---|---|---|---|---|
 | USD per minute | $0.002 | $0.006 / $0.005 | $0.010 | $0.062 |
 
-- **2026-01-01 cut**: GitHub-hosted prices fell by up to 39% depending on the machine (for example, Linux 2-core $0.008 → $0.006).
+- **2026-01-01 cut**: GitHub-hosted prices fell depending on the machine (for example, Linux 2-core $0.008 → $0.006, a 25% cut). The changelog headline's "up to 39%" was confirmed via search results only.
 - **Self-hosted charge on hold**: in its 2025-12-16 changelog GitHub announced a $0.002 per-minute charge for self-hosted use in private repositories from 2026-03-01, then postponed it on 2025-12-17. The pricing docs checked on 2026-09-30 still say self-hosted use is free. It may come back, so watch the changelog.
 - Each job is **rounded up** to the whole minute, and time spent on failed runs and re-runs counts too. Storage overage is $0.25 per GB-month for artifacts and Packages and $0.07 for cache, accrued hourly. The old OS multipliers (Windows 2x, macOS 10x) are gone from the current pricing docs, replaced by per-machine minute rates. Check the billing page to see how included minutes are drawn down on Windows and macOS. Without a payment method, runs are blocked once the included amount is used up. With one, set a **budget** as a cap. Copilot code review in private repositories also uses Actions minutes.
 

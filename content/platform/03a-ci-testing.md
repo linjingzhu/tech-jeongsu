@@ -67,7 +67,7 @@ Google은 **같은 코드에서 통과와 실패가 모두 나오는 Test**를 F
 | 시간 · 날짜 | 자정, 월말, Time zone에서 실패 | 시계를 주입(Fake clock)한다 |
 | 외부 Network | 외부 API 지연 · 장애 때 실패 | Contract Test나 가짜 Server로 대체 |
 
-**탐지**: 실패한 Test를 **같은 Commit에서** 다시 돌려 통과하면 Flaky로 기록한다. Playwright는 재시도에서 통과한 Test를 "flaky"로 따로 분류하고, `--fail-on-flaky-tests`로 그런 Test가 있으면 실행을 실패시킨다. Node.js Test Runner는 v26.1.0부터 `--test-randomize`로 실행 순서를 섞어 순서 의존을 드러낸다. Test별 통과 · 실패 이력을 남겨야 "이번 주에 세 번 흔들린 Test"를 찾을 수 있다.
+**탐지**: 실패한 Test를 **같은 Commit에서** 다시 돌려 통과하면 Flaky로 기록한다. Playwright는 재시도에서 통과한 Test를 "flaky"로 따로 분류하고, `--fail-on-flaky-tests`로 그런 Test가 있으면 실행을 실패시킨다. Node.js Test Runner는 v26.1.0 · v24.16.0부터 `--test-randomize`로 실행 순서를 섞어 순서 의존을 드러낸다. Test별 통과 · 실패 이력을 남겨야 "이번 주에 세 번 흔들린 Test"를 찾을 수 있다.
 
 **정책**
 
