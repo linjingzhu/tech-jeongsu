@@ -81,7 +81,7 @@ Recommendation happens video by video, but **channel design is what makes a view
 - **Format series**: A recurring series built on the same frame. Viewers know the frame when they arrive, and planning time drops for the creator.
 - **Playlists**: One per series. Sort ordered lectures so viewers start from part 1.
 - **Channel trailer**: A short introduction shown on the channel home to visitors who have not subscribed. Help says it is not shown again to a viewer who has already watched it (confirmed via search results).
-- **Featured video**: The video shown on the channel home to returning subscribers. Use your latest flagship lecture.
+- **Featured video**: The video shown on the channel home to returning subscribers. Like the trailer, it is described as not shown again to a viewer who has watched it (confirmed via search results). Use your latest flagship lecture.
 - **Channel home sections**: Up to 12 custom sections are allowed, according to Help (confirmed via search results). Put series playlists at the top.
 
 ### 6. How Long-form and Shorts Audiences Relate
@@ -114,7 +114,7 @@ Example creator J makes one long-form lecture (8-12 min) and 3 Shorts cut from i
 
 - **Playlists**: 3 by series + 1 "Start here if you are new".
 - **Trailer and home**: Until about 5 videos exist, skip the trailer and set the best lecture as the featured video. Then make a trailer that states the promise in 30-60 seconds (the length is J's choice).
-- **Uploads**: Long-form on the same weekday every week; Shorts spread across the week. The time of day is whenever J can keep it.
+- **Uploads**: Long-form every Tuesday; Shorts spread across the week, such as Thursday, Saturday and Monday (the default in "One Source, Multi Use (OSMU) Strategy"). The time of day is whenever J can keep it.
 
 Studio review every Sunday (diagnostic examples, assumptions):
 

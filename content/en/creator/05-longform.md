@@ -107,8 +107,8 @@ Using **one tool all the way** is faster. Start with a beginner tool and move on
 
 YouTube Studio's **Test & Compare** lets you upload up to 3 titles, thumbnails or title + thumbnail combinations for one video and shows them to split groups of viewers (confirmed via search results).
 
-- Title testing was reported to have expanded to creators worldwide in 2025-12. Channels with advanced features enabled use it in YouTube Studio on a computer. The winner is decided by **watch time**, not CTR (some descriptions say watch time per impression). A test runs for up to 2 weeks, and the result is described as one of winner, performed the same, or inconclusive.
-- Shorts, scheduled live streams, Premieres and some others are said not to be eligible. A new channel with few views is likely to get "inconclusive".
+- Title testing was reported to have expanded to creators worldwide in 2025-12. Channels with advanced features enabled use it in YouTube Studio on a computer. The winner is decided by **watch time**, not CTR (some descriptions say watch time per impression). A test runs for up to 2 weeks, and the result is one of Winner (statistically significantly ahead on watch time share), Preferred (likely ahead but not significant) or None (no difference; the first variant you uploaded stays the default) (confirmed via search results).
+- Shorts, scheduled live streams, Premieres and some others are said not to be eligible. A new channel with few views is likely to get "None".
 
 ### 10. Production Checklist
 
@@ -122,19 +122,19 @@ YouTube Studio's **Test & Compare** lets you upload up to 3 titles, thumbnails o
 
 ## Applied: Example Creator J's Week
 
-Example creator J's split of 10 hours a week (assumption). The details of the 3 blog hours are in "Writing and Running a Blog".
+Example creator J's split of 10 hours a week (assumption). The reasoning behind the full split is in "One Source, Multi Use (OSMU) Strategy", and the details of the 2 blog hours are in "Writing and Running a Blog".
 
 | Task | Hours (assumption) |
 |---|---|
-| Idea, title and thumbnail candidates, shared outline (shared with the blog) | 1 (video 0.5 + blog 0.5) |
-| Script | 1.5 |
-| Recording (screen + voice) | 1 |
-| Editing | 2 |
-| Thumbnail, caption fixes, chapters, publishing | 0.5 |
-| 3 Shorts ("Shorts and Faceless Channels") | 1 |
-| Review (Studio, comments) | 0.5 |
-| Blog post and refresh (excluding the outline share) | 2.5 |
-| Total | 10 |
+| Source package: research and example files | 1.0 |
+| Source package: outline (shared with the blog) | 0.5 |
+| Source package: script | 0.5 |
+| Source package: recording (screen + voice) | 1.5 |
+| Long-form editing and thumbnail (including caption fixes, chapters, publishing) | 3.0 |
+| Blog post | 2.0 |
+| 3 Shorts ("Shorts and Faceless Channels") | 1.0 |
+| Community (pinned comment, collecting questions) | 0.5 |
+| Total | 10.0 |
 
 First video (assumption): "Remove Duplicates in Excel in One Go — 3 Methods Compared", target length 10 minutes. Example chapters in the description:
 

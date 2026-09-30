@@ -1,6 +1,6 @@
 # Writing and Running a Blog: Answering Search Readers from One Outline
 
-> **Learning goal**: Design a Naver Blog post part by part (title, first screen, structure, images, tables, download), write to search intent without repeating keywords, and improve posts with a pre-publish checklist, a refresh routine and Naver Blog Statistics.
+> **Learning goal**: Design a Naver Blog post part by part (title, first screen, structure, images, tables, download), write to search intent without repeating keywords, and improve posts with a pre-publish checklist, a refresh routine and Naver Blog Stats.
 
 This document covers **the craft of writing posts and running a blog**. How Naver Search finds and ranks documents (C-Rank, D.I.A.+, Smart Blocks, AI Briefing) is in "Naver Blog and How Naver Search Works", and who you write for is in "Choosing a Topic and Audience". The policy risks of AI tools are in "AI-assisted Production and Platform Policy", and image and font copyright plus ad disclosure are in "Disclosure, Copyright and Tax". Naver Blog menu names and features are **as of 2026-09** and can change with app updates.
 
@@ -14,7 +14,7 @@ This document covers **the craft of writing posts and running a blog**. How Nave
 | Template | A post frame you fill in the same order every time | Fixes the quality floor |
 | Keyword stuffing | Unnaturally repeating the search term | Do not do it |
 | Refresh | Updating the facts, images and links of a published post | A monthly routine |
-| Blog Statistics | Naver Blog's statistics screens for views, traffic sources, rankings and more | The evidence for choosing what to fix |
+| Blog Stats | Naver Blog's statistics screens for views, traffic sources, rankings and more | The evidence for choosing what to fix |
 
 ## Principles
 
@@ -80,7 +80,7 @@ A tutorial becomes a wrong post when the tool changes. Instead of only writing n
 | Cycle | Task | Evidence |
 |---|---|---|
 | Weekly | Answer new comment questions; add recurring ones to the body | Comments |
-| Monthly | Check versions, menu names and links in the most-viewed posts | Post ranking in Blog Statistics |
+| Monthly | Check versions, menu names and links in the most-viewed posts | Post ranking in Blog Stats |
 | Quarterly | Merge several thin posts answering the same question into one; link to it from the rest | List of overlapping topics |
 | On tool updates | Add one line at the top: "Updated: date, what changed" | Tool announcements |
 
@@ -102,9 +102,9 @@ flowchart LR
 - **YouTube -> Blog**: Tables, formulas, copyable text and practice files that are hard to show in full on video belong to the post; the description sends viewers there.
 - A post is for reading and copying; a video is for watching and following. Do not move the same sentences across unchanged.
 
-### 7. Measuring with Blog Statistics
+### 7. Measuring with Blog Stats
 
-Naver Blog offers Blog Statistics in the management screen and in the app. The menu layout can change, so find the right screen by the **question** you are asking.
+Naver Blog offers Blog Stats in the management screen and in the app. The menu layout can change, so find the right screen by the **question** you are asking.
 
 | Question | Statistic to check (menu names are examples) | Action |
 |---|---|---|
@@ -124,7 +124,7 @@ Check statistics **once a week on the same day**. Reacting to daily swings means
 | Fact-check | Extracting the list of claims to verify | Verify against official docs or the real screen; record source and date |
 | Before publishing | Spelling and duplicate-sentence checks | Write the sentences that carry experience and judgment yourself |
 
-AI-written sentences sound plausible but often get **menu names, function arguments and versions** wrong. Before publishing, treat "a factual claim written by AI" as "a claim not yet checked". There are press reports that Naver introduced an "AI-used" label for Blog and other services in 2026; that label and the policy on mass posting are covered in "AI-assisted Production and Platform Policy".
+AI-written sentences sound plausible but often get **menu names, function arguments and versions** wrong. Before publishing, treat "a factual claim written by AI" as "a claim not yet checked". Naver introduced an "AI used" label for Blog and other services in 2025-05, and as of 2026-07 reports, the label is voluntary on Blog. That label and the policy on mass posting are covered in "AI-assisted Production and Platform Policy".
 
 ## Applied: Example Creator J's Blog Week
 
@@ -132,10 +132,10 @@ Example creator J spends about 2 of their 10 weekly hours on the blog. The outli
 
 | Day | Blog work | Hours (assumption) |
 |---|---|---|
-| Mon | Pick one reader question, write the shared outline (shared with the video) | Counted in the source package |
-| Wed | Draft the post from the outline, take step screenshots, prepare the practice file | 1.0 |
-| Wed | Run the checklist, publish, embed the video posted the day before | 0.5 |
-| Sun | Check Blog Statistics, collect comment questions, refresh 1 old post | 0.5 |
+| Sat (previous weekend) | Write the shared outline (shared with the video) | Counted in the source package |
+| Mon | Check Blog Stats, collect comment questions, refresh 1 old post | 0.5 |
+| Mon-Tue | Draft the post from the outline, take step screenshots, prepare the practice file | 1.0 |
+| Wed | Run the checklist, publish, embed the video posted on Tuesday | 0.5 |
 
 An example first post (assumption):
 
@@ -177,8 +177,9 @@ Platforms such as Tistory or WordPress let you handle ad code and domains yourse
 
 ## References
 
-- Naver Blog Statistics screen — Naver Blog app and management screen; the menu layout as of 2026-09-30 needs a direct check (help pages were unreachable and search results did not confirm the detailed items)
-- Report on Naver introducing an "AI-used" label for Blog, Cafe and others — [Naver's double standard on AI labels: mandatory for Shopping, voluntary for Blog](https://news.mtn.co.kr/news-detail/2026072417015682342) — Money Today Broadcast (MTN), in Korean, 2026-07-24, confirmed via search results
+- Naver Blog Stats screen — Naver Blog app and management screen; the menu layout as of 2026-09-30 needs a direct check (help pages were unreachable and search results did not confirm the detailed items)
+- ["This content was made with AI": Naver introduces the "AI used" label (Korean)](https://news.nate.com/view/20250520n29594) — Nate News, 2025-05-20, for when the label was introduced, confirmed via search results
+- Report that the label is voluntary on Blog — [Naver's double standard on AI labels: mandatory for Shopping, voluntary for Blog](https://news.mtn.co.kr/news-detail/2026072417015682342) — Money Today Broadcast (MTN), in Korean, 2026-07-24, confirmed via search results
 - Report on Naver's response to low-quality mass AI posts — [Low-quality "machine-gun" AI blog posts; Naver to tighten sanctions](https://www.newsverse.kr/news/articleView.html?idxno=9959) — Newsverse, in Korean, confirmed via search results
 - [Google Search's guidance on using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content?hl=ko) — Google Search Central, confirmed via search results (general principles from another search engine, for reference)
 - [UNIQUE function](https://support.microsoft.com/en-us/office/unique-function-c5ab87fd-30a3-4ce9-9d1a-40204fb85e1e) — Microsoft Support, for checking the function in the applied example, confirmed via search results
