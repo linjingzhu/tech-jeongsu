@@ -225,7 +225,7 @@ steps:
 </code></pre>
 <ul>
 <li><code>npm sbom</code> builds a CycloneDX or SPDX SBOM from the installed dependencies. For mixed languages or container images, use a tool such as syft (<code>syft &lt;image&gt; -o spdx-json</code>).</li>
-<li><code>attest-build-provenance</code> signs with an OIDC token (<code>id-token: write</code>) and stores the attestation with the <code>attestations: write</code> permission.</li>
+<li><code>attest-build-provenance</code> signs with an OIDC token (<code>id-token: write</code>) and stores the attestation with the <code>attestations: write</code> permission. Since v4 this action wraps <code>actions/attest</code>, so GitHub&#39;s docs recommend <code>actions/attest</code> for new setups (&quot;Deployment Automation and Versioning&quot;).</li>
 </ul>
 <p>The consumer verifies before deploying.</p>
 <pre><code class="language-bash">gh attestation verify ./dist/app.tar.gz --repo my-org/my-app

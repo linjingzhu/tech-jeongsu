@@ -104,7 +104,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 | 방식 | `cache_control` 명시 또는 top-level 자동 | 자동(1,024 token 이상 prefix) | Implicit 자동 + explicit 수동 |
 | Cache 읽기 | 입력의 0.1×(Opus 5.5 0.05×, Fable 5.1 0.025×) | 최대 90% 할인(모델별 cached input 단가) | Gemini 2.5 이상 90% 할인 |
 | Cache 쓰기 | 1.25×(5분), 2×(1시간) | 확인 필요(2차 출처는 write 배수를 확인해 주지 않는다) | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
-| 수명 | 5분 또는 1시간 | GPT-6 계열(Sol · Luna) 30분 창(2026-09-22 발표, 2차 출처로만 확인) | Explicit는 TTL 지정 |
+| 수명 | 5분 또는 1시간 | 최신 모델 30분 창(2026-09-22 발표, 2차 출처로만 확인. 모델 이름은 출처마다 GPT-6 Sol·Luna와 GPT-5.6 Sol로 엇갈린다) | Explicit는 TTL 지정 |
 | Batch | 50% | 50% | 50% |
 
 ## 적용: 1인 스튜디오의 하루

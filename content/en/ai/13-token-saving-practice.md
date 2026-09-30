@@ -104,7 +104,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 | Mechanism | Explicit `cache_control` or top-level automatic | Automatic (prefixes of 1,024 tokens or more) | Implicit automatic + explicit manual |
 | Cache read | 0.1x input (0.05x Opus 5.5, 0.025x Fable 5.1) | Up to 90% off (per-model cached-input price) | 90% off on Gemini 2.5 and later |
 | Cache write | 1.25x (5 minutes), 2x (1 hour) | Needs checking (secondary sources do not confirm a write multiplier) | Standard input price; explicit adds hourly storage cost |
-| Lifetime | 5 minutes or 1 hour | 30-minute window on the GPT-6 family (Sol · Luna) (announced 2026-09-22, confirmed only by secondary sources) | Explicit caches take a set TTL |
+| Lifetime | 5 minutes or 1 hour | 30-minute window on the newest models (announced 2026-09-22, confirmed only by secondary sources; sources disagree on the names, GPT-6 Sol · Luna vs GPT-5.6 Sol) | Explicit caches take a set TTL |
 | Batch | 50% | 50% | 50% |
 
 ## Applied: A Day in a Solo Studio
