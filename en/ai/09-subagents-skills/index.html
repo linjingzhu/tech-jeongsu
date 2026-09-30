@@ -214,7 +214,7 @@ maxTurns: 6
 <tr>
 <td><code>permissionMode</code></td>
 <td><code>plan</code></td>
-<td>Starts in read-only exploration (plan mode). If the parent conversation is in acceptEdits, auto or bypassPermissions, though, this value is ignored and the parent&#39;s mode applies</td>
+<td>Starts in read-only exploration (plan mode). The parent&#39;s mode can override it, though (see Common Misconceptions below)</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -261,7 +261,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tr>
 <td><code>permissionMode: plan</code></td>
 <td><code>sandbox_mode = &quot;read-only&quot;</code></td>
-<td>The parent or runtime can override either side. Claude follows the parent&#39;s mode when the parent is in acceptEdits, auto or bypassPermissions; Codex follows a parent runtime override. Check the effective permissions</td>
+<td>The parent or runtime can override either side, so check the effective permissions (see Common Misconceptions below)</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>

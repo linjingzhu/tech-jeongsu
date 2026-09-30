@@ -214,7 +214,7 @@ maxTurns: 6
 <tr>
 <td><code>permissionMode</code></td>
 <td><code>plan</code></td>
-<td>읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 대화가 acceptEdits · auto · bypassPermissions면 이 값은 무시되고 부모 mode를 따른다</td>
+<td>읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 mode가 덮어쓸 수 있다(아래 흔한 오해 참고)</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
@@ -261,7 +261,7 @@ implement, choose product scope, approve paid automation, or merge.
 <tr>
 <td><code>permissionMode: plan</code></td>
 <td><code>sandbox_mode = &quot;read-only&quot;</code></td>
-<td>양쪽 모두 부모나 Runtime이 덮어쓸 수 있다. Claude는 부모가 acceptEdits · auto · bypassPermissions면 부모 mode를, Codex는 상위 Runtime override를 따르므로 실효 권한을 확인한다</td>
+<td>양쪽 모두 부모나 Runtime이 덮어쓸 수 있으므로 실효 권한을 확인한다(아래 흔한 오해 참고)</td>
 </tr>
 <tr>
 <td><code>maxTurns</code></td>
