@@ -156,39 +156,12 @@ jobs:
 
 ## 예시: 이 사이트에 필요한 CI
 
-이 사이트는 `stable` Branch를 GitHub Pages로 내보내는 정적 사이트이고, 생성된 HTML도 Repository에 들어 있다. `node --test tests/*.cjs`는 내비게이션, 한영 문서 짝, Diagram 구조 등을 확인하고, `node tools/build-site.mjs --check`는 생성된 Page가 없거나 낡았거나 지워야 할 Page가 남아 있으면 실패한다. **지금은 CI가 없다.** 아래는 설계 예시이며 Workflow 파일은 만들지 않았다.
+이 사이트(`stable` Branch를 GitHub Pages로 내보내는 정적 사이트, 지금은 CI 없음)의 PR 관문은 아래 두 검사이고, 이 검사를 돌리는 Workflow 설계는 「GitHub Actions 실전」의 "예시 설계: 이 사이트에 CI를 붙인다면"에 한 곳으로 모아 두었다.
 
 | 검사 | 시점 | Merge를 막는가 | 이유 |
 |---|---|---|---|
 | `node --test tests/*.cjs` | PR, `stable` Push | 예 | 영문 짝이 빠진 문서, 깨진 Diagram을 막는다 |
 | `node tools/build-site.mjs --check` | PR, `stable` Push | 예 | Markdown만 고치고 HTML 재생성을 잊은 변경을 막는다 |
-
-```yaml
-name: site-ci
-on:
-  pull_request:
-    branches: [stable]
-  push:
-    branches: [stable]
-permissions:
-  contents: read
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: 22
-      - run: node --test tests/*.cjs
-      - run: node tools/build-site.mjs --check
-```
-
-- 설치할 의존성이 없으니 Cache도 필요 없다. 로컬에서 두 검사는 합쳐 1초 남짓이라 병목은 Runner 준비 시간이다.
-- **배포**: Branch에서 게시하는 Pages도 GitHub가 Actions Workflow로 배포한다. 그러니 이 사이트에서 CI의 일은 배포가 아니라 **`stable`에 나쁜 변경이 들어가지 않게 막는 것**이다. `check` Job을 `stable`의 필수 검사로 지정한다. Merge queue는 Organization 소유 Repository에서만 쓸 수 있다. 개인 계정 Repository라면 Strict 필수 검사로 대신한다.
 
 ## 지표: CI가 건강한가
 

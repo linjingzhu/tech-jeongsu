@@ -403,7 +403,7 @@ jobs:
         run: exit 1
 </code></pre>
 <h2>Example: The CI This Site Needs</h2>
-<p>This site is a static site that GitHub Pages serves from the <code>stable</code> branch, and the generated HTML is committed to the repository. <code>node --test tests/*.cjs</code> checks navigation, Korean–English document pairs, diagram structure and more, and <code>node tools/build-site.mjs --check</code> fails when a generated page is missing, stale, or left over when it should have been removed. <strong>Today there is no CI.</strong> Below is an example design; no workflow file was created.</p>
+<p>This site (a static site that GitHub Pages serves from the <code>stable</code> branch, with no CI today) gates PRs on the two checks below; the workflow design that runs them is kept in one place, the &quot;Example Design: If This Site Added CI&quot; section of &quot;GitHub Actions in Practice&quot;.</p>
 <table>
 <thead>
 <tr>
@@ -426,32 +426,6 @@ jobs:
 <td>Stops changes that edit Markdown but forget to regenerate HTML</td>
 </tr>
 </tbody></table>
-<pre><code class="language-yaml">name: site-ci
-on:
-  pull_request:
-    branches: [stable]
-  push:
-    branches: [stable]
-permissions:
-  contents: read
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: 22
-      - run: node --test tests/*.cjs
-      - run: node tools/build-site.mjs --check
-</code></pre>
-<ul>
-<li>There are no dependencies to install, so no cache is needed. Locally the two checks take a little over a second together, so the bottleneck is runner startup.</li>
-<li><strong>Deploy</strong>: GitHub deploys Pages with an Actions workflow even when publishing from a branch. So CI&#39;s job on this site is not deploying but <strong>keeping bad changes out of <code>stable</code></strong>. Make the <code>check</code> job a required check on <code>stable</code>. Merge queues are only available to organization-owned repositories; for a repository owned by a personal account, use strict required checks instead.</li>
-</ul>
 <h2>Metrics: Is CI Healthy?</h2>
 <table>
 <thead>

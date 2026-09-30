@@ -284,42 +284,13 @@ ARR = 350만 × 12 = 4,200만 원
 </tr>
 </thead>
 <tbody><tr>
-<td>Apple App Store</td>
-<td>표준 30%, Small Business Program 15% (전년 수익 100만 달러 이하), 구독 2년차 갱신분 15%</td>
-<td>한국은 외부 결제 허용 시 26% 수수료 구조 (2022 발표)</td>
-</tr>
-<tr>
-<td>Google Play</td>
-<td>현행 연 100만 달러까지 15%, 자동 갱신 구독 15% (2022-01-01부터). 한국 대체 결제 시 4%p 인하 (15% → 11%)</td>
-<td>한국에 새 체계(첫 100만 달러 10% 등) 2026-12-31 시행 예정 보도, 04 문서 표로 재확인</td>
-</tr>
-<tr>
 <td>토스페이먼츠 (국내 PG)</td>
 <td>일반 카드 3.4%, 가입비 22만 원, 연 관리비 11만 원 (비교 자료 기준)</td>
 <td>영세·중소 우대 수수료, 자동결제(빌링)는 별도 심사·계약</td>
 </tr>
-<tr>
-<td>Paddle (MoR)</td>
-<td>5% + 50센트</td>
-<td>한국 판매자 지원, 세금 계산·징수·신고를 Paddle이 판매자로서 처리</td>
-</tr>
-<tr>
-<td>Lemon Squeezy (MoR)</td>
-<td>5% + 50센트 + 해외 결제·구독 등 추가 요율</td>
-<td>2024년 Stripe 인수, Stripe Managed Payments로 이전 중. 신규 가입: 대기자 명단·초대제라는 보도가 있으나 공식 확인 안 됨. 2026-06에는 Stripe Managed Payments의 초대 없는 공개 가입이 곧 열린다는 발표가 보도됐으나 개시는 확인 안 됨 (접속 2026-09-29)</td>
-</tr>
-<tr>
-<td>Stripe Managed Payments (MoR)</td>
-<td>Stripe 결제 수수료 + 거래당 3.5%. 3.5%는 부가세 등 간접세를 포함한 거래 총액에 붙는다 (Stripe 지원 문서)</td>
-<td>2026-02 공개 프리뷰, 2026-06 초대 없는 공개 가입 예고 (보도). <strong>한국 판매자는 대상 아님</strong>: Stripe가 한국을 가맹점 지원 국가로 두지 않고, 2026년 2차 자료도 한국을 제외 국가로 적는다 (공식 국가 목록은 직접 확인 못 함, 접속 2026-09-29)</td>
-</tr>
-<tr>
-<td>Stripe (직접 처리)</td>
-<td>해당 없음</td>
-<td>한국은 Stripe 가맹점 지원 국가 목록에 없음. 해외 법인이 있어야 가능</td>
-</tr>
 </tbody></table>
-<p>새로 해외 판매를 시작하는 한국 1인 개발자라면 Paddle 또는 Gumroad(둘 다 MoR)부터 검토한다. MoR과 직접 PG의 손익분기는 04 심화에서 계산한다.</p>
+<p>App Store·Google Play·Steam 같은 플랫폼 수수료와 Paddle·Lemon Squeezy·Stripe Managed Payments 같은 MoR 수수료는 「수익 모델 개론」의 플랫폼·결제 수수료 표 하나에서 관리하므로, 여기서는 그 표에 없는 국내 PG만 적는다.</p>
+<p>새로 해외 판매를 시작하는 한국 1인 개발자라면 Paddle 또는 Gumroad(둘 다 MoR, Paddle은 한국 판매자 지원)부터 검토한다. MoR과 직접 PG의 손익분기는 04 심화에서 계산한다.</p>
 <h3>Merchant of Record가 바꾸는 것</h3>
 <ul>
 <li><strong>MoR</strong>은 법적으로 고객에게 파는 판매자가 된다. 각국 부가세·판매세를 MoR이 계산·징수·신고하고, 개발자는 MoR로부터 <strong>정산금</strong>을 받는다.</li>
@@ -360,17 +331,9 @@ ARR = 350만 × 12 = 4,200만 원
 <li><a href="https://en.wikipedia.org/wiki/Van_Westendorp%27s_Price_Sensitivity_Meter">Wikipedia - Van Westendorp&#39;s Price Sensitivity Meter</a> (접근 2026-09-29)</li>
 <li><a href="https://academic.oup.com/jcr/article/9/1/90/1839380">Huber, Payne &amp; Puto (1982), Journal of Consumer Research</a> (접근 2026-09-29)</li>
 <li><a href="https://developer.apple.com/app-store/small-business-program/">Apple Developer - App Store Small Business Program</a> (접근 2026-09-29)</li>
-<li><a href="https://developer.apple.com/app-store/subscriptions/">Apple Developer - Auto-renewable Subscriptions</a> (접근 2026-09-29)</li>
-<li><a href="https://www.cnbc.com/2022/06/30/apple-opens-up-third-party-app-payments-in-korea-will-take-26percent-cut-.html">CNBC - Apple opens up third-party app payments in South Korea (2022-06-30)</a> (접근 2026-09-29)</li>
-<li><a href="https://support.google.com/googleplay/android-developer/answer/112622?hl=en">Google Play Console Help - Service fees</a> (접근 2026-09-29)</li>
-<li><a href="https://www.khan.co.kr/article/202603052151005">경향신문 - 구글플레이 수수료 인하, 한국은 12월 시행 (2026-03-05)</a> (접근 2026-09-29)</li>
 <li><a href="https://blog.portone.io/opi_pg-comparison2026/">PortOne 블로그 - 2026년 국내 PG사 비교</a> (접근 2026-09-29)</li>
 <li><a href="https://docs.tosspayments.com/guides/v2/billing">토스페이먼츠 개발자센터 - 자동결제(빌링) 이해하기</a> (접근 2026-09-29)</li>
 <li><a href="https://www.paddle.com/help/start/intro-to-paddle/which-countries-are-supported-by-paddle">Paddle Help Center - Which countries are supported by Paddle?</a> (접근 2026-09-29)</li>
-<li><a href="https://www.lemonsqueezy.com/blog/2026-update">Lemon Squeezy - 2026 Update: Lemon Squeezy + Stripe Managed Payments</a> (접근 2026-09-29)</li>
-<li><a href="https://stripe.com/global">Stripe - Global availability</a> (접근 2026-09-29)</li>
-<li><a href="https://support.stripe.com/questions/managed-payments-pricing">Stripe Support - Managed Payments pricing</a> (접근 2026-09-29)</li>
-<li><a href="https://support.google.com/googleplay/android-developer/answer/11222040?hl=en">Google Play Console Help - 한국 사용자 대상 결제 요건 변경</a> (접근 2026-09-29)</li>
 </ul>
 </article>
       <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../studio/05-ad-revenue/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>광고 수익 심화</span></a><a class="page-link next" href="../../studio/07-game-monetization/"><span><small>다음 문서</small>게임 수익화</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>

@@ -68,7 +68,7 @@ flowchart LR
 ```
 
 - Do not rebuild on promotion. The next job takes the digest · artifact ID left by the previous stage as its input.
-- Required reviewers (up to six, one approval) and wait timers (1–43,200 minutes) on GitHub environments are **available only in public repositories on the Free · Pro · Team plans**. Deployment branch · tag restrictions also work in private repositories on Pro · Team. Setup is in "GitHub Actions in Practice".
+- Required reviewers, wait timers, deployment branch restrictions and their plan limits are covered in one place, the "Environments and Deployment Protection Rules" section of "GitHub Actions in Practice".
 - Put the changelog, the list of migrations and the staging smoke-test results close to the approval screen so approvers can see "what is going out". In continuous deployment with no human approval, **automated checks and automatic rollback conditions** take that place.
 
 ## Putting Database Migrations in the Pipeline
@@ -164,7 +164,7 @@ jobs:
         run: ./scripts/deploy.sh "$TAG"
 ```
 
-- Tags · releases · pushes made with the default `GITHUB_TOKEN` generally **do not start new workflow runs** (to prevent recursion). So a deploy workflow hooked separately on `on: release` silently never runs. Chain the deploy job through outputs in the same workflow as in the example above, or use a GitHub App token. Pass the tag name through `env` rather than putting `${{ }}` directly in `run:` (the injection section of "GitHub Actions in Practice"). As of 2026-09, GitHub's docs add an exception: `pull_request` runs for PRs created by this token start in an "approval required" state. If CI on a release PR seems stuck, check this first.
+- Tags · releases · pushes made with the default `GITHUB_TOKEN` **do not start new workflow runs** (the rule and its PR exception are in the "Permissions: A Least-Privilege GITHUB_TOKEN" section of "GitHub Actions in Practice"). So a deploy workflow hooked separately on `on: release` silently never runs. Chain the deploy job through outputs in the same workflow as in the example above, or use a GitHub App token. Pass the tag name through `env` rather than putting `${{ }}` directly in `run:` (the injection section of "GitHub Actions in Practice"). If CI on a release PR opened with this token seems stuck, check that exception (waiting for approval) first.
 
 ### Tags and GitHub Releases
 

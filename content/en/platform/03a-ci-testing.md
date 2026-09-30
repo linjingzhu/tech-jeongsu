@@ -156,39 +156,12 @@ jobs:
 
 ## Example: The CI This Site Needs
 
-This site is a static site that GitHub Pages serves from the `stable` branch, and the generated HTML is committed to the repository. `node --test tests/*.cjs` checks navigation, Korean–English document pairs, diagram structure and more, and `node tools/build-site.mjs --check` fails when a generated page is missing, stale, or left over when it should have been removed. **Today there is no CI.** Below is an example design; no workflow file was created.
+This site (a static site that GitHub Pages serves from the `stable` branch, with no CI today) gates PRs on the two checks below; the workflow design that runs them is kept in one place, the "Example Design: If This Site Added CI" section of "GitHub Actions in Practice".
 
 | Check | When | Blocks merge? | Why |
 |---|---|---|---|
 | `node --test tests/*.cjs` | PR, push to `stable` | Yes | Stops documents missing their English twin and broken diagrams |
 | `node tools/build-site.mjs --check` | PR, push to `stable` | Yes | Stops changes that edit Markdown but forget to regenerate HTML |
-
-```yaml
-name: site-ci
-on:
-  pull_request:
-    branches: [stable]
-  push:
-    branches: [stable]
-permissions:
-  contents: read
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: 22
-      - run: node --test tests/*.cjs
-      - run: node tools/build-site.mjs --check
-```
-
-- There are no dependencies to install, so no cache is needed. Locally the two checks take a little over a second together, so the bottleneck is runner startup.
-- **Deploy**: GitHub deploys Pages with an Actions workflow even when publishing from a branch. So CI's job on this site is not deploying but **keeping bad changes out of `stable`**. Make the `check` job a required check on `stable`. Merge queues are only available to organization-owned repositories; for a repository owned by a personal account, use strict required checks instead.
 
 ## Metrics: Is CI Healthy?
 

@@ -68,7 +68,7 @@ flowchart LR
 ```
 
 - 승격 때 다시 Build하지 않는다. 앞 단계가 남긴 Digest · Artifact ID를 다음 Job이 입력으로 받는다.
-- GitHub Environment의 필수 Reviewer(최대 6명, 1명 승인)와 대기 시간(1–43,200분)은 **Free · Pro · Team에서는 Public Repository에서만** 쓴다. 배포 가능 Branch · Tag 제한은 Pro · Team이면 Private에서도 쓴다. 설정은 「GitHub Actions 실전」.
+- 필수 Reviewer · 대기 시간 · 배포 가능 Branch 제한과 요금제별 제약은 「GitHub Actions 실전」의 "Environment와 배포 보호 규칙"에서 한 번에 다룬다.
 - 승인자가 "무엇이 나가는가"를 보게 Changelog, Migration 목록, Staging Smoke Test 결과를 승인 화면 가까이에 남긴다. 사람 승인이 없는 Continuous Deployment라면 **자동 검증과 자동 Rollback 조건**이 그 자리를 채운다.
 
 ## DB Migration을 Pipeline에 넣기
@@ -164,7 +164,7 @@ jobs:
         run: ./scripts/deploy.sh "$TAG"
 ```
 
-- 기본 `GITHUB_TOKEN`으로 만든 Tag · Release · Push는 원칙적으로 **새 Workflow를 시작하지 않는다**(무한 반복 방지). 그래서 `on: release`로 따로 걸어 둔 배포 Workflow는 조용히 안 돈다. 위 예시처럼 같은 Workflow에서 Output으로 배포 Job을 잇거나 GitHub App Token을 쓴다. Tag 이름은 `run:`에 `${{ }}`로 넣지 않고 `env`로 넘긴다(「GitHub Actions 실전」의 Injection 절). 2026-09 GitHub 문서에는 이 Token이 만든 PR의 `pull_request` 실행을 "승인 필요" 상태로 만드는 예외가 추가되어 있다. Release PR의 CI가 멈춰 있다면 이것부터 본다.
+- 기본 `GITHUB_TOKEN`으로 만든 Tag · Release · Push는 **새 Workflow를 시작하지 않는다**(규칙과 PR 예외는 「GitHub Actions 실전」의 "권한: 최소 GITHUB_TOKEN"). 그래서 `on: release`로 따로 걸어 둔 배포 Workflow는 조용히 안 돈다. 위 예시처럼 같은 Workflow에서 Output으로 배포 Job을 잇거나 GitHub App Token을 쓴다. Tag 이름은 `run:`에 `${{ }}`로 넣지 않고 `env`로 넘긴다(「GitHub Actions 실전」의 Injection 절). 이 Token으로 연 Release PR의 CI가 멈춰 있다면 그 예외(승인 대기)부터 본다.
 
 ### Tag와 GitHub Release
 

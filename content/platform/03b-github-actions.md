@@ -72,7 +72,7 @@ Job에 `environment:`를 적으면 보호 규칙을 통과해야 Job이 시작�
 
 `GITHUB_TOKEN`은 Job마다 발급되고 Job이 끝나면 만료되는 저장소 한정 Token이다. 기본 권한은 Enterprise · Organization · 저장소 설정에서 오고, 2023-02 이후 새로 만든 Organization과 개인 저장소는 읽기 전용이 기본이다. 설정에 기대지 말고 Workflow에 적는다.
 
-- 최상위는 `permissions: {}`로 닫고 필요한 Job에서만 연다(예: `permissions: { contents: read, pull-requests: write }`). `id-token: write`는 OIDC가 필요한 Job에만 준다. `GITHUB_TOKEN`으로 Push한 변경은 새 Workflow를 만들지 않는다(`workflow_dispatch` · `repository_dispatch` 제외). 무한 반복을 막는 장치다. Dependabot이 연 PR의 실행은 Fork처럼 읽기 전용 Token을 받고 Secret을 못 읽는다.
+- 최상위는 `permissions: {}`로 닫고 필요한 Job에서만 연다(예: `permissions: { contents: read, pull-requests: write }`). `id-token: write`는 OIDC가 필요한 Job에만 준다. `GITHUB_TOKEN`으로 일으킨 Event(Push, Tag · Release 생성 등)는 새 Workflow run을 만들지 않는다(`workflow_dispatch` · `repository_dispatch` 제외). 무한 반복을 막는 장치다. 예외: 이 Token으로 만든 PR에서는 `pull_request`의 `opened` · `synchronize` · `reopened` Event가 Workflow run을 만들되, 쓰기 권한이 있는 사람이 승인해야 도는 상태로 만든다(2026-09 GitHub 문서 기준, 순차 적용). Dependabot이 연 PR의 실행은 Fork처럼 읽기 전용 Token을 받고 Secret을 못 읽는다.
 - **Secret과 Variable**: `secrets.NAME`은 Log에서 가려지고 `vars.NAME`은 그대로 보인다. Key는 Secret, Region · 공개 URL은 Variable에 두고, 둘 다 Organization · 저장소 · Environment 중 가장 좁은 곳에 둔다. Cloud 자격 증명은 저장하지 말고 OIDC로 받는다(「CI/CD · OIDC · GitOps」).
 
 ## 외부 Action 고정과 Dependabot

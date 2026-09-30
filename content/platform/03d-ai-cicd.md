@@ -59,7 +59,7 @@ flowchart LR
 
 - **시도 예산**: 한 실패에 3회, 같은 실패 문구가 두 번 나오면 진단을 바꾸거나 멈추고, 배제한 원인을 PR에 남긴다. Job에는 `timeout-minutes`, Agent에는 턴 · 비용 상한을 건다.
 - **완료 기준에 불변 조건을 넣는다**: "테스트가 통과하고, `tests/`와 `.github/`는 바뀌지 않는다."
-- `GITHUB_TOKEN`으로 만든 Push는 새 Workflow run을 만들지 않는다. 예외로 PR을 열거나 갱신한 경우는 쓰기 권한자가 승인해야 도는 상태로 생성된다(GitHub 문서상 dotcom에 배포 중). Agent가 같은 Workflow 안에서 자기 결과를 바로 재검증하려 하지 말고, 사람이 보는 PR에서 다시 돌게 둔다.
+- `GITHUB_TOKEN`으로 만든 Push는 새 Workflow run을 만들지 않는다(PR 예외까지 「GitHub Actions 실전」의 "권한: 최소 GITHUB_TOKEN"). Agent가 같은 Workflow 안에서 자기 결과를 바로 재검증하려 하지 말고, 사람이 보는 PR에서 다시 돌게 둔다.
 
 Agent가 만든 PR에서 테스트가 사라지거나 꺼지면 실패하는 Guard job의 예다. Merge commit의 첫 번째 부모(Base)와 비교하므로 PR이 실제로 바꾼 것만 본다. 의도적인 테스트 삭제는 사람이 별도 PR로 하고 Ruleset 우회 권한자가 처리한다. `actions/checkout`의 SHA는 2026-09-30에 `git ls-remote`로 v7.0.1 Tag가 가리키는 Commit을 확인한 값이니, 도입 시점에 다시 확인하고 Dependabot으로 갱신한다(「GitHub Actions 실전」).
 
@@ -106,7 +106,7 @@ CI의 Agent는 PR 제목 · 본문, Commit 메시지, Issue와 댓글, PR이 바
 | Shell 주입 | `run:` 안에 `${{ github.event.* }}`를 직접 넣지 않고 환경 변수로 넘긴다(「GitHub Actions 실전」) |
 | 오래 사는 Self-hosted Runner | 공개 저장소의 Fork PR을 재사용되는 Self-hosted Runner에서 돌리지 않는다 |
 
-`pull_request_target` 쪽 기본값은 2025–2026년에 계속 좁아졌다. 2025-12-08부터 Workflow 파일과 기본 Checkout은 항상 기본 Branch에서 온다. `actions/checkout` v7은 `pull_request_target` · `workflow_run`에서 Fork PR Checkout을 막고, 풀려면 `allow-unsafe-pr-checkout: true`를 명시해야 한다. GitHub 문서에 따르면 공개 저장소에는 `pull_request_target`을 막는 기본 Policy가 평가 모드로 걸려 있고, 2026-11-02부터 해당 저장소에 강제된다. 영향 받는 Workflow가 있으면 그 전에 Policy insights를 확인한다.
+`pull_request_target` 쪽 기본값은 2025–2026년에 계속 좁아졌다(기본 Branch의 Workflow 파일, `actions/checkout` v7의 Fork PR Checkout 차단은 「GitHub Actions 실전」의 "신뢰할 수 없는 입력: Injection과 pull_request_target"). 그 차단을 풀려면 `allow-unsafe-pr-checkout: true`를 명시해야 한다. GitHub 문서에 따르면 공개 저장소에는 `pull_request_target`을 막는 기본 Policy가 평가 모드로 걸려 있고, 2026-11-02부터 해당 저장소에 강제된다. 영향 받는 Workflow가 있으면 그 전에 Policy insights를 확인한다.
 
 ## AI 코드를 위한 품질 관문
 

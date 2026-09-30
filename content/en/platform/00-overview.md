@@ -48,6 +48,10 @@ The key point is that the arrows return to Code. Deployment is not a one-time ev
 | 01 | Choosing a Deployment Target | Which fits: Static, Edge, PaaS, or Serverless? |
 | 02 | Cloud and Kubernetes | AWS / Google Cloud / Azure / Korean clouds and running containers |
 | 03 | CI/CD Pipeline | What do we automate from commit to production? Environment design, infrastructure as code |
+| 03a | CI Fundamentals and Test Strategy | How do test placement, flaky tests and required checks make "is this safe to merge?" a trustworthy answer within minutes? |
+| 03b | GitHub Actions in Practice | How do permissions, caching, deployment approvals, action pinning, runners and pricing keep workflows safe, cheap and fast? |
+| 03c | Deployment Automation and Versioning | How do previews, environment promotion, database migrations and release automation ship the same artifact in a way you can undo? |
+| 03d | CI/CD in the AI Era | When agents write more of the code, how do AI code review, prompt-injection defenses and evals fit into the gate? |
 | 04 | Release Strategies | Rolling, Blue-Green, Canary, Feature Flag, Rollback |
 | 05 | Mobile Store Distribution | App Store and Google Play review, testing tracks, 2026 policies, signing key management |
 | 06 | Domain · DNS · TLS · CDN | A safe, fast path for users to reach you |
@@ -72,7 +76,7 @@ If a lower layer is shaky, effort in the upper layers collapses easily. Converse
 
 | Role | Suggested order |
 |---|---|
-| Developer | 01 → 03 → 04 → 07 → 08 |
+| Developer | 01 → 03 → 03a → 03b → 04 → 07 → 08 |
 | PO / PM | 00 → 04 → 05 → 07 → 09 |
 | Solo developer | 10 → 01 → 06 → 05 |
 | Operations / Platform owner | 02 → 07 → 08 → 09 |

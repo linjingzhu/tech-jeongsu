@@ -59,7 +59,7 @@ If you run the action yourself, start from the workflow in "Headless, CI and Clo
 
 - **Attempt budget**: three tries per failure; when the same failure message shows up twice, change the diagnosis or stop, and leave the ruled-out causes on the PR. Put `timeout-minutes` on the job and turn and cost caps on the agent.
 - **Put invariants in the done criteria**: "the tests pass, and `tests/` and `.github/` are unchanged."
-- A push made with `GITHUB_TOKEN` does not create a new workflow run. The exception is opening or updating a PR, which creates runs that wait for approval from someone with write access (per GitHub's docs, still rolling out on github.com). Do not have the agent re-verify its own result inside the same workflow; let it run again on the PR a human sees.
+- A push made with `GITHUB_TOKEN` does not create a new workflow run (the PR exception is in the "Permissions: A Least-Privilege GITHUB_TOKEN" section of "GitHub Actions in Practice"). Do not have the agent re-verify its own result inside the same workflow; let it run again on the PR a human sees.
 
 Below is an example guard job that fails when tests disappear or get switched off in an agent-made PR. It compares against the merge commit's first parent (the base), so it sees only what the PR actually changed. An intentional test deletion goes in a separate human PR, handled by someone with ruleset bypass rights. The `actions/checkout` SHA is the commit the v7.0.1 tag pointed to when checked with `git ls-remote` on 2026-09-30; re-check it when you adopt this and keep it updated with Dependabot ("GitHub Actions in Practice").
 
@@ -106,7 +106,7 @@ Two cases (a defensive summary; both confirmed via search results):
 | Shell injection | Do not put `${{ github.event.* }}` directly in `run:`; pass it through an environment variable ("GitHub Actions in Practice") |
 | Long-lived self-hosted runners | Do not run fork PRs of public repositories on reused self-hosted runners |
 
-The defaults around `pull_request_target` kept tightening through 2025–2026. From 2025-12-08 the workflow file and the default checkout always come from the default branch. `actions/checkout` v7 blocks checking out fork PRs under `pull_request_target` and `workflow_run`, and lifting that requires an explicit `allow-unsafe-pr-checkout: true`. According to GitHub's docs, public repositories have a default policy that blocks `pull_request_target`, currently in evaluate mode, and it is enforced for the affected repositories from 2026-11-02. If you have affected workflows, check policy insights before then.
+The defaults around `pull_request_target` kept tightening through 2025–2026 (the default-branch workflow file and `actions/checkout` v7 blocking fork PR checkout are in the "Untrusted Input: Injection and pull_request_target" section of "GitHub Actions in Practice"). Lifting that block requires an explicit `allow-unsafe-pr-checkout: true`. According to GitHub's docs, public repositories have a default policy that blocks `pull_request_target`, currently in evaluate mode, and it is enforced for the affected repositories from 2026-11-02. If you have affected workflows, check policy insights before then.
 
 ## Quality Gates for AI-Written Code
 
