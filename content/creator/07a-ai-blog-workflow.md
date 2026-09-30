@@ -57,8 +57,8 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 | 도구 | 잘하는 일 | 하는 법 | 튜토리얼 |
 |---|---|---|---|
 | Perplexity | 답변마다 출처 링크. Pro Search·Deep Research 모드 | 모드를 고르고 질문을 구체적으로 쓴다. 반복 주제는 Spaces(도움말 제목은 Projects)에 지침을 넣는다 | [What is Pro Search?](https://www.perplexity.ai/help-center/en/articles/10352903-what-is-pro-search) (영어), [Introducing Perplexity Deep Research](https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research) (영어) |
-| Gemini Notebook (옛 NotebookLM) | 내가 올린 PDF·웹페이지·유튜브 영상 안에서만 답하고 인용 표시 | 공식 도움말·실습 파일을 소스로 넣고 "이 소스에 없는 내용은 없다고 말해"라고 묻는다 | [Learn about NotebookLM](https://support.google.com/notebooklm/answer/16164461) (영어), [노트북LM 실전 활용법 12가지](https://www.oppadu.com/live/250/) (한국어, 오빠두엑셀, [영상](https://www.youtube.com/watch?v=eeJz8HAyTk0)) |
-| ChatGPT 딥 리서치 | 조사 계획을 보여 주고 수정받은 뒤 보고서 작성 | 도구 메뉴(+)에서 Deep Research, 독자·범위·출력 형식을 적는다 | [Deep research in ChatGPT](https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt) (영어) |
+| Gemini Notebook (옛 NotebookLM) | 내가 올린 PDF·웹페이지·유튜브 영상 안에서만 답하고 인용 표시 | 공식 도움말·실습 파일을 소스로 넣고 "이 소스에 없는 내용은 없다고 말해"라고 묻는다 | [Learn about NotebookLM](https://support.google.com/notebooklm/answer/16164461) (영어), 영상 [노트북LM 실전 활용법 12가지](https://www.youtube.com/watch?v=eeJz8HAyTk0) (한국어, 오빠두엑셀) |
+| ChatGPT 딥 리서치 | 조사 계획을 제안하고, 검토·수정한 뒤 보고서를 쓴다고 안내된다 (검색 결과로 확인, 시작 방식은 바뀔 수 있다) | 도구 메뉴(+)에서 Deep Research, 독자·범위·출력 형식을 적는다 | [Deep research in ChatGPT](https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt) (영어) |
 | Gemini Deep Research | 조사 계획서를 먼저 보여 주고 보고서 생성 | gemini.google.com에서 Deep Research 선택 | [Gemini 앱에서 Deep Research 사용하기](https://support.google.com/gemini/answer/15719111?hl=ko&co=GENIE.Platform%3DDesktop) (한국어) |
 | Claude 웹 검색·Research | 웹 검색을 켜고, 유료 요금제에서는 Research로 여러 번 검색 | 입력창 + 메뉴에서 웹 검색을 켠 뒤 Research 선택 | [Enable and use web search](https://support.claude.com/en/articles/10684626-enable-and-use-web-search) (영어), [Use research on Claude](https://support.claude.com/en/articles/11088861-use-research-on-claude) (영어) |
 
@@ -71,8 +71,8 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 
 | 도구 | 넣어 둘 것 | 튜토리얼 |
 |---|---|---|
-| Claude Projects + 스타일 | 프로젝트 지침(스타일 가이드), 프로젝트 지식(템플릿, 지난 글 2~3편). 내 글 샘플로 사용자 지정 스타일도 만들 수 있다 | [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) (영어), [Introduction to projects · Claude Academy](https://academy.claude.com/courses/claude-101/introduction-to-projects) (영어 강좌), [Styles 발표](https://www.anthropic.com/news/styles) (영어) |
-| ChatGPT Projects / 맞춤형 GPT | 프로젝트 파일·지침. OpenAI는 2026-09 맞춤형 GPT의 단계적 종료를 발표했으므로 새로 만든다면 Projects를 쓴다 (「AI 제작 방법론: 프롬프트·검수·자동화」) | [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) (영어), [Using custom GPTs](https://openai.com/academy/custom-gpts/) (영어), [Writing with ChatGPT](https://openai.com/academy/writing/) (영어) |
+| Claude Projects + 스타일 | 프로젝트 지침(스타일 가이드), 프로젝트 지식(템플릿, 지난 글 2~3편). 내 글 샘플로 사용자 지정 스타일도 만들 수 있다 | [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) (영어), [Introduction to projects · Claude Academy](https://academy.claude.com/courses/claude-101/introduction-to-projects) (영어 강좌) |
+| ChatGPT Projects | 프로젝트 파일·지침. 맞춤형 GPT는 단계적으로 종료되고 있고, 개인 계정은 새 GPT를 만들 수 없다고 안내되므로 Projects를 쓴다 (검색 결과로 확인, 「AI 제작 방법론: 프롬프트·검수·자동화」) | [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) (영어), [Writing with ChatGPT](https://openai.com/academy/writing/) (영어) |
 | Gemini Gems | Gem 이름과 요청 사항(스타일 가이드), 참고 파일. 개인 계정은 2026-11-17부터 Skills로 이전될 예정이므로 원본 지침은 내 파일에 보관한다 | [Gemini 앱에서 Gem 시작하기](https://support.google.com/gemini/answer/15236321?hl=ko) (한국어) |
 
 - **하는 법**: ① 조사 노트와 독자 질문 목록을 붙여 넣고 **개요만** 먼저 받는다. ② 개요를 내가 실제로 해 본 순서로 고친다. ③ 소제목 하나씩 초안을 받는다. ④ 초안에서 "직접 해 보니", "제 파일에서는" 같은 경험 문장이 들어갈 자리를 `[경험]`으로 비워 두게 한다. 그 자리는 사람이 채운다.
@@ -84,7 +84,7 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 |---|---|---|
 | CLOVA X·Cue: | 2026-04-09 서비스 종료. 하이퍼클로바X 기술은 검색 등 핵심 서비스에 녹인다는 방향 (보도로 확인) | 네이버 자체 AI 챗봇으로 글을 쓰는 선택지는 없다 |
 | 스마트에디터 AI 글쓰기 | 공식 AI 글쓰기 보조 기능은 검색으로 확인하지 못했다 | 초안은 외부 도구에서 만들고 에디터에서 다듬는다 |
-| AI 브리핑 | 2025-03 도입. 검색 상단 요약과 함께 블로그 등 출처 글을 보여 준다. 월 3,000만 명이 쓴다고 네이버가 밝혔다 | 첫 화면에 답이 있는 글이 인용 후보가 된다 |
+| AI 브리핑 | 2025-03 도입. 검색 상단 요약과 함께 블로그 등 출처 글을 보여 준다. 2026-08 보도자료 기준 월 3,000만 명이 쓴다 | 첫 화면에 답이 있는 글이 인용 후보가 된다 |
 | AI탭 | 2026-04-28 네이버플러스 멤버십 베타, 2026-06-26 전체 이용자에게 정식 출시 (보도로 확인) | 대화형 검색에서도 출처 글이 쓰인다 |
 | 네이버 메이트 | 2026-06 베타. AI 브리핑 인용수·주제 전문성·활동성으로 매월 약 3,000명을 뽑아 활동지원금을 준다고 보도됐다 | 인용수가 새 보상 지표가 됐다. 수익 전체는 「광고 수익: 애드포스트와 YouTube 파트너 프로그램」 |
 | AI 활용 표시 | AI로 만든 이미지·영상에 붙이는 표시. 블로그는 자율 | 표시 기준은 「AI 활용 제작과 플랫폼 정책」 |
@@ -108,7 +108,7 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 
 ### 7. 표와 템플릿: J의 주제 그 자체
 
-- **Copilot in Excel**: 오른쪽 아래 Copilot 아이콘으로 열고, 수식 생성·차트·피벗 테이블·서식을 말로 요청한다. 2026-09 도움말은 편집(edit)·계획(plan)·대화(chat) 세 모드를 안내한다. 개인용 Microsoft 365에서의 제공 범위와 한국어 지원은 요금제별로 다를 수 있다.
+- **Copilot in Excel**: 도움말은 Excel 오른쪽 아래의 Copilot 아이콘으로 연다고 안내하며 (검색 결과로 확인, 버전에 따라 리본 홈 탭 버튼일 수 있다), 수식 생성·차트·피벗 테이블·서식을 말로 요청한다. 2026-09 도움말은 편집(edit)·계획(plan)·대화(chat) 세 모드를 안내한다 (검색 결과로 확인). 개인용 Microsoft 365에서의 제공 범위와 한국어 지원은 요금제별로 다를 수 있다.
 - **Gemini in Sheets**: 오른쪽 위 "Gemini에게 물어보기"로 표 만들기, 수식, 분석, 차트를 요청한다. 쓸 수 있는 요금제는 도움말에서 확인한다.
 - **하는 법**: ① AI에 "가상의 주문 데이터 30행"처럼 **실습용 샘플 데이터**를 만들게 한다. 실제 회사 데이터는 넣지 않는다. ② 수식은 AI 제안을 받되 셀에 직접 넣어 결과를 확인한다. ③ 배포할 템플릿에는 AI 기능 없이도 작동하는 수식만 남긴다.
 - **튜토리얼**: [Get started with Copilot in Excel](https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel) (영어), [Microsoft Copilot video tutorials](https://support.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-video-tutorials) (영어), [직장인을 위한 엑셀 코파일럿 실전 활용법](https://www.oppadu.com/lesson/xl-copilot-tips/) (한국어, 오빠두엑셀), [Google Sheets의 Gemini로 공동작업하기](https://support.google.com/docs/answer/14356410?hl=ko-kr) (한국어), 영상 [Gemini: Your always-on AI assistant in Sheets](https://www.youtube.com/watch?v=lfGIQbzyhFs) (영어).
@@ -208,7 +208,7 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 
 **초안 도구와 강좌**
 - [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) — Claude 도움말; [Introduction to projects](https://academy.claude.com/courses/claude-101/introduction-to-projects) — Claude Academy; [Styles](https://www.anthropic.com/news/styles) — Anthropic; [Anthropic YouTube 채널](https://www.youtube.com/@anthropic-ai)
-- [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) — OpenAI 도움말; [Using custom GPTs](https://openai.com/academy/custom-gpts/), [Writing with ChatGPT](https://openai.com/academy/writing/) — OpenAI Academy
+- [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) — OpenAI 도움말; [Writing with ChatGPT](https://openai.com/academy/writing/) — OpenAI Academy; [Using custom GPTs](https://openai.com/academy/custom-gpts/) — OpenAI Academy (맞춤형 GPT는 단계적 종료 중)
 - [Gemini 앱에서 Gem 시작하기](https://support.google.com/gemini/answer/15236321?hl=ko) — Gemini 앱 고객센터
 - [Google AI Essentials](https://grow.google/ai-essentials/) — Grow with Google 입문 강좌
 
