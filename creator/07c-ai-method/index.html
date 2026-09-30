@@ -124,7 +124,7 @@
 <tr>
 <td>프롬프트 템플릿</td>
 <td>빈칸만 바꿔 매주 다시 쓰는 지시문</td>
-<td>[역할]·[입력]·[작업]·[형식]·[제약] 다섯 칸</td>
+<td>[역할·참조]·[입력]·[작업]·[형식]·[제약] 다섯 칸</td>
 </tr>
 <tr>
 <td>스타일 가이드</td>
@@ -155,7 +155,7 @@
     LOG --&gt;|다음 주 방향| DIR
 </code></pre>
 <h3>2. 프롬프트는 문장이 아니라 양식이다</h3>
-<p>좋은 프롬프트를 매번 새로 쓰면 품질이 요일마다 달라진다. <strong>빈칸이 있는 양식</strong>을 만들어 두고 입력만 바꾼다. 이 문서의 템플릿은 다섯 칸이다: <strong>[역할]·[참조]</strong>(누구로서, 어떤 스타일 가이드로), <strong>[입력]</strong>(이번 주의 검색어·개요·전사문·지표. 긴 자료는 지시문 위에 둔다), <strong>[작업]</strong>(한 번에 한 가지), <strong>[형식]</strong>(표의 열, 길이, 자리 표시. 형식이 정해지면 검수가 쉬워진다), <strong>[제약]</strong>(&quot;모르면 [확인 필요]로 남겨라&quot;, &quot;없는 수치를 만들지 마라&quot;. 환각을 줄이는 가장 싼 방법). 기본기는 Anthropic의 <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a>와 <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">대화형 튜토리얼</a>(영어), Google의 <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a>(영어, 10시간 미만 과정)로 익힌다.</p>
+<p>좋은 프롬프트를 매번 새로 쓰면 품질이 요일마다 달라진다. <strong>빈칸이 있는 양식</strong>을 만들어 두고 입력만 바꾼다. 이 문서의 템플릿은 다섯 칸이다: <strong>[역할·참조]</strong>(누구로서, 어떤 스타일 가이드로), <strong>[입력]</strong>(이번 주의 검색어·개요·전사문·지표. 긴 자료는 지시문 위에 둔다), <strong>[작업]</strong>(한 번에 한 가지), <strong>[형식]</strong>(표의 열, 길이, 자리 표시. 형식이 정해지면 검수가 쉬워진다), <strong>[제약]</strong>(&quot;모르면 [확인 필요]로 남겨라&quot;, &quot;없는 수치를 만들지 마라&quot;. 환각을 줄이는 가장 싼 방법). 기본기는 Anthropic의 <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a>와 <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">대화형 튜토리얼</a>(영어), Google의 <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a>(영어, 10시간 미만 과정)로 익힌다.</p>
 <h3>3. 스타일 가이드와 프로젝트 메모리: 원본은 내 파일로</h3>
 <p>프로젝트 메모리 기능은 스타일 가이드와 참고 파일을 매 대화에 자동으로 불러와 준다. 다만 2026년 9월 한 달 사이에 두 회사가 이 기능의 형태를 바꿨다. 결론은 하나다. <strong>스타일 가이드의 원본은 <code>style_guide.md</code> 한 파일로 내가 갖고, 각 도구에는 복사본을 넣는다.</strong> 도구를 바꿔도 파일을 다시 붙여 넣으면 끝난다.</p>
 <table>
@@ -171,7 +171,7 @@
 <td>Claude Projects</td>
 <td>프로젝트마다 지시문(instructions)과 지식 파일(knowledge)을 둔다. 무료 플랜도 개수 제한(도움말 검색 결과상 5개) 안에서 쓸 수 있다고 안내된다</td>
 <td>스타일 가이드 + 지난 개요 모음으로 &quot;주간 제작&quot; 프로젝트</td>
-<td><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">프로젝트 만들기와 관리</a>(영어), <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Claude 101: Introduction to projects</a>(영어), <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">클로드 프로젝트 사용법</a>(한국어 블로그), <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">15분 만에 클로드를 나만의 직원으로</a>(한국어 영상, 제3자)</td>
+<td><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">프로젝트 만들기와 관리</a>(영어, 공식), <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">클로드 프로젝트 사용법</a>(한국어 블로그)</td>
 </tr>
 <tr>
 <td>ChatGPT Projects</td>
@@ -195,11 +195,10 @@
 <td>Gemini Notebook (옛 NotebookLM)</td>
 <td>2026-07-16 이름 변경. 올린 자료 안에서 답하고 출처를 인용한다. 무료 한도는 노트북 100개·노트북당 소스 50개라는 2차 자료가 있다</td>
 <td>공식 문서·도움말·참고 영상을 모은 &quot;조사 노트북&quot;</td>
-<td><a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook</a>(영어), <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips: How to use NotebookLM</a>(영어 영상, Google Workspace), <a href="https://brunch.co.kr/@eunjongseong/242">노트북LM 완벽가이드</a>(한국어 블로그)</td>
+<td><a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips: How to use NotebookLM</a>(영어 영상, Google Workspace 공식), <a href="https://brunch.co.kr/@eunjongseong/242">노트북LM 완벽가이드</a>(한국어 블로그)</td>
 </tr>
 </tbody></table>
-<p>J의 스타일 가이드 원본 (템플릿):</p>
-<pre><code class="language-text"># style_guide.md — J의 스타일 가이드 v1 (2026-10-05)
+<pre><code class="language-text"># style_guide.md 템플릿 — J의 스타일 가이드 원본 v1 (2026-10-05)
 독자: 엑셀은 매일 쓰지만 함수와 자동화는 낯선 사무직
 말투: 존댓말, 한 문장에 한 가지, 전문 용어는 처음 한 번 풀어 쓴다
 금지: 과장(&quot;무조건&quot;, &quot;1분 만에&quot;), 확인하지 않은 수치, 남의 화면 캡처
@@ -251,7 +250,7 @@
 </tbody></table>
 <p>발행 직전 체크리스트는 다섯 줄이면 된다: ① P7 목록의 &quot;높음&quot; 항목을 모두 원 출처로 확인했다 ② <code>[확인 필요]</code>와 <code>[J의 …]</code> 자리 표시가 하나도 남지 않았다 ③ 캡처와 본문의 메뉴 이름이 같다 ④ 스타일 가이드의 금지 표현이 없다 ⑤ 작업 기록에 쓴 도구와 확인 날짜를 적었다.</p>
 <h3>6. 자동화: 반복 단계만, 발행은 사람</h3>
-<p>자동화할 대상은 <strong>판단이 없는 반복</strong>이다: 매주 같은 순서로, 같은 입력을, 같은 곳에 옮기는 일. 네이버 블로그 통계는 공개 API를 확인하지 못했으므로 손으로 옮긴다.</p>
+<p>자동화할 대상은 <strong>판단이 없는 반복</strong>이다: 매주 같은 순서로, 같은 입력을, 같은 곳에 옮기는 일. 네이버 블로그 통계는 공개 API를 확인하지 못했으므로 손으로 옮긴다. 발행을 자동화하지 않는 이유는 표 아래에 적었다.</p>
 <table>
 <thead>
 <tr>
@@ -267,7 +266,7 @@
 <td>무료. 개인 계정은 트리거 실행 합계 하루 90분, 1회 실행 6분</td>
 <td>—</td>
 <td>캘린더 시트 날짜에 맞춘 발행 알림 메일, 매주 월요일 YouTube Analytics 수치를 시트에 한 줄 기록, 주차 폴더와 <code>rights.md</code> 틀 만들기</td>
-<td><a href="https://developers.google.com/apps-script/overview">Apps Script overview</a>(영어), <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a>(영어), <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">AI로 구글 시트 앱 10분 만에</a>(한국어, 오빠두엑셀), <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">앱스 스크립트 사용법</a>(한국어 영상, 제3자)</td>
+<td><a href="https://developers.google.com/apps-script/overview">Apps Script overview</a>(영어, 공식), <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">AI로 구글 시트 앱 10분 만에</a>(한국어, 오빠두엑셀)</td>
 </tr>
 <tr>
 <td>Make</td>
@@ -288,14 +287,12 @@
 <td>자체 호스팅 Community Edition 무료</td>
 <td>Cloud Starter 월 €24(연간 결제 시 €20), 2,500 executions</td>
 <td>위와 같음. 복잡한 흐름, 서버를 직접 운영할 수 있을 때</td>
-<td><a href="https://docs.n8n.io/courses/level-one/">Level one 텍스트 과정</a>(영어, 약 2시간), <a href="https://docs.n8n.io/video-courses/">Video courses</a>(영어), <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n 강의/강좌</a>(한국어 재생목록, 제3자)</td>
+<td><a href="https://docs.n8n.io/courses/level-one/">Level one 텍스트 과정</a>(영어, 공식, 약 2시간), <a href="https://wikidocs.net/book/18092">n8n 노코드 자동화 한글 가이드북</a>(한국어, WikiDocs)</td>
 </tr>
 </tbody></table>
-<p>자동 발행을 하지 않는 이유와 한계:</p>
 <ul>
-<li><strong>네이버</strong>: 블로그 글쓰기 API는 광고성 대량 글 때문에 2020-05-06 종료됐다 (보도로 확인). 공식 자동 게시 경로가 없고, 매크로 우회는 「AI 활용 제작과 플랫폼 정책」에서 다룬 비정상 이용 제재 쪽으로 간다.</li>
-<li><strong>YouTube</strong>: 2020-07-28 이후 만든 검증되지 않은 API 프로젝트로 올린 영상은 비공개로 잠기고, 공개하려면 감사(audit)를 받아야 한다 (YouTube Data API 문서, 검색 결과로 확인). 사람 없이 초안부터 발행까지 돌면 영상 간 차이가 줄어 inauthentic content에 가까워진다.</li>
-<li><strong>보안과 비용</strong>: API 키를 공유 시트에 두지 않고 권한은 필요한 범위만 준다. Zapier는 성공한 액션마다, Make는 액션마다 사용량을 세므로 반복 실행이 요금을 키운다. 실패 알림을 켜서 &quot;조용히 멈춘 자동화&quot;를 막는다.</li>
+<li><strong>플랫폼</strong>: 네이버 블로그 글쓰기 API는 광고성 대량 글 때문에 2020-05-06 종료됐다 (보도로 확인). 공식 자동 게시 경로가 없고, 매크로 우회는 「AI 활용 제작과 플랫폼 정책」에서 다룬 비정상 이용 제재 쪽으로 간다. YouTube에서는 2020-07-28 이후 만든 검증되지 않은 API 프로젝트로 올린 영상은 비공개로 잠기고, 공개하려면 감사(audit)를 받아야 한다 (YouTube Data API 문서, 검색 결과로 확인). 사람 없이 초안부터 발행까지 돌면 영상 간 차이가 줄어 inauthentic content에 가까워진다.</li>
+<li><strong>보안과 비용</strong>: API 키를 공유 시트에 두지 않고 권한은 필요한 범위만 준다. Zapier는 성공한 액션마다, Make는 오퍼레이션마다 크레딧을 쓰므로 반복 실행이 요금을 키운다. 실패 알림을 켜서 &quot;조용히 멈춘 자동화&quot;를 막는다.</li>
 </ul>
 <h2>적용: 예시 크리에이터 J의 프롬프트 라이브러리와 주간 루프</h2>
 <h3>J의 주간 루프: OSMU 단계별 네 칸</h3>
@@ -342,7 +339,7 @@
 <td>롱폼 편집·썸네일 (3.0)</td>
 <td>썸네일 결정</td>
 <td>문구 후보(P6)</td>
-<td>선택, Test &amp; Compare</td>
+<td>문구 선택 (Test &amp; Compare는 「롱폼 영상 기획과 제작」 기준, 조회가 쌓인 뒤에만)</td>
 <td>자막 오탈자</td>
 </tr>
 <tr>
@@ -369,48 +366,56 @@
 </tbody></table>
 <h3>프롬프트 라이브러리 (템플릿)</h3>
 <pre><code class="language-text"># P1 템플릿: 검색어 묶기
-[역할·입력] 너는 네이버 블로그와 YouTube 튜토리얼 채널의 편집자다. 데이터랩·검색광고 키워드 도구에서 모은 검색어: {붙여넣기}
+[역할·참조] 너는 네이버 블로그와 YouTube 튜토리얼 채널의 편집자다. style_guide.md의 독자 항목을 따른다.
+[입력] 데이터랩·검색광고 키워드 도구에서 모은 검색어: {붙여넣기}
 [작업] 같은 문제를 푸는 검색어끼리 5~8개 묶음으로 나누고, 묶음마다 대표 질문 한 문장을 적어라.
 [형식] 표: 묶음 이름 | 대표 질문 | 포함 검색어 | 검색 의도(방법/문제 해결/비교/개념)
 [제약] 목록에 없는 검색어나 검색량 숫자를 만들지 마라. 애매한 검색어는 &quot;미분류&quot;에 둔다.
 </code></pre>
 <pre><code class="language-text"># P2 템플릿: 독자 질문에서 개요로
-[역할·입력] 너는 엑셀 업무 자동화 강의의 구성 작가다. 주제: {주제} / 독자 질문: {목록} / 내가 해 본 과정 메모: {메모}
+[역할·참조] 너는 엑셀 업무 자동화 강의의 구성 작가다. style_guide.md를 따른다.
+[입력] 주제: {주제} / 독자 질문: {목록} / 내가 해 본 과정 메모: {메모}
 [작업] &quot;하나의 개요&quot;를 만들어라: 문제 → 해결 단계 → 흔한 실수 → 다음 단계.
 [형식] 소제목 5~7개. 소제목마다 핵심 한 줄과 &quot;필요한 화면 캡처&quot; 한 줄.
 [제약] 내 메모에 없는 단계는 [확인 필요]로 표시한다.
 </code></pre>
 <pre><code class="language-text"># P3 템플릿: 스타일 가이드에 맞춘 블로그 초안
-[참조] 프로젝트의 style_guide.md와 이번 주 개요를 따른다.
+[역할·참조] 너는 J의 네이버 블로그 편집자다. 프로젝트의 style_guide.md를 따른다.
+[입력] 이번 주 개요: {개요} / 과정 메모: {메모}
 [작업] 네이버 블로그 글 초안을 써라. 첫 화면 3~5줄에 결론·대상·소요 시간을 둔다.
 [형식] 소제목은 개요와 같게. 단계마다 [캡처: 무엇을 보여 줄지] 자리 표시를 넣는다.
 [제약] 수치·메뉴 경로·함수 이름은 개요와 메모에 있는 것만 쓰고, 없으면 [확인 필요]. 경험 자리는 [J의 실수/측정값] 빈칸으로 남긴다.
 </code></pre>
 <pre><code class="language-text"># P4 템플릿: 훅이 있는 롱폼 대본
-[참조] style_guide.md의 말투 항목과 이번 주 개요를 따른다.
+[역할·참조] 너는 J의 강의 대본 작가다. style_guide.md의 말투 항목을 따른다.
+[입력] 이번 주 개요: {개요}
 [작업] 8~12분 강의 대본을 써라. 첫 30초는 문제 장면 → 완성 결과 → 오늘 배울 것 순서다.
 [형식] 두 열 표: 말할 문장 | 화면 지시(녹화할 동작)
 [제약] 귀로 듣는 짧은 문장. &quot;1분 만에 끝&quot; 같은 과장 금지. 개요에 없는 기능은 [확인 필요]로 표시한다.
 </code></pre>
 <pre><code class="language-text"># P5 템플릿: 전사문에서 Shorts 구간 고르기
+[역할·참조] 너는 J의 Shorts 편집자다. style_guide.md를 따른다.
 [입력] 롱폼 강의의 타임스탬프 포함 전사문: {전사문}
 [작업] Short로 자를 30~60초 구간 후보 5개를 골라라. 결과가 한 화면에 보이는 구간이 우선이다.
 [형식] 표: 시작~끝 | 유형(결과형/실수형/질문형) | 첫 1~2초 자막 문구 | 롱폼으로 보낼 이유
 [제약] 전사문에 없는 내용을 더하지 마라. 앞뒤 맥락 없이 이해되지 않는 구간은 뺀다.
 </code></pre>
 <pre><code class="language-text"># P6 템플릿: 썸네일 문구 후보
+[역할·참조] 너는 썸네일 문구 작가다. style_guide.md의 금지 표현을 따른다.
 [입력] 제목 후보: {제목} / 결과 화면 설명: {설명} / 대상 시청자: {대상}
 [작업] 썸네일 문구 후보 10개를 만들어라. 짧게, 최대 두 줄.
 [형식] 번호 | 문구 | 제목과 겹치지 않는 정보 | 과장 위험(낮음/중간/높음)
 [제약] 영상에서 보여 주지 않는 결과를 약속하지 마라.
 </code></pre>
 <pre><code class="language-text"># P7 템플릿: 팩트체크 목록
+[역할·참조] 너는 발행 전 검수자다. style_guide.md의 금지 항목도 함께 본다.
 [입력] 발행 전 원고: {원고}
 [작업] 확인이 필요한 주장을 모두 뽑아라: 수치, 날짜, 가격, 메뉴 경로, 함수 이름, 정책, 다른 서비스 설명.
 [형식] 표: 문장 | 주장 유형 | 확인할 원 출처의 종류 | 위험도(높음/중간/낮음)
 [제약] 주장이 맞는지 판정하지 마라. 목록만 만든다. 판정은 사람이 원 출처로 한다.
 </code></pre>
 <pre><code class="language-text"># P8 템플릿: 발행 7일 뒤 리뷰
+[역할·참조] 너는 J의 채널 분석 보조다.
 [입력] 7일 지표: {조회수·평균 시청 지속 시간·노출 클릭률·블로그 유입 검색어·댓글 요약} / 지난 4주 평균: {값}
 [작업] 4주 평균과 비교해 달라진 점 3가지와 다음 주에 바꿀 것 1가지를 제안하라.
 [형식] 관찰 | 근거 지표 | 가설 | 다음 주 실험 1개
@@ -440,15 +445,9 @@
 </tr>
 <tr>
 <td>자동화</td>
-<td>Apps Script</td>
-<td>무료 (개인 계정 트리거 하루 90분)</td>
-<td>알림·지표 수집·폴더 정리</td>
-</tr>
-<tr>
-<td>자동화 (선택)</td>
-<td>Make·Zapier·n8n</td>
-<td>무료 플랜부터. 유료는 위 표의 시작가</td>
-<td>전사문 → 초안을 4주 이상 손으로 해 본 뒤에만 검토</td>
+<td>Apps Script (+ 선택: Make·Zapier·n8n)</td>
+<td>Apps Script 무료 (개인 계정 트리거 하루 90분). 나머지는 무료 플랜부터, 유료는 위 표의 시작가</td>
+<td>Apps Script로 알림·지표 수집·폴더 정리. 유료 자동화는 전사문 → 초안을 4주 이상 손으로 해 본 뒤에만 검토</td>
 </tr>
 <tr>
 <td><strong>합계 (방법론 도구)</strong></td>
@@ -457,7 +456,7 @@
 <td>첫 90일에는 이 이상 늘리지 않는다</td>
 </tr>
 </tbody></table>
-<p>편집·자막·디자인 도구의 요금은 「AI로 블로그 글 만들기: 도구와 튜토리얼」과 「AI로 유튜브 영상 만들기: 도구와 튜토리얼」에서 다룬다. 가격은 자주 바뀐다. Google은 I/O 2026에서 요금제를 개편했고 이후 AI Plus 가격을 내렸다는 보도가 있다. 결제 전에 각 가격 페이지를 다시 확인한다.</p>
+<p>이 문서는 LLM·조사·자동화 도구의 요금만 다룬다. 편집·음성 도구의 요금 메모는 「AI로 유튜브 영상 만들기: 도구와 튜토리얼」의 표에 있고, 이미지·디자인 도구는 결제 전 각 공식 가격 페이지에서 확인한다. 가격은 자주 바뀐다. Google은 I/O 2026에서 요금제를 개편했고 이후 AI Plus 가격을 내렸다는 보도가 있다. 결제 전에 각 가격 페이지를 다시 확인한다.</p>
 <h2>심화</h2>
 <p>&quot;AI 덕분에 빨라졌다&quot;는 느낌은 검수 시간을 빼먹기 쉽다. 단계마다 <strong>순절약 = 줄어든 작성 시간 − 늘어난 검수 시간</strong>을 본다. 「AI 활용 제작과 플랫폼 정책」의 절약 시간은 가정이므로, J는 첫 4주 동안 실제로 기록해 가정을 확인한다.</p>
 <table>
@@ -509,14 +508,10 @@
 <p>모든 링크는 2026-09-30 검색 결과로 확인했다 (직접 접속 확인은 하지 못함). 언어 표시가 없으면 영어다.</p>
 <ul>
 <li><strong>방법과 프롬프트</strong>: <a href="https://academy.claude.com/courses/ai-fluency-framework-foundations">AI Fluency: Framework and foundations</a>, <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a>, <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">Interactive Prompt Engineering Tutorial</a> — Anthropic / <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> — Google Skills — 2026-09-30 검색 결과로 확인</li>
-<li><strong>Claude Projects</strong>: <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Anthropic / <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">클로드 프로젝트(Projects) 사용법</a> — 준이아빠블로그 (한국어) / <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">15분만에 클로드를 나만의 직원으로 만들기</a> — YouTube (한국어, 제3자) — 2026-09-30 검색 결과로 확인</li>
-<li><strong>ChatGPT</strong>: <a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a>, <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> — OpenAI Help Center / <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx">OpenAI to Retire Custom GPTs, Replace Them with Plugins</a> — Virtualization Review, 2026-09-28 — 2026-09-30 검색 결과로 확인</li>
-<li><strong>Gemini Gems·Skills</strong>: <a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a>, <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills for Gemini Apps</a> — Gemini Apps Help / <a href="https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/">Google is killing off Gemini&#39;s Gems in favor of skills</a> — TechCrunch, 2026-09-28 / <a href="https://www.androidauthority.com/gemini-skills-expand-free-accounts-3716627/">Gemini Skills are expanding to free accounts</a> — Android Authority — 2026-09-30 검색 결과로 확인</li>
-<li><strong>Gemini Notebook</strong>: <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a>, <a href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/">8 expert tips for getting started with NotebookLM</a> — Google 블로그 / <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook in Gemini Notebook</a> — Gemini Notebook Help / <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips for Google Workspace: How to use NotebookLM</a> — Google Workspace, YouTube / <a href="https://brunch.co.kr/@eunjongseong/242">노트북LM 완벽가이드</a> — 브런치 (한국어) — 2026-09-30 검색 결과로 확인</li>
+<li><strong>프로젝트 메모리 (Claude·ChatGPT)</strong>: <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Anthropic / <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">클로드 프로젝트(Projects) 사용법</a> — 준이아빠블로그 (한국어) / <a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a>, <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> — OpenAI Help Center / <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx">OpenAI to Retire Custom GPTs, Replace Them with Plugins</a> — Virtualization Review, 2026-09-28 — 2026-09-30 검색 결과로 확인</li>
+<li><strong>Gemini (Gems·Skills·Notebook)</strong>: <a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a>, <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills for Gemini Apps</a> — Gemini Apps Help / <a href="https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/">Google is killing off Gemini&#39;s Gems in favor of skills</a> — TechCrunch, 2026-09-28 / <a href="https://www.androidauthority.com/gemini-skills-expand-free-accounts-3716627/">Gemini Skills are expanding to free accounts</a> — Android Authority / <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a>, <a href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/">8 expert tips for getting started with NotebookLM</a> — Google 블로그 / <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook in Gemini Notebook</a> — Gemini Notebook Help / <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips for Google Workspace: How to use NotebookLM</a> — Google Workspace, YouTube / <a href="https://brunch.co.kr/@eunjongseong/242">노트북LM 완벽가이드</a> — 브런치 (한국어) — 2026-09-30 검색 결과로 확인</li>
 <li><strong>독창성과 정책</strong>: <a href="https://www.youtube.com/watch?v=14Vm0CiyUVE">YouTube&#39;s Inauthentic Content Policy - Explained!</a> — Creator Insider로 보도됨, YouTube, 2026-07 / <a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/">YouTube clarifies policies around AI slop and upsetting videos</a> — TechCrunch, 2026-07-20 / <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a> — Google Search Central — 2026-09-30 검색 결과로 확인</li>
-<li><strong>Apps Script</strong>: <a href="https://developers.google.com/apps-script/overview">Google Apps Script overview</a>, <a href="https://developers.google.com/apps-script/guides/services/quotas">Quotas for Google Services</a>, <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> — Google for Developers / <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">코딩 몰라도 AI로 앱 개발?! 구글 시트로 10분 만에</a> — 오빠두엑셀 (한국어) / <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">구글 시트 활용도 높이는 &#39;앱스 스크립트&#39; 사용법</a> — YouTube (한국어, 제3자) — 2026-09-30 검색 결과로 확인</li>
-<li><strong>Make·Zapier·n8n</strong>: <a href="https://academy.make.com/">Make Academy</a>, <a href="https://help.make.com/credits">Credits</a> — Make / <a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a>, <a href="https://help.zapier.com/hc/en-us/articles/15279018245901-How-pay-per-task-billing-works-in-Zapier">How pay-per-task billing works in Zapier</a> — Zapier / <a href="https://docs.n8n.io/courses/level-one/">Level one: Introduction</a>, <a href="https://docs.n8n.io/video-courses/">Video courses</a> — n8n Docs / <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n 강의/강좌</a> — YouTube 재생목록 (한국어, 제3자) — 2026-09-30 검색 결과로 확인</li>
-<li><strong>자동 발행의 한계</strong>: <a href="https://www.newspim.com/news/view/20200413000737">네이버 &#39;글쓰기 API&#39; 기능, 내달 종료</a> — 뉴스핌 (한국어), 2020-04-13 / <a href="https://developers.google.com/youtube/v3/docs/videos/insert">Videos: insert</a> — YouTube Data API — 2026-09-30 검색 결과로 확인</li>
+<li><strong>자동화와 그 한계</strong>: <a href="https://developers.google.com/apps-script/overview">Google Apps Script overview</a>, <a href="https://developers.google.com/apps-script/guides/services/quotas">Quotas for Google Services</a>, <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> — Google for Developers / <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">코딩 몰라도 AI로 앱 개발?! 구글 시트로 10분 만에</a> — 오빠두엑셀 (한국어) / <a href="https://academy.make.com/">Make Academy</a>, <a href="https://help.make.com/credits">Credits</a> — Make / <a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a>, <a href="https://help.zapier.com/hc/en-us/articles/15279018245901-How-pay-per-task-billing-works-in-Zapier">How pay-per-task billing works in Zapier</a> — Zapier / <a href="https://docs.n8n.io/courses/level-one/">Level one: Introduction</a>, <a href="https://docs.n8n.io/video-courses/">Video courses</a> — n8n Docs / <a href="https://wikidocs.net/book/18092">n8n 노코드 자동화 한글 가이드북</a> — WikiDocs (한국어) / <a href="https://www.newspim.com/news/view/20200413000737">네이버 &#39;글쓰기 API&#39; 기능, 내달 종료</a> — 뉴스핌 (한국어), 2020-04-13 / <a href="https://developers.google.com/youtube/v3/docs/videos/insert">Videos: insert</a> — YouTube Data API — 2026-09-30 검색 결과로 확인</li>
 <li><strong>가격</strong>: <a href="https://claude.com/pricing">Plans &amp; Pricing</a> — Anthropic / <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">What is ChatGPT Plus?</a> — OpenAI Help Center / <a href="https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/">Everything new in our Google AI subscriptions, fresh from I/O 2026</a> — Google 블로그 / <a href="https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/">Google cuts the price of its AI Plus plan and doubles the storage</a> — Engadget / <a href="https://www.make.com/en/pricing">Pricing &amp; Subscription Packages</a> — Make / <a href="https://zapier.com/pricing">Plans &amp; Pricing</a> — Zapier / <a href="https://n8n.io/pricing/">n8n Plans and Pricing</a> — n8n — 2026-09-30 검색 결과로 확인</li>
 </ul>
 </article>

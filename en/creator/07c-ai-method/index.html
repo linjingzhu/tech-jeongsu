@@ -124,7 +124,7 @@
 <tr>
 <td>Prompt template</td>
 <td>An instruction you reuse every week by changing only the blanks</td>
-<td>Five slots: [Role]·[Input]·[Task]·[Format]·[Constraints]</td>
+<td>Five slots: [Role and reference]·[Input]·[Task]·[Format]·[Constraints]</td>
 </tr>
 <tr>
 <td>Style guide</td>
@@ -155,7 +155,7 @@
     LOG --&gt;|next week&#39;s direction| DIR
 </code></pre>
 <h3>2. A prompt is a form, not a sentence</h3>
-<p>If you write a good prompt from scratch every time, quality changes by the day of the week. Build <strong>a form with blanks</strong> and change only the input. The templates here have five slots: <strong>[Role]·[Reference]</strong> (who is writing, following which style guide), <strong>[Input]</strong> (this week&#39;s keywords, outline, transcript or metrics; put long material above the instructions), <strong>[Task]</strong> (one job at a time), <strong>[Format]</strong> (table columns, length, placeholders; a fixed format makes review easier) and <strong>[Constraints]</strong> (&quot;leave [check needed] if unsure&quot;, &quot;do not invent numbers&quot;; the cheapest way to reduce hallucination). Learn the basics from Anthropic&#39;s <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a> and <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">interactive tutorial</a> (English), and from Google&#39;s <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> (English, under 10 hours).</p>
+<p>If you write a good prompt from scratch every time, quality changes by the day of the week. Build <strong>a form with blanks</strong> and change only the input. The templates here have five slots: <strong>[Role and reference]</strong> (who is writing, following which style guide), <strong>[Input]</strong> (this week&#39;s keywords, outline, transcript or metrics; put long material above the instructions), <strong>[Task]</strong> (one job at a time), <strong>[Format]</strong> (table columns, length, placeholders; a fixed format makes review easier) and <strong>[Constraints]</strong> (&quot;leave [check needed] if unsure&quot;, &quot;do not invent numbers&quot;; the cheapest way to reduce hallucination). Learn the basics from Anthropic&#39;s <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a> and <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">interactive tutorial</a> (English), and from Google&#39;s <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> (English, under 10 hours).</p>
 <h3>3. Style guide and project memory: keep the original in your own file</h3>
 <p>Project memory loads your style guide and reference files into every chat. But within the single month of September 2026, two vendors changed the shape of this feature. The conclusion is simple: <strong>keep the original style guide as one file, <code>style_guide.md</code>, that you own, and put copies into each tool.</strong> When you switch tools, you paste the file again and you are done.</p>
 <table>
@@ -171,7 +171,7 @@
 <td>Claude Projects</td>
 <td>Each project has instructions and knowledge files. Help-centre search results say the free plan can use it within a count limit (five projects)</td>
 <td>A &quot;weekly production&quot; project with the style guide plus past outlines</td>
-<td><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a> (English), <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Claude 101: Introduction to projects</a> (English), <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> (Korean blog), <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">Turn Claude into your own assistant in 15 minutes</a> (Korean video, third party)</td>
+<td><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a> (English, official), <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> (Korean blog)</td>
 </tr>
 <tr>
 <td>ChatGPT Projects</td>
@@ -195,11 +195,10 @@
 <td>Gemini Notebook (formerly NotebookLM)</td>
 <td>Renamed on 2026-07-16. Answers from the sources you upload and cites them. Secondary sources give free limits of 100 notebooks and 50 sources per notebook</td>
 <td>A &quot;research notebook&quot; of official docs, help pages and reference videos</td>
-<td><a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook</a> (English), <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips: How to use NotebookLM</a> (English video, Google Workspace), <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> (Korean blog)</td>
+<td><a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips: How to use NotebookLM</a> (English video, official Google Workspace), <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> (Korean blog)</td>
 </tr>
 </tbody></table>
-<p>J&#39;s original style guide (template):</p>
-<pre><code class="language-text"># style_guide.md — J&#39;s style guide v1 (2026-10-05)
+<pre><code class="language-text"># style_guide.md template — J&#39;s original style guide v1 (2026-10-05)
 Reader: office workers who use Excel daily but find functions and automation unfamiliar
 Tone: polite form, one idea per sentence, spell out a technical term the first time
 Banned: hype (&quot;guaranteed&quot;, &quot;in 1 minute&quot;), unchecked numbers, other people&#39;s screenshots
@@ -251,7 +250,7 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 </tbody></table>
 <p>The final pre-publish checklist fits in five lines: (1) every &quot;high&quot; item on the P7 list was checked against an original source; (2) no <code>[check needed]</code> or <code>[J&#39;s …]</code> placeholders remain; (3) menu names match between screenshots and text; (4) none of the style guide&#39;s banned phrases appear; (5) the tools used and the check dates are in the work log.</p>
 <h3>6. Automation: only the repetitive steps, and a person publishes</h3>
-<p>Automate <strong>repetition without judgement</strong>: moving the same input, in the same order, to the same place every week. Naver Blog statistics are copied by hand, because no public API for them could be confirmed.</p>
+<p>Automate <strong>repetition without judgement</strong>: moving the same input, in the same order, to the same place every week. Naver Blog statistics are copied by hand, because no public API for them could be confirmed. The reasons for not automating publishing are below the table.</p>
 <table>
 <thead>
 <tr>
@@ -267,7 +266,7 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 <td>Free. Personal accounts get 90 minutes a day of total trigger runtime and 6 minutes per run</td>
 <td>—</td>
 <td>Publishing-reminder emails from dates in a calendar sheet, one row of YouTube Analytics numbers every Monday, weekly folders and a <code>rights.md</code> skeleton</td>
-<td><a href="https://developers.google.com/apps-script/overview">Apps Script overview</a> (English), <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> (English), <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">A Google Sheets app with AI in 10 minutes</a> (Korean, Oppadu Excel), <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">How to use Apps Script</a> (Korean video, third party)</td>
+<td><a href="https://developers.google.com/apps-script/overview">Apps Script overview</a> (English, official), <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">A Google Sheets app with AI in 10 minutes</a> (Korean, Oppadu Excel)</td>
 </tr>
 <tr>
 <td>Make</td>
@@ -288,14 +287,12 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 <td>Self-hosted Community Edition is free</td>
 <td>Cloud Starter €24 a month (€20 billed annually), 2,500 executions</td>
 <td>Same as above. Complex flows, if you can run your own server</td>
-<td><a href="https://docs.n8n.io/courses/level-one/">Level one text course</a> (English, about 2 hours), <a href="https://docs.n8n.io/video-courses/">Video courses</a> (English), <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n lecture playlist</a> (Korean playlist, third party)</td>
+<td><a href="https://docs.n8n.io/courses/level-one/">Level one text course</a> (English, official, about 2 hours), <a href="https://wikidocs.net/book/18092">n8n no-code automation guidebook</a> (Korean, WikiDocs)</td>
 </tr>
 </tbody></table>
-<p>Why J does not auto-publish, and the limits:</p>
 <ul>
-<li><strong>Naver</strong>: the Naver Blog posting API was shut down on 2020-05-06 because of mass-produced advertising posts (confirmed via news reports). There is no official auto-posting route, and working around it with macros leads toward the abnormal-use sanctions covered in &quot;AI-assisted Production and Platform Policy&quot;.</li>
-<li><strong>YouTube</strong>: videos uploaded through unverified API projects created after 2020-07-28 are locked to private, and making them public requires an audit (YouTube Data API docs, confirmed via search results). A pipeline that runs from draft to publish without a person shrinks the differences between videos and moves toward inauthentic content.</li>
-<li><strong>Security and cost</strong>: keep API keys out of shared sheets and grant only the permissions needed. Zapier counts each successful action and Make counts each action, so repeated runs raise the bill. Turn on failure alerts so an automation cannot stop silently.</li>
+<li><strong>Platforms</strong>: the Naver Blog posting API was shut down on 2020-05-06 because of mass-produced advertising posts (confirmed via news reports). There is no official auto-posting route, and working around it with macros leads toward the abnormal-use sanctions covered in &quot;AI-assisted Production and Platform Policy&quot;. On YouTube, videos uploaded through unverified API projects created after 2020-07-28 are locked to private, and making them public requires an audit (YouTube Data API docs, confirmed via search results). A pipeline that runs from draft to publish without a person shrinks the differences between videos and moves toward inauthentic content.</li>
+<li><strong>Security and cost</strong>: keep API keys out of shared sheets and grant only the permissions needed. Zapier counts each successful action and Make spends credits per operation, so repeated runs raise the bill. Turn on failure alerts so an automation cannot stop silently.</li>
 </ul>
 <h2>Applied: Example creator J&#39;s prompt library and weekly loop</h2>
 <h3>J&#39;s weekly loop: four slots per OSMU step</h3>
@@ -342,7 +339,7 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 <td>Long-form edit and thumbnail (3.0)</td>
 <td>Decide the thumbnail</td>
 <td>Text options (P6)</td>
-<td>Choose, Test &amp; Compare</td>
+<td>Choose the text (Test &amp; Compare only once views build up, per &quot;Planning and Producing Long-form Video&quot;)</td>
 <td>Caption typos</td>
 </tr>
 <tr>
@@ -369,48 +366,56 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 </tbody></table>
 <h3>Prompt library (templates)</h3>
 <pre><code class="language-text"># P1 template: keyword clustering
-[Role and input] You are the editor of a Naver Blog and YouTube tutorial channel. Keywords from Naver DataLab and the Naver search-ad keyword tool: {paste}
+[Role and reference] You are the editor of a Naver Blog and YouTube tutorial channel. Follow the reader section of style_guide.md.
+[Input] Keywords from Naver DataLab and the Naver search-ad keyword tool: {paste}
 [Task] Group keywords that solve the same problem into 5–8 clusters, and write one representative question per cluster.
 [Format] Table: cluster name | representative question | keywords included | search intent (how-to/problem-solving/comparison/concept)
 [Constraints] Do not invent keywords or search volumes that are not in the list. Put unclear keywords under &quot;unclassified&quot;.
 </code></pre>
 <pre><code class="language-text"># P2 template: from reader questions to an outline
-[Role and input] You are the structure writer for an Excel work-automation course. Topic: {topic} / Reader questions: {list} / My notes from doing it: {notes}
+[Role and reference] You are the structure writer for an Excel work-automation course. Follow style_guide.md.
+[Input] Topic: {topic} / Reader questions: {list} / My notes from doing it: {notes}
 [Task] Build &quot;one outline&quot;: problem → solution steps → common mistakes → next step.
 [Format] 5–7 subheadings. Under each, one key line and one line for &quot;screenshot needed&quot;.
 [Constraints] Mark any step that is not in my notes as [check needed].
 </code></pre>
 <pre><code class="language-text"># P3 template: blog draft in the style guide
-[Reference] Follow style_guide.md in the project and this week&#39;s outline.
+[Role and reference] You are J&#39;s Naver Blog editor. Follow style_guide.md in the project.
+[Input] This week&#39;s outline: {outline} / Process notes: {notes}
 [Task] Write a Naver Blog post draft. Put the answer, the reader and the time needed in the first 3–5 lines.
 [Format] Subheadings match the outline. Add a [screenshot: what it shows] placeholder at every step.
 [Constraints] Use only numbers, menu paths and function names found in the outline and notes; otherwise [check needed]. Leave experience as a [J&#39;s mistake/measurement] blank.
 </code></pre>
 <pre><code class="language-text"># P4 template: long-form script with a hook
-[Reference] Follow the tone section of style_guide.md and this week&#39;s outline.
+[Role and reference] You are J&#39;s lecture scriptwriter. Follow the tone section of style_guide.md.
+[Input] This week&#39;s outline: {outline}
 [Task] Write an 8–12 minute lecture script. The first 30 seconds go problem scene → finished result → today&#39;s goal.
 [Format] Two-column table: line to say | screen direction (action to record)
 [Constraints] Short sentences for the ear. No hype such as &quot;done in 1 minute&quot;. Mark any feature not in the outline as [check needed].
 </code></pre>
 <pre><code class="language-text"># P5 template: choosing Shorts segments from a transcript
+[Role and reference] You are J&#39;s Shorts editor. Follow style_guide.md.
 [Input] Timestamped transcript of the long-form lecture: {transcript}
 [Task] Pick 5 candidate segments of 30–60 seconds to cut as Shorts. Prefer segments where the result shows on one screen.
 [Format] Table: start–end | type (result/mistake/question) | caption for the first 1–2 seconds | reason to send viewers to the long-form
 [Constraints] Do not add anything that is not in the transcript. Drop segments that make no sense without context.
 </code></pre>
 <pre><code class="language-text"># P6 template: thumbnail text options
+[Role and reference] You are a thumbnail copywriter. Follow the banned phrases in style_guide.md.
 [Input] Title options: {title} / Result screen description: {description} / Target viewer: {audience}
 [Task] Write 10 thumbnail text options. Short, two lines at most.
 [Format] Number | text | information not repeated from the title | hype risk (low/medium/high)
 [Constraints] Do not promise a result the video does not show.
 </code></pre>
 <pre><code class="language-text"># P7 template: fact-check list
+[Role and reference] You are the pre-publish reviewer. Also check the banned items in style_guide.md.
 [Input] Draft before publishing: {draft}
 [Task] Extract every claim that needs checking: numbers, dates, prices, menu paths, function names, policies, descriptions of other services.
 [Format] Table: sentence | claim type | kind of original source to check | risk (high/medium/low)
 [Constraints] Do not judge whether a claim is true. Only build the list. A person decides using the original source.
 </code></pre>
 <pre><code class="language-text"># P8 template: review 7 days after publishing
+[Role and reference] You are J&#39;s channel analytics assistant.
 [Input] 7-day metrics: {views, average view duration, impressions click-through rate, blog search keywords, comment summary} / last 4-week average: {values}
 [Task] Compared with the 4-week average, name 3 things that changed and propose 1 thing to change next week.
 [Format] Observation | supporting metric | hypothesis | 1 experiment for next week
@@ -440,15 +445,9 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 </tr>
 <tr>
 <td>Automation</td>
-<td>Apps Script</td>
-<td>Free (90 minutes a day of trigger runtime on personal accounts)</td>
-<td>Reminders, metrics collection, folder set-up</td>
-</tr>
-<tr>
-<td>Automation (optional)</td>
-<td>Make, Zapier, n8n</td>
-<td>Start on the free plans. Paid prices are in the table above</td>
-<td>Consider only after doing transcript → draft by hand for 4+ weeks</td>
+<td>Apps Script (+ optional: Make, Zapier, n8n)</td>
+<td>Apps Script is free (90 minutes a day of trigger runtime on personal accounts). The others start on free plans; paid prices are in the table above</td>
+<td>Apps Script for reminders, metrics collection and folder set-up. Consider paid automation only after doing transcript → draft by hand for 4+ weeks</td>
 </tr>
 <tr>
 <td><strong>Total (method tools)</strong></td>
@@ -457,7 +456,7 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 <td>Do not add more in the first 90 days</td>
 </tr>
 </tbody></table>
-<p>Prices for editing, caption and design tools are covered in &quot;Writing Blog Posts with AI: Tools and Tutorials&quot; and &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;. Prices change often. Google reorganised its plans at I/O 2026 and later reportedly cut the AI Plus price. Check each pricing page again before you pay.</p>
+<p>This document covers prices only for LLM, research and automation tools. Price notes for editing and voice tools are in the tables of &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;, and for image and design tools, check each official pricing page before you pay. Prices change often. Google reorganised its plans at I/O 2026 and later reportedly cut the AI Plus price. Check each pricing page again before you pay.</p>
 <h2>Going Deeper</h2>
 <p>The feeling that &quot;AI made me faster&quot; tends to leave out review time. For each step, look at <strong>net saving = writing time saved − review time added</strong>. The time savings in &quot;AI-assisted Production and Platform Policy&quot; are assumptions, so J logs real numbers for the first 4 weeks to test them.</p>
 <table>
@@ -509,14 +508,10 @@ Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own 
 <p>All links were confirmed via search results on 2026-09-30 (they could not be opened directly). Links are in English unless marked.</p>
 <ul>
 <li><strong>Method and prompts</strong>: <a href="https://academy.claude.com/courses/ai-fluency-framework-foundations">AI Fluency: Framework and foundations</a>, <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a>, <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">Interactive Prompt Engineering Tutorial</a> — Anthropic / <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> — Google Skills — confirmed via search results (2026-09-30)</li>
-<li><strong>Claude Projects</strong>: <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Anthropic / <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> — Juniappa Blog (Korean) / <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">Turn Claude into your own assistant in 15 minutes</a> — YouTube (Korean, third party) — confirmed via search results (2026-09-30)</li>
-<li><strong>ChatGPT</strong>: <a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a>, <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> — OpenAI Help Center / <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx">OpenAI to Retire Custom GPTs, Replace Them with Plugins</a> — Virtualization Review, 2026-09-28 — confirmed via search results (2026-09-30)</li>
-<li><strong>Gemini Gems and Skills</strong>: <a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a>, <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills for Gemini Apps</a> — Gemini Apps Help / <a href="https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/">Google is killing off Gemini&#39;s Gems in favor of skills</a> — TechCrunch, 2026-09-28 / <a href="https://www.androidauthority.com/gemini-skills-expand-free-accounts-3716627/">Gemini Skills are expanding to free accounts</a> — Android Authority — confirmed via search results (2026-09-30)</li>
-<li><strong>Gemini Notebook</strong>: <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a>, <a href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/">8 expert tips for getting started with NotebookLM</a> — Google Blog / <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook in Gemini Notebook</a> — Gemini Notebook Help / <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips for Google Workspace: How to use NotebookLM</a> — Google Workspace, YouTube / <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> — Brunch (Korean) — confirmed via search results (2026-09-30)</li>
+<li><strong>Project memory (Claude, ChatGPT)</strong>: <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Anthropic / <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> — Juniappa Blog (Korean) / <a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a>, <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> — OpenAI Help Center / <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx">OpenAI to Retire Custom GPTs, Replace Them with Plugins</a> — Virtualization Review, 2026-09-28 — confirmed via search results (2026-09-30)</li>
+<li><strong>Gemini (Gems, Skills, Notebook)</strong>: <a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a>, <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills for Gemini Apps</a> — Gemini Apps Help / <a href="https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/">Google is killing off Gemini&#39;s Gems in favor of skills</a> — TechCrunch, 2026-09-28 / <a href="https://www.androidauthority.com/gemini-skills-expand-free-accounts-3716627/">Gemini Skills are expanding to free accounts</a> — Android Authority / <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a>, <a href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/">8 expert tips for getting started with NotebookLM</a> — Google Blog / <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook in Gemini Notebook</a> — Gemini Notebook Help / <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips for Google Workspace: How to use NotebookLM</a> — Google Workspace, YouTube / <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> — Brunch (Korean) — confirmed via search results (2026-09-30)</li>
 <li><strong>Originality and policy</strong>: <a href="https://www.youtube.com/watch?v=14Vm0CiyUVE">YouTube&#39;s Inauthentic Content Policy - Explained!</a> — reported as Creator Insider, YouTube, 2026-07 / <a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/">YouTube clarifies policies around AI slop and upsetting videos</a> — TechCrunch, 2026-07-20 / <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a> — Google Search Central — confirmed via search results (2026-09-30)</li>
-<li><strong>Apps Script</strong>: <a href="https://developers.google.com/apps-script/overview">Google Apps Script overview</a>, <a href="https://developers.google.com/apps-script/guides/services/quotas">Quotas for Google Services</a>, <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> — Google for Developers / <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">Build an app with AI and Google Sheets in 10 minutes, no coding</a> — Oppadu Excel (Korean) / <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">How to use Apps Script to get more out of Google Sheets</a> — YouTube (Korean, third party) — confirmed via search results (2026-09-30)</li>
-<li><strong>Make, Zapier, n8n</strong>: <a href="https://academy.make.com/">Make Academy</a>, <a href="https://help.make.com/credits">Credits</a> — Make / <a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a>, <a href="https://help.zapier.com/hc/en-us/articles/15279018245901-How-pay-per-task-billing-works-in-Zapier">How pay-per-task billing works in Zapier</a> — Zapier / <a href="https://docs.n8n.io/courses/level-one/">Level one: Introduction</a>, <a href="https://docs.n8n.io/video-courses/">Video courses</a> — n8n Docs / <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n lectures</a> — YouTube playlist (Korean, third party) — confirmed via search results (2026-09-30)</li>
-<li><strong>Limits of auto-publishing</strong>: <a href="https://www.newspim.com/news/view/20200413000737">Naver to end its &quot;posting API&quot; next month</a> — Newspim (Korean), 2020-04-13 / <a href="https://developers.google.com/youtube/v3/docs/videos/insert">Videos: insert</a> — YouTube Data API — confirmed via search results (2026-09-30)</li>
+<li><strong>Automation and its limits</strong>: <a href="https://developers.google.com/apps-script/overview">Google Apps Script overview</a>, <a href="https://developers.google.com/apps-script/guides/services/quotas">Quotas for Google Services</a>, <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> — Google for Developers / <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">Build an app with AI and Google Sheets in 10 minutes, no coding</a> — Oppadu Excel (Korean) / <a href="https://academy.make.com/">Make Academy</a>, <a href="https://help.make.com/credits">Credits</a> — Make / <a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a>, <a href="https://help.zapier.com/hc/en-us/articles/15279018245901-How-pay-per-task-billing-works-in-Zapier">How pay-per-task billing works in Zapier</a> — Zapier / <a href="https://docs.n8n.io/courses/level-one/">Level one: Introduction</a>, <a href="https://docs.n8n.io/video-courses/">Video courses</a> — n8n Docs / <a href="https://wikidocs.net/book/18092">n8n no-code automation guidebook</a> — WikiDocs (Korean) / <a href="https://www.newspim.com/news/view/20200413000737">Naver to end its &quot;posting API&quot; next month</a> — Newspim (Korean), 2020-04-13 / <a href="https://developers.google.com/youtube/v3/docs/videos/insert">Videos: insert</a> — YouTube Data API — confirmed via search results (2026-09-30)</li>
 <li><strong>Prices</strong>: <a href="https://claude.com/pricing">Plans &amp; Pricing</a> — Anthropic / <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">What is ChatGPT Plus?</a> — OpenAI Help Center / <a href="https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/">Everything new in our Google AI subscriptions, fresh from I/O 2026</a> — Google Blog / <a href="https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/">Google cuts the price of its AI Plus plan and doubles the storage</a> — Engadget / <a href="https://www.make.com/en/pricing">Pricing &amp; Subscription Packages</a> — Make / <a href="https://zapier.com/pricing">Plans &amp; Pricing</a> — Zapier / <a href="https://n8n.io/pricing/">n8n Plans and Pricing</a> — n8n — confirmed via search results (2026-09-30)</li>
 </ul>
 </article>
