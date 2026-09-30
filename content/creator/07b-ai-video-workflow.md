@@ -11,7 +11,7 @@
 | Ask Studio | YouTube Studio 안의 대화형 AI. 내 채널 데이터·댓글·업로드 기록으로 아이디어와 분석 답을 준다 | 아이디어와 분석 단계의 기본값 |
 | 영감(Inspiration) 탭 | 아이디어·제목·썸네일·개요를 제안하던 Studio 탭 | 2026-08부터 단계적 종료, Ask Studio로 대체 |
 | 텍스트 기반 편집 | 음성을 받아 적은 텍스트를 지우거나 옮기면 영상이 같이 잘리는 편집 방식 | 화면 녹화 강의의 컷 편집 |
-| 보이스 클로닝 | 내 목소리 샘플로 AI 음성을 만드는 기능 | 틀린 단어 몇 개를 고칠 때만. 표시 기준은 07 문서 |
+| 보이스 클로닝 | 내 목소리 샘플로 AI 음성을 만드는 기능 | Shorts 한 편의 시험에만. 롱폼의 틀린 단어는 다시 녹음한다. 표시 기준은 07 문서 |
 | 생성형 영상 | 프롬프트로 짧은 영상 클립을 만드는 모델 (Veo, Runway, Kling 등) | 설명용 B-roll 한정 |
 | 자동 더빙 | YouTube가 영상 음성을 다른 언어로 번역해 오디오 트랙을 만드는 기능 | 게시 후 선택 단계 |
 | 튜토리얼 | 도구 회사의 공식 도움말·강좌, 또는 검증된 제작자의 강의 영상 | 도구를 처음 쓸 때 20~30분 투자 |
@@ -45,7 +45,7 @@ flowchart LR
 |---|---|---|---|
 | Ask Studio | 아이디어, 댓글 요약, 분석 질문 | **이용 가능** (데스크톱 YouTube Studio) | YouTube 한국 블로그 (검색 결과로 확인) |
 | 영감 탭 | 아이디어 카드 제안 | 2026-08부터 단계적 종료 | YouTube 고객센터 (검색 결과로 확인) |
-| Edit with AI (Shorts) | 촬영본을 골라 음악·전환을 넣은 첫 편집본 | 한국 포함 발표 (2025-11), 일부 기기·크리에이터부터 | PPC Land, YouTube 커뮤니티 공지 |
+| Edit with AI (Shorts) | 촬영본을 골라 음악·전환을 넣은 첫 편집본. 발표 시점 기준 AI 보이스오버(영어·힌디어)도 넣는다 | 한국 포함 발표 (2025-11), 일부 기기·크리에이터부터 | PPC Land, YouTube 커뮤니티 공지 |
 | Gemini 대화형 편집 | 말이나 글로 지시하면 컷·전환·자막을 배치 | 2027년 초 한국·미국 등 14개국 도입 예정이라는 **보도** | ZDNet Korea, 2026-09-24 |
 | Veo 3 Fast (Shorts) | Shorts 카메라에서 8초 안팎의 AI 클립 생성 | **확인 안 됨**. 발표 지역은 미국·영국·캐나다·호주·뉴질랜드(2025-09), 이후 일부 중동·북아프리카 | YouTube 블로그, Google MENA 블로그 |
 | Dream Screen (Veo 2) | Shorts 배경·클립 생성 | **확인 안 됨**. 발표 지역은 미국·캐나다·호주·뉴질랜드 | YouTube 블로그, 2025-02 |
@@ -73,7 +73,7 @@ flowchart LR
 
 ### 5. 목소리: 내 목소리가 먼저다
 
-얼굴 없는 채널에서 목소리는 진행자다(「Shorts와 얼굴 없는 채널」). AI 음성은 **녹음 실수를 고치는 도구**로 먼저 쓰고, 전체 내레이션은 시험 옵션으로 둔다. 합성 음성의 표시와 요금제별 상업 이용 조건은 「AI 활용 제작과 플랫폼 정책」을 본다.
+얼굴 없는 채널에서 목소리는 진행자다(「Shorts와 얼굴 없는 채널」). 롱폼에서 틀린 단어는 **그 문장을 다시 녹음해** 고친다. AI 음성과 보이스 클로닝은 「롱폼 영상 기획과 제작」에서 정한 대로 Shorts 한 편에서만 시험하는 옵션이다. 합성 음성의 표시와 요금제별 상업 이용 조건은 「AI 활용 제작과 플랫폼 정책」을 본다.
 
 | 도구 (예시) | 한국어 | 특징 (2026-09, 검색 결과로 확인) | 튜토리얼 |
 |---|---|---|---|
@@ -83,13 +83,13 @@ flowchart LR
 | CLOVA Dubbing (클로바더빙) | 지원 | 네이버클라우드의 AI 보이스 더빙. 무료 이용 시 출처 표기·상업 조건을 약관에서 확인 | [재생목록 (한국어)](https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq) |
 | Supertone Play (수퍼톤 플레이) | 지원 | HYBE 계열 수퍼톤의 TTS. 2026-01 새 모델로 23개 언어 지원 발표 | [신모델 소개 (한국어)](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) |
 
-J의 기준: 본 영상은 본인 목소리로 녹음한다. 틀린 함수 이름 한두 단어는 다시 녹음하는 편이 가장 안전하고, 보이스 클로닝으로 고친 영상은 07 문서의 보수적 기준에 따라 변경·합성 콘텐츠 설정을 켠다.
+J의 기준: 본 영상은 본인 목소리로 녹음하고, 틀린 함수 이름은 그 문장만 다시 녹음한다. 보이스 클로닝은 Shorts 시험에만 쓰며, 보이스 클로닝으로 고친 영상은 어느 것이든 07 문서의 보수적 기준에 따라 변경·합성 콘텐츠 설정을 켠다.
 
 ### 6. 화면 녹화: 녹화는 사람이, 확대는 도구가
 
 | 도구 (예시) | 플랫폼 | AI·자동 기능 | 튜토리얼 |
 |---|---|---|---|
-| OBS Studio | Windows·macOS·Linux, 무료 | AI 기능은 없다. 설정이 안정적이고 오디오 트랙을 나눠 녹음 | [공식 Quick Start (영어)](https://obsproject.com/kb/quick-start-guide), [인프런 녹화 가이드 (한국어)](https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio), [OBS 사용법 영상 (한국어)](https://www.youtube.com/watch?v=XuAYjvxi0mE) |
+| OBS Studio | Windows·macOS·Linux, 무료 | AI 기능은 없다. 설정이 안정적이고 오디오 트랙을 나눠 녹음 | [공식 Quick Start (영어)](https://obsproject.com/kb/quick-start-guide), [OBS 사용법 영상 (한국어)](https://www.youtube.com/watch?v=XuAYjvxi0mE) |
 | Screen Studio | macOS 전용이라는 비교 글이 있다 | 클릭 위치 자동 확대, 커서 부드럽게 | 공식 사이트 주소를 검색 결과로 확인하지 못해 링크하지 않음 |
 | Loom | 브라우저·데스크톱 | 자막, 제목·요약·챕터 자동 생성, 군말 제거 | [Loom AI features (영어)](https://support.atlassian.com/loom/docs/loom-ai-features) |
 
@@ -104,7 +104,7 @@ J의 기준: 본 영상은 본인 목소리로 녹음한다. 틀린 함수 이�
 | Descript | 문서처럼 편집, AI 공동 편집자 Underlord, 음질 보정 | 한국어 전사 지원 언어에 포함된다는 제3자 리뷰 | [입문 6단계 (영어)](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started) |
 | Premiere Pro | 텍스트 기반 편집, 음성→텍스트 자막, Generative Extend, 미디어 인텔리전스 검색 | 구독형. 한국어 전사는 설치 버전에서 확인 | [Text-Based Editing (영어)](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html) |
 | DaVinci Resolve | 20: AI IntelliScript(대본으로 가편집), AI 애니메이션 자막, AI 오디오 어시스턴트. 21(2026-06 정식): AI 도구 추가 | AI 기능 상당수가 유료판(Studio) 기능이라는 보도 | [공식 트레이닝 (영어)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
-| YouTube Edit with AI | Shorts 촬영본으로 첫 편집본 | 한국 포함 발표, 순차 제공 | [도움말 (영어)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (영어)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
+| YouTube Edit with AI | Shorts 촬영본으로 첫 편집본. 발표 시점 기준 AI 보이스오버도 넣는다 — J는 끄거나, 남기면 합성 음성 표시 | 한국 포함 발표, 순차 제공 | [도움말 (영어)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (영어)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
 
 화면 녹화 강의에서 AI 편집이 가장 많이 틀리는 곳은 **함수 이름·메뉴 이름·숫자**다. "VLOOKUP"이 "브이 룩업"으로, "필터"가 "피터"로 받아 적히는 식이다. 자동 자막은 한 번에 일괄 수정할 단어 목록을 만들어 두면 빨라진다. 도구는 「롱폼 영상 기획과 제작」의 등급표처럼 **하나로 고정**한다.
 
@@ -114,14 +114,14 @@ J 같은 튜토리얼 채널에서 생성형 영상의 자리는 좁다. 실제 
 
 | 서비스 (예시) | 2026-09 상태 (검색 결과로 확인) | 링크 |
 |---|---|---|
-| Veo (Google) | Gemini 앱·Flow·API에서 Veo 3.1 제공. Flow는 2026-02 이후 140여 개국이라는 자료가 있으나 한국 포함은 확인 못 함 | [Veo 모델 소개](https://deepmind.google/models/veo/), [Flow 공개 (한국어)](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) |
+| Veo (Google) | Gemini 앱·Flow·API에서 Veo 3.1 제공. Flow가 140여 개국으로 확대됐다는 자료가 있으나 한국 포함은 확인 못 함 | [Veo 모델 소개](https://deepmind.google/models/veo/), [Flow 공개 (한국어)](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) |
 | Veo in Shorts | 위 표 참고. 한국 확인 안 됨 | [Made on YouTube 2025 도구 설명](https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/) |
-| Sora (OpenAI) | 앱·웹 2026-04-26 종료, API 2026-09-24 종료 예정으로 안내 | [종료 안내](https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation) |
+| Sora (OpenAI) | 앱·웹 2026-04-26 종료, API는 2026-09-24 종료로 안내 | [종료 안내](https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation) |
 | Runway | 무료 체험 크레딧과 월 구독. 생성 길이만큼 크레딧 차감 | [크레딧 도움말](https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work) |
 | Kling (Kuaishou) | 2026-02 3.0 공개 보도 | [공식 사이트](https://kling.ai/) |
 | Pika | 웹·앱 서비스 계속 | [공식 사이트](https://pika.art/) |
 
-**규칙 세 가지**: ① 실제 엑셀 화면처럼 보이는 가짜 화면은 만들지 않는다. ② 사실적인 사람·장소·사건 장면이면 변경·합성 콘텐츠를 표시한다(「AI 활용 제작과 플랫폼 정책」). ③ 생성 클립이 영상마다 반복되면 inauthentic content 위험이 커진다.
+**규칙 세 가지**: ① 실제 엑셀 화면처럼 보이는 가짜 화면은 만들지 않는다. ② 사실적인 사람·장소·사건 장면이면 변경·합성 콘텐츠를 표시한다(「AI 활용 제작과 플랫폼 정책」). ③ 생성 클립을 반복해 쓰는 것 자체는 문제가 아니다. 영상 전체가 같은 틀·같은 클립·바뀐 문장뿐이면 inauthentic content 쪽 위험이다 (「AI 활용 제작과 플랫폼 정책」).
 
 ### 9. 썸네일, 자막·더빙, 분석
 
@@ -145,12 +145,12 @@ J의 한 주 배분은 「원소스 멀티유즈(OSMU) 전략」의 기준표를
 | 녹화·음성 | OBS Studio + USB 마이크 | 없음 | 실제 파일로 녹화, 본인 목소리 녹음 | 1.5 |
 | 롱폼 편집 | Vrew | 자동 자막, 텍스트 컷, 무음 정리 | 함수 이름 교정, 확대 구간 편집 | 2.5 |
 | 썸네일 | Canva + Test & Compare | 배치 후보 | 문구 결정, 결과 화면 캡처 | 0.5 |
-| Shorts 3개 | Vrew 세로 재편집 (Edit with AI는 메뉴가 보이면 1개만 시험) | 구간 후보 | 결과형·실수형·질문형 선택 | 1.0 |
+| Shorts 3개 | Vrew 세로 재편집 (Edit with AI는 메뉴가 보이면 1개만 시험, AI 보이스오버는 끈다) | 구간 후보 | 결과형·실수형·질문형 선택 | 1.0 |
 | 게시 후 | YouTube 자동 자막 교정본 업로드, Ask Studio | 댓글 요약 | 다음 주제 메모 | 월요일 점검에 포함 |
 
 - **시험 규칙 (가정)**: 새 도구는 한 달에 하나만, Short 1개에서 시험한다. 4주 뒤 편집 시간과 시청 vs 스와이프 비율을 기존 방식과 비교해 남길지 정한다.
 - **쓰지 않는 것**: 생성형 영상으로 만든 엑셀 화면, 전체 AI 내레이션. AI 음성은 「롱폼 영상 기획과 제작」에서 정한 대로 Shorts 한 편의 시험 옵션으로만 쓴다.
-- **표시**: 본인 화면과 본인 목소리만 쓴 영상은 표시 대상이 아니다. AI 음성 Short와 사실적 생성 클립이 들어간 영상은 표시한다.
+- **표시**: 본인 화면과 본인 목소리만 쓴 영상은 표시 대상이 아니다. AI 음성 Short, 보이스 클로닝으로 고친 영상, 사실적 생성 클립이 들어간 영상은 표시한다.
 
 ## 심화
 
@@ -164,7 +164,7 @@ J의 한 주 배분은 「원소스 멀티유즈(OSMU) 전략」의 기준표를
 
 ### 도구 비용과 중단 위험
 
-Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존속 여부가 빠르게 바뀐다. 원본 녹화 파일, 대본, 자막 파일(.srt)을 **도구 밖에 보관**하면 도구를 바꿔도 작업이 남는다. 월 예산표와 요금제 비교는 「AI 제작 방법론: 프롬프트·검수·자동화」에서 다룬다.
+Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존속 여부가 빠르게 바뀐다. 원본 녹화 파일, 대본, 자막 파일(.srt)을 **도구 밖에 보관**하면 도구를 바꿔도 작업이 남는다. LLM·자동화 도구의 월 예산표는 「AI 제작 방법론: 프롬프트·검수·자동화」에 있다. 편집·음성 도구의 요금 메모는 이 문서의 표에 두고, 결제 전 공식 가격 페이지에서 확인한다.
 
 ## 흔한 오해
 

@@ -11,7 +11,7 @@ This document gathers **how to do the production craft from "Planning and Produc
 | Ask Studio | The conversational AI inside YouTube Studio. It answers with your channel data, comments and upload history | The default for the idea and analytics stages |
 | Inspiration tab | The Studio tab that suggested ideas, titles, thumbnails and outlines | Being phased out from 2026-08, replaced by Ask Studio |
 | Text-based editing | Editing where deleting or moving words in the transcript cuts the video with them | Cutting screen-recorded lessons |
-| Voice cloning | Building an AI voice from samples of your own voice | Only for fixing a few wrong words. Disclosure rules are in doc 07 |
+| Voice cloning | Building an AI voice from samples of your own voice | Only for a test on one Short. Wrong words in long-form are re-recorded. Disclosure rules are in doc 07 |
 | Generative video | Models that make short clips from a prompt (Veo, Runway, Kling and others) | Explanatory B-roll only |
 | Auto dubbing | YouTube translates a video's speech and creates an audio track in another language | An optional after-publish stage |
 | Tutorial | A vendor's official help or course, or a lesson video from a vetted creator | Invest 20-30 minutes when you first use a tool |
@@ -45,7 +45,7 @@ Before outside tools, check what YouTube Studio and the Shorts app already have.
 |---|---|---|---|
 | Ask Studio | Ideas, comment summaries, analytics questions | **Available** (desktop YouTube Studio) | YouTube Korea blog (confirmed via search results) |
 | Inspiration tab | Idea cards | Phased out from 2026-08 | YouTube Help (confirmed via search results) |
-| Edit with AI (Shorts) | A first cut from your footage with music and transitions | Announced including South Korea (2025-11), starting with some devices and creators | PPC Land, YouTube Community announcement |
+| Edit with AI (Shorts) | A first cut from your footage with music and transitions. As announced, it also adds an AI voice-over (English or Hindi) | Announced including South Korea (2025-11), starting with some devices and creators | PPC Land, YouTube Community announcement |
 | Gemini conversational editing | Places cuts, transitions and captions from spoken or typed instructions | **Reported** to reach 14 countries including Korea and the US in early 2027 | ZDNet Korea, 2026-09-24 |
 | Veo 3 Fast (Shorts) | Generates a clip of about 8 seconds in the Shorts camera | **Not confirmed**. Announced for the US, UK, Canada, Australia and New Zealand (2025-09), later some MENA countries | YouTube Blog, Google MENA blog |
 | Dream Screen (Veo 2) | Generates Shorts backgrounds and clips | **Not confirmed**. Announced for the US, Canada, Australia and New Zealand | YouTube Blog, 2025-02 |
@@ -73,7 +73,7 @@ The Inspiration tab (formerly the Research tab) is being phased out from 2026-08
 
 ### 5. Voice: your own voice comes first
 
-On a faceless channel the voice is the host ("Shorts and Faceless Channels"). Use AI voice **to fix recording mistakes** first, and keep full narration as a test option. Disclosure of synthetic voice and each plan's commercial-use terms are in "AI-assisted Production and Platform Policy".
+On a faceless channel the voice is the host ("Shorts and Faceless Channels"). In long-form, fix a wrong word by **re-recording that sentence**. AI voice and voice cloning stay a test option on one Short, as set in "Planning and Producing Long-form Video". Disclosure of synthetic voice and each plan's commercial-use terms are in "AI-assisted Production and Platform Policy".
 
 | Tool (example) | Korean | Notes (2026-09, confirmed via search results) | Tutorial |
 |---|---|---|---|
@@ -83,13 +83,13 @@ On a faceless channel the voice is the host ("Shorts and Faceless Channels"). Us
 | CLOVA Dubbing | Yes | Naver Cloud's AI voice dubbing. On the free tier, check attribution and commercial terms | [Playlist (Korean)](https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq) |
 | Supertone Play | Yes | TTS from Supertone, a HYBE company. A new model with 23 languages was announced in 2026-01 | [New model post (Korean)](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) |
 
-J's rule: record the main video in J's own voice. Re-recording one or two wrong function names is the safest fix, and a video fixed with voice cloning gets the altered or synthetic content setting under doc 07's conservative rule.
+J's rule: record the main video in J's own voice and re-record only the sentence with a wrong function name. Voice cloning is used only for Shorts tests, and any video fixed with voice cloning gets the altered or synthetic content setting under doc 07's conservative rule.
 
 ### 6. Screen recording: people record, tools zoom
 
 | Tool (example) | Platform | AI and automatic features | Tutorial |
 |---|---|---|---|
-| OBS Studio | Windows, macOS, Linux, free | No AI features. Stable settings and separate audio tracks | [Official Quick Start (English)](https://obsproject.com/kb/quick-start-guide), [Inflearn recording guide (Korean)](https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio), [OBS how-to video (Korean)](https://www.youtube.com/watch?v=XuAYjvxi0mE) |
+| OBS Studio | Windows, macOS, Linux, free | No AI features. Stable settings and separate audio tracks | [Official Quick Start (English)](https://obsproject.com/kb/quick-start-guide), [OBS how-to video (Korean)](https://www.youtube.com/watch?v=XuAYjvxi0mE) |
 | Screen Studio | Comparison posts say macOS only | Auto zoom on clicks, smoothed cursor | Not linked: the official site address did not appear in search results |
 | Loom | Browser and desktop | Captions, auto titles, summaries and chapters, filler-word removal | [Loom AI features (English)](https://support.atlassian.com/loom/docs/loom-ai-features) |
 
@@ -104,7 +104,7 @@ Auto zoom is especially useful when cutting vertical Shorts. But J decides the z
 | Descript | Edit like a document, the Underlord AI co-editor, audio cleanup | A third-party review lists Korean among transcription languages | [Six steps to start (English)](https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started) |
 | Premiere Pro | Text-based editing, speech-to-text captions, Generative Extend, media intelligence search | Subscription. Check Korean transcription in your installed version | [Text-Based Editing (English)](https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html) |
 | DaVinci Resolve | 20: AI IntelliScript (rough cut from a script), AI animated subtitles, AI Audio Assistant. 21 (final 2026-06): more AI tools | Reports say many AI features are in the paid Studio edition | [Official training (English)](https://www.blackmagicdesign.com/products/davinciresolve/training) |
-| YouTube Edit with AI | A first cut from Shorts footage | Announced including Korea, rolling out gradually | [Help (English)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (English)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
+| YouTube Edit with AI | A first cut from Shorts footage. As announced, it also adds an AI voice-over; J turns it off, or discloses synthetic voice if kept | Announced including Korea, rolling out gradually | [Help (English)](https://support.google.com/youtube/answer/16631240?hl=en-GB), [How-to Short (English)](https://www.youtube.com/shorts/1WW76Rz4nqM) |
 
 In screen-recorded lessons, AI editing gets **function names, menu names and numbers** wrong most often. "VLOOKUP" comes out as a phonetic spelling and "filter" as a similar-sounding word. Keep a list of words to batch-replace in auto captions. Stick to **one tool**, as in the tool tiers of "Planning and Producing Long-form Video".
 
@@ -114,14 +114,14 @@ On a tutorial channel like J's, generative video has a narrow place, because the
 
 | Service (example) | Status as of 2026-09 (confirmed via search results) | Link |
 |---|---|---|
-| Veo (Google) | Veo 3.1 in the Gemini app, Flow and the API. Sources say Flow reached about 140 countries after 2026-02, but Korea was not confirmed | [Veo model page](https://deepmind.google/models/veo/), [Flow launch (Korean)](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) |
+| Veo (Google) | Veo 3.1 in the Gemini app, Flow and the API. Sources say Flow expanded to about 140 countries, but Korea was not confirmed | [Veo model page](https://deepmind.google/models/veo/), [Flow launch (Korean)](https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/) |
 | Veo in Shorts | See the table above. Not confirmed in Korea | [Made on YouTube 2025 tools explained](https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/) |
-| Sora (OpenAI) | App and web closed 2026-04-26; the API is scheduled to end 2026-09-24 | [Discontinuation notice](https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation) |
+| Sora (OpenAI) | App and web closed 2026-04-26; the API was announced to end on 2026-09-24 | [Discontinuation notice](https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation) |
 | Runway | Trial credits and monthly plans. Credits are charged by generation length | [Credits help](https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work) |
 | Kling (Kuaishou) | Version 3.0 reported in 2026-02 | [Official site](https://kling.ai/) |
 | Pika | Web and app service continues | [Official site](https://pika.art/) |
 
-**Three rules**: (1) Never make fake screens that look like real spreadsheets. (2) Disclose realistic scenes of people, places or events as altered or synthetic content ("AI-assisted Production and Platform Policy"). (3) Reusing generated clips across videos raises the inauthentic-content risk.
+**Three rules**: (1) Never make fake screens that look like real spreadsheets. (2) Disclose realistic scenes of people, places or events as altered or synthetic content ("AI-assisted Production and Platform Policy"). (3) Reusing a generated clip is not a problem in itself. If whole videos are the same template, the same clips and only changed sentences, that is the inauthentic-content risk ("AI-assisted Production and Platform Policy").
 
 ### 9. Thumbnails, captions and dubbing, analytics
 
@@ -145,12 +145,12 @@ J's weekly split follows the baseline table in "One Source, Multi Use (OSMU) Str
 | Recording and voice | OBS Studio + USB microphone | None | Records with real files, records own voice | 1.5 |
 | Long-form editing | Vrew | Auto captions, text cuts, silence cleanup | Fixes function names, edits zoom sections | 2.5 |
 | Thumbnail | Canva + Test & Compare | Layout options | Chooses the words, captures the result screen | 0.5 |
-| Three Shorts | Vertical re-edit in Vrew (tries Edit with AI on one Short if the menu appears) | Segment candidates | Picks the result, mistake and question types | 1.0 |
+| Three Shorts | Vertical re-edit in Vrew (tries Edit with AI on one Short if the menu appears, with the AI voice-over off) | Segment candidates | Picks the result, mistake and question types | 1.0 |
 | After publishing | Corrected auto captions uploaded, Ask Studio | Comment summary | Notes the next topic | Included in the Monday review |
 
 - **Test rule (assumed)**: One new tool per month, tried on one Short. After four weeks, compare editing time and the viewed vs swiped away ratio with the old way before keeping it.
 - **Not used**: Spreadsheet screens made with generative video, full AI narration. AI voice stays a test option on one Short, as set in "Planning and Producing Long-form Video".
-- **Disclosure**: Videos with only J's own screen and voice are not in scope. Videos with an AI-voice Short or realistic generated clips are disclosed.
+- **Disclosure**: Videos with only J's own screen and voice are not in scope. AI-voice Shorts, videos fixed with voice cloning and videos with realistic generated clips are disclosed.
 
 ## Going Deeper
 
@@ -164,7 +164,7 @@ At Made On YouTube 2026 on 2026-09-23, YouTube announced conversational editing,
 
 ### Tool costs and shutdown risk
 
-As the Sora app and web closing in 2026-04 shows, AI tools change plans and even disappear quickly. Keep raw recordings, scripts and caption files (.srt) **outside the tool**, so the work survives a tool change. The monthly budget table and plan comparison are in "An AI Production Method: Prompts, Review and Automation".
+As the Sora app and web closing in 2026-04 shows, AI tools change plans and even disappear quickly. Keep raw recordings, scripts and caption files (.srt) **outside the tool**, so the work survives a tool change. The monthly budget table for LLM and automation tools is in "An AI Production Method: Prompts, Review and Automation". Pricing notes for editing and voice tools stay in this document's tables; check the official pricing page before paying.
 
 ## Common Misconceptions
 
