@@ -100,7 +100,7 @@ The figures and calculations are in "Ad Revenue: AdPost and the YouTube Partner 
 
 ## Applied: Example Creator J's Three Shorts
 
-Each week J uploads one 8 to 12 minute long-form lecture (for example "Clean up duplicate spreadsheet data in one go with AI") and makes three Shorts from it. Assume about 1.5 of J's 10 weekly hours go to Shorts.
+Each week J uploads one 8 to 12 minute long-form lecture (for example "Remove Duplicates in Excel in One Go — 3 Methods Compared") and makes three Shorts from it. Assume about 1 of J's 10 weekly hours goes to Shorts.
 
 | Short | Content | First 1-2 seconds | Link |
 |---|---|---|---|
@@ -108,7 +108,7 @@ Each week J uploads one 8 to 12 minute long-form lecture (for example "Clean up 
 | 2 Mistake | One common beginner mistake and the fix | The error message on screen | Related video: this week's long-form |
 | 3 Question | Answering a comment from last week | A screenshot of the comment | Related video: the long-form the question came from |
 
-- Recording: mark the zoom areas while recording the long-form, then record the Shorts segments once more in vertical.
+- Recording: mark the zoom areas while recording the long-form, then re-crop those segments to vertical and zoom in. Re-recording in vertical is chosen only when the text is still too small.
 - Voice: J's own voice by default. An AI voice is tested on one Short only, and the decision follows a comparison of viewed vs swiped away and comments against Shorts in J's own voice.
 - Decision rule (assumption): after 12 Shorts over 4 weeks, compare each Short's viewed share and the long-form views that came via the related video link, then make more of the types that worked.
 
