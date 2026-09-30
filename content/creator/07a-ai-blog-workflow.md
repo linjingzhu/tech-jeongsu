@@ -207,7 +207,7 @@ AI에게 "검색량이 많은 키워드를 알려 줘"라고 묻지 않는다. �
 - [Enable and use web search](https://support.claude.com/en/articles/10684626-enable-and-use-web-search), [Use research on Claude](https://support.claude.com/en/articles/11088861-use-research-on-claude) — Claude 도움말
 
 **초안 도구와 강좌**
-- [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) — Claude 도움말; [Introduction to projects](https://academy.claude.com/courses/claude-101/introduction-to-projects) — Claude Academy; [Styles](https://www.anthropic.com/news/styles) — Anthropic; [Anthropic YouTube 채널](https://www.youtube.com/@anthropic-ai)
+- [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) — Claude 도움말; [Introduction to projects](https://academy.claude.com/courses/claude-101/introduction-to-projects) — Claude Academy; Styles(링크 없음: 원래 공지 주소가 2026-09-30 기준 404) — Anthropic; [Anthropic YouTube 채널](https://www.youtube.com/@anthropic-ai)
 - [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) — OpenAI 도움말; [Writing with ChatGPT](https://openai.com/academy/writing/) — OpenAI Academy; [Using custom GPTs](https://openai.com/academy/custom-gpts/) — OpenAI Academy (맞춤형 GPT는 단계적 종료 중)
 - [Gemini 앱에서 Gem 시작하기](https://support.google.com/gemini/answer/15236321?hl=ko) — Gemini 앱 고객센터
 - [Google AI Essentials](https://grow.google/ai-essentials/) — Grow with Google 입문 강좌

@@ -209,7 +209,7 @@ Every link was confirmed in search results on 2026-09-30 (not opened directly).
 - [Make my voice AI](https://vrew.ai/ko/feature/ai-voice/) — Vrew (Korean); [Korean Text to Speech](https://elevenlabs.io/text-to-speech/korean), [Text to Speech docs](https://elevenlabs.io/docs/overview/capabilities/text-to-speech) — ElevenLabs; [ElevenLabs Tutorial for Beginners](https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/) — Kevin Stratvert, 2026-07-21
 - [How to use the Typecast AI voice actors](https://typecast.ai/kr/learn/how-to-use-typecast/) — Typecast (Korean); [Typecast, a leader in AI voice-actor content production](https://www.mstoday.co.kr/news/articleView.html?idxno=101040) — MS TODAY (Korean), 2026-04
 - [CLOVA Dubbing](https://www.ncloud.com/product/aiService/clovaDubbing) — Naver Cloud; [CLOVA Dubbing playlist](https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq) — YouTube (Korean)
-- [Supertone Play unveils a new TTS model](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) — Supertone (Korean); [Supertone Play](https://play.supertone.ai/)
+- [Supertone Play unveils a new TTS model](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) — Supertone (Korean)
 
 **Recording and editing**
 - [Quick Start Guide](https://obsproject.com/kb/quick-start-guide) — OBS; [Screen recording with OBS Studio](https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio) — Inflearn instructor guide (Korean); [How to use OBS Studio](https://www.youtube.com/watch?v=XuAYjvxi0mE) — YouTube (Korean)

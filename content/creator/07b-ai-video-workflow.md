@@ -209,7 +209,7 @@ Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존�
 - [내 목소리 AI 만들기](https://vrew.ai/ko/feature/ai-voice/) — Vrew; [Korean Text to Speech](https://elevenlabs.io/text-to-speech/korean), [Text to Speech 문서](https://elevenlabs.io/docs/overview/capabilities/text-to-speech) — ElevenLabs; [ElevenLabs Tutorial for Beginners](https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/) — Kevin Stratvert, 2026-07-21
 - [인공지능 성우 타입캐스트 사용법](https://typecast.ai/kr/learn/how-to-use-typecast/) — Typecast; [AI 성우 활용 콘텐츠 제작의 강자 '타입캐스트'](https://www.mstoday.co.kr/news/articleView.html?idxno=101040) — MS TODAY, 2026-04
 - [CLOVA Dubbing](https://www.ncloud.com/product/aiService/clovaDubbing) — 네이버클라우드; [CLOVA Dubbing 재생목록](https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq) — YouTube (한국어)
-- [수퍼톤 플레이 TTS 신모델 공개](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) — Supertone; [Supertone Play](https://play.supertone.ai/)
+- [수퍼톤 플레이 TTS 신모델 공개](https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual) — Supertone
 
 **녹화와 편집**
 - [Quick Start Guide](https://obsproject.com/kb/quick-start-guide) — OBS; [OBS Studio로 화면 녹화하기](https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio) — 인프런 지식공유자 가이드; [OBS Studio 사용법](https://www.youtube.com/watch?v=XuAYjvxi0mE) — YouTube (한국어)

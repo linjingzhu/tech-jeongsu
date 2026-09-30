@@ -207,7 +207,7 @@ Every link was confirmed in search results on 2026-09-30 (not opened directly).
 - [Enable and use web search](https://support.claude.com/en/articles/10684626-enable-and-use-web-search), [Use research on Claude](https://support.claude.com/en/articles/11088861-use-research-on-claude) — Claude Help Center
 
 **Drafting tools and courses**
-- [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) — Claude Help Center; [Introduction to projects](https://academy.claude.com/courses/claude-101/introduction-to-projects) — Claude Academy; [Styles](https://www.anthropic.com/news/styles) — Anthropic; [Anthropic YouTube channel](https://www.youtube.com/@anthropic-ai)
+- [What are projects?](https://support.claude.com/en/articles/9517075-what-are-projects) — Claude Help Center; [Introduction to projects](https://academy.claude.com/courses/claude-101/introduction-to-projects) — Claude Academy; Styles (no link: the original announcement URL returns 404 as of 2026-09-30) — Anthropic; [Anthropic YouTube channel](https://www.youtube.com/@anthropic-ai)
 - [Projects in ChatGPT](https://help.openai.com/en/articles/10169521-projects-in-chatgpt) — OpenAI Help Center; [Writing with ChatGPT](https://openai.com/academy/writing/) — OpenAI Academy; [Using custom GPTs](https://openai.com/academy/custom-gpts/) — OpenAI Academy (custom GPTs are being retired)
 - [Get started with Gems in the Gemini app](https://support.google.com/gemini/answer/15236321?hl=ko) — Gemini Apps Help (Korean)
 - [Google AI Essentials](https://grow.google/ai-essentials/) — Grow with Google introductory course
