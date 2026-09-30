@@ -109,14 +109,15 @@ J's split of the 10 weekly hours is a starting assumption; actual times are meas
 
 | Task | Hours per week (assumption) |
 |---|---|
-| Outline and research | 1.5 |
-| Screen and voice recording | 2 |
-| Long-form editing (with AI help) | 3 |
-| Blog post from the same outline | 2 |
-| Cutting 3 Shorts | 1 |
-| Replies, neighbours, product prep | 0.5 |
+| Research, outline and script | 2.0 |
+| Screen and voice recording | 1.5 |
+| Long-form editing and thumbnail (with AI help) | 3.0 |
+| Blog post from the same outline | 2.0 |
+| Cutting 3 Shorts | 1.0 |
+| Community (replies, neighbours) | 0.5 |
+| Total | 10 |
 
-By D90 J will have made 13 long-form videos, 39 Shorts and at least 13 blog posts. What J checks at D90 is not revenue but **which topics' posts and videos got a response in search and recommendations, and how many people took the free template**.
+Over 13 weeks J makes 13 long-form videos, 39 Shorts (38 published by D90) and 13 blog posts. What J checks at D90 is not revenue but **which topics' posts and videos got a response in search and recommendations, and how many people took the free template**.
 
 ## Going Deeper
 
@@ -137,12 +138,12 @@ Converting watch hours into views shows the scale. **Assuming** an average view 
 - 8,000 hours → about 120,000 views. About 2,300 views per video on average.
 - 20M Shorts views in 90 days → about 222,000 views a day on average.
 
-J's D90 (2027-01-03) falls before the change, but reaching the old 4,000-hour bar before 2027-01-31 would take about 60,000 cumulative views in the first 4 months. So J **plans against the new bar (1,000 subscribers + 8,000 hours)**. In the illustrative model in "Ad Revenue: AdPost and the YouTube Partner Program" (monthly views growing steadily; not a forecast), the fan-funding tier arrives in month 7–14 and the ads tier in month 11–26. No scenario reaches the fan-funding tier by D90. Meanwhile J looks to products for revenue. AdPost has no official numeric bar; it is described as reviewing activity and suitability together, including operating period, public content count and visitor numbers. The widely repeated "90 days open, 50 posts, 100 visitors a day" is not an official bar (confirmed via search results).
+J's D90 (2027-01-03) falls before the change, but reaching the old 4,000-hour bar before 2027-01-31 would take about 60,000 cumulative views in the first 4 months. So J **plans against the new bar (1,000 subscribers + 8,000 hours)**. In the illustrative model in "Ad Revenue: AdPost and the YouTube Partner Program" (monthly views growing steadily; not a forecast), the fan-funding tier arrives in month 7–14 and the ads tier in month 11–26. No scenario reaches the fan-funding tier by D90. Meanwhile J looks to products for revenue. AdPost is described as reviewing operating period, public content count, visitor numbers and more together, but no numeric bar could be confirmed in the official help. The widely repeated "90 days, 50 posts, 100 visitors" is folklore not confirmed on any official page (confirmed via search results).
 
 ### The Distribution of Outcomes
 
 - A study of a random sample of YouTube channels (Bärtl, 2018) found that **the top 3% of channels took 85% of views**.
-- According to National Tax Service data (reported from a National Assembly release in 2026-02), 34,806 people reported one-person media creator income for tax year 2024, averaging about KRW 71 million each. The top 1% (348 people) averaged about KRW 1.29 billion; the bottom 50% (17,404 people) averaged about KRW 24.63 million.
+- According to National Tax Service data (reported from a National Assembly release in 2026-02), 34,806 people reported one-person media creator income for tax year 2024, averaging about KRW 71 million each. The top 1% (348 people) averaged about KRW 1.29 billion; the bottom 50%, reported as 17,404 people, averaged about KRW 24.63 million.
 
 Both figures describe **those who already had results**. The tax figures are gross receipts before expenses and include only people who had income to report. Channels that started and quit without income are not counted. Think of the median rather than the mean, and of the people missing from the denominator.
 
@@ -156,7 +157,7 @@ Affiliate commissions and brand sponsorships are possible but are not the focus 
 - **"Ads first, products later"** — The ad gates open late. Product potential is already decided when you choose the topic.
 - **"Pass 1,000 subscribers and you are monetized"** — You also need the watch-hour or Shorts-view bar, and channels applying from 2027-02-01 need 8,000 hours or 20M Shorts views. The 500-subscriber fan-funding tier has no ad revenue sharing.
 - **"The average YouTuber earns KRW 71 million, so I will too"** — That is the average of people who had income to report. The top 1% pulls the average up.
-- **"AdPost approves you at 90 days and 50 posts"** — There is no official numeric bar. Activity and suitability are reviewed together.
+- **"AdPost approves you at 90 days and 50 posts"** — No numeric bar could be confirmed in the official help. It is folklore not confirmed on any official page.
 
 ## Self-Check Questions
 

@@ -27,7 +27,7 @@ Both revenue engines from "Blog & YouTube Monetization Overview" start with the 
 | Monetization path | Does this reader spend money to save time? Do advertisers want this reader? | Whether similar paid products are selling, whether search ads run on the keywords |
 | Sustainability | Can you think of sub-problems for 50 posts and videos? Will the topic still interest you in a year? | The number of individual items in a draft topic tree |
 
-If any of the four is zero, the topic is out. Big demand without an edge loses to competitors; an edge without a monetization path becomes a hobby. Subjective scores are fine. What matters is **comparing all four criteria in the same table**.
+Score each criterion 1–5; if any of the four scores 1 (effectively absent), the topic is out. Big demand without an edge loses to competitors; an edge without a monetization path becomes a hobby. Subjective scores are fine. What matters is **comparing all four criteria in the same table**.
 
 ### Checking Demand on Naver
 
@@ -92,7 +92,7 @@ J put three candidates in one table and scored them 1–5. The scores are **J's 
 |---|---|---|---|---|---|
 | Work automation with spreadsheets and AI tools | 4 | 4 (daily work) | 5 (templates, courses) | 4 | Chosen |
 | Commute reading log | 3 | 3 | 2 | 4 | On hold: weak monetization path |
-| Latest AI news round-up | 4 | 2 | 2 | 2 | Out: weak edge and sustainability; repetitive summaries carry policy risk |
+| Latest AI news round-up | 4 | 1 | 2 | 2 | Out: edge scores 1 (effectively absent), weak sustainability; repetitive summaries carry policy risk |
 
 J checks demand during the week before D0. Numbers are read from the tools and written down; this document does not invent example figures.
 
@@ -148,7 +148,7 @@ After D90, revisit the topic or persona if these overlap: most posts and videos 
 
 ## Self-Check Questions
 
-1. Why is a topic that scores zero on any of the four criteria dropped? Give an example.
+1. Why is a topic that scores 1 (effectively absent) on any of the four criteria dropped? Give an example.
 2. In DataLab search trends, keyword A shows 100 and keyword B shows 50. What can and cannot you conclude from this?
 3. How does the difference in "moment of arrival" between blog readers and YouTube viewers change the opening of a post versus a video?
 4. Write one pillar, three clusters and six individual pieces for your topic. Which items could lead to a product?
