@@ -45,10 +45,10 @@ As an office worker, J makes the source on the weekend, then finishes and publis
 |---|---|---|---|
 | Sat | 3.5 | Pick the topic from comments and search terms, research and example files, outline, check the AI script draft, screen recording and voice | Source package |
 | Sun | 3 | Long-form editing, thumbnail, title | Long-form (scheduled for Tuesday) |
-| Mon | 1 | Blog draft and captures from the same outline | Blog draft |
+| Mon | 1.25 | Weekly metrics review (last week's posts, 15 min), blog draft and captures from the same outline | Weekly log, blog draft |
 | Tue | 1 | Finish the blog post, embed the video | Blog post (scheduled for Wednesday) |
 | Wed | 1 | Cut 3 Shorts from the long-form video and link it as the related video | 3 Shorts (scheduled for Thu, Sat, Mon) |
-| Thu | 0.5 | Pinned comment and community post, collect questions, one line of weekly metrics | Weekly log |
+| Thu | 0.25 | Pinned comment and community post, collect questions | Question list |
 
 The blog post and the video come from the same outline ("one outline, two outputs"). In phases 2 and 3, trim Saturday's source time and Sunday's editing time and add 1-1.5 hours of product work at the end of Sunday.
 
@@ -85,8 +85,8 @@ Weeks are counted by publishing week. J makes the W1 source on the weekend just 
 | W5 | 2026-11-02 (D30 is 11-04) | Monthly reports with pivot tables | D30 review |
 | W6 | 2026-11-09 (D35) | Merging many files with Power Query | Open the paid template pack waitlist |
 | W7 | 2026-11-16 | Q&A from comment questions | Pack contents and how-to video plan |
-| W8 | 2026-11-23 (D49) | Template pack preview tutorial | Start a 2-week pre-sale |
-| W9 | 2026-11-30 (D60 is 12-04) | A dashboard with conditional formatting | D60 review, close the pre-sale |
+| W8 | 2026-11-23 (D49) | Template pack preview tutorial | Open the pre-sale (D49-D60, about 12 days) |
+| W9 | 2026-11-30 (D60 is 12-04) | A dashboard with conditional formatting | Close and judge the pre-sale at the D60 review |
 | W10 | 2026-12-07 (D63) | How to use the template pack | Deliver to pre-sale buyers |
 | W11 | 2026-12-14 | Turning meeting notes into tables with AI | Improve from buyer questions, record one spare source in advance |
 | W12 | 2026-12-21 | Year-end work review sheet | Switch to regular sales, draft the e-book outline |
@@ -99,7 +99,7 @@ Office schedules tend to pile up at year end, so J records a spare source in W11
 | When | Output target | Leading metrics to watch | Decision |
 |---|---|---|---|
 | D30 (2026-11-04) | 5 long-form, 5 blog posts, 12 Shorts, free template published | Impressions CTR and average percentage viewed per video, blog search terms, template contacts | Decide only whether to cut scope. Too early to judge the topic |
-| D60 (2026-12-04) | Cumulative 9 long-form, 9 blog posts, 25 Shorts, pre-sale under way | Number of distinct people asking questions, 4-week trends, waitlist size | Apply the full decision rules. Check the pre-sale bar (10 in 2 weeks, assumption) |
+| D60 (2026-12-04) | Cumulative 9 long-form, 9 blog posts, 25 Shorts, pre-sale under way | Number of distinct people asking questions, 4-week trends, waitlist size | Apply the full decision rules. Judge the pre-sale: 10 sales in about 12 days, D49-D60 (assumption) |
 | D90 (2027-01-03) | Cumulative 13 long-form, 13 blog posts, 38 Shorts (W13's Monday Short falls on D91), template pack delivered | Buyer questions, top blog posts by search traffic, videos that convert viewers to subscribers | Decide the next 90 days' topic, format and product (whether to open an e-book waitlist) |
 
 The cumulative counts assume long-form on Tuesdays, the blog on Wednesdays and Shorts on Thursdays, Saturdays and Mondays. Over all 13 weeks the totals match the "13 long-form videos, 39 Shorts and 13 blog posts" in "Blog & YouTube Monetization Overview"; only the last Short goes out the day after D90 (2027-01-04).
@@ -108,7 +108,7 @@ Ads: plan ad revenue inside the 90 days at KRW 0. Applying for Naver AdPost and 
 
 ### Timing the first product launch
 
-J publishes a free template at D14 to collect contacts, then takes the paid template pack through **a waitlist at D35, a pre-sale at D49 and delivery at D63**. J sells no paid product before D30, because there is no basis for selling yet (repeated questions from different people). Before D49, check whether mail-order registration and business registration apply, and put the refund terms on the sales page ("Disclosure, Copyright and Tax", "Own Products: Courses, E-books and Templates").
+J publishes a free template at D14 to collect contacts, then takes the paid template pack through **a waitlist at D35, a pre-sale from D49 to D60 (judged at the D60 review) and delivery at D63**. J sells no paid product before D30, because there is no basis for selling yet (repeated questions from different people). Before D49, check whether mail-order registration applies, and talk to a tax accountant before business registration. Template sales are a taxable supply, so a 940306 VAT-exempt registration alone may not be enough, and a mixed registration with VAT filing may be needed ("Disclosure, Copyright and Tax"). Put the refund terms on the sales page ("Own Products: Courses, E-books and Templates").
 
 ### Risks, and what to stop
 
@@ -131,7 +131,7 @@ Once the schedule is stable, record two sources at once every other week (batchi
 ### After 90 days: what to carry into the next plan
 
 - The common topic of the top 5 blog posts by search traffic and the top 3 videos by subscriber conversion → the next 90 days' topic
-- The list of buyer questions and the 12 outlines → the e-book outline (how to bundle them is in "One Source, Multi Use (OSMU) Strategy")
+- The list of buyer questions and the 12 outlines from W1-W12 (W13 is left out because it falls just before D90) → the e-book outline (how to bundle them is in "One Source, Multi Use (OSMU) Strategy")
 - The actual weekly time log → the next time budget
 - The distance left to the ad thresholds → a realistic date estimated with the calculation in "Ad Revenue: AdPost and the YouTube Partner Program"
 

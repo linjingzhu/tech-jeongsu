@@ -41,7 +41,7 @@ The rules for splitting one piece of content into a blog post, a video, Shorts a
 ### 3. Validate before you build
 
 1. **Waitlist**: post one paragraph about the product and a draft outline, and open a "notify me at launch" form. Sign-ups are the upper bound of interest.
-2. **Pre-sale**: open a payment link at an early-bird price. If it misses the bar (for example 10 sales in 2 weeks, an assumption), refund everyone in full and change the topic or format.
+2. **Pre-sale**: open a payment link at an early-bird price. If it misses the bar (for example 10 sales in a pre-sale window of about 12 days, an assumption), refund everyone in full and change the topic or format.
 3. **Minimum delivery**: deliver to pre-sale buyers first, then strengthen the full edition with the questions they send.
 
 The rate at which waitlist sign-ups turn into payments varies widely by product, so no published benchmark is used here. Use your own list's actual rate as the first baseline. A pre-sale is still subject to the E-Commerce Act's disclosure and refund duties (section 7 below).
@@ -60,7 +60,7 @@ Pricing theory follows "Paid Sales, Subscriptions and Pricing". Only the points 
 | Kmong | Tiered service fee by sale amount: 16.4% (up to KRW 700,000), 9.4%, 4.4%, plus a 3.3% payment network fee, plus 10% VAT on both fees. May differ by category | Low: product review, limited access to buyer contacts | E-books, templates, consulting |
 | Class101 | Subscription (CLASS101+) classes are paid out by share of watch time, with a settlement rate that differs by contract plan. Individually sold classes are confirmed for settlement 90 days after the buyer starts (creator guide, confirmed via search results) | Low: production and scheduling negotiated, delayed settlement | VOD courses |
 | Taling | About 20% brokerage commission on e-books and VOD (reports and comparison articles), with 3.3% income tax withheld at settlement. Deductions differ by format | Medium: review, a reported minimum length for e-books | E-books, VOD, one-day classes |
-| Naver Smart Store | Naver Pay order-management fee of about 1.98-3.63% by revenue tier, plus a 2.73% sales fee (0.91% for traffic from marketing links; reorganized 2025-06-02, reported as excluding VAT) | High: buyer data, coupons, reviews | Template packs, e-books (check the seller center for how digital goods can be listed) |
+| Naver Smart Store | Naver Pay order-management fee of about 1.98-3.63% by revenue tier (appears to include VAT, not verified), plus a 2.73% sales fee (0.91% for traffic from marketing links, reported as excluding VAT; reorganized 2025-06-02) | High: buyer data, coupons, reviews | Template packs, e-books (check the seller center for how digital goods can be listed) |
 | Own site plus a domestic PG | 3.4% on ordinary cards, with sign-up and annual fees on top (comparison data in "Paid Sales, Subscriptions and Pricing") | Highest: list, prices and updates are all yours | Courses, bundles, subscriptions |
 | Overseas MoR (Paddle, Gumroad) | Paddle 5% + 50 cents; Gumroad 10% + 50 cents (plus card processing, and 30% on marketplace sales) | High, with overseas tax handled for you | English-language templates and e-books |
 
@@ -101,7 +101,7 @@ This is the ladder for J (work automation with spreadsheets and AI tools, 10 hou
 | Rung | Product | When | Price (assumption) | Channel | Validation bar (assumption) |
 |---|---|---|---|---|---|
 | 0 | Free "weekly work report automation sheet" | D14 (2026-10-19) | KRW 0 | Blog notice post plus form | 150 contacts by D60 |
-| 1 | Paid template pack (8 sheets plus how-to videos) | Waitlist D35, pre-sale D49, delivery D63 | List KRW 14,900, early bird KRW 9,900 | Smart Store or Kmong | 10 pre-sales in 2 weeks |
+| 1 | Paid template pack (8 sheets plus how-to videos) | Waitlist D35, pre-sale D49-D60, delivery D63 | List KRW 14,900, early bird KRW 9,900 | Smart Store or Kmong | 10 pre-sales in the window (D49-D60, about 12 days) |
 | 2 | E-book "Cut repetitive work with Excel and AI" | Waitlist after D90 | KRW 29,000 | Taling or own site | Survey of template buyers |
 | 3 | VOD course | Outside the 90-day plan (review only) | TBD | Class101 offer or own site | E-book sales trend |
 
@@ -110,13 +110,13 @@ This is the ladder for J (work automation with spreadsheets and AI tools, 10 hou
 ```text
 Kmong (first tier 16.4% + payment network 3.3%, 10% VAT on fees):
   14,900 × (0.164 + 0.033) × 1.1 = KRW 3,229 → net about KRW 11,671
-Smart Store (order management 1.98% small-business tier + marketing-link sales fee 0.91% with VAT → 1.001%):
+Smart Store (both fees made VAT-inclusive: order management 1.98% small-business tier assumed to include VAT, sales fee 0.91% × 1.1 = 1.001%):
   14,900 × (0.0198 + 0.01001) = KRW 444 → net about KRW 14,456
 Own site + PG (3.4%):
   14,900 × 0.034 = KRW 507 → net about KRW 14,393, before PG sign-up and annual fees
 ```
 
-Ten pre-sales come to about KRW 140,000 on Smart Store. J's conclusion: for the first product the bottleneck is not the fee but **the time to set up the channel**. J puts Smart Store first, because J keeps the buyer list, and if the pre-sale misses the bar, tests once more with Kmong's marketplace exposure. An own site with PG sign-up fees waits until annual volume is known.
+Ten pre-sales at the early-bird price of KRW 9,900 come to about KRW 96,000 on Smart Store (10 × 9,900 × (1 − 0.02981)). J's conclusion: for the first product the bottleneck is not the fee but **the time to set up the channel**. J puts Smart Store first, because J keeps the buyer list, and if the pre-sale misses the bar, tests once more with Kmong's marketplace exposure. An own site with PG sign-up fees waits until annual volume is known.
 
 Bad example:
 
@@ -154,7 +154,7 @@ Marketplace sales often do not let the seller freely use buyer contacts. To move
 
 1. With 2,000 monthly visitors, 0.8% conversion (assumption) and a KRW 19,000 price, what is monthly revenue? What RPM would ads need to earn the same?
 2. "Please send the file" has appeared three times in the comments. What else would you check before treating it as a product signal?
-3. You set the pre-sale bar at "10 in 2 weeks" and got 6. Name two next actions.
+3. You set the pre-sale bar at "10 in 12 days" and got 6. Name two next actions.
 4. Explain whether to sell your first template pack on Kmong or Smart Store, using fees, traffic and list ownership.
 5. To state a withdrawal restriction on a PDF e-book's sales page, what measure must you take alongside it?
 

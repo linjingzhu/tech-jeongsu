@@ -40,7 +40,7 @@ The KFTC Guidelines on Endorsement and Recommendation Advertising require an end
 - **Video**: the KFTC handbook's examples disclose by voice or caption **at the start and the end** of the video and, in long videos, **repeat** the disclosure with captions (example: every 5 minutes). For live streams, the examples repeat it so viewers who join midway can see it, and put the sponsorship in the stream title (confirmed via search results).
 - **Form**: text in a size and color that stands out from the background, and audio that can be understood without adjusting volume or speed. Place the disclosure close to the endorsement itself.
 - **Wording**: state the consideration plainly, e.g. "Ad", "Sponsored", "Written after receiving the product free from [brand]". The 2024 revision added conditional or vague wording such as "may receive a small commission" as an example of inappropriate disclosure.
-- **AI virtual humans**: under the revision in force from 2026-06-01, when a virtual human made with generative AI endorses something, you must disclose that it is a "virtual human". In text media, put it in the title or opening; in video, show it near the virtual human while it appears.
+- **AI virtual humans**: under the revision in force from 2026-06-01, when a virtual human made with generative AI endorses something, you must disclose that it is a "virtual human". In text media, put it in the title or opening; in video, show it near the virtual human while it appears (KFTC press release and press reports, confirmed via search results).
 
 ### 3. YouTube's paid promotion checkbox
 
@@ -90,7 +90,8 @@ flowchart TD
 | Simple expense rate threshold (prior-year revenue) | Under KRW 36 million (information services group, confirmed via search results) | Under KRW 24 million (personal services group, confirmed via search results) |
 | 2026 change | Added to the industries that must file a cash sales statement (commentary says from returns filed after 2026-04, confirmed via search results) | No such report |
 
-- **AdPost income**: for individual members, Naver is reported to withhold tax as **other income** before paying (many sources describe it as 8.8%), while business members issue an electronic tax invoice and are paid against it. But a platform's withholding category does not settle the income category under tax law. Tax commentary says continuous and repeated income is in principle business income, so once the income grows, decide with a tax accountant on switching to a business membership and on the income category.
+- **Template sales are separate from 940306**: the 940306 exemption covers personal services that supply content to a video platform. Selling template files is generally treated as a VAT-taxable supply. For e-books, some sources say an e-publication with an ISBN or ECN may count as a tax-exempt book, but the requirements need to be confirmed. So once J starts selling templates, a 940306 VAT-exempt registration alone may not be enough. J may need to register as a mixed business with a taxable code (for example e-commerce retail) and file VAT, so confirm with a tax accountant before registering.
+- **AdPost income**: for individual members, Naver is reported to withhold tax as **other income** before paying (many sources describe it as 8.8%), while business members are reported to issue an (electronic) tax invoice if they are a taxable business, or a VAT-exempt invoice if they are a VAT-exempt business, and are paid against it (confirmed via search results). But a platform's withholding category does not settle the income category under tax law. Tax commentary says continuous and repeated income is in principle business income, so once the income grows, decide with a tax accountant on switching to a business membership and on the income category.
 - **Global income tax**: income for January to December is filed in **May** of the following year (June for those subject to the faithful-filing confirmation). If other income is KRW 3 million or less a year, you may choose separate taxation. Tax already withheld is settled in the return. Rates and bookkeeping are in "Income Tax · Corporate Tax · Withholding · Books".
 - **Records**: keep monthly platform statements (YouTube/AdSense payments, AdPost settlements), foreign-currency deposit records, receipts for equipment, software, fonts and stock, and license screenshots in one folder. A separate business bank account makes the books and evidence easier.
 
@@ -104,11 +105,11 @@ J is an office worker who makes faceless Excel and AI tool lessons with screen r
 | D0 | Start an asset log: font name and license URL, music track name and license type, screenshot guidelines | Copyright |
 | First AI tool review | If the vendor gave free credits: "[Sponsored]" at the start of the blog title, captions at the start and end of the video, paid promotion ticked | Endorsement guidelines |
 | First affiliate link | Right above the link: "If you buy through this link, J earns a commission" | Ban on vague wording |
-| First paid sale (pre-sale at D49) | Check whether mail-order registration applies and consider business registration (no facilities → 940306 is a candidate; template sales need a separate industry review) | "Registration · Mail-Order Sales" |
-| 2027-02-10 | If registered as VAT-exempt, file the business status report for 2026 | NTS |
+| Before the first paid sale (before the pre-sale opens at D49) | Check whether mail-order registration applies. Talk to a tax accountant before business registration: video income alone makes 940306 a candidate, but template sales are a taxable supply, so a mixed registration with a taxable code and VAT filing may be needed | "Registration · Mail-Order Sales", "VAT · Zero Rate · Tax Invoices" |
+| 2027-01-25 / 2027-02-10 | If a taxable code was also registered, file the VAT return for the second half of 2026 (January 25); if only a VAT-exempt code was registered, file the business status report for 2026 (February 10) | NTS |
 | 2027-05 | File global income tax for October-December 2026 income together with wage income | Income Tax Act |
 
-> J's template and e-book sales are not "supplying content to a video platform". Apart from the creator industry code, check with a tax accountant whether to add a secondary code such as e-commerce retail, and whether those sales are taxable (to be confirmed).
+> J's template sales are not "supplying content to a video platform" and are likely to be a taxable supply. If J registers only 940306 and sells templates, a VAT return may be missed. Whether an e-book is exempt (the ISBN or ECN requirement) needs to be confirmed. Settle the set of industry codes with a tax accountant before the pre-sale.
 
 Bad example:
 
