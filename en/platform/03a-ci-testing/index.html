@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>CI Fundamentals and Test Strategy: Merge Often, Learn Fast | MyAI</title>
+    <meta name="description" content="CI (Continuous Integration) is not keeping a CI server switched on. It is the habit of merging small changes often and having a machine answer &quot;is this sa…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="CI Fundamentals and Test Strategy: Merge Often, Learn Fast | MyAI" />
+    <meta property="og:description" content="CI (Continuous Integration) is not keeping a CI server switched on. It is the habit of merging small changes often and having a machine answer &quot;is this sa…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/03a-ci-testing.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link active" aria-current="page" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group closed" data-group="8"><button aria-expanded="false" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>CI Fundamentals and Test Strategy</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>CI Fundamentals and Test Strategy: Merge Often, Learn Fast</h1>
+<p>CI (Continuous Integration) is not keeping a CI server switched on. It is <strong>the habit of merging small changes often and having a machine answer &quot;is this safe to merge?&quot; within minutes of every merge</strong>. This document covers what makes that answer trustworthy: where tests run, a flaky-test policy, speed, and required checks. Terms, the overall flow, artifact promotion and DORA metrics live in the hub document &quot;CI/CD · OIDC · GitOps&quot;. Facts were checked as of 2026-09.</p>
+<h2>CI Means &quot;Merge Often&quot;</h2>
+<p>In his Continuous Integration article, revised in 2024-01, Martin Fowler names <strong>everyone pushes commits to the mainline every day</strong> and <strong>keep the build fast</strong> as core practices. Running a CI tool while branches grow apart for weeks is CI in name only.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Trunk-based Development</th>
+<th>Long-lived Feature Branches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Merge cadence</td>
+<td>At least once a day</td>
+<td>When the feature is done (days to weeks)</td>
+</tr>
+<tr>
+<td>Conflicts</td>
+<td>Small and frequent, resolved at once</td>
+<td>Large and rare, piled up on merge day</td>
+</tr>
+<tr>
+<td>What CI verifies</td>
+<td>&quot;Merged with main as it is now&quot;</td>
+<td>&quot;Main as it was weeks ago&quot;</td>
+</tr>
+<tr>
+<td>Unfinished features</td>
+<td>Merged behind a feature flag</td>
+<td>Hidden on the branch</td>
+</tr>
+</tbody></table>
+<p>Citing its 2016–2017 survey data, DORA reports that teams with three or fewer active branches that merge to trunk at least once a day performed better. Feature flags that hide unfinished work are covered in &quot;Canary · Blue-Green · Flags · Rollback&quot;. <strong>The fast-feedback principle</strong>: if you move on to other work while waiting, you have lost the context by the time you learn of the failure. One of Fowler&#39;s CI check questions is &quot;when the build fails, is it usually back to green within ten minutes?&quot; PR checks should finish within minutes, and when main breaks, fixing it comes before new features.</p>
+<h2>Pipeline Stages and Order: Fail Fast</h2>
+<pre><code class="language-mermaid">flowchart LR
+    C[Commit / PR] --&gt; F[Format · Lint]
+    F --&gt; TY[Typecheck]
+    TY --&gt; U[Unit Test]
+    U --&gt; B[Build]
+    B --&gt; I[Integration Test]
+    I --&gt; G{Required checks pass?}
+    G --&gt;|Yes| M[Merge queue / Main]
+    G --&gt;|No| X[Notify the author at once]
+    M --&gt; E[E2E · Performance · Nightly]
+</code></pre>
+<ul>
+<li>Put <strong>cheap checks that fail often first</strong>. Format and lint commonly take tens of seconds, unit tests a few minutes, E2E tens of minutes. Do not let a lint failure surface only after a 20-minute E2E run.</li>
+<li>Split independent checks (lint, unit) into <strong>parallel jobs</strong>. Forcing an order shows only the first failure; the rest appear on the next push.</li>
+<li>Within one stage, show <strong>every failure at once</strong>. If tests are split across runners, set <code>fail-fast: false</code> on the matrix so the other pieces run to the end when one fails.</li>
+</ul>
+<h2>Test Levels: Pyramid and Trophy</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>What it verifies</th>
+<th>Speed</th>
+<th>Flakiness risk</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static</td>
+<td>Format and types, without running</td>
+<td>Very fast</td>
+<td>Almost none</td>
+<td>ESLint, <code>tsc --noEmit</code></td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>One function or class</td>
+<td>Fast</td>
+<td>Low</td>
+<td>Price calculation, a parser</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>Several units plus a real boundary such as a DB</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Repository layer + a PostgreSQL container</td>
+</tr>
+<tr>
+<td>Contract</td>
+<td>The request and response promise between two services</td>
+<td>Fast–medium</td>
+<td>Low</td>
+<td>Pact&#39;s consumer-driven contracts</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>A whole user flow</td>
+<td>Slow</td>
+<td>High</td>
+<td>Sign-up → payment in a browser</td>
+</tr>
+</tbody></table>
+<p><strong>The Test Pyramid</strong> was introduced by Mike Cohn in his 2009 book <em>Succeeding with Agile</em> and spread through Martin Fowler&#39;s 2012 article. It puts the most tests in fast, stable unit tests and the fewest in slow, flaky UI tests. <strong>The Testing Trophy</strong> is the shape Kent C. Dodds proposed for JavaScript applications: static checks at the base and the largest share for integration tests (&quot;Write tests. Not too many. Mostly integration.&quot;). The two differ in a judgment about <strong>where bugs come from</strong>. Either way, keep E2E to the few core flows you must protect. With several services, <strong>contract tests</strong> let each service&#39;s CI check &quot;did the provider break the consumer&#39;s expectations?&quot; without an E2E environment.</p>
+<h3>What Runs When</h3>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>What runs</th>
+<th>Blocks merge?</th>
+<th>Principle</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PR (every push)</td>
+<td>Format, lint, typecheck, unit, affected integration tests</td>
+<td>Yes</td>
+<td>Under 10 minutes. Time an author can wait</td>
+</tr>
+<tr>
+<td>Merge queue</td>
+<td>The same required checks, on &quot;latest main + PRs ahead&quot;</td>
+<td>Yes</td>
+<td>Re-verify the combined result</td>
+</tr>
+<tr>
+<td>After merge to main</td>
+<td>Full integration, build, staging deploy (&quot;Deployment Automation and Versioning&quot;)</td>
+<td>No (alert)</td>
+<td>If it breaks, revert first</td>
+</tr>
+<tr>
+<td>Nightly</td>
+<td>Full E2E, performance, dependency and link checks</td>
+<td>No (open an issue)</td>
+<td>Slow checks or ones that depend on outside systems</td>
+</tr>
+</tbody></table>
+<h2>Flaky Tests: Retries Hide Bugs</h2>
+<p>Google calls <strong>a test that both passes and fails on the same code</strong> a flaky test. A 2016 Google Testing Blog post reported that about 1.5% of all test runs gave a flaky result and that about 16% of tests showed some level of flakiness. When red is often false, people shrug &quot;that one again&quot;, and real failures get buried with it. Luo et al. (FSE 2014) analyzed 201 commits that fixed flaky tests in 51 open-source projects and named the first three causes in the table below as the most common (cited as about 45%, 20% and 12%).</p>
+<table>
+<thead>
+<tr>
+<th>Cause</th>
+<th>Symptom</th>
+<th>Direction of the fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Async wait</td>
+<td>Check after <code>sleep(1000)</code>, fails only on slow runners</td>
+<td>Wait for a condition, not a fixed time</td>
+</tr>
+<tr>
+<td>Concurrency</td>
+<td>Fails only when run in parallel</td>
+<td>Remove shared state, separate resources per test</td>
+</tr>
+<tr>
+<td>Test order dependency</td>
+<td>Passes alone, fails in the full run</td>
+<td>Each test creates and cleans its own data. Run in shuffled order</td>
+</tr>
+<tr>
+<td>Time and dates</td>
+<td>Fails at midnight, month end, in some time zones</td>
+<td>Inject the clock (fake clock)</td>
+</tr>
+<tr>
+<td>External network</td>
+<td>Fails when an outside API is slow or down</td>
+<td>Replace with contract tests or a fake server</td>
+</tr>
+</tbody></table>
+<p><strong>Detection</strong>: if a failed test passes when rerun <strong>on the same commit</strong>, record it as flaky. Playwright classifies tests that pass on retry as &quot;flaky&quot;, and <code>--fail-on-flaky-tests</code> fails the run if any exist. The Node.js test runner shuffles execution order with <code>--test-randomize</code> from v26.1.0 and v24.16.0, which exposes order dependency. Only a per-test pass and fail history lets you find &quot;the test that flaked three times this week&quot;.</p>
+<p><strong>Policy</strong></p>
+<ol>
+<li>A flaky test is <strong>a real bug</strong>. It may be a bug in the test or a race condition in the product. Open an issue with an owner and a deadline.</li>
+<li>Quarantine (temporarily removing a test from required checks) is <strong>a temporary measure with a deadline</strong>. Keep running quarantined tests and record the results. Fowler also says quarantine is only a first step to limit damage, and the test must be fixed soon.</li>
+<li>Use automatic retries <strong>only as a detection tool</strong>. Never silently count a pass-on-retry as a &quot;pass&quot;. Lengthening a <code>sleep</code>, loosening an assertion or adding <code>skip</code> to get green is not a fix.</li>
+</ol>
+<h2>Test Data and Throwaway Services</h2>
+<ul>
+<li><strong>Each test creates its own data.</strong> Leaning on a shared staging DB or fixed accounts makes results depend on run order and concurrency. Why not to copy production data is in the hub&#39;s &quot;The Trap of Production-Like Data&quot;.</li>
+<li><strong>Start a real DB as a throwaway.</strong> GitHub Actions service containers create a fresh container for each job and destroy it when the job ends (Linux runners only). To start containers from test code, use Testcontainers (Docker acquired its maintainer, AtomicJar, in 2023-12).</li>
+</ul>
+<pre><code class="language-yaml">jobs:
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: &gt;-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: npm ci
+      - run: npm run test:integration
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+</code></pre>
+<p>Steps start only after the health check passes, which removes the flaky cause &quot;tests ran before the DB was up&quot;. The password here is a value for a container that disappears with the job, so it is not a secret.</p>
+<h2>Static Checks and Coverage</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What CI does</th>
+<th>A gate?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Format</td>
+<td>Reports differences in <code>--check</code> mode. CI does not fix and commit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Lint · Typecheck</td>
+<td>Treats violations as failures. Warnings only pile up, so turn them off or raise them to errors. Run apart from the build job</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>Shows reviewers the changed lines no test reached</td>
+<td>A signal. Not a target</td>
+</tr>
+</tbody></table>
+<p>Coverage counts the lines tests <strong>executed</strong>, not the lines they <strong>verified</strong>. Tests without assertions still raise the number, and making the number a target breeds such tests. Google Testing Blog&#39;s &quot;Code Coverage Best Practices&quot; (2020-08) describes an internal guideline of 60% as acceptable, 75% as commendable and 90% as exemplary, yet recommends team-level judgment over blanket mandates. Do not fail the build on a 0.1% drop; use coverage as grounds to ask in review &quot;why does this branch have no test?&quot;</p>
+<h2>Speed: Keep PR Checks Under 10 Minutes</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Effect</th>
+<th>Caution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache</td>
+<td>Shorter dependency install</td>
+<td>Key on the lock file hash. Setup is in &quot;GitHub Actions in Practice&quot;</td>
+</tr>
+<tr>
+<td>Test splitting (sharding)</td>
+<td>Node.js <code>--test-shard=1/3</code> (since v20.5.0 and v18.19.0), Playwright <code>--shard=1/3</code></td>
+<td>The slowest piece sets the total time</td>
+</tr>
+<tr>
+<td>Test impact analysis</td>
+<td>Only related tests, with Jest <code>--changedSince=&lt;branch&gt;</code> or Playwright <code>--only-changed=&lt;ref&gt;</code></td>
+<td>Misses config and data changes. Run everything on main and nightly</td>
+</tr>
+</tbody></table>
+<h2>Required Checks, Branch Protection, Rulesets, Merge Queue</h2>
+<p>A red light from CI is useless if the merge button still works. On GitHub these features make <strong>merging possible only after checks pass</strong> (as of 2026-09).</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What it does</th>
+<th>Where it is available</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Branch protection rules</td>
+<td>Required status checks, reviews, no force pushes. Strict mode allows merge only when the branch includes the latest base</td>
+<td>Public repositories on Free; private ones too on Pro, Team and Enterprise Cloud</td>
+</tr>
+<tr>
+<td>Rulesets</td>
+<td>When several rulesets overlap all apply, and the most restrictive rule wins. Anyone with read access can see the active rules</td>
+<td>Same as branch protection</td>
+</tr>
+<tr>
+<td>Merge queue</td>
+<td>Re-verifies a PR on &quot;latest base + PRs ahead&quot; before merging</td>
+<td>Public repositories owned by an organization; private repositories in Enterprise Cloud organizations</td>
+</tr>
+</tbody></table>
+<p><strong>Where people get stuck</strong></p>
+<ul>
+<li>With a merge queue, the workflow needs the <code>merge_group</code> trigger. Without it, required checks are never reported and the merge fails.</li>
+<li>When path or branch filters <strong>skip a whole workflow</strong>, its check stays &quot;Pending&quot; and blocks the merge. When an <code>if</code> condition <strong>skips a job</strong>, it reports &quot;Success&quot;.</li>
+<li>A job hanging off a failed job through <code>needs</code> is skipped and may not block the merge. So, as below (the <code>lint</code> and <code>test</code> definitions are omitted), add one gate job with <code>if: always()</code> and register only it as the required check. Adding or removing jobs then needs no change to the protection rules. Keep job names used as required checks unique across workflows. Results from a <code>workflow_dispatch</code> run do not satisfy required checks.</li>
+</ul>
+<pre><code class="language-yaml">on:
+  pull_request:
+  merge_group:
+    types: [checks_requested]
+jobs:
+  ci-ok:
+    if: always()
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(needs.*.result, &#39;failure&#39;) || contains(needs.*.result, &#39;cancelled&#39;)
+        run: exit 1
+</code></pre>
+<h2>Example: The CI This Site Needs</h2>
+<p>This site (a static site that GitHub Pages serves from the <code>stable</code> branch, with no CI today) gates PRs on the two checks below; the workflow design that runs them is kept in one place, the &quot;Example Design: If This Site Added CI&quot; section of &quot;GitHub Actions in Practice&quot;.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>When</th>
+<th>Blocks merge?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>node --test tests/*.cjs</code></td>
+<td>PR, push to <code>stable</code></td>
+<td>Yes</td>
+<td>Stops documents missing their English twin and broken diagrams</td>
+</tr>
+<tr>
+<td><code>node tools/build-site.mjs --check</code></td>
+<td>PR, push to <code>stable</code></td>
+<td>Yes</td>
+<td>Stops changes that edit Markdown but forget to regenerate HTML</td>
+</tr>
+</tbody></table>
+<h2>Metrics: Is CI Healthy?</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Why watch it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CI duration</td>
+<td>From start to end of the PR&#39;s required checks (p50 · p90)</td>
+<td>Past 10 minutes, people stop waiting and switch to other work</td>
+</tr>
+<tr>
+<td>Flake rate</td>
+<td>Share of runs whose result changed on a rerun of the same commit</td>
+<td>As it rises, people stop trusting red</td>
+</tr>
+<tr>
+<td>Time to green</td>
+<td>From the moment main breaks until it passes again</td>
+<td>How fast main is restored</td>
+</tr>
+</tbody></table>
+<p>These metrics sit upstream of the DORA metrics (&quot;CI/CD · OIDC · GitOps&quot;). Slow, flaky CI lengthens change lead time, and as people start bypassing checks the change fail rate rises too.</p>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad:  Put retries: 3 on a flaky E2E test and record only &quot;passed&quot;.
+Good: Record tests that pass on retry as flaky and attach an issue and an owner.
+      Fix or delete quarantined tests before their deadline.
+</code></pre>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>How many days does your team&#39;s average feature branch live? What would it take (feature flags, small PRs) to bring that under a day?</li>
+<li>If you moved the slowest stage of your PR checks to the merge queue or nightly, which bugs would you learn about later?</li>
+<li>Counting a pass-on-retry as a &quot;pass&quot; hides what kind of product bug?</li>
+<li>How does a required check look when path filters skip the workflow, and when <code>if</code> skips the job?</li>
+<li>What mistake does this site&#39;s <code>build-site.mjs --check</code> prevent, and why put it in the PR gate?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a> (revised 2024-01-18) · <a href="https://martinfowler.com/bliki/ContinuousIntegrationCertification.html">Continuous Integration Certification</a> · <a href="https://martinfowler.com/bliki/TestPyramid.html">Test Pyramid</a> (2012) · <a href="https://martinfowler.com/articles/nonDeterminism.html">Eradicating Non-Determinism in Tests</a> (2011) — martinfowler.com, confirmed via search results 2026-09-30</li>
+<li><a href="https://dora.dev/capabilities/trunk-based-development/">Capabilities: Trunk-based development</a> — DORA, confirmed via search results 2026-09-30</li>
+<li><a href="https://kentcdodds.com/blog/the-testing-trophy-and-testing-classifications">The Testing Trophy and Testing Classifications</a> — Kent C. Dodds, 2021-06-03 · <a href="https://docs.pact.io/">Pact Docs</a> — Pact · <a href="https://www.docker.com/blog/docker-whale-comes-atomicjar-maker-of-testcontainers/">Docker acquires AtomicJar, maker of Testcontainers</a> — Docker, 2023-12-11. All confirmed via search results 2026-09-30</li>
+<li><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html">Flaky Tests at Google and How We Mitigate Them</a> (2016-05, John Micco) · <a href="https://testing.googleblog.com/2020/08/code-coverage-best-practices.html">Code Coverage Best Practices</a> (2020-08) — Google Testing Blog · <a href="https://dl.acm.org/doi/10.1145/2635868.2635920">An Empirical Analysis of Flaky Tests</a> — Luo et al., FSE 2014. All confirmed via search results 2026-09-30</li>
+<li><a href="https://playwright.dev/docs/test-retries">Retries</a> · <a href="https://playwright.dev/docs/test-cli">Command line</a> — Playwright Docs, checked 2026-09-30 (docs source on GitHub) · <a href="https://jestjs.io/docs/cli">Jest CLI Options</a> — Jest, confirmed via search results 2026-09-30 · <a href="https://nodejs.org/api/cli.html">Command-line API</a> — Node.js v26.10.0 Docs, checked 2026-09-30</li>
+<li><a href="https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers">Communicating with Docker service containers</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#merge_group">Events that trigger workflows: merge_group</a> — GitHub Docs, checked 2026-09-30 (github/docs source)</li>
+<li><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches">About protected branches</a> · <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets">About rulesets</a> · <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue">Managing a merge queue</a> — GitHub Docs, checked 2026-09-30 (github/docs source)</li>
+<li><a href="https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks">Troubleshooting required status checks</a> · <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">Configuring a publishing source for your GitHub Pages site</a> — GitHub Docs, checked 2026-09-30 (github/docs source)</li>
+<li><a href="https://github.com/actions/checkout">actions/checkout</a> v7.0.1 · <a href="https://github.com/actions/setup-node">actions/setup-node</a> v7.0.0 — GitHub, tag commit SHAs checked 2026-09-30</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/03-ci-cd-pipeline/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>CI/CD · OIDC · GitOps</span></a><a class="page-link next" href="../../../en/platform/03b-github-actions/"><span><small>Next</small>GitHub Actions in Practice</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

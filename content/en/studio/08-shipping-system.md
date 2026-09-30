@@ -85,7 +85,7 @@ If Must exceeds 60%, cut the scope again. If the Musts are not done at hour 45, 
 [D-0]  Deploy, email the waitlist, announce in three channels, answer questions for the first 24 hours
 ```
 
-Design the first 100 users before the product. For choosing channels and tiering launches, see the Marketing track's "Go-to-Market · Launch · PLG and SLG" and "Channel Strategy · Content · Paid · Lifecycle · Community".
+Design the first 100 users before the product. For choosing channels and tiering launches, see the Marketing track's "Go-to-Market · Launch · PLG/SLG" and "Channels · Content · Paid · Lifecycle".
 
 ### The 30-Day Post-Launch Routine
 
@@ -117,7 +117,7 @@ Good example:
 | Deployment | Deploy to staging, run smoke tests | Production approval and rollback decisions |
 | After launch | Summarize error logs, triage questions | Answers on refunds and personal data |
 
-Build the pipeline following the Platform track's "CI/CD Pipeline: From Commit to Production" and "Practical Guide for Small Teams: Solo Developers and Small Teams". Keep payments, personal data and production approval as human gates.
+Build the pipeline following the Platform track's "CI/CD · OIDC · GitOps" and "Small Team Playbook". Keep payments, personal data and production approval as human gates.
 
 ## Common Misconceptions
 

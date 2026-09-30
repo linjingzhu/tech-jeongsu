@@ -71,6 +71,9 @@ Rejected:
 
 Impact:
 Import, Timeline, Save/Load 검토 필요.
+
+Revisit if:
+사용자가 Camera Shot과 Animation을 구분하지 못한다는 피드백이 반복되면 재검토.
 ```
 
 ### Release Scope

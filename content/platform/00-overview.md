@@ -48,6 +48,10 @@ flowchart LR
 | 01 | 배포 대상 고르기 | Static, Edge, PaaS, Serverless 중 무엇이 맞는가 |
 | 02 | Cloud와 Kubernetes | AWS / Google Cloud / Azure / 국내 Cloud와 Container 운영 |
 | 03 | CI/CD Pipeline | Commit부터 Production까지 무엇을 자동화하는가, Environment 설계, Infra도 코드로(IaC) |
+| 03a | CI 기초와 테스트 전략 | 합쳐도 되는지를 몇 분 안에 믿을 만하게 답하려면 테스트 배치, Flaky test, 필수 검사를 어떻게 짜는가 |
+| 03b | GitHub Actions 실전 | Workflow를 안전하고 싸고 빠르게 돌리려면 권한, 캐시, 배포 승인, Action 고정, Runner, 요금을 어떻게 다루는가 |
+| 03c | 배포 자동화와 버전 관리 | 합친 것을 같은 Artifact로 되돌릴 수 있게 내보내려면 Preview, Environment 승격, DB Migration, Release 자동화를 어떻게 하는가 |
+| 03d | AI 시대의 CI/CD | Agent가 코드를 더 많이 쓸 때 AI 코드 리뷰, Prompt injection 방어, Eval을 관문에 어떻게 넣는가 |
 | 04 | Release 전략 | Rolling, Blue-Green, Canary, Feature Flag, Rollback |
 | 05 | 모바일 Store 배포 | App Store, Google Play 심사와 Testing Track, 2026 정책, 서명 키 관리 |
 | 06 | Domain · DNS · TLS · CDN | 사용자가 안전하고 빠르게 도달하는 경로 |
@@ -72,7 +76,7 @@ flowchart LR
 
 | 역할 | 추천 순서 |
 |---|---|
-| 개발자 | 01 → 03 → 04 → 07 → 08 |
+| 개발자 | 01 → 03 → 03a → 03b → 04 → 07 → 08 |
 | PO / PM | 00 → 04 → 05 → 07 → 09 |
 | 1인 개발자 | 10 → 01 → 06 → 05 |
 | 운영 / Platform 담당 | 02 → 07 → 08 → 09 |

@@ -93,7 +93,7 @@ flowchart TD
 
 ## 적용: 이 저장소의 설정
 
-이 저장소는 역할 agent에 권한을 박아 두었다. Claude agent 두 개는 `tools: Read, Grep, Glob, Bash`와 `permissionMode: plan`, Codex agent 세 개는 `sandbox_mode = "read-only"`다. 다만 Claude agent는 부모가 default·plan·dontAsk일 때 읽기 전용이다. 부모 대화가 `acceptEdits` · `auto` · `bypassPermissions`면 subagent는 부모 mode로 돌고 `permissionMode`는 무시되며, 두 agent에는 `Bash`가 있으므로 그때는 읽기 전용이 아니다. `.ai/HARNESS.md`는 parent runtime override가 파일의 sandbox 설정을 이길 수 있으니 실제 권한을 확인하라고 덧붙인다. 그러나 **커밋된 `.claude/settings.json`과 hook은 없다**. 아래는 이 빈칸을 채우는 초안이며, 테스트 명령은 이 저장소의 `node --test tests/*.test.cjs`다.
+이 저장소는 역할 agent에 권한을 박아 두었다. Claude agent 두 개는 `tools: Read, Grep, Glob, Bash`와 `permissionMode: plan`(plan mode: 읽기 위주, auto mode가 있으면 classifier 승인 명령 포함), Codex agent 세 개는 `sandbox_mode = "read-only"`다. 다만 부모 mode가 `permissionMode`를 덮어쓸 수 있다(「Subagent · Skill · Plugin」 참고). `.ai/HARNESS.md`는 parent runtime override가 파일의 sandbox 설정을 이길 수 있으니 실제 권한을 확인하라고 덧붙인다. 그러나 **커밋된 `.claude/settings.json`과 hook은 없다**. 아래는 이 빈칸을 채우는 초안이며, 테스트 명령은 이 저장소의 `node --test tests/*.test.cjs`다.
 
 ```json
 {
@@ -110,11 +110,12 @@ flowchart TD
 }
 ```
 
-**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 줄 끝 `\` 이어쓰기를 합치고, escape된 `\#`를 `_`로 바꾼 다음 backslash를 모두 지운 뒤, 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운다. `$`나 backtick이 든 큰따옴표 문자열은 지우지 않고 남긴다. 이어서 단어 첫머리의 `#`부터 줄 끝까지(주석)를 지우고, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 명령의 첫 번째 `push` 뒤 인자 전부**를 검사한다. 마지막 `push`를 기준으로 삼으면 `git push -f origin main push`처럼 끝에 붙인 `push` 한 단어가 앞의 옵션을 모두 숨긴다. 막는 것은 `f`가 든 짧은 옵션 묶음(`-uf`, `-4f`), `--force`로 시작하는 모든 긴 옵션(`--force-w` 같은 축약 포함), `--mirror`와 그 축약(`--m`까지), `+`로 시작하는 refspec, 그리고 **`$`, backtick, `{`, `}`가 든 모든 인자**다. 변수, 명령 치환, brace 확장(`-{f,v}`)은 실행 전에는 값을 알 수 없으므로 값을 따지지 않고 닫힌 쪽으로 막는다. 또 명령 어디에든 `remote.<name>.mirror`나 `+`로 시작하는 `remote.<name>.push` 값이 있으면 막는다. `git -c …`로 한 번만 넣든 `git config`로 저장하든 같다. `jq`가 없거나 입력을 읽지 못하면 **닫힌 쪽으로 실패**(exit 2)한다. `jq` 실패로 `CMD`가 비어 exit 0으로 끝났다면 차단이 조용히 꺼졌을 것이고, exit 0의 stderr는 debug log에만 남으므로 아무도 몰랐을 것이다.
+**Hook 1, force push 차단** (`.claude/hooks/block-force-push.sh`). 줄 끝 `\` 이어쓰기를 합치고, escape된 `\#`를 `_`로 바꾼 다음 backslash를 모두 지운 뒤, 한 글자 따옴표를 풀고 여러 단어짜리 따옴표 문자열(commit 메시지 등)은 지운다. `$`나 backtick이 든 큰따옴표 문자열은 지우지 않고 남긴다. 이어서 단어 첫머리의 `#`부터 줄 끝까지(주석)를 지우고, `&&` · `;` · `|` · 줄바꿈으로 명령을 나눠 **각 명령의 첫 번째 `push` 뒤 인자 전부**를 검사한다. 마지막 `push`를 기준으로 삼으면 `git push -f origin main push`처럼 끝에 붙인 `push` 한 단어가 앞의 옵션을 모두 숨긴다. 막는 것은 `f`가 든 짧은 옵션 묶음(`-uf`, `-4f`), `--force`로 시작하는 모든 긴 옵션(`--force-w` 같은 축약 포함), `--mirror`와 그 축약(`--m`까지), `+`로 시작하는 refspec, 그리고 **`$`, backtick, `{`, `}`가 든 모든 인자**다. 변수, 명령 치환, brace 확장(`-{f,v}`)은 실행 전에는 값을 알 수 없으므로 값을 따지지 않고 닫힌 쪽으로 막는다. 또 명령 어디에든 `remote.<name>.mirror`나 `+`로 시작하는 `remote.<name>.push` 값이 있으면 막는다. `git -c …`로 한 번만 넣든 `git config`로 저장하든 같다. `jq`가 없거나, 입력을 읽지 못하거나, 입력에 명령이 없으면(빈 stdin, `{}`, `command`가 없는 `tool_input`) **닫힌 쪽으로 실패**(exit 2)한다. 빈 `CMD`로 exit 0이 나면 차단이 조용히 꺼지고, exit 0의 stderr는 debug log에만 남으므로 아무도 모른다.
 
 ```bash
 command -v jq >/dev/null || { echo "Blocked: jq is missing, so the force-push check cannot run." >&2; exit 2; }
 CMD=$(jq -r '.tool_input.command // empty') || exit 2
+[ -n "$CMD" ] || { echo "Blocked: hook input had no command" >&2; exit 2; }
 CMD=${CMD//$'\\\n'/}
 S=$(printf '%s\n' "$CMD" | sed -E "s/\\\\#/_/g; s/\\\\//g; s/[\"']([^\"'[:space:]#]*)[\"']/\1/g; s/\"[^\"\$\`]*\"|'[^']*'//g; s/(^|[[:space:];&|])#.*$//; s/(&&|\|\||[;&|])/\n/g")
 ARGS=$(printf '%s\n' "$S" | grep -oE '(^|[[:space:]])push([[:space:]].*)?$' | sed -E 's/^[[:space:]]?push//; s/^/ /; s/$/ /')
@@ -126,7 +127,7 @@ fi
 exit 0
 ```
 
-아래는 실제로 실행한 71개 사례 중 일부다(2026-09-29, bash 5 · GNU grep/sed · jq 1.7). `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`, `-{f,v}`, `git -c remote.x.push=+HEAD:refs/heads/main push x`가 실제로 강제 갱신이나 mirror push로 처리된다는 것은 git 2.43과 로컬 bare 원격으로 따로 확인했다. "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
+아래는 실제로 실행한 77개 사례 중 일부다(2026-09-30, bash 5 · GNU grep/sed · jq 1.7). `-4f`, `--force-w`, `--mirr`, `\-f`, `--forc$'e'`, `-{f,v}`, `git -c remote.x.push=+HEAD:refs/heads/main push x`가 실제로 강제 갱신이나 mirror push로 처리된다는 것은 git 2.43과 로컬 bare 원격으로 따로 확인했다. "jq 없음"은 `PATH`에서 `jq`를 뺀 실행이다. 줄바꿈 치환은 GNU sed 문법이므로 macOS 기본 sed에서는 따로 시험해야 한다.
 
 | 명령 | 기대 | jq 있음 | jq 없음 |
 |---|---|---|---|
@@ -159,6 +160,8 @@ exit 0
 | `git branch \# && git push origin main \# -f` · `git push origin main -o \# -f` | 2 | 2 | 2 |
 | `git -c remote.origin.mirror=true push origin` · `git -c Remote.Origin.Mirror push origin` | 2 | 2 | 2 |
 | `git -c remote.origin.push=+refs/heads/main:refs/heads/main push origin` · `git config remote.origin.push +refs/heads/main:refs/heads/main && git push origin` | 2 | 2 | 2 |
+| 명령 없는 입력: 빈 stdin · `{}` · `{"tool_input":{}}` · `{"tool_input":{"command":""}}` · `{"tool_input":{"command":null}}` | 2 | 2 | 2 |
+| JSON이 아닌 입력 | 2 | 2 | 2 |
 | 한계: `git p -f origin main` · `git -c alias.p=push p -f origin main` | 2 | **0** | 2 |
 | 한계: `echo push -f` | 0 | **2** | 2 |
 | 범위 밖: `git push origin :main` · `--delete origin main` · `-d origin main` | 0 | 0 | 2 |

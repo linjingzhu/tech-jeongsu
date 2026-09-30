@@ -82,7 +82,7 @@ steps:
 ```
 
 - `npm sbom` builds a CycloneDX or SPDX SBOM from the installed dependencies. For mixed languages or container images, use a tool such as syft (`syft <image> -o spdx-json`).
-- `attest-build-provenance` signs with an OIDC token (`id-token: write`) and stores the attestation with the `attestations: write` permission.
+- `attest-build-provenance` signs with an OIDC token (`id-token: write`) and stores the attestation with the `attestations: write` permission. Since v4 this action wraps `actions/attest`, so GitHub's docs recommend `actions/attest` for new setups ("Deployment Automation and Versioning").
 
 The consumer verifies before deploying.
 

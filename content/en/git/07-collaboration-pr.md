@@ -86,7 +86,7 @@ This usually has no effect on the PR if the remote branch still exists.
 
 ### Delete the Remote Head Branch
 
-The PR’s source disappears, disrupting the normal update/integration workflow.
+The GitHub UI does not let you delete the head branch of an open PR. If you delete it with `git push`, for example `git push origin --delete <branch>`, the PR is closed.
 
 The basic order is therefore:
 

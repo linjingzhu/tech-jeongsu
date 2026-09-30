@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>네이버 블로그와 검색 구조 | MyAI(마이아이)</title>
+    <meta name="description" content="「주제 선정과 독자 설계」에서 정한 주제와 토픽 트리를 네이버 블로그에 옮기는 문서다. 여기서는 검색이 글을 찾고 고르는 구조만 다룬다. 글을 어떻게 쓰고 어떤 주기로 운영할지는 「블로그 글쓰기와 운영」, AI 도구 사용과 정책 위험은 「AI 활용 제작과 플랫폼 정책」, 광고…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="네이버 블로그와 검색 구조 | MyAI(마이아이)" />
+    <meta property="og:description" content="「주제 선정과 독자 설계」에서 정한 주제와 토픽 트리를 네이버 블로그에 옮기는 문서다. 여기서는 검색이 글을 찾고 고르는 구조만 다룬다. 글을 어떻게 쓰고 어떤 주기로 운영할지는 「블로그 글쓰기와 운영」, AI 도구 사용과 정책 위험은 「AI 활용 제작과 플랫폼 정책」, 광고…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/creator/02-naver-search.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI 기초와 테스트 전략</a><a class="tree-link" href="../../platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions 실전</a><a class="tree-link" href="../../platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">배포 자동화와 버전 관리</a><a class="tree-link" href="../../platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">AI 시대의 CI/CD</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../assets/icons/video.svg" alt="" aria-hidden="true"><span>블로그·유튜브 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../creator/00-overview/" data-path="content/creator/00-overview.md">블로그·유튜브 수익화 전체 개요</a><a class="tree-link" href="../../creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">주제 선정과 독자 설계</a><a class="tree-link active" aria-current="page" href="../../creator/02-naver-search/" data-path="content/creator/02-naver-search.md">네이버 블로그와 검색 구조</a><a class="tree-link" href="../../creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">블로그 글쓰기와 운영</a><a class="tree-link" href="../../creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">유튜브 추천 구조와 채널 설계</a><a class="tree-link" href="../../creator/05-longform/" data-path="content/creator/05-longform.md">롱폼 영상 기획과 제작</a><a class="tree-link" href="../../creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts와 얼굴 없는 채널</a><a class="tree-link" href="../../creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI 활용 제작과 플랫폼 정책</a><a class="tree-link" href="../../creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">AI로 블로그 글 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">AI로 유튜브 영상 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">AI 제작 방법론: 프롬프트·검수·자동화</a><a class="tree-link" href="../../creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">광고 수익: 애드포스트와 YouTube 파트너 프로그램</a><a class="tree-link" href="../../creator/09-own-products/" data-path="content/creator/09-own-products.md">자체 상품 수익: 강의·전자책·템플릿</a><a class="tree-link" href="../../creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">표시 의무·저작권·세금</a><a class="tree-link" href="../../creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">원소스 멀티유즈(OSMU) 전략</a><a class="tree-link" href="../../creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">채널 90일 실행 계획</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>블로그·유튜브 수익화</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>네이버 블로그와 검색 구조</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>네이버 블로그와 검색 구조</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: 네이버 통합검색이 스마트블록·블로그 탭·AI 브리핑으로 결과를 짜는 방식을 설명하고, 네이버가 공개한 C-Rank와 D.I.A.(+)의 뜻을 구분하며, 블로그를 주제에 맞게 개설하고, 네이버가 저품질·어뷰징으로 다루는 행동과 커뮤니티의 속설을 가려내고, 블로그 통계로 실제로 잴 수 있는 것을 고를 수 있다.</p>
+</blockquote>
+<p>「주제 선정과 독자 설계」에서 정한 주제와 토픽 트리를 네이버 블로그에 옮기는 문서다. 여기서는 <strong>검색이 글을 찾고 고르는 구조</strong>만 다룬다. 글을 어떻게 쓰고 어떤 주기로 운영할지는 「블로그 글쓰기와 운영」, AI 도구 사용과 정책 위험은 「AI 활용 제작과 플랫폼 정책」, 광고성 글 표시와 저작권은 「표시 의무·저작권·세금」에서 다룬다. Google AI Overviews와 비교한 AI 검색 대응은 「AI 검색 · GEO/AEO」를 본다. 모든 내용은 <strong>2026-09 기준</strong>이다. 네이버 도움말과 공식 블로그는 이 작업 환경에서 직접 열리지 않아, 네이버 발표를 전한 기사와 해설을 교차 확인하고 &quot;검색 결과로 확인&quot;이라고 적었다. 네이버는 순위 공식을 공개하지 않으므로, 이 문서의 알고리즘 설명은 <strong>네이버가 밝힌 개념 수준</strong>이다.</p>
+<h2>핵심 개념</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>통합검색</td>
+<td>검색어를 입력하면 처음 나오는 결과 화면. 여러 출처의 결과를 블록 단위로 쌓는다</td>
+</tr>
+<tr>
+<td>스마트블록</td>
+<td>검색 의도를 AI로 나눠, 의도별 주제 블록으로 결과를 묶어 보여 주는 방식. 2021-10 &#39;에어서치&#39;와 함께 공개됐다</td>
+</tr>
+<tr>
+<td>인기글 스마트블록</td>
+<td>블로그·카페 등 이용자 생성 콘텐츠(UGC)를 모아 보여 주는 블록. 2024-02 기존 VIEW 탭을 대신하며 도입됐다고 보도됐다</td>
+</tr>
+<tr>
+<td>블로그 탭</td>
+<td>통합검색 위쪽 탭 중 블로그 글만 모아 보는 결과. 2024-02 VIEW 탭이 블로그 탭과 카페 탭으로 나뉘었다</td>
+</tr>
+<tr>
+<td>AI 브리핑</td>
+<td>통합검색 위쪽에 생성형 AI 요약 답변과 근거 출처(블로그 원문 등)를 함께 보여 주는 기능. 2025-03-27 도입</td>
+</tr>
+<tr>
+<td>C-Rank</td>
+<td>문서 자체보다 <strong>문서를 만든 출처(블로그)의 신뢰도</strong>를 평가하는 개념. 2016년 도입</td>
+</tr>
+<tr>
+<td>D.I.A. / D.I.A.+</td>
+<td>키워드별로 사용자가 선호한 문서의 특성을 학습해 <strong>문서</strong>의 점수를 매기는 모델. D.I.A.는 2018년, D.I.A.+는 2020년 적용으로 알려져 있다</td>
+</tr>
+<tr>
+<td>네이버 인플루언서</td>
+<td>주제별 창작자를 선정해 인플루언서 검색 결과와 인플루언서 홈에 노출하는 프로그램</td>
+</tr>
+</tbody></table>
+<h2>원리</h2>
+<h3>통합검색은 어떻게 짜이는가</h3>
+<pre><code class="language-mermaid">flowchart LR
+    Q[&quot;검색어 입력&quot;] --&gt; I[&quot;검색 의도 분석&quot;]
+    I --&gt; AB[&quot;AI 브리핑 요약과 출처&quot;]
+    I --&gt; SB[&quot;스마트블록 의도별 주제 블록&quot;]
+    I --&gt; TAB[&quot;블로그 탭&quot;]
+    SRC[&quot;C-Rank 출처 평가&quot;] --&gt; R[&quot;후보 문서 순위&quot;]
+    DOC[&quot;D.I.A.+ 문서 평가&quot;] --&gt; R
+    R --&gt; AB
+    R --&gt; SB
+    R --&gt; TAB
+</code></pre>
+<ul>
+<li><strong>스마트블록</strong>: 네이버는 2021-10 에어서치를 발표하며, 하나의 검색어에 담긴 서로 다른 의도를 AI로 나눠 블록으로 제시한다고 설명했다. 당시 네이버 관계자는 이를 &quot;통합검색의 발전적 해체&quot;라고 표현했다(검색 결과로 확인). 같은 &quot;엑셀 자동화&quot;라도 &quot;초보 입문&quot;, &quot;매크로&quot;, &quot;함수 모음&quot; 같은 의도별 블록이 따로 생길 수 있다.</li>
+<li><strong>인기글과 블로그 탭</strong>: 2024-02 VIEW 탭이 없어지고, 블로그·카페 글을 모은 &#39;인기글&#39; 스마트블록이 생겼으며, 탭은 블로그 탭과 카페 탭으로 나뉘었다고 보도됐다(검색 결과로 확인).</li>
+<li><strong>AI 브리핑</strong>: 2025-03-27 도입됐고, 답변의 근거가 된 블로그 원문을 함께 제시한다. 2025년 말 통합검색 질의의 약 20%에 적용됐고, 네이버는 2026-02 실적 발표에서 2026년 말까지 적용 범위를 약 2배로 넓히겠다고 밝혔다고 보도됐다(검색 결과로 확인).</li>
+<li><strong>출처 신뢰 표시</strong>: 네이버는 2026-05-14부터 공공기관 등 일부 공식 블로그에 AI가 운영 주체와 다루는 내용을 요약해 주는 &#39;AI 출처 정보&#39;를 붙인다고 발표했다. LLM과 시각언어모델(VLM)로 사이트 성격, 콘텐츠 구성, 디자인·레이아웃까지 분석한다고 설명했다(검색 결과로 확인).</li>
+</ul>
+<p>결과 화면이 여러 블록으로 쪼개졌다는 것은, <strong>&quot;1위&quot;라는 하나의 자리가 없다</strong>는 뜻이다. 내 글은 어떤 의도 블록에, 블로그 탭에, 또는 AI 브리핑의 출처 링크로 나타날 수 있고, 각 자리마다 클릭률이 다르다.</p>
+<h3>C-Rank: 누가 썼는가</h3>
+<p>네이버는 2016년 C-Rank를 도입하며, 문서 자체보다 문서의 출처인 블로그의 신뢰도와 인기도를 평가해 순위에 반영한다고 설명했다. 평가 요소로는 <strong>Context</strong>(주제 집중도), <strong>Content</strong>(콘텐츠의 품질), <strong>Chain</strong>(소비·생산의 연쇄 반응, 즉 읽히고 반응을 얻는 정도)이 소개됐다(검색 결과로 확인). 실무적으로 이 설명에서 읽을 수 있는 것은 두 가지다.</p>
+<ol>
+<li>한 블로그가 <strong>한 주제를 꾸준히 깊게</strong> 다루면 그 주제에서 출처로서 평가받기 쉽다.</li>
+<li>주제가 흩어진 블로그는 어느 주제에서도 출처로 인정받기 어렵다.</li>
+</ol>
+<p>가중치와 계산식은 공개되지 않았다.</p>
+<h3>D.I.A.와 D.I.A.+: 무엇을 썼는가</h3>
+<p>D.I.A.(Deep Intent Analysis)는 네이버 데이터로 키워드별 사용자가 선호한 문서의 점수를 순위에 반영하는 모델로 소개됐다. 반영 요소로는 문서의 주제 적합도, 경험 정보, 정보의 충실성, 문서의 의도, 상대적인 어뷰징 척도, 독창성, 적시성이 거론된다. 2020년 말 D.I.A.+는 사용자의 구체적 의도에 맞는 문서와 출처를 찾기 위해 딥 매칭, 패턴 분석, 동적 랭킹을 개선한 것으로 설명됐다(검색 결과로 확인). 요소 목록에 <strong>경험</strong>, <strong>독창성</strong>, <strong>어뷰징 척도</strong>가 함께 들어 있다는 점이 중요하다. 직접 해 본 과정과 화면은 올리고, 남의 글을 재조합하거나 같은 글을 반복하면 내려가는 방향이다.</p>
+<h3>AI 브리핑과 출처 선정</h3>
+<p>AI 브리핑이 어떤 문서를 출처로 고르는지 네이버는 공식 수치를 공개하지 않았다. 다만 두 가지 공개 신호가 있다. 하나는 2026-06 시범 출시한 &#39;네이버 메이트&#39;가 <strong>AI 브리핑 인용 수와 주제별 전문성, 활동성</strong>을 기준으로 창작자를 고른다는 점이고, 다른 하나는 네이버가 검색의 방향을 &quot;신뢰할 수 있는 출처&quot;로 반복해 설명한다는 점이다(검색 결과로 확인). AI 브리핑에 인용되더라도 사용자가 원문을 클릭할지는 별개다. 요약이 있는 결과에서 클릭이 줄어든다는 Google 쪽 조사는 「광고 수익 심화」에서 소개했다.</p>
+<p>두 신호에 더해 원칙 수준의 기준도 보도됐다. 보도에 따르면 네이버는 2026년 5월 직접 경험한 지식, 일관된 주제, 거짓 없는 진정성, 읽기 쉬운 구조, 최신성 유지를 콘텐츠 원칙으로 제시했고, 기계적으로 생성한 글·출처가 불분명한 짜깁기·과도한 홍보성 글은 인용에서 제외한다고 밝혔다 (<a href="https://v.daum.net/v/6X1XvAe4cP">다음 뉴스 보도</a>, 검색 결과로 확인, 네이버 원문은 열지 못함).</p>
+<h3>네이버가 저품질·어뷰징으로 보는 것</h3>
+<p>네이버 블로그 운영정책과 검색 도움말 원문을 직접 열지 못해, 아래는 D.I.A. 요소 설명과 운영정책 관련 보도에서 확인한 <strong>범주</strong>다.</p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>예</th>
+<th>연결된 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>반복·복제</td>
+<td>같은 글을 제목만 바꿔 여러 번 발행, 남의 글을 옮겨 붙이기</td>
+<td>D.I.A. 요소의 독창성·어뷰징 척도</td>
+</tr>
+<tr>
+<td>키워드 채우기</td>
+<td>본문과 상관없는 인기 키워드 나열, 같은 키워드 과다 반복</td>
+<td>주제 적합도·문서 의도</td>
+</tr>
+<tr>
+<td>대량 자동 생성</td>
+<td>짧은 간격으로 비슷한 구조의 글을 대량 발행</td>
+<td>어뷰징 척도. AI 사용 자체보다 대량·저가치 패턴이 문제로 설명된다</td>
+</tr>
+<tr>
+<td>반응 조작</td>
+<td>매크로·프로그램으로 공감·댓글·이웃·방문 부풀리기</td>
+<td>운영정책의 금지 행위(검색 결과로 확인)</td>
+</tr>
+<tr>
+<td>대가 미표시</td>
+<td>협찬·체험단 글에 경제적 이해관계를 숨기기</td>
+<td>공정위 추천·보증 심사지침(2024-12-01 시행: 제목 또는 첫 부분에 표시)</td>
+</tr>
+<tr>
+<td>권리 침해</td>
+<td>무단 이미지·영상·폰트 사용</td>
+<td>저작권 신고에 따른 게시 중단</td>
+</tr>
+</tbody></table>
+<p>AI 생성 콘텐츠에 대해서는, 네이버가 2025-05 블로그·카페 등에 &#39;AI 활용&#39; 표시 기능을 도입했고 블로그에서는 표시가 자율이라고 보도됐다(검색 결과로 확인). &quot;AI로 쓴 글은 자동으로 검색에서 제외된다&quot;는 네이버의 공식 문서는 찾지 못했다. AI 사용의 경계는 「AI 활용 제작과 플랫폼 정책」에서, 광고성 글의 기준과 표시 방법은 「표시 의무·저작권·세금」과 「법 · 윤리 · 광고 표시」에서 다룬다.</p>
+<h2>적용: 예시 크리에이터 J의 블로그 개설</h2>
+<p>J는 D0(2026-10-05) 전에 블로그를 연다. 메뉴 이름은 2026-09 화면 기준이며 바뀔 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>설정</th>
+<th>J의 선택</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>블로그 이름·별명</td>
+<td>주제가 드러나는 이름 (예: &quot;J의 업무 자동화 노트&quot;)</td>
+<td>검색 결과와 AI 출처 정보에서 무엇을 다루는 블로그인지 보이게</td>
+</tr>
+<tr>
+<td>프로필 소개</td>
+<td>직장인, 매일 엑셀·AI 도구로 반복 업무를 줄이는 사람, 다루는 범위</td>
+<td>얼굴은 없어도 경험의 출처를 밝힌다</td>
+</tr>
+<tr>
+<td>블로그 주제</td>
+<td>관리 화면의 블로그 주제에서 IT·컴퓨터 계열 선택</td>
+<td>C-Rank의 Context 설명과 맞춘다</td>
+</tr>
+<tr>
+<td>카테고리</td>
+<td>토픽 트리의 클러스터 3개 = 카테고리 3개 (엑셀 반복 작업, AI 도구로 문서 작업, 보고서 자동화) + 공지</td>
+<td>카테고리 하나가 한 클러스터</td>
+</tr>
+<tr>
+<td>글별 주제</td>
+<td>발행할 때 글마다 같은 주제 분야 선택</td>
+<td>블로그 주제와 글 주제를 일치시킨다</td>
+</tr>
+<tr>
+<td>자료 배포</td>
+<td>무료 템플릿은 글 안 다운로드 안내로 제공</td>
+<td>「자체 상품 수익: 강의·전자책·템플릿」의 첫 단계</td>
+</tr>
+</tbody></table>
+<p>J가 첫 4주 동안 하지 않는 것: 다른 주제의 일상 글 섞기, 같은 튜토리얼을 제목만 바꿔 다시 올리기, 이웃 늘리기 프로그램, 한 번에 여러 글 몰아 발행하기. 글 구성과 발행 주기는 「블로그 글쓰기와 운영」을 따른다.</p>
+<p>J는 매주 월요일 블로그 통계에서 세 가지만 기록한다. 지난주 글별 조회수, 검색 유입 비중과 상위 유입 검색어, 무료 템플릿 안내 글의 조회수. 이 기록이 「채널 90일 실행 계획」의 D30·D60·D90 판단 자료가 된다.</p>
+<h2>심화</h2>
+<h3>네이버 인플루언서</h3>
+<p>네이버 인플루언서는 주제 하나를 골라 신청하고 심사를 거쳐 선정되는 창작자 프로그램이다. 선정되면 인플루언서 홈이 생기고, 통합검색의 인플루언서 관련 블록과 인플루언서 탭에 콘텐츠가 노출될 수 있다. 네이버의 랭킹 개편 공지를 전한 자료에 따르면 인플루언서 주제 랭킹에는 서비스 활성도, 사용자 피드백, 창작자 영향력, 팬 수와 함께 <strong>문서 품질</strong>이 반영된다(검색 결과로 확인). 선정되면 브랜드와 창작자를 연결하는 &#39;브랜드 커넥트&#39;를 쓸 수 있다.</p>
+<p>신청 기준으로 &quot;게시물 N개, 최근 3개월 N개&quot; 같은 숫자가 돌지만 네이버가 공개한 기준이 아니다. J는 첫 90일에 신청하지 않는다. 한 주제로 글이 충분히 쌓이고 블로그 통계에서 검색 유입이 안정된 뒤 검토한다.</p>
+<h3>속설과 문서화된 것</h3>
+<table>
+<thead>
+<tr>
+<th>주장</th>
+<th>상태</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&quot;블로그 지수(최적·준최 N단계)가 있다&quot;</td>
+<td>네이버 공식 용어가 아니다</td>
+<td>외부 업체가 자체 모델로 만든 추정값이다. 2025-11 네이버 RSS 접근 방식 변경 뒤 지수 조회 서비스들이 중단됐다(검색 결과로 확인)</td>
+</tr>
+<tr>
+<td>&quot;저품질에 걸렸다&quot;</td>
+<td>네이버가 공개한 상태값이 아니다</td>
+<td>노출 급감을 부르는 커뮤니티 표현이다. 원인은 정책 위반, 문서·출처 평가 변화, 결과 화면 구조 변화(스마트블록·AI 브리핑), 경쟁 글 증가 등 여러 가지일 수 있다</td>
+</tr>
+<tr>
+<td>&quot;1일 1포스팅을 끊으면 순위가 떨어진다&quot;</td>
+<td>문서화되지 않았다</td>
+<td>C-Rank 설명에 활동과 반응(Chain)이 있지만 빈도 공식은 없다</td>
+</tr>
+<tr>
+<td>&quot;글자 수 N자, 사진 N장 이상이어야 한다&quot;</td>
+<td>문서화되지 않았다</td>
+<td>D.I.A. 요소는 정보의 충실성이지 분량 기준이 아니다</td>
+</tr>
+<tr>
+<td>C-Rank, D.I.A.(+) 개념</td>
+<td>네이버가 설명한 개념</td>
+<td>2016, 2018, 2020 발표(검색 결과로 확인)</td>
+</tr>
+<tr>
+<td>스마트블록, 블로그·카페 탭 분리, AI 브리핑</td>
+<td>네이버 발표</td>
+<td>2021-10, 2024-02, 2025-03-27</td>
+</tr>
+</tbody></table>
+<h3>블로그 통계로 실제로 잴 수 있는 것</h3>
+<table>
+<thead>
+<tr>
+<th>잴 수 있는 것</th>
+<th>쓰는 곳</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>조회수·방문자 수 추이 (일·주·월)</td>
+<td>발행 주기와 반응의 관계 보기</td>
+</tr>
+<tr>
+<td>유입 경로와 유입 검색어</td>
+<td>어떤 검색 의도로 들어오는지, 토픽 트리의 다음 글 고르기</td>
+</tr>
+<tr>
+<td>성별·연령·기기 분포</td>
+<td>페르소나 검증 (「주제 선정과 독자 설계」)</td>
+</tr>
+<tr>
+<td>글별 조회수 순위</td>
+<td>클러스터별 성과 비교</td>
+</tr>
+<tr>
+<td>크리에이터 어드바이저 트렌드</td>
+<td>주제 분야의 최근 검색어</td>
+</tr>
+</tbody></table>
+<p>잴 수 없는 것도 분명히 알아 둔다. 내 글의 <strong>순위 점수, C-Rank 값, &quot;지수&quot;는 어떤 공식 화면에도 없다.</strong> 외부 도구가 보여 주는 값은 추정이다. 통계 항목 이름은 2026-09 화면 기준이며 바뀔 수 있다.</p>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;네이버는 1위 자리 하나를 두고 경쟁한다&quot;</strong> — 결과가 의도별 스마트블록, 블로그 탭, AI 브리핑 출처로 나뉜다.</li>
+<li><strong>&quot;C-Rank 점수를 확인할 수 있다&quot;</strong> — 네이버는 개념만 설명했고 점수를 공개하지 않는다.</li>
+<li><strong>&quot;AI로 쓴 글은 무조건 검색에서 빠진다&quot;</strong> — 그런 공식 문서는 찾지 못했다. 반복·대량·저가치 패턴이 문제다.</li>
+<li><strong>&quot;블로그 지수 사이트가 멈췄으니 네이버가 지수를 없앴다&quot;</strong> — 원래 네이버 지수가 아니었다.</li>
+<li><strong>&quot;AI 브리핑에 인용되면 방문자가 늘어난다&quot;</strong> — 인용과 클릭은 별개다. 블로그 통계의 유입으로 확인한다.</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>C-Rank와 D.I.A.+는 각각 &quot;누구&quot;와 &quot;무엇&quot; 중 어느 쪽을 평가하는가? 주제가 흩어진 블로그에 불리한 쪽은?</li>
+<li>2024-02 VIEW 탭 변경 뒤, 블로그 글이 검색 결과에 나타날 수 있는 자리 세 가지는?</li>
+<li>J가 카테고리를 토픽 트리의 클러스터와 일치시킨 이유를 C-Rank 설명과 연결해 말해 보라.</li>
+<li>&quot;저품질에 걸렸다&quot;고 느낄 때, 블로그 통계에서 먼저 확인할 것 두 가지와 속설 대신 점검할 원인 세 가지는?</li>
+<li>네이버 인플루언서 신청을 첫 90일 뒤로 미루는 이유는?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://navercorp.com/media/pressReleasesDetail?seq=30604">네이버, 새로운 검색경험 제공하는 &#39;에어서치&#39; 선보인다</a> — NAVER Corp. 보도자료, 2021-10, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://byline.network/2021/10/26-173/">네이버, 20년 만에 검색 갈아엎는다</a> — 바이라인네트워크, 2021-10-26, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.etnews.com/20240201000022">네이버 VIEW, &#39;인기글&#39; 스마트블록으로 전환…블로그·카페 탭 분리</a> — 전자신문, 2024-02-01, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html">네이버, 27일 검색창에 &#39;AI 브리핑&#39; 도입</a> — 뉴데일리, 2025-03-24, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.sentv.co.kr/article/view/sentv202602060034">네이버 &quot;AI 브리핑 연말까지 2배 확대&quot;</a> — 서울경제TV, 2026-02-06, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://blog.nasmedia.co.kr/entry/2604naspick">네이버 AI 브리핑, 검색을 요약에서 탐색으로 확장하다</a> — 나스미디어, 2026-04, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.newsis.com/view/NISX20260507_0003620731">&quot;이 정보 믿어도 될까&quot;…네이버 AI가 블로그 정체 알려준다</a> — 뉴시스, 2026-05-07, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.news1.kr/it-science/general-it/6164096">검색 신뢰도 집중하는 네이버…AI로 &#39;믿을 수 있는&#39; 출처 가려낸다</a> — 뉴스1, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.edaily.co.kr/News/Read?newsId=03466966645478440">네이버, AI가 인용한 창작자 3000명 공개…&#39;네이버 메이트&#39; 시작</a> — 이데일리, 2026-06, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://v.daum.net/v/6X1XvAe4cP">AI는 어떤 콘텐츠를 선택할까?…&#39;네이버 메이트&#39; 선정 기준 살펴보니</a> — 다음 뉴스, 콘텐츠 원칙 보도, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.twinword.co.kr/blog/naver-seo-d-i-a/">네이버의 최신 검색 상위 랭킹 로직 – 다이아 (D.I.A.)</a> — 트윈워드, 검색 결과로 확인 (2026-09-30). 네이버 서치 공식 블로그 설명을 인용한 해설</li>
+<li><a href="https://www.ascentkorea.com/naver_seo_strategies_2/">네이버 SEO(2편) 알고리즘과 검색엔진시스템 총정리</a> — 어센트코리아, 검색 결과로 확인 (2026-09-30). C-Rank·D.I.A.+ 설명 인용</li>
+<li><a href="https://news.nate.com/view/20250520n29594">&quot;AI로 만든 콘텐츠입니다&quot;⋯네이버 &#39;AI 활용 콘텐츠&#39; 표시 도입</a> — 네이트 뉴스, 2025-05-20, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://news.mtn.co.kr/news-detail/2026072417015682342">네이버, AI 생성물 표기 이중 기준...쇼핑은 의무·블로그는 자율</a> — MTN, 2026-07-24, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.i-boss.co.kr/ab-6141-68793">블덱스 서비스 종료 및 환불 사태, &#39;네이버 최적·준최 지수 폐지?&#39; 팩트체크 총정리</a> — 아이보스, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://gobooki.net/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%9D%B8%ED%94%8C%EB%A3%A8%EC%96%B8%EC%84%9C-%EA%B2%80%EC%83%89-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%B3%80%EA%B2%BD/">네이버, 인플루언서 검색 알고리즘 변경... 문서 품질도 중요해져</a> — 거북이 미디어 전략 연구소, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.ajunews.com/view/20241115102251443">대가 받은 블로그·후기글 제목·첫부분에 &#39;광고&#39;·&#39;협찬&#39; 명시해야</a> — 아주경제, 2024-11-15, 검색 결과로 확인 (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../creator/01-niche-audience/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>주제 선정과 독자 설계</span></a><a class="page-link next" href="../../creator/03-blog-writing/"><span><small>다음 문서</small>블로그 글쓰기와 운영</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

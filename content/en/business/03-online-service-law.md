@@ -41,13 +41,14 @@ The items the policy must contain are set by Article 30(1) of the Act and Articl
 | Outsourcing of processing | If applicable |
 | Cross-border transfer (legal ground, items, country, recipient, etc.) | If applicable |
 | Destruction procedure and method (with the legal ground and items if a law requires retention) | Always |
-| Whether sensitive data may become public and how to choose non-disclosure (Act Article 30(1) item 4-2, related to Article 23(3), effective 2024-03-15) | If applicable |
+| Whether sensitive data may become public and how to choose non-disclosure (Act Article 30(1) item 4-2 (article number needs verification), related to Article 23(3), effective 2024-03-15) | If applicable |
 | Rights and duties of data subjects and legal guardians, and how to exercise them | Always |
 | Security safeguards | Always |
 | Installation, operation and refusal of automatic collection tools (cookies, analytics and ad SDKs, etc.) | If applicable |
 | Name of the chief privacy officer, or the responsible department and contact details | Always |
-| Department that receives and handles access requests | Recommended by the drafting guidelines (statutory basis needs verification) |
-| Remedies for infringement of data subjects' rights | Recommended by the drafting guidelines (statutory basis needs verification) |
+| Department that receives and handles access requests | Always (Enforcement Decree Article 31(1)) |
+| Remedies for infringement of data subjects' rights | Always (Enforcement Decree Article 31(1)) |
+| Changes to the privacy policy | Always (Enforcement Decree Article 31(1)) |
 
 The Personal Information Protection Commission (PIPC) publishes **Privacy Policy Drafting Guidelines**. A revised edition was released in April 2025, so write from the latest edition.
 
@@ -83,7 +84,7 @@ Mobile apps carry a few more legal duties than web services.
 |---|---|---|
 | Location-based service business report | Location Information Act Article 9, special rule for small businesses Article 9-2 | Businesses offering location-based services using personal location data report to the Korea Media and Communications Commission. Small business owners and one-person creative companies may start without reporting, but must report to continue past 1 month after starting |
 | App access permission notice and consent | Network Act Article 22-2 | Apps that access device data or functions such as camera, location or contacts. **Separate required and optional permissions, explain them and get consent**, and do not refuse service because an optional permission was declined |
-| Sending advertising information (push marketing) | Network Act Article 50 | Anyone sending commercial ads by app push, text or email. **Explicit prior consent**, separate consent for sending between 9 p.m. and 8 a.m., and periodic confirmation of consent |
+| Sending advertising information (push marketing) | Network Act Article 50 | Anyone sending commercial ads by app push, text or email. **Explicit prior consent**, separate consent for sending between 9 p.m. and 8 a.m. (email excepted, under the proviso to Article 50(3) and the Enforcement Decree), and periodic confirmation of consent |
 | Game rating classification | Game Industry Promotion Act Articles 21 and 21-2 | Anyone distributing or offering a game. Get a rating from the Game Rating and Administration Committee or a self-rating business (such as an app market) |
 | Harmful-to-minors media labeling | Youth Protection Act Article 13 | When offering content classified as harmful to minors. Harmful-to-minors label and age verification measures |
 | Personal data breach notification and reporting | PIPA Article 34, Enforcement Decree Articles 39 and 40 | Every personal information controller. Notify data subjects within 72 hours, and report to the PIPC or KISA within 72 hours when the conditions apply (fine for not reporting) |
@@ -103,7 +104,7 @@ An online mall operator must display the trade name, representative's name, busi
 
 ### Subscription Billing and Dark Patterns
 
-The amended E-Commerce Act promulgated on 2024-02-13 **took effect on 2025-02-14** and directly regulates six types of dark patterns.
+The amended E-Commerce Act promulgated on 2024-02-13 **took effect on 2025-02-14** and directly regulates six types of dark patterns. A subscription SaaS that a solo developer sells by card payment may also be covered, so confirm applicability with a legal review.
 
 | Regulated practice | Article | Meaning for a subscription SaaS |
 |---|---|---|

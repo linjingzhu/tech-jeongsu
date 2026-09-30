@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Writing Blog Posts with AI: Tools and Tutorials | MyAI</title>
+    <meta name="description" content="This document covers how to do the writing craft from &quot;Writing and Running a Blog&quot; faster with AI tools, stage by stage. Policy risks such as disclosure,…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07a-ai-blog-workflow/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/07a-ai-blog-workflow/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Writing Blog Posts with AI: Tools and Tutorials | MyAI" />
+    <meta property="og:description" content="This document covers how to do the writing craft from &quot;Writing and Running a Blog&quot; faster with AI tools, stage by stage. Policy risks such as disclosure,…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/07a-ai-blog-workflow.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link active" aria-current="page" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Writing Blog Posts with AI: Tools and Tutorials</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Writing Blog Posts with AI: Tools and Tutorials</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Split one Naver Blog post into seven stages, from topic and keyword research to the publishing checklist, pick the AI tool and official tutorial that fit each stage to learn it quickly, and keep the experience and fact-checking steps that a human must own.</p>
+</blockquote>
+<p>This document covers <strong>how to do the writing craft from &quot;Writing and Running a Blog&quot; faster with AI tools</strong>, stage by stage. Policy risks such as disclosure, mass production and tool terms are in &quot;AI-assisted Production and Platform Policy&quot;, how Naver search evaluates posts is in &quot;Naver Blog and How Naver Search Works&quot;, and how the 10 weekly hours are split is in &quot;One Source, Multi Use (OSMU) Strategy&quot;. Video tools are in &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;, and the prompt library, review protocol, automation and pricing are in &quot;An AI Production Method: Prompts, Review and Automation&quot;. Features and names are <strong>as of 2026-09</strong>. Every link is an address confirmed in search results on 2026-09-30; none could be opened directly from this environment. Tool names are <strong>neutral examples</strong>, not recommendations.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>How this document uses it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Grounded research</td>
+<td>Using AI so that every answer carries a source, or answers only from material you uploaded</td>
+<td>The default for the research stage</td>
+</tr>
+<tr>
+<td>Deep research</td>
+<td>A feature where the AI searches and reads many times, then writes a report with sources</td>
+<td>Used only when digging into a new topic</td>
+</tr>
+<tr>
+<td>Project memory</td>
+<td>A workspace where instructions and files, added once, apply to every chat inside it</td>
+<td>Holds the style guide and the post template</td>
+</tr>
+<tr>
+<td>Style guide</td>
+<td>A one-page document of tone, term spellings, banned phrases and post structure</td>
+<td>Fixes the floor of draft quality</td>
+</tr>
+<tr>
+<td>AI Briefing</td>
+<td>Naver&#39;s AI summary answer at the top of search, shown with blog and other source posts</td>
+<td>The standard for writing in a citable structure</td>
+</tr>
+<tr>
+<td>Tutorial</td>
+<td>A vendor&#39;s official help page or course, or a lesson video from a proven creator</td>
+<td>Worth 20-30 minutes the first time you use a tool</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. The seven-stage flow</h3>
+<p>At each stage AI takes <strong>drafting and sorting</strong>, and the human takes <strong>direction, experience and checking</strong>. Instead of skipping stages, pick just one tool per stage.</p>
+<pre><code class="language-mermaid">flowchart LR
+    K[1 Topic and keywords] --&gt;|Reader questions| R[2 Grounded research]
+    R --&gt;|Research notes| D[3 Outline and draft]
+    D --&gt;|Marked gaps| I[4 Images and diagrams]
+    D --&gt;|Table slots| T[5 Tables and templates]
+    I --&gt; F[6 Fact-check and human edit]
+    T --&gt; F
+    F --&gt;|Pass| P[7 Publishing checklist]
+    F --&gt;|Needs fixes| D
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What AI does</th>
+<th>What the human does</th>
+<th>Typical tools (examples)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 Topic and keywords</td>
+<td>Cluster search terms, turn them into questions</td>
+<td>Check the numbers, choose the topic</td>
+<td>Naver DataLab, the search-ad keyword tool + a chat AI</td>
+</tr>
+<tr>
+<td>2 Grounded research</td>
+<td>Find sources, summarize, find counterpoints</td>
+<td>Open the originals, note the dates</td>
+<td>Perplexity, Gemini Notebook (formerly NotebookLM), web search and deep research</td>
+</tr>
+<tr>
+<td>3 Outline and draft</td>
+<td>Heading candidates, sentence drafts</td>
+<td>Reorder to the steps you actually did</td>
+<td>Claude Projects, ChatGPT Projects, Gemini Gems (→ Skills)</td>
+</tr>
+<tr>
+<td>4 Images and diagrams</td>
+<td>Concept diagrams, cover backgrounds</td>
+<td>Capture real screens, hide personal data</td>
+<td>Canva AI, image generators, a screenshot tool</td>
+</tr>
+<tr>
+<td>5 Tables and templates</td>
+<td>Suggest formulas, sample data</td>
+<td>Verify formulas, tidy the download file</td>
+<td>Copilot in Excel, Gemini in Sheets</td>
+</tr>
+<tr>
+<td>6 Fact-check and edit</td>
+<td>List the claims to check</td>
+<td>Compare with official docs, write the experience lines</td>
+<td>A second AI, official help pages</td>
+</tr>
+<tr>
+<td>7 Publish</td>
+<td>Spelling and duplicate checks</td>
+<td>Final check of labels, links and rights</td>
+<td>Checklist</td>
+</tr>
+</tbody></table>
+<h3>2. Topic and keywords: numbers from Naver&#39;s tools, clustering by AI</h3>
+<ul>
+<li><strong>Tools</strong>: the tool descriptions of Naver DataLab search trends and the search-ad keyword tool are in &quot;Choosing a Topic and Audience&quot;. This section covers only the order in which to use the two tools with AI.</li>
+<li><strong>How to</strong>: (1) In the keyword tool, download the related keywords for a seed term such as &quot;Excel duplicates&quot;. (2) Paste the list into an AI and ask it to &quot;group these by search intent and turn each group into one reader question&quot;. (3) Check the seasonality of the top two or three groups in DataLab. (4) Copy the numbers <strong>from the tool screens</strong>, not from the AI.</li>
+<li><strong>Tutorials</strong>: <a href="https://www.ascentkorea.com/naver-datalab-guide/">Naver DataLab guide</a> (Korean, Ascent Korea), <a href="https://www.theegg.com/ko/insights/naver-keyword-tool-explained/">Using the Naver keyword tool effectively</a> (Korean, The Egg), video <a href="https://www.youtube.com/watch?v=PjvqZZoZVLg">Comparing four Naver search-volume tools</a> (Korean, a marketer&#39;s lesson).</li>
+</ul>
+<p>Do not ask an AI &quot;which keywords have high search volume&quot;. A chat AI does not know Naver&#39;s search volumes and will invent plausible numbers.</p>
+<h3>3. Grounded research: opening the source is part of the research</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Good at</th>
+<th>How to</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Perplexity</td>
+<td>A source link on every answer. Pro Search and Deep Research modes</td>
+<td>Pick the mode and write a specific question. Put standing instructions for repeat topics in Spaces (the help page is now titled Projects)</td>
+<td><a href="https://www.perplexity.ai/help-center/en/articles/10352903-what-is-pro-search">What is Pro Search?</a> (English), <a href="https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research">Introducing Perplexity Deep Research</a> (English)</td>
+</tr>
+<tr>
+<td>Gemini Notebook (formerly NotebookLM)</td>
+<td>Answers only from the PDFs, web pages and YouTube videos you add, with citations</td>
+<td>Add official help pages and your practice file as sources and ask &quot;say so if it is not in these sources&quot;</td>
+<td><a href="https://support.google.com/notebooklm/answer/16164461">Learn about NotebookLM</a> (English), video <a href="https://www.youtube.com/watch?v=eeJz8HAyTk0">12 practical ways to use NotebookLM</a> (Korean, Oppadu Excel)</td>
+</tr>
+<tr>
+<td>ChatGPT deep research</td>
+<td>Described as proposing a research plan you review and edit, then writing a report (confirmed via search results; how it starts may change)</td>
+<td>Pick Deep Research from the tools menu (+) and state the reader, scope and output format</td>
+<td><a href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt">Deep research in ChatGPT</a> (English)</td>
+</tr>
+<tr>
+<td>Gemini Deep Research</td>
+<td>Shows a research plan first, then generates the report</td>
+<td>Choose Deep Research at gemini.google.com</td>
+<td><a href="https://support.google.com/gemini/answer/15719111?hl=ko&co=GENIE.Platform%3DDesktop">Use Deep Research in the Gemini app</a> (Korean)</td>
+</tr>
+<tr>
+<td>Claude web search and Research</td>
+<td>Turn on web search; on paid plans, Research runs many searches</td>
+<td>Turn on web search from the + menu in the input box, then choose Research</td>
+<td><a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search">Enable and use web search</a> (English), <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude">Use research on Claude</a> (English)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Rename</strong>: on 2026-07-16 Google announced that NotebookLM is renamed Gemini Notebook. It is the same product, and existing notebooks and links are said to keep working (confirmed via search results). The help-page addresses still contain notebooklm.</li>
+<li><strong>Rule</strong>: keep <strong>the original address and the date you checked it</strong> in your research notes, not the AI summary. Open every source the AI gives and check that the sentence is really there. A deep-research report is a &quot;reading list&quot;, not a conclusion to quote.</li>
+</ul>
+<h3>4. Outline and draft: put the style guide in once</h3>
+<p>If you retype instructions such as &quot;friendly, answer first&quot; every time, results drift. Put your style guide and the post template from &quot;Writing and Running a Blog&quot; into <strong>project memory</strong>, and draft only inside it.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What to put in</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Projects + styles</td>
+<td>Project instructions (style guide), project knowledge (template, two or three past posts). You can also build a custom style from samples of your writing</td>
+<td><a href="https://support.claude.com/en/articles/9517075-what-are-projects">What are projects?</a> (English), <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects · Claude Academy</a> (English course)</td>
+</tr>
+<tr>
+<td>ChatGPT Projects</td>
+<td>Project files and instructions. Custom GPTs are being retired and personal accounts are reported to be unable to create new GPTs, so use Projects (confirmed via search results; &quot;An AI Production Method: Prompts, Review and Automation&quot;)</td>
+<td><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a> (English), <a href="https://openai.com/academy/writing/">Writing with ChatGPT</a> (English)</td>
+</tr>
+<tr>
+<td>Gemini Gems</td>
+<td>The Gem&#39;s name and instructions (style guide), reference files. Personal accounts are due to move to Skills from 2026-11-17, so keep the original instructions in your own file</td>
+<td><a href="https://support.google.com/gemini/answer/15236321?hl=ko">Get started with Gems in the Gemini app</a> (Korean)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>How to</strong>: (1) Paste the research notes and the reader questions and ask for <strong>only the outline</strong> first. (2) Reorder the outline to the steps you actually did. (3) Ask for a draft one heading at a time. (4) Have the draft leave <code>[experience]</code> slots wherever a line such as &quot;when I tried it&quot; or &quot;in my file&quot; belongs. A human fills those slots.</li>
+<li>For the actual prompt text, use the prompt library in &quot;An AI Production Method: Prompts, Review and Automation&quot;.</li>
+</ul>
+<h3>5. Naver&#39;s AI: what exists in 2026 and what does not</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status as of 2026-09</th>
+<th>What it means for a blogger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLOVA X and Cue:</td>
+<td>Shut down on 2026-04-09. Naver&#39;s stated direction is to fold HyperCLOVA X technology into core services such as search (confirmed via reports)</td>
+<td>There is no Naver chatbot to write posts with</td>
+</tr>
+<tr>
+<td>An AI writing helper in SmartEditor</td>
+<td>No official AI writing assistant could be confirmed in search results</td>
+<td>Draft in outside tools and polish in the editor</td>
+</tr>
+<tr>
+<td>AI Briefing</td>
+<td>Introduced 2025-03. Shows blog and other source posts with the summary at the top of search. 30 million monthly users per a 2026-08 press release</td>
+<td>A post with the answer on its first screen becomes a citation candidate</td>
+</tr>
+<tr>
+<td>AI Tab</td>
+<td>Beta for Naver Plus members on 2026-04-28, full launch for all users on 2026-06-26 (confirmed via reports)</td>
+<td>Conversational search also uses source posts</td>
+</tr>
+<tr>
+<td>Naver Mate</td>
+<td>Beta from 2026-06. Reported to pick about 3,000 creators a month by AI Briefing citations, topic expertise and activity, and pay them an activity grant</td>
+<td>Citations are a new reward metric. Revenue as a whole is in &quot;Ad Revenue: AdPost and the YouTube Partner Program&quot;</td>
+</tr>
+<tr>
+<td>AI-use label</td>
+<td>A label for AI-generated images and videos. Voluntary on the blog</td>
+<td>The labelling standard is in &quot;AI-assisted Production and Platform Policy&quot;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Posts that get cited</strong>: the content principles and citation exclusions Naver was reported to set out in 2026-05 are covered in the AI Briefing and source selection section of &quot;Naver Blog and How Naver Search Works&quot;.</li>
+<li><strong>Conclusion</strong>: a post that reads as AI-written moves away from citation. How AI Briefing chooses documents is in &quot;Naver Blog and How Naver Search Works&quot;, and generative search in general is in &quot;AI Search · GEO/AEO&quot;.</li>
+</ul>
+<h3>6. Images and diagrams: capture real screens, use AI only for concepts</h3>
+<table>
+<thead>
+<tr>
+<th>Use</th>
+<th>Tool (example)</th>
+<th>How to</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Covers and diagrams</td>
+<td>Canva AI</td>
+<td>Put the title into a template and use AI to vary the background and layout</td>
+<td><a href="https://www.canva.com/help/using-canva-ai/">Getting started with Canva AI</a> (Korean help page), <a href="https://www.youtube.com/@canvakorea">Canva&#39;s official Korean channel</a> (Korean)</td>
+</tr>
+<tr>
+<td>Concept illustrations</td>
+<td>ChatGPT image generation</td>
+<td>State the aspect ratio and any text in the prompt</td>
+<td><a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">Images in ChatGPT</a> (English)</td>
+</tr>
+<tr>
+<td>Concept illustrations</td>
+<td>Gemini app image generation (Nano Banana)</td>
+<td>Create an image from the tools menu, or edit an uploaded image</td>
+<td><a href="https://support.google.com/gemini/answer/14286560?hl=ko">Generate and edit images with the Gemini app</a> (Korean)</td>
+</tr>
+<tr>
+<td>Stylized images</td>
+<td>Midjourney</td>
+<td>Generate on the web Create page</td>
+<td><a href="https://docs.midjourney.com/docs/quick-start">Getting Started Guide</a> (English)</td>
+</tr>
+<tr>
+<td>Images with text</td>
+<td>Ideogram</td>
+<td>Put the exact wording in quotation marks</td>
+<td><a href="https://docs.ideogram.ai/using-ideogram/getting-started/prompting-guide/2-prompting-fundamentals/text-and-typography">Text and Typography</a> (English)</td>
+</tr>
+<tr>
+<td>Real screens</td>
+<td>Windows Snipping Tool</td>
+<td>Capture with Windows logo key+Shift+S, mark with the pen, hide emails with text actions</td>
+<td><a href="https://www.microsoft.com/ko-kr/windows/tips/snipping-tool">Snipping Tool</a> (Korean)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Rule</strong>: any image that says &quot;this is what it really looks like&quot;, such as an Excel screen, <strong>must be captured by you</strong>. A fake screenshot drawn by AI misleads readers and destroys a tutorial&#39;s credibility.</li>
+<li><strong>Rights</strong>: commercial-use terms differ between free and paid plans. The one-line summary and the check procedure are in &quot;AI-assisted Production and Platform Policy&quot;, and font and image copyright is in &quot;Disclosure, Copyright and Tax&quot;.</li>
+</ul>
+<h3>7. Tables and templates: J&#39;s topic itself</h3>
+<ul>
+<li><strong>Copilot in Excel</strong>: the help page says to open it with the Copilot icon at the lower right of Excel (confirmed via search results; in some versions it may be the button on the ribbon&#39;s Home tab), then ask in plain words for formulas, charts, PivotTables and formatting. The 2026-09 help page describes three modes: edit, plan and chat (confirmed via search results). What personal Microsoft 365 plans include, and Korean-language support, can differ by plan.</li>
+<li><strong>Gemini in Sheets</strong>: use &quot;Ask Gemini&quot; at the upper right to request tables, formulas, analysis and charts. Check the help page for which plans include it.</li>
+<li><strong>How to</strong>: (1) Have the AI make <strong>practice sample data</strong>, such as &quot;30 rows of fictional orders&quot;. Never paste real company data. (2) Take the AI&#39;s formula suggestion but enter it in a cell yourself and check the result. (3) Keep only formulas that work without any AI feature in the template you distribute.</li>
+<li><strong>Tutorials</strong>: <a href="https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel">Get started with Copilot in Excel</a> (English), <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-video-tutorials">Microsoft Copilot video tutorials</a> (English), <a href="https://www.oppadu.com/lesson/xl-copilot-tips/">Practical Excel Copilot for office workers</a> (Korean, Oppadu Excel), <a href="https://support.google.com/docs/answer/14356410?hl=ko-kr">Collaborate with Gemini in Google Sheets</a> (Korean), video <a href="https://www.youtube.com/watch?v=lfGIQbzyhFs">Gemini: Your always-on AI assistant in Sheets</a> (English).</li>
+</ul>
+<h3>8. Fact-check and the human edit pass</h3>
+<ol>
+<li>Use the P7 template to list the <strong>claims to check</strong> in the draft (function names and arguments, menu names, versions, numbers).</li>
+<li>Check that list following the review protocol and the pre-publish checklist in section 5 of &quot;An AI Production Method: Prompts, Review and Automation&quot;. The <code>[experience]</code> slots count as placeholders under that checklist. For Excel functions the standard is an official page such as <a href="https://support.microsoft.com/en-us/excel/excel-functions-alphabetical">Excel functions (alphabetical)</a> plus your own screen.</li>
+</ol>
+<h3>9. Publishing checklist (the AI parts)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> You decided whether to add the &quot;AI-use&quot; label to AI-made images (standard in &quot;AI-assisted Production and Platform Policy&quot;).</li>
+<li><input disabled="" type="checkbox"> You checked the image tool&#39;s plan and commercial-use terms.</li>
+<li><input disabled="" type="checkbox"> Any affiliate or sponsored link is disclosed on the first screen (&quot;Disclosure, Copyright and Tax&quot;).</li>
+<li><input disabled="" type="checkbox"> Links to official docs and videos in the post open, and you added a link to your own video on the same topic.</li>
+</ul>
+<h2>Applied: One Post by Example Creator J (the AI Version)</h2>
+<p>Example creator J spends about 2 of their 10 weekly hours on the blog (&quot;Writing and Running a Blog&quot;). This week&#39;s topic is &quot;Remove Excel duplicates in one go&quot;. All times are illustrative assumptions.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>J&#39;s tool</th>
+<th>Output</th>
+<th>Hours (assumed)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 Topic and keywords</td>
+<td>Keyword tool + clustering by intent in Claude</td>
+<td>Five reader questions</td>
+<td>Inside the shared outline time</td>
+</tr>
+<tr>
+<td>2 Grounded research</td>
+<td>Three Microsoft help pages as sources in Gemini Notebook</td>
+<td>Research notes with sources and dates</td>
+<td>Inside the shared outline time</td>
+</tr>
+<tr>
+<td>3 Outline and draft</td>
+<td>Claude Projects (style guide, two past posts)</td>
+<td>A draft with <code>[experience]</code> slots marked</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>4 Images</td>
+<td>Six step captures with the Snipping Tool, one cover in Canva</td>
+<td>Captioned images</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>5 Tables and templates</td>
+<td>Sample data and draft formulas with Copilot in Excel</td>
+<td>Practice file</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>6 Check and edit</td>
+<td>Cross-check in ChatGPT, compare with official docs</td>
+<td>A manuscript with <code>[experience]</code> filled</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>7 Publish</td>
+<td>Checklist</td>
+<td>Published post, video link</td>
+<td>0.2</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The 1.5 hours plus the Monday stats check and refresh of 0.5 hours (&quot;Writing and Running a Blog&quot;) fit the 2-hour weekly budget. What AI saves is <strong>drafting</strong> time, and checking and editing time is assumed to grow.</li>
+<li>J makes only the cover with an AI tool and captures every Excel screen directly. In weeks with an AI-generated cover image, J turns on the &quot;AI-use&quot; label.</li>
+<li>J fixes one tool per stage. Trying a new tool every week spends the saved time on learning tools again.</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>Should you aim for AI Briefing citations</h3>
+<p>Citations feed Naver Mate selection, so you will care about them. But the citation standard is public only at the level of principles, and the detailed algorithm is not published. Since the principles themselves are &quot;experience, a consistent topic, easy-to-read structure, currency&quot;, keeping the basics of <strong>putting the answer on the first screen and writing the process you actually followed</strong> points the same way as chasing citations. Industry analyses say heading structure, comparison tables and step-by-step explanations are cited often, but that is not Naver&#39;s official explanation.</p>
+<h3>How to choose tutorial links</h3>
+<p>Use the same standard when you give readers links. (1) Official help pages and courses first, (2) Korean where it exists, (3) material from the last year, (4) avoid channels with titles like &quot;10 million won a month in one day&quot;. Videos age quickly when a tool&#39;s screens change, so pair one video with one official help page in your post.</p>
+<h3>Signs to drop an AI tool</h3>
+<p>If one stage has two or more tools, or setting up and comparing tools takes longer than the time they save, drop one. How to measure time per tool is in &quot;An AI Production Method: Prompts, Review and Automation&quot;.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Just ask the AI for search volume&quot;</strong>: a chat AI does not know Naver&#39;s search volumes. Copy the numbers from the DataLab and keyword-tool screens.</li>
+<li><strong>&quot;It has a source, so it is true&quot;</strong>: sometimes the source link does not support the sentence. Until you open it, the claim is unchecked.</li>
+<li><strong>&quot;Naver has its own AI writing chatbot&quot;</strong>: CLOVA X shut down on 2026-04-09. Naver&#39;s AI now lives in search (AI Briefing, AI Tab).</li>
+<li><strong>&quot;AI images can stand in for screens&quot;</strong>: a tutorial&#39;s screens are evidence. Capture real screens yourself.</li>
+<li><strong>&quot;More tools means more speed&quot;</strong>: savings add up only when you fix one tool per stage.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>What does the value 100 in DataLab search trends mean, and why must you not read it as absolute volume?</li>
+<li>Which research role fits Gemini Notebook (formerly NotebookLM), and which fits deep-research features?</li>
+<li>Name three files J should put into project memory.</li>
+<li>As of 2026-09, name two Naver AI services where a blogger&#39;s posts are used as sources.</li>
+<li>In the fact-check step, what do you do if two AIs give the same answer but the official documentation differs?</li>
+</ol>
+<h2>References</h2>
+<p>Every link was confirmed in search results on 2026-09-30 (not opened directly).</p>
+<p><strong>Naver</strong></p>
+<ul>
+<li><a href="https://zdnet.co.kr/view/?no=20260225180559">Naver ends its generative AI experiment: CLOVA X and Cue: close in April</a> — ZDNet Korea (Korean), 2026-02-25</li>
+<li><a href="https://news.nate.com/view/20260409n31474">Naver AI chatbot CLOVA X shuts down to focus on AI agents</a> — Nate News (Korean), 2026-04-09</li>
+<li><a href="https://www.navercorp.com/media/pressReleasesDetail?seq=10034429">Naver officially launches the conversational search AI Tab</a> — NAVER Corp. press release (Korean), 2026-06</li>
+<li><a href="https://navercorp.com/media/pressReleasesDetail?seq=10034578">Blog creators earn more in the AI era: creator support roughly doubled since AI Briefing</a> — NAVER Corp. press release (Korean), 2026-08</li>
+<li><a href="https://zdnet.co.kr/view/?no=20260622165503">&quot;AI citations over follower counts&quot;: Naver Mate changes the creator ecosystem</a> — ZDNet Korea (Korean), 2026-06-22</li>
+<li><a href="https://v.daum.net/v/6X1XvAe4cP">Which content does AI choose? A look at Naver Mate selection criteria</a> — Daum News (Korean), report on the content principles</li>
+<li><a href="https://blog.nasmedia.co.kr/entry/2606naspick">70% of content cited in AI Briefing is UGC: why Naver created Naver Mate</a> — Nasmedia blog (Korean)</li>
+<li><a href="https://www.ascentkorea.com/naver-datalab-guide/">Naver DataLab guide</a> — Ascent Korea (Korean)</li>
+<li><a href="https://www.theegg.com/ko/insights/naver-keyword-tool-explained/">Using the Naver keyword tool effectively</a> — The Egg (Korean)</li>
+<li><a href="https://www.youtube.com/watch?v=PjvqZZoZVLg">A marketer&#39;s full comparison of four Naver search-volume tools</a> — YouTube (Korean)</li>
+</ul>
+<p><strong>Research tools</strong></p>
+<ul>
+<li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a> — Google Blog, 2026-07</li>
+<li><a href="https://support.google.com/notebooklm/answer/16164461">Learn about NotebookLM</a> — Google Help</li>
+<li><a href="https://blog.google/intl/ko-kr/company-news/technology/notebooklm-audio-overviews-50-languages-kr/">Try NotebookLM&#39;s popular Audio Overviews in Korean</a> — Google Korea Blog (Korean)</li>
+<li><a href="https://www.oppadu.com/live/250/">NotebookLM guide: 12 practical uses for office workers</a> — Oppadu Excel (Korean), <a href="https://www.youtube.com/watch?v=eeJz8HAyTk0">YouTube video</a></li>
+<li><a href="https://www.perplexity.ai/help-center/en/articles/10352903-what-is-pro-search">What is Pro Search?</a>, <a href="https://www.perplexity.ai/help-center/en/articles/10352961-what-are-spaces">What are Projects?</a> — Perplexity Help Center</li>
+<li><a href="https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research">Introducing Perplexity Deep Research</a> — Perplexity blog</li>
+<li><a href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt">Deep research in ChatGPT</a> — OpenAI Help Center</li>
+<li><a href="https://support.google.com/gemini/answer/15719111?hl=ko&co=GENIE.Platform%3DDesktop">Use Deep Research in the Gemini app</a> — Gemini Apps Help (Korean)</li>
+<li><a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search">Enable and use web search</a>, <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude">Use research on Claude</a> — Claude Help Center</li>
+</ul>
+<p><strong>Drafting tools and courses</strong></p>
+<ul>
+<li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">What are projects?</a> — Claude Help Center; <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Claude Academy; Styles (no link: the original announcement URL returns 404 as of 2026-09-30) — Anthropic; <a href="https://www.youtube.com/@anthropic-ai">Anthropic YouTube channel</a></li>
+<li><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a> — OpenAI Help Center; <a href="https://openai.com/academy/writing/">Writing with ChatGPT</a> — OpenAI Academy; <a href="https://openai.com/academy/custom-gpts/">Using custom GPTs</a> — OpenAI Academy (custom GPTs are being retired)</li>
+<li><a href="https://support.google.com/gemini/answer/15236321?hl=ko">Get started with Gems in the Gemini app</a> — Gemini Apps Help (Korean)</li>
+<li><a href="https://grow.google/ai-essentials/">Google AI Essentials</a> — Grow with Google introductory course</li>
+</ul>
+<p><strong>Images and screenshots</strong></p>
+<ul>
+<li><a href="https://www.canva.com/help/using-canva-ai/">Getting started with Canva AI</a> — Canva Help; <a href="https://www.youtube.com/@canvakorea">Canva</a> — Canva&#39;s official Korean YouTube</li>
+<li><a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt">Images in ChatGPT</a> — OpenAI Help Center</li>
+<li><a href="https://support.google.com/gemini/answer/14286560?hl=ko">Generate and edit images with the Gemini app</a> — Gemini Apps Help (Korean)</li>
+<li><a href="https://docs.midjourney.com/docs/quick-start">Getting Started Guide</a> — Midjourney; <a href="https://docs.ideogram.ai/using-ideogram/getting-started/prompting-guide/2-prompting-fundamentals/text-and-typography">Text and Typography</a> — Ideogram</li>
+<li><a href="https://www.microsoft.com/ko-kr/windows/tips/snipping-tool">Snipping Tool</a> — Microsoft Windows (Korean)</li>
+</ul>
+<p><strong>Tables and templates, fact-checking</strong></p>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel">Get started with Copilot in Excel</a>, <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-video-tutorials">Microsoft Copilot video tutorials</a>, <a href="https://support.microsoft.com/en-us/excel/excel-functions-alphabetical">Excel functions (alphabetical)</a> — Microsoft Support</li>
+<li><a href="https://www.oppadu.com/lesson/xl-copilot-tips/">Practical Excel Copilot for office workers</a> — Oppadu Excel (Korean); <a href="https://www.youtube.com/@Oppadu">Oppadu Excel YouTube</a></li>
+<li><a href="https://support.google.com/docs/answer/14356410?hl=ko-kr">Collaborate with Gemini in Google Sheets</a> — Google Docs Editors Help (Korean); <a href="https://www.youtube.com/watch?v=lfGIQbzyhFs">Gemini: Your always-on AI assistant in Sheets</a> — YouTube (English)</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">Google Search&#39;s guidance on using generative AI content on your website</a> — Google Search Central (general principles of another search engine, for reference)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/07-ai-production-policy/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>AI-assisted Production and Platform Policy</span></a><a class="page-link next" href="../../../en/creator/07b-ai-video-workflow/"><span><small>Next</small>Making YouTube Videos with AI: Tools and Tutorials</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

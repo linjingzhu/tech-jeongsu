@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>AI로 유튜브 영상 만들기: 도구와 튜토리얼 | MyAI(마이아이)</title>
+    <meta name="description" content="이 문서는 「롱폼 영상 기획과 제작」과 「Shorts와 얼굴 없는 채널」에서 다룬 제작 기술을 AI 도구로 더 빨리 하는 방법을 단계별로 모았다. 합성 콘텐츠 표시, inauthentic content, 도구 약관 같은 정책 위험은 「AI 활용 제작과 플랫폼 정책」에서, 블로…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="AI로 유튜브 영상 만들기: 도구와 튜토리얼 | MyAI(마이아이)" />
+    <meta property="og:description" content="이 문서는 「롱폼 영상 기획과 제작」과 「Shorts와 얼굴 없는 채널」에서 다룬 제작 기술을 AI 도구로 더 빨리 하는 방법을 단계별로 모았다. 합성 콘텐츠 표시, inauthentic content, 도구 약관 같은 정책 위험은 「AI 활용 제작과 플랫폼 정책」에서, 블로…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/creator/07b-ai-video-workflow.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI 기초와 테스트 전략</a><a class="tree-link" href="../../platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions 실전</a><a class="tree-link" href="../../platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">배포 자동화와 버전 관리</a><a class="tree-link" href="../../platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">AI 시대의 CI/CD</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../assets/icons/video.svg" alt="" aria-hidden="true"><span>블로그·유튜브 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../creator/00-overview/" data-path="content/creator/00-overview.md">블로그·유튜브 수익화 전체 개요</a><a class="tree-link" href="../../creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">주제 선정과 독자 설계</a><a class="tree-link" href="../../creator/02-naver-search/" data-path="content/creator/02-naver-search.md">네이버 블로그와 검색 구조</a><a class="tree-link" href="../../creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">블로그 글쓰기와 운영</a><a class="tree-link" href="../../creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">유튜브 추천 구조와 채널 설계</a><a class="tree-link" href="../../creator/05-longform/" data-path="content/creator/05-longform.md">롱폼 영상 기획과 제작</a><a class="tree-link" href="../../creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts와 얼굴 없는 채널</a><a class="tree-link" href="../../creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI 활용 제작과 플랫폼 정책</a><a class="tree-link" href="../../creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">AI로 블로그 글 만들기: 도구와 튜토리얼</a><a class="tree-link active" aria-current="page" href="../../creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">AI로 유튜브 영상 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">AI 제작 방법론: 프롬프트·검수·자동화</a><a class="tree-link" href="../../creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">광고 수익: 애드포스트와 YouTube 파트너 프로그램</a><a class="tree-link" href="../../creator/09-own-products/" data-path="content/creator/09-own-products.md">자체 상품 수익: 강의·전자책·템플릿</a><a class="tree-link" href="../../creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">표시 의무·저작권·세금</a><a class="tree-link" href="../../creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">원소스 멀티유즈(OSMU) 전략</a><a class="tree-link" href="../../creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">채널 90일 실행 계획</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>블로그·유튜브 수익화</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>AI로 유튜브 영상 만들기: 도구와 튜토리얼</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>AI로 유튜브 영상 만들기: 도구와 튜토리얼</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: 롱폼·Shorts·얼굴 없는 영상의 제작을 아이디어부터 분석까지 9단계로 나누고, 단계마다 YouTube 내장 AI와 외부 도구 가운데 하나를 골라 공식 튜토리얼로 첫 사용법을 익히며, 한국에서 쓸 수 있는 기능과 아직 확인되지 않은 기능을 구분할 수 있다.</p>
+</blockquote>
+<p>이 문서는 「롱폼 영상 기획과 제작」과 「Shorts와 얼굴 없는 채널」에서 다룬 제작 기술을 <strong>AI 도구로 더 빨리 하는 방법</strong>을 단계별로 모았다. 합성 콘텐츠 표시, inauthentic content, 도구 약관 같은 정책 위험은 「AI 활용 제작과 플랫폼 정책」에서, 블로그 쪽 도구는 「AI로 블로그 글 만들기: 도구와 튜토리얼」에서, 프롬프트 모음·검수 절차·자동화·요금은 「AI 제작 방법론: 프롬프트·검수·자동화」에서, 주 10시간 배분은 「원소스 멀티유즈(OSMU) 전략」에서 다룬다. 기능 이름과 제공 지역은 <strong>2026-09 기준</strong>이다. YouTube의 AI 기능은 나라·기기·채널별로 순차 제공되므로 &quot;한국에서 확인됨&quot;과 &quot;확인 안 됨&quot;을 나눠 적었다. 링크는 모두 2026-09-30 검색 결과에 나온 주소이며, 이 환경에서는 직접 열어 보지 못했다. 도구 이름은 <strong>중립적인 예시</strong>일 뿐 추천이 아니다.</p>
+<h2>핵심 개념</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>뜻</th>
+<th>이 문서에서의 쓰임</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ask Studio</td>
+<td>YouTube Studio 안의 대화형 AI. 내 채널 데이터·댓글·업로드 기록으로 아이디어와 분석 답을 준다</td>
+<td>아이디어와 분석 단계의 기본값</td>
+</tr>
+<tr>
+<td>영감(Inspiration) 탭</td>
+<td>아이디어·제목·썸네일·개요를 제안하던 Studio 탭</td>
+<td>2026-08부터 단계적 종료, Ask Studio로 대체</td>
+</tr>
+<tr>
+<td>텍스트 기반 편집</td>
+<td>음성을 받아 적은 텍스트를 지우거나 옮기면 영상이 같이 잘리는 편집 방식</td>
+<td>화면 녹화 강의의 컷 편집</td>
+</tr>
+<tr>
+<td>보이스 클로닝</td>
+<td>내 목소리 샘플로 AI 음성을 만드는 기능</td>
+<td>Shorts 한 편의 시험에만. 롱폼의 틀린 단어는 다시 녹음한다. 표시 기준은 07 문서</td>
+</tr>
+<tr>
+<td>생성형 영상</td>
+<td>프롬프트로 짧은 영상 클립을 만드는 모델 (Veo, Runway, Kling 등)</td>
+<td>설명용 B-roll 한정</td>
+</tr>
+<tr>
+<td>자동 더빙</td>
+<td>YouTube가 영상 음성을 다른 언어로 번역해 오디오 트랙을 만드는 기능</td>
+<td>게시 후 선택 단계</td>
+</tr>
+<tr>
+<td>튜토리얼</td>
+<td>뜻과 고르는 기준은 「AI로 블로그 글 만들기: 도구와 튜토리얼」을 따른다</td>
+<td>도구를 처음 쓸 때 20~30분 투자</td>
+</tr>
+</tbody></table>
+<h2>원리</h2>
+<h3>1. 9단계 흐름과 사람의 확인 지점</h3>
+<p>AI는 <strong>초안과 반복 작업</strong>을 맡고, 사람은 <strong>경험·화면·판단</strong>을 맡는다. 화살표의 라벨이 사람이 개입하는 지점이다.</p>
+<pre><code class="language-mermaid">flowchart LR
+    IDEA[1 아이디어] --&gt;|주제 하나 고르기| SCRIPT[2 대본·훅]
+    SCRIPT --&gt;|경험·수치 추가| VOICE[3 목소리]
+    VOICE --&gt; REC[4 화면 녹화]
+    REC --&gt; EDIT[5 AI 편집]
+    EDIT --&gt;|필요할 때만| BROLL[6 생성형 B-roll]
+    EDIT --&gt;|용어 교정| THUMB[7 썸네일·제목]
+    BROLL --&gt;|사실적이면 표시| THUMB
+    THUMB --&gt; PUB[게시]
+    PUB --&gt; CAP[8 자막·번역·더빙]
+    PUB --&gt; DATA[9 분석]
+    DATA --&gt;|다음 주제| IDEA
+</code></pre>
+<h3>2. YouTube 내장 AI 기능: 한국에서 쓸 수 있나</h3>
+<p>외부 도구보다 먼저 확인할 것은 YouTube Studio와 Shorts 앱에 이미 있는 기능이다. 무료이고, 채널 데이터와 바로 연결된다. 다만 제공 지역이 기능마다 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>하는 일</th>
+<th>한국 (2026-09 기준)</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ask Studio</td>
+<td>아이디어, 댓글 요약, 분석 질문</td>
+<td><strong>이용 가능</strong> (데스크톱 YouTube Studio)</td>
+<td>YouTube 한국 블로그 (검색 결과로 확인)</td>
+</tr>
+<tr>
+<td>영감 탭</td>
+<td>아이디어 카드 제안</td>
+<td>2026-08부터 단계적 종료</td>
+<td>YouTube 고객센터 (검색 결과로 확인)</td>
+</tr>
+<tr>
+<td>Edit with AI (Shorts)</td>
+<td>촬영본을 골라 음악·전환을 넣은 첫 편집본. 발표 시점 기준 AI 보이스오버(영어·힌디어)도 넣는다</td>
+<td>한국 포함 발표 (2025-11), 일부 기기·크리에이터부터</td>
+<td>PPC Land, YouTube 커뮤니티 공지</td>
+</tr>
+<tr>
+<td>Gemini 대화형 편집</td>
+<td>말이나 글로 지시하면 컷·전환·자막을 배치</td>
+<td>2027년 초 한국·미국 등 14개국 도입 예정이라는 <strong>보도</strong></td>
+<td>ZDNet Korea, 2026-09-24</td>
+</tr>
+<tr>
+<td>Veo 3 Fast (Shorts)</td>
+<td>Shorts 카메라에서 8초 안팎의 AI 클립 생성</td>
+<td><strong>확인 안 됨</strong>. 발표 지역은 미국·영국·캐나다·호주·뉴질랜드(2025-09), 이후 일부 중동·북아프리카</td>
+<td>YouTube 블로그, Google MENA 블로그</td>
+</tr>
+<tr>
+<td>Dream Screen (Veo 2)</td>
+<td>Shorts 배경·클립 생성</td>
+<td><strong>확인 안 됨</strong>. 발표 지역은 미국·캐나다·호주·뉴질랜드</td>
+<td>YouTube 블로그, 2025-02</td>
+</tr>
+<tr>
+<td>스토리텔링 어시스턴트, 다이내믹 썸네일</td>
+<td>대본·가편집 피드백, 시청자별 썸네일 선택</td>
+<td>2026-09-23 발표. 한국 일정 <strong>확인 안 됨</strong></td>
+<td>YouTube 블로그 (Made On YouTube 2026)</td>
+</tr>
+<tr>
+<td>자동 더빙</td>
+<td>다른 언어 오디오 트랙 생성</td>
+<td>한국어 고객센터 문서 있음. 언어 쌍은 Studio에서 확인</td>
+<td>YouTube 고객센터</td>
+</tr>
+<tr>
+<td>YouTube Create 앱</td>
+<td>모바일 편집 앱</td>
+<td>한국 Android 제공 국가 목록에 포함</td>
+<td>YouTube 고객센터</td>
+</tr>
+</tbody></table>
+<p>&quot;확인 안 됨&quot;은 없다는 뜻이 아니라 <strong>공식 자료로 한국 제공을 확인하지 못했다</strong>는 뜻이다. 내 Studio와 Shorts 카메라에 메뉴가 보이는지가 최종 확인이다. 지역 제한을 VPN 등으로 우회하는 방법은 약관 문제가 생길 수 있으므로 쓰지 않는다.</p>
+<h3>3. 아이디어: Ask Studio를 먼저</h3>
+<ul>
+<li><strong>무엇을 하나</strong>: &quot;최근 업로드한 영상의 성과는?&quot;, &quot;시청자들이 편집 스타일에 대해 뭐라고 하나?&quot;처럼 묻는다. 채널 분석, 댓글, 업로드 기록을 근거로 답한다.</li>
+<li><strong>쓰는 법</strong>: 데스크톱 YouTube Studio 오른쪽 위의 반짝임 아이콘을 누른다. 공식 가이드는 &quot;댓글에서 아이디어를 줘&quot;처럼 모호하게 묻기보다 특정 영상을 지정하고, 분석 화면의 용어(&quot;트래픽 소스&quot;, &quot;새 시청자&quot;)를 쓰라고 권한다.</li>
+<li><strong>제한</strong>: 공식 아티스트 채널, 아동용 채널, 만 18세 미만 크리에이터는 쓸 수 없다고 안내된다 (검색 결과로 확인). 답은 AI 요약이므로 숫자는 분석 화면에서 다시 본다.</li>
+<li><strong>튜토리얼</strong>: <a href="https://blog.youtube/intl/ko-kr/news-and-events/ai-ask-studio/">Ask Studio 소개 (한국어)</a>, <a href="https://blog.youtube/creator-and-artist-stories/youtube-ask-studio-creator-guide/">Ask Studio: Getting started guide (영어)</a>, <a href="https://www.youtube.com/watch?v=zpXHtc5m4ZI">시작 가이드 영상 (영어)</a></li>
+</ul>
+<p>영감 탭(예전 이름 Research 탭)은 2026-08부터 단계적으로 사라진다. 키워드 수요를 따로 보고 싶으면 「AI로 블로그 글 만들기: 도구와 튜토리얼」의 키워드 조사 방법을 같이 쓴다.</p>
+<h3>4. 대본과 훅: 범용 LLM + 채널 문맥</h3>
+<ul>
+<li><strong>도구</strong>: Claude, ChatGPT, Gemini 같은 범용 대화형 AI. 스타일 가이드와 지난 대본을 프로젝트 기능에 넣어 두면 매번 설명하지 않아도 된다 (<a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Claude 프로젝트 만들기</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects 강좌</a>).</li>
+<li><strong>순서</strong>: ① 제목·썸네일 약속 한 줄 → ② 첫 30초 훅 후보 3개 → ③ 챕터 개요 → ④ 귀로 듣는 문장으로 초안 → ⑤ J가 직접 겪은 실수·수치를 <code>[경험]</code> 자리에 채운다. 구조 원칙은 「롱폼 영상 기획과 제작」을 따른다.</li>
+<li><strong>YouTube 쪽 변화</strong>: 2026-09-23 Made On YouTube에서 대본과 가편집을 분석해 속도·구조를 제안하는 스토리텔링 어시스턴트가 발표됐다. 한국 제공 일정은 확인하지 못했다.</li>
+<li>프롬프트 원문(훅 3개, Shorts 컷 지점 찾기 등)은 「AI 제작 방법론: 프롬프트·검수·자동화」에 템플릿으로 있다.</li>
+</ul>
+<h3>5. 목소리: 내 목소리가 먼저다</h3>
+<p>얼굴 없는 채널에서 목소리는 진행자다(「Shorts와 얼굴 없는 채널」). 롱폼에서 틀린 단어는 <strong>그 문장을 다시 녹음해</strong> 고친다. AI 음성과 보이스 클로닝은 「롱폼 영상 기획과 제작」에서 정한 대로 Shorts 한 편에서만 시험하는 옵션이다. 합성 음성의 표시와 요금제별 상업 이용 조건은 「AI 활용 제작과 플랫폼 정책」을 본다.</p>
+<table>
+<thead>
+<tr>
+<th>도구 (예시)</th>
+<th>한국어</th>
+<th>특징 (2026-09, 검색 결과로 확인)</th>
+<th>튜토리얼</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vrew AI 목소리</td>
+<td>지원</td>
+<td>편집기 안의 TTS. 준비된 30문장을 읽어 &quot;내 목소리 AI&quot;를 만든다</td>
+<td><a href="https://vrew.ai/ko/feature/ai-voice/">AI 목소리 안내 (한국어)</a></td>
+</tr>
+<tr>
+<td>ElevenLabs</td>
+<td>지원</td>
+<td>TTS·보이스 클로닝·더빙. Eleven v3가 한국어를 포함한다고 문서화</td>
+<td><a href="https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/">Kevin Stratvert 입문 가이드 (영어)</a></td>
+</tr>
+<tr>
+<td>Typecast (타입캐스트)</td>
+<td>지원</td>
+<td>국내 서비스. 감정 연기가 되는 AI 성우 400여 명이라는 2026-04 보도</td>
+<td><a href="https://typecast.ai/kr/learn/how-to-use-typecast/">사용법 (한국어)</a></td>
+</tr>
+<tr>
+<td>CLOVA Dubbing (클로바더빙)</td>
+<td>지원</td>
+<td>네이버클라우드의 AI 보이스 더빙. 무료 이용 시 출처 표기·상업 조건을 약관에서 확인</td>
+<td><a href="https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq">재생목록 (한국어)</a></td>
+</tr>
+<tr>
+<td>Supertone Play (수퍼톤 플레이)</td>
+<td>지원</td>
+<td>HYBE 계열 수퍼톤의 TTS. 2026-01 새 모델로 23개 언어 지원 발표</td>
+<td><a href="https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual">신모델 소개 (한국어)</a></td>
+</tr>
+</tbody></table>
+<p>J의 기준: 본 영상은 본인 목소리로 녹음하고, 틀린 함수 이름은 그 문장만 다시 녹음한다. 보이스 클로닝은 Shorts 시험에만 쓰며, 보이스 클로닝으로 고친 영상은 어느 것이든 07 문서의 보수적 기준에 따라 변경·합성 콘텐츠 설정을 켠다.</p>
+<h3>6. 화면 녹화: 녹화는 사람이, 확대는 도구가</h3>
+<table>
+<thead>
+<tr>
+<th>도구 (예시)</th>
+<th>플랫폼</th>
+<th>AI·자동 기능</th>
+<th>튜토리얼</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OBS Studio</td>
+<td>Windows·macOS·Linux, 무료</td>
+<td>AI 기능은 없다. 설정이 안정적이고 오디오 트랙을 나눠 녹음</td>
+<td><a href="https://obsproject.com/kb/quick-start-guide">공식 Quick Start (영어)</a>, <a href="https://www.youtube.com/watch?v=XuAYjvxi0mE">OBS 사용법 영상 (한국어)</a></td>
+</tr>
+<tr>
+<td>Screen Studio</td>
+<td>macOS 전용이라는 비교 글이 있다</td>
+<td>클릭 위치 자동 확대, 커서 부드럽게</td>
+<td>공식 사이트 주소를 검색 결과로 확인하지 못해 링크하지 않음</td>
+</tr>
+<tr>
+<td>Loom</td>
+<td>브라우저·데스크톱</td>
+<td>자막, 제목·요약·챕터 자동 생성, 군말 제거</td>
+<td><a href="https://support.atlassian.com/loom/docs/loom-ai-features">Loom AI features (영어)</a></td>
+</tr>
+</tbody></table>
+<p>자동 확대는 세로 Shorts를 자를 때 특히 쓸모 있다. 다만 확대할 영역은 녹화 전에 J가 정한다(「Shorts와 얼굴 없는 채널」). Windows에서 자동 확대가 필요하면 편집 단계의 키프레임 확대로 대신한다.</p>
+<h3>7. AI 편집: 텍스트로 자르고, 용어는 사람이 고친다</h3>
+<table>
+<thead>
+<tr>
+<th>도구 (예시)</th>
+<th>AI로 하는 일</th>
+<th>한국어·요금 메모 (검색 결과로 확인)</th>
+<th>튜토리얼</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vrew</td>
+<td>한국어 자동 자막, 텍스트 삭제로 컷 편집, 무음 구간 정리</td>
+<td>2026-04-22 통합 크레딧 방식으로 개편. 무료는 매달 크레딧이 충전된다는 안내</td>
+<td><a href="https://www.youtube.com/watch?v=QtP9PvjMy5E">무작정 따라하기 #1 (한국어)</a>, <a href="https://vrew.ai/ko/blog/all/text-based-video-editing/">텍스트 기반 편집 가이드 (한국어)</a></td>
+</tr>
+<tr>
+<td>CapCut</td>
+<td>자동 캡션, 템플릿, 배경 제거</td>
+<td>자동 캡션 등이 유료 요금제로 옮겨졌다는 보도. 음원·템플릿 상업 조건 확인</td>
+<td><a href="https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles">자막 인식 도움말 (한국어)</a></td>
+</tr>
+<tr>
+<td>Descript</td>
+<td>문서처럼 편집, AI 공동 편집자 Underlord, 음질 보정</td>
+<td>한국어 전사 지원 언어에 포함된다는 제3자 리뷰</td>
+<td><a href="https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started">입문 6단계 (영어)</a></td>
+</tr>
+<tr>
+<td>Premiere Pro</td>
+<td>텍스트 기반 편집, 음성→텍스트 자막, Generative Extend, 미디어 인텔리전스 검색</td>
+<td>구독형. 한국어 전사는 설치 버전에서 확인</td>
+<td><a href="https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html">Text-Based Editing (영어)</a></td>
+</tr>
+<tr>
+<td>DaVinci Resolve</td>
+<td>20: AI IntelliScript(대본으로 가편집), AI 애니메이션 자막, AI 오디오 어시스턴트. 21(2026-06 정식): AI 도구 추가</td>
+<td>AI 기능 상당수가 유료판(Studio) 기능이라는 보도. Studio는 일회성 구매(295달러로 안내, 검색 결과로 확인)</td>
+<td><a href="https://www.blackmagicdesign.com/products/davinciresolve/training">공식 트레이닝 (영어)</a></td>
+</tr>
+<tr>
+<td>YouTube Edit with AI</td>
+<td>Shorts 촬영본으로 첫 편집본. 발표 시점 기준 AI 보이스오버도 넣는다 — J는 끄거나, 남기면 합성 음성 표시</td>
+<td>한국 포함 발표, 순차 제공</td>
+<td><a href="https://support.google.com/youtube/answer/16631240?hl=en-GB">도움말 (영어)</a>, <a href="https://www.youtube.com/shorts/1WW76Rz4nqM">How-to Short (영어)</a></td>
+</tr>
+</tbody></table>
+<p>화면 녹화 강의에서 AI 편집이 가장 많이 틀리는 곳은 <strong>함수 이름·메뉴 이름·숫자</strong>다. &quot;VLOOKUP&quot;이 &quot;브이 룩업&quot;으로, &quot;필터&quot;가 &quot;피터&quot;로 받아 적히는 식이다. 자동 자막은 한 번에 일괄 수정할 단어 목록을 만들어 두면 빨라진다. 도구는 「롱폼 영상 기획과 제작」의 등급표처럼 <strong>하나로 고정</strong>한다.</p>
+<h3>8. 생성형 영상: B-roll에만, 그리고 표시</h3>
+<p>J 같은 튜토리얼 채널에서 생성형 영상의 자리는 좁다. 실제 화면이 증거이기 때문이다. 쓸 만한 곳은 챕터 전환, 개념 비유(&quot;데이터가 쌓이는 창고&quot;) 같은 설명용 B-roll이다.</p>
+<table>
+<thead>
+<tr>
+<th>서비스 (예시)</th>
+<th>2026-09 상태 (검색 결과로 확인)</th>
+<th>링크</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Veo (Google)</td>
+<td>Gemini 앱·Flow·API에서 Veo 3.1 제공. Flow가 140여 개국으로 확대됐다는 자료가 있으나 한국 포함은 확인 못 함</td>
+<td><a href="https://deepmind.google/models/veo/">Veo 모델 소개</a>, <a href="https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/">Flow 공개 (한국어)</a></td>
+</tr>
+<tr>
+<td>Veo in Shorts</td>
+<td>위 표 참고. 한국 확인 안 됨</td>
+<td><a href="https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/">Made on YouTube 2025 도구 설명</a></td>
+</tr>
+<tr>
+<td>Sora (OpenAI)</td>
+<td>앱·웹 2026-04-26 종료, API는 2026-09-24 종료로 안내</td>
+<td><a href="https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation">종료 안내</a></td>
+</tr>
+<tr>
+<td>Runway</td>
+<td>무료 체험 크레딧과 월 구독. 생성 길이만큼 크레딧 차감</td>
+<td><a href="https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work">크레딧 도움말</a></td>
+</tr>
+<tr>
+<td>Kling (Kuaishou)</td>
+<td>2026-02 3.0 공개 보도</td>
+<td><a href="https://kling.ai/">공식 사이트</a></td>
+</tr>
+<tr>
+<td>Pika</td>
+<td>웹·앱 서비스 계속</td>
+<td><a href="https://pika.art/">공식 사이트</a></td>
+</tr>
+</tbody></table>
+<p><strong>규칙 세 가지</strong>: ① 실제 엑셀 화면처럼 보이는 가짜 화면은 만들지 않는다. ② 사실적인 사람·장소·사건 장면이면 변경·합성 콘텐츠를 표시한다(「AI 활용 제작과 플랫폼 정책」). ③ 생성 클립을 반복해 쓰는 것 자체는 문제가 아니다. 영상 전체가 같은 틀·같은 클립·바뀐 문장뿐이면 inauthentic content 쪽 위험이다 (「AI 활용 제작과 플랫폼 정책」).</p>
+<h3>9. 썸네일, 자막·더빙, 분석</h3>
+<p><strong>썸네일</strong>: 얼굴 없는 채널의 기본은 결과 화면 캡처 + 2<del>4단어 문구다(「롱폼 영상 기획과 제작」). Canva의 <a href="https://www.canva.com/create/youtube-thumbnails/">YouTube 썸네일 템플릿</a>과 <a href="https://www.canva.com/ai-thumbnail-maker/">AI 썸네일 메이커</a>로 배치 후보를 빠르게 만들고, 문구는 J가 고른다. 후보 2</del>3개는 <a href="https://support.google.com/youtube/answer/16391400?hl=en">Test &amp; Compare</a>로 시청 시간 기준 비교한다. 2026-09 발표된 다이내믹 썸네일은 한국 제공을 확인하지 못했다.</p>
+<p><strong>자막·번역·더빙</strong>:</p>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/6373554?hl=en">자동 자막</a>은 한국어를 지원하지만, 편집 도구에서 교정한 자막 파일을 올리는 편이 정확하다.</li>
+<li><a href="https://support.google.com/youtube/answer/15569972?hl=ko">자동 더빙 (한국어 도움말)</a>은 채널 고급 설정에서 켜고, &quot;게시 전 더빙 직접 검토&quot;를 선택할 수 있다고 안내된다 (검색 결과로 확인). 2026년 초 모든 크리에이터로 확대됐다는 보도가 있다.</li>
+<li>직접 만든 번역 음성은 <a href="https://support.google.com/youtube/answer/13338784?hl=ko">다국어 오디오 트랙</a>으로 올린다. 대상 언어·검토 기준은 07 문서의 자동 더빙 항목을 본다.</li>
+</ul>
+<p><strong>분석</strong>: Ask Studio는 분석 화면에서도 추천 질문을 준다. &quot;지난 4주 동안 Shorts에서 롱폼으로 넘어온 시청자는?&quot;처럼 묻고, 답에 나온 숫자는 분석 탭의 원래 보고서와 대조한다. 지표 해석은 「유튜브 추천 구조와 채널 설계」를 따른다.</p>
+<h2>적용: 예시 크리에이터 J의 영상 제작 스택</h2>
+<p>J의 한 주 배분은 「원소스 멀티유즈(OSMU) 전략」의 기준표를 따른다. 영상 쪽 6시간(스크립트 0.5, 녹화·음성 1.5, 롱폼 편집·썸네일 3.0, Shorts 1.0)에 도구를 하나씩 붙이면 이렇다. 시간은 설명용 가정이다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>J가 쓰는 도구</th>
+<th>AI가 하는 일</th>
+<th>J가 하는 일</th>
+<th>시간 (가정)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>아이디어</td>
+<td>Ask Studio</td>
+<td>지난 영상 댓글 질문 요약</td>
+<td>주제 하나 고르기</td>
+<td>조사 시간에 포함</td>
+</tr>
+<tr>
+<td>대본·훅</td>
+<td>Claude Projects (스타일 가이드, 지난 대본 2편)</td>
+<td>훅 3개, 챕터 개요, 초안</td>
+<td>실수 사례·수치 채우기, 소리 내어 읽기</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>녹화·음성</td>
+<td>OBS Studio + USB 마이크</td>
+<td>없음</td>
+<td>실제 파일로 녹화, 본인 목소리 녹음</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>롱폼 편집</td>
+<td>Vrew</td>
+<td>자동 자막, 텍스트 컷, 무음 정리</td>
+<td>함수 이름 교정, 확대 구간 편집</td>
+<td>2.5</td>
+</tr>
+<tr>
+<td>썸네일</td>
+<td>Canva + Test &amp; Compare</td>
+<td>배치 후보</td>
+<td>문구 결정, 결과 화면 캡처</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Shorts 3개</td>
+<td>Vrew 세로 재편집 (Edit with AI는 메뉴가 보이면 1개만 시험, AI 보이스오버는 끈다)</td>
+<td>구간 후보</td>
+<td>결과형·실수형·질문형 선택</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>게시 후</td>
+<td>YouTube 자동 자막 교정본 업로드, Ask Studio</td>
+<td>댓글 요약</td>
+<td>다음 주제 메모</td>
+<td>월요일 점검에 포함</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>시험 규칙 (가정)</strong>: 새 도구는 한 달에 하나만, Short 1개에서 시험한다. 4주 뒤 편집 시간과 시청 vs 스와이프 비율을 기존 방식과 비교해 남길지 정한다.</li>
+<li><strong>쓰지 않는 것</strong>: 생성형 영상으로 만든 엑셀 화면, 전체 AI 내레이션. AI 음성은 「롱폼 영상 기획과 제작」에서 정한 대로 Shorts 한 편의 시험 옵션으로만 쓴다.</li>
+<li><strong>표시</strong>: 본인 화면과 본인 목소리만 쓴 영상은 표시 대상이 아니다. AI 음성 Short, 보이스 클로닝으로 고친 영상, 사실적 생성 클립이 들어간 영상은 표시한다.</li>
+</ul>
+<h2>심화</h2>
+<h3>발표와 제공은 다르다</h3>
+<p>2026-09-23 Made On YouTube 2026에서 대화형 편집, 스토리텔링 어시스턴트, 다이내믹 썸네일, 라이브 실시간 더빙 등이 발표됐다. YouTube의 AI 기능은 대개 <strong>영어·미국 → 일부 국가 → 확대</strong> 순서로 제공되고, 같은 나라 안에서도 채널마다 시기가 다르다. 그래서 이 문서는 발표만 있는 기능을 J의 작업표에 넣지 않았다. 새 기능은 ① 공식 블로그 발표, ② 고객센터 문서의 제공 국가, ③ 내 Studio 화면 순서로 확인한다.</p>
+<h3>튜토리얼을 고르는 기준</h3>
+<p>고르는 기준은 「AI로 블로그 글 만들기: 도구와 튜토리얼」의 심화 절을 따른다. YouTube 공식 교육 자료는 <a href="https://www.youtube.com/intl/ko_ALL/creators/">YouTube 크리에이터 (한국어)</a>와 <a href="https://www.youtube.com/creators/create/ai-for-creators/">AI for Creators</a>에 모여 있다.</p>
+<h3>도구 비용과 중단 위험</h3>
+<p>Sora 앱·웹이 2026-04에 종료된 것처럼, AI 도구는 요금제와 존속 여부가 빠르게 바뀐다. 원본 녹화 파일, 대본, 자막 파일(.srt)을 <strong>도구 밖에 보관</strong>하면 도구를 바꿔도 작업이 남는다. LLM·자동화 도구의 월 예산표는 「AI 제작 방법론: 프롬프트·검수·자동화」에 있다. 편집·음성 도구의 요금 메모는 이 문서의 표에 두고, 결제 전 공식 가격 페이지에서 확인한다.</p>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;YouTube가 발표했으니 한국에서도 된다&quot;</strong> — Veo in Shorts와 Dream Screen은 2026-09 기준 한국 제공을 확인하지 못했다. 발표와 제공 국가는 따로 확인한다.</li>
+<li><strong>&quot;영감 탭이 아이디어 도구다&quot;</strong> — 2026-08부터 단계적으로 종료된다. 대화형 Ask Studio가 대신한다.</li>
+<li><strong>&quot;AI 편집이면 자막 교정이 필요 없다&quot;</strong> — 함수·메뉴 이름과 숫자는 거의 항상 틀린다. 교정은 사람이 한다.</li>
+<li><strong>&quot;내 목소리를 복제한 AI 음성은 표시할 필요가 없다&quot;</strong> — 공식 문서로 예외를 확인하지 못했으므로 보수적으로 표시한다(「AI 활용 제작과 플랫폼 정책」).</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>Ask Studio와 영감 탭은 어떻게 다르며, 2026-09 기준 한국 크리에이터는 어느 쪽을 써야 하는가?</li>
+<li>9단계 흐름에서 사람이 반드시 개입하는 지점 세 곳을 꼽고, 각각 무엇을 확인하는지 말해 보라.</li>
+<li>화면 녹화 강의를 텍스트 기반 편집 도구로 자를 때 가장 먼저 교정해야 할 오류 유형은 무엇인가?</li>
+<li>J가 설명용 B-roll로 생성형 영상을 한 컷 넣을 때 지켜야 할 규칙 세 가지는?</li>
+<li>새 YouTube AI 기능이 발표됐을 때 한국에서 쓸 수 있는지 확인하는 순서를 말해 보라.</li>
+</ol>
+<h2>참고 자료</h2>
+<p>모든 링크는 2026-09-30 검색 결과로 확인했다 (직접 접속 확인은 못 함).</p>
+<p><strong>YouTube: 아이디어·분석·편집</strong></p>
+<ul>
+<li><a href="https://blog.youtube/intl/ko-kr/news-and-events/ai-ask-studio/">한국 크리에이터들을 위한 새로운 AI 파트너, Ask Studio를 소개합니다!</a> — YouTube 한국 블로그; <a href="https://support.google.com/youtube/answer/16291691?hl=en">Learn about Ask Studio in YouTube Studio</a> — YouTube 고객센터</li>
+<li><a href="https://blog.youtube/creator-and-artist-stories/youtube-ask-studio-creator-guide/">Ask Studio: Getting started guide for creators</a> — YouTube 블로그; <a href="https://www.youtube.com/watch?v=zpXHtc5m4ZI">Ask Studio - Getting Started Guide for Creators</a> — YouTube (영어)</li>
+<li><a href="https://support.google.com/youtube/answer/15575509?hl=en">Explore Inspiration tab on YouTube</a> — YouTube 고객센터 (2026-08 단계적 종료 안내)</li>
+<li><a href="https://blog.youtube/intl/ko-kr/news-and-events/youtube-studio-made-on-youtube-2025/">최신 유튜브 스튜디오 업데이트로 창작 여정을 혁신하세요</a> — YouTube 한국 블로그, 2025-09</li>
+<li><a href="https://blog.youtube/news-and-events/innovation-youtube-era-made-on-viewers-creators/">Made On YouTube 2026: All Announcements &amp; New Features</a> — YouTube 블로그, 2026-09</li>
+<li><a href="https://zdnet.co.kr/view/?no=20260924092215">&quot;크리에이터 대체 안한다&quot;…유튜브, AI 기능 대폭 확대</a> — ZDNet Korea, 2026-09-24 (대화형 편집 14개국 도입 예정 보도)</li>
+<li><a href="https://support.google.com/youtube/answer/16631240?hl=en-GB">Create content using Edit with AI</a> — YouTube 고객센터; <a href="https://ppc.land/youtube-launches-edit-with-ai-for-automated-shorts-creation/">YouTube launches Edit with AI for automated Shorts creation</a> — PPC Land, 2025-11; <a href="https://www.youtube.com/shorts/1WW76Rz4nqM">HOW TO: Edit with AI in YouTube Shorts</a> — YouTube (영어)</li>
+<li><a href="https://support.google.com/youtube/answer/13952912?hl=en">YouTube Create available locations</a> — YouTube 고객센터; <a href="https://www.socialmediatoday.com/news/youtube-ask-studio-ai-chatbot-explainer-analytics/803682/">YouTube Shares More Info on Its &#39;Ask Studio&#39; AI Bot</a> — Social Media Today</li>
+</ul>
+<p><strong>YouTube: 생성형 영상·썸네일·자막·더빙</strong></p>
+<ul>
+<li><a href="https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/">Unpacking the magic of our new creative tools</a> — YouTube 블로그, 2025-09 (Veo 3 Fast 제공 국가)</li>
+<li><a href="https://blog.google/intl/en-mena/product-updates/connect-communicate/unlocking-new-creative-possibilities-on-youtube-shorts-with-veo-3-in-mena/">Unlocking new creative possibilities with Veo 3 on YouTube Shorts in MENA</a> — Google MENA 블로그, 2025-11</li>
+<li><a href="https://blog.youtube/news-and-events/veo-2-shorts/">Imagine it, create it: Veo 2 is coming to YouTube Shorts</a> — YouTube 블로그, 2025-02</li>
+<li><a href="https://support.google.com/youtube/answer/15260303?hl=ko">AI 생성 기능을 사용하여 Shorts 콘텐츠 만들기</a> — YouTube 고객센터</li>
+<li><a href="https://support.google.com/youtube/answer/16391400?hl=en">A/B test titles &amp; thumbnails</a> — YouTube 고객센터; <a href="https://support.google.com/youtube/answer/6373554?hl=en">Use automatic captioning</a> — YouTube 고객센터</li>
+<li><a href="https://support.google.com/youtube/answer/15569972?hl=ko">자동 더빙 사용하기</a>, <a href="https://support.google.com/youtube/answer/13338784?hl=ko">동영상에 다국어 기능 추가하기</a> — YouTube 고객센터; <a href="https://www.socialmediatoday.com/news/youtube-expands-auto-dubbing-to-all-creators/811375/">YouTube Expands Auto-Dubbing to All Creators</a> — Social Media Today</li>
+<li><a href="https://www.youtube.com/intl/ko_ALL/creators/">YouTube 크리에이터</a>, <a href="https://www.youtube.com/creators/create/ai-for-creators/">AI for Creators</a> — YouTube 공식 교육 사이트</li>
+</ul>
+<p><strong>음성</strong></p>
+<ul>
+<li><a href="https://vrew.ai/ko/feature/ai-voice/">내 목소리 AI 만들기</a> — Vrew; <a href="https://elevenlabs.io/text-to-speech/korean">Korean Text to Speech</a>, <a href="https://elevenlabs.io/docs/overview/capabilities/text-to-speech">Text to Speech 문서</a> — ElevenLabs; <a href="https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/">ElevenLabs Tutorial for Beginners</a> — Kevin Stratvert, 2026-07-21</li>
+<li><a href="https://typecast.ai/kr/learn/how-to-use-typecast/">인공지능 성우 타입캐스트 사용법</a> — Typecast; <a href="https://www.mstoday.co.kr/news/articleView.html?idxno=101040">AI 성우 활용 콘텐츠 제작의 강자 &#39;타입캐스트&#39;</a> — MS TODAY, 2026-04</li>
+<li><a href="https://www.ncloud.com/product/aiService/clovaDubbing">CLOVA Dubbing</a> — 네이버클라우드; <a href="https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq">CLOVA Dubbing 재생목록</a> — YouTube (한국어)</li>
+<li><a href="https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual">수퍼톤 플레이 TTS 신모델 공개</a> — Supertone</li>
+</ul>
+<p><strong>녹화와 편집</strong></p>
+<ul>
+<li><a href="https://obsproject.com/kb/quick-start-guide">Quick Start Guide</a> — OBS; <a href="https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio">OBS Studio로 화면 녹화하기</a> — 인프런 지식공유자 가이드; <a href="https://www.youtube.com/watch?v=XuAYjvxi0mE">OBS Studio 사용법</a> — YouTube (한국어)</li>
+<li><a href="https://www.screensnap.pro/blog/screen-studio-for-windows">Screen Studio for Windows: 7 Best Alternatives</a> — ScreenSnap (macOS 전용 여부 비교 글); <a href="https://support.atlassian.com/loom/docs/loom-ai-features">Loom AI features</a> — Atlassian 지원</li>
+<li><a href="https://www.youtube.com/watch?v=QtP9PvjMy5E">브루 무작정 따라하고 마스터하기 #1</a> — YouTube (한국어), <a href="https://vrew.imweb.me/tutorial">Vrew 튜토리얼 모음</a>, <a href="https://www.youtube.com/playlist?list=PLIJ_xikv0zfcSMgpi9w2fb4348keFPxWK">Vrew_PC Tutorial (ko) 재생목록</a></li>
+<li><a href="https://vrew.ai/ko/blog/all/ai-subtitle-with-vrew/">AI 자막 생성 프로그램 Vrew로 유튜브 자막 넣기</a>, <a href="https://vrew.ai/ko/blog/all/text-based-video-editing/">텍스트 기반 영상 편집 가이드</a> — Vrew 블로그; <a href="https://vrew.imweb.me/notice/?bmode=view&idx=170656156">2026/4/22, 통합 크레딧 방식으로 변경됩니다</a> — Vrew 공지</li>
+<li><a href="https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles">자막을 어떻게 인식합니까?</a> — CapCut 도움말; <a href="https://www.descript.com/blog/article/capcut-captions-arent-free-anymore-heres-a-better-option">CapCut captions aren&#39;t free anymore</a> — Descript 블로그 (경쟁사 글)</li>
+<li><a href="https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started">Descript Tutorial for Beginners: 6 Steps to Start</a>, <a href="https://www.descript.com/blog/article/underlord-ai-video-editor-primer">How to Get Started with Underlord: An AI Video Editor Primer</a> — Descript 블로그</li>
+<li><a href="https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html">Text-Based Editing overview in Premiere</a>, <a href="https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html">What&#39;s new in Adobe Premiere</a> — Adobe 도움말</li>
+<li><a href="https://www.blackmagicdesign.com/products/davinciresolve/training">DaVinci Resolve Training</a>, <a href="https://www.blackmagicdesign.com/products/davinciresolve/studio">DaVinci Resolve Studio</a> — Blackmagic Design; <a href="https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/">DaVinci Resolve 20 Released with a Handful of AI-assisted Features</a> — CineD; <a href="https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/">DaVinci Resolve 21 Officially Released</a> — PetaPixel, 2026-06-03</li>
+</ul>
+<p><strong>생성형 영상, 썸네일, 대본</strong></p>
+<ul>
+<li><a href="https://deepmind.google/models/veo/">Veo</a> — Google DeepMind; <a href="https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/">[I/O 2025] 비오 3 기반 AI 영화 제작 툴 &#39;플로우(Flow)&#39;</a> — Google 코리아 블로그; <a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/flow-adds-speech-expands/">You can now make your images talk with Veo 3 in Flow, plus we&#39;re expanding to more countries</a> — Google 블로그</li>
+<li><a href="https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation">What to know about the Sora discontinuation</a> — OpenAI 도움말; <a href="https://techcrunch.com/2026/03/24/openais-sora-was-the-creepiest-app-on-your-phone-now-its-shutting-down/">OpenAI&#39;s Sora was the creepiest app on your phone -- now it&#39;s shutting down</a> — TechCrunch, 2026-03-24</li>
+<li><a href="https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work">How do credits work?</a>, <a href="https://runway.com/pricing">Pricing</a> — Runway; <a href="https://kling.ai/">Kling AI</a>; <a href="https://pika.art/">Pika</a></li>
+<li><a href="https://www.canva.com/create/youtube-thumbnails/">YouTube 썸네일 만들기</a>, <a href="https://www.canva.com/ai-thumbnail-maker/">AI Thumbnail Maker</a> — Canva</li>
+<li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a> — Claude 도움말; <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Claude Academy</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../creator/07a-ai-blog-workflow/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>AI로 블로그 글 만들기: 도구와 튜토리얼</span></a><a class="page-link next" href="../../creator/07c-ai-method/"><span><small>다음 문서</small>AI 제작 방법론: 프롬프트·검수·자동화</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

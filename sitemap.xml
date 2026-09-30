@@ -541,6 +541,46 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/"/>
   </url>
   <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/"/>
+  </url>
+  <url>
     <loc>https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/04-release-strategies/"/>
@@ -819,6 +859,166 @@
     <loc>https://linjingzhu.github.io/tech-jeongsu/en/studio/10-90-day-plan/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/studio/10-90-day-plan/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/studio/10-90-day-plan/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/00-overview/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/00-overview/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/00-overview/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/01-niche-audience/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/01-niche-audience/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/01-niche-audience/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/01-niche-audience/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/01-niche-audience/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/01-niche-audience/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/03-blog-writing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/03-blog-writing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/03-blog-writing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/04-youtube-system/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/04-youtube-system/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/04-youtube-system/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/05-longform/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/05-longform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/05-longform/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/05-longform/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/05-longform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/05-longform/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/07-ai-production-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07-ai-production-policy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07-ai-production-policy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/07a-ai-blog-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07a-ai-blog-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07a-ai-blog-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07a-ai-blog-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/07c-ai-method/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07c-ai-method/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07c-ai-method/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/08-ad-revenue/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/08-ad-revenue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/08-ad-revenue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/09-own-products/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/09-own-products/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/09-own-products/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/09-own-products/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/09-own-products/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/09-own-products/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/10-disclosure-tax/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/10-disclosure-tax/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/10-disclosure-tax/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/10-disclosure-tax/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/10-disclosure-tax/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/10-disclosure-tax/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/11-one-source-multi-use/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/11-one-source-multi-use/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/11-one-source-multi-use/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/creator/12-90-day-plan/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/12-90-day-plan/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/12-90-day-plan/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/creator/12-90-day-plan/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/12-90-day-plan/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/12-90-day-plan/"/>
   </url>
   <url>
     <loc>https://linjingzhu.github.io/tech-jeongsu/about/</loc>

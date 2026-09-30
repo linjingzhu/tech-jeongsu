@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Shorts and Faceless Channels: Designing to Beat a Single Swipe, and Adding Originality | MyAI</title>
+    <meta name="description" content="This document covers the production of Shorts and faceless formats. How recommendations work and how to design a channel are in &quot;How YouTube Recommends an…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Shorts and Faceless Channels: Designing to Beat a Single Swipe, and Adding Originality | MyAI" />
+    <meta property="og:description" content="This document covers the production of Shorts and faceless formats. How recommendations work and how to design a channel are in &quot;How YouTube Recommends an…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/06-shorts-faceless.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link active" aria-current="page" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Shorts and Faceless Channels</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Shorts and Faceless Channels: Designing to Beat a Single Swipe, and Adding Originality</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain how the Shorts feed asks the viewer for a different decision than long-form does, cut Shorts from a long-form video and link them back with a related video, and tell where faceless channels run into the &quot;inauthentic content&quot; and reused-content policies from what adds originality.</p>
+</blockquote>
+<p>This document covers the <strong>production</strong> of Shorts and faceless formats. How recommendations work and how to design a channel are in &quot;How YouTube Recommends and Channel Design&quot;, planning an 8 to 12 minute lecture is in &quot;Planning and Producing Long-form Video&quot;, the overall flow that splits one source into long-form, Shorts, a blog post and products is in &quot;One Source, Multi Use (OSMU) Strategy&quot;, AI tools and synthetic-content disclosure are in &quot;AI-assisted Production and Platform Policy&quot;, and the Shorts revenue share is in &quot;Ad Revenue: AdPost and the YouTube Partner Program&quot;. Features and policies are <strong>as of 2026-09</strong>. YouTube Help could not be opened directly, so some facts are marked &quot;confirmed via search results&quot;.</p>
+<blockquote>
+<p><strong>Making it with AI</strong>: AI tools and tutorial links for picking Shorts segments, vertical editing, captions and voice are collected in &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;.</p>
+</blockquote>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>What was confirmed (as of 2026-09)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shorts</td>
+<td>Vertical or square video of 3 minutes or less</td>
+<td>Up to 3 minutes for uploads from 2024-10-15 (60 seconds before that)</td>
+</tr>
+<tr>
+<td>Views (Shorts)</td>
+<td>One view each time a play or replay starts</td>
+<td>Counted with no minimum watch time since 2025-03-31</td>
+</tr>
+<tr>
+<td>Engaged views</td>
+<td>The previous way of counting views</td>
+<td>Used for YPP eligibility and the Shorts revenue share</td>
+</tr>
+<tr>
+<td>Viewed vs swiped away</td>
+<td>The share of feed impressions where the viewer kept watching versus swiped on</td>
+<td>A Shorts metric in YouTube Studio analytics</td>
+</tr>
+<tr>
+<td>Related video link</td>
+<td>A link at the bottom of a Short to one video on the same channel</td>
+<td>Set in YouTube Studio on desktop</td>
+</tr>
+<tr>
+<td>Faceless channel</td>
+<td>A channel made with screen recording, slides, B-roll and voice-over, with no presenter on camera</td>
+<td>The format itself does not break any policy</td>
+</tr>
+</tbody></table>
+<p>In the Shorts feed the viewer does <strong>not choose</strong> the video. In long-form the first step is a click on a thumbnail and title. In Shorts the video is already playing, and the viewer only decides &quot;keep watching or swipe&quot;. So the place CTR holds in long-form is taken in Shorts by <strong>viewed vs swiped away</strong>.</p>
+<h2>Principles</h2>
+<h3>The first one or two seconds are the thumbnail</h3>
+<p>To avoid the swipe, the opening frame has to show the result. For a work-automation topic, show &quot;a 30-minute clean-up finishing in 3 seconds&quot; first and explain the method afterwards. Greetings, channel intros and logo animations are all reasons to swipe.</p>
+<pre><code class="language-mermaid">flowchart LR
+    FEED[Short shown in the feed] --&gt; HOOK{Is the result visible&lt;br/&gt;in the first 1-2 seconds}
+    HOOK --&gt;|No| SWIPE[Swipe: a view is counted&lt;br/&gt;but not an engaged view]
+    HOOK --&gt;|Yes| WATCH[Keeps watching]
+    WATCH --&gt; LOOP{Does the end&lt;br/&gt;flow into the start}
+    LOOP --&gt;|Yes| REPLAY[Replay]
+    LOOP --&gt;|No| NEXT[Next video]
+    WATCH --&gt; LINK[Related video link to the long-form]
+</code></pre>
+<h3>Loops and length</h3>
+<p>Since 2025-03-31 Shorts views are counted <strong>each time</strong> a play or replay starts. If the last frame flows naturally into the first, replays go up. Revenue sharing and YPP eligibility still use <strong>engaged views</strong>, though, so giving people a reason to watch to the end beats forced edits that chase replays.</p>
+<p>The maximum is 3 minutes, but length is not the goal. Third-party analyses say 30 to 60 seconds is the most common high-performing range, but that is not an official standard, so <strong>treat it as a hypothesis and test it on your own channel</strong>. Reports say recording in the Shorts camera is capped at 60 seconds per take, so build longer Shorts in an editor and upload them.</p>
+<h3>Cutting Shorts from long-form</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>How</th>
+<th>Upside</th>
+<th>Watch out</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YouTube&#39;s &quot;Edit into a Short&quot;</td>
+<td>Pick a segment on the watch page of a public long-form video and make a Short</td>
+<td>Linked back to the original long-form automatically</td>
+<td>Per the Help page the segment is at most 60 seconds. Not available for private or unlisted videos or videos with third-party copyright claims</td>
+</tr>
+<tr>
+<td>Re-edit in an editor</td>
+<td>Re-crop for vertical and add captions and zoom</td>
+<td>Makes small screen-recording text readable</td>
+<td>A horizontal frame dropped into a vertical frame is unreadable</td>
+</tr>
+<tr>
+<td>Shoot or record for Shorts</td>
+<td>Record in vertical from the start</td>
+<td>Easiest to read</td>
+<td>Adds production time</td>
+</tr>
+</tbody></table>
+<p>This section covers only the craft of making one Short. Which derivatives come from which source is decided in &quot;One Source, Multi Use (OSMU) Strategy&quot;. Screen-recorded tutorials are horizontal by default, so a vertical crop makes cell and menu text tiny. Decide in advance which area to zoom into, and keep <strong>one action</strong> per Short.</p>
+<h3>Sending viewers from a Short to long-form</h3>
+<p>The related video link, introduced in September 2023, connects a Short to <strong>one video on the same channel</strong> at the bottom of the screen. External links in Shorts descriptions were made unclickable as an anti-spam measure, so the path to the blog runs through the long-form description and a pinned comment. The flow is &quot;Short → related long-form → blog post and template in the long-form description&quot;.</p>
+<h3>Four faceless formats</h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Good fit</th>
+<th>Where originality comes from</th>
+<th>Common failure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Screen recording</td>
+<td>Software how-tos, spreadsheets and automation</td>
+<td>A real work problem you solved yourself, mistakes and how you fixed them</td>
+<td>Clicks with no explanation</td>
+</tr>
+<tr>
+<td>Slides</td>
+<td>Concepts, comparisons, checklists</td>
+<td>Diagrams and decision rules you made yourself</td>
+<td>Reading a text-packed slide aloud</td>
+</tr>
+<tr>
+<td>B-roll</td>
+<td>Mood, supporting a story</td>
+<td>Footage you shot, edits that match the explanation</td>
+<td>Stitching free stock clips together and swapping only the script</td>
+</tr>
+<tr>
+<td>Voice-over</td>
+<td>The explanatory spine of every format</td>
+<td>Your experience, opinions and way of speaking</td>
+<td>Reading a script that would be the same whoever said it</td>
+</tr>
+</tbody></table>
+<h3>Where faceless channels run into policy</h3>
+<p>The definitions, history and allowances of YouTube&#39;s <strong>&quot;inauthentic content&quot;</strong> (mass-produced, repetitive content) and <strong>reused content</strong> rules are covered in &quot;AI-assisted Production and Platform Policy&quot;; this section only looks at the signals that bring a faceless channel close to those lines.</p>
+<p>Having no face is not the problem. The problem is <strong>a production method that gives the same result whoever uses it</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Warning sign</th>
+<th>How to add originality</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Several videos a day from one template with only the keyword swapped</td>
+<td>Show a different real problem and result in each video</td>
+</tr>
+<tr>
+<td>Other people&#39;s or stock footage stitched together and read by a synthetic voice</td>
+<td>Use your own screen recordings and your own files</td>
+</tr>
+<tr>
+<td>A script that summarizes web articles</td>
+<td>Add &quot;when I tried it&quot; experience, failures, numbers and decision rules</td>
+</tr>
+<tr>
+<td>No trace of a person anywhere on the channel</td>
+<td>The same voice, the same point of view, follow-ups answering comment questions</td>
+</tr>
+</tbody></table>
+<p>In his January 2026 annual letter, YouTube CEO Neal Mohan named managing low-quality AI content (&quot;AI slop&quot;) as a priority for 2026. It is safer to assume the risk for mass-produced faceless channels has not gone down. The rules for using AI tools are in &quot;AI-assisted Production and Platform Policy&quot;.</p>
+<h3>Voice quality</h3>
+<p>On a faceless channel the voice is effectively the presenter.</p>
+<ul>
+<li><strong>Recording space</strong>: a quiet room with little echo matters more than an expensive microphone. Keep the same distance between mouth and mic every time.</li>
+<li><strong>Editing</strong>: clean up in this order: noise reduction, breaths and silences, then level the volume. Heavy noise reduction makes a voice sound robotic.</li>
+<li><strong>Script</strong>: written-style scripts sound read. Read them aloud and shorten the sentences.</li>
+<li><strong>AI voice</strong>: an option, nothing more. It can cost the trust and identity you built with your own voice, and on YouTube disclose any synthetic voice to be safe, even a clone of your own (&quot;AI-assisted Production and Platform Policy&quot;).</li>
+</ul>
+<h3>A growth tool or a revenue tool</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Shorts</th>
+<th>Long-form</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Main role</td>
+<td>Discovery: reaching people who do not know the channel</td>
+<td>Trust and revenue: the path to watch time, ads and products</td>
+</tr>
+<tr>
+<td>Ad revenue model</td>
+<td>Shorts feed ads pooled, 45% of the creator-pool allocation</td>
+<td>55% of net watch-page ad revenue</td>
+</tr>
+<tr>
+<td>From 2027-02-01</td>
+<td>Shorts ad and subscription revenue share only with 10M+ qualified Shorts views (engaged views) in the last 90 days (as announced)</td>
+<td>No change</td>
+</tr>
+<tr>
+<td>Expectation for a small channel</td>
+<td>Subscribers and long-form traffic rather than revenue</td>
+<td>The centre of revenue and product sales</td>
+</tr>
+</tbody></table>
+<p>The figures and calculations are in &quot;Ad Revenue: AdPost and the YouTube Partner Program&quot;. This document&#39;s conclusion is simple: <strong>on a small channel, Shorts are an entrance to the long-form and the blog, not a revenue source</strong>.</p>
+<h2>Applied: Example Creator J&#39;s Three Shorts</h2>
+<p>Each week J uploads one 8 to 12 minute long-form lecture (for example &quot;Remove Duplicates in Excel in One Go — 3 Methods Compared&quot;) and makes three Shorts from it. Assume about 1 of J&#39;s 10 weekly hours goes to Shorts.</p>
+<table>
+<thead>
+<tr>
+<th>Short</th>
+<th>Content</th>
+<th>First 1-2 seconds</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 Result</td>
+<td>Before and after of the sheet</td>
+<td>A messy table cleaning itself up in one step</td>
+<td>Related video: this week&#39;s long-form</td>
+</tr>
+<tr>
+<td>2 Mistake</td>
+<td>One common beginner mistake and the fix</td>
+<td>The error message on screen</td>
+<td>Related video: this week&#39;s long-form</td>
+</tr>
+<tr>
+<td>3 Question</td>
+<td>Answering a comment from last week</td>
+<td>A screenshot of the comment</td>
+<td>Related video: the long-form the question came from</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Recording: mark the zoom areas while recording the long-form, then re-crop those segments to vertical and zoom in. Re-recording in vertical is chosen only when the text is still too small.</li>
+<li>Voice: J&#39;s own voice by default. An AI voice is tested on one Short only, and the decision follows a comparison of viewed vs swiped away and comments against Shorts in J&#39;s own voice.</li>
+<li>Decision rule (assumption): after 12 Shorts over 4 weeks, compare each Short&#39;s viewed share and the long-form views that came via the related video link, then make more of the types that worked.</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>The same video on several platforms</h3>
+<p>You can post the same video to other vertical-video platforms such as Instagram Reels. Upload the original file rather than one stamped with another platform&#39;s watermark. No official explanation was found of how cross-posting affects recommendations.</p>
+<h3>What to measure</h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Metric</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Did the opening frame work</td>
+<td>Viewed vs swiped away</td>
+</tr>
+<tr>
+<td>Was it worth watching to the end</td>
+<td>Average percentage viewed, replays</td>
+</tr>
+<tr>
+<td>Did it send people to long-form</td>
+<td>Related video link clicks, Shorts as a traffic source on the long-form</td>
+</tr>
+<tr>
+<td>Did the channel grow</td>
+<td>Subscribers gained per Short</td>
+</tr>
+</tbody></table>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Shorts are capped at 60 seconds&quot;</strong>: uploads from 2024-10-15 can run 3 minutes. Reports say recording in the Shorts camera is capped at 60 seconds per take.</li>
+<li><strong>&quot;More views mean more revenue&quot;</strong>: since 2025-03-31 views include replays and brief plays. Revenue and YPP use engaged views.</li>
+<li><strong>&quot;Faceless channels cannot be monetized&quot;</strong>: the test is mass production and reuse, not the format.</li>
+<li><strong>&quot;Reuse is fine if I have permission&quot;</strong>: the reused content rule looks for significant added value, whatever the permission.</li>
+<li><strong>&quot;Posting lots of Shorts builds ad revenue&quot;</strong>: from 2027-02-01 there is no Shorts revenue share below 10M qualified Shorts views (engaged views) in 90 days (as announced).</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Which Shorts metric plays the role CTR plays in long-form, and why are the roles similar?</li>
+<li>Since 2025-03-31, how do &quot;views&quot; and &quot;engaged views&quot; differ, and which one is used for revenue?</li>
+<li>What is the first problem to solve when turning a horizontal screen recording into a Short?</li>
+<li>Name two policy risks for a faceless channel that makes five videos a day from the same template, and a way to reduce each.</li>
+<li>On a channel with 300 subscribers, what should the goal of Shorts be instead of revenue, and which metric confirms it?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/10059070?hl=en">Upload YouTube Shorts / Shorts length extended to 3 minutes</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://ppc.land/youtube-changes-how-shorts-views-are-counted-from-march-31/">YouTube changes how Shorts views are counted from March 31</a> — PPC Land, 2025-03, checked 2026-09-30</li>
+<li><a href="https://support.google.com/youtube/answer/14075157?hl=en">Add a related video to your YouTube Shorts</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.tubefilter.com/2023/09/01/youtube-related-links-multi-format-creators-shorts-live-long-form/">YouTube&#39;s &quot;related links&quot; connect Shorts, long-form videos, and live streams</a> — Tubefilter, 2023-09-01, checked 2026-09-30</li>
+<li><a href="https://support.google.com/youtube/answer/12836917?hl=en">Create YouTube Shorts from your videos</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/1311392?hl=en">YouTube channel monetization policies</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.socialmediatoday.com/news/youtube-clarifies-monetization-update-inauthentic-repeated-content/752892/">YouTube Clarifies Changes to Monetization Rules Around Inauthentic Content</a> — Social Media Today, 2025-07, checked 2026-09-30</li>
+<li><a href="https://www.cnbc.com/2026/01/21/youtube-chief-says-managing-ai-slop-is-a-priority-for-2026-.html">YouTube chief says &#39;managing AI slop&#39; is a priority for 2026</a> — CNBC, 2026-01-21, checked 2026-09-30</li>
+<li><a href="https://support.google.com/youtube/answer/12504220?hl=en">YouTube Shorts monetization policies</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/">New opportunities to earn and changes to the YouTube Partner Program</a> — YouTube Blog, 2026-08, confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/05-longform/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Planning and Producing Long-form Video</span></a><a class="page-link next" href="../../../en/creator/07-ai-production-policy/"><span><small>Next</small>AI-assisted Production and Platform Policy</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

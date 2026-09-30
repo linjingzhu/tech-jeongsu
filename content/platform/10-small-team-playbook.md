@@ -40,7 +40,10 @@ flowchart LR
 
 ```yaml
 name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:

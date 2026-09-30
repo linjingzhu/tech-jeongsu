@@ -2,6 +2,17 @@
 
 CI/CD is not "a script that deploys automatically"; it is **the quality gates a change passes on its way to production, written as code**.
 
+## Deep dives on this topic
+
+This document is the hub for the whole CI/CD flow and for OIDC, GitOps and IaC. Each stage is covered in depth below.
+
+| Document | What it covers |
+|---|---|
+| "CI Fundamentals and Test Strategy" | Integrating often, pipeline stages, test levels and placement, flaky tests, speed, required checks and merge queues |
+| "GitHub Actions in Practice" | Workflow anatomy, reusable workflows, caching, environment approvals, permissions, security, cost |
+| "Deployment Automation and Versioning" | Automated deploys by target, preview deploys, database migrations, versions, changelogs and releases |
+| "CI/CD in the AI Era" | AI code review, the limits for agents that fix CI, prompt-injection defence, quality gates for AI code |
+
 ## Terms
 
 | Term | Meaning |

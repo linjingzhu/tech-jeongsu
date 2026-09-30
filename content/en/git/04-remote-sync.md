@@ -114,13 +114,4 @@ upstream           downstream
 
 ## Collaborating on a Branch Pushed by Someone Else
 
-```bash
-git fetch origin
-git switch --track origin/feature/camera
-```
-
-This is possible.
-
-However, if two people push to the same branch concurrently, non-fast-forward conflicts occur frequently.
-
-It is generally easier to manage separate branches for each person and integrate them through PRs.
+You can also work on a branch someone else pushed by running `git fetch origin` and then `git switch --track origin/<branch>`; the problems that come from pushing to it at the same time, and how to split the work into separate branches, are covered in "Collaboration · PR · Code review".
