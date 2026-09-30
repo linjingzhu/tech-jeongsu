@@ -541,6 +541,46 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03-ci-cd-pipeline/"/>
   </url>
   <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03c-cd-release-automation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03c-cd-release-automation/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/"/>
+  </url>
+  <url>
+    <loc>https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03d-ai-cicd/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03d-ai-cicd/"/>
+  </url>
+  <url>
     <loc>https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/04-release-strategies/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/04-release-strategies/"/>
