@@ -14,6 +14,7 @@ This document covers **ad revenue only**, for the blog and for YouTube. The gene
 | CPM | What advertisers pay per 1,000 ad impressions | Before YouTube's share, counted per ad impression |
 | RPM | What the creator earns per 1,000 views | After YouTube's share, across all views including those with no ad |
 | Qualified watch hours | Public long-form watch time used for YPP eligibility | Time watched in the Shorts feed does not count |
+| Qualified Shorts views (engaged views) | Shorts views counted the previous way. Different from the displayed view count, which includes replays and brief plays | Used for YPP eligibility and the Shorts revenue share |
 
 ## Principles
 
@@ -30,7 +31,7 @@ This document covers **ad revenue only**, for the blog and for YouTube. The gene
 | Other way to receive | Individual members are reported to be able to convert small amounts to Naver Pay money | Confirmed via search results; the minimum was not confirmed |
 | Sanctions | Confirmed invalid clicks or traffic can lead to deductions, withheld payouts and clawback of paid amounts | Confirmed via search results |
 
-Tax is withheld at payout. The income category and rate are in "Disclosure, Copyright and Tax".
+Tax is withheld only on payouts above a set amount: the minimum-tax floor on the other-income amount, which means payouts above about KRW 125,000 (confirmed via search results). The income category and rate are in "Disclosure, Copyright and Tax".
 
 Naver has creator income beyond AdPost. Naver Brand Connect, which matches advertisers with creators, is sponsorship and is covered with its disclosure rules in "Disclosure, Copyright and Tax". "Naver Mate" is a programme reported to pick creators each month, partly by how often AI Briefing cites them, and pay them an activity grant (beta from 2026-06, confirmed via search results). Neither is ad revenue, so they are only named here. An August 2026 report says AdPost payouts grew about 14% compared with February 2025.
 
@@ -48,6 +49,15 @@ In August 2026 YouTube announced changes to YPP. For **channels applying from 20
 
 - **The fan-funding tier does not change.** It carries no ad revenue share; a channel moves up once it meets the ads-tier thresholds.
 - **Shorts revenue threshold (from 2027-02-01)**: even a YPP channel needs 10M qualified Shorts views in the last 90 days to receive the Shorts ad and subscription revenue share. Below that it keeps earning on long-form, and the Shorts share resumes once it crosses the threshold again.
+- **Payouts (confirmed via search results)**: YPP earnings are paid through the linked AdSense account.
+
+| Item | Detail |
+|---|---|
+| What you need | An AdSense account linked to the YouTube channel, with payment details |
+| Payment threshold | USD 100 by default, or the equivalent in the account currency. Below it, the balance rolls over to the next month. The exact amount for KRW accounts was not confirmed |
+| Timing | After the previous month's earnings are finalized early in the month, paid between the 21st and 26th if above the threshold with no payment hold |
+| Tax information | Tax information (including US tax information) must be submitted in AdSense. Korean filing is in "Disclosure, Copyright and Tax" |
+
 - **Activity requirement (from 2027-02-01, existing partners)**: reports say a channel counts as "active" if it has 1,000 qualified watch hours in the last year, 1M qualified Shorts views in the last 90 days, or uploads two long-form videos or five Shorts every 90 days.
 
 ### Revenue shares
@@ -94,9 +104,9 @@ No official RPM range exists. The calculation below uses **third-party estimates
 | Subscriber conversion | 1 per 100 long-form views; Shorts contribution ignored | Calculation assumption (conservative) |
 | Qualified watch hours | Long-form views × 4 minutes ÷ 60, summed over the last 12 months | Shorts feed watch time does not count |
 
-In every scenario J applies after 2027-02-01, so **the new thresholds (1,000 subscribers + 8,000 hours)** apply. Reaching the old 4,000 hours before 2027-01-31 would take 60,000 cumulative views in the first four months, that is k ≈ 6,000.
+In every scenario J applies after 2027-02-01, so **the new thresholds (1,000 subscribers + 8,000 hours)** apply. Applying under the old rules before 2027-01-31 would need, within the first four months, k ≈ 6,000 for 4,000 hours (60,000 cumulative views) and k ≈ 10,000 for 1,000 subscribers (100,000 cumulative views). Month 4 ends on 2027-02-05, so in practice even more.
 
-| Scenario | Fan-funding tier (500 subscribers + 3,000 hours) | Ads tier (1,000 subscribers + 8,000 hours) | Monthly long-form ad revenue just after joining (assumed RPM KRW 1,000-5,000) |
+| Scenario | Fan-funding tier (500 subscribers + 3,000 hours) | Ads tier (1,000 subscribers + 8,000 hours) | Monthly long-form ad revenue in the month after joining (assumed RPM KRW 1,000-5,000) |
 |---|---|---|---|
 | Slow k = 500 | Month 14 (early 2027-12); subscribers are the binding limit | Month 26 (early 2028-12), about 1,755 cumulative subscribers | 13,500 views a month × RPM → about KRW 13,500-67,500 |
 | Medium k = 1,000 | Month 10 (early 2027-08); subscribers are the binding limit | Month 16 (early 2028-02), about 1,360 cumulative subscribers | 17,000 views a month × RPM → about KRW 17,000-85,000 |
@@ -123,7 +133,7 @@ flowchart LR
 
 ### Why ads alone fall short at a small scale
 
-In the "medium" scenario above, monthly long-form ad revenue just after joining the ads tier is about KRW 17,000 to 85,000 by assumption. The time invested is 10 hours a week, about 43 hours a month. Ads pay **a few thousand won per 1,000 views**, so they stay small without scale, and they are zero before the threshold. By contrast, when a few of the same viewers buy a template pack or a course, each one pays thousands to tens of thousands of won. So J's path is to **build a list with a free template and move on to paid products** while waiting for ads. The design is in "Own Products: Courses, E-books and Templates", and pricing and payments are in "Paid Sales, Subscriptions and Pricing".
+In the "medium" scenario above, monthly long-form ad revenue in the month after joining the ads tier is about KRW 17,000 to 85,000 by assumption. The time invested is 10 hours a week, about 43 hours a month. Ads pay **a few thousand won per 1,000 views**, so they stay small without scale, and they are zero before the threshold. By contrast, when a few of the same viewers buy a template pack or a course, each one pays thousands to tens of thousands of won. So J's path is to **build a list with a free template and move on to paid products** while waiting for ads. The design is in "Own Products: Courses, E-books and Templates", and pricing and payments are in "Paid Sales, Subscriptions and Pricing".
 
 ### The order for growing ad revenue
 
@@ -161,5 +171,8 @@ In the "medium" scenario above, monthly long-form ad revenue just after joining 
 - [YouTube Shorts monetization policies](https://support.google.com/youtube/answer/12504220?hl=en) — YouTube Help, confirmed via search results (2026-09-30)
 - [Understand ad revenue analytics](https://support.google.com/youtube/answer/9314357) — YouTube Help, confirmed via search results (2026-09-30)
 - [Manage mid-roll ad breaks in long videos](https://support.google.com/youtube/answer/6175006?hl=en) — YouTube Help, confirmed via search results (2026-09-30)
+- [Payment timelines for AdSense](https://support.google.com/youtube/answer/7164703?hl=en) — YouTube Help, confirmed via search results (2026-09-30)
+- [Payment thresholds](https://support.google.com/adsense/answer/1709871?hl=en) — Google AdSense Help, confirmed via search results (2026-09-30)
+- [How to withhold tax on other income](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6457&cntntsId=7893) — National Tax Service (Korean), confirmed via search results (2026-09-30)
 - [YouTube revenue calculation 2026: RPM and CPM](https://snsboost.kr/blog/44) — SNS Booster (Korean), third-party estimate, confirmed via search results (2026-09-30)
 - [YouTube Shorts RPM in 2026: Typical Ranges by Niche](https://miraflow.ai/blog/youtube-shorts-rpm-2026-real-ranges-by-niche) — Miraflow, third-party estimate, confirmed via search results (2026-09-30)

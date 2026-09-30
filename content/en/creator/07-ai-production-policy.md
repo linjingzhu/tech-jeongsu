@@ -42,12 +42,12 @@ There is one test: does AI shrink or grow **what viewers can get only from this 
 
 YouTube requires creators to disclose content made with altered or synthetic media, including generative AI, when a viewer could **easily mistake it for a real person, place or event**.
 
-| Disclosure needed | Disclosure not needed |
-|---|---|
-| Replacing a real person's face with someone else's | Clearly unrealistic scenes, animation |
-| Synthesizing another person's voice to narrate | Minor edits such as colour grading or beauty filters |
-| Altering real events or places, such as making a real building look on fire | Using AI only for production help, such as scripts, ideas or automatic captions |
-| Realistic fictional events, such as a tornado heading for a real town | Cloning your own voice for voice-overs or dubs (per YouTube's 2024 announcement) |
+| Disclosure needed | Disclosure not needed | Not confirmed — disclose to be safe |
+|---|---|---|
+| Replacing a real person's face with someone else's | Clearly unrealistic scenes, animation | Cloning your own voice with AI for voice-overs or dubs. Third-party sources call it an exception, but no official YouTube source confirming that was found, and the official example is "synthetically generating a person's voice to narrate", so disclose |
+| Synthesizing a real person's voice to narrate | Minor edits such as colour grading or beauty filters | |
+| Altering real events or places, such as making a real building look on fire | Using AI only for production help, such as scripts, ideas or automatic captions | |
+| Realistic fictional events, such as a tornado heading for a real town | | |
 
 - **Where**: at upload, in the "Altered content" setting in YouTube Studio.
 - **Where the label appears**: by default in the "How this content was made" section of the expanded description. For sensitive topics such as health, news, elections and finance, a more prominent label may appear on the player.
@@ -85,7 +85,7 @@ Reports say YouTube began offering likeness detection to YPP creators in October
 | Chat assistant outputs (e.g. OpenAI) | The terms assign the company's rights in outputs to the user "if any". That is not a promise that rights exist |
 | Image generation (e.g. Midjourney) | Paid subscribers own their assets. A company with over USD 1 million in annual revenue (or its employee) needs a Pro or Mega plan |
 | TTS (e.g. ElevenLabs) | The free plan allows no commercial use and requires attribution in the title when published. Paid plans include a commercial licence (beta features excluded) |
-| Voice cloning | Do not clone another person's voice without consent. It also triggers YouTube disclosure |
+| Voice cloning | Do not clone another person's voice without consent. On YouTube, disclose a synthetic voice to be safe, even your own |
 
 This table is not legal advice. **Check the terms of the plan you use before publishing**, and record the date you checked. The general principles of contracts and IP are in "Contracts · IP · Open Source".
 
@@ -99,7 +99,7 @@ flowchart TD
     FACT -->|Yes| OWN{Does it contain my experience,<br/>screen and judgement}
     OWN -->|No| ADD[Add the process I actually went through]
     ADD --> OWN
-    OWN -->|Yes| REAL{Any realistic synthetic scene<br/>or someone else's voice}
+    OWN -->|Yes| REAL{Any realistic synthetic scene<br/>or synthetic voice}
     REAL -->|Yes| LABEL[Altered or synthetic disclosure]
     REAL -->|No| LIC
     LABEL --> LIC{Commercial-use terms<br/>of the tool plan checked}
@@ -116,8 +116,8 @@ J teaches work automation, so the process of using AI is itself content. The rul
 | Script | Rewrite the AI draft, adding J's own mistakes and numbers | About 0.5 hours |
 | Recording | Screen-record real spreadsheet files. No AI-generated screens | 0 |
 | Editing and captions | Use silence removal and automatic captions, then correct terms such as function names by hand | About 1 hour |
-| Voice | J's own voice by default. An AI voice only on one Short, after checking the paid plan's terms | 0 |
-| Disclosure | Only J's own screen and voice, so usually no disclosure. Disclose if a realistic synthetic scene is used | — |
+| Voice | J's own voice by default. An AI voice only on one Short, after checking the paid plan's terms, and the AI-voice Short has the altered or synthetic content setting turned on | 0 |
+| Disclosure | No disclosure for videos with only J's own screen and J's recorded voice. Disclose the AI-voice Short and any realistic synthetic scene | — |
 
 J's weekly videos each cover a different real work problem, which is far from template mass production. The risk is "using AI to make this week's script a variation of last week's".
 

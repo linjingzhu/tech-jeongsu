@@ -85,7 +85,7 @@ On a faceless channel the voice is effectively the presenter.
 - **Recording space**: a quiet room with little echo matters more than an expensive microphone. Keep the same distance between mouth and mic every time.
 - **Editing**: clean up in this order: noise reduction, breaths and silences, then level the volume. Heavy noise reduction makes a voice sound robotic.
 - **Script**: written-style scripts sound read. Read them aloud and shorten the sentences.
-- **AI voice**: an option, nothing more. It can cost the trust and identity you built with your own voice, and synthesizing someone else's voice triggers disclosure ("AI-assisted Production and Platform Policy").
+- **AI voice**: an option, nothing more. It can cost the trust and identity you built with your own voice, and on YouTube disclose any synthetic voice to be safe, even a clone of your own ("AI-assisted Production and Platform Policy").
 
 ### A growth tool or a revenue tool
 
@@ -93,7 +93,7 @@ On a faceless channel the voice is effectively the presenter.
 |---|---|---|
 | Main role | Discovery: reaching people who do not know the channel | Trust and revenue: the path to watch time, ads and products |
 | Ad revenue model | Shorts feed ads pooled, 45% of the creator-pool allocation | 55% of net watch-page ad revenue |
-| From 2027-02-01 | Shorts ad and subscription revenue share only with 10M+ engaged views in the last 90 days (as announced) | No change |
+| From 2027-02-01 | Shorts ad and subscription revenue share only with 10M+ qualified Shorts views (engaged views) in the last 90 days (as announced) | No change |
 | Expectation for a small channel | Subscribers and long-form traffic rather than revenue | The centre of revenue and product sales |
 
 The figures and calculations are in "Ad Revenue: AdPost and the YouTube Partner Program". This document's conclusion is simple: **on a small channel, Shorts are an entrance to the long-form and the blog, not a revenue source**.
@@ -133,7 +133,7 @@ You can post the same video to other vertical-video platforms such as Instagram 
 - **"More views mean more revenue"**: since 2025-03-31 views include replays and brief plays. Revenue and YPP use engaged views.
 - **"Faceless channels cannot be monetized"**: the test is mass production and reuse, not the format.
 - **"Reuse is fine if I have permission"**: the reused content rule looks for significant added value, whatever the permission.
-- **"Posting lots of Shorts builds ad revenue"**: from 2027-02-01 there is no Shorts revenue share below 10M engaged views in 90 days (as announced).
+- **"Posting lots of Shorts builds ad revenue"**: from 2027-02-01 there is no Shorts revenue share below 10M qualified Shorts views (engaged views) in 90 days (as announced).
 
 ## Self-Check Questions
 

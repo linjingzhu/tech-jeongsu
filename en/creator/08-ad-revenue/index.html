@@ -146,6 +146,11 @@
 <td>Public long-form watch time used for YPP eligibility</td>
 <td>Time watched in the Shorts feed does not count</td>
 </tr>
+<tr>
+<td>Qualified Shorts views (engaged views)</td>
+<td>Shorts views counted the previous way. Different from the displayed view count, which includes replays and brief plays</td>
+<td>Used for YPP eligibility and the Shorts revenue share</td>
+</tr>
 </tbody></table>
 <h2>Principles</h2>
 <h3>Naver AdPost</h3>
@@ -198,7 +203,7 @@
 <td>Confirmed via search results</td>
 </tr>
 </tbody></table>
-<p>Tax is withheld at payout. The income category and rate are in &quot;Disclosure, Copyright and Tax&quot;.</p>
+<p>Tax is withheld only on payouts above a set amount: the minimum-tax floor on the other-income amount, which means payouts above about KRW 125,000 (confirmed via search results). The income category and rate are in &quot;Disclosure, Copyright and Tax&quot;.</p>
 <p>Naver has creator income beyond AdPost. Naver Brand Connect, which matches advertisers with creators, is sponsorship and is covered with its disclosure rules in &quot;Disclosure, Copyright and Tax&quot;. &quot;Naver Mate&quot; is a programme reported to pick creators each month, partly by how often AI Briefing cites them, and pay them an activity grant (beta from 2026-06, confirmed via search results). Neither is ad revenue, so they are only named here. An August 2026 report says AdPost payouts grew about 14% compared with February 2025.</p>
 <h3>The YouTube Partner Program: two tiers and the 2027 change</h3>
 <p>In August 2026 YouTube announced changes to YPP. For <strong>channels applying from 2027-02-01</strong>, the ads-tier thresholds double. Channels already in YPP keep their status, but from the same date an activity requirement and a Shorts revenue threshold apply, and they must accept the revised terms by 2027-01-31.</p>
@@ -245,6 +250,33 @@
 <ul>
 <li><strong>The fan-funding tier does not change.</strong> It carries no ad revenue share; a channel moves up once it meets the ads-tier thresholds.</li>
 <li><strong>Shorts revenue threshold (from 2027-02-01)</strong>: even a YPP channel needs 10M qualified Shorts views in the last 90 days to receive the Shorts ad and subscription revenue share. Below that it keeps earning on long-form, and the Shorts share resumes once it crosses the threshold again.</li>
+<li><strong>Payouts (confirmed via search results)</strong>: YPP earnings are paid through the linked AdSense account.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What you need</td>
+<td>An AdSense account linked to the YouTube channel, with payment details</td>
+</tr>
+<tr>
+<td>Payment threshold</td>
+<td>USD 100 by default, or the equivalent in the account currency. Below it, the balance rolls over to the next month. The exact amount for KRW accounts was not confirmed</td>
+</tr>
+<tr>
+<td>Timing</td>
+<td>After the previous month&#39;s earnings are finalized early in the month, paid between the 21st and 26th if above the threshold with no payment hold</td>
+</tr>
+<tr>
+<td>Tax information</td>
+<td>Tax information (including US tax information) must be submitted in AdSense. Korean filing is in &quot;Disclosure, Copyright and Tax&quot;</td>
+</tr>
+</tbody></table>
+<ul>
 <li><strong>Activity requirement (from 2027-02-01, existing partners)</strong>: reports say a channel counts as &quot;active&quot; if it has 1,000 qualified watch hours in the last year, 1M qualified Shorts views in the last 90 days, or uploads two long-form videos or five Shorts every 90 days.</li>
 </ul>
 <h3>Revenue shares</h3>
@@ -352,14 +384,14 @@
 <td>Shorts feed watch time does not count</td>
 </tr>
 </tbody></table>
-<p>In every scenario J applies after 2027-02-01, so <strong>the new thresholds (1,000 subscribers + 8,000 hours)</strong> apply. Reaching the old 4,000 hours before 2027-01-31 would take 60,000 cumulative views in the first four months, that is k ≈ 6,000.</p>
+<p>In every scenario J applies after 2027-02-01, so <strong>the new thresholds (1,000 subscribers + 8,000 hours)</strong> apply. Applying under the old rules before 2027-01-31 would need, within the first four months, k ≈ 6,000 for 4,000 hours (60,000 cumulative views) and k ≈ 10,000 for 1,000 subscribers (100,000 cumulative views). Month 4 ends on 2027-02-05, so in practice even more.</p>
 <table>
 <thead>
 <tr>
 <th>Scenario</th>
 <th>Fan-funding tier (500 subscribers + 3,000 hours)</th>
 <th>Ads tier (1,000 subscribers + 8,000 hours)</th>
-<th>Monthly long-form ad revenue just after joining (assumed RPM KRW 1,000-5,000)</th>
+<th>Monthly long-form ad revenue in the month after joining (assumed RPM KRW 1,000-5,000)</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -398,7 +430,7 @@
 </code></pre>
 <h2>Going Deeper</h2>
 <h3>Why ads alone fall short at a small scale</h3>
-<p>In the &quot;medium&quot; scenario above, monthly long-form ad revenue just after joining the ads tier is about KRW 17,000 to 85,000 by assumption. The time invested is 10 hours a week, about 43 hours a month. Ads pay <strong>a few thousand won per 1,000 views</strong>, so they stay small without scale, and they are zero before the threshold. By contrast, when a few of the same viewers buy a template pack or a course, each one pays thousands to tens of thousands of won. So J&#39;s path is to <strong>build a list with a free template and move on to paid products</strong> while waiting for ads. The design is in &quot;Own Products: Courses, E-books and Templates&quot;, and pricing and payments are in &quot;Paid Sales, Subscriptions and Pricing&quot;.</p>
+<p>In the &quot;medium&quot; scenario above, monthly long-form ad revenue in the month after joining the ads tier is about KRW 17,000 to 85,000 by assumption. The time invested is 10 hours a week, about 43 hours a month. Ads pay <strong>a few thousand won per 1,000 views</strong>, so they stay small without scale, and they are zero before the threshold. By contrast, when a few of the same viewers buy a template pack or a course, each one pays thousands to tens of thousands of won. So J&#39;s path is to <strong>build a list with a free template and move on to paid products</strong> while waiting for ads. The design is in &quot;Own Products: Courses, E-books and Templates&quot;, and pricing and payments are in &quot;Paid Sales, Subscriptions and Pricing&quot;.</p>
 <h3>The order for growing ad revenue</h3>
 <ol>
 <li><strong>Pass the threshold</strong>: long-form watch time decides it. Shorts help with subscribers and long-form traffic.</li>
@@ -435,6 +467,9 @@
 <li><a href="https://support.google.com/youtube/answer/12504220?hl=en">YouTube Shorts monetization policies</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
 <li><a href="https://support.google.com/youtube/answer/9314357">Understand ad revenue analytics</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
 <li><a href="https://support.google.com/youtube/answer/6175006?hl=en">Manage mid-roll ad breaks in long videos</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/7164703?hl=en">Payment timelines for AdSense</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/adsense/answer/1709871?hl=en">Payment thresholds</a> — Google AdSense Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6457&cntntsId=7893">How to withhold tax on other income</a> — National Tax Service (Korean), confirmed via search results (2026-09-30)</li>
 <li><a href="https://snsboost.kr/blog/44">YouTube revenue calculation 2026: RPM and CPM</a> — SNS Booster (Korean), third-party estimate, confirmed via search results (2026-09-30)</li>
 <li><a href="https://miraflow.ai/blog/youtube-shorts-rpm-2026-real-ranges-by-niche">YouTube Shorts RPM in 2026: Typical Ranges by Niche</a> — Miraflow, third-party estimate, confirmed via search results (2026-09-30)</li>
 </ul>
