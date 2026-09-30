@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>How YouTube Recommends and Channel Design: Recommendations Follow the Viewer, Not the Video | MyAI</title>
+    <meta name="description" content="This document covers the recommendation system and channel design. Making a single video is in &quot;Planning and Producing Long-form Video&quot;, producing vertica…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/04-youtube-system/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/04-youtube-system/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="How YouTube Recommends and Channel Design: Recommendations Follow the Viewer, Not the Video | MyAI" />
+    <meta property="og:description" content="This document covers the recommendation system and channel design. Making a single video is in &quot;Planning and Producing Long-form Video&quot;, producing vertica…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/04-youtube-system/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/04-youtube-system.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=creator-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=creator-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link active" aria-current="page" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>How YouTube Recommends and Channel Design</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>How YouTube Recommends and Channel Design: Recommendations Follow the Viewer, Not the Video</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain the recommendation principles YouTube itself describes (Home, suggested videos, search, the Shorts feed, satisfaction signals), use YouTube Studio&#39;s traffic sources and CTR, average view duration and retention for diagnosis, and design a channel around a promise, format series, playlists and the channel home.</p>
+</blockquote>
+<p>This document covers <strong>the recommendation system and channel design</strong>. Making a single video is in &quot;Planning and Producing Long-form Video&quot;, producing vertical video and faceless channels is in &quot;Shorts and Faceless Channels&quot;, and the monetization thresholds are in &quot;Ad Revenue: AdPost and the YouTube Partner Program&quot;. Choosing the channel topic and viewers comes first, in &quot;Choosing a Topic and Audience&quot;. Content is <strong>as of 2026-09</strong>. YouTube Help, How YouTube Works and the official blog could not be opened directly from the environment used to write this document, so those facts were confirmed via search results and are marked as such. Weights or thresholds YouTube has not published are not given.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>Name shown in Studio (example)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Home</td>
+<td>The personalized feed you see when you open the app</td>
+<td>Browse features</td>
+</tr>
+<tr>
+<td>Suggested videos</td>
+<td>Videos shown beside, below or after the one being watched</td>
+<td>Suggested videos</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>The result list for a viewer who typed a query</td>
+<td>YouTube search</td>
+</tr>
+<tr>
+<td>Shorts feed</td>
+<td>The feed where you swipe through vertical videos</td>
+<td>Shorts feed</td>
+</tr>
+<tr>
+<td>Impressions</td>
+<td>Times a thumbnail was shown on a viewer&#39;s screen</td>
+<td>Impressions</td>
+</tr>
+<tr>
+<td>Impressions click-through rate (CTR)</td>
+<td>Share of impressions that became clicks</td>
+<td>Impressions click-through rate</td>
+</tr>
+<tr>
+<td>Average view duration (AVD)</td>
+<td>Average watch time per view</td>
+<td>Average view duration</td>
+</tr>
+<tr>
+<td>Audience retention</td>
+<td>Share of viewers still watching at each point in the video</td>
+<td>Audience retention, key moments</td>
+</tr>
+<tr>
+<td>Satisfaction signals</td>
+<td>Signals used to estimate whether a viewer was satisfied</td>
+<td>Not shown directly</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. The Goal and Signals YouTube Describes</h3>
+<p>YouTube describes its recommendation system as finding <strong>videos that one particular viewer wants to watch and will be satisfied by</strong>. The signals mentioned in its official explanations (confirmed via search results) are:</p>
+<ul>
+<li><strong>Clicks</strong>: what the viewer chose. YouTube itself says clicks alone do not show satisfaction.</li>
+<li><strong>Watch time</strong>: how much they watched.</li>
+<li><strong>Survey responses</strong>: surveys that ask viewers to rate a video they watched. YouTube says only views rated 4 or 5 stars count as &quot;valued watch time&quot;. Responses from people who did not answer are predicted by a model.</li>
+<li><strong>Shares, likes and dislikes</strong>: viewers are more likely to be satisfied by videos they share or like, and a dislike signals they did not enjoy it.</li>
+<li>Explicit feedback such as <strong>&quot;Not interested&quot;</strong>.</li>
+</ul>
+<p>The key point is that recommendation does not spread a &quot;good video&quot; to everyone; it picks <strong>the video this viewer will be satisfied with at this moment</strong>. So the same video can keep being recommended to some viewers and never appear for others. YouTube staff have repeated this in interviews and Creator Insider videos, in the spirit of &quot;the algorithm follows the audience&quot; (confirmed via search results).</p>
+<h3>2. Each Surface Means a Different Viewer Task</h3>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Viewer&#39;s state</th>
+<th>What the video needs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Home</td>
+<td>Browsing without a goal</td>
+<td>A thumbnail and title understood at a glance, a match with interests</td>
+</tr>
+<tr>
+<td>Suggested videos</td>
+<td>Looking for what follows the video just watched</td>
+<td>A topic answering the previous video&#39;s next question, a series</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Already has a problem to solve</td>
+<td>A title that matches the query, the answer within the first 30 seconds</td>
+</tr>
+<tr>
+<td>Shorts feed</td>
+<td>Swiping</td>
+<td>A reason in the first 1-2 seconds, a short self-contained structure (&quot;Shorts and Faceless Channels&quot;)</td>
+</tr>
+<tr>
+<td>Channel page, playlists, notifications</td>
+<td>Already knows the channel</td>
+<td>Organized playlists, a consistent promise</td>
+</tr>
+</tbody></table>
+<p>The traffic sources report in YouTube Studio splits views into Browse features, Suggested videos, YouTube search, External, Channel pages, Playlists, Notifications, Direct or unknown, and more. Views from links in a video description are said to count under Suggested videos, not External (confirmed via search results). Tutorial channels often see search dominate at first, with suggested and Home growing as viewer responses accumulate, but this is a tendency, not a fixed sequence.</p>
+<h3>3. The Creator&#39;s Proxy Metrics: CTR, AVD and Retention</h3>
+<p>Most satisfaction signals are not visible to creators. Instead, read Studio metrics as <strong>proxies for satisfaction</strong>.</p>
+<pre><code class="language-mermaid">flowchart LR
+    I[Impression] --&gt; C[Click = CTR]
+    C --&gt; W[Watch = AVD and retention]
+    W --&gt; S[Satisfaction = likes, shares, surveys, return visits]
+    S --&gt; N[More impressions to similar viewers]
+    N --&gt; I
+    W --&gt;|leaves when expectations are not met| X[Weak satisfaction signal]
+</code></pre>
+<ul>
+<li><strong>CTR depends on where the impression happened.</strong> YouTube Help says about half of all channels and videos have an impressions CTR in the 2-10% range (confirmed via search results). As impressions widen to new viewers, CTR can naturally drop, so do not judge a video on CTR alone.</li>
+<li><strong>AVD = total watch time / views.</strong> A 5-minute AVD on a 10-minute video and on a 20-minute video mean different things, so read it together with retention (%).</li>
+<li><strong>Key moments in retention</strong>: Studio marks the Intro (the share still watching after the first 30 seconds), Top moments, Spikes and Dips (confirmed via search results). Designing the first 30 seconds is covered in &quot;Planning and Producing Long-form Video&quot;.</li>
+<li>YouTube&#39;s &quot;Test &amp; Compare&quot; choosing the winner by <strong>watch time</strong>, not CTR, points the same way. A thumbnail that draws clicks and then disappoints does not win.</li>
+</ul>
+<h3>4. The Order to Read YouTube Studio</h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Report to check</th>
+<th>Caution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Where was it shown?</td>
+<td>Traffic source types</td>
+<td>CTR baselines differ by source</td>
+</tr>
+<tr>
+<td>When shown, did people click?</td>
+<td>Impressions, impressions CTR</td>
+<td>CTR falling as impressions grow can be normal</td>
+</tr>
+<tr>
+<td>After clicking, did they watch?</td>
+<td>Average view duration, retention, key moments</td>
+<td>Compare with your own videos of similar length</td>
+</tr>
+<tr>
+<td>Did they come back?</td>
+<td>Returning viewers, subscriber change</td>
+<td>Return viewing shows channel health better than subscriber count</td>
+</tr>
+<tr>
+<td>What about Shorts?</td>
+<td>Shorts views and engaged views</td>
+<td>Since 2025-03-31, Shorts views count from the start of each play or replay. YPP and revenue sharing still use engaged views, the older definition (confirmed via search results)</td>
+</tr>
+</tbody></table>
+<h3>5. Channel Design: Promise, Format Series, Playlists, Channel Home</h3>
+<p>Recommendation happens video by video, but <strong>channel design is what makes a viewer pick a second video.</strong></p>
+<ul>
+<li><strong>Promise</strong>: One sentence of &quot;for whom, which problem, in what way&quot;. Viewers remember the channel only if every video fits inside this sentence.</li>
+<li><strong>Format series</strong>: A recurring series built on the same frame. Viewers know the frame when they arrive, and planning time drops for the creator.</li>
+<li><strong>Playlists</strong>: One per series. Sort ordered lectures so viewers start from part 1.</li>
+<li><strong>Channel trailer</strong>: A short introduction shown on the channel home to visitors who have not subscribed. Help says it is not shown again to a viewer who has already watched it (confirmed via search results).</li>
+<li><strong>Featured video</strong>: The video shown on the channel home to returning subscribers. Use your latest flagship lecture.</li>
+<li><strong>Channel home sections</strong>: Up to 12 custom sections are allowed, according to Help (confirmed via search results). Put series playlists at the top.</li>
+</ul>
+<h3>6. How Long-form and Shorts Audiences Relate</h3>
+<p>YouTube staff have said several times that Shorts and long-form are distributed by <strong>separate recommendation systems</strong>, and that performance in one does not penalize recommendations in the other (statements by the Shorts product lead and the creator liaison, confirmed via search results). They also acknowledge that viewers who watch only Shorts do not often move to long-form. So:</p>
+<ul>
+<li>Shorts subscribers can grow without long-form views growing at the same rate. Read the two numbers separately.</li>
+<li>Use the <strong>related video link</strong> feature that sends Shorts viewers to long-form (confirmed via search results). How to produce it is in &quot;Shorts and Faceless Channels&quot;.</li>
+<li>Choose Shorts topics inside the long-form promise. Trending Shorts outside the promise gather viewers unrelated to your long-form.</li>
+</ul>
+<h3>7. Upload Cadence versus Quality</h3>
+<p>YouTube staff have explained, in effect, that upload frequency itself does not raise recommendation scores and that taking a break is not penalized (Creator Insider and others, confirmed via search results). Recommendation judges each video by viewer response. The reason cadence matters lies with <strong>people</strong>, not the algorithm.</p>
+<ul>
+<li>Viewers remember a fixed day, and the creator builds a routine.</li>
+<li>A cadence you cannot keep lowers quality and eventually stops. Start at <strong>the lowest cadence you can keep</strong>, then raise it.</li>
+</ul>
+<h2>Applied: Example Creator J&#39;s Channel Design</h2>
+<p>Example creator J makes one long-form lecture (8-12 min) and 3 Shorts cut from it with 10 hours a week. D0 = 2026-10-05 (Monday).</p>
+<ul>
+<li><strong>Promise</strong>: &quot;How office workers can automate the spreadsheet tasks they repeat every week, with AI tools, in 10 minutes.&quot;</li>
+<li><strong>Three format series</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Series</th>
+<th>Format</th>
+<th>Example</th>
+<th>Main surface expected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>One Function in 10 Minutes</td>
+<td>Lecture</td>
+<td>&quot;XLOOKUP in 10 Minutes&quot;</td>
+<td>Search</td>
+</tr>
+<tr>
+<td>Automating Repeat Work</td>
+<td>Lecture</td>
+<td>&quot;Build the Weekly Report Automatically&quot;</td>
+<td>Search -&gt; suggested videos</td>
+</tr>
+<tr>
+<td>Trying AI Tools</td>
+<td>Review</td>
+<td>&quot;3 AI Spreadsheet Assistants on the Same Task&quot;</td>
+<td>Home, suggested videos</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Playlists</strong>: 3 by series + 1 &quot;Start here if you are new&quot;.</li>
+<li><strong>Trailer and home</strong>: Until about 5 videos exist, skip the trailer and set the best lecture as the featured video. Then make a trailer that states the promise in 30-60 seconds (the length is J&#39;s choice).</li>
+<li><strong>Uploads</strong>: Long-form on the same weekday every week; Shorts spread across the week. The time of day is whenever J can keep it.</li>
+</ul>
+<p>Studio review every Sunday (diagnostic examples, assumptions):</p>
+<table>
+<thead>
+<tr>
+<th>Observation (assumption)</th>
+<th>Possible reading</th>
+<th>What to change in the next video</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search traffic exists, but CTR is lower than similar videos of mine</td>
+<td>The title does not show the query and the promise well</td>
+<td>Put the problem name at the front of the title</td>
+</tr>
+<tr>
+<td>CTR is high, but intro retention is low</td>
+<td>The first 30 seconds differ from what the thumbnail promised</td>
+<td>Show the result screen in the first 30 seconds</td>
+</tr>
+<tr>
+<td>A sharp dip mid-video</td>
+<td>A stretch where the explanation drags</td>
+<td>Split into chapters, change the screen</td>
+</tr>
+<tr>
+<td>Many Shorts views, almost no traffic to long-form</td>
+<td>Shorts topics are far from the long-form</td>
+<td>Related video link, align the topics</td>
+</tr>
+</tbody></table>
+<h2>Going Deeper</h2>
+<h3>Recommendation Is &quot;Pull&quot;, Not &quot;Push&quot;</h3>
+<p>A common explanation is that &quot;a new video is first tested on subscribers and, if it does well, spreads in widening circles&quot;. Todd Beaupré, YouTube&#39;s director for growth and discovery, explained in interviews that a video is not &quot;dispatched&quot; to anyone when it goes live; instead, <strong>each time a viewer opens the app, the system pulls candidates suited to that person</strong>, and the first viewers are not limited to core subscribers (confirmed via search results). There are no official numbers for the size or duration of any spread. So do not judge a video on its first 48 hours alone; look at search and suggested traffic over several weeks.</p>
+<h3>Video by Video, Not Channel by Channel</h3>
+<p>YouTube&#39;s creator liaison has explained, in effect, that recommendation is judged by video and topic rather than by the whole channel (confirmed via search results). One weak video does not &quot;punish&quot; the next. But if you keep posting topics your subscribers do not respond to, weaker early viewer response to new videos is a natural result.</p>
+<h3>Personalization Makes Comparison Hard</h3>
+<p>The same video has different CTR and retention for different viewer groups. Comparing with <strong>your own videos of similar length and topic</strong> gives a cleaner signal than comparing with other channels&#39; averages. Studio&#39;s &quot;typical&quot; comparison line is also based on your recent videos.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Posting at the right hour makes the algorithm push you&quot;</strong> — YouTube says publish time is not known to affect long-term performance. Posting when your viewers are active may only bring early views slightly sooner (confirmed via search results).</li>
+<li><strong>&quot;You need lots of tags to rank&quot;</strong> — YouTube Help says tags are useful when your content is commonly misspelled and otherwise play a minimal role in discovery (confirmed via search results). The title, description and the video itself come first.</li>
+<li><strong>&quot;The algorithm hates me&quot;</strong> — Recommendation follows viewer response video by video. If views stalled, find where: traffic source, CTR or retention.</li>
+<li><strong>&quot;Posting Shorts ruins long-form&quot;</strong> — YouTube says the recommendation systems are separate. The audiences can still differ.</li>
+<li><strong>&quot;The higher the CTR, the better&quot;</strong> — A thumbnail that betrays expectations can raise CTR while lowering watch time and satisfaction.</li>
+<li><strong>&quot;Taking a break kills the channel&quot;</strong> — There is no official statement that a break itself is penalized. Only viewers&#39; habits weaken.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>What does YouTube call &quot;valued watch time&quot;, and why is watch time alone not enough?</li>
+<li>Explain why the same video&#39;s CTR differs between search and Home.</li>
+<li>In a video with high CTR but low intro retention, what would you fix first?</li>
+<li>Name one video topic outside example creator J&#39;s promise and say why J should avoid it.</li>
+<li>After 2025-03-31, how do Shorts views and engaged views differ, and which one is used for YPP?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/16089387?hl=en">How YouTube recommendations work</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/">On YouTube&#39;s recommendation system</a> — YouTube Official Blog, confirmed via search results</li>
+<li><a href="https://www.youtube.com/howyoutubeworks/product-features/recommendations/">How YouTube Works: Recommendations</a> — YouTube, unreachable on 2026-09-30</li>
+<li><a href="https://support.google.com/youtube/answer/9314355?hl=en">Understand your YouTube video reach (traffic sources)</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://support.google.com/youtube/answer/7628154?hl=en">Impressions &amp; click-through-rate FAQs</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://support.google.com/youtube/answer/9314415?hl=en">Measure key moments for audience retention</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://support.google.com/youtube/answer/16391400?hl=en">A/B test titles &amp; thumbnails</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://support.google.com/youtube/answer/3219384?hl=en">Customize your YouTube channel layout</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://support.google.com/youtube/answer/146402?hl=en">Add tags to your YouTube videos</a> — YouTube Help, confirmed via search results</li>
+<li><a href="https://ppc.land/youtube-changes-how-shorts-views-are-counted-from-march-31/">YouTube changes how Shorts views are counted from March 31</a> — PPC Land, 2025-03, confirmed via search results</li>
+<li><a href="https://blog.youtube/creator-and-artist-stories/youtube-related-videos-traffic-guide/">How to convert YouTube Shorts views into long-form channel growth</a> — YouTube Official Blog, confirmed via search results</li>
+<li><a href="https://creaticalc.com/blog/do-youtube-shorts-hurt-long-form">Do YouTube Shorts Hurt Your Long-Form Videos? What YouTube Actually Said</a> — CreatiCalc, a summary of YouTube staff statements (secondary source), confirmed via search results</li>
+<li><a href="https://ppc.land/subscribers-skip-90-of-uploads-in-their-feed-youtube-director-says/">Subscribers skip 90% of uploads in their feed, YouTube director says</a> — PPC Land, a summary of Todd Beaupré&#39;s statements (secondary source), confirmed via search results</li>
+<li>Creator Insider algorithm Q&amp;A videos — YouTube; the individual videos were unreachable, so only quotations in search results were checked</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/03-blog-writing/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Writing and Running a Blog</span></a><a class="page-link next" href="../../../en/creator/05-longform/"><span><small>Next</small>Planning and Producing Long-form Video</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

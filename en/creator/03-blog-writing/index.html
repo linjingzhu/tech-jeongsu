@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Writing and Running a Blog: Answering Search Readers from One Outline | MyAI</title>
+    <meta name="description" content="This document covers the craft of writing posts and running a blog. How Naver Search finds and ranks documents (C-Rank, D.I.A.+, Smart Blocks, AI Briefing…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/03-blog-writing/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/03-blog-writing/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Writing and Running a Blog: Answering Search Readers from One Outline | MyAI" />
+    <meta property="og:description" content="This document covers the craft of writing posts and running a blog. How Naver Search finds and ranks documents (C-Rank, D.I.A.+, Smart Blocks, AI Briefing…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/03-blog-writing/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/03-blog-writing.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=creator-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=creator-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link active" aria-current="page" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Writing and Running a Blog</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Writing and Running a Blog: Answering Search Readers from One Outline</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Design a Naver Blog post part by part (title, first screen, structure, images, tables, download), write to search intent without repeating keywords, and improve posts with a pre-publish checklist, a refresh routine and Naver Blog Statistics.</p>
+</blockquote>
+<p>This document covers <strong>the craft of writing posts and running a blog</strong>. How Naver Search finds and ranks documents (C-Rank, D.I.A.+, Smart Blocks, AI Briefing) is in &quot;Naver Blog and How Naver Search Works&quot;, and who you write for is in &quot;Choosing a Topic and Audience&quot;. The policy risks of AI tools are in &quot;AI-assisted Production and Platform Policy&quot;, and image and font copyright plus ad disclosure are in &quot;Disclosure, Copyright and Tax&quot;. Naver Blog menu names and features are <strong>as of 2026-09</strong> and can change with app updates.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>How this document uses it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search intent</td>
+<td>The &quot;thing I want solved right now&quot; behind a query</td>
+<td>The basis for the title and the first screen</td>
+</tr>
+<tr>
+<td>First screen</td>
+<td>The area under the title visible without scrolling (mostly mobile)</td>
+<td>Put the conclusion and the answer here</td>
+</tr>
+<tr>
+<td>Outline</td>
+<td>A blueprint of subheadings, each with one key line</td>
+<td>Shared by the blog post and the video script</td>
+</tr>
+<tr>
+<td>Template</td>
+<td>A post frame you fill in the same order every time</td>
+<td>Fixes the quality floor</td>
+</tr>
+<tr>
+<td>Keyword stuffing</td>
+<td>Unnaturally repeating the search term</td>
+<td>Do not do it</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Updating the facts, images and links of a published post</td>
+<td>A monthly routine</td>
+</tr>
+<tr>
+<td>Blog Statistics</td>
+<td>Naver Blog&#39;s statistics screens for views, traffic sources, rankings and more</td>
+<td>The evidence for choosing what to fix</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. Anatomy of a Naver Post</h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Role</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Title</td>
+<td>Shows the search term and the promise together</td>
+<td>What the reader would search + what they get. No hype or bait</td>
+</tr>
+<tr>
+<td>First screen</td>
+<td>Gives the answer first</td>
+<td>Conclusion within 3-5 lines, who the post is for, time needed</td>
+</tr>
+<tr>
+<td>Subheading structure</td>
+<td>A map for readers who skim</td>
+<td>3-7 subheadings split into steps, comparisons and cautions</td>
+</tr>
+<tr>
+<td>Images and captions</td>
+<td>Proof you did it, and the explanation</td>
+<td>Your own screenshots. One caption line on &quot;what to look at&quot;</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td>Comparisons and settings at a glance</td>
+<td>3 columns or fewer, readable on mobile without sideways scrolling</td>
+</tr>
+<tr>
+<td>Checklist or template download</td>
+<td>Something to use right after reading</td>
+<td>File attachment or link. State the free-use terms in the post</td>
+</tr>
+<tr>
+<td>Closing</td>
+<td>The next action</td>
+<td>1-2 links to related posts or videos, one line inviting questions</td>
+</tr>
+</tbody></table>
+<p>Images default to <strong>screenshots you made yourself</strong>. Other people&#39;s images, thumbnails made with paid fonts and icons taken from the web need a rights check (&quot;Disclosure, Copyright and Tax&quot;). Checking that no personal email, company file name or customer data shows in a screenshot is part of the image check too.</p>
+<h3>2. Writing to Search Intent without Repeating Keywords</h3>
+<p>A query usually has one main intent. Decide the intent first and the shape of the post follows.</p>
+<table>
+<thead>
+<tr>
+<th>Intent</th>
+<th>Example query</th>
+<th>Matching post shape</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>How-to</td>
+<td>&quot;remove duplicates in Excel&quot;</td>
+<td>Step-by-step walkthrough + result screen</td>
+</tr>
+<tr>
+<td>Troubleshooting</td>
+<td>&quot;VLOOKUP #N/A error&quot;</td>
+<td>Diagnosis table by cause + fix order</td>
+</tr>
+<tr>
+<td>Comparison</td>
+<td>&quot;Excel Power Query vs macros&quot;</td>
+<td>Criteria table + recommendation by situation</td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>&quot;what is Power Query&quot;</td>
+<td>Definition -&gt; example -&gt; when to use it</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Bad example</strong>: Repeat &quot;remove duplicates in Excel&quot; word for word in the title, first paragraph, every subheading and every image description, and restate the same sentence several times in the body.</li>
+<li><strong>Good example</strong>: Put the search term in the title once, naturally, and explain the body with the other words readers actually use, such as &quot;duplicate rows&quot;, &quot;keep unique values only&quot; and &quot;the UNIQUE function&quot;. Check first <strong>whether you answered the question to the end</strong>, not the keyword.</li>
+</ul>
+<p>How search engines evaluate documents is detailed in &quot;Naver Blog and How Naver Search Works&quot;. The rule here is simple: write so the reader can finish the job with this one post.</p>
+<h3>3. A Post Template</h3>
+<pre><code class="language-text">[Title] {search term} — {result they get} ({audience/version})
+[First screen] 2-3 line conclusion / who this is for / time needed / what to prepare
+[Subheading 1] See the result first: 1 finished screenshot + caption
+[Subheading 2] Step by step: step 1 ~ step n (1 screenshot per step)
+[Subheading 3] Where people get stuck: error -&gt; cause -&gt; fix table
+[Subheading 4] Variations: 1-2 similar situations
+[Download] Practice file and checklist (one line on the terms of use)
+[Closing] Related post and video links / version and check date / invite questions
+</code></pre>
+<h3>4. Pre-publish Editing Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> The title alone tells the reader what they get.</li>
+<li><input disabled="" type="checkbox"> The first screen has the conclusion. A long greeting such as &quot;Hello, today we...&quot; does not come before it.</li>
+<li><input disabled="" type="checkbox"> You <strong>followed every step again yourself</strong> and got the same result.</li>
+<li><input disabled="" type="checkbox"> Numbers, versions and menu names were checked against official docs or the real screen, with the check date written down.</li>
+<li><input disabled="" type="checkbox"> Screenshots contain no personal or company information.</li>
+<li><input disabled="" type="checkbox"> You checked the source and terms of use for every image, font and icon.</li>
+<li><input disabled="" type="checkbox"> Any affiliate link or sponsorship is disclosed on the first screen (&quot;Disclosure, Copyright and Tax&quot;).</li>
+<li><input disabled="" type="checkbox"> You checked in mobile preview that tables and images are readable.</li>
+<li><input disabled="" type="checkbox"> Links to related posts and videos work.</li>
+</ul>
+<h3>5. Update and Refresh Routine</h3>
+<p>A tutorial becomes a wrong post when the tool changes. Instead of only writing new posts, <strong>fix old posts on a fixed cycle</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Cycle</th>
+<th>Task</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Weekly</td>
+<td>Answer new comment questions; add recurring ones to the body</td>
+<td>Comments</td>
+</tr>
+<tr>
+<td>Monthly</td>
+<td>Check versions, menu names and links in the most-viewed posts</td>
+<td>Post ranking in Blog Statistics</td>
+</tr>
+<tr>
+<td>Quarterly</td>
+<td>Merge several thin posts answering the same question into one; link to it from the rest</td>
+<td>List of overlapping topics</td>
+</tr>
+<tr>
+<td>On tool updates</td>
+<td>Add one line at the top: &quot;Updated: date, what changed&quot;</td>
+<td>Tool announcements</td>
+</tr>
+</tbody></table>
+<p>We could not confirm any official statement from Naver on how edits affect search visibility. So the purpose of a refresh is <strong>removing wrong information, not a visibility trick</strong>.</p>
+<h3>6. One Outline, Two Outputs</h3>
+<p>Planning the blog post and the long-form video separately doubles the time. The rule is one: <strong>make one outline, then write it out as a post and as a video.</strong> The full pipeline that turns one source into Shorts and product modules as well is in &quot;One Source, Multi Use (OSMU) Strategy&quot;; here we look only at the writing side of the link.</p>
+<pre><code class="language-mermaid">flowchart LR
+    O[Shared outline] --&gt; B[Blog post]
+    O --&gt; V[Long-form video]
+    B --&gt;|link at end of post| V
+    V --&gt;|link in description| B
+</code></pre>
+<ul>
+<li><strong>Blog -&gt; YouTube</strong>: Send steps that need &quot;follow along on screen&quot; to the video link.</li>
+<li><strong>YouTube -&gt; Blog</strong>: Tables, formulas, copyable text and practice files that are hard to show in full on video belong to the post; the description sends viewers there.</li>
+<li>A post is for reading and copying; a video is for watching and following. Do not move the same sentences across unchanged.</li>
+</ul>
+<h3>7. Measuring with Blog Statistics</h3>
+<p>Naver Blog offers Blog Statistics in the management screen and in the app. The menu layout can change, so find the right screen by the <strong>question</strong> you are asking.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Statistic to check (menu names are examples)</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Which posts get read?</td>
+<td>Post ranking by views</td>
+<td>Refresh the top posts first</td>
+</tr>
+<tr>
+<td>Where do readers come from?</td>
+<td>Traffic sources, incoming search terms</td>
+<td>Unexpected search terms are new post candidates</td>
+</tr>
+<tr>
+<td>Do they read to the end?</td>
+<td>Dwell metrics such as average time spent</td>
+<td>If short, fix the first screen and structure</td>
+</tr>
+<tr>
+<td>Do they come back?</td>
+<td>Return-visit and Neighbor-visit metrics</td>
+<td>Strengthen series and internal links</td>
+</tr>
+</tbody></table>
+<p>Check statistics <strong>once a week on the same day</strong>. Reacting to daily swings means you spend more time watching numbers than fixing posts.</p>
+<h3>8. Where AI Fits in Writing</h3>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What you can hand to AI</th>
+<th>What a person must do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Outline</td>
+<td>A list of reader questions, candidate subheadings</td>
+<td>Reorder into the sequence you actually followed</td>
+</tr>
+<tr>
+<td>Draft</td>
+<td>Polishing step descriptions, table frames</td>
+<td>Reproduce and screenshot every step yourself</td>
+</tr>
+<tr>
+<td>Fact-check</td>
+<td>Extracting the list of claims to verify</td>
+<td>Verify against official docs or the real screen; record source and date</td>
+</tr>
+<tr>
+<td>Before publishing</td>
+<td>Spelling and duplicate-sentence checks</td>
+<td>Write the sentences that carry experience and judgment yourself</td>
+</tr>
+</tbody></table>
+<p>AI-written sentences sound plausible but often get <strong>menu names, function arguments and versions</strong> wrong. Before publishing, treat &quot;a factual claim written by AI&quot; as &quot;a claim not yet checked&quot;. There are press reports that Naver introduced an &quot;AI-used&quot; label for Blog and other services in 2026; that label and the policy on mass posting are covered in &quot;AI-assisted Production and Platform Policy&quot;.</p>
+<h2>Applied: Example Creator J&#39;s Blog Week</h2>
+<p>Example creator J spends about 2 of their 10 weekly hours on the blog. The outline shared with the video counts toward the source-package time in &quot;One Source, Multi Use (OSMU) Strategy&quot;, which has the full weekly split. D0 is 2026-10-05 (Monday).</p>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Blog work</th>
+<th>Hours (assumption)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mon</td>
+<td>Pick one reader question, write the shared outline (shared with the video)</td>
+<td>Counted in the source package</td>
+</tr>
+<tr>
+<td>Wed</td>
+<td>Draft the post from the outline, take step screenshots, prepare the practice file</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Wed</td>
+<td>Run the checklist, publish, embed the video posted the day before</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Sun</td>
+<td>Check Blog Statistics, collect comment questions, refresh 1 old post</td>
+<td>0.5</td>
+</tr>
+</tbody></table>
+<p>An example first post (assumption):</p>
+<ul>
+<li><strong>Title</strong>: &quot;Remove Duplicates in Excel in One Go — 3 Methods Compared (Microsoft 365)&quot;</li>
+<li><strong>First screen</strong>: &quot;Under 1,000 rows, use [Remove Duplicates]; if you must keep the original, use the UNIQUE function; if you repeat the same job every week, Power Query fits. It takes 10 minutes to follow along, and the practice file is below the post.&quot;</li>
+<li><strong>Download</strong>: A practice Excel file + a &quot;5 things to check before removing duplicates&quot; checklist. This later leads to the free template -&gt; paid template pack path (&quot;Own Products: Courses, E-books and Templates&quot;).</li>
+</ul>
+<p>J uses AI for outline candidates and polishing sentences, but follows every step again on their own PC and takes the screenshots. Function explanations that AI suggests stay only after being checked against Microsoft&#39;s official help.</p>
+<h2>Going Deeper</h2>
+<h3>Series and Hub Posts</h3>
+<p>Once one topic has more than 5 posts, create a <strong>hub post</strong> such as &quot;Excel Automation for Beginners: Contents&quot; and link each post to the hub and the hub to each post. Readers find the next post more easily, and you see missing topics at a glance.</p>
+<h3>When to Merge Thin Posts</h3>
+<p>If several short posts answer the same question, readers cannot tell which one to read. Merge the content into the post with the most views, and put a link to the merged post at the top of the others. Whether to delete or keep a post depends on its existing links and comments.</p>
+<h3>One Line on Other Blog Platforms</h3>
+<p>Platforms such as Tistory or WordPress let you handle ad code and domains yourself, but this section covers only Naver Blog, aimed at beginners whose search traffic is concentrated on Naver.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;The more keywords, the higher the rank&quot;</strong> — Repetition ruins reading and can be a problem under search quality policies. Answering the intent to the end comes first.</li>
+<li><strong>&quot;Longer posts always win&quot;</strong> — What you need is a post with no missing steps, not length. If the first-screen answer comes late, a long post is worse.</li>
+<li><strong>&quot;Writing several posts a day with AI grows the blog fast&quot;</strong> — Unverified facts and near-duplicate posts pile up. For the policy risk of mass posting, see &quot;AI-assisted Production and Platform Policy&quot;.</li>
+<li><strong>&quot;Once written, a post is done&quot;</strong> — Tutorials go wrong when tools change. Refreshing is part of running the blog.</li>
+<li><strong>&quot;Blog posts and videos must be planned separately&quot;</strong> — Making both from one outline lets you run two channels within 10 hours a week (&quot;One Source, Multi Use (OSMU) Strategy&quot;).</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Write a 3-line first screen for a reader who searched &quot;VLOOKUP #N/A error&quot;.</li>
+<li>What are two ways to put the search term in the title and body without keyword stuffing?</li>
+<li>What will you do with the post ranking by views and with the incoming search terms, respectively?</li>
+<li>From the same outline, name one part the blog post handles and one the video handles.</li>
+<li>What three items in an AI-written draft must a person check before publishing?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li>Naver Blog Statistics screen — Naver Blog app and management screen; the menu layout as of 2026-09-30 needs a direct check (help pages were unreachable and search results did not confirm the detailed items)</li>
+<li>Report on Naver introducing an &quot;AI-used&quot; label for Blog, Cafe and others — <a href="https://news.mtn.co.kr/news-detail/2026072417015682342">Naver&#39;s double standard on AI labels: mandatory for Shopping, voluntary for Blog</a> — Money Today Broadcast (MTN), in Korean, 2026-07-24, confirmed via search results</li>
+<li>Report on Naver&#39;s response to low-quality mass AI posts — <a href="https://www.newsverse.kr/news/articleView.html?idxno=9959">Low-quality &quot;machine-gun&quot; AI blog posts; Naver to tighten sanctions</a> — Newsverse, in Korean, confirmed via search results</li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content?hl=ko">Google Search&#39;s guidance on using generative AI content on your website</a> — Google Search Central, confirmed via search results (general principles from another search engine, for reference)</li>
+<li><a href="https://support.microsoft.com/en-us/office/unique-function-c5ab87fd-30a3-4ce9-9d1a-40204fb85e1e">UNIQUE function</a> — Microsoft Support, for checking the function in the applied example, confirmed via search results</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/02-naver-search/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Naver Blog and How Naver Search Works</span></a><a class="page-link next" href="../../../en/creator/04-youtube-system/"><span><small>Next</small>How YouTube Recommends and Channel Design</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -130,6 +130,24 @@ const DOCS = [
       ["90일 실행 계획 사례", "content/studio/10-90-day-plan.md"],
     ],
   },
+  {
+    title: "블로그·유튜브 수익화",
+    items: [
+      ["블로그·유튜브 수익화 전체 개요", "content/creator/00-overview.md"],
+      ["주제 선정과 독자 설계", "content/creator/01-niche-audience.md"],
+      ["네이버 블로그와 검색 구조", "content/creator/02-naver-search.md"],
+      ["블로그 글쓰기와 운영", "content/creator/03-blog-writing.md"],
+      ["유튜브 추천 구조와 채널 설계", "content/creator/04-youtube-system.md"],
+      ["롱폼 영상 기획과 제작", "content/creator/05-longform.md"],
+      ["Shorts와 얼굴 없는 채널", "content/creator/06-shorts-faceless.md"],
+      ["AI 활용 제작과 플랫폼 정책", "content/creator/07-ai-production-policy.md"],
+      ["광고 수익: 애드포스트와 YouTube 파트너 프로그램", "content/creator/08-ad-revenue.md"],
+      ["자체 상품 수익: 강의·전자책·템플릿", "content/creator/09-own-products.md"],
+      ["표시 의무·저작권·세금", "content/creator/10-disclosure-tax.md"],
+      ["원소스 멀티유즈(OSMU) 전략", "content/creator/11-one-source-multi-use.md"],
+      ["채널 90일 실행 계획", "content/creator/12-90-day-plan.md"],
+    ],
+  },
 ];
 const SITE_PAGES = ["content/site/about.md", "content/site/privacy.md", "content/site/contact.md"];
 // Every document has its own crawlable address, relative to the site root.
@@ -144,7 +162,7 @@ function pageHref(path, lang) {
   return (lang === "en" ? "en/" : "") + pagePath(path);
 }
 // One icon per DOCS group, in the same order.
-const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase", "coins"];
+const groupIcons = ["book", "cube", "layout-grid", "users", "speakerphone", "cloud-upload", "briefcase", "coins", "video"];
 
 const $ = (id) => document.getElementById(id);
 const escapeHtml = (value) =>
