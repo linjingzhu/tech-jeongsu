@@ -4,6 +4,8 @@
 
 This document covers **the process of making one horizontal video of roughly 8-20 minutes**. How recommendation works and how to read Studio metrics are in "How YouTube Recommends and Channel Design"; the details of Shorts and the faceless format are in "Shorts and Faceless Channels"; the policy risks of AI voices and AI editing are in "AI-assisted Production and Platform Policy"; and background music, fonts and on-screen copyrighted works are in "Disclosure, Copyright and Tax". Tool features and prices and YouTube features are **as of 2026-09**, and every gear budget is an **example range**.
 
+> **Making it with AI**: AI tools and tutorial links for scripts, voice, editing, captions and thumbnails are collected in "Making YouTube Videos with AI: Tools and Tutorials".
+
 ## Key Concepts
 
 | Stage | Output | Lecture (e.g. a spreadsheet function lecture) | Review (e.g. comparing AI tools) |

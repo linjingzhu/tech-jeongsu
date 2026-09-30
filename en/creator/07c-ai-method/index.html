@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>An AI Production Method: Prompts, Review and Automation — A Way of Working That Outlives the Tools | MyAI</title>
+    <meta name="description" content="Tool names change every few months. In July 2026 NotebookLM was renamed Gemini Notebook, and in September OpenAI announced the retirement of custom GPTs w…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07c-ai-method/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/07c-ai-method/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="An AI Production Method: Prompts, Review and Automation — A Way of Working That Outlives the Tools | MyAI" />
+    <meta property="og:description" content="Tool names change every few months. In July 2026 NotebookLM was renamed Gemini Notebook, and in September OpenAI announced the retirement of custom GPTs w…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/07c-ai-method/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/07c-ai-method.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link active" aria-current="page" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>An AI Production Method: Prompts, Review and Automation</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>An AI Production Method: Prompts, Review and Automation — A Way of Working That Outlives the Tools</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Map the operating model &quot;you set direction → AI drafts → you verify and add experience → AI checks format&quot; onto the OSMU production steps, keep reusable prompt templates and a style guide as your own files outside any tool, and design your own pre-publish review, automation of repetitive steps, measurement of AI&#39;s effect and a monthly tool budget.</p>
+</blockquote>
+<p>Tool names change every few months. In July 2026 NotebookLM was renamed Gemini Notebook, and in September OpenAI announced the retirement of custom GPTs while Google announced that Gems will turn into Skills. So this document covers <strong>a way of working that outlives the tools</strong>. Step-by-step tool use for the blog is in &quot;Writing Blog Posts with AI: Tools and Tutorials&quot;, step-by-step tool use for video is in &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;, policy such as synthetic-content disclosure, inauthentic content and terms of use is in &quot;AI-assisted Production and Platform Policy&quot;, and the weekly production flow and time split follow &quot;One Source, Multi Use (OSMU) Strategy&quot;. Features, prices and status are <strong>as of 2026-09</strong>. Most official pages could not be opened directly, so they are marked &quot;confirmed via search results&quot;. Tool names are neutral examples, not recommendations.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>How this document uses it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operating model</td>
+<td>The order and roles that you and AI take on one output</td>
+<td>Direction → draft → verification and experience → format check</td>
+</tr>
+<tr>
+<td>Prompt template</td>
+<td>An instruction you reuse every week by changing only the blanks</td>
+<td>Five slots: [Role]·[Input]·[Task]·[Format]·[Constraints]</td>
+</tr>
+<tr>
+<td>Style guide</td>
+<td>A one-page document on reader, tone, banned phrases, terms and format</td>
+<td>The standard for every draft. The original lives in your own file</td>
+</tr>
+<tr>
+<td>Project memory</td>
+<td>A feature that loads instructions and reference files into every chat</td>
+<td>Claude Projects, ChatGPT Projects, Gems and Skills, Gemini Notebook</td>
+</tr>
+<tr>
+<td>Originality layer</td>
+<td>Evidence AI cannot make and only J can add</td>
+<td>Your own screen recordings, real files, mistakes, measurements</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. The operating model: four slots in order</h3>
+<p>AI is strong at <strong>removing the blank page and fixing format</strong>, and weak at <strong>guaranteeing facts and producing experience</strong>. So the roles split into four slots. You set the direction (for whom, about what), AI writes the draft, you check the facts and add your own experience, and finally AI checks for gaps, spelling and format. If the check raises an issue, the work goes back to your slot. The 4D model (Delegation, Description, Discernment, Diligence) in Anthropic&#39;s free course <a href="https://academy.claude.com/courses/ai-fluency-framework-foundations">AI Fluency</a> has the same shape: choose what to hand over, describe it clearly, judge the result and take responsibility.</p>
+<pre><code class="language-mermaid">flowchart LR
+    DIR[&quot;You: pick topic, reader, source&quot;] --&gt;|outline and notes| DRAFT[&quot;AI: draft&quot;]
+    DRAFT --&gt;|draft| VER[&quot;You: verify, add experience&quot;]
+    VER --&gt;|revision| FMT[&quot;AI: format and gap check&quot;]
+    FMT --&gt;|issues| VER
+    FMT --&gt;|pass| PUB[&quot;You: publish&quot;]
+    PUB --&gt;|7-day metrics| LOG[&quot;Work log and weekly review&quot;]
+    LOG --&gt;|next week&#39;s direction| DIR
+</code></pre>
+<h3>2. A prompt is a form, not a sentence</h3>
+<p>If you write a good prompt from scratch every time, quality changes by the day of the week. Build <strong>a form with blanks</strong> and change only the input. The templates here have five slots: <strong>[Role]·[Reference]</strong> (who is writing, following which style guide), <strong>[Input]</strong> (this week&#39;s keywords, outline, transcript or metrics; put long material above the instructions), <strong>[Task]</strong> (one job at a time), <strong>[Format]</strong> (table columns, length, placeholders; a fixed format makes review easier) and <strong>[Constraints]</strong> (&quot;leave [check needed] if unsure&quot;, &quot;do not invent numbers&quot;; the cheapest way to reduce hallucination). Learn the basics from Anthropic&#39;s <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a> and <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">interactive tutorial</a> (English), and from Google&#39;s <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> (English, under 10 hours).</p>
+<h3>3. Style guide and project memory: keep the original in your own file</h3>
+<p>Project memory loads your style guide and reference files into every chat. But within the single month of September 2026, two vendors changed the shape of this feature. The conclusion is simple: <strong>keep the original style guide as one file, <code>style_guide.md</code>, that you own, and put copies into each tool.</strong> When you switch tools, you paste the file again and you are done.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status as of 2026-09 (confirmed via search results)</th>
+<th>J&#39;s use</th>
+<th>Tutorials</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Projects</td>
+<td>Each project has instructions and knowledge files. Help-centre search results say the free plan can use it within a count limit (five projects)</td>
+<td>A &quot;weekly production&quot; project with the style guide plus past outlines</td>
+<td><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a> (English), <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Claude 101: Introduction to projects</a> (English), <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> (Korean blog), <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">Turn Claude into your own assistant in 15 minutes</a> (Korean video, third party)</td>
+</tr>
+<tr>
+<td>ChatGPT Projects</td>
+<td>Projects share instructions and files. Free allows 5 files per project, Go and Plus 25</td>
+<td>The same setup if ChatGPT is your main tool</td>
+<td><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a> (English)</td>
+</tr>
+<tr>
+<td>Custom GPTs</td>
+<td>Personal accounts (Free, Go, Plus, Pro) cannot create new GPTs, and a retirement with migration to plugins was announced on 2026-09-11. The FAQ gives 2026-12-11 as the planned retirement date</td>
+<td><strong>Do not build new ones.</strong> If you have an existing GPT, move its instructions into <code>style_guide.md</code></td>
+<td><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> (English)</td>
+</tr>
+<tr>
+<td>Gemini Gems → Skills</td>
+<td>Gems on personal accounts migrate automatically to Skills from 2026-11-17. Reports say Skills are expanding to free personal accounts (18 and over)</td>
+<td>One &quot;fact-check&quot; Skill if Gemini is your cross-check model</td>
+<td><a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a> (English), <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills</a> (English)</td>
+</tr>
+<tr>
+<td>Gemini Notebook (formerly NotebookLM)</td>
+<td>Renamed on 2026-07-16. Answers from the sources you upload and cites them. Secondary sources give free limits of 100 notebooks and 50 sources per notebook</td>
+<td>A &quot;research notebook&quot; of official docs, help pages and reference videos</td>
+<td><a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook</a> (English), <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips: How to use NotebookLM</a> (English video, Google Workspace), <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> (Korean blog)</td>
+</tr>
+</tbody></table>
+<p>J&#39;s original style guide (template):</p>
+<pre><code class="language-text"># style_guide.md — J&#39;s style guide v1 (2026-10-05)
+Reader: office workers who use Excel daily but find functions and automation unfamiliar
+Tone: polite form, one idea per sentence, spell out a technical term the first time
+Banned: hype (&quot;guaranteed&quot;, &quot;in 1 minute&quot;), unchecked numbers, other people&#39;s screenshots
+Terms: Excel menus by their Korean UI names, functions in capitals (XLOOKUP, UNIQUE)
+Format: blog first screen = answer+reader+time needed / video first 30 s = problem→result→today&#39;s goal
+Evidence: every post and video has 1 mistake by J + 1 measurement + J&#39;s own screen recording
+</code></pre>
+<h3>4. The originality layer: what only J can add</h3>
+<p>AI drafts come out similar for everyone. What makes the output J&#39;s is <strong>evidence AI cannot have</strong>: screens recorded on real Excel files, example files with company data removed, the formula J first got wrong and how it was fixed, measurements such as &quot;cleaning 3,200 rows: 40 minutes by hand → 2 minutes with a function&quot;, and reader questions from comments. The <code>[J&#39;s mistake/measurement]</code> blank in the templates is left on purpose so that AI cannot fill it. Platforms point the same way. In 2026-07 YouTube described inauthentic content as three types: &quot;template-based and repetitive&quot;, &quot;off-putting or distressing&quot; and &quot;AI personas discussing sensitive topics such as health or finance&quot; (TechCrunch report and a Creator Insider video, confirmed via search results), and Google Search says it rewards <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">people-first content</a> that shows experience and expertise, regardless of how it was made. The definitions and boundaries of the policies are in &quot;AI-assisted Production and Platform Policy&quot;, and how Naver evaluates posts is in &quot;Naver Blog and How Naver Search Works&quot;.</p>
+<h3>5. The review protocol: the original source decides</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>How to check</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sources</td>
+<td>Open every link the AI gave and find the sentence yourself</td>
+<td>At least one original source (official docs, help pages), with the date you checked</td>
+</tr>
+<tr>
+<td>Numbers, prices, dates</td>
+<td>Compare with the original source and add &quot;as of 2026-09&quot;</td>
+<td>No original source → delete it or write &quot;could not confirm&quot;</td>
+</tr>
+<tr>
+<td>Menu paths, function names</td>
+<td>Follow the steps in real Excel</td>
+<td>Post, script and screenshots match each other</td>
+</tr>
+<tr>
+<td>Screenshots</td>
+<td>Look for personal data, company file names, AI-generated screens</td>
+<td>Only real screens you captured</td>
+</tr>
+<tr>
+<td>Cross-model check</td>
+<td>Give another vendor&#39;s model the draft and the fact-check list (P7) and ask for objections and gaps</td>
+<td>Decide each flagged item by the original source. Never settle it by a vote between models</td>
+</tr>
+<tr>
+<td>Labels and rights</td>
+<td>Follow the pre-publish check in &quot;AI-assisted Production and Platform Policy&quot;</td>
+<td>That check passes</td>
+</tr>
+</tbody></table>
+<p>The final pre-publish checklist fits in five lines: (1) every &quot;high&quot; item on the P7 list was checked against an original source; (2) no <code>[check needed]</code> or <code>[J&#39;s …]</code> placeholders remain; (3) menu names match between screenshots and text; (4) none of the style guide&#39;s banned phrases appear; (5) the tools used and the check dates are in the work log.</p>
+<h3>6. Automation: only the repetitive steps, and a person publishes</h3>
+<p>Automate <strong>repetition without judgement</strong>: moving the same input, in the same order, to the same place every week. Naver Blog statistics are copied by hand, because no public API for them could be confirmed.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Free tier (2026-09, confirmed via search results)</th>
+<th>Paid from</th>
+<th>Repetitive work J hands over</th>
+<th>Tutorials</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apps Script</td>
+<td>Free. Personal accounts get 90 minutes a day of total trigger runtime and 6 minutes per run</td>
+<td>—</td>
+<td>Publishing-reminder emails from dates in a calendar sheet, one row of YouTube Analytics numbers every Monday, weekly folders and a <code>rights.md</code> skeleton</td>
+<td><a href="https://developers.google.com/apps-script/overview">Apps Script overview</a> (English), <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> (English), <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">A Google Sheets app with AI in 10 minutes</a> (Korean, Oppadu Excel), <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">How to use Apps Script</a> (Korean video, third party)</td>
+</tr>
+<tr>
+<td>Make</td>
+<td>Free: 1,000 credits a month</td>
+<td>Core about $9–12 a month (10,000 credits; varies by billing cycle and by source)</td>
+<td>Drop a transcript into a Drive folder and an LLM API writes an outline and a blog draft document (API fees extra)</td>
+<td><a href="https://academy.make.com/">Make Academy</a> (English, free)</td>
+</tr>
+<tr>
+<td>Zapier</td>
+<td>Free: 100 tasks a month, two-step Zaps</td>
+<td>Professional $19.99 a month billed annually, $29.99 monthly, 750 tasks</td>
+<td>Same as above. The most connected apps</td>
+<td><a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a> (English)</td>
+</tr>
+<tr>
+<td>n8n</td>
+<td>Self-hosted Community Edition is free</td>
+<td>Cloud Starter €24 a month (€20 billed annually), 2,500 executions</td>
+<td>Same as above. Complex flows, if you can run your own server</td>
+<td><a href="https://docs.n8n.io/courses/level-one/">Level one text course</a> (English, about 2 hours), <a href="https://docs.n8n.io/video-courses/">Video courses</a> (English), <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n lecture playlist</a> (Korean playlist, third party)</td>
+</tr>
+</tbody></table>
+<p>Why J does not auto-publish, and the limits:</p>
+<ul>
+<li><strong>Naver</strong>: the Naver Blog posting API was shut down on 2020-05-06 because of mass-produced advertising posts (confirmed via news reports). There is no official auto-posting route, and working around it with macros leads toward the abnormal-use sanctions covered in &quot;AI-assisted Production and Platform Policy&quot;.</li>
+<li><strong>YouTube</strong>: videos uploaded through unverified API projects created after 2020-07-28 are locked to private, and making them public requires an audit (YouTube Data API docs, confirmed via search results). A pipeline that runs from draft to publish without a person shrinks the differences between videos and moves toward inauthentic content.</li>
+<li><strong>Security and cost</strong>: keep API keys out of shared sheets and grant only the permissions needed. Zapier counts each successful action and Make counts each action, so repeated runs raise the bill. Turn on failure alerts so an automation cannot stop silently.</li>
+</ul>
+<h2>Applied: Example creator J&#39;s prompt library and weekly loop</h2>
+<h3>J&#39;s weekly loop: four slots per OSMU step</h3>
+<p>Use the 10-hour weekly split from &quot;One Source, Multi Use (OSMU) Strategy&quot; as it is, and divide each step into the four slots. P1–P8 are the prompt template numbers below. Replace the <code>{ }</code> with this week&#39;s material and use them with <code>style_guide.md</code> loaded into project memory. The result is always a draft.</p>
+<table>
+<thead>
+<tr>
+<th>OSMU step (hours)</th>
+<th>You: direction</th>
+<th>AI: draft</th>
+<th>You: verify and add experience</th>
+<th>AI: format check</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Research and example file (1.0)</td>
+<td>Choose this week&#39;s reader problem</td>
+<td>Cluster keywords (P1), summarise sources in the notebook</td>
+<td>Open original sources, build the example file yourself</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Outline (0.5)</td>
+<td>Define the problem</td>
+<td>Outline draft (P2)</td>
+<td>Reorder to match what you actually did</td>
+<td>Find missing steps</td>
+</tr>
+<tr>
+<td>Script (0.5)</td>
+<td>Choose the hook</td>
+<td>Script draft (P4)</td>
+<td>Add your mistakes and measurements</td>
+<td>Check length and tone</td>
+</tr>
+<tr>
+<td>Recording and voice (1.5)</td>
+<td>All human</td>
+<td>—</td>
+<td>Record on real files</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Long-form edit and thumbnail (3.0)</td>
+<td>Decide the thumbnail</td>
+<td>Text options (P6)</td>
+<td>Choose, Test &amp; Compare</td>
+<td>Caption typos</td>
+</tr>
+<tr>
+<td>Blog post (2.0)</td>
+<td>Decide the first screen</td>
+<td>Post draft (P3), fact-check list (P7)</td>
+<td>Match screenshots and formulas</td>
+<td>Cross-model check, spelling</td>
+</tr>
+<tr>
+<td>3 Shorts (1.0)</td>
+<td>Choose three</td>
+<td>Segment candidates (P5)</td>
+<td>Edit the first 1–2 seconds</td>
+<td>Captions</td>
+</tr>
+<tr>
+<td>Community and log (0.5)</td>
+<td>Next week&#39;s direction</td>
+<td>7-day review draft (P8)</td>
+<td>Decide</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<h3>Prompt library (templates)</h3>
+<pre><code class="language-text"># P1 template: keyword clustering
+[Role and input] You are the editor of a Naver Blog and YouTube tutorial channel. Keywords from Naver DataLab and the Naver search-ad keyword tool: {paste}
+[Task] Group keywords that solve the same problem into 5–8 clusters, and write one representative question per cluster.
+[Format] Table: cluster name | representative question | keywords included | search intent (how-to/problem-solving/comparison/concept)
+[Constraints] Do not invent keywords or search volumes that are not in the list. Put unclear keywords under &quot;unclassified&quot;.
+</code></pre>
+<pre><code class="language-text"># P2 template: from reader questions to an outline
+[Role and input] You are the structure writer for an Excel work-automation course. Topic: {topic} / Reader questions: {list} / My notes from doing it: {notes}
+[Task] Build &quot;one outline&quot;: problem → solution steps → common mistakes → next step.
+[Format] 5–7 subheadings. Under each, one key line and one line for &quot;screenshot needed&quot;.
+[Constraints] Mark any step that is not in my notes as [check needed].
+</code></pre>
+<pre><code class="language-text"># P3 template: blog draft in the style guide
+[Reference] Follow style_guide.md in the project and this week&#39;s outline.
+[Task] Write a Naver Blog post draft. Put the answer, the reader and the time needed in the first 3–5 lines.
+[Format] Subheadings match the outline. Add a [screenshot: what it shows] placeholder at every step.
+[Constraints] Use only numbers, menu paths and function names found in the outline and notes; otherwise [check needed]. Leave experience as a [J&#39;s mistake/measurement] blank.
+</code></pre>
+<pre><code class="language-text"># P4 template: long-form script with a hook
+[Reference] Follow the tone section of style_guide.md and this week&#39;s outline.
+[Task] Write an 8–12 minute lecture script. The first 30 seconds go problem scene → finished result → today&#39;s goal.
+[Format] Two-column table: line to say | screen direction (action to record)
+[Constraints] Short sentences for the ear. No hype such as &quot;done in 1 minute&quot;. Mark any feature not in the outline as [check needed].
+</code></pre>
+<pre><code class="language-text"># P5 template: choosing Shorts segments from a transcript
+[Input] Timestamped transcript of the long-form lecture: {transcript}
+[Task] Pick 5 candidate segments of 30–60 seconds to cut as Shorts. Prefer segments where the result shows on one screen.
+[Format] Table: start–end | type (result/mistake/question) | caption for the first 1–2 seconds | reason to send viewers to the long-form
+[Constraints] Do not add anything that is not in the transcript. Drop segments that make no sense without context.
+</code></pre>
+<pre><code class="language-text"># P6 template: thumbnail text options
+[Input] Title options: {title} / Result screen description: {description} / Target viewer: {audience}
+[Task] Write 10 thumbnail text options. Short, two lines at most.
+[Format] Number | text | information not repeated from the title | hype risk (low/medium/high)
+[Constraints] Do not promise a result the video does not show.
+</code></pre>
+<pre><code class="language-text"># P7 template: fact-check list
+[Input] Draft before publishing: {draft}
+[Task] Extract every claim that needs checking: numbers, dates, prices, menu paths, function names, policies, descriptions of other services.
+[Format] Table: sentence | claim type | kind of original source to check | risk (high/medium/low)
+[Constraints] Do not judge whether a claim is true. Only build the list. A person decides using the original source.
+</code></pre>
+<pre><code class="language-text"># P8 template: review 7 days after publishing
+[Input] 7-day metrics: {views, average view duration, impressions click-through rate, blog search keywords, comment summary} / last 4-week average: {values}
+[Task] Compared with the 4-week average, name 3 things that changed and propose 1 thing to change next week.
+[Format] Observation | supporting metric | hypothesis | 1 experiment for next week
+[Constraints] Do not assert causes that are not in the metrics. Label hypotheses as hypotheses.
+</code></pre>
+<h3>J&#39;s monthly tool budget (as of 2026-09)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Choice</th>
+<th>Plan and price (confirmed via search results)</th>
+<th>J&#39;s call</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Main LLM (only one)</td>
+<td>One of Claude, ChatGPT, Gemini</td>
+<td>Claude Pro $20 a month ($17 a month billed annually) / ChatGPT Plus $20 a month (no annual billing) / Google AI Pro $19.99 a month (US price; the Korean won price could not be confirmed on an official page)</td>
+<td>Try it for a month and keep the one whose drafts need the fewest fixes. Cross-check with another vendor&#39;s free plan (0)</td>
+</tr>
+<tr>
+<td>Research notebook</td>
+<td>Gemini Notebook</td>
+<td>Free (with limits). Higher limits with Google AI plans</td>
+<td>Where official docs and help pages are collected</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Apps Script</td>
+<td>Free (90 minutes a day of trigger runtime on personal accounts)</td>
+<td>Reminders, metrics collection, folder set-up</td>
+</tr>
+<tr>
+<td>Automation (optional)</td>
+<td>Make, Zapier, n8n</td>
+<td>Start on the free plans. Paid prices are in the table above</td>
+<td>Consider only after doing transcript → draft by hand for 4+ weeks</td>
+</tr>
+<tr>
+<td><strong>Total (method tools)</strong></td>
+<td></td>
+<td><strong>About $20 ≈ KRW 28,000 a month</strong> (assuming 1 USD = KRW 1,400; tax and exchange-rate changes not included)</td>
+<td>Do not add more in the first 90 days</td>
+</tr>
+</tbody></table>
+<p>Prices for editing, caption and design tools are covered in &quot;Writing Blog Posts with AI: Tools and Tutorials&quot; and &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;. Prices change often. Google reorganised its plans at I/O 2026 and later reportedly cut the AI Plus price. Check each pricing page again before you pay.</p>
+<h2>Going Deeper</h2>
+<p>The feeling that &quot;AI made me faster&quot; tends to leave out review time. For each step, look at <strong>net saving = writing time saved − review time added</strong>. The time savings in &quot;AI-assisted Production and Platform Policy&quot; are assumptions, so J logs real numbers for the first 4 weeks to test them.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>How to measure</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Time per step</td>
+<td>Start and end times in the work-log sheet</td>
+<td>Compare with the split in &quot;One Source, Multi Use (OSMU) Strategy&quot;</td>
+</tr>
+<tr>
+<td>Review time</td>
+<td>Minutes spent checking the P7 list</td>
+<td>If net saving is 0 or less, rethink AI use in that step</td>
+</tr>
+<tr>
+<td>Draft survival rate</td>
+<td>Share of AI draft sentences left in the published version (roughly)</td>
+<td>Almost unchanged is an originality warning; almost all discarded means the draft is not helping</td>
+</tr>
+<tr>
+<td>Errors after publishing</td>
+<td>Factual errors flagged in comments or found yourself</td>
+<td>Target 0. One error means tighter review in that step</td>
+</tr>
+</tbody></table>
+<p>Compare outcome metrics (average view duration, blog search keywords) as 4-week averages before and after adopting AI, and note that other factors are mixed in. <strong>Stop rule</strong>: if net saving is 0 or less for 4 weeks in a row, or the same tool causes two published factual errors, stop using that tool in that step. Matching the 4-week pruning cycle of &quot;One Source, Multi Use (OSMU) Strategy&quot; keeps this to one review. After a model update, rerun P1, P3 and P5 on last week&#39;s three inputs (keyword list, outline, transcript) as a &quot;test set&quot; to see whether the format and the <code>[check needed]</code> markers hold, and version prompts as <code>prompts_v2.md</code> next to the style guide.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;One good prompt is enough&quot;</strong> — Review and J&#39;s experience decide quality. A prompt only fixes the floor.</li>
+<li><strong>&quot;If two AIs give the same answer, it is true&quot;</strong> — Both models may have learned the same wrong material. The original source decides.</li>
+<li><strong>&quot;Automation only counts if it goes all the way to publishing&quot;</strong> — Naver closed its auto-posting route and YouTube locks unverified API uploads to private. Automation stops at drafts and logs.</li>
+<li><strong>&quot;Settings saved in a project feature will stay&quot;</strong> — Their shape changes, as the custom GPT retirement and the Gems → Skills move show. The original is your own file.</li>
+</ul>
+<h2>Self-check Questions</h2>
+<ol>
+<li>Which of the four slots in the operating model is never handed to AI, and why?</li>
+<li>Which two risks does the <code>[J&#39;s mistake/measurement]</code> blank in the P3 template prevent?</li>
+<li>If two models disagree in a cross-model check, what decides?</li>
+<li>Give one reason each for not auto-publishing on Naver Blog and on YouTube.</li>
+<li>Over 4 weeks, writing time for scripts fell by 30 minutes but review time rose by 40 minutes. What do you do?</li>
+</ol>
+<h2>References</h2>
+<p>All links were confirmed via search results on 2026-09-30 (they could not be opened directly). Links are in English unless marked.</p>
+<ul>
+<li><strong>Method and prompts</strong>: <a href="https://academy.claude.com/courses/ai-fluency-framework-foundations">AI Fluency: Framework and foundations</a>, <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a>, <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">Interactive Prompt Engineering Tutorial</a> — Anthropic / <a href="https://www.skills.google/paths/2337/course_templates/1229">Google Prompting Essentials</a> — Google Skills — confirmed via search results (2026-09-30)</li>
+<li><strong>Claude Projects</strong>: <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Anthropic / <a href="https://www.digitalmarketer.co.kr/class/claude-in-practice/what-are-claude-projects">How to use Claude Projects</a> — Juniappa Blog (Korean) / <a href="https://www.youtube.com/watch?v=Kgte_LvYGqk">Turn Claude into your own assistant in 15 minutes</a> — YouTube (Korean, third party) — confirmed via search results (2026-09-30)</li>
+<li><strong>ChatGPT</strong>: <a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt">Projects in ChatGPT</a>, <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">Custom GPT retirement and migration FAQ</a> — OpenAI Help Center / <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx">OpenAI to Retire Custom GPTs, Replace Them with Plugins</a> — Virtualization Review, 2026-09-28 — confirmed via search results (2026-09-30)</li>
+<li><strong>Gemini Gems and Skills</strong>: <a href="https://support.google.com/gemini/answer/18560919">About the transition from Gems to skills</a>, <a href="https://support.google.com/gemini/answer/17102773?hl=en">Write effective skills for Gemini Apps</a> — Gemini Apps Help / <a href="https://techcrunch.com/2026/09/28/google-is-killing-off-geminis-gems-in-favor-of-skills/">Google is killing off Gemini&#39;s Gems in favor of skills</a> — TechCrunch, 2026-09-28 / <a href="https://www.androidauthority.com/gemini-skills-expand-free-accounts-3716627/">Gemini Skills are expanding to free accounts</a> — Android Authority — confirmed via search results (2026-09-30)</li>
+<li><strong>Gemini Notebook</strong>: <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">NotebookLM is now Gemini Notebook</a>, <a href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/">8 expert tips for getting started with NotebookLM</a> — Google Blog / <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">Create a notebook in Gemini Notebook</a> — Gemini Notebook Help / <a href="https://www.youtube.com/watch?v=mX39MYEhqCU">Quick Tips for Google Workspace: How to use NotebookLM</a> — Google Workspace, YouTube / <a href="https://brunch.co.kr/@eunjongseong/242">The complete NotebookLM guide</a> — Brunch (Korean) — confirmed via search results (2026-09-30)</li>
+<li><strong>Originality and policy</strong>: <a href="https://www.youtube.com/watch?v=14Vm0CiyUVE">YouTube&#39;s Inauthentic Content Policy - Explained!</a> — reported as Creator Insider, YouTube, 2026-07 / <a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/">YouTube clarifies policies around AI slop and upsetting videos</a> — TechCrunch, 2026-07-20 / <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a> — Google Search Central — confirmed via search results (2026-09-30)</li>
+<li><strong>Apps Script</strong>: <a href="https://developers.google.com/apps-script/overview">Google Apps Script overview</a>, <a href="https://developers.google.com/apps-script/guides/services/quotas">Quotas for Google Services</a>, <a href="https://developers.google.com/apps-script/advanced/youtube-analytics">YouTube Analytics Service</a> — Google for Developers / <a href="https://www.oppadu.com/lesson/ai-apps-script-10min/">Build an app with AI and Google Sheets in 10 minutes, no coding</a> — Oppadu Excel (Korean) / <a href="https://www.youtube.com/watch?v=C7CqK2vOWHY">How to use Apps Script to get more out of Google Sheets</a> — YouTube (Korean, third party) — confirmed via search results (2026-09-30)</li>
+<li><strong>Make, Zapier, n8n</strong>: <a href="https://academy.make.com/">Make Academy</a>, <a href="https://help.make.com/credits">Credits</a> — Make / <a href="https://learn.zapier.com/build-your-first-zap">Build your first Zap</a>, <a href="https://help.zapier.com/hc/en-us/articles/15279018245901-How-pay-per-task-billing-works-in-Zapier">How pay-per-task billing works in Zapier</a> — Zapier / <a href="https://docs.n8n.io/courses/level-one/">Level one: Introduction</a>, <a href="https://docs.n8n.io/video-courses/">Video courses</a> — n8n Docs / <a href="https://www.youtube.com/playlist?list=PL6skWNka9B4v9h1mm57TzTzqXjWICUQTQ">n8n lectures</a> — YouTube playlist (Korean, third party) — confirmed via search results (2026-09-30)</li>
+<li><strong>Limits of auto-publishing</strong>: <a href="https://www.newspim.com/news/view/20200413000737">Naver to end its &quot;posting API&quot; next month</a> — Newspim (Korean), 2020-04-13 / <a href="https://developers.google.com/youtube/v3/docs/videos/insert">Videos: insert</a> — YouTube Data API — confirmed via search results (2026-09-30)</li>
+<li><strong>Prices</strong>: <a href="https://claude.com/pricing">Plans &amp; Pricing</a> — Anthropic / <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">What is ChatGPT Plus?</a> — OpenAI Help Center / <a href="https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/">Everything new in our Google AI subscriptions, fresh from I/O 2026</a> — Google Blog / <a href="https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/">Google cuts the price of its AI Plus plan and doubles the storage</a> — Engadget / <a href="https://www.make.com/en/pricing">Pricing &amp; Subscription Packages</a> — Make / <a href="https://zapier.com/pricing">Plans &amp; Pricing</a> — Zapier / <a href="https://n8n.io/pricing/">n8n Plans and Pricing</a> — n8n — confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/07b-ai-video-workflow/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Making YouTube Videos with AI: Tools and Tutorials</span></a><a class="page-link next" href="../../../en/creator/08-ad-revenue/"><span><small>Next</small>Ad Revenue: AdPost and the YouTube Partner Program</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -4,6 +4,8 @@
 
 This document covers the **production** of Shorts and faceless formats. How recommendations work and how to design a channel are in "How YouTube Recommends and Channel Design", planning an 8 to 12 minute lecture is in "Planning and Producing Long-form Video", the overall flow that splits one source into long-form, Shorts, a blog post and products is in "One Source, Multi Use (OSMU) Strategy", AI tools and synthetic-content disclosure are in "AI-assisted Production and Platform Policy", and the Shorts revenue share is in "Ad Revenue: AdPost and the YouTube Partner Program". Features and policies are **as of 2026-09**. YouTube Help could not be opened directly, so some facts are marked "confirmed via search results".
 
+> **Making it with AI**: AI tools and tutorial links for picking Shorts segments, vertical editing, captions and voice are collected in "Making YouTube Videos with AI: Tools and Tutorials".
+
 ## Key Concepts
 
 | Term | Meaning | What was confirmed (as of 2026-09) |

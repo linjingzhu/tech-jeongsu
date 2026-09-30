@@ -4,6 +4,8 @@
 
 This document covers **the craft of writing posts and running a blog**. How Naver Search finds and ranks documents (C-Rank, D.I.A.+, Smart Blocks, AI Briefing) is in "Naver Blog and How Naver Search Works", and who you write for is in "Choosing a Topic and Audience". The policy risks of AI tools are in "AI-assisted Production and Platform Policy", and image and font copyright plus ad disclosure are in "Disclosure, Copyright and Tax". Naver Blog menu names and features are **as of 2026-09** and can change with app updates.
 
+> **Writing with AI**: AI tools and tutorial links for research, drafting, images and review are collected in "Writing Blog Posts with AI: Tools and Tutorials".
+
 ## Key Concepts
 
 | Term | Meaning | How this document uses it |

@@ -4,6 +4,8 @@
 
 AI cuts the time spent on scripts, editing, captions and translation. It also makes your output look like that of the many channels using the same tools, and it makes wrong information sound convincing. This document covers **AI tools and the platform-policy risk that comes with them**. The craft of Shorts and faceless formats is in "Shorts and Faceless Channels", turning one source into several formats is in "One Source, Multi Use (OSMU) Strategy", and the legal side of ad disclosure, copyright and tax is in "Disclosure, Copyright and Tax". Policies and terms are **as of 2026-09**. YouTube Help and Naver help pages could not be opened directly, so many items are marked "confirmed via search results". Tool names are **neutral examples**, not recommendations.
 
+> **Tools, tutorials and method**: this document covers policy and principles. Stage-by-stage tools and tutorial links are in "Writing Blog Posts with AI: Tools and Tutorials" and "Making YouTube Videos with AI: Tools and Tutorials"; the prompt library, review procedure and automation are in "An AI Production Method: Prompts, Review and Automation".
+
 ## Key Concepts
 
 | Term | Meaning | Key point |
