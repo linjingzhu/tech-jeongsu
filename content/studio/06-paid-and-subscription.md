@@ -120,15 +120,11 @@ App Store 가격은 스토어마다 세금 포함 여부가 다르다. 부가세
 
 | 경로 | 수수료 (공시 기준) | 특징 |
 |---|---|---|
-| Apple App Store | 표준 30%, Small Business Program 15% (전년 수익 100만 달러 이하), 구독 2년차 갱신분 15% | 한국은 외부 결제 허용 시 26% 수수료 구조 (2022 발표) |
-| Google Play | 현행 연 100만 달러까지 15%, 자동 갱신 구독 15% (2022-01-01부터). 한국 대체 결제 시 4%p 인하 (15% → 11%) | 한국에 새 체계(첫 100만 달러 10% 등) 2026-12-31 시행 예정 보도, 04 문서 표로 재확인 |
 | 토스페이먼츠 (국내 PG) | 일반 카드 3.4%, 가입비 22만 원, 연 관리비 11만 원 (비교 자료 기준) | 영세·중소 우대 수수료, 자동결제(빌링)는 별도 심사·계약 |
-| Paddle (MoR) | 5% + 50센트 | 한국 판매자 지원, 세금 계산·징수·신고를 Paddle이 판매자로서 처리 |
-| Lemon Squeezy (MoR) | 5% + 50센트 + 해외 결제·구독 등 추가 요율 | 2024년 Stripe 인수, Stripe Managed Payments로 이전 중. 신규 가입: 대기자 명단·초대제라는 보도가 있으나 공식 확인 안 됨. 2026-06에는 Stripe Managed Payments의 초대 없는 공개 가입이 곧 열린다는 발표가 보도됐으나 개시는 확인 안 됨 (접속 2026-09-29) |
-| Stripe Managed Payments (MoR) | Stripe 결제 수수료 + 거래당 3.5%. 3.5%는 부가세 등 간접세를 포함한 거래 총액에 붙는다 (Stripe 지원 문서) | 2026-02 공개 프리뷰, 2026-06 초대 없는 공개 가입 예고 (보도). **한국 판매자는 대상 아님**: Stripe가 한국을 가맹점 지원 국가로 두지 않고, 2026년 2차 자료도 한국을 제외 국가로 적는다 (공식 국가 목록은 직접 확인 못 함, 접속 2026-09-29) |
-| Stripe (직접 처리) | 해당 없음 | 한국은 Stripe 가맹점 지원 국가 목록에 없음. 해외 법인이 있어야 가능 |
 
-새로 해외 판매를 시작하는 한국 1인 개발자라면 Paddle 또는 Gumroad(둘 다 MoR)부터 검토한다. MoR과 직접 PG의 손익분기는 04 심화에서 계산한다.
+App Store·Google Play·Steam 같은 플랫폼 수수료와 Paddle·Lemon Squeezy·Stripe Managed Payments 같은 MoR 수수료는 「수익 모델 개론」의 플랫폼·결제 수수료 표 하나에서 관리하므로, 여기서는 그 표에 없는 국내 PG만 적는다.
+
+새로 해외 판매를 시작하는 한국 1인 개발자라면 Paddle 또는 Gumroad(둘 다 MoR, Paddle은 한국 판매자 지원)부터 검토한다. MoR과 직접 PG의 손익분기는 04 심화에서 계산한다.
 
 ### Merchant of Record가 바꾸는 것
 
@@ -172,14 +168,6 @@ flowchart TD
 - [Wikipedia - Van Westendorp's Price Sensitivity Meter](https://en.wikipedia.org/wiki/Van_Westendorp%27s_Price_Sensitivity_Meter) (접근 2026-09-29)
 - [Huber, Payne & Puto (1982), Journal of Consumer Research](https://academic.oup.com/jcr/article/9/1/90/1839380) (접근 2026-09-29)
 - [Apple Developer - App Store Small Business Program](https://developer.apple.com/app-store/small-business-program/) (접근 2026-09-29)
-- [Apple Developer - Auto-renewable Subscriptions](https://developer.apple.com/app-store/subscriptions/) (접근 2026-09-29)
-- [CNBC - Apple opens up third-party app payments in South Korea (2022-06-30)](https://www.cnbc.com/2022/06/30/apple-opens-up-third-party-app-payments-in-korea-will-take-26percent-cut-.html) (접근 2026-09-29)
-- [Google Play Console Help - Service fees](https://support.google.com/googleplay/android-developer/answer/112622?hl=en) (접근 2026-09-29)
-- [경향신문 - 구글플레이 수수료 인하, 한국은 12월 시행 (2026-03-05)](https://www.khan.co.kr/article/202603052151005) (접근 2026-09-29)
 - [PortOne 블로그 - 2026년 국내 PG사 비교](https://blog.portone.io/opi_pg-comparison2026/) (접근 2026-09-29)
 - [토스페이먼츠 개발자센터 - 자동결제(빌링) 이해하기](https://docs.tosspayments.com/guides/v2/billing) (접근 2026-09-29)
 - [Paddle Help Center - Which countries are supported by Paddle?](https://www.paddle.com/help/start/intro-to-paddle/which-countries-are-supported-by-paddle) (접근 2026-09-29)
-- [Lemon Squeezy - 2026 Update: Lemon Squeezy + Stripe Managed Payments](https://www.lemonsqueezy.com/blog/2026-update) (접근 2026-09-29)
-- [Stripe - Global availability](https://stripe.com/global) (접근 2026-09-29)
-- [Stripe Support - Managed Payments pricing](https://support.stripe.com/questions/managed-payments-pricing) (접근 2026-09-29)
-- [Google Play Console Help - 한국 사용자 대상 결제 요건 변경](https://support.google.com/googleplay/android-developer/answer/11222040?hl=en) (접근 2026-09-29)

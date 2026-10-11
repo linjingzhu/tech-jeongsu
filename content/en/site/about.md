@@ -14,6 +14,7 @@ MyAI is a personal technical notebook that turns what I learn in development, pr
 | Platform Deployment & Services | What does it take to ship code to users safely and run it? |
 | Business | How do you prepare registration, legal and tax work when starting a software business in Korea? |
 | Solo Studio Monetization | What should a solo studio that builds a lot choose, ship and earn from? |
+| Blog & YouTube Monetization | How does a small channel earn from a Naver blog and YouTube? |
 
 ## How the documents are made
 

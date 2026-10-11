@@ -2,6 +2,17 @@
 
 CI/CD는 "자동으로 배포하는 Script"가 아니라 **변경이 Production에 도달하기까지의 품질 관문을 코드로 만든 것**이다.
 
+## 이 주제의 심화 문서
+
+이 문서는 CI/CD 전체 흐름과 OIDC·GitOps·IaC를 다루는 허브다. 각 단계는 아래 문서에서 깊게 다룬다.
+
+| 문서 | 다루는 것 |
+|---|---|
+| 「CI 기초와 테스트 전략」 | 자주 통합하기, Pipeline 단계, 테스트 수준과 배치, Flaky test, 속도, 필수 검사와 Merge queue |
+| 「GitHub Actions 실전」 | Workflow 구조, 재사용 Workflow, 캐시, Environment 승인, 권한, 보안, 비용 |
+| 「배포 자동화와 버전 관리」 | 대상별 배포 자동화, 미리보기 배포, DB migration, 버전·Changelog·Release |
+| 「AI 시대의 CI/CD」 | AI 코드 리뷰, CI를 고치는 에이전트의 한계선, Prompt injection 방어, AI 코드 품질 관문 |
+
 ## 용어 구분
 
 | 용어 | 의미 |

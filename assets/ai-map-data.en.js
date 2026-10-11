@@ -193,6 +193,7 @@ window.AI_MAP_DATA_EN = {
         "Web"
       ],
       "plans": [
+        "Free",
         "Paid"
       ]
     },
@@ -534,8 +535,7 @@ window.AI_MAP_DATA_EN = {
       "downloadUrl": null,
       "platforms": [],
       "plans": [
-        "Free",
-        "Paid"
+        "Paid (Enterprise)"
       ]
     },
     {
@@ -683,14 +683,13 @@ window.AI_MAP_DATA_EN = {
       "id": "media-dall-e-3",
       "name": "DALL-E 3",
       "publisher": "OpenAI",
-      "description": "A text-to-image model integrated into ChatGPT Plus/Enterprise. Also available through an API.",
+      "description": "OpenAI's previous-generation text-to-image model. Image generation in ChatGPT now uses GPT Image.",
       "category": "media",
       "sourceUrl": "https://openai.com/",
       "webUrl": null,
       "downloadUrl": null,
       "platforms": [],
       "plans": [
-        "Free",
         "Paid"
       ]
     },
@@ -1149,7 +1148,7 @@ window.AI_MAP_DATA_EN = {
       "id": "models-hugging-face",
       "name": "Hugging Face",
       "publisher": "Hugging Face",
-      "description": "A model hub hosting tens of thousands of models, datasets, and integrations.",
+      "description": "A model hub hosting more than 1 million models, plus datasets and integrations.",
       "category": "models",
       "sourceUrl": "https://huggingface.co/",
       "webUrl": null,
@@ -1668,7 +1667,9 @@ window.AI_MAP_DATA_EN = {
       "sourceUrl": "https://ai.meta.com/muse/",
       "webUrl": "https://ai.meta.com/muse/",
       "downloadUrl": "https://ai.meta.com/muse/download/",
-      "platforms": [],
+      "platforms": [
+        "Web"
+      ],
       "plans": [
         "Free",
         "Power $20/month",
@@ -2314,7 +2315,7 @@ window.AI_MAP_DATA_EN = {
     {
       "id": "midjourney-v8-news",
       "title": "V8 Before 2026? | Midjourney News",
-      "summary": "A news video discussing prospects for the Midjourney V8 release.",
+      "summary": "A pre-release speculation video about Midjourney V8. Its predictions about timing and features are not confirmed information.",
       "url": "https://www.youtube.com/watch?v=t7Tv1PGB-KE",
       "source": "YouTube",
       "date": ""

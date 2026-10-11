@@ -30,7 +30,7 @@ Article 50 of Korea's Act on Promotion of Information and Communications Network
 | Requirement | Content |
 |---|---|
 | Prior opt-in consent | In principle, the recipient's explicit prior consent is required |
-| Night-time sending | From 9 p.m. to 8 a.m. the next day, separate prior consent is required |
+| Night-time sending | From 9 p.m. to 8 a.m. the next day, separate prior consent is required (email excepted, under the proviso to Article 50(3) and the Enforcement Decree) |
 | Labeling duty | An "(Ad)" label where the advertising information begins, the sender's name and contact, and opt-out instructions |
 | Refusal and withdrawal | No sending after the recipient refuses or withdraws consent |
 | Consent reconfirmation | Reconfirm consent every two years from the date it was given (Enforcement Decree Article 62-3) |
@@ -74,16 +74,7 @@ The number in the good example is an assumption for illustration. The point is t
 
 ## Korea: E-Commerce Act Dark-Pattern Rules (in Force Since 2025-02-14)
 
-With the amended E-Commerce Act taking effect on 2025-02-14, six types of online dark patterns became **subject to statutory regulation**. The KFTC published a Q&A just before the rules took effect, and an amended Enforcement Decree set fines and business-suspension criteria for violations. The rules cover online transactions with consumers; a SaaS that individual developers pay for by card may be covered, so confirm with legal review.
-
-| Type | Description | Basis |
-|---|---|---|
-| Hidden renewal | Raising a subscription price or converting free to paid without the consumer consent and notice procedure | Act Article 13(6), Enforcement Decree |
-| Drip pricing | Showing only part of the price at first and revealing extra charges during checkout | Act Article 21-2(1) |
-| Preselected options | Preselecting options that favor the business so the consumer pays with them | Act Article 21-2(1) |
-| False hierarchy | Making one choice stand out by size, color, or position so consumers are misled | Act Article 21-2(1) |
-| Obstructing cancellation or withdrawal | Cancellation or account deletion harder than signup; restricted ways to cancel | Act Article 21-2(1) |
-| Nagging | Repeatedly asking, via pop-ups and the like, to change a choice already made; excepted if the consumer can opt not to be asked again for at least 7 days | Act Article 21-2(1), Enforcement Decree |
+Since 2025-02-14 the amended E-Commerce Act regulates six types of online dark patterns: hidden renewal, drip pricing, preselected options, false hierarchy, obstructing cancellation or withdrawal, and nagging. The article for each type and what it means for a subscription SaaS are in "Terms · Privacy · E-Commerce".
 
 **Rule for paid conversions and price increases**: when a subscription price increases or a free service converts to paid, the business must obtain the consumer's consent **within the 30 days before** the increase or conversion, and must tell the consumer the conditions and methods for withdrawing that consent (Enforcement Decree).
 
@@ -101,6 +92,7 @@ Good example:
 
 - The KFTC's guidelines on endorsements and testimonials in labeling and advertising require that **material connections such as payments, discounts, or sponsorship be disclosed so consumers can easily notice them** in influencer posts, reviews, and similar content. Disclosure should be in an easily seen place such as the title or the beginning; hiding it mid-text, in comments, or behind "more" is not considered adequate.
 - After an administrative notice in 2026-04, the KFTC put the amended guidelines into force on 2026-06-01. Ads in which **a virtual person created with generative AI or similar technology endorses a product must clearly state that it is a "virtual person"**.
+- For creators, where and how to disclose sponsorships and affiliate links is covered canonically in "Disclosure, Copyright and Tax".
 
 ## Korea: AI Basic Act
 
@@ -121,7 +113,7 @@ Even when you are a user with no AI Basic Act duty, AI output used in ads still 
 ## EU
 
 - **Consent**: To keep using Google ad measurement and personalization features for EEA users, you must obtain consent and pass Consent Mode signals (since 2024-03).
-- **AI Act Article 50**: Transparency obligations apply from 2026-08-02. Deployers who publish deepfakes must disclose this clearly at the latest at the time of first exposure. The European Commission FAQ mentions a limited grace period until 2026-12-02, only for the marking obligation for AI-generated content from systems placed on the market before 2026-08-02.
+- **AI Act Article 50**: Transparency obligations apply from 2026-08-02. Deployers who publish deepfakes must disclose this clearly at the latest at the time of first exposure. The European Commission FAQ mentions a limited grace period until 2026-12-02, only for the marking obligation for AI-generated content from systems placed on the market before 2026-08-02 (per the EC FAQ; later Digital Omnibus discussions may change this).
 
 ## United States
 

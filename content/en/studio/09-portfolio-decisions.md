@@ -112,7 +112,7 @@ By realized revenue per hour alone, all fall short of KRW 21,875. These are earl
 
 Verdicts are read in the order kill → hold → continue → double down, and only the first match applies, so T1's four cells neither overlap nor leave gaps. A held T1 is judged again at D90 by the same rule, and if it still has fewer than 10 payments then, it is killed. Hold is the "not enough data → hold: improve measurement" branch in the flowchart above.
 
-P1 launched on 2026-06-15 (assumption), so G4's 60-day window closed on 2026-08-14, but that was before the G4 gate in 02 existed, so it had no criteria set in advance. Its first criteria were written at D0 in 10, using the same numbers as G4, with only the verdict date set to D90 (step 1 of 10's applied section). The criteria do not change before the verdict.
+P1 shipped before the G4 gate existed and so had no criteria set in advance, which is why its row in the table above has D90 as the verdict date. Why and how those criteria were first written is in step 1 of "A 90-Day Plan, Worked Through".
 
 Held against the rules, the day-60 dashboard puts T1 in double down (11%, KRW 450,000, about 12 payments = 450,000 ÷ 37,870), while C2, GM1 and P1 await their day-90 verdict. P1's 40 weekly active users are 40% of the 100 bar, so on the current trend it is heading for the archive.
 

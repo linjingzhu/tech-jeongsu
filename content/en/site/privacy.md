@@ -1,12 +1,12 @@
 # Privacy Policy
 
-Effective date: 2026-09-28
+Effective date: 2026-09-30
 
 MyAI ("this site") does not collect visitors' personal information directly. This policy explains what information is processed, and where, when you use this site.
 
 ## Information this site collects directly
 
-There is no sign-up, comment or contact form, so this site does not directly collect or store personal information such as names, email addresses or phone numbers.
+There is no sign-up, comment or contact form, so this site does not directly collect or store personal information such as names, email addresses or phone numbers. Anything you post in GitHub Issues for contact, together with your GitHub username, is public and is processed by GitHub under its privacy statement.
 
 ## Information stored in your browser
 
@@ -18,9 +18,11 @@ This site uses your browser's local storage (localStorage) to remember your lang
 |---|---|---|
 | GitHub Pages | Hosting | Access logs such as IP addresses, under the [GitHub General Privacy Statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement). |
 | Google Fonts | Fonts | Your IP address when fonts are downloaded, under the [Google Privacy Policy](https://policies.google.com/privacy). |
-| Google AdSense | Advertising | Cookies, web beacons, IP addresses and similar. See the advertising section below. |
+| Google AdSense (once enabled) | Advertising | Once ads are enabled, cookies, web beacons, IP addresses and similar are processed. See the advertising section below. |
 
 ## Advertising and cookies
+
+This site does not show ads or use advertising cookies yet; this section describes what applies once Google AdSense is enabled.
 
 This site may show ads through Google AdSense.
 

@@ -24,6 +24,8 @@ WT A    → feature/a  WIP unchanged
 WT B    → feature/b  Based on the latest origin/stable
 ```
 
+Details: "Understanding worktrees"
+
 ## 2. Your Current Feature Is 73 Commits Behind stable
 
 First update your view of the remote state.
@@ -71,6 +73,8 @@ First push:
 git push -u origin feature/a
 ```
 
+Details: "Collaboration · PR · Code review"
+
 ## 5. Briefly Inspect Another Developer’s Remote Branch
 
 ```bash
@@ -79,6 +83,8 @@ git switch --detach origin/feature/a
 ```
 
 Create a local branch if you intend to continue by making changes.
+
+Details: "HEAD · Checkout · Detached HEAD"
 
 ## 6. Before Running Merge / Rebase / Cherry-pick
 
@@ -140,17 +146,7 @@ git worktree prune
 
 > Create a feature/camera branch and a separate worktree from the latest origin/stable. Do not change the current session’s branch or worktree.
 
-### Rebase
-
-> Before rebasing the current feature branch onto origin/stable, show me the acting branch, the base, and the commits that will change. If conflicts occur, stop instead of resolving them automatically.
-
-### Cherry-pick
-
-> Before bringing in only this commit, use git show to check its changes and prerequisite dependencies.
-
-### PR
-
-> Review the current branch’s diff and commits, and write a PR description targeting stable. Mark anything not verified by build/test as NOT VERIFIED.
+Example instructions for commit, pull, push, rebase, merge, cherry-pick and PRs are collected in "Claude Code as a Git client".
 
 ## Key Concepts to Remember in Practice
 

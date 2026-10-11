@@ -40,7 +40,10 @@ Plan conditions change. Check commercial-use permission, billing units and provi
 
 ```yaml
 name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:

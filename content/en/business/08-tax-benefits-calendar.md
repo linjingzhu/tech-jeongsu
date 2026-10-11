@@ -76,7 +76,7 @@ Good example:
 
 - Withholding tax is due by the 10th of the next month (January 10 and July 10 if approved for semiannual payment), and simplified statements for business income are monthly.
 - The simplified taxpayer's preliminary return duty comes from VAT Act Article 66(3). A simplified taxpayer who issued no tax invoices only pays the amount noticed in July (document 06).
-- **Simplified payment statements for wage income become monthly for payments from 2027-01-01** (due by the end of the month after the payment month). The January and July half-year filings in the table apply to payments through 2026. The NTS says that during 2027 (through 2028 for small businesses), filing by the old half-year deadline waives the non-filing penalty.
+- Simplified payment statements for wage income become monthly for payments from 2027-01-01. For the deferral and the penalty waiver, see "Income Tax · Corporate Tax · Withholding · Books".
 - If a deadline falls on a Saturday or holiday, it moves to the next business day. Check actual dates each year on the **NTS tax schedule**.
 
 ## When You Need a Tax Accountant

@@ -113,7 +113,7 @@ This table is the track's default allocation. The 90-day plan in 10 starts from 
 | Archive | 7 | 2 games (GM2, GM3), 3 creative tools (T2–T4), 1 productivity app (P3), 1 content site (C1) |
 | Total | 12 | |
 
-The archive is not deletion. Tidy the repository, write one line on "the condition for taking it back out", and leave it alone. The launched P1 sits in the operating slot. P1 shipped before the G4 gate existed and so had no criteria set in advance; document 10 writes its first date and state, using the same numbers as G4.
+The archive is not deletion. Tidy the repository, write one line on "the condition for taking it back out", and leave it alone. The launched P1 sits in the operating slot. P1 shipped before the G4 gate existed and so had no criteria set in advance. How its first criteria are written is in step 1 of "A 90-Day Plan, Worked Through".
 
 ## Going Deeper
 

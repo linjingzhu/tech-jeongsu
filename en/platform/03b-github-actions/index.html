@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>GitHub Actions in Practice: Workflow Anatomy · Permissions · Caching · Cost | MyAI</title>
+    <meta name="description" content="Triggers and basic syntax are covered in &quot;GitHub Actions · Hooks · Cron&quot;, and the overall flow and OIDC in &quot;CI/CD · OIDC · GitOps&quot;. This document is the n…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="GitHub Actions in Practice: Workflow Anatomy · Permissions · Caching · Cost | MyAI" />
+    <meta property="og:description" content="Triggers and basic syntax are covered in &quot;GitHub Actions · Hooks · Cron&quot;, and the overall flow and OIDC in &quot;CI/CD · OIDC · GitOps&quot;. This document is the n…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/platform/03b-github-actions.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link active" aria-current="page" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group closed" data-group="8"><button aria-expanded="false" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Platform Deployment &amp; Services</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>GitHub Actions in Practice</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>GitHub Actions in Practice: Workflow Anatomy · Permissions · Caching · Cost</h1>
+<p>Triggers and basic syntax are covered in &quot;GitHub Actions · Hooks · Cron&quot;, and the overall flow and OIDC in &quot;CI/CD · OIDC · GitOps&quot;. This document is the next step: <strong>running workflows safely, cheaply and fast</strong>. It covers job dependencies, reuse, caching, deployment approvals, least privilege, action pinning, untrusted input, runners, pricing and debugging, and ends by designing the workflow this site would need if it added CI. Every fact is as of 2026-09. Pricing and plan coverage change often, so re-check the sources in the references before you adopt anything.</p>
+<h2>Workflow Anatomy</h2>
+<p>Read a workflow as <strong>Event → Job → Step</strong>. Jobs run in parallel by default; <code>needs</code> adds ordering and passes values along. The diagram below is the example design at the end of this document.</p>
+<pre><code class="language-mermaid">flowchart LR
+    E1[pull_request: stable] --&gt; C[check: tests and build check]
+    E2[push: stable] --&gt; C
+    C --&gt;|push only| D[deploy: Pages]
+    D --&gt; ENV[environment: github-pages]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+<th>Common mistake</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>on</code></td>
+<td>Events to run on, with branch and path filters</td>
+<td>Setting both <code>push</code> and <code>pull_request</code> without filters, so the same change is checked twice</td>
+</tr>
+<tr>
+<td><code>needs</code></td>
+<td>Runs only after the earlier job succeeds; passes values through <code>needs.&lt;id&gt;.outputs</code></td>
+<td>Forgetting <code>if: failure()</code> or <code>always()</code> on a notify or cleanup job that must run after a failure</td>
+</tr>
+<tr>
+<td><code>strategy.matrix</code></td>
+<td>Copies one job for each OS and version combination</td>
+<td>Combinations multiply and per-minute cost explodes</td>
+</tr>
+<tr>
+<td><code>if</code></td>
+<td>Condition for a job or step</td>
+<td>Using <code>&quot;</code> for strings inside an expression. Only <code>&#39;</code> works</td>
+</tr>
+</tbody></table>
+<p>A <strong>context</strong> is a group of values you read in expressions. Common ones are <code>github</code> (event, ref, actor), <code>env</code>, <code>vars</code>, <code>secrets</code>, <code>matrix</code>, <code>needs</code>, <code>runner</code> and <code>inputs</code>. The status functions <code>success()</code> (the default), <code>failure()</code>, <code>always()</code> and <code>cancelled()</code> let you build failure notifications and cleanup jobs. Give every job a <code>timeout-minutes</code>. With the default of 360 minutes, a stuck job burns minutes for six hours.</p>
+<h2>Reuse: Reusable Workflows and Composite Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Reusable workflow (<code>workflow_call</code>)</th>
+<th>Composite action (<code>action.yml</code>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unit and call site</td>
+<td>A workflow with several jobs. Called by a job-level <code>uses:</code></td>
+<td>A bundle of steps. Called by a step-level <code>uses:</code></td>
+</tr>
+<tr>
+<td>Runner</td>
+<td>Each of its jobs picks its own</td>
+<td>Runs on the calling job&#39;s runner</td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>Receives <code>secrets:</code> or <code>secrets: inherit</code></td>
+<td>Cannot use them directly. Pass them as inputs</td>
+</tr>
+<tr>
+<td>Logs and nesting</td>
+<td>Separate logs per job and step, up to 10 levels</td>
+<td>Logged as one step, up to 10 nested</td>
+</tr>
+</tbody></table>
+<p>The rule of thumb: <strong>anything that needs jobs and environments, such as a deployment procedure, is a reusable workflow; a few repeated steps such as &quot;setup + install + cache&quot; are a composite action</strong>. Call a reusable workflow from another repository by SHA too, as in <code>owner/repo/.github/workflows/deploy.yml@&lt;commit-sha&gt;</code>.</p>
+<h2>Caching and Artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Cache</th>
+<th>Artifact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Purpose</td>
+<td>Make the next run <strong>faster</strong> (dependencies, intermediate build output)</td>
+<td><strong>Hand results</strong> to other jobs or to people (build output, test reports)</td>
+</tr>
+<tr>
+<td>Lifetime</td>
+<td>Deleted after 7 days without access; above the default 10 GB per repository, the oldest go first</td>
+<td>90 days by default; shorten with <code>retention-days</code></td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Restores only caches from the current branch, the default branch and the PR&#39;s base branch</td>
+<td>Downloaded by other jobs in the same run, or through the UI and API</td>
+</tr>
+</tbody></table>
+<pre><code class="language-yaml">      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with: { node-version: 22, cache: npm }
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .build-cache
+          key: build-${{ runner.os }}-${{ hashFiles(&#39;package-lock.json&#39;) }}
+</code></pre>
+<p>Use the built-in cache of the <code>setup-*</code> actions first, and <code>actions/cache</code> only for other paths. Never put secrets in a cache: anyone with read access can reach its contents through a pull request. <strong>Cache poisoning defence</strong>: events that outsiders can trigger, such as <code>pull_request_target</code>, <code>issue_comment</code> and <code>workflow_run</code>, can only read caches in the default branch&#39;s scope. Let a trusted workflow that runs on <code>push</code> keep the default-branch cache up to date.</p>
+<h2>Environments and Deployment Protection Rules</h2>
+<p>When a job names an <code>environment:</code>, it starts only after the environment&#39;s protection rules pass, and only then can it read the environment&#39;s secrets (the &quot;Environment Design&quot; section of &quot;CI/CD · OIDC · GitOps&quot;). <strong>Plan limits</strong>: on Free, Pro and Team, required reviewers, wait timers, custom protection rules and the admin-bypass setting work <strong>only in public repositories</strong>, and Free private repositories cannot use environment secrets at all. If a private repository needs an approval gate, consider an Enterprise plan, or use protected branches and a manual <code>workflow_dispatch</code> instead.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Required reviewers</td>
+<td>Up to 6 people or teams; one approval lets the job proceed. You can stop the person who started the deployment from approving it</td>
+</tr>
+<tr>
+<td>Wait timer</td>
+<td>Waits 1–43,200 minutes (30 days). The wait is not billed</td>
+</tr>
+<tr>
+<td>Deployment branches and tags</td>
+<td>Only protected branches, or only branches and tags matching name patterns, can deploy</td>
+</tr>
+<tr>
+<td>Custom protection rules</td>
+<td>A GitHub App approves or rejects based on an outside system (observability, change management). Admin bypass can be turned off</td>
+</tr>
+</tbody></table>
+<h2>concurrency: Tidying Overlapping Runs</h2>
+<p>Within one <code>concurrency.group</code> only one run is active, and by default only the newest pending run is kept. PR checks use <code>cancel-in-progress</code> to cancel the previous run, while <strong>deployment jobs use <code>cancel-in-progress: false</code></strong> so a deployment in progress finishes. A deployment cut off halfway leaves a half-changed state. The example design below shows both settings together. The 2026-09 docs also have <code>queue: max</code>, which queues up to 100 pending runs (it cannot be combined with <code>cancel-in-progress: true</code>).</p>
+<h2>Permissions: A Least-Privilege GITHUB_TOKEN</h2>
+<p><code>GITHUB_TOKEN</code> is a repository-scoped token issued for each job and expired when the job ends. Its default permissions come from enterprise, organization and repository settings; organizations and personal repositories created after 2023-02 default to read-only. Do not rely on the settings; write the permissions into the workflow.</p>
+<ul>
+<li>Close everything at the top with <code>permissions: {}</code> and open only what each job needs (for example <code>permissions: { contents: read, pull-requests: write }</code>). Give <code>id-token: write</code> only to jobs that need OIDC. Events triggered with <code>GITHUB_TOKEN</code> (pushes, creating tags or releases, and so on) do not create new workflow runs (except <code>workflow_dispatch</code> and <code>repository_dispatch</code>); this prevents endless loops. The exception: for a PR created with this token, <code>pull_request</code> <code>opened</code>, <code>synchronize</code> and <code>reopened</code> events do create workflow runs, but in a state that needs approval from someone with write access before they run (per GitHub&#39;s docs as of 2026-09, rolling out gradually). Runs for pull requests opened by Dependabot are treated like forks: they get a read-only token and cannot read secrets.</li>
+<li><strong>Secrets and variables</strong>: <code>secrets.NAME</code> is masked in logs; <code>vars.NAME</code> is shown as is. Put keys in secrets and regions or public URLs in variables, each at the narrowest of organization, repository or environment level. Do not store cloud credentials; get them through OIDC (&quot;CI/CD · OIDC · GitOps&quot;).</li>
+</ul>
+<h2>Pinning Third-Party Actions and Dependabot</h2>
+<p>A tag (<code>@v7</code>) can be moved to another commit by its owner or by an attacker. That was the path of the 2025-03 <code>tj-actions/changed-files</code> incident (&quot;Secrets · SBOM · SLSA&quot;). <strong>Pin to the full 40-character commit SHA and add the version as a comment.</strong> Since 2025-08 an organization policy can enforce SHA pinning. Get the SHA with <code>git ls-remote https://github.com/actions/checkout refs/tags/v7.0.1 &#39;refs/tags/v7.0.1^{}&#39;</code>. Two lines of output mean an annotated tag, and the SHA on the <code>^{}</code> line is the real commit. Also check that the SHA matches the commit on the repository&#39;s release page. Dependabot keeps pinned SHAs current with PRs that update the SHA and the version comment together.</p>
+<pre><code class="language-yaml">version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    cooldown: { default-days: 7 }
+</code></pre>
+<p><code>cooldown</code> waits a number of days after a new version appears before opening a PR, so you do not pull a freshly tampered release right away. Per the 2026-09 docs, version updates get a 3-day cooldown by default even when you do not set one. In 2026-03 GitHub announced workflow-level dependency locking on its roadmap. It was not yet in the workflow syntax docs checked on 2026-09-30, so until then SHA pinning plus Dependabot is the baseline.</p>
+<h2>Untrusted Input: Injection and pull_request_target</h2>
+<p><code>${{ }}</code> is substituted as text <strong>before</strong> the shell runs. If a value written by outsiders, such as a PR title, branch name or issue body, goes straight into <code>run:</code>, that value becomes a command.</p>
+<pre><code class="language-yaml">      # Bad: quotes and a command in the title are executed as is
+      - run: echo &quot;PR title is ${{ github.event.pull_request.title }}&quot;
+      # Good: pass it as an environment variable and read the shell variable in quotes
+      - env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: echo &quot;PR title is $TITLE&quot;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>What runs, with which permissions</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pull_request</code></td>
+<td>The PR&#39;s merge commit. Fork PRs get a read-only token and no secrets</td>
+<td>Build and test here</td>
+</tr>
+<tr>
+<td><code>pull_request_target</code></td>
+<td>The default branch&#39;s workflow, with a write-capable token and secrets</td>
+<td>Never check out or run PR code</td>
+</tr>
+<tr>
+<td><code>workflow_run</code></td>
+<td>Default-branch context after an earlier workflow finishes</td>
+<td>Do not trust the earlier run&#39;s artifacts</td>
+</tr>
+</tbody></table>
+<p>Since 2025-12-08, <code>pull_request_target</code> <strong>always runs the workflow file from the default branch</strong>, whatever the base branch. <code>actions/checkout</code> v7 refuses by default to check out fork PR code under this event and <code>workflow_run</code>. Prompt injection when an AI agent in CI reads PR or issue content is covered in &quot;CI/CD in the AI Era&quot;.</p>
+<h2>Choosing Runners</h2>
+<table>
+<thead>
+<tr>
+<th>Runner</th>
+<th>Traits</th>
+<th>Cost (2026-09)</th>
+<th>Where not to use it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Standard GitHub-hosted</td>
+<td>A fresh VM per job. <code>ubuntu-latest</code> is Ubuntu 24.04</td>
+<td>Free for public; private uses included minutes, then is billed</td>
+<td>Jobs that need your internal network</td>
+</tr>
+<tr>
+<td>Larger runner</td>
+<td>More CPU and RAM, static IP, GPU. Team and Enterprise Cloud only</td>
+<td><strong>Always billed</strong>, even for public, and included minutes do not apply</td>
+<td>Jobs a standard runner handles fine</td>
+</tr>
+<tr>
+<td>Self-hosted</td>
+<td>Your servers or cluster, internal network. No isolation between jobs, so make them ephemeral</td>
+<td>No GitHub charge; the infrastructure is your cost</td>
+<td><strong>Public repositories</strong>. Anyone can run code on your runner through a PR</td>
+</tr>
+</tbody></table>
+<h2>Cost: As of 2026-09</h2>
+<p>Standard runners in public repositories, GitHub Pages and Dependabot runs are free. Private repositories use the account plan&#39;s included amounts and are billed beyond them.</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Included minutes (per month)</th>
+<th>Artifact storage</th>
+<th>Cache (per repository)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Free (personal · organization)</td>
+<td>2,000</td>
+<td>500 MB</td>
+<td>10 GB</td>
+</tr>
+<tr>
+<td>Pro / Team</td>
+<td>3,000</td>
+<td>1 GB / 2 GB</td>
+<td>10 GB</td>
+</tr>
+<tr>
+<td>Enterprise Cloud</td>
+<td>50,000</td>
+<td>50 GB</td>
+<td>10 GB</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Standard runner</th>
+<th>Linux 1-core</th>
+<th>Linux 2-core x64 / arm64</th>
+<th>Windows 2-core</th>
+<th>macOS 3 · 4-core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>USD per minute</td>
+<td>$0.002</td>
+<td>$0.006 / $0.005</td>
+<td>$0.010</td>
+<td>$0.062</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>2026-01-01 cut</strong>: GitHub-hosted prices fell depending on the machine (for example, Linux 2-core $0.008 → $0.006, a 25% cut). The changelog headline&#39;s &quot;up to 39%&quot; was confirmed via search results only.</li>
+<li><strong>Self-hosted charge on hold</strong>: in its 2025-12-16 changelog GitHub announced a $0.002 per-minute charge for self-hosted use in private repositories from 2026-03-01, then postponed it on 2025-12-17. The pricing docs checked on 2026-09-30 still say self-hosted use is free. It may come back, so watch the changelog.</li>
+<li>Each job is <strong>rounded up</strong> to the whole minute, and time spent on failed runs and re-runs counts too. Storage overage is $0.25 per GB-month for artifacts and Packages and $0.07 for cache, accrued hourly. The old OS multipliers (Windows 2x, macOS 10x) are gone from the current pricing docs, replaced by per-machine minute rates. Check the billing page to see how included minutes are drawn down on Windows and macOS. Without a payment method, runs are blocked once the included amount is used up. With one, set a <strong>budget</strong> as a cap. Copilot code review in private repositories also uses Actions minutes.</li>
+</ul>
+<h2>Debugging</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>You do not know why it fails</td>
+<td>Secret or variable <code>ACTIONS_STEP_DEBUG=true</code> (runner diagnostics: <code>ACTIONS_RUNNER_DEBUG</code>). For one run only, re-run with &quot;Enable debug logging&quot; or <code>gh run rerun RUN_ID --debug</code></td>
+</tr>
+<tr>
+<td>Only some jobs failed</td>
+<td>&quot;Re-run failed jobs&quot; or <code>gh run rerun RUN_ID --failed</code>. Within 30 days, at most 50 times</td>
+</tr>
+<tr>
+<td>Trying it without a push</td>
+<td>Run it locally in Docker with <code>act</code> (nektos/act). <code>act -l</code> lists jobs; <code>act pull_request -j check</code> runs one</td>
+</tr>
+</tbody></table>
+<p>A re-run uses the original event&#39;s <code>GITHUB_SHA</code> and <strong>the permissions of whoever started the first run</strong>. If you changed the code, you need a new push, and never cover intermittent failures with re-runs (&quot;CI Fundamentals and Test Strategy&quot;). <code>act</code>&#39;s images are not the same as GitHub-hosted runners, so a local pass only shows the syntax and flow are right. Pass secrets with <code>--secret-file</code>, but never production values.</p>
+<h2>Example Design: If This Site Added CI</h2>
+<p>This site is a static site served by GitHub Pages from the <code>stable</code> branch, and as of 2026-09-30 it has <strong>no CI</strong>. Tests run with <code>node --test tests/*.cjs</code>, and <code>node tools/build-site.mjs --check</code> checks that the generated pages are up to date. Below is a <strong>design example</strong> that has not been added to the repository; the SHAs were checked with <code>git ls-remote</code> on 2026-09-30.</p>
+<pre><code class="language-yaml">name: site
+on:
+  pull_request:
+    branches: [stable]
+  push:
+    branches: [stable]
+permissions: {}
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == &#39;pull_request&#39; }}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with: { node-version: 22 }
+      - run: node --test tests/*.cjs
+      - run: node tools/build-site.mjs --check
+  deploy:
+    needs: check
+    if: github.event_name == &#39;push&#39;
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: read, pages: write, id-token: write }
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency: { group: pages, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with: { path: . }
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+</code></pre>
+<p>The scripts have no dependencies, so there is no cache, and standard runners on a public repository cost nothing. To use <code>deploy</code>, switch the Pages source from &quot;Deploy from a branch&quot; to <strong>&quot;GitHub Actions&quot;</strong>. To keep branch deploys instead, keep only <code>check</code> and make it a required status check in branch protection. <code>path: .</code> uploads the whole repository except <code>.git</code>, <code>.github</code> and hidden files. If you do not want <code>tests/</code> and <code>tools/</code> published, upload a directory that holds only the public files.</p>
+<h2>Bad Example / Good Example</h2>
+<pre><code class="language-text">Bad: third-party actions on an @v2 tag, no permissions block, and the PR title placed straight into run:.
+Good: top-level permissions: {}, least privilege per job, actions pinned to SHA + version comment, outside input passed via env.
+Bad: checking out the PR head under pull_request_target and running tests. Fork code gets the secrets and a write token.
+Good: build and test under pull_request; use pull_request_target only for labels and comments that run no PR code.
+</code></pre>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>In one workflow in your repository, which step fails if you change the top-level <code>permissions</code> to <code>{}</code>? Which permissions alone should that job get?</li>
+<li>Why is <code>run: echo &quot;${{ github.head_ref }}&quot;</code> dangerous? Rewrite it to do the same thing safely.</li>
+<li>You want a human approval before production deploys from a private repository on the Team plan. Can you use required reviewers? If not, what would you use instead?</li>
+<li>A private repository runs a 6-minute CI on Linux 2-core 40 times a day for 30 days. How many minutes is that, and what does the part above the Pro plan&#39;s included minutes cost?</li>
+<li>In the example workflow, if you delete the <code>deploy</code> job&#39;s <code>concurrency</code> and change the workflow-level setting to <code>cancel-in-progress: true</code>, what can happen when merges land back to back?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://docs.github.com/en/billing/concepts/product-billing/github-actions">GitHub Actions billing</a> · <a href="https://docs.github.com/en/billing/reference/actions-runner-pricing">Actions runner pricing</a> — GitHub Docs, checked 2026-09-30 (source in the github/docs repository)</li>
+<li><a href="https://github.blog/changelog/2025-12-16-coming-soon-simpler-pricing-and-a-better-experience-for-github-actions/">Update to GitHub Actions pricing</a> (2025-12-16) · <a href="https://github.blog/changelog/2026-01-01-reduced-pricing-for-github-hosted-runners-usage/">Reduced pricing for GitHub-hosted runners usage</a> (2026-01-01) — GitHub Changelog, confirmed via search results</li>
+<li><a href="https://github.com/resources/insights/2026-pricing-changes-for-github-actions">Pricing changes for GitHub Actions</a> · <a href="https://github.com/orgs/community/discussions/182186">Updates to GitHub Actions pricing</a> (2025-12-17) — GitHub, checked 2026-09-30</li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax">Workflow syntax</a> · <a href="https://docs.github.com/en/actions/concepts/workflows-and-actions/reusing-workflow-configurations">Reusing workflow configurations</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching">Dependency caching reference</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments">Deployments and environments</a> · <a href="https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency">Control the concurrency of workflows and jobs</a> — GitHub Docs, checked 2026-09-30 (source in the github/docs repository)</li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/github_token">GITHUB_TOKEN</a> · <a href="https://docs.github.com/en/actions/reference/security/secure-use">Secure use reference</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request_target">Events that trigger workflows</a> — GitHub Docs, checked 2026-09-30 (source in the github/docs repository)</li>
+<li><a href="https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/">Updating the default GITHUB_TOKEN permissions to read-only</a> (2023-02-02) · <a href="https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/">Actions pull_request_target and environment branch protections changes</a> (2025-11-07) — GitHub Changelog, confirmed via search results</li>
+<li><a href="https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference">Dependabot options reference</a> — GitHub Docs, checked 2026-09-30 (source in the github/docs repository) · <a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/keeping-your-actions-up-to-date-with-dependabot">Keeping your actions up to date with Dependabot</a> — GitHub Docs, confirmed via search results</li>
+<li><a href="https://github.com/orgs/community/discussions/190621">What&#39;s coming to our GitHub Actions 2026 security roadmap</a> — GitHub Community, 2026-03-26, checked 2026-09-30</li>
+<li><a href="https://docs.github.com/en/actions/reference/limits">Actions limits</a> · <a href="https://docs.github.com/en/actions/how-tos/monitor-workflows/enable-debug-logging">Enable debug logging</a> · <a href="https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs">Re-run workflows and jobs</a> — GitHub Docs, checked 2026-09-30 (source in the github/docs repository)</li>
+<li><a href="https://github.com/actions/checkout">actions/checkout</a> · <a href="https://github.com/actions/runner-images">actions/runner-images</a> · <a href="https://github.com/nektos/act">nektos/act</a> · <a href="https://github.com/actions/starter-workflows/blob/main/pages/static.yml">Pages starter workflow</a> — GitHub, checked 2026-09-30</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/platform/03a-ci-testing/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>CI Fundamentals and Test Strategy</span></a><a class="page-link next" href="../../../en/platform/03c-cd-release-automation/"><span><small>Next</small>Deployment Automation and Versioning</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

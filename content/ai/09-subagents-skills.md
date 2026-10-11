@@ -72,7 +72,7 @@ maxTurns: 6
 | 필드 | 값 | 이유 |
 |---|---|---|
 | `tools` | Edit · Write 없음 | 생략하면 **모든 도구를 상속**한다. 목록은 허용 목록이다 |
-| `permissionMode` | `plan` | 읽기 전용 탐색 모드(Plan Mode)로 시작한다. 단, 부모 대화가 acceptEdits · auto · bypassPermissions면 이 값은 무시되고 부모 mode를 따른다 |
+| `permissionMode` | `plan` | Plan Mode(읽기 위주로 탐색하고 계획을 세우는 mode)로 시작한다. 단, 부모 mode가 덮어쓸 수 있다(아래 흔한 오해 참고) |
 | `maxTurns` | `6` | 한도에 닿으면 멈추고 부분 결과를 돌려준다 |
 | `model` | 없음 | 가장 싼 유능한 Model이 이기는 역할이라 Harness에 맡긴다 |
 
@@ -98,7 +98,7 @@ implement, choose product scope, approve paid automation, or merge.
 |---|---|---|
 | `name`, `description`, 본문 | `name`, `description`, `developer_instructions` | `name`과 `developer_instructions`는 필수다. `description`은 파일에서 생략할 수 있지만 적었다면 비어 있으면 안 되고, 다른 설정 층의 같은 이름 역할도 설명을 채우지 않으면 그 역할은 경고와 함께 무시된다(`codex-rs/agent-roles/src/`, 2026-09-29 main) |
 | `tools` 허용 목록 | 없음 | `sandbox_mode`와 지시문으로 대신한다 |
-| `permissionMode: plan` | `sandbox_mode = "read-only"` | 양쪽 모두 부모나 Runtime이 덮어쓸 수 있다. Claude는 부모가 acceptEdits · auto · bypassPermissions면 부모 mode를, Codex는 상위 Runtime override를 따르므로 실효 권한을 확인한다 |
+| `permissionMode: plan` | `sandbox_mode = "read-only"` | 양쪽 모두 부모나 Runtime이 덮어쓸 수 있으므로 실효 권한을 확인한다(아래 흔한 오해 참고) |
 | `maxTurns` | 없음 | 지시문의 "at most eight rounds"는 강제되는 카운터가 아니다 |
 | `model` | `model`, `model_reasoning_effort` | Agent 파일의 `model`이 Spawn 요청보다 우선하므로 검토자 파일은 일부러 비운다 |
 

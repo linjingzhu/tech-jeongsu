@@ -55,7 +55,7 @@ flowchart LR
 
 - GameAnalytics' 2026 benchmarks (2025 data, 16,000+ mobile games with 1,000+ monthly active users) reported median D1 around 22%, D7 just under 4%, D30 around 0.7-0.8%, and top-quartile D1 just above 30% (per secondary summaries).
 - Revenue = DAU × ARPDAU. DAU is built from new installs times retention, so low retention demands large daily install volume (usually paid ads).
-- IAP revenue carries app store fees (document 06). Ad revenue follows ad network settlement (document 05).
+- IAP revenue carries app store fees (the fee table in document 04). Ad revenue follows ad network settlement (document 05).
 
 ## Applied: The Example Studio
 

@@ -113,7 +113,7 @@ A community is not an ad channel but **a structure in which customers help each 
 
 When targeting Korean customers, a global channel list is not enough. Naver and Kakao each bundle search, messaging, and commerce under one company, so **each channel has a different character and different applicable rules.**
 
-The advertising-information rules in Network Act Article 50 (prior opt-in consent, an "(Ad)" label, separate consent for night-time sending, opt-out instructions) apply to **channels that send to a recipient, such as text messages, email, app push, and messenger messages**. Ads shown in search results or feeds are not transmissions, so Article 50 does not apply to them, but their copy and sponsorship disclosures follow the Labeling and Advertising Act and the KFTC endorsement guidelines (document 09).
+The advertising-information rules in Network Act Article 50 (prior opt-in consent, an "(Ad)" label, separate consent for night-time sending, opt-out instructions) apply to **channels that send to a recipient, such as text messages, email, app push, and messenger messages**. The night-time consent rule, however, does not apply to email (proviso to Article 50(3) and the Enforcement Decree). Ads shown in search results or feeds are not transmissions, so Article 50 does not apply to them, but their copy and sponsorship disclosures follow the Labeling and Advertising Act and the KFTC endorsement guidelines (document 09).
 
 | Channel | Character | Network Act Article 50 applies? | Measurability |
 |---|---|---|---|

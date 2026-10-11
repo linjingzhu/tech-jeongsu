@@ -31,7 +31,7 @@ flowchart TD
 
 ## Data Coverage
 
-- A catalog of more than 109 AI tools/resources
+- A catalog of more than 130 AI tools/resources
 - 7 categories
 - Distinction between installed applications and web access
 - Image/design and coding workflow guides

@@ -86,7 +86,7 @@ Remote Branch가 남아 있다면 PR에는 보통 영향이 없다.
 
 ### Remote Head Branch 삭제
 
-PR의 Source가 사라지므로 정상적인 업데이트/통합 흐름이 깨진다.
+GitHub UI에서는 열린 PR의 Head Branch를 삭제할 수 없다. `git push origin --delete <branch>`처럼 `git push`로 삭제하면 그 PR은 닫힌다.
 
 따라서 기본 순서:
 

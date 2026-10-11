@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>AI-assisted Production and Platform Policy: Speed from AI, Responsibility from You | MyAI</title>
+    <meta name="description" content="AI cuts the time spent on scripts, editing, captions and translation. It also makes your output look like that of the many channels using the same tools,…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07-ai-production-policy/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/07-ai-production-policy/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="AI-assisted Production and Platform Policy: Speed from AI, Responsibility from You | MyAI" />
+    <meta property="og:description" content="AI cuts the time spent on scripts, editing, captions and translation. It also makes your output look like that of the many channels using the same tools,…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/07-ai-production-policy/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/07-ai-production-policy.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link active" aria-current="page" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>AI-assisted Production and Platform Policy</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>AI-assisted Production and Platform Policy: Speed from AI, Responsibility from You</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Separate what AI can help with at each production stage from where it hurts quality, explain YouTube&#39;s altered or synthetic content disclosure, the &quot;inauthentic content&quot; and reused-content rules and Naver&#39;s stance on AI mass-produced posts, and set up a pre-publish check that includes the commercial-use terms of your tools.</p>
+</blockquote>
+<p>AI cuts the time spent on scripts, editing, captions and translation. It also makes your output look like that of the many channels using the same tools, and it makes wrong information sound convincing. This document covers <strong>AI tools and the platform-policy risk that comes with them</strong>. The craft of Shorts and faceless formats is in &quot;Shorts and Faceless Channels&quot;, turning one source into several formats is in &quot;One Source, Multi Use (OSMU) Strategy&quot;, and the legal side of ad disclosure, copyright and tax is in &quot;Disclosure, Copyright and Tax&quot;. Policies and terms are <strong>as of 2026-09</strong>. YouTube Help and Naver help pages could not be opened directly, so many items are marked &quot;confirmed via search results&quot;. Tool names are <strong>neutral examples</strong>, not recommendations.</p>
+<blockquote>
+<p><strong>Tools, tutorials and method</strong>: this document covers policy and principles. Stage-by-stage tools and tutorial links are in &quot;Writing Blog Posts with AI: Tools and Tutorials&quot; and &quot;Making YouTube Videos with AI: Tools and Tutorials&quot;; the prompt library, review procedure and automation are in &quot;An AI Production Method: Prompts, Review and Automation&quot;.</p>
+</blockquote>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>Key point</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Altered or synthetic content disclosure</td>
+<td>A YouTube Studio setting at upload for disclosing realistic altered or synthetic content</td>
+<td>Only realistic content. Help with scripts or captions is not covered</td>
+</tr>
+<tr>
+<td>Inauthentic content</td>
+<td>The YPP rule that excludes mass-produced or repetitive content from monetization</td>
+<td>Renamed from &quot;repetitious content&quot; on 2025-07-15</td>
+</tr>
+<tr>
+<td>Reused content</td>
+<td>Reusing other people&#39;s content without significant added value</td>
+<td>Judged separately from permission and copyright</td>
+</tr>
+<tr>
+<td>Likeness detection</td>
+<td>A YouTube feature that finds AI-generated videos using your face and alerts you</td>
+<td>You can request removal after a match</td>
+</tr>
+<tr>
+<td>Commercial-use terms</td>
+<td>What a tool&#39;s terms say about ownership and commercial use of outputs</td>
+<td>They differ by plan</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>A tool map by stage</h3>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What AI does well</th>
+<th>Neutral example (not a recommendation)</th>
+<th>Where it hurts quality</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Research</td>
+<td>Source lists, summaries, finding counter-arguments</td>
+<td>General chat assistants, AI search</td>
+<td>Invents sources and numbers (hallucination)</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Outlines, polishing sentences, adjusting length</td>
+<td>General chat assistants</td>
+<td>Sentences anyone could write, explanations with no experience behind them</td>
+</tr>
+<tr>
+<td>Voice and TTS</td>
+<td>Voice-over, a pronunciation guide</td>
+<td>TTS services such as ElevenLabs</td>
+<td>Flat intonation costs trust. Commercial terms vary by plan</td>
+</tr>
+<tr>
+<td>Image</td>
+<td>Thumbnail backgrounds, draft diagrams</td>
+<td>Image generators such as Midjourney</td>
+<td>Fake screenshots that look like a real screen</td>
+</tr>
+<tr>
+<td>Video</td>
+<td>B-roll, transitions</td>
+<td>Text-to-video services</td>
+<td>Realistic scenes need disclosure. The channel starts to look like every other one</td>
+</tr>
+<tr>
+<td>Editing</td>
+<td>Removing silences, cutting, noise reduction</td>
+<td>AI features in video editors</td>
+<td>Heavy auto-cutting removes the natural pauses</td>
+</tr>
+<tr>
+<td>Captions</td>
+<td>Speech-recognition captions</td>
+<td>YouTube automatic captions</td>
+<td>Errors in technical terms and proper names</td>
+</tr>
+<tr>
+<td>Translation and dubbing</td>
+<td>Subtitles in other languages, voice dubbing</td>
+<td>YouTube auto-dubbing</td>
+<td>Awkward machine translation, inconsistent terms</td>
+</tr>
+</tbody></table>
+<p><strong>YouTube auto-dubbing</strong>: reports say it was announced in September 2024, extended to YPP creators in 2025, and opened to all creators in early 2026 with 27 languages (confirmed via search results). Dubbing Korean videos into English is reported to be supported. Language pairs and eligible channels can change, so check in YouTube Studio and review each dub before it goes live.</p>
+<h3>Where AI helps and where it hurts</h3>
+<p>There is one test: does AI shrink or grow <strong>what viewers can get only from this channel</strong>?</p>
+<ul>
+<li><strong>Helps</strong>: repetitive work (caption timing, silence removal, format conversion), drafts (outlines, title options), checks (spelling, missing steps).</li>
+<li><strong>Hurts</strong>: when it writes your experience (the process you actually went through) for you, when facts (numbers, features, policies) are copied without checking, when it replaces your voice and point of view wholesale.</li>
+</ul>
+<h3>YouTube&#39;s altered or synthetic content disclosure</h3>
+<p>YouTube requires creators to disclose content made with altered or synthetic media, including generative AI, when a viewer could <strong>easily mistake it for a real person, place or event</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Disclosure needed</th>
+<th>Disclosure not needed</th>
+<th>Not confirmed — disclose to be safe</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Replacing a real person&#39;s face with someone else&#39;s</td>
+<td>Clearly unrealistic scenes, animation</td>
+<td>Cloning your own voice with AI for voice-overs or dubs. Third-party sources call it an exception, but no official YouTube source confirming that was found, and the official example is &quot;synthetically generating a person&#39;s voice to narrate&quot;, so disclose</td>
+</tr>
+<tr>
+<td>Synthesizing a real person&#39;s voice to narrate</td>
+<td>Minor edits such as colour grading or beauty filters</td>
+<td></td>
+</tr>
+<tr>
+<td>Altering real events or places, such as making a real building look on fire</td>
+<td>Using AI only for production help, such as scripts, ideas or automatic captions</td>
+<td></td>
+</tr>
+<tr>
+<td>Realistic fictional events, such as a tornado heading for a real town</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Where</strong>: at upload, in the &quot;Altered content&quot; setting in YouTube Studio.</li>
+<li><strong>Where the label appears</strong>: by default in the &quot;How this content was made&quot; section of the expanded description. For sensitive topics such as health, news, elections and finance, a more prominent label may appear on the player.</li>
+<li><strong>If you do not</strong>: YouTube may add the label itself, and creators who consistently fail to disclose may face penalties including content removal or suspension from YPP (confirmed via search results).</li>
+</ul>
+<h3>&quot;Inauthentic content&quot; and reused content</h3>
+<p>Both rules are <strong>YPP monetization policies</strong>. A channel can lose monetization without breaking the Community Guidelines.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Inauthentic content</th>
+<th>Reused content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What it looks at</td>
+<td>Mass production and repetition: videos that look template-made with little variation. In 2026-07 YouTube was reported to describe it as three types: &quot;template-based and repetitive&quot;, &quot;off-putting or distressing&quot; and &quot;AI personas discussing sensitive topics such as health or finance&quot; (<a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/">TechCrunch, 2026-07-20</a>, confirmed via search results)</td>
+<td>Source: content that is not your own creation and already exists elsewhere</td>
+</tr>
+<tr>
+<td>History</td>
+<td>Renamed from &quot;repetitious content&quot; on 2025-07-15 and clarified to include mass-produced content</td>
+<td>An existing rule</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>Hundreds of synthetic-voice videos from one template with only the sentences changed</td>
+<td>Compilations of other people&#39;s clips, reactions with no commentary, re-uploads of other channels&#39; videos</td>
+</tr>
+<tr>
+<td>When it is allowed</td>
+<td>Each video has its own content and production decisions</td>
+<td>Significant original commentary, substantive modification, or educational or entertainment value is added</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>Using AI is not banned in itself</td>
+<td>Applies even with the original creator&#39;s permission. Judged separately from copyright and fair use</td>
+</tr>
+</tbody></table>
+<p><strong>Turning your own content into other formats</strong>: cutting Shorts from your own long-form or writing a blog post from the same outline is not reuse of other people&#39;s content. But using AI to churn out many videos from lightly varied versions of one script moves you towards the inauthentic-content risk. What each derivative adds is decided in &quot;One Source, Multi Use (OSMU) Strategy&quot;; check it against this table.</p>
+<h3>Likeness detection</h3>
+<p>Reports say YouTube began offering likeness detection to YPP creators in October 2025 and, in May 2026, opened it to channel owners and managers aged 18 and over (confirmed via search results). It scans newly uploaded videos for AI-generated content that uses an enrolled person&#39;s face and alerts them, and the person can review a match and request removal under the privacy guidelines. Reports in September 2026 also describe adding voice detection. Even a faceless channel should watch this if <strong>its voice is the brand</strong>.</p>
+<h3>Naver&#39;s stance: the problem is mass production and low quality, not AI</h3>
+<ul>
+<li><strong>AI-use label</strong>: from 2025-05-21 Naver Blog added an option to mark images and videos generated or edited with AI with an &quot;AI-use&quot; icon. A July 2026 report says that on the blog this is <strong>recommended, not mandatory</strong> (confirmed via search results).</li>
+<li><strong>Mass-produced posts</strong>: after a March 2026 report on blogs publishing 100 AI-made posts a day, Naver said it continuously monitors and sanctions abnormal use such as spam, advertising and macros, and is strengthening its technical response to keep search results trustworthy (Newsverse, 2026-03-24).</li>
+<li><strong>Summary</strong>: no evidence was found that Naver officially bans the use of AI. The risk is unchecked AI output and mass publishing. How search evaluates documents is covered in &quot;Naver Blog and How Naver Search Works&quot;.</li>
+</ul>
+<h3>Rights in AI outputs and voices</h3>
+<table>
+<thead>
+<tr>
+<th>What to check</th>
+<th>What was confirmed (2026-09; each tool&#39;s terms can change)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Copyright in AI outputs in Korea</td>
+<td>The June 2025 guide from the Ministry of Culture, Sports and Tourism and the Korea Copyright Commission: with human creative contribution, a work can be registered as a &quot;work using generative AI&quot;; a &quot;generative AI output&quot; with no such contribution cannot</td>
+</tr>
+<tr>
+<td>Chat assistant outputs (e.g. OpenAI)</td>
+<td>The terms assign the company&#39;s rights in outputs to the user &quot;if any&quot;. That is not a promise that rights exist</td>
+</tr>
+<tr>
+<td>Image generation (e.g. Midjourney)</td>
+<td>Paid subscribers own their assets. A company with over USD 1 million in annual revenue (or its employee) needs a Pro or Mega plan</td>
+</tr>
+<tr>
+<td>TTS (e.g. ElevenLabs)</td>
+<td>The free plan allows no commercial use and requires attribution in the title when published. Paid plans include a commercial licence (beta features excluded)</td>
+</tr>
+<tr>
+<td>Voice cloning</td>
+<td>Do not clone another person&#39;s voice without consent. On YouTube, disclose a synthetic voice to be safe, even your own</td>
+</tr>
+</tbody></table>
+<p>This table is not legal advice. <strong>Check the terms of the plan you use before publishing</strong>, and record the date you checked. The general principles of contracts and IP are in &quot;Contracts · IP · Open Source&quot;.</p>
+<h3>A pre-publish check</h3>
+<pre><code class="language-mermaid">flowchart TD
+    DRAFT[AI-assisted draft] --&gt; FACT{Numbers, features and policies&lt;br/&gt;checked at the original source}
+    FACT --&gt;|No| FIX[Check or remove]
+    FIX --&gt; FACT
+    FACT --&gt;|Yes| OWN{Does it contain my experience,&lt;br/&gt;screen and judgement}
+    OWN --&gt;|No| ADD[Add the process I actually went through]
+    ADD --&gt; OWN
+    OWN --&gt;|Yes| REAL{Any realistic synthetic scene&lt;br/&gt;or synthetic voice}
+    REAL --&gt;|Yes| LABEL[Altered or synthetic disclosure]
+    REAL --&gt;|No| LIC
+    LABEL --&gt; LIC{Commercial-use terms&lt;br/&gt;of the tool plan checked}
+    LIC --&gt; PUB[Publish]
+</code></pre>
+<h2>Applied: Example Creator J&#39;s Rules for AI</h2>
+<p>J teaches work automation, so the process of using AI is itself content. The rule is &quot;AI does drafts and repetitive work; judgement and the screen are J&#39;s&quot;.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>J&#39;s approach</th>
+<th>Saved per 10-hour week (assumption)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Outline</td>
+<td>Refine one outline with AI, then split it into the blog post and the video script</td>
+<td>About 1 hour</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Rewrite the AI draft, adding J&#39;s own mistakes and numbers</td>
+<td>About 0.5 hours</td>
+</tr>
+<tr>
+<td>Recording</td>
+<td>Screen-record real spreadsheet files. No AI-generated screens</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Editing and captions</td>
+<td>Use silence removal and automatic captions, then correct terms such as function names by hand</td>
+<td>About 1 hour</td>
+</tr>
+<tr>
+<td>Voice</td>
+<td>J&#39;s own voice by default. An AI voice only on one Short, after checking the paid plan&#39;s terms, and the AI-voice Short has the altered or synthetic content setting turned on</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Disclosure</td>
+<td>No disclosure for videos with only J&#39;s own screen and J&#39;s recorded voice. Disclose the AI-voice Short and any realistic synthetic scene</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>J&#39;s weekly videos each cover a different real work problem, which is far from template mass production. The risk is &quot;using AI to make this week&#39;s script a variation of last week&#39;s&quot;.</p>
+<h2>Going Deeper</h2>
+<h3>Does the label affect performance</h3>
+<p>YouTube Help says adding a disclosure does not limit a video&#39;s reach or its eligibility to earn money (confirmed via search results). Penalties come from repeatedly failing to disclose what should be disclosed. It is more accurate to see the label not as &quot;a confession of using AI&quot; but as <strong>a device that stops viewers from taking it as real</strong>.</p>
+<h3>Keep a record</h3>
+<p>For each video, write one line: tools used, plan, the date you checked the terms, and whether you disclosed. It is your evidence if the terms change or someone disputes your use later.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;Any use of AI must be disclosed&quot;</strong>: only realistic, misleading alteration or synthesis. Help with scripts or captions is not covered.</li>
+<li><strong>&quot;AI videos cannot be monetized&quot;</strong>: the test is mass production, repetition and reuse, not AI use itself.</li>
+<li><strong>&quot;I had permission, so it is not reused content&quot;</strong>: the reused-content judgement is separate from permission and copyright.</li>
+<li><strong>&quot;Naver bans AI posts&quot;</strong>: no official ban was found. Spam, mass publishing and wrong information are the problem.</li>
+<li><strong>&quot;I paid, so the copyright is mine&quot;</strong>: ownership under the terms is not the same as copyright protection. Without human creative contribution, protection may be weak.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Does a screen-recording video with an AI-written script and your own recorded voice need the altered or synthetic disclosure? Why?</li>
+<li>What does each of the &quot;inauthentic content&quot; and reused-content rules look at?</li>
+<li>What must you check before using narration made with a free TTS plan in a monetized video?</li>
+<li>Is Naver Blog&#39;s &quot;AI-use&quot; label mandatory? What does Naver actually treat as a problem?</li>
+<li>If you drop the &quot;my experience, screen and judgement&quot; step from the pre-publish check, which two risks grow?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/14328491?hl=en">Disclosing use of GenAI content (altered or synthetic content)</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/15447836?hl=en">Understanding &#39;How this content was made&#39; disclosures on YouTube</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://blog.youtube/news-and-events/disclosing-ai-generated-content/">How we&#39;re helping creators disclose altered or synthetic content</a> — YouTube Blog, 2024-03, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/1311392?hl=en">YouTube channel monetization policies</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://ppc.land/youtube-clarifies-inauthentic-content-policy-changes/">YouTube clarifies &quot;inauthentic content&quot; policy changes</a> — PPC Land, 2025-07, checked 2026-09-30</li>
+<li><a href="https://ppc.land/understanding-youtubes-reused-content-policy/">Understanding YouTube&#39;s reused content policy</a> — PPC Land, checked 2026-09-30</li>
+<li><a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/">YouTube clarifies policies around AI slop and upsetting videos</a> — TechCrunch, 2026-07-20, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/16440338?hl=en">Likeness detection on YouTube</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.mediapost.com/publications/article/415170/youtube-rolls-out-likeness-detection-to-all-creato.html">YouTube Rolls Out Likeness Detection To All Creators Over 18</a> — MediaPost, 2026-05-19, checked 2026-09-30</li>
+<li><a href="https://blog.youtube/news-and-events/youtube-auto-dubbing-expressive-speech/">Unlocking a global audience with auto dubbing</a> — YouTube Blog, confirmed via search results (2026-09-30)</li>
+<li><a href="https://news.mtn.co.kr/news-detail/2026072417015682342">Naver&#39;s double standard on AI labels: mandatory in shopping, voluntary on blogs</a> — MTN (Korean), 2026-07-24, checked 2026-09-30</li>
+<li><a href="https://www.newsverse.kr/news/articleView.html?idxno=9959">100 low-quality &quot;AI machine-gun&quot; blog posts a day; Naver to tighten sanctions</a> — Newsverse (Korean), 2026-03-24, checked 2026-09-30</li>
+<li><a href="https://www.copyright.or.kr/information-materials/publication/research-report/view.do?brdctsno=54253">Copyright registration guide for works using generative AI</a> — Korea Copyright Commission (Korean), 2025-06, confirmed via search results (2026-09-30)</li>
+<li><a href="https://openai.com/policies/row-terms-of-use/">Terms of Use</a> — OpenAI, confirmed via search results (2026-09-30)</li>
+<li><a href="https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service">Terms of Service</a> — Midjourney, confirmed via search results (2026-09-30)</li>
+<li><a href="https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform">Can I publish the content I generate on the platform?</a> — ElevenLabs, confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/06-shorts-faceless/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Shorts and Faceless Channels</span></a><a class="page-link next" href="../../../en/creator/07a-ai-blog-workflow/"><span><small>Next</small>Writing Blog Posts with AI: Tools and Tutorials</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

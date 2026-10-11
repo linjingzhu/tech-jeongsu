@@ -116,7 +116,7 @@ tech-jeongsu/
 | 층 | 이 저장소에서 | 관찰 |
 |---|---|---|
 | 지시문 | `CLAUDE.md`, `AGENTS.md`가 `.ai/`를 가리킴 | 진입 파일은 짧은 계약, 본문은 trigger로 on demand 로드 |
-| Subagent | 두 Claude agent, 세 Codex agent | 부모가 default·plan·dontAsk일 때 읽기 전용: `permissionMode: plan`, `sandbox_mode = "read-only"`. 부모가 acceptEdits · auto · bypassPermissions면 Claude agent는 부모 mode를 따르고, Codex agent도 상위 runtime override가 이길 수 있다 |
+| Subagent | 두 Claude agent, 세 Codex agent | `permissionMode: plan`(plan mode: 읽기 위주, auto mode가 있으면 classifier 승인 명령 포함), `sandbox_mode = "read-only"`. 부모 mode나 상위 runtime override가 이 값을 덮어쓸 수 있다(「Subagent · Skill · Plugin」 참고) |
 | Skill | `auto-dev` 두 판 | Codex 판은 `allow_implicit_invocation: false`로 자동 실행 금지 |
 | 모델 | Codex dispatcher와 fast-explorer만 TOML에 모델 고정 | Codex reviewer와 두 Claude agent는 비워 둠. reviewer는 구현자와 다른 모델을 호출 시점에 고르기 위해 |
 | 권한 · Hook · MCP | 커밋된 파일 없음 | HARNESS.md는 "commit하라"고 하지만 강제 층은 아직 비어 있다 |

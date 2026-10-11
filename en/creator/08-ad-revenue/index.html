@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Ad Revenue: AdPost and the YouTube Partner Program | MyAI</title>
+    <meta name="description" content="This document covers ad revenue only, for the blog and for YouTube. The general principles of RPM and CPM, the AdSense revenue share and invalid traffic a…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/08-ad-revenue/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/08-ad-revenue/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Ad Revenue: AdPost and the YouTube Partner Program | MyAI" />
+    <meta property="og:description" content="This document covers ad revenue only, for the blog and for YouTube. The general principles of RPM and CPM, the AdSense revenue share and invalid traffic a…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/08-ad-revenue/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/08-ad-revenue.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link active" aria-current="page" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Ad Revenue: AdPost and the YouTube Partner Program</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Ad Revenue: AdPost and the YouTube Partner Program</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain the eligibility, revenue mechanics and payout rules of Naver AdPost and the YouTube Partner Program (YPP), estimate when a channel reaches the thresholds under explicit assumptions and the YPP rules that change on 2027-02-01, and say why ads alone fall short at a small scale.</p>
+</blockquote>
+<p>This document covers <strong>ad revenue only</strong>, for the blog and for YouTube. The general principles of RPM and CPM, the AdSense revenue share and invalid traffic are already in &quot;Advertising Revenue in Depth&quot; and are not repeated. Selling courses, e-books and templates is in &quot;Own Products: Courses, E-books and Templates&quot;, withholding tax and income tax are in &quot;Disclosure, Copyright and Tax&quot;, and the part Shorts play in growth is in &quot;Shorts and Faceless Channels&quot;. Everything is <strong>as of 2026-09</strong>. Naver help pages and YouTube Help could not be opened directly, so most facts are &quot;confirmed via search results&quot;, and where no official figure exists this document says so. The exchange rate is the site-wide assumption of <strong>USD 1 = KRW 1,400</strong>.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>Key point</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naver AdPost</td>
+<td>Naver&#39;s programme that places ads on Naver media such as Naver Blog and shares the revenue</td>
+<td>After the media review, ads appear automatically</td>
+</tr>
+<tr>
+<td>YPP fan-funding tier</td>
+<td>The lower YPP tier, open from 500 subscribers</td>
+<td>Memberships, Super Chat, Super Thanks, Shopping. No ad revenue share</td>
+</tr>
+<tr>
+<td>YPP ads tier</td>
+<td>The full monetization tier, open from 1,000 subscribers</td>
+<td>Watch-page ads, Shorts ads, YouTube Premium revenue share</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td>What advertisers pay per 1,000 ad impressions</td>
+<td>Before YouTube&#39;s share, counted per ad impression</td>
+</tr>
+<tr>
+<td>RPM</td>
+<td>What the creator earns per 1,000 views</td>
+<td>After YouTube&#39;s share, across all views including those with no ad</td>
+</tr>
+<tr>
+<td>Qualified watch hours</td>
+<td>Public long-form watch time used for YPP eligibility</td>
+<td>Time watched in the Shorts feed does not count</td>
+</tr>
+<tr>
+<td>Qualified Shorts views (engaged views)</td>
+<td>Shorts views counted the previous way. Different from the displayed view count, which includes replays and brief plays</td>
+<td>Used for YPP eligibility and the Shorts revenue share</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>Naver AdPost</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>What was confirmed</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Eligibility</td>
+<td>No official numeric threshold is published. Naver reviews operating period, number of public posts, activity such as visitors and pageviews, and suitability as an ad medium together</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>Common myth</td>
+<td>&quot;90 days since opening, 50 posts, 100 visitors a day&quot; is not an official rule</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>Review</td>
+<td>After registering the medium at adpost.naver.com, blog review takes up to 5 business days, and ads appear automatically once approved</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>How revenue arises</td>
+<td>From impressions and clicks on ads placed in posts. The share of advertiser spend paid out is not published</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>Payout condition</td>
+<td>Paid the next month if the balance at the end of the previous month is at or above the minimum payout you set (default KRW 50,000; it cannot be set lower)</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>Payout date</td>
+<td>Around the 25th of each month for individual members; earlier around holidays</td>
+<td>Confirmed via search results</td>
+</tr>
+<tr>
+<td>Other way to receive</td>
+<td>Individual members are reported to be able to convert small amounts to Naver Pay money</td>
+<td>Confirmed via search results; the minimum was not confirmed</td>
+</tr>
+<tr>
+<td>Sanctions</td>
+<td>Confirmed invalid clicks or traffic can lead to deductions, withheld payouts and clawback of paid amounts</td>
+<td>Confirmed via search results</td>
+</tr>
+</tbody></table>
+<p>Tax is withheld only on payouts above a set amount: the minimum-tax floor on the other-income amount, which means payouts above about KRW 125,000 (confirmed via search results). The income category and rate are in &quot;Disclosure, Copyright and Tax&quot;.</p>
+<p>Naver has creator income beyond AdPost. Naver Brand Connect, which matches advertisers with creators, is sponsorship and is covered with its disclosure rules in &quot;Disclosure, Copyright and Tax&quot;. &quot;Naver Mate&quot; is a programme reported to pick creators each month, partly by how often AI Briefing cites them, and pay them an activity grant (beta from 2026-06, confirmed via search results). Neither is ad revenue, so they are only named here. An August 2026 report says AdPost payouts grew about 14% compared with February 2025.</p>
+<h3>The YouTube Partner Program: two tiers and the 2027 change</h3>
+<p>In August 2026 YouTube announced changes to YPP. For <strong>channels applying from 2027-02-01</strong>, the ads-tier thresholds double. Channels already in YPP keep their status, but from the same date an activity requirement and a Shorts revenue threshold apply, and they must accept the revised terms by 2027-01-31.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Fan-funding tier</th>
+<th>Ads tier (applying by 2027-01-31)</th>
+<th>Ads tier (applying from 2027-02-01)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Subscribers</td>
+<td>500</td>
+<td>1,000</td>
+<td>1,000</td>
+</tr>
+<tr>
+<td>Uploads</td>
+<td>3 public uploads in the last 90 days</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Viewing condition (either)</td>
+<td>3,000 qualified watch hours in the last 12 months or 3M qualified Shorts views in the last 90 days</td>
+<td>4,000 hours in 12 months or 10M Shorts views in 90 days</td>
+<td>8,000 hours in 365 days or 20M Shorts views in 90 days</td>
+</tr>
+<tr>
+<td>Unlocks</td>
+<td>Channel memberships, Super Chat and Super Stickers, Super Thanks, Shopping</td>
+<td>All of those plus watch-page ads, Shorts feed ads, Premium revenue share</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>In Korea</td>
+<td>Launched first in 2023 in five countries including Korea</td>
+<td>Applies</td>
+<td>Applies</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>The fan-funding tier does not change.</strong> It carries no ad revenue share; a channel moves up once it meets the ads-tier thresholds.</li>
+<li><strong>Shorts revenue threshold (from 2027-02-01)</strong>: even a YPP channel needs 10M qualified Shorts views in the last 90 days to receive the Shorts ad and subscription revenue share. Below that it keeps earning on long-form, and the Shorts share resumes once it crosses the threshold again.</li>
+<li><strong>Payouts (confirmed via search results)</strong>: YPP earnings are paid through the linked AdSense account.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What you need</td>
+<td>An AdSense account linked to the YouTube channel, with payment details</td>
+</tr>
+<tr>
+<td>Payment threshold</td>
+<td>USD 100 by default, or the equivalent in the account currency. Below it, the balance rolls over to the next month. The exact amount for KRW accounts was not confirmed</td>
+</tr>
+<tr>
+<td>Timing</td>
+<td>After the previous month&#39;s earnings are finalized early in the month, paid between the 21st and 26th if above the threshold with no payment hold</td>
+</tr>
+<tr>
+<td>Tax information</td>
+<td>Tax information (including US tax information) must be submitted in AdSense. Korean filing is in &quot;Disclosure, Copyright and Tax&quot;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Activity requirement (from 2027-02-01, existing partners)</strong>: reports say a channel counts as &quot;active&quot; if it has 1,000 qualified watch hours in the last year, 1M qualified Shorts views in the last 90 days, or uploads two long-form videos or five Shorts every 90 days.</li>
+</ul>
+<h3>Revenue shares</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Creator share</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Long-form watch-page ads</td>
+<td>55% of net ad revenue</td>
+<td>Calculated per video</td>
+</tr>
+<tr>
+<td>Shorts feed ads</td>
+<td>45% of the creator-pool allocation</td>
+<td>Feed ad revenue is pooled, the music-licensing portion is taken out, and the rest is split by each creator&#39;s share of engaged views per country</td>
+</tr>
+<tr>
+<td>YouTube Premium</td>
+<td>Distributed by how much Premium members watch</td>
+<td>The August 2026 announcement is reported to set the creator pool at 30% of net Premium subscription revenue and 60% for Premium Lite, split 55% long-form and 45% Shorts</td>
+</tr>
+</tbody></table>
+<p>For a Short using one music track, half of its portion of the pool goes to music licensing, but <strong>your rate (45%) and your engaged-view allocation do not depend on music use</strong>.</p>
+<h3>What moves RPM on YouTube</h3>
+<pre><code class="language-mermaid">flowchart LR
+    ADV[Advertiser bids: CPM] --&gt; IMP[Impressions only on&lt;br/&gt;views that carry an ad]
+    IMP --&gt; SHARE[YouTube share taken&lt;br/&gt;long-form 45 / Shorts 55]
+    SHARE --&gt; OTHER[Premium, memberships and more added]
+    OTHER --&gt; RPM[Divided by all views: RPM]
+</code></pre>
+<p>RPM puts views with no ad in the denominator, so it is <strong>always lower than CPM</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>How it works</th>
+<th>What it means for J</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Topic</td>
+<td>Advertisers bid more for audiences they want to reach</td>
+<td>Work tools and automation overlap with business-software advertisers (size of the effect not confirmed)</td>
+</tr>
+<tr>
+<td>Viewer country</td>
+<td>Ad markets differ in size by country</td>
+<td>A Korean-language channel is watched mostly in Korea. Auto-dubbing may bring viewers from elsewhere (&quot;AI-assisted Production and Platform Policy&quot;)</td>
+</tr>
+<tr>
+<td>Video length</td>
+<td>Long-form videos of 8 minutes or more can carry mid-roll ads</td>
+<td>8 to 12 minute lectures qualify. Place mid-rolls where they do not break the flow</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>Shorts are paid from a pooled feed allocation, so revenue per view is very low</td>
+<td>Shorts are a traffic source rather than a revenue source</td>
+</tr>
+<tr>
+<td>Views with no revenue</td>
+<td>Ad blockers and views with no ad only grow the denominator</td>
+<td>Each channel has to measure its own RPM</td>
+</tr>
+</tbody></table>
+<p>No official RPM range exists. The calculation below uses <strong>third-party estimates</strong> as assumptions: Korean long-form RPM of KRW 1,000 to 5,000 (estimates on a Korean revenue-calculator blog) and Shorts RPM of USD 0.01 to 0.08 (estimates by overseas tool vendors, about KRW 14 to 112). Replace them with the real values from YouTube Studio after monetization.</p>
+<h2>Applied: When Example Creator J Reaches the Thresholds (Illustrative Calculation)</h2>
+<p><strong>This is an illustrative calculation from assumptions, not a forecast.</strong> D0 is 2026-10-05, and month 1 is the month starting at D0.</p>
+<table>
+<thead>
+<tr>
+<th>Assumption</th>
+<th>Value</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Long-form</td>
+<td>One a week, 10 minutes</td>
+<td>The site-wide example</td>
+</tr>
+<tr>
+<td>Average view duration</td>
+<td>4 minutes (40% retention)</td>
+<td>Calculation assumption</td>
+</tr>
+<tr>
+<td>Monthly long-form views</td>
+<td>k × n in month n (growing by k each month)</td>
+<td>Calculation assumption. k = 500 / 1,000 / 2,000</td>
+</tr>
+<tr>
+<td>Subscriber conversion</td>
+<td>1 per 100 long-form views; Shorts contribution ignored</td>
+<td>Calculation assumption (conservative)</td>
+</tr>
+<tr>
+<td>Qualified watch hours</td>
+<td>Long-form views × 4 minutes ÷ 60, summed over the last 12 months</td>
+<td>Shorts feed watch time does not count</td>
+</tr>
+</tbody></table>
+<p>In every scenario J applies after 2027-02-01, so <strong>the new thresholds (1,000 subscribers + 8,000 hours)</strong> apply. Applying under the old rules before 2027-01-31 would need, within the first four months, k ≈ 6,000 for 4,000 hours (60,000 cumulative views) and k ≈ 10,000 for 1,000 subscribers (100,000 cumulative views). Month 4 ends on 2027-02-05, so in practice even more.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Fan-funding tier (500 subscribers + 3,000 hours)</th>
+<th>Ads tier (1,000 subscribers + 8,000 hours)</th>
+<th>Monthly long-form ad revenue in the month after joining (assumed RPM KRW 1,000-5,000)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Slow k = 500</td>
+<td>Month 14 (early 2027-12); subscribers are the binding limit</td>
+<td>Month 26 (early 2028-12), about 1,755 cumulative subscribers</td>
+<td>13,500 views a month × RPM → about KRW 13,500-67,500</td>
+</tr>
+<tr>
+<td>Medium k = 1,000</td>
+<td>Month 10 (early 2027-08); subscribers are the binding limit</td>
+<td>Month 16 (early 2028-02), about 1,360 cumulative subscribers</td>
+<td>17,000 views a month × RPM → about KRW 17,000-85,000</td>
+</tr>
+<tr>
+<td>Fast k = 2,000</td>
+<td>Month 7 (early 2027-05)</td>
+<td>Month 11 (early 2027-09), about 1,320 cumulative subscribers</td>
+<td>24,000 views a month × RPM → about KRW 24,000-120,000</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Worked example (medium): views over the 12 months to month 16 (months 5-16) = 1,000 × (5 + … + 16) = 126,000 → 126,000 × 4 ÷ 60 = 8,400 hours. Month 15 gives 7,600 hours, short of the bar.</li>
+<li>The review after applying takes extra time. At D90 (2027-01-03) no scenario has reached even the fan-funding tier.</li>
+<li>Shorts: from 2027-02-01 there is no Shorts revenue share below 10M qualified Shorts views in 90 days. This model does not assume three Shorts a week will get there.</li>
+</ul>
+<p><strong>Blog (AdPost)</strong>: neither an official RPM nor a reliable published range was found, so only the formula is given: cumulative pageviews needed to reach the KRW 50,000 minimum payout = 50,000 ÷ (earnings per 1,000 pageviews) × 1,000. <strong>Assuming</strong> KRW 1,000 per 1,000 pageviews for ease of calculation, 50,000 pageviews are needed. The balance carries over, so it does not have to be reached in one month. Replace the value with real earnings 4 to 8 weeks after approval.</p>
+<pre><code class="language-mermaid">flowchart LR
+    START[D0 blog and channel start] --&gt; ADPOST[AdPost review passed]
+    START --&gt; FAN[Fan-funding tier&lt;br/&gt;500 + 3,000 hours]
+    FAN --&gt; ADS[Ads tier&lt;br/&gt;1,000 + 8,000 hours]
+    ADPOST --&gt; SMALL[Small ad revenue]
+    ADS --&gt; SMALL
+    START --&gt; PROD[Free template → paid product]
+    PROD --&gt; MAIN[The core of early revenue]
+</code></pre>
+<h2>Going Deeper</h2>
+<h3>Why ads alone fall short at a small scale</h3>
+<p>In the &quot;medium&quot; scenario above, monthly long-form ad revenue in the month after joining the ads tier is about KRW 17,000 to 85,000 by assumption. The time invested is 10 hours a week, about 43 hours a month. Ads pay <strong>a few thousand won per 1,000 views</strong>, so they stay small without scale, and they are zero before the threshold. By contrast, when a few of the same viewers buy a template pack or a course, each one pays thousands to tens of thousands of won. So J&#39;s path is to <strong>build a list with a free template and move on to paid products</strong> while waiting for ads. The design is in &quot;Own Products: Courses, E-books and Templates&quot;, and pricing and payments are in &quot;Paid Sales, Subscriptions and Pricing&quot;.</p>
+<h3>The order for growing ad revenue</h3>
+<ol>
+<li><strong>Pass the threshold</strong>: long-form watch time decides it. Shorts help with subscribers and long-form traffic.</li>
+<li><strong>Measure RPM</strong>: 4 to 8 weeks after monetization, redo the table above with the real RPM.</li>
+<li><strong>Place mid-rolls</strong>: in videos of 8 minutes or more, at the points where an explanation ends.</li>
+<li><strong>Protect the account</strong>: clicking your own ads, asking for clicks and buying traffic are grounds for clawback and suspension on both AdPost and YouTube (&quot;Advertising Revenue in Depth&quot;).</li>
+</ol>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;AdPost approves you at 90 days and 50 posts&quot;</strong>: there is no official numeric rule. Activity and suitability are reviewed together.</li>
+<li><strong>&quot;1,000 subscribers and 4,000 hours is enough&quot;</strong>: channels applying from 2027-02-01 need 8,000 hours or 20M Shorts views.</li>
+<li><strong>&quot;500 subscribers bring ad revenue&quot;</strong>: the fan-funding tier has no ad revenue share.</li>
+<li><strong>&quot;Lots of Shorts views fill the watch hours too&quot;</strong>: Shorts feed watch time does not count toward qualified watch hours.</li>
+<li><strong>&quot;A CPM of KRW 5,000 means KRW 5,000 per 1,000 views&quot;</strong>: RPM is lower because of YouTube&#39;s share and views with no ad.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>What is AdPost&#39;s minimum payout, and what happens in a month when the balance is below it?</li>
+<li>For a channel applying to YPP for the first time in 2027-03, what are the ads-tier thresholds, and how do they differ from the fan-funding tier?</li>
+<li>How is the creator share calculated for long-form ads and for Shorts ads?</li>
+<li>If monthly long-form views grow by 1,000 each month and the average view duration is 5 minutes, in which month are 8,000 hours first reached?</li>
+<li>Using numbers, explain why J should grow own products first even after joining the ads tier.</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://postdot.kr/blog/naver-adpost-guide">Naver AdPost eligibility and earnings</a> — PostDot (Korean), confirmed via search results (2026-09-30)</li>
+<li><a href="https://online-financer.com/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%95%A0%EB%93%9C%ED%8F%AC%EC%8A%A4%ED%8A%B8-%EC%88%98%EC%9D%B5-%EC%A7%80%EA%B8%89/">Naver AdPost payout and settlement guide</a> — (Korean), confirmed via search results (2026-09-30)</li>
+<li><a href="https://m.news.nate.com/view/20260807n25996">&quot;Does blogging pay?&quot; Naver says creator income and support doubled</a> — Nate News (Korean), 2026-08-07, confirmed via search results (2026-09-30)</li>
+<li><a href="https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/">New opportunities to earn and changes to the YouTube Partner Program</a> — YouTube Blog, 2026-08, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/12843009?hl=en">Changes to the YouTube Partner Program</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://9to5google.com/2026/08/10/youtube-premium-lite-expansion-monetization-changes/">YouTube teases Premium Lite expansion, doubles channel monetization requirements</a> — 9to5Google, 2026-08-10, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/13429240?hl=ko">Expanded YouTube Partner Program overview</a> — YouTube Help (Korean), confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/72851?hl=en">YouTube Partner Program overview &amp; eligibility</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/12504220?hl=en">YouTube Shorts monetization policies</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/9314357">Understand ad revenue analytics</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/6175006?hl=en">Manage mid-roll ad breaks in long videos</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/7164703?hl=en">Payment timelines for AdSense</a> — YouTube Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/adsense/answer/1709871?hl=en">Payment thresholds</a> — Google AdSense Help, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=6457&cntntsId=7893">How to withhold tax on other income</a> — National Tax Service (Korean), confirmed via search results (2026-09-30)</li>
+<li><a href="https://snsboost.kr/blog/44">YouTube revenue calculation 2026: RPM and CPM</a> — SNS Booster (Korean), third-party estimate, confirmed via search results (2026-09-30)</li>
+<li><a href="https://miraflow.ai/blog/youtube-shorts-rpm-2026-real-ranges-by-niche">YouTube Shorts RPM in 2026: Typical Ranges by Niche</a> — Miraflow, third-party estimate, confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/07c-ai-method/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>An AI Production Method: Prompts, Review and Automation</span></a><a class="page-link next" href="../../../en/creator/09-own-products/"><span><small>Next</small>Own Products: Courses, E-books and Templates</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

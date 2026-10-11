@@ -120,15 +120,11 @@ Good example:
 
 | Path | Fee (as published) | Notes |
 |---|---|---|
-| Apple App Store | Standard 30%, Small Business Program 15% (up to $1M proceeds in the prior year), subscription renewals after the first year 15% | In Korea, a 26% commission structure applies when alternative payment is used (announced 2022) |
-| Google Play | Currently 15% up to $1M a year, auto-renewing subscriptions 15% (since 2022-01-01). Korean alternative billing cuts it by 4 points (15% → 11%) | Press reports a new structure for Korea (10% on the first $1M, among others) planned for 2026-12-31; recheck in document 04's table |
 | Toss Payments (Korean PG) | General card rate 3.4%, sign-up fee KRW 220,000, annual fee KRW 110,000 (per comparison sources) | Preferential rates for small merchants; automatic billing needs a separate review and contract |
-| Paddle (MoR) | 5% + 50 cents | Supports Korean sellers; Paddle, as seller, calculates, collects and files taxes |
-| Lemon Squeezy (MoR) | 5% + 50 cents + surcharges for international payments, subscriptions and more | Acquired by Stripe in 2024, migrating to Stripe Managed Payments. New sign-ups: reported as waitlist or invite-only, not officially confirmed. In 2026-06 an announcement that invite-free public sign-up for Stripe Managed Payments was coming soon was reported, but its opening is not confirmed (accessed 2026-09-29) |
-| Stripe Managed Payments (MoR) | Stripe processing fees + 3.5% per transaction. The 3.5% applies to the full transaction amount including indirect taxes such as VAT (Stripe Support) | Public preview from 2026-02, invite-free public sign-up announced as coming in 2026-06 (reported). **Not available to sellers in South Korea**: Stripe does not list South Korea as a supported merchant country, and 2026 secondary sources list it among excluded countries (the official country list could not be checked directly, accessed 2026-09-29) |
-| Stripe (direct processor) | Not applicable | Korea is not on Stripe's list of supported merchant countries; needs an entity abroad |
 
-A Korean solo developer starting overseas sales now should look at Paddle or Gumroad (both MoRs) first. The break-even between an MoR and a direct PG is computed in 04's Going Deeper.
+Platform fees such as App Store, Google Play and Steam, and MoR fees such as Paddle, Lemon Squeezy and Stripe Managed Payments, are kept in one place, the platform and payment fee table in "Revenue Models: An Introduction", so this table lists only the Korean PG that table lacks.
+
+A Korean solo developer starting overseas sales now should look at Paddle or Gumroad (both MoRs; Paddle supports Korean sellers) first. The break-even between an MoR and a direct PG is computed in 04's Going Deeper.
 
 ### What a Merchant of Record Changes
 
@@ -172,14 +168,6 @@ flowchart TD
 - [Wikipedia - Van Westendorp's Price Sensitivity Meter](https://en.wikipedia.org/wiki/Van_Westendorp%27s_Price_Sensitivity_Meter) (accessed 2026-09-29)
 - [Huber, Payne & Puto (1982), Journal of Consumer Research](https://academic.oup.com/jcr/article/9/1/90/1839380) (accessed 2026-09-29)
 - [Apple Developer - App Store Small Business Program](https://developer.apple.com/app-store/small-business-program/) (accessed 2026-09-29)
-- [Apple Developer - Auto-renewable Subscriptions](https://developer.apple.com/app-store/subscriptions/) (accessed 2026-09-29)
-- [CNBC - Apple opens up third-party app payments in South Korea (2022-06-30)](https://www.cnbc.com/2022/06/30/apple-opens-up-third-party-app-payments-in-korea-will-take-26percent-cut-.html) (accessed 2026-09-29)
-- [Google Play Console Help - Service fees](https://support.google.com/googleplay/android-developer/answer/112622?hl=en) (accessed 2026-09-29)
-- [Kyunghyang Shinmun - Google Play fee cut, Korea from December (2026-03-05, in Korean)](https://www.khan.co.kr/article/202603052151005) (accessed 2026-09-29)
 - [PortOne blog - Comparing Korean PGs in 2026 (in Korean)](https://blog.portone.io/opi_pg-comparison2026/) (accessed 2026-09-29)
 - [Toss Payments Developer Center - Understanding automatic billing (in Korean)](https://docs.tosspayments.com/guides/v2/billing) (accessed 2026-09-29)
 - [Paddle Help Center - Which countries are supported by Paddle?](https://www.paddle.com/help/start/intro-to-paddle/which-countries-are-supported-by-paddle) (accessed 2026-09-29)
-- [Lemon Squeezy - 2026 Update: Lemon Squeezy + Stripe Managed Payments](https://www.lemonsqueezy.com/blog/2026-update) (accessed 2026-09-29)
-- [Stripe - Global availability](https://stripe.com/global) (accessed 2026-09-29)
-- [Stripe Support - Managed Payments pricing](https://support.stripe.com/questions/managed-payments-pricing) (accessed 2026-09-29)
-- [Google Play Console Help - Changes to Google Play's billing requirements for developers serving users in South Korea](https://support.google.com/googleplay/android-developer/answer/11222040?hl=en) (accessed 2026-09-29)

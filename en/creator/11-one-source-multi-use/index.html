@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>One Source, Multi Use (OSMU) Strategy: Research Once, Rewrite for Each Platform | MyAI</title>
+    <meta name="description" content="This document ties the whole section into one production flow. The craft of writing a post is in &quot;Writing and Running a Blog&quot;, lecture videos are in &quot;Plan…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/11-one-source-multi-use/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/11-one-source-multi-use/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="One Source, Multi Use (OSMU) Strategy: Research Once, Rewrite for Each Platform | MyAI" />
+    <meta property="og:description" content="This document ties the whole section into one production flow. The craft of writing a post is in &quot;Writing and Running a Blog&quot;, lecture videos are in &quot;Plan…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/11-one-source-multi-use/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/11-one-source-multi-use.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link active" aria-current="page" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>One Source, Multi Use (OSMU) Strategy</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>One Source, Multi Use (OSMU) Strategy: Research Once, Rewrite for Each Platform</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Tell source assets from derivatives, split one week&#39;s source package into long-form, Shorts, a Naver post, community posts, messages and product modules, make each derivative native to its platform rather than a copy, and set rules for publishing order, linking, rights, measurement and pruning.</p>
+</blockquote>
+<p>This document ties the whole section into one production flow. The craft of writing a post is in &quot;Writing and Running a Blog&quot;, lecture videos are in &quot;Planning and Producing Long-form Video&quot;, a single Short is in &quot;Shorts and Faceless Channels&quot;, the policy risks of AI tools are in &quot;AI-assisted Production and Platform Policy&quot;, product design and marketplaces are in &quot;Own Products: Courses, E-books and Templates&quot;, copyright and ad disclosure are in &quot;Disclosure, Copyright and Tax&quot;, and the week-by-week schedule is in &quot;A 90-day Channel Plan&quot;. Here we decide <strong>what to make once and what to make fresh for each platform</strong>. Policies and features are <strong>as of 2026-09</strong>; Naver&#39;s help pages and the YouTube Help Center could not be opened directly, so several items are marked &quot;confirmed via search results&quot;. All time and performance figures are illustrative assumptions.</p>
+<h2>Key Concepts</h2>
+<p><strong>One source, multi use (OSMU)</strong> means deriving several outputs from a source you make once. The point is not &quot;upload the same file in many places&quot; but <strong>research and structure once, expression fresh for each platform</strong>. A <strong>source asset</strong> is material you reuse regardless of platform, and one week&#39;s bundle is called a <strong>source package</strong>. A <strong>derivative</strong> is an output rebuilt from the source in one platform&#39;s grammar, and a <strong>product module</strong> is a paid unit made by bundling and deepening several weeks of sources.</p>
+<table>
+<thead>
+<tr>
+<th>Source asset</th>
+<th>What it holds</th>
+<th>Main derivatives it feeds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Research notes</td>
+<td>Reader questions, official doc links with check dates, results you tried yourself</td>
+<td>The factual basis of every derivative</td>
+</tr>
+<tr>
+<td>Outline</td>
+<td>Problem → solution steps → common mistakes → next step</td>
+<td>Long-form structure, blog subheadings, e-book table of contents</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Sentences to say, screen directions</td>
+<td>Long-form narration, raw material for the blog draft</td>
+</tr>
+<tr>
+<td>Screen recording master</td>
+<td>Horizontal master + marked zoom segments</td>
+<td>Long-form, Shorts, blog screenshots, course lessons</td>
+</tr>
+<tr>
+<td>Template file</td>
+<td>Practice spreadsheet, checklist</td>
+<td>Free template, paid template pack</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Derivative</th>
+<th>Platform</th>
+<th>Taken from the source</th>
+<th>Must be made fresh</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Long-form lecture (8-12 min)</td>
+<td>YouTube</td>
+<td>Outline, script, recording</td>
+<td>Opening, editing rhythm, thumbnail</td>
+<td>Trust and watch time</td>
+</tr>
+<tr>
+<td>3 Shorts</td>
+<td>YouTube</td>
+<td>Recording segments</td>
+<td>Vertical reframing, first 1-2 seconds, captions</td>
+<td>Discovery</td>
+</tr>
+<tr>
+<td>Naver Blog post</td>
+<td>Naver</td>
+<td>Outline, research notes</td>
+<td>Title and first screen matched to the search question, copyable formulas</td>
+<td>Search traffic</td>
+</tr>
+<tr>
+<td>Blog images and tables</td>
+<td>Naver</td>
+<td>Recording captures, template</td>
+<td>Step-by-step screenshots, comparison tables</td>
+<td>Post comprehension</td>
+</tr>
+<tr>
+<td>Community post, pinned comment</td>
+<td>YouTube</td>
+<td>The outline&#39;s core question</td>
+<td>Poll or question, links to the post and template</td>
+<td>Engagement and linking</td>
+</tr>
+<tr>
+<td>Email or KakaoTalk channel message</td>
+<td>Own list</td>
+<td>This week&#39;s summary, template</td>
+<td>One paragraph just for list readers</td>
+<td>List relationship</td>
+</tr>
+<tr>
+<td>Product module</td>
+<td>Marketplace</td>
+<td>Sources from W1-W12 (W13 excluded, as it falls just before D90)</td>
+<td>Organisation, manual, support</td>
+<td>Revenue</td>
+</tr>
+</tbody></table>
+<pre><code class="language-mermaid">flowchart LR
+    SRC[&quot;Source package: research notes, outline, script, recording, template&quot;] --&gt; LF[&quot;Long-form lecture 8-12 min&quot;]
+    SRC --&gt; BP[&quot;Naver Blog post&quot;]
+    SRC --&gt; TPL[&quot;Free template&quot;]
+    LF --&gt; SH[&quot;3 Shorts&quot;]
+    LF --&gt; CM[&quot;Community post, pinned comment&quot;]
+    BP --&gt; IMG[&quot;Blog images and tables&quot;]
+    SH --&gt;|Related video| LF
+    LF --&gt;|Description link| BP
+    BP --&gt; TPL
+    TPL --&gt; MSG[&quot;Email and KakaoTalk channel list&quot;]
+    MSG --&gt; PROD[&quot;Product modules: template pack, e-book chapter, course lesson&quot;]
+    SRC -. W1-W12 accumulation .-&gt; PROD
+</code></pre>
+<h2>Principles</h2>
+<h3>1. Translation, not copying: native to each platform</h3>
+<p>A derivative must be the source <strong>translated into the way that platform&#39;s audience uses content</strong>. Naver readers arrive from a search query, skim and copy; long-form viewers watch while following along; Shorts viewers decide in the first 1-2 seconds whether to swipe. <strong>Bad example</strong>: pasting the video&#39;s auto-captions straight into the blog body, and cutting the first 60 seconds of the long-form into a Short. <strong>Good example</strong>: the blog puts the answer, formulas and tables on the first screen, the video opens on the problem, and the Short opens on a single result screen.</p>
+<h3>2. Naver: similar and duplicate documents</h3>
+<p>On 2012-10-30 Naver announced &quot;Project BiO&quot;, which separates original documents from similar ones and shows the original first (confirmed via press reports). Its current criteria are not public, and the &quot;similar document&quot; concept used in the industry (light edits can still be caught; repeated posts inside your own blog are a problem too) is commentary, not an official Naver document. So the rules are conservative.</p>
+<ul>
+<li><strong>Do not copy</strong> the same post to a blog, a Cafe or another account. When turning video captions into a post, rewrite the sentences, structure and screenshots.</li>
+<li>Do not write another post answering the same question on your own blog; <strong>revise and merge the existing post</strong> (&quot;Writing and Running a Blog&quot;). How search evaluates documents is in &quot;Naver Blog and How Naver Search Works&quot;.</li>
+</ul>
+<h3>3. YouTube: reused content and inauthentic content</h3>
+<p>The definitions, examples and allowed scope of these two monetization policies are in &quot;AI-assisted Production and Platform Policy&quot;. Only the conclusions OSMU needs are here. Making Shorts from your own long-form is a flow YouTube supports through its &quot;Edit into a Short&quot; feature. The OSMU risk is not reuse but <strong>repetition</strong>. Stacking weekly videos that swap a few words in the same frame leans towards inauthentic content. Every source needs a new problem and a new recording.</p>
+<h3>4. Order of production and publishing</h3>
+<p>Production always starts with <strong>research → outline → script → recording</strong>. Only after recording do the post&#39;s screenshots and the Shorts segments exist. We found no official platform rule on publishing order, so the table below is a set of judgement criteria.</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>When</th>
+<th>Why</th>
+<th>Caution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Video first, post the next day</td>
+<td>Default. Tutorials without urgent search timing</td>
+<td>The post can go out with the video embedded, and the long-form the Shorts will point to already exists</td>
+<td>The post enters search a day later</td>
+</tr>
+<tr>
+<td>Post first, video later</td>
+<td>When search demand clusters on a date, such as year-end tax settlement or a new feature launch</td>
+<td>A post is faster to make than a video</td>
+<td>Add the video to the post after it goes public</td>
+</tr>
+<tr>
+<td>Shorts spread out after the long-form</td>
+<td>Always</td>
+<td>A related video link can only point to a video that is already uploaded</td>
+<td>Do not post all 3 on the same day</td>
+</tr>
+</tbody></table>
+<h3>5. Linking without cannibalising</h3>
+<p>When derivatives do the same job, they steal each other&#39;s views (cannibalisation). <strong>Split the roles</strong>: the video shows the process, the post gives the formulas, tables and files to copy, and the Short shows one result and sends viewers to the long-form. If the post carries the whole video script, readers have no reason to see both.</p>
+<p>Design the links as a one-way chain: Short → (related video) → long-form → (description, pinned comment) → blog post and free template → (opt-in subscription) → email and KakaoTalk channel list → product. Links in Shorts descriptions and comments have not been clickable since 2023-08-31, so the related video link is the only direct path. The blog post sends readers back to the long-form by embedding the video at the &quot;follow along on screen&quot; step. Consent and labelling rules for promotional messages follow &quot;Channels · Content · Paid · Lifecycle&quot; and &quot;Disclosure, Copyright and Tax&quot;.</p>
+<h3>6. Asset library and rights</h3>
+<p>A source is only reused if you can find it. Keep sources and derivatives together in one weekly folder (for example <code>2026-W41_dedupe/</code>) and put the type and version in file names (<code>src_outline_v2.md</code>, <code>src_rec_raw.mp4</code>, <code>out_short-1_result.mp4</code>). In each folder, <code>rights.md</code> records the origin and licence scope of the fonts, music and images used that week. Because one asset flows into video, post and paid product, <strong>only put assets into the source that are cleared for every derivative plus paid products.</strong> If in doubt, replace them with assets you made yourself.</p>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>What to check</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fonts</td>
+<td>Allowed scope for video, print and embedding (e-books, apps)</td>
+<td>Noonnu labels each font&#39;s allowed uses, such as embedding and BI/CI (confirmed via search results). The final check is the foundry&#39;s licence</td>
+</tr>
+<tr>
+<td>Background music</td>
+<td>Whether use outside the platform is allowed</td>
+<td>Standard-licence tracks in the YouTube Audio Library are described as restricted outside YouTube, and CC BY tracks as needing attribution (confirmed via search results)</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>Whether redistribution and inclusion in products for sale are allowed</td>
+<td>Check in the licence whether a stock image may sit inside a template file you sell</td>
+</tr>
+<tr>
+<td>AI-generated output</td>
+<td>The tool&#39;s terms for commercial use</td>
+<td>&quot;AI-assisted Production and Platform Policy&quot;</td>
+</tr>
+</tbody></table>
+<h3>7. Converting formats with AI, editing by a human</h3>
+<p>AI is good at format conversion: transcript → blog subheadings and step list, long-form transcript → 5 candidate 30-60 second segments &quot;where the result is visible on one screen&quot;, outline → candidate community questions. The output is a <strong>draft</strong>. A human writes the sentences, picks 3 of the candidates, checks every function name and menu path against the real screen, and adds <strong>one thing the source did not have</strong> to each derivative (a new screenshot, a new question, a new example). Labelling rules (YouTube&#39;s altered or synthetic content disclosure, and the optional &quot;AI-used&quot; label Naver Blog introduced on 2025-05-21) follow &quot;AI-assisted Production and Platform Policy&quot;.</p>
+<h3>8. When OSMU hurts</h3>
+<p>Cutting a 20-step setup process into a Short conveys nothing, so that week you make fewer Shorts. The same applies when the number of derivatives becomes the goal and each one gets worse, or when you force seven outputs out of a weak source. <strong>Not making a format that does not fit</strong> is also an OSMU rule.</p>
+<h2>Applied: Example creator J&#39;s weekly source package</h2>
+<p>J&#39;s week 1 (D0 = 2026-10-05) source is &quot;cleaning up duplicate data in Excel&quot;. This table is the canonical allocation for the whole section, and the hours in other documents follow it.</p>
+<table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Step</th>
+<th>Output</th>
+<th>Hours (assumed)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Research, example file</td>
+<td>Research notes, practice sheet (source)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Outline</td>
+<td>&quot;One outline&quot; (source)</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Script</td>
+<td>AI draft + J&#39;s own mistake stories (source)</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Screen recording, voice</td>
+<td>Horizontal master + marked zoom segments (source)</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Long-form edit, thumbnail</td>
+<td>10-minute lecture (published Tue)</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Blog post, screenshots, tables</td>
+<td>Naver post (published Wed, video embedded)</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3 Shorts</td>
+<td>Result, mistake and question types (spread Thu, Sat, Mon)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Community post, pinned comment, message, library tidy-up</td>
+<td>Question post, list message, <code>rights.md</code></td>
+<td>0.5</td>
+</tr>
+<tr>
+<td></td>
+<td>Total</td>
+<td></td>
+<td><strong>10.0</strong></td>
+</tr>
+</tbody></table>
+<p>If the same outputs were made separately for each platform (an illustrative calculation, not a measurement):</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>OSMU</th>
+<th>Separately</th>
+<th>Why it differs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Research, outline, script</td>
+<td>2.0</td>
+<td>3.5</td>
+<td>Separate research and outlines for video and post</td>
+</tr>
+<tr>
+<td>Recording</td>
+<td>1.5</td>
+<td>1.5</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Long-form edit</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Blog post</td>
+<td>2.0</td>
+<td>3.0</td>
+<td>New example file and screenshots</td>
+</tr>
+<tr>
+<td>3 Shorts</td>
+<td>1.0</td>
+<td>3.0</td>
+<td>Each planned and recorded on its own</td>
+</tr>
+<tr>
+<td>Community, message, tidy-up</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Total</td>
+<td><strong>10.0</strong></td>
+<td><strong>14.5</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Working separately overshoots the 10 weekly hours by 4.5, so J would have to give up either Shorts or the blog. Most of the saving comes from <strong>doing research and recording only once</strong>. Over W1-W12 the sources accumulate like this (W13 excluded, as it falls just before D90). The product schedule follows &quot;Own Products: Courses, E-books and Templates&quot; and &quot;A 90-day Channel Plan&quot;.</p>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>Accumulated sources</th>
+<th>Product module built from them</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Weeks 1-2 (D0-D13)</td>
+<td>2 outlines, 2 sheets</td>
+<td>The best-received sheet → free template (D14)</td>
+</tr>
+<tr>
+<td>Weeks 3-5 (to D34)</td>
+<td>5 outlines, 5-8 sheets</td>
+<td>Paid template pack list from the sheets with the most downloads and comment requests, waitlist opens (D35)</td>
+</tr>
+<tr>
+<td>Weeks 6-10 (to D69)</td>
+<td>10 weeks of recording masters</td>
+<td>Masters re-edited short into the pack&#39;s &quot;how to use&quot; videos, presale (D49-D60, judged at the D60 review) and delivery (D63)</td>
+</tr>
+<tr>
+<td>Weeks 11-12 (to D83)</td>
+<td>12 outlines from W1-W12 (W13 excluded, as it falls just before D90)</td>
+<td>12 outlines grouped into 4 parts × 3 chapters as the e-book table of contents, waitlist after D90</td>
+</tr>
+</tbody></table>
+<p>A paid pack needs more than a bundle of free sheets. It needs <strong>value on top of what buyers already got for free</strong>, such as a manual, an integrated sheet and a promise of updates. In the illustrative calculation in &quot;Ad Revenue: AdPost and the YouTube Partner Program&quot;, J reaches the YPP ad tier in month 11 to 26, so in the first 90 days the OSMU payoff is not ads but <strong>time saved, product modules and learning which topics get a response</strong>.</p>
+<h2>Going Deeper</h2>
+<h3>Which derivative drove the result</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it shows</th>
+<th>J&#39;s question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UTM or short links</td>
+<td>Which derivative a visit to the product or template page started from</td>
+<td>Did template downloads come from the blog post or the long-form description?</td>
+</tr>
+<tr>
+<td>Traffic sources in YouTube Studio&#39;s Reach tab</td>
+<td>Shorts feed, YouTube search, Suggested videos, External and more</td>
+<td>How many long-form views came via Shorts?</td>
+</tr>
+<tr>
+<td>Inflow analysis in Naver Blog Statistics</td>
+<td>Search inflow, site inflow, inflow search terms (menu names can change)</td>
+<td>Does the post get readers from search or from YouTube?</td>
+</tr>
+</tbody></table>
+<p>Tag every link with its origin, for example <code>?utm_source=naverblog&amp;utm_medium=post&amp;utm_campaign=2026-w41</code>. UTM only means something when the receiving page reads it with an analytics tool, and it misses journeys that switch devices, so add one question to the download form: &quot;Where did you hear about this?&quot;</p>
+<h3>A pruning rule</h3>
+<p>Review each derivative&#39;s <strong>result per hour invested</strong> (downloads, subscriptions, search inflow) in 4-week blocks (assumption). If it is the lowest for 4 weeks running and another derivative delivers the same result, cut it back or stop it. In the first 90 days, &quot;result&quot; means product signals such as downloads, list sign-ups and presales, not ad revenue. The exception is long-form, the centre of the loop: it is the raw material for every derivative and where watch time builds, so it stays even when its short-term result is low. Never prune on the first 2 weeks of numbers.</p>
+<h3>Refreshing old content</h3>
+<p>On Naver, revise and update an old top-viewed post instead of rewriting it as a new one. On YouTube a published video file cannot be swapped, so make a new Short from the old long-form (public long-form only, not with a third-party copyright claim), or, if the tool has changed, make a new version and link it from the old video&#39;s pinned comment. A refreshed source flows into a template pack update.</p>
+<h3>Adding more platforms later (optional)</h3>
+<p>Add Instagram Reels, Threads or a newsletter one at a time, <strong>only after the core loop (long-form, Shorts, Naver) has held steady for 12 weeks</strong>. First check in <code>rights.md</code> that the music and fonts are cleared for the new platform, and upload the original file rather than one watermarked by another platform (&quot;Shorts and Faceless Channels&quot;).</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;OSMU means uploading the same content in many places&quot;</strong> — It reuses the research and structure, not the finished output.</li>
+<li><strong>&quot;Shorts cut from my own video count as reused content and lose monetization&quot;</strong> — Reused content targets material that is not your own creation. The risk is repetition and mass production (&quot;AI-assisted Production and Platform Policy&quot;).</li>
+<li><strong>&quot;More derivatives are always better&quot;</strong> — A derivative that does not pay back its time eats into the quality of the source.</li>
+<li><strong>&quot;Music and fonts used in a video can also go into an e-book&quot;</strong> — The allowed scope differs by use.</li>
+<li><strong>&quot;If AI converts it, no editing is needed&quot;</strong> — AI output is a draft. A human checks the facts and fits the platform&#39;s grammar.</li>
+</ul>
+<h2>Self-check Questions</h2>
+<ol>
+<li>Name the five source assets and one derivative each of them feeds.</li>
+<li>What two problems can come from posting long-form captions unchanged as a Naver post?</li>
+<li>For a year-end tax settlement Excel tutorial, would you publish the video or the post first? Why?</li>
+<li>What path must a reader take to get from a Short to the blog post?</li>
+<li>Over 4 weeks, community posts had the lowest result per hour. What do you check before stopping them?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/1311392?hl=en">YouTube channel monetization policies — YouTube Help</a> — Google, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/community-guide/271248162/%F0%9F%94%8E-faq-reused-content-youtube%E2%80%99s-partner-program?hl=en">FAQ: Reused Content &amp; YouTube&#39;s Partner Program — YouTube Community</a> — Google, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/12836917?hl=en">Create YouTube Shorts from your videos — YouTube Help</a> — Google, confirmed via search results (2026-09-30)</li>
+<li><a href="https://searchengineland.com/youtube-enables-linking-shorts-long-form-videos-430655">YouTube enables linking between Shorts and long-form videos — Search Engine Land</a> — Search Engine Land, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.tubefilter.com/2023/08/10/youtube-shorts-comments-spam/">YouTube&#39;s banning clickable links from Shorts descriptions and comments — Tubefilter</a> — Tubefilter, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/9314355?hl=en">Understand your YouTube video reach — YouTube Help</a> — Google, confirmed via search results (2026-09-30)</li>
+<li><a href="https://support.google.com/analytics/answer/10917952?hl=en">URL builders: Collect campaign data with custom URLs — Analytics Help</a> — Google, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.hankookilbo.com/news/article/201210301298432767">Naver search overhaul (Korean) — Hankook Ilbo</a> — Hankook Ilbo, 2012-10-30, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.openads.co.kr/content/contentDetail?contsId=4748">Rethinking Naver&#39;s &quot;similar document&quot; concept (Korean) — Openads</a> — Openads (industry commentary), confirmed via search results (2026-09-30)</li>
+<li><a href="https://lickd.co/youtube-audio-library/">YouTube Audio Library: what is it &amp; what are its limitations — Lickd</a> — Lickd, confirmed via search results (2026-09-30)</li>
+<li><a href="https://noonnu.cc/en/questions">Noonnu FAQ — Noonnu</a> — Noonnu, confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/10-disclosure-tax/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Disclosure, Copyright and Tax</span></a><a class="page-link next" href="../../../en/creator/12-90-day-plan/"><span><small>Next</small>A 90-day Channel Plan</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

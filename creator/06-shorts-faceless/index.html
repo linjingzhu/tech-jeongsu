@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Shorts와 얼굴 없는 채널: 스와이프 한 번을 이기는 설계와 독창성 | MyAI(마이아이)</title>
+    <meta name="description" content="이 문서는 Shorts와 얼굴 없는(faceless) 형식의 제작을 다룬다. 추천이 어떻게 작동하는지와 채널 설계는 「유튜브 추천 구조와 채널 설계」, 8~12분 강의 영상을 기획하는 법은 「롱폼 영상 기획과 제작」, 하나의 원본을 롱폼·Shorts·블로그 글·상품으로 나누는…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/06-shorts-faceless/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="Shorts와 얼굴 없는 채널: 스와이프 한 번을 이기는 설계와 독창성 | MyAI(마이아이)" />
+    <meta property="og:description" content="이 문서는 Shorts와 얼굴 없는(faceless) 형식의 제작을 다룬다. 추천이 어떻게 작동하는지와 채널 설계는 「유튜브 추천 구조와 채널 설계」, 8~12분 강의 영상을 기획하는 법은 「롱폼 영상 기획과 제작」, 하나의 원본을 롱폼·Shorts·블로그 글·상품으로 나누는…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/creator/06-shorts-faceless/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/creator/06-shorts-faceless.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI 기초와 테스트 전략</a><a class="tree-link" href="../../platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions 실전</a><a class="tree-link" href="../../platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">배포 자동화와 버전 관리</a><a class="tree-link" href="../../platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">AI 시대의 CI/CD</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../assets/icons/video.svg" alt="" aria-hidden="true"><span>블로그·유튜브 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../creator/00-overview/" data-path="content/creator/00-overview.md">블로그·유튜브 수익화 전체 개요</a><a class="tree-link" href="../../creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">주제 선정과 독자 설계</a><a class="tree-link" href="../../creator/02-naver-search/" data-path="content/creator/02-naver-search.md">네이버 블로그와 검색 구조</a><a class="tree-link" href="../../creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">블로그 글쓰기와 운영</a><a class="tree-link" href="../../creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">유튜브 추천 구조와 채널 설계</a><a class="tree-link" href="../../creator/05-longform/" data-path="content/creator/05-longform.md">롱폼 영상 기획과 제작</a><a class="tree-link active" aria-current="page" href="../../creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts와 얼굴 없는 채널</a><a class="tree-link" href="../../creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI 활용 제작과 플랫폼 정책</a><a class="tree-link" href="../../creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">AI로 블로그 글 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">AI로 유튜브 영상 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">AI 제작 방법론: 프롬프트·검수·자동화</a><a class="tree-link" href="../../creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">광고 수익: 애드포스트와 YouTube 파트너 프로그램</a><a class="tree-link" href="../../creator/09-own-products/" data-path="content/creator/09-own-products.md">자체 상품 수익: 강의·전자책·템플릿</a><a class="tree-link" href="../../creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">표시 의무·저작권·세금</a><a class="tree-link" href="../../creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">원소스 멀티유즈(OSMU) 전략</a><a class="tree-link" href="../../creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">채널 90일 실행 계획</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>블로그·유튜브 수익화</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Shorts와 얼굴 없는 채널</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Shorts와 얼굴 없는 채널: 스와이프 한 번을 이기는 설계와 독창성</h1>
+<blockquote>
+<p><strong>학습 목표</strong>: Shorts 피드가 롱폼과 어떻게 다른 결정을 요구하는지 설명하고, 롱폼에서 Shorts를 잘라 관련 동영상으로 연결하며, 얼굴 없는 채널이 &quot;inauthentic content&quot;·재사용 콘텐츠 정책에 걸리는 지점과 독창성을 더하는 방법을 구분할 수 있다.</p>
+</blockquote>
+<p>이 문서는 Shorts와 얼굴 없는(faceless) 형식의 <strong>제작</strong>을 다룬다. 추천이 어떻게 작동하는지와 채널 설계는 「유튜브 추천 구조와 채널 설계」, 8~12분 강의 영상을 기획하는 법은 「롱폼 영상 기획과 제작」, 하나의 원본을 롱폼·Shorts·블로그 글·상품으로 나누는 전체 흐름은 「원소스 멀티유즈(OSMU) 전략」, AI 도구와 합성 콘텐츠 표시는 「AI 활용 제작과 플랫폼 정책」, Shorts 수익 배분은 「광고 수익: 애드포스트와 YouTube 파트너 프로그램」에서 다룬다. 기능과 정책은 <strong>2026-09 기준</strong>이며, YouTube 고객센터에 직접 접속할 수 없어 일부는 &quot;검색 결과로 확인&quot;으로 표시했다.</p>
+<blockquote>
+<p><strong>AI로 만들기</strong>: Shorts 구간 고르기·세로 편집·자막·음성에 쓰는 AI 도구와 튜토리얼 링크는 「AI로 유튜브 영상 만들기: 도구와 튜토리얼」에 모았다.</p>
+</blockquote>
+<h2>핵심 개념</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>뜻</th>
+<th>확인한 내용 (2026-09 기준)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shorts</td>
+<td>세로 또는 정사각형, 3분 이하 영상</td>
+<td>2024-10-15 이후 업로드분부터 최대 3분 (이전 60초)</td>
+</tr>
+<tr>
+<td>조회수(Shorts)</td>
+<td>재생·반복 재생이 시작될 때마다 1회</td>
+<td>2025-03-31부터 최소 시청 시간 없이 집계</td>
+</tr>
+<tr>
+<td>참여 조회수(engaged views)</td>
+<td>예전 방식의 조회수</td>
+<td>YPP 자격과 Shorts 수익 배분에 쓰인다</td>
+</tr>
+<tr>
+<td>시청 vs 스와이프 비율</td>
+<td>피드에서 영상이 떴을 때 계속 본 비율과 넘긴 비율</td>
+<td>YouTube Studio 분석의 Shorts 지표</td>
+</tr>
+<tr>
+<td>관련 동영상 링크</td>
+<td>Short 하단에 같은 채널의 영상 1개를 거는 링크</td>
+<td>데스크톱 YouTube Studio에서 설정</td>
+</tr>
+<tr>
+<td>얼굴 없는 채널</td>
+<td>진행자 얼굴 없이 화면 녹화·슬라이드·B-roll·보이스오버로 만드는 채널</td>
+<td>형식 자체는 정책 위반이 아니다</td>
+</tr>
+</tbody></table>
+<p>Shorts 피드에서는 시청자가 영상을 <strong>고르지 않는다</strong>. 롱폼은 썸네일과 제목을 보고 누르는 선택이 먼저지만, Shorts는 영상이 이미 재생되고 있고 시청자는 &quot;계속 볼까, 넘길까&quot;만 결정한다. 그래서 롱폼의 CTR 자리에 Shorts에서는 <strong>시청 vs 스와이프 비율</strong>이 온다.</p>
+<h2>원리</h2>
+<h3>첫 1~2초가 썸네일이다</h3>
+<p>피드에서 넘겨지지 않으려면 첫 화면이 결과를 보여 줘야 한다. 업무 자동화 주제라면 &quot;30분 걸리던 정리가 3초에 끝나는 장면&quot;을 먼저 보여 주고, 방법은 그 뒤에 설명한다. 인사말, 채널 소개, 로고 애니메이션은 모두 스와이프 이유가 된다.</p>
+<pre><code class="language-mermaid">flowchart LR
+    FEED[피드에 Short 노출] --&gt; HOOK{첫 1~2초에&lt;br/&gt;결과가 보이는가}
+    HOOK --&gt;|아니오| SWIPE[스와이프: 조회는 집계되지만&lt;br/&gt;참여 조회는 아님]
+    HOOK --&gt;|예| WATCH[계속 시청]
+    WATCH --&gt; LOOP{끝이 처음과&lt;br/&gt;이어지는가}
+    LOOP --&gt;|예| REPLAY[반복 재생]
+    LOOP --&gt;|아니오| NEXT[다음 영상]
+    WATCH --&gt; LINK[관련 동영상 링크로 롱폼 이동]
+</code></pre>
+<h3>반복 재생(loop)과 길이</h3>
+<p>2025-03-31 이후 Shorts 조회수는 재생·반복 재생이 <strong>시작될 때마다</strong> 집계된다. 끝 장면이 첫 장면으로 자연스럽게 이어지면 반복 재생이 늘어난다. 다만 수익 배분과 YPP 자격은 여전히 <strong>참여 조회수</strong>를 쓰므로, 반복 재생을 노린 억지 편집보다 끝까지 볼 이유를 만드는 편이 낫다.</p>
+<p>최대 길이는 3분이지만 길이는 목표가 아니다. 제3자 분석들은 30~60초가 가장 흔한 성과 구간이라고 말하지만 공식 기준이 아니므로 <strong>가설로 두고 내 채널에서 시험한다</strong>. Shorts 카메라로 직접 녹화할 때는 한 번에 60초 제한이 있다는 보도가 있으므로, 긴 Short는 편집 프로그램에서 만들어 업로드한다.</p>
+<h3>롱폼에서 Shorts 자르기</h3>
+<table>
+<thead>
+<tr>
+<th>방식</th>
+<th>방법</th>
+<th>장점</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YouTube의 &quot;Short로 편집&quot;</td>
+<td>공개 롱폼의 시청 페이지에서 구간을 골라 Short를 만든다</td>
+<td>원본 롱폼과 자동으로 연결된다</td>
+<td>도움말상 선택 구간은 최대 60초. 비공개·일부공개 영상과 제3자 저작권 주장이 있는 영상은 불가</td>
+</tr>
+<tr>
+<td>편집 프로그램에서 재편집</td>
+<td>세로 화면에 맞게 다시 자르고 자막·확대를 넣는다</td>
+<td>화면 녹화의 작은 글씨를 키울 수 있다</td>
+<td>가로 화면을 그대로 세로 틀에 넣으면 읽을 수 없다</td>
+</tr>
+<tr>
+<td>Shorts 전용 촬영·녹화</td>
+<td>처음부터 세로 비율로 녹화한다</td>
+<td>가장 읽기 쉽다</td>
+<td>제작 시간이 추가된다</td>
+</tr>
+</tbody></table>
+<p>여기서는 Shorts 한 편을 만드는 기술만 다룬다. 어떤 원본에서 무엇을 파생할지는 「원소스 멀티유즈(OSMU) 전략」에서 정한다. 화면 녹화 튜토리얼은 가로 화면이 기본이라 세로로 자르면 셀·메뉴 글씨가 작아진다. 확대(zoom)할 영역을 미리 정해 두고, 한 Short에는 <strong>한 가지 동작</strong>만 담는다.</p>
+<h3>Short에서 롱폼으로 보내기</h3>
+<p>2023년 9월 도입된 관련 동영상 링크는 Short 하단에 <strong>같은 채널의 영상 하나</strong>를 연결한다. Shorts 설명란의 외부 링크는 스팸 대응으로 클릭할 수 없게 바뀌었으므로, 블로그로 보내는 길은 롱폼 설명란과 고정 댓글이 맡는다. 흐름은 &quot;Short → 관련 롱폼 → 롱폼 설명란의 블로그 글과 템플릿&quot;이다.</p>
+<h3>얼굴 없는 형식 네 가지</h3>
+<table>
+<thead>
+<tr>
+<th>형식</th>
+<th>잘 맞는 주제</th>
+<th>독창성이 생기는 곳</th>
+<th>흔한 실패</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>화면 녹화</td>
+<td>소프트웨어 사용법, 엑셀·자동화</td>
+<td>직접 푼 실제 업무 문제, 실수와 해결 과정</td>
+<td>설명 없이 클릭만 이어지는 녹화</td>
+</tr>
+<tr>
+<td>슬라이드</td>
+<td>개념 설명, 비교, 체크리스트</td>
+<td>직접 만든 도식과 판단 기준</td>
+<td>글자로 가득 찬 화면을 그대로 읽기</td>
+</tr>
+<tr>
+<td>B-roll</td>
+<td>분위기 전달, 이야기 보조</td>
+<td>직접 촬영한 장면, 설명과 맞물린 편집</td>
+<td>무료 스톡 영상을 이어 붙이고 원고만 바꾸기</td>
+</tr>
+<tr>
+<td>보이스오버</td>
+<td>모든 형식의 설명 축</td>
+<td>내 경험·의견·말투</td>
+<td>원고를 읽기만 해서 누가 말해도 같은 내용</td>
+</tr>
+</tbody></table>
+<h3>얼굴 없는 채널이 정책에 걸리는 지점</h3>
+<p>YouTube의 <strong>&quot;inauthentic content&quot;</strong>(대량 생산·반복 콘텐츠)와 <strong>재사용 콘텐츠(reused content)</strong> 규정의 정의·역사·허용 범위는 「AI 활용 제작과 플랫폼 정책」에서 다루며, 여기서는 얼굴 없는 채널이 그 경계에 가까워지는 신호만 본다.</p>
+<p>얼굴이 없다는 사실 자체는 문제가 아니다. 문제는 <strong>누가 만들어도 같은 결과가 나오는 제작 방식</strong>이다.</p>
+<table>
+<thead>
+<tr>
+<th>위험 신호</th>
+<th>독창성을 더하는 방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>같은 템플릿에 주제어만 바꾼 영상이 매일 여러 개</td>
+<td>영상마다 다른 실제 문제와 결과물을 보여 준다</td>
+</tr>
+<tr>
+<td>남의 영상·스톡 영상을 이어 붙이고 합성 음성으로 읽기</td>
+<td>직접 녹화한 화면과 직접 만든 파일을 쓴다</td>
+</tr>
+<tr>
+<td>웹 글을 요약해 읽는 원고</td>
+<td>&quot;내가 해 보니&quot; 경험, 실패, 수치, 판단 기준을 넣는다</td>
+</tr>
+<tr>
+<td>채널 전체에 사람의 흔적이 없음</td>
+<td>같은 목소리, 같은 관점, 댓글 질문에 답하는 후속 영상</td>
+</tr>
+</tbody></table>
+<p>YouTube CEO Neal Mohan은 2026년 1월 연례 서한에서 저품질 AI 콘텐츠(&quot;AI slop&quot;) 관리를 2026년 우선순위로 꼽았다. 대량 생산형 얼굴 없는 채널의 위험은 줄어들지 않았다고 보는 편이 안전하다. AI 도구를 쓸 때의 기준은 「AI 활용 제작과 플랫폼 정책」을 본다.</p>
+<h3>목소리 품질</h3>
+<p>얼굴 없는 채널에서 목소리는 사실상 진행자다.</p>
+<ul>
+<li><strong>녹음 환경</strong>: 비싼 마이크보다 조용하고 울림이 적은 방이 먼저다. 입과 마이크 거리를 매번 같게 둔다.</li>
+<li><strong>편집</strong>: 잡음 제거, 숨소리·침묵 정리, 음량 평준화 순서로 손본다. 과한 잡음 제거는 목소리를 로봇처럼 만든다.</li>
+<li><strong>원고</strong>: 문어체 원고는 읽는 티가 난다. 소리 내어 읽어 보고 문장을 짧게 고친다.</li>
+<li><strong>AI 음성</strong>: 선택지일 뿐이다. 자기 목소리로 쌓은 신뢰와 채널 정체성을 잃을 수 있고, 합성 음성은 자기 목소리를 복제한 것이라도 YouTube에서는 보수적으로 표시한다 (「AI 활용 제작과 플랫폼 정책」).</li>
+</ul>
+<h3>성장 수단인가, 수익 수단인가</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Shorts</th>
+<th>롱폼</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>주 역할</td>
+<td>발견: 채널을 모르는 사람에게 닿기</td>
+<td>신뢰와 수익: 시청 시간, 광고, 상품으로 가는 길</td>
+</tr>
+<tr>
+<td>광고 수익 구조</td>
+<td>Shorts 피드 광고를 모아 크리에이터 풀에서 45% 배분</td>
+<td>시청 페이지 광고 순수익의 55%</td>
+</tr>
+<tr>
+<td>2027-02-01 이후</td>
+<td>최근 90일 유효 Shorts 조회(참여 조회수) 1,000만 회 이상일 때만 Shorts 광고·구독 수익 배분 (발표 기준)</td>
+<td>변화 없음</td>
+</tr>
+<tr>
+<td>소규모 채널의 기대치</td>
+<td>수익보다 구독자·롱폼 유입</td>
+<td>수익과 상품 판매의 중심</td>
+</tr>
+</tbody></table>
+<p>수치 확인과 계산은 「광고 수익: 애드포스트와 YouTube 파트너 프로그램」에서 한다. 이 문서의 결론은 하나다. <strong>소규모 채널에서 Shorts는 수익이 아니라 롱폼과 블로그로 보내는 입구</strong>다.</p>
+<h2>적용: 예시 크리에이터 J의 Shorts 3개</h2>
+<p>J는 매주 8~12분 롱폼 강의 1개(예: &quot;엑셀 중복값 한 번에 지우기 — 3가지 방법 비교&quot;)를 올리고, 거기서 Shorts 3개를 만든다. 주 10시간 중 Shorts에는 약 1시간을 쓴다고 가정한다.</p>
+<table>
+<thead>
+<tr>
+<th>Short</th>
+<th>내용</th>
+<th>첫 1~2초</th>
+<th>연결</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 결과형</td>
+<td>정리 전 → 후 화면 비교</td>
+<td>지저분한 표가 한 번에 정리되는 장면</td>
+<td>관련 동영상: 이번 주 롱폼</td>
+</tr>
+<tr>
+<td>② 실수형</td>
+<td>초보가 흔히 하는 실수 1개와 고치는 법</td>
+<td>오류 메시지 화면</td>
+<td>관련 동영상: 이번 주 롱폼</td>
+</tr>
+<tr>
+<td>③ 질문형</td>
+<td>지난주 댓글 질문에 답하기</td>
+<td>질문 댓글 캡처</td>
+<td>관련 동영상: 질문이 나온 롱폼</td>
+</tr>
+</tbody></table>
+<ul>
+<li>녹화: 롱폼 녹화 때 확대할 영역을 표시해 두고, 그 구간을 세로로 다시 자르고 확대한다. 세로 재녹화는 글씨가 너무 작을 때만 선택한다.</li>
+<li>목소리: 기본은 본인 목소리. AI 음성은 한 Short에서만 시험하고, 시청 vs 스와이프 비율과 댓글 반응을 본인 목소리 Short와 비교한 뒤 결정한다.</li>
+<li>판단 기준 (가정): 4주 동안 12개를 올린 뒤 Short별 시청 비율과 &quot;관련 동영상&quot; 클릭 후 롱폼 조회를 비교해, 잘된 유형의 비중을 늘린다.</li>
+</ul>
+<h2>심화</h2>
+<h3>같은 영상을 여러 플랫폼에</h3>
+<p>Instagram Reels 등 다른 세로 영상 플랫폼에 같은 영상을 올릴 수도 있다. 다른 플랫폼의 워터마크가 찍힌 파일을 그대로 올리기보다 원본 파일을 쓴다. 플랫폼 간 교차 게시가 추천에 어떤 영향을 주는지는 공식 설명을 확인하지 못했다.</p>
+<h3>측정할 지표</h3>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>볼 지표</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>첫 장면이 효과가 있었나</td>
+<td>시청 vs 스와이프 비율</td>
+</tr>
+<tr>
+<td>끝까지 볼 만했나</td>
+<td>평균 시청 비율, 반복 재생</td>
+</tr>
+<tr>
+<td>롱폼으로 보냈나</td>
+<td>관련 동영상 링크 클릭, 롱폼의 트래픽 소스 중 Shorts</td>
+</tr>
+<tr>
+<td>채널이 컸나</td>
+<td>Short별 구독자 증가</td>
+</tr>
+</tbody></table>
+<h2>흔한 오해</h2>
+<ul>
+<li><strong>&quot;Shorts는 60초까지다&quot;</strong> — 2024-10-15 이후 업로드분은 3분까지다. 단, Shorts 카메라 녹화는 한 번에 60초 제한이 있다는 보도가 있다.</li>
+<li><strong>&quot;조회수가 늘었으니 수익도 는다&quot;</strong> — 2025-03-31 이후 조회수는 반복·짧은 재생까지 센다. 수익과 YPP는 참여 조회수 기준이다.</li>
+<li><strong>&quot;얼굴이 없으면 수익 창출이 안 된다&quot;</strong> — 형식이 아니라 대량 생산·재사용 여부가 기준이다.</li>
+<li><strong>&quot;허락받은 영상이면 재사용해도 된다&quot;</strong> — 재사용 콘텐츠 규정은 허락 여부와 무관하게 의미 있는 부가가치를 본다.</li>
+<li><strong>&quot;Shorts를 많이 올리면 광고 수익이 쌓인다&quot;</strong> — 2027-02-01부터는 90일 유효 Shorts 조회(참여 조회수) 1,000만 회 미만이면 Shorts 수익 배분이 없다 (발표 기준).</li>
+</ul>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>롱폼의 CTR에 해당하는 Shorts 지표는 무엇이며, 왜 역할이 비슷한가?</li>
+<li>2025-03-31 이후 &quot;조회수&quot;와 &quot;참여 조회수&quot;는 어떻게 다르고, 수익에는 어느 쪽이 쓰이는가?</li>
+<li>가로 화면 녹화를 Shorts로 바꿀 때 가장 먼저 해결해야 할 문제는 무엇인가?</li>
+<li>같은 템플릿으로 매일 5개씩 만드는 얼굴 없는 채널이 받을 수 있는 정책 위험 두 가지와, 각각을 줄이는 방법을 말해 보라.</li>
+<li>구독자 300명인 채널에서 Shorts의 목표를 수익이 아니라 무엇으로 잡아야 하며, 그것을 어떤 지표로 확인하는가?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/10059070?hl=en">Upload YouTube Shorts / Shorts 길이 3분 확대</a> — YouTube Help, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://ppc.land/youtube-changes-how-shorts-views-are-counted-from-march-31/">YouTube changes how Shorts views are counted from March 31</a> — PPC Land, 2025-03, 2026-09-30 확인</li>
+<li><a href="https://support.google.com/youtube/answer/14075157?hl=en">Add a related video to your YouTube Shorts</a> — YouTube Help, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.tubefilter.com/2023/09/01/youtube-related-links-multi-format-creators-shorts-live-long-form/">YouTube&#39;s &quot;related links&quot; connect Shorts, long-form videos, and live streams</a> — Tubefilter, 2023-09-01, 2026-09-30 확인</li>
+<li><a href="https://support.google.com/youtube/answer/12836917?hl=en">Create YouTube Shorts from your videos</a> — YouTube Help, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://support.google.com/youtube/answer/1311392?hl=en">YouTube channel monetization policies</a> — YouTube Help, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://www.socialmediatoday.com/news/youtube-clarifies-monetization-update-inauthentic-repeated-content/752892/">YouTube Clarifies Changes to Monetization Rules Around Inauthentic Content</a> — Social Media Today, 2025-07, 2026-09-30 확인</li>
+<li><a href="https://www.cnbc.com/2026/01/21/youtube-chief-says-managing-ai-slop-is-a-priority-for-2026-.html">YouTube chief says &#39;managing AI slop&#39; is a priority for 2026</a> — CNBC, 2026-01-21, 2026-09-30 확인</li>
+<li><a href="https://support.google.com/youtube/answer/12504220?hl=en">YouTube Shorts monetization policies</a> — YouTube Help, 검색 결과로 확인 (2026-09-30)</li>
+<li><a href="https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/">New opportunities to earn and changes to the YouTube Partner Program</a> — YouTube Blog, 2026-08, 검색 결과로 확인 (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../creator/05-longform/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>롱폼 영상 기획과 제작</span></a><a class="page-link next" href="../../creator/07-ai-production-policy/"><span><small>다음 문서</small>AI 활용 제작과 플랫폼 정책</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

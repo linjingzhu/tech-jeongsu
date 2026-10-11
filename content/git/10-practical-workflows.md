@@ -24,6 +24,8 @@ WT A    → feature/a  WIP 그대로
 WT B    → feature/b  최신 origin/stable 기반
 ```
 
+자세히: 「Worktree 완전 이해」
+
 ## 2. 현재 Feature가 stable보다 73 Commit 뒤처짐
 
 먼저 Remote 상태를 갱신한다.
@@ -71,6 +73,8 @@ Remote에는 Branch가 없다.
 git push -u origin feature/a
 ```
 
+자세히: 「협업 · Push · PR · Code Review」
+
 ## 5. 다른 개발자의 Remote Branch를 잠깐 보기
 
 ```bash
@@ -79,6 +83,8 @@ git switch --detach origin/feature/a
 ```
 
 수정까지 이어갈 거라면 Local Branch를 만든다.
+
+자세히: 「HEAD · Checkout · Detached HEAD」
 
 ## 6. Merge / Rebase / Cherry-pick을 실행하기 전
 
@@ -140,17 +146,7 @@ git worktree prune
 
 > 최신 origin/stable에서 feature/camera Branch와 별도 Worktree를 만들어. 현재 Session의 Branch와 Worktree는 변경하지 마.
 
-### Rebase
-
-> 현재 Feature Branch를 origin/stable 위로 rebase하기 전에 주체와 base, 변경될 Commit을 보여줘. Conflict가 있으면 자동 해결하지 말고 중단해.
-
-### Cherry-pick
-
-> 이 Commit만 가져오기 전에 git show로 변경과 선행 의존성을 확인해.
-
-### PR
-
-> 현재 Branch의 diff와 commit을 검토하고 stable 대상으로 PR 설명을 작성해. Build/Test에서 검증하지 않은 항목은 NOT VERIFIED로 표시해.
+Commit · Pull · Push · Rebase · Merge · Cherry-pick · PR 지시 예시는 「Claude Code를 Git Client처럼 쓰기」에 모아 두었다.
 
 ## 실전에서 기억할 핵심
 
