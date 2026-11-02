@@ -71,6 +71,9 @@ Creating a separate Animation Object.
 
 Impact:
 Review required for Import, Timeline, and Save/Load.
+
+Revisit if:
+Users repeatedly report that they cannot tell a Camera Shot from an Animation.
 ```
 
 ### Release Scope

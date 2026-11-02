@@ -72,7 +72,7 @@ maxTurns: 6
 | Field | Value | Why |
 |---|---|---|
 | `tools` | No Edit or Write | Omitting the field **inherits every tool**. The list is an allowlist |
-| `permissionMode` | `plan` | Starts in read-only exploration (plan mode). If the parent conversation is in acceptEdits, auto or bypassPermissions, though, this value is ignored and the parent's mode applies |
+| `permissionMode` | `plan` | Starts in plan mode (mostly read-only exploration and planning). The parent's mode can override it, though (see Common Misconceptions below) |
 | `maxTurns` | `6` | At the limit it stops and returns a partial result |
 | `model` | Unset | The cheapest capable model wins this role, so the harness decides |
 
@@ -98,7 +98,7 @@ implement, choose product scope, approve paid automation, or merge.
 |---|---|---|
 | `name`, `description`, body | `name`, `description`, `developer_instructions` | `name` and `developer_instructions` are required. `description` may be left out of the file, but if present it must not be blank, and if no role of the same name in another config layer supplies one either, the role is dropped with a warning (`codex-rs/agent-roles/src/`, 2026-09-29 main) |
 | `tools` allowlist | None | `sandbox_mode` and the instructions stand in for it |
-| `permissionMode: plan` | `sandbox_mode = "read-only"` | The parent or runtime can override either side. Claude follows the parent's mode when the parent is in acceptEdits, auto or bypassPermissions; Codex follows a parent runtime override. Check the effective permissions |
+| `permissionMode: plan` | `sandbox_mode = "read-only"` | The parent or runtime can override either side, so check the effective permissions (see Common Misconceptions below) |
 | `maxTurns` | None | "At most eight rounds" in the instructions is not an enforced counter |
 | `model` | `model`, `model_reasoning_effort` | A model in the agent file takes precedence over the spawn request, so the reviewer file leaves it empty on purpose |
 

@@ -114,13 +114,4 @@ upstream           downstream
 
 ## 다른 사람이 Push한 Branch를 공동 작업
 
-```bash
-git fetch origin
-git switch --track origin/feature/camera
-```
-
-가능하다.
-
-하지만 둘이 같은 Branch를 동시에 Push하면 non-fast-forward 충돌이 자주 생긴다.
-
-일반적으로는 각자 Branch를 분리하고 PR로 통합하는 편이 관리가 쉽다.
+다른 사람이 Push한 Branch도 `git fetch origin` 후 `git switch --track origin/<branch>`로 받아 함께 작업할 수 있으며, 동시에 Push할 때 생기는 문제와 Branch를 나누는 방법은 「협업 · Push · PR · Code Review」에서 다룬다.

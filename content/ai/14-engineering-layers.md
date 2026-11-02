@@ -126,7 +126,7 @@ Agent는 볼 수 있는 것만 고친다. OpenAI 팀은 agent가 브라우저(Ch
 
 ### 보이는 빈칸 세 가지
 
-1. **같은 규칙이 도구마다 강제력이 다르다.** 탐색자의 "최대 6라운드"는 Claude에서는 `maxTurns: 6`으로 강제되지만 Codex에서는 지시문의 문장이다. `.ai/HARNESS.md`도 "Claude의 도구 허용 목록과 `maxTurns`는 Codex 설정 키가 아니다"라고 인정한다. 또 Claude agent의 `permissionMode: plan`은 부모 세션이 `acceptEdits`·`auto`·`bypassPermissions`면 무시된다(「권한 · Sandbox · Hook」).
+1. **같은 규칙이 도구마다 강제력이 다르다.** 탐색자의 "최대 6라운드"는 Claude에서는 `maxTurns: 6`으로 강제되지만 Codex에서는 지시문의 문장이다. `.ai/HARNESS.md`도 "Claude의 도구 허용 목록과 `maxTurns`는 Codex 설정 키가 아니다"라고 인정한다. 또 Claude agent의 `permissionMode: plan`은 부모 mode가 덮어쓸 수 있다(「Subagent · Skill · Plugin」 참고).
 2. **검사는 있지만 아무도 부르지 않으면 돌지 않는다.** 테스트는 이 문서 같은 한·영 쌍의 구조를 기계적으로 검사하는 좋은 sensor다. 하지만 hook도 CI도 없으니 실행 여부는 agent가 지시를 따르느냐에 달려 있다. 강제력 있는 검사가 요청으로 호출되는 셈이다.
 3. **진입 계약 두 개가 같은 상황을 다르게 읽는다.** 이 저장소에는 `.ai/PROJECT_CONTEXT.md`가 없고 템플릿만 있다. `CLAUDE.md`는 없을 때 "the set is not adopted here: stop and run `python3 .ai/tools/adopt.py`"라고 하고, `AGENTS.md`는 정책 템플릿 자체를 관리할 때(`LESSONS_FROM_PRACTICE.md`가 있을 때) "project instance files are intentionally absent; do not create them"이라고 한다. `check_policy_set.py`도 이 상태를 "the set as shipped"로 읽고 통과시킨다. 사람이 쓴 요청끼리 어긋나면 모델마다 다르게 행동한다. 이것은 컨텍스트 층의 결함이다.
 

@@ -14,7 +14,7 @@ Intended readers:
 - Freelancers who do contract development while preparing their own product
 - Product Owners who want to settle the structure before founding a company
 
-## The Three Pillars
+## The Four Pillars
 
 | Pillar | Core question | Documents |
 |---|---|---|

@@ -85,7 +85,7 @@ Must가 60%를 넘으면 범위를 다시 자른다. 45시간째에 Must가 끝�
 [D-0]  배포, 대기자에게 메일, 채널 3곳 공지, 첫 24시간 문의 응대
 ```
 
-첫 100명은 제품보다 먼저 설계한다. 채널 고르기와 Launch 등급 나누기는 마케팅 트랙의 「Go-to-Market · Launch · PLG와 SLG」, 「채널 전략 · Content · Paid · Lifecycle · Community」를 본다.
+첫 100명은 제품보다 먼저 설계한다. 채널 고르기와 Launch 등급 나누기는 마케팅 트랙의 「Go-to-Market · Launch · PLG/SLG」, 「채널 · Content · Paid · Lifecycle」를 본다.
 
 ### 출시 후 30일 루틴
 
@@ -117,7 +117,7 @@ Must가 60%를 넘으면 범위를 다시 자른다. 45시간째에 Must가 끝�
 | 배포 | 스테이징 배포, 스모크 테스트 | Production 승인과 롤백 판단 |
 | 출시 후 | 오류 로그 요약, 문의 분류 | 환불·개인정보 관련 답변 |
 
-파이프라인 구성은 플랫폼 트랙의 「CI/CD Pipeline: Commit에서 Production까지」와 「작은 팀 실전 가이드: 1인 개발자와 소규모 팀」을 따른다. 결제·개인정보·Production 승인은 사람의 관문으로 남긴다.
+파이프라인 구성은 플랫폼 트랙의 「CI/CD · OIDC · GitOps」와 「작은 팀 실전 가이드」을 따른다. 결제·개인정보·Production 승인은 사람의 관문으로 남긴다.
 
 ## 흔한 오해
 

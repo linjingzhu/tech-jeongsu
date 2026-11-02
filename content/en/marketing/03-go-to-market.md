@@ -54,7 +54,7 @@ flowchart LR
 
 ## B2B Buyers Research Alone, and Use AI Too
 
-According to a Gartner survey published on 2026-05-20 (645 B2B buyers, August–September 2025), buyers used an average of seven information sources in a recent purchase, and 45% said they used generative AI. In the same survey, 69% said they prefer to validate AI-generated insights with sales reps.
+According to a Gartner survey published on 2026-05-20 (645 B2B buyers, August–September 2025; it is the same survey, but press releases give the sample as 645 or 646), buyers used an average of seven information sources in a recent purchase, and 45% said they used generative AI. In the same survey, 69% said they prefer to validate AI-generated insights with sales reps.
 
 The share preferring a rep-free buying experience was 61% in the survey published on 2025-06-25 and 67% in the one published on 2026-03-09 (see document 01).
 

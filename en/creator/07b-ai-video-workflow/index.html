@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Making YouTube Videos with AI: Tools and Tutorials | MyAI</title>
+    <meta name="description" content="This document gathers how to do the production craft from &quot;Planning and Producing Long-form Video&quot; and &quot;Shorts and Faceless Channels&quot; faster with AI tools…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/07b-ai-video-workflow/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Making YouTube Videos with AI: Tools and Tutorials | MyAI" />
+    <meta property="og:description" content="This document gathers how to do the production craft from &quot;Planning and Producing Long-form Video&quot; and &quot;Shorts and Faceless Channels&quot; faster with AI tools…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/07b-ai-video-workflow/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/07b-ai-video-workflow.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link active" aria-current="page" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Making YouTube Videos with AI: Tools and Tutorials</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Making YouTube Videos with AI: Tools and Tutorials</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Split long-form, Shorts and faceless production into nine stages from ideas to analytics, pick one of YouTube&#39;s built-in AI features or an outside tool for each stage and learn it from an official tutorial, and tell the features you can use in Korea apart from those not yet confirmed there.</p>
+</blockquote>
+<p>This document gathers <strong>how to do the production craft from &quot;Planning and Producing Long-form Video&quot; and &quot;Shorts and Faceless Channels&quot; faster with AI tools</strong>, stage by stage. Policy risks such as synthetic-content disclosure, inauthentic content and tool terms are in &quot;AI-assisted Production and Platform Policy&quot;, blog-side tools are in &quot;Writing Blog Posts with AI: Tools and Tutorials&quot;, the prompt library, review protocol, automation and pricing are in &quot;An AI Production Method: Prompts, Review and Automation&quot;, and the split of the 10 weekly hours is in &quot;One Source, Multi Use (OSMU) Strategy&quot;. Feature names and regions are <strong>as of 2026-09</strong>. YouTube rolls out its AI features by country, device and channel, so this page separates &quot;confirmed in Korea&quot; from &quot;not confirmed&quot;. Every link is an address that appeared in search results on 2026-09-30; none could be opened directly from this environment. Tool names are <strong>neutral examples</strong>, not recommendations.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>How this document uses it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ask Studio</td>
+<td>The conversational AI inside YouTube Studio. It answers with your channel data, comments and upload history</td>
+<td>The default for the idea and analytics stages</td>
+</tr>
+<tr>
+<td>Inspiration tab</td>
+<td>The Studio tab that suggested ideas, titles, thumbnails and outlines</td>
+<td>Being phased out from 2026-08, replaced by Ask Studio</td>
+</tr>
+<tr>
+<td>Text-based editing</td>
+<td>Editing where deleting or moving words in the transcript cuts the video with them</td>
+<td>Cutting screen-recorded lessons</td>
+</tr>
+<tr>
+<td>Voice cloning</td>
+<td>Building an AI voice from samples of your own voice</td>
+<td>Only for a test on one Short. Wrong words in long-form are re-recorded. Disclosure rules are in doc 07</td>
+</tr>
+<tr>
+<td>Generative video</td>
+<td>Models that make short clips from a prompt (Veo, Runway, Kling and others)</td>
+<td>Explanatory B-roll only</td>
+</tr>
+<tr>
+<td>Auto dubbing</td>
+<td>YouTube translates a video&#39;s speech and creates an audio track in another language</td>
+<td>An optional after-publish stage</td>
+</tr>
+<tr>
+<td>Tutorial</td>
+<td>The meaning and the selection criteria follow &quot;Writing Blog Posts with AI: Tools and Tutorials&quot;</td>
+<td>Invest 20-30 minutes when you first use a tool</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>1. The nine-stage flow and where people check</h3>
+<p>AI takes the <strong>drafts and repetitive work</strong>; the person takes the <strong>experience, screens and judgment</strong>. The edge labels are the points where the person steps in.</p>
+<pre><code class="language-mermaid">flowchart LR
+    IDEA[1 Ideas] --&gt;|pick one topic| SCRIPT[2 Script and hook]
+    SCRIPT --&gt;|add experience and numbers| VOICE[3 Voice]
+    VOICE --&gt; REC[4 Screen recording]
+    REC --&gt; EDIT[5 AI editing]
+    EDIT --&gt;|only when needed| BROLL[6 Generative B-roll]
+    EDIT --&gt;|fix terms| THUMB[7 Thumbnail and title]
+    BROLL --&gt;|disclose if realistic| THUMB
+    THUMB --&gt; PUB[Publish]
+    PUB --&gt; CAP[8 Captions, translation, dubbing]
+    PUB --&gt; DATA[9 Analytics]
+    DATA --&gt;|next topic| IDEA
+</code></pre>
+<h3>2. YouTube&#39;s built-in AI features: can you use them in Korea</h3>
+<p>Before outside tools, check what YouTube Studio and the Shorts app already have. These features are free and tied to your channel data. Their regions differ by feature.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What it does</th>
+<th>Korea (as of 2026-09)</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ask Studio</td>
+<td>Ideas, comment summaries, analytics questions</td>
+<td><strong>Available</strong> (desktop YouTube Studio)</td>
+<td>YouTube Korea blog (confirmed via search results)</td>
+</tr>
+<tr>
+<td>Inspiration tab</td>
+<td>Idea cards</td>
+<td>Phased out from 2026-08</td>
+<td>YouTube Help (confirmed via search results)</td>
+</tr>
+<tr>
+<td>Edit with AI (Shorts)</td>
+<td>A first cut from your footage with music and transitions. As announced, it also adds an AI voice-over (English or Hindi)</td>
+<td>Announced including South Korea (2025-11), starting with some devices and creators</td>
+<td>PPC Land, YouTube Community announcement</td>
+</tr>
+<tr>
+<td>Gemini conversational editing</td>
+<td>Places cuts, transitions and captions from spoken or typed instructions</td>
+<td><strong>Reported</strong> to reach 14 countries including Korea and the US in early 2027</td>
+<td>ZDNet Korea, 2026-09-24</td>
+</tr>
+<tr>
+<td>Veo 3 Fast (Shorts)</td>
+<td>Generates a clip of about 8 seconds in the Shorts camera</td>
+<td><strong>Not confirmed</strong>. Announced for the US, UK, Canada, Australia and New Zealand (2025-09), later some MENA countries</td>
+<td>YouTube Blog, Google MENA blog</td>
+</tr>
+<tr>
+<td>Dream Screen (Veo 2)</td>
+<td>Generates Shorts backgrounds and clips</td>
+<td><strong>Not confirmed</strong>. Announced for the US, Canada, Australia and New Zealand</td>
+<td>YouTube Blog, 2025-02</td>
+</tr>
+<tr>
+<td>Storytelling assistant, dynamic thumbnails</td>
+<td>Feedback on scripts and rough cuts; a per-viewer thumbnail choice</td>
+<td>Announced 2026-09-23. Korean timing <strong>not confirmed</strong></td>
+<td>YouTube Blog (Made On YouTube 2026)</td>
+</tr>
+<tr>
+<td>Auto dubbing</td>
+<td>Creates audio tracks in other languages</td>
+<td>A Korean-language help page exists. Check language pairs in Studio</td>
+<td>YouTube Help</td>
+</tr>
+<tr>
+<td>YouTube Create app</td>
+<td>Mobile editing app</td>
+<td>South Korea is on the Android availability list</td>
+<td>YouTube Help</td>
+</tr>
+</tbody></table>
+<p>&quot;Not confirmed&quot; does not mean the feature is missing. It means <strong>no official source confirmed availability in Korea</strong>. The final check is whether the menu appears in your own Studio and Shorts camera. Do not bypass regional limits with a VPN or similar; it can breach the terms.</p>
+<h3>3. Ideas: Ask Studio first</h3>
+<ul>
+<li><strong>What it does</strong>: You ask things like &quot;How is my latest upload doing?&quot; or &quot;What are viewers saying about my editing style?&quot;. It answers from your analytics, comments and upload history.</li>
+<li><strong>How to use it</strong>: Click the sparkle icon at the top right of desktop YouTube Studio. The official guide advises naming a specific video instead of a vague &quot;give me ideas from comments&quot;, and using the analytics labels (&quot;Traffic sources&quot;, &quot;New viewers&quot;).</li>
+<li><strong>Limits</strong>: Official Artist Channels, Made for Kids channels and creators under 18 cannot use it (confirmed via search results). Answers are AI summaries, so recheck numbers on the analytics screens.</li>
+<li><strong>Tutorials</strong>: <a href="https://blog.youtube/intl/ko-kr/news-and-events/ai-ask-studio/">Introducing Ask Studio (Korean)</a>, <a href="https://blog.youtube/creator-and-artist-stories/youtube-ask-studio-creator-guide/">Ask Studio: Getting started guide (English)</a>, <a href="https://www.youtube.com/watch?v=zpXHtc5m4ZI">Getting-started video (English)</a></li>
+</ul>
+<p>The Inspiration tab (formerly the Research tab) is being phased out from 2026-08. If you want keyword demand separately, add the keyword research method from &quot;Writing Blog Posts with AI: Tools and Tutorials&quot;.</p>
+<h3>4. Script and hook: a general LLM plus channel context</h3>
+<ul>
+<li><strong>Tools</strong>: General chat AIs such as Claude, ChatGPT and Gemini. Put your style guide and past scripts into a project feature so you do not re-explain them each time (<a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Create a Claude project</a>, <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects course</a>).</li>
+<li><strong>Order</strong>: (1) one line for the title and thumbnail promise, (2) three hook options for the first 30 seconds, (3) a chapter outline, (4) a draft in sentences written for the ear, (5) J fills the <code>[experience]</code> slots with real mistakes and numbers. Structure follows &quot;Planning and Producing Long-form Video&quot;.</li>
+<li><strong>On YouTube&#39;s side</strong>: At Made On YouTube on 2026-09-23 YouTube announced a storytelling assistant that analyses scripts and rough cuts and suggests pacing and structure changes. Korean timing was not confirmed.</li>
+<li>The prompts themselves (three hooks, finding Shorts cut points and more) are templates in &quot;An AI Production Method: Prompts, Review and Automation&quot;.</li>
+</ul>
+<h3>5. Voice: your own voice comes first</h3>
+<p>On a faceless channel the voice is the host (&quot;Shorts and Faceless Channels&quot;). In long-form, fix a wrong word by <strong>re-recording that sentence</strong>. AI voice and voice cloning stay a test option on one Short, as set in &quot;Planning and Producing Long-form Video&quot;. Disclosure of synthetic voice and each plan&#39;s commercial-use terms are in &quot;AI-assisted Production and Platform Policy&quot;.</p>
+<table>
+<thead>
+<tr>
+<th>Tool (example)</th>
+<th>Korean</th>
+<th>Notes (2026-09, confirmed via search results)</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vrew AI voice</td>
+<td>Yes</td>
+<td>TTS inside the editor. Read 30 prepared sentences to build &quot;my voice AI&quot;</td>
+<td><a href="https://vrew.ai/ko/feature/ai-voice/">AI voice page (Korean)</a></td>
+</tr>
+<tr>
+<td>ElevenLabs</td>
+<td>Yes</td>
+<td>TTS, voice cloning and dubbing. Docs list Korean for Eleven v3</td>
+<td><a href="https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/">Kevin Stratvert beginner guide (English)</a></td>
+</tr>
+<tr>
+<td>Typecast</td>
+<td>Yes</td>
+<td>A Korean service. A 2026-04 report cites about 400 AI voice actors with emotional delivery</td>
+<td><a href="https://typecast.ai/kr/learn/how-to-use-typecast/">How to use (Korean)</a></td>
+</tr>
+<tr>
+<td>CLOVA Dubbing</td>
+<td>Yes</td>
+<td>Naver Cloud&#39;s AI voice dubbing. On the free tier, check attribution and commercial terms</td>
+<td><a href="https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq">Playlist (Korean)</a></td>
+</tr>
+<tr>
+<td>Supertone Play</td>
+<td>Yes</td>
+<td>TTS from Supertone, a HYBE company. A new model with 23 languages was announced in 2026-01</td>
+<td><a href="https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual">New model post (Korean)</a></td>
+</tr>
+</tbody></table>
+<p>J&#39;s rule: record the main video in J&#39;s own voice and re-record only the sentence with a wrong function name. Voice cloning is used only for Shorts tests, and any video fixed with voice cloning gets the altered or synthetic content setting under doc 07&#39;s conservative rule.</p>
+<h3>6. Screen recording: people record, tools zoom</h3>
+<table>
+<thead>
+<tr>
+<th>Tool (example)</th>
+<th>Platform</th>
+<th>AI and automatic features</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OBS Studio</td>
+<td>Windows, macOS, Linux, free</td>
+<td>No AI features. Stable settings and separate audio tracks</td>
+<td><a href="https://obsproject.com/kb/quick-start-guide">Official Quick Start (English)</a>, <a href="https://www.youtube.com/watch?v=XuAYjvxi0mE">OBS how-to video (Korean)</a></td>
+</tr>
+<tr>
+<td>Screen Studio</td>
+<td>Comparison posts say macOS only</td>
+<td>Auto zoom on clicks, smoothed cursor</td>
+<td>Not linked: the official site address did not appear in search results</td>
+</tr>
+<tr>
+<td>Loom</td>
+<td>Browser and desktop</td>
+<td>Captions, auto titles, summaries and chapters, filler-word removal</td>
+<td><a href="https://support.atlassian.com/loom/docs/loom-ai-features">Loom AI features (English)</a></td>
+</tr>
+</tbody></table>
+<p>Auto zoom is especially useful when cutting vertical Shorts. But J decides the zoom areas before recording (&quot;Shorts and Faceless Channels&quot;). On Windows, use keyframed zoom in the editing stage instead.</p>
+<h3>7. AI editing: cut by text, fix terms by hand</h3>
+<table>
+<thead>
+<tr>
+<th>Tool (example)</th>
+<th>What AI does</th>
+<th>Korean and pricing notes (confirmed via search results)</th>
+<th>Tutorial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vrew</td>
+<td>Korean auto captions, cutting by deleting text, silence cleanup</td>
+<td>Moved to unified credits on 2026-04-22. The free tier is said to get monthly credits</td>
+<td><a href="https://www.youtube.com/watch?v=QtP9PvjMy5E">Follow-along #1 (Korean)</a>, <a href="https://vrew.ai/ko/blog/all/text-based-video-editing/">Text-based editing guide (Korean)</a></td>
+</tr>
+<tr>
+<td>CapCut</td>
+<td>Auto captions, templates, background removal</td>
+<td>Reports say auto captions and more moved to paid plans. Check music and template commercial terms</td>
+<td><a href="https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles">Caption recognition help (Korean)</a></td>
+</tr>
+<tr>
+<td>Descript</td>
+<td>Edit like a document, the Underlord AI co-editor, audio cleanup</td>
+<td>A third-party review lists Korean among transcription languages</td>
+<td><a href="https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started">Six steps to start (English)</a></td>
+</tr>
+<tr>
+<td>Premiere Pro</td>
+<td>Text-based editing, speech-to-text captions, Generative Extend, media intelligence search</td>
+<td>Subscription. Check Korean transcription in your installed version</td>
+<td><a href="https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html">Text-Based Editing (English)</a></td>
+</tr>
+<tr>
+<td>DaVinci Resolve</td>
+<td>20: AI IntelliScript (rough cut from a script), AI animated subtitles, AI Audio Assistant. 21 (final 2026-06): more AI tools</td>
+<td>Reports say many AI features are in the paid Studio edition. Studio is a one-time purchase (listed at USD 295, confirmed via search results)</td>
+<td><a href="https://www.blackmagicdesign.com/products/davinciresolve/training">Official training (English)</a></td>
+</tr>
+<tr>
+<td>YouTube Edit with AI</td>
+<td>A first cut from Shorts footage. As announced, it also adds an AI voice-over; J turns it off, or discloses synthetic voice if kept</td>
+<td>Announced including Korea, rolling out gradually</td>
+<td><a href="https://support.google.com/youtube/answer/16631240?hl=en-GB">Help (English)</a>, <a href="https://www.youtube.com/shorts/1WW76Rz4nqM">How-to Short (English)</a></td>
+</tr>
+</tbody></table>
+<p>In screen-recorded lessons, AI editing gets <strong>function names, menu names and numbers</strong> wrong most often. &quot;VLOOKUP&quot; comes out as a phonetic spelling and &quot;filter&quot; as a similar-sounding word. Keep a list of words to batch-replace in auto captions. Stick to <strong>one tool</strong>, as in the tool tiers of &quot;Planning and Producing Long-form Video&quot;.</p>
+<h3>8. Generative video: B-roll only, and disclose</h3>
+<p>On a tutorial channel like J&#39;s, generative video has a narrow place, because the real screen is the evidence. It fits explanatory B-roll such as chapter transitions and concept metaphors (&quot;a warehouse where data piles up&quot;).</p>
+<table>
+<thead>
+<tr>
+<th>Service (example)</th>
+<th>Status as of 2026-09 (confirmed via search results)</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Veo (Google)</td>
+<td>Veo 3.1 in the Gemini app, Flow and the API. Sources say Flow expanded to about 140 countries, but Korea was not confirmed</td>
+<td><a href="https://deepmind.google/models/veo/">Veo model page</a>, <a href="https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/">Flow launch (Korean)</a></td>
+</tr>
+<tr>
+<td>Veo in Shorts</td>
+<td>See the table above. Not confirmed in Korea</td>
+<td><a href="https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/">Made on YouTube 2025 tools explained</a></td>
+</tr>
+<tr>
+<td>Sora (OpenAI)</td>
+<td>App and web closed 2026-04-26; the API was announced to end on 2026-09-24</td>
+<td><a href="https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation">Discontinuation notice</a></td>
+</tr>
+<tr>
+<td>Runway</td>
+<td>Trial credits and monthly plans. Credits are charged by generation length</td>
+<td><a href="https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work">Credits help</a></td>
+</tr>
+<tr>
+<td>Kling (Kuaishou)</td>
+<td>Version 3.0 reported in 2026-02</td>
+<td><a href="https://kling.ai/">Official site</a></td>
+</tr>
+<tr>
+<td>Pika</td>
+<td>Web and app service continues</td>
+<td><a href="https://pika.art/">Official site</a></td>
+</tr>
+</tbody></table>
+<p><strong>Three rules</strong>: (1) Never make fake screens that look like real spreadsheets. (2) Disclose realistic scenes of people, places or events as altered or synthetic content (&quot;AI-assisted Production and Platform Policy&quot;). (3) Reusing a generated clip is not a problem in itself. If whole videos are the same template, the same clips and only changed sentences, that is the inauthentic-content risk (&quot;AI-assisted Production and Platform Policy&quot;).</p>
+<h3>9. Thumbnails, captions and dubbing, analytics</h3>
+<p><strong>Thumbnails</strong>: The faceless default is a result-screen capture plus two to four words (&quot;Planning and Producing Long-form Video&quot;). Use Canva&#39;s <a href="https://www.canva.com/create/youtube-thumbnails/">YouTube thumbnail templates</a> and <a href="https://www.canva.com/ai-thumbnail-maker/">AI Thumbnail Maker</a> to lay out options quickly; J chooses the words. Compare two or three options on watch time with <a href="https://support.google.com/youtube/answer/16391400?hl=en">Test &amp; Compare</a>. Dynamic thumbnails, announced in 2026-09, were not confirmed for Korea.</p>
+<p><strong>Captions, translation and dubbing</strong>:</p>
+<ul>
+<li><a href="https://support.google.com/youtube/answer/6373554?hl=en">Automatic captions</a> support Korean, but uploading a caption file corrected in your editor is more accurate.</li>
+<li><a href="https://support.google.com/youtube/answer/15569972?hl=ko">Auto dubbing (Korean help page)</a> is turned on in the channel&#39;s advanced settings, with an option to review dubs manually before publishing (confirmed via search results). Reports say it reached all creators in early 2026.</li>
+<li>Upload translated audio you made yourself as a <a href="https://support.google.com/youtube/answer/13338784?hl=ko">multi-language audio track</a>. For target languages and review rules, see the auto-dubbing item in doc 07.</li>
+</ul>
+<p><strong>Analytics</strong>: Ask Studio also suggests questions on the analytics page. Ask something like &quot;How many viewers came from Shorts to long-form in the last four weeks?&quot;, then check the numbers against the original report in the analytics tab. Interpreting metrics follows &quot;How YouTube Recommends and Channel Design&quot;.</p>
+<h2>Applied: Example Creator J&#39;s Video Production Stack</h2>
+<p>J&#39;s weekly split follows the baseline table in &quot;One Source, Multi Use (OSMU) Strategy&quot;. Attaching one tool to each part of the six video hours (script 0.5, recording and voice 1.5, long-form editing and thumbnail 3.0, Shorts 1.0) gives the table below. Times are illustrative assumptions.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>J&#39;s tool</th>
+<th>What AI does</th>
+<th>What J does</th>
+<th>Time (assumed)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ideas</td>
+<td>Ask Studio</td>
+<td>Summarises questions in last week&#39;s comments</td>
+<td>Picks one topic</td>
+<td>Included in research time</td>
+</tr>
+<tr>
+<td>Script and hook</td>
+<td>Claude Projects (style guide, two past scripts)</td>
+<td>Three hooks, chapter outline, draft</td>
+<td>Adds mistakes and numbers, reads aloud</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Recording and voice</td>
+<td>OBS Studio + USB microphone</td>
+<td>None</td>
+<td>Records with real files, records own voice</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>Long-form editing</td>
+<td>Vrew</td>
+<td>Auto captions, text cuts, silence cleanup</td>
+<td>Fixes function names, edits zoom sections</td>
+<td>2.5</td>
+</tr>
+<tr>
+<td>Thumbnail</td>
+<td>Canva + Test &amp; Compare</td>
+<td>Layout options</td>
+<td>Chooses the words, captures the result screen</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Three Shorts</td>
+<td>Vertical re-edit in Vrew (tries Edit with AI on one Short if the menu appears, with the AI voice-over off)</td>
+<td>Segment candidates</td>
+<td>Picks the result, mistake and question types</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>After publishing</td>
+<td>Corrected auto captions uploaded, Ask Studio</td>
+<td>Comment summary</td>
+<td>Notes the next topic</td>
+<td>Included in the Monday review</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Test rule (assumed)</strong>: One new tool per month, tried on one Short. After four weeks, compare editing time and the viewed vs swiped away ratio with the old way before keeping it.</li>
+<li><strong>Not used</strong>: Spreadsheet screens made with generative video, full AI narration. AI voice stays a test option on one Short, as set in &quot;Planning and Producing Long-form Video&quot;.</li>
+<li><strong>Disclosure</strong>: Videos with only J&#39;s own screen and voice are not in scope. AI-voice Shorts, videos fixed with voice cloning and videos with realistic generated clips are disclosed.</li>
+</ul>
+<h2>Going Deeper</h2>
+<h3>Announced is not available</h3>
+<p>At Made On YouTube 2026 on 2026-09-23, YouTube announced conversational editing, a storytelling assistant, dynamic thumbnails, live real-time dubbing and more. YouTube usually ships AI features <strong>in English and the US first, then some countries, then wider</strong>, and timing differs between channels within one country. So this document keeps announced-only features out of J&#39;s workflow. Check a new feature in this order: (1) the official blog announcement, (2) the availability list on the help page, (3) your own Studio screen.</p>
+<h3>How to choose tutorials</h3>
+<p>The selection criteria follow the Going Deeper section of &quot;Writing Blog Posts with AI: Tools and Tutorials&quot;. YouTube&#39;s official training material is gathered at <a href="https://www.youtube.com/intl/ko_ALL/creators/">YouTube Creators (Korean)</a> and <a href="https://www.youtube.com/creators/create/ai-for-creators/">AI for Creators</a>.</p>
+<h3>Tool costs and shutdown risk</h3>
+<p>As the Sora app and web closing in 2026-04 shows, AI tools change plans and even disappear quickly. Keep raw recordings, scripts and caption files (.srt) <strong>outside the tool</strong>, so the work survives a tool change. The monthly budget table for LLM and automation tools is in &quot;An AI Production Method: Prompts, Review and Automation&quot;. Pricing notes for editing and voice tools stay in this document&#39;s tables; check the official pricing page before paying.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;YouTube announced it, so it works in Korea&quot;</strong> — As of 2026-09, Korean availability of Veo in Shorts and Dream Screen was not confirmed. Check announcements and country lists separately.</li>
+<li><strong>&quot;The Inspiration tab is the idea tool&quot;</strong> — It is being phased out from 2026-08. The conversational Ask Studio replaces it.</li>
+<li><strong>&quot;AI editing means no caption fixes&quot;</strong> — Function names, menu names and numbers are almost always wrong. A person fixes them.</li>
+<li><strong>&quot;An AI clone of my own voice needs no disclosure&quot;</strong> — No official source confirmed that exception, so disclose conservatively (&quot;AI-assisted Production and Platform Policy&quot;).</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>How do Ask Studio and the Inspiration tab differ, and which should a creator in Korea use as of 2026-09?</li>
+<li>Name three points in the nine-stage flow where a person must step in, and what they check at each.</li>
+<li>When cutting a screen-recorded lesson with a text-based editor, which kind of error do you fix first?</li>
+<li>What three rules must J follow when adding one generative B-roll shot?</li>
+<li>When a new YouTube AI feature is announced, in what order do you check whether it works in Korea?</li>
+</ol>
+<h2>References</h2>
+<p>Every link was confirmed in search results on 2026-09-30 (not opened directly).</p>
+<p><strong>YouTube: ideas, analytics, editing</strong></p>
+<ul>
+<li><a href="https://blog.youtube/intl/ko-kr/news-and-events/ai-ask-studio/">Introducing Ask Studio, a new AI partner for Korean creators</a> — YouTube Korea blog (Korean); <a href="https://support.google.com/youtube/answer/16291691?hl=en">Learn about Ask Studio in YouTube Studio</a> — YouTube Help</li>
+<li><a href="https://blog.youtube/creator-and-artist-stories/youtube-ask-studio-creator-guide/">Ask Studio: Getting started guide for creators</a> — YouTube Blog; <a href="https://www.youtube.com/watch?v=zpXHtc5m4ZI">Ask Studio - Getting Started Guide for Creators</a> — YouTube (English)</li>
+<li><a href="https://support.google.com/youtube/answer/15575509?hl=en">Explore Inspiration tab on YouTube</a> — YouTube Help (2026-08 phase-out notice)</li>
+<li><a href="https://blog.youtube/intl/ko-kr/news-and-events/youtube-studio-made-on-youtube-2025/">Transform your creative journey with the latest YouTube Studio updates</a> — YouTube Korea blog (Korean), 2025-09</li>
+<li><a href="https://blog.youtube/news-and-events/innovation-youtube-era-made-on-viewers-creators/">Made On YouTube 2026: All Announcements &amp; New Features</a> — YouTube Blog, 2026-09</li>
+<li><a href="https://zdnet.co.kr/view/?no=20260924092215">&quot;We will not replace creators&quot;: YouTube greatly expands AI features</a> — ZDNet Korea (Korean), 2026-09-24 (report of conversational editing coming to 14 countries)</li>
+<li><a href="https://support.google.com/youtube/answer/16631240?hl=en-GB">Create content using Edit with AI</a> — YouTube Help; <a href="https://ppc.land/youtube-launches-edit-with-ai-for-automated-shorts-creation/">YouTube launches Edit with AI for automated Shorts creation</a> — PPC Land, 2025-11; <a href="https://www.youtube.com/shorts/1WW76Rz4nqM">HOW TO: Edit with AI in YouTube Shorts</a> — YouTube (English)</li>
+<li><a href="https://support.google.com/youtube/answer/13952912?hl=en">YouTube Create available locations</a> — YouTube Help; <a href="https://www.socialmediatoday.com/news/youtube-ask-studio-ai-chatbot-explainer-analytics/803682/">YouTube Shares More Info on Its &#39;Ask Studio&#39; AI Bot</a> — Social Media Today</li>
+</ul>
+<p><strong>YouTube: generative video, thumbnails, captions, dubbing</strong></p>
+<ul>
+<li><a href="https://blog.youtube/news-and-events/generative-ai-creation-tools-made-on-youtube-2025/">Unpacking the magic of our new creative tools</a> — YouTube Blog, 2025-09 (Veo 3 Fast countries)</li>
+<li><a href="https://blog.google/intl/en-mena/product-updates/connect-communicate/unlocking-new-creative-possibilities-on-youtube-shorts-with-veo-3-in-mena/">Unlocking new creative possibilities with Veo 3 on YouTube Shorts in MENA</a> — Google MENA blog, 2025-11</li>
+<li><a href="https://blog.youtube/news-and-events/veo-2-shorts/">Imagine it, create it: Veo 2 is coming to YouTube Shorts</a> — YouTube Blog, 2025-02</li>
+<li><a href="https://support.google.com/youtube/answer/15260303?hl=ko">Create content for Shorts using AI-generated features</a> — YouTube Help (Korean)</li>
+<li><a href="https://support.google.com/youtube/answer/16391400?hl=en">A/B test titles &amp; thumbnails</a> — YouTube Help; <a href="https://support.google.com/youtube/answer/6373554?hl=en">Use automatic captioning</a> — YouTube Help</li>
+<li><a href="https://support.google.com/youtube/answer/15569972?hl=ko">Use automatic dubbing</a>, <a href="https://support.google.com/youtube/answer/13338784?hl=ko">Add multi-language features to your videos</a> — YouTube Help (Korean); <a href="https://www.socialmediatoday.com/news/youtube-expands-auto-dubbing-to-all-creators/811375/">YouTube Expands Auto-Dubbing to All Creators</a> — Social Media Today</li>
+<li><a href="https://www.youtube.com/intl/ko_ALL/creators/">YouTube Creators</a>, <a href="https://www.youtube.com/creators/create/ai-for-creators/">AI for Creators</a> — YouTube&#39;s official training sites</li>
+</ul>
+<p><strong>Voice</strong></p>
+<ul>
+<li><a href="https://vrew.ai/ko/feature/ai-voice/">Make my voice AI</a> — Vrew (Korean); <a href="https://elevenlabs.io/text-to-speech/korean">Korean Text to Speech</a>, <a href="https://elevenlabs.io/docs/overview/capabilities/text-to-speech">Text to Speech docs</a> — ElevenLabs; <a href="https://kevinstratvert.com/2026/07/21/elevenlabs-tutorial-for-beginners-complete-step-by-step-guide/">ElevenLabs Tutorial for Beginners</a> — Kevin Stratvert, 2026-07-21</li>
+<li><a href="https://typecast.ai/kr/learn/how-to-use-typecast/">How to use the Typecast AI voice actors</a> — Typecast (Korean); <a href="https://www.mstoday.co.kr/news/articleView.html?idxno=101040">Typecast, a leader in AI voice-actor content production</a> — MS TODAY (Korean), 2026-04</li>
+<li><a href="https://www.ncloud.com/product/aiService/clovaDubbing">CLOVA Dubbing</a> — Naver Cloud; <a href="https://www.youtube.com/playlist?list=PLq8dHmDf5DDXPPp_LB7yf_qiFqEDg6tmq">CLOVA Dubbing playlist</a> — YouTube (Korean)</li>
+<li><a href="https://www.supertone.ai/ko/work/ai-tts-model-sona2-multilingual">Supertone Play unveils a new TTS model</a> — Supertone (Korean)</li>
+</ul>
+<p><strong>Recording and editing</strong></p>
+<ul>
+<li><a href="https://obsproject.com/kb/quick-start-guide">Quick Start Guide</a> — OBS; <a href="https://inflab-1.gitbook.io/inflearn/lecture-video/recording/obs-studio">Screen recording with OBS Studio</a> — Inflearn instructor guide (Korean); <a href="https://www.youtube.com/watch?v=XuAYjvxi0mE">How to use OBS Studio</a> — YouTube (Korean)</li>
+<li><a href="https://www.screensnap.pro/blog/screen-studio-for-windows">Screen Studio for Windows: 7 Best Alternatives</a> — ScreenSnap (comparison post on macOS-only status); <a href="https://support.atlassian.com/loom/docs/loom-ai-features">Loom AI features</a> — Atlassian Support</li>
+<li><a href="https://www.youtube.com/watch?v=QtP9PvjMy5E">Vrew follow-along and master #1</a> — YouTube (Korean), <a href="https://vrew.imweb.me/tutorial">Vrew tutorials</a>, <a href="https://www.youtube.com/playlist?list=PLIJ_xikv0zfcSMgpi9w2fb4348keFPxWK">Vrew_PC Tutorial (ko) playlist</a></li>
+<li><a href="https://vrew.ai/ko/blog/all/ai-subtitle-with-vrew/">Add YouTube captions with the AI caption tool Vrew</a>, <a href="https://vrew.ai/ko/blog/all/text-based-video-editing/">Text-based video editing guide</a> — Vrew blog (Korean); <a href="https://vrew.imweb.me/notice/?bmode=view&idx=170656156">Switching to unified credits on 2026-04-22</a> — Vrew notice (Korean)</li>
+<li><a href="https://www.capcut.com/ko-kr/help/how-to-recognise-subtitles">How are captions recognised?</a> — CapCut Help (Korean); <a href="https://www.descript.com/blog/article/capcut-captions-arent-free-anymore-heres-a-better-option">CapCut captions aren&#39;t free anymore</a> — Descript blog (a competitor&#39;s post)</li>
+<li><a href="https://www.descript.com/blog/article/descript-tutorial-for-beginners-6-steps-to-get-started">Descript Tutorial for Beginners: 6 Steps to Start</a>, <a href="https://www.descript.com/blog/article/underlord-ai-video-editor-primer">How to Get Started with Underlord: An AI Video Editor Primer</a> — Descript blog</li>
+<li><a href="https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html">Text-Based Editing overview in Premiere</a>, <a href="https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html">What&#39;s new in Adobe Premiere</a> — Adobe Help</li>
+<li><a href="https://www.blackmagicdesign.com/products/davinciresolve/training">DaVinci Resolve Training</a>, <a href="https://www.blackmagicdesign.com/products/davinciresolve/studio">DaVinci Resolve Studio</a> — Blackmagic Design; <a href="https://www.cined.com/davinci-resolve-20-released-with-handful-of-ai-assisted-features/">DaVinci Resolve 20 Released with a Handful of AI-assisted Features</a> — CineD; <a href="https://petapixel.com/2026/06/03/davinci-resolve-21-officially-released-with-new-photo-editing-ai-tools-and-much-more/">DaVinci Resolve 21 Officially Released</a> — PetaPixel, 2026-06-03</li>
+</ul>
+<p><strong>Generative video, thumbnails, scripts</strong></p>
+<ul>
+<li><a href="https://deepmind.google/models/veo/">Veo</a> — Google DeepMind; <a href="https://blog.google/intl/ko-kr/company-news/technology/google-flow-veo-ai-filmmaking-tool-kr/">[I/O 2025] Introducing Flow, an AI filmmaking tool built on Veo 3</a> — Google Korea blog (Korean); <a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/flow-adds-speech-expands/">You can now make your images talk with Veo 3 in Flow, plus we&#39;re expanding to more countries</a> — Google Blog</li>
+<li><a href="https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation">What to know about the Sora discontinuation</a> — OpenAI Help; <a href="https://techcrunch.com/2026/03/24/openais-sora-was-the-creepiest-app-on-your-phone-now-its-shutting-down/">OpenAI&#39;s Sora was the creepiest app on your phone -- now it&#39;s shutting down</a> — TechCrunch, 2026-03-24</li>
+<li><a href="https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work">How do credits work?</a>, <a href="https://runway.com/pricing">Pricing</a> — Runway; <a href="https://kling.ai/">Kling AI</a>; <a href="https://pika.art/">Pika</a></li>
+<li><a href="https://www.canva.com/create/youtube-thumbnails/">Make YouTube thumbnails</a>, <a href="https://www.canva.com/ai-thumbnail-maker/">AI Thumbnail Maker</a> — Canva</li>
+<li><a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">How can I create and manage projects?</a> — Claude Help; <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects">Introduction to projects</a> — Claude Academy</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/07a-ai-blog-workflow/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Writing Blog Posts with AI: Tools and Tutorials</span></a><a class="page-link next" href="../../../en/creator/07c-ai-method/"><span><small>Next</small>An AI Production Method: Prompts, Review and Automation</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

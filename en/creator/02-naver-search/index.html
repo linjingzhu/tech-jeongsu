@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>Naver Blog and How Naver Search Works | MyAI</title>
+    <meta name="description" content="This document moves the topic and topic tree chosen in &quot;Choosing a Topic and Audience&quot; onto Naver Blog. It covers only how search finds and picks posts. H…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/creator/02-naver-search/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI" />
+    <meta property="og:title" content="Naver Blog and How Naver Search Works | MyAI" />
+    <meta property="og:description" content="This document moves the topic and topic tree chosen in &quot;Choosing a Topic and Audience&quot; onto Naver Blog. It covers only how search finds and picks posts. H…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/en/creator/02-naver-search/" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="site-root" content="../../../" />
+    <meta name="doc-path" content="content/creator/02-naver-search.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="Open document menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../../en/">MyAI</a
+      ><span class="brand-note" data-i18n="tagline">Development · Product · Operations notes</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documents and content"
+            placeholder="Search documents and content"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="Search results">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            Try again
+          </button>
+          <nav id="searchResults" aria-label="Search results"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="Open table of contents"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="false">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="Explore documents">
+      <nav id="tree" aria-label="Document tree"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../../assets/icons/book.svg" alt="" aria-hidden="true"><span>Using AI</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../../en/ai/00-overview/" data-path="content/ai/00-overview.md">AI development overview</a><a class="tree-link" href="../../../en/ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Developing with Claude Code + Codex</a><a class="tree-link" href="../../../en/ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../../en/ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-agent roles and model routing</a><a class="tree-link" href="../../../en/ai/04-self-improving/" data-path="content/ai/04-self-improving.md">Self-improving development</a><a class="tree-link" href="../../../en/ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code as a Git client</a><a class="tree-link" href="../../../en/ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">Agent Setup Map</a><a class="tree-link" href="../../../en/ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">Instructions and Memory</a><a class="tree-link" href="../../../en/ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">Permissions, Sandbox, Hooks</a><a class="tree-link" href="../../../en/ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagents, Skills and Plugins</a><a class="tree-link" href="../../../en/ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP and External Tools</a><a class="tree-link" href="../../../en/ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless, CI and Cloud Runs</a><a class="tree-link" href="../../../en/ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">Principles of AI Token Efficiency</a><a class="tree-link" href="../../../en/ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">Saving Tokens in Practice</a><a class="tree-link" href="../../../en/ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">Layers of AI Engineering: Prompt, Context, Harness</a><a class="tree-link" href="../../../en/ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">Loop Engineering</a><a class="tree-link" href="../../../en/ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">Reverse Engineering: Law and Lawful Uses</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>Using Git</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../../en/git/00-overview/" data-path="content/git/00-overview.md">The big picture of Git</a><a class="tree-link" href="../../../en/git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../../en/git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../../en/git/03-worktree/" data-path="content/git/03-worktree.md">Understanding worktrees</a><a class="tree-link" href="../../../en/git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../../en/git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../../en/git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../../en/git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">Collaboration · PR · Code review</a><a class="tree-link" href="../../../en/git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hooks · Cron</a><a class="tree-link" href="../../../en/git/09-build-directory/" data-path="content/git/09-build-directory.md">Build directories and worktree storage</a><a class="tree-link" href="../../../en/git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">Practical workflows</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../../en/ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map overview</a><a class="tree-link" href="../../../en/ai-map/catalog/" data-path="@ai-map:catalog">All AI tools</a><a class="tree-link" href="../../../en/ai-map/category/chat/" data-path="@ai-map:category:chat">Chatbots &amp; assistants</a><a class="tree-link" href="../../../en/ai-map/category/coding/" data-path="@ai-map:category:coding">Coding tools &amp; agents</a><a class="tree-link" href="../../../en/ai-map/category/media/" data-path="@ai-map:category:media">Generative media</a><a class="tree-link" href="../../../en/ai-map/category/models/" data-path="@ai-map:category:models">Models &amp; model hubs</a><a class="tree-link" href="../../../en/ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">Agent frameworks</a><a class="tree-link" href="../../../en/ai-map/category/community/" data-path="@ai-map:category:community">Communities &amp; discussion</a><a class="tree-link" href="../../../en/ai-map/category/resources/" data-path="@ai-map:category:resources">Learning &amp; news resources</a><a class="tree-link" href="../../../en/ai-map/guides/" data-path="@ai-map:guides">AI workflow guides</a><a class="tree-link" href="../../../en/ai-map/news/" data-path="@ai-map:news">AI news</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../../assets/icons/users.svg" alt="" aria-hidden="true"><span>Product Planning &amp; Operations</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../../en/po/00-overview/" data-path="content/po/00-overview.md">Product Owner overview</a><a class="tree-link" href="../../../en/po/01-qualification/" data-path="content/po/01-qualification.md">Qualifications and core skills</a><a class="tree-link" href="../../../en/po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager</a><a class="tree-link" href="../../../en/po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">A Product Owner’s knowledge map</a><a class="tree-link" href="../../../en/po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">Discovery · Strategy · Roadmaps</a><a class="tree-link" href="../../../en/po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlogs · Priorities · Requirements</a><a class="tree-link" href="../../../en/po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery workflow</a><a class="tree-link" href="../../../en/po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">Collaboration · Meetings · Artifacts</a><a class="tree-link" href="../../../en/po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">Metrics and decisions</a><a class="tree-link" href="../../../en/po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">Product Owners in the AI era</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../../en/marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing Overview</a><a class="tree-link" href="../../../en/marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">Market &amp; Customer Research · Segmentation</a><a class="tree-link" href="../../../en/marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../../en/marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../../en/marketing/04-channels/" data-path="content/marketing/04-channels.md">Channels · Content · Paid · Lifecycle</a><a class="tree-link" href="../../../en/marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI Search · GEO/AEO</a><a class="tree-link" href="../../../en/marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">Measurement · Attribution · Privacy</a><a class="tree-link" href="../../../en/marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../../en/marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI Workflows · Risks</a><a class="tree-link" href="../../../en/marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">Law · Ethics · Ad Disclosure</a></div></div><div class="tree-group closed" data-group="5"><button aria-expanded="false" aria-controls="group-5"><img src="../../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform Deployment &amp; Services</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../../en/platform/00-overview/" data-path="content/platform/00-overview.md">Platform Deployment Overview</a><a class="tree-link" href="../../../en/platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">Targets · Static · Serverless</a><a class="tree-link" href="../../../en/platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · Korean Clouds</a><a class="tree-link" href="../../../en/platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../../en/platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI Fundamentals and Test Strategy</a><a class="tree-link" href="../../../en/platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions in Practice</a><a class="tree-link" href="../../../en/platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">Deployment Automation and Versioning</a><a class="tree-link" href="../../../en/platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">CI/CD in the AI Era</a><a class="tree-link" href="../../../en/platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flags · Rollback</a><a class="tree-link" href="../../../en/platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../../en/platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../../en/platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../../en/platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secrets · SBOM · SLSA</a><a class="tree-link" href="../../../en/platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../../en/platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">Small Team Playbook</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>Business</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../../en/business/00-overview/" data-path="content/business/00-overview.md">Business Track Overview</a><a class="tree-link" href="../../../en/business/01-entity-choice/" data-path="content/business/01-entity-choice.md">Sole Prop · Corporation · VAT Type</a><a class="tree-link" href="../../../en/business/02-registration/" data-path="content/business/02-registration.md">Registration · Mail-Order Sales</a><a class="tree-link" href="../../../en/business/03-online-service-law/" data-path="content/business/03-online-service-law.md">Terms · Privacy · E-Commerce</a><a class="tree-link" href="../../../en/business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">Contracts · IP · Open Source</a><a class="tree-link" href="../../../en/business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">Hiring · Social Insurance · Freelancers</a><a class="tree-link" href="../../../en/business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">VAT · Zero Rate · Tax Invoices</a><a class="tree-link" href="../../../en/business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">Income Tax · Corporate Tax · Withholding · Books</a><a class="tree-link" href="../../../en/business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">Startup Relief · Tax Calendar · Accountants</a><a class="tree-link" href="../../../en/business/09-startup-support/" data-path="content/business/09-startup-support.md">Startup Support Programs</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>Solo Studio Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../../en/studio/00-overview/" data-path="content/studio/00-overview.md">Solo Studio Monetization Overview</a><a class="tree-link" href="../../../en/studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">The Economics of a Solo Studio</a><a class="tree-link" href="../../../en/studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">Product Portfolio Theory</a><a class="tree-link" href="../../../en/studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">Choosing Opportunities and Validating Demand</a><a class="tree-link" href="../../../en/studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">Revenue Models: An Introduction</a><a class="tree-link" href="../../../en/studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">Advertising Revenue in Depth</a><a class="tree-link" href="../../../en/studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">Paid Sales, Subscriptions and Pricing</a><a class="tree-link" href="../../../en/studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">Game Monetization</a><a class="tree-link" href="../../../en/studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">A Shipping System</a><a class="tree-link" href="../../../en/studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">Measurement and Portfolio Decisions</a><a class="tree-link" href="../../../en/studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">A 90-Day Plan, Worked Through</a></div></div><div class="tree-group" data-group="8"><button aria-expanded="true" aria-controls="group-8"><img src="../../../assets/icons/video.svg" alt="" aria-hidden="true"><span>Blog &amp; YouTube Monetization</span><img class="chevron" src="../../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../../en/creator/00-overview/" data-path="content/creator/00-overview.md">Blog &amp; YouTube Monetization Overview</a><a class="tree-link" href="../../../en/creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">Choosing a Topic and Audience</a><a class="tree-link active" aria-current="page" href="../../../en/creator/02-naver-search/" data-path="content/creator/02-naver-search.md">Naver Blog and How Naver Search Works</a><a class="tree-link" href="../../../en/creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">Writing and Running a Blog</a><a class="tree-link" href="../../../en/creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">How YouTube Recommends and Channel Design</a><a class="tree-link" href="../../../en/creator/05-longform/" data-path="content/creator/05-longform.md">Planning and Producing Long-form Video</a><a class="tree-link" href="../../../en/creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts and Faceless Channels</a><a class="tree-link" href="../../../en/creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI-assisted Production and Platform Policy</a><a class="tree-link" href="../../../en/creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">Writing Blog Posts with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">Making YouTube Videos with AI: Tools and Tutorials</a><a class="tree-link" href="../../../en/creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">An AI Production Method: Prompts, Review and Automation</a><a class="tree-link" href="../../../en/creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">Ad Revenue: AdPost and the YouTube Partner Program</a><a class="tree-link" href="../../../en/creator/09-own-products/" data-path="content/creator/09-own-products.md">Own Products: Courses, E-books and Templates</a><a class="tree-link" href="../../../en/creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">Disclosure, Copyright and Tax</a><a class="tree-link" href="../../../en/creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">One Source, Multi Use (OSMU) Strategy</a><a class="tree-link" href="../../../en/creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">A 90-day Channel Plan</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">On this page</h2>
+      <nav id="toc" aria-label="Table of contents"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="Current document"><span>Blog &amp; YouTube Monetization</span><img src="../../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>Naver Blog and How Naver Search Works</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>Naver Blog and How Naver Search Works</h1>
+<blockquote>
+<p><strong>Learning goal</strong>: Explain how Naver&#39;s integrated search builds results from Smart Blocks, the blog tab and AI Briefing, tell apart C-Rank and D.I.A.(+) as Naver has described them, open a blog set up for your topic, separate what Naver treats as low quality or abuse from community folklore, and choose what Blog Stats can actually measure.</p>
+</blockquote>
+<p>This document moves the topic and topic tree chosen in &quot;Choosing a Topic and Audience&quot; onto Naver Blog. It covers only <strong>how search finds and picks posts</strong>. How to write posts and on what cadence is in &quot;Writing and Running a Blog&quot;, using AI tools and the policy risk that comes with them in &quot;AI-assisted Production and Platform Policy&quot;, and disclosure of promotional posts and copyright in &quot;Disclosure, Copyright and Tax&quot;. For AI search compared with Google AI Overviews, see &quot;AI Search · GEO/AEO&quot;. Everything is <strong>as of 2026-09</strong>. Naver&#39;s help pages and official blog could not be opened directly from this working environment, so Naver&#39;s announcements were cross-checked through news reports and commentary and marked &quot;confirmed via search results&quot;. Naver does not publish its ranking formula, so the algorithm descriptions here stay <strong>at the level of concepts Naver has explained</strong>.</p>
+<h2>Key Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Integrated search</td>
+<td>The first results screen after a query. It stacks results from many sources in blocks</td>
+</tr>
+<tr>
+<td>Smart Block</td>
+<td>Results grouped into topic blocks, one per search intent, with intent split by AI. Unveiled in 2021-10 together with &quot;AiRSearch&quot;</td>
+</tr>
+<tr>
+<td>Popular Posts Smart Block</td>
+<td>A block collecting user-generated content (UGC) such as blog and cafe posts. Reported as introduced in 2024-02 in place of the old VIEW tab</td>
+</tr>
+<tr>
+<td>Blog tab</td>
+<td>The tab above integrated search that shows blog posts only. In 2024-02 the VIEW tab was split into a blog tab and a cafe tab</td>
+</tr>
+<tr>
+<td>AI Briefing</td>
+<td>A generative AI summary answer shown at the top of integrated search together with its sources (blog originals and others). Introduced 2025-03-27</td>
+</tr>
+<tr>
+<td>C-Rank</td>
+<td>A concept that evaluates <strong>the trust of the source (the blog)</strong> rather than the document itself. Introduced in 2016</td>
+</tr>
+<tr>
+<td>D.I.A. / D.I.A.+</td>
+<td>A model that learns the traits of documents users preferred for each keyword and scores the <strong>document</strong>. D.I.A. is known to date from 2018 and D.I.A.+ from 2020</td>
+</tr>
+<tr>
+<td>Naver Influencer</td>
+<td>A programme that selects creators by topic and surfaces them in influencer search results and on an influencer home</td>
+</tr>
+</tbody></table>
+<h2>Principles</h2>
+<h3>How Integrated Search Is Assembled</h3>
+<pre><code class="language-mermaid">flowchart LR
+    Q[&quot;Query entered&quot;] --&gt; I[&quot;Search intent analysis&quot;]
+    I --&gt; AB[&quot;AI Briefing summary and sources&quot;]
+    I --&gt; SB[&quot;Smart Blocks topic blocks per intent&quot;]
+    I --&gt; TAB[&quot;Blog tab&quot;]
+    SRC[&quot;C-Rank source evaluation&quot;] --&gt; R[&quot;Candidate document ranking&quot;]
+    DOC[&quot;D.I.A.+ document evaluation&quot;] --&gt; R
+    R --&gt; AB
+    R --&gt; SB
+    R --&gt; TAB
+</code></pre>
+<ul>
+<li><strong>Smart Blocks</strong>: Announcing AiRSearch in 2021-10, Naver explained that it splits the different intents inside one query with AI and presents them as blocks. A Naver lead at the time called this &quot;a constructive dismantling of integrated search&quot; (confirmed via search results). Even for the same &quot;spreadsheet automation&quot; query, separate intent blocks such as &quot;beginner introduction&quot;, &quot;macros&quot; and &quot;function collections&quot; may appear.</li>
+<li><strong>Popular Posts and the blog tab</strong>: In 2024-02 the VIEW tab was removed, a &quot;Popular Posts&quot; Smart Block collecting blog and cafe posts appeared, and the tab split into a blog tab and a cafe tab, as reported (confirmed via search results).</li>
+<li><strong>AI Briefing</strong>: Introduced on 2025-03-27, it shows the blog originals its answer is based on. It was reported as applied to about 20% of integrated search queries by the end of 2025, and at its 2026-02 earnings call Naver said it would roughly double that coverage by the end of 2026 (confirmed via search results).</li>
+<li><strong>Source-trust labels</strong>: Naver announced that from 2026-05-14 some official blogs, such as those of public institutions, carry &quot;AI source information&quot;, an AI summary of who runs the blog and what it covers. It said it uses LLMs and vision-language models (VLMs) to analyse site character, content structure, and even design and layout (confirmed via search results).</li>
+</ul>
+<p>Splitting the results page into many blocks means <strong>there is no single &quot;number one&quot; slot</strong>. Your post may appear in an intent block, in the blog tab or as a source link in AI Briefing, and each slot has a different click rate.</p>
+<h3>C-Rank: Who Wrote It</h3>
+<p>Introducing C-Rank in 2016, Naver explained that it evaluates the trust and popularity of the blog that is the document&#39;s source, rather than the document itself, and reflects this in ranking. The factors presented were <strong>Context</strong> (topic focus), <strong>Content</strong> (quality of the content) and <strong>Chain</strong> (the chain reaction of consumption and production, that is, how far it is read and responded to) (confirmed via search results). Two practical readings follow.</p>
+<ol>
+<li>A blog that covers <strong>one topic steadily and in depth</strong> is more easily assessed as a source for that topic.</li>
+<li>A blog with scattered topics struggles to be recognised as a source for any of them.</li>
+</ol>
+<p>The weights and formula have not been published.</p>
+<h3>D.I.A. and D.I.A.+: What Was Written</h3>
+<p>D.I.A. (Deep Intent Analysis) was presented as a model that uses Naver&#39;s data to reflect, per keyword, scores for documents users preferred. The factors cited are topic relevance, experience information, completeness of information, the document&#39;s intent, a relative abuse measure, originality and timeliness. D.I.A.+, at the end of 2020, was described as improving deep matching, pattern analysis and dynamic ranking to find documents and sources that match the user&#39;s specific intent (confirmed via search results). What matters is that <strong>experience</strong>, <strong>originality</strong> and <strong>abuse measure</strong> sit in the same list. Processes and screens you actually did push a post up; recombining others&#39; posts or repeating the same post pushes it down.</p>
+<h3>AI Briefing and Source Selection</h3>
+<p>Naver has not published figures on how AI Briefing picks its sources. There are two public signals, though. One is that &quot;Naver Mate&quot;, piloted from 2026-06, selects creators by <strong>AI Briefing citation count, topic expertise and activity</strong>; the other is that Naver repeatedly frames the direction of search as &quot;trustworthy sources&quot; (confirmed via search results). Being cited in AI Briefing is separate from whether users click through to the original. Google-side research showing fewer clicks on results with a summary is introduced in &quot;Advertising Revenue in Depth&quot;.</p>
+<p>Beyond those two signals, principle-level criteria have also been reported. Reports say that in May 2026 Naver set out content principles of first-hand knowledge, a consistent topic, honest authenticity, easy-to-read structure and keeping content current, and said that mechanically generated posts, patchworks with unclear sources and overly promotional posts are excluded from citation (<a href="https://v.daum.net/v/6X1XvAe4cP">Daum News report (Korean)</a>, confirmed via search results; Naver&#39;s original could not be opened).</p>
+<h3>What Naver Treats as Low Quality or Abuse</h3>
+<p>The Naver Blog operating policy and search help pages could not be opened directly, so below are the <strong>categories</strong> confirmed from the D.I.A. factor descriptions and from reports on the operating policy.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+<th>Linked basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Repetition and copying</td>
+<td>Publishing the same post several times with only the title changed, pasting others&#39; posts</td>
+<td>The originality and abuse-measure factors of D.I.A.</td>
+</tr>
+<tr>
+<td>Keyword stuffing</td>
+<td>Listing popular keywords unrelated to the body, over-repeating one keyword</td>
+<td>Topic relevance, document intent</td>
+</tr>
+<tr>
+<td>Mass auto-generation</td>
+<td>Publishing many similarly structured posts at short intervals</td>
+<td>Abuse measure. The problem is described as the mass, low-value pattern rather than AI use itself</td>
+</tr>
+<tr>
+<td>Engagement manipulation</td>
+<td>Inflating likes, comments, neighbours or visits with macros or programs</td>
+<td>Prohibited acts in the operating policy (confirmed via search results)</td>
+</tr>
+<tr>
+<td>Undisclosed payment</td>
+<td>Hiding the economic interest in sponsored or reviewer-programme posts</td>
+<td>KFTC Guidelines on Endorsement and Recommendation Advertising (in force 2024-12-01: disclose in the title or at the start)</td>
+</tr>
+<tr>
+<td>Rights infringement</td>
+<td>Unauthorised images, video or fonts</td>
+<td>Takedown after a copyright report</td>
+</tr>
+</tbody></table>
+<p>On AI-generated content, Naver introduced an &quot;AI used&quot; label for blogs, cafes and other services in 2025-05, and labelling on blogs was reported as voluntary (confirmed via search results). No official Naver document was found saying &quot;posts written with AI are automatically dropped from search&quot;. The limits of AI use are covered in &quot;AI-assisted Production and Platform Policy&quot;, and what counts as a promotional post and how to disclose it in &quot;Disclosure, Copyright and Tax&quot; and &quot;Law · Ethics · Ad Disclosure&quot;.</p>
+<h2>Applied: Example Creator J Opens the Blog</h2>
+<p>J opens the blog before D0 (2026-10-05). Menu names follow the 2026-09 screens and may change.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>J&#39;s choice</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Blog name and nickname</td>
+<td>A name that shows the topic (e.g. &quot;J&#39;s work automation notes&quot;)</td>
+<td>So search results and AI source information show what the blog covers</td>
+</tr>
+<tr>
+<td>Profile introduction</td>
+<td>Office worker who cuts repetitive work every day with spreadsheets and AI tools, plus the scope covered</td>
+<td>No face, but the source of experience is stated</td>
+</tr>
+<tr>
+<td>Blog topic</td>
+<td>Pick the IT and computers area in the blog topic setting of the admin screen</td>
+<td>Matches the Context part of the C-Rank description</td>
+</tr>
+<tr>
+<td>Categories</td>
+<td>The topic tree&#39;s 3 clusters = 3 categories (repetitive spreadsheet tasks, document work with AI tools, report automation) plus notices</td>
+<td>One category per cluster</td>
+</tr>
+<tr>
+<td>Per-post topic</td>
+<td>Pick the same topic area for every post when publishing</td>
+<td>Keeps blog topic and post topic aligned</td>
+</tr>
+<tr>
+<td>Material distribution</td>
+<td>Free templates offered through download instructions inside posts</td>
+<td>The first step of &quot;Own Products: Courses, E-books and Templates&quot;</td>
+</tr>
+</tbody></table>
+<p>What J does not do in the first 4 weeks: mix in daily-life posts on other topics, republish the same tutorial with a new title, use neighbour-growth programs, or publish several posts in one burst. Post structure and cadence follow &quot;Writing and Running a Blog&quot;.</p>
+<p>Every Monday J records only three things from Blog Stats: last week&#39;s views per post, the share of search traffic and the top search queries, and the views of the post that offers the free template. These records feed the D30, D60 and D90 decisions in &quot;A 90-day Channel Plan&quot;.</p>
+<h2>Going Deeper</h2>
+<h3>Naver Influencer</h3>
+<p>Naver Influencer is a creator programme you apply to by choosing one topic and are selected into after review. Once selected you get an influencer home, and your content can appear in influencer-related blocks in integrated search and in the influencer tab. According to material relaying Naver&#39;s ranking-change notice, influencer topic ranking reflects service activity, user feedback, creator influence and fan count, together with <strong>document quality</strong> (confirmed via search results). Selected creators can use &quot;Brand Connect&quot;, which links brands and creators.</p>
+<p>Numbers such as &quot;N posts, N in the last 3 months&quot; circulate as application criteria, but Naver has not published them. J does not apply in the first 90 days. J considers it once enough posts have built up on one topic and search traffic in Blog Stats has stabilised.</p>
+<h3>Folklore and What Is Documented</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Status</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&quot;There is a blog index (optimal, semi-optimal level N)&quot;</td>
+<td>Not an official Naver term</td>
+<td>Estimates built by outside vendors on their own models. After Naver changed RSS access in 2025-11, index lookup services shut down (confirmed via search results)</td>
+</tr>
+<tr>
+<td>&quot;My blog got hit by low quality&quot;</td>
+<td>Not a status Naver publishes</td>
+<td>A community phrase for a sudden drop in exposure. Causes can be many: policy violations, changes in document or source evaluation, changes in the results layout (Smart Blocks, AI Briefing), more competing posts</td>
+</tr>
+<tr>
+<td>&quot;Break the one-post-a-day streak and rankings fall&quot;</td>
+<td>Not documented</td>
+<td>The C-Rank description includes activity and response (Chain), but no frequency formula</td>
+</tr>
+<tr>
+<td>&quot;Posts need N characters and N photos&quot;</td>
+<td>Not documented</td>
+<td>The D.I.A. factor is completeness of information, not a length rule</td>
+</tr>
+<tr>
+<td>The C-Rank and D.I.A.(+) concepts</td>
+<td>Concepts Naver has explained</td>
+<td>Announced 2016, 2018, 2020 (confirmed via search results)</td>
+</tr>
+<tr>
+<td>Smart Blocks, the blog/cafe tab split, AI Briefing</td>
+<td>Naver announcements</td>
+<td>2021-10, 2024-02, 2025-03-27</td>
+</tr>
+</tbody></table>
+<h3>What Blog Stats Can Actually Measure</h3>
+<table>
+<thead>
+<tr>
+<th>Measurable</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Views and visitor trends (day, week, month)</td>
+<td>Relating cadence to response</td>
+</tr>
+<tr>
+<td>Traffic sources and incoming search queries</td>
+<td>Seeing which search intents bring readers, picking the next post in the topic tree</td>
+</tr>
+<tr>
+<td>Gender, age and device mix</td>
+<td>Checking the persona (&quot;Choosing a Topic and Audience&quot;)</td>
+</tr>
+<tr>
+<td>Views ranking per post</td>
+<td>Comparing clusters</td>
+</tr>
+<tr>
+<td>Creator Advisor trends</td>
+<td>Recent queries in your topic area</td>
+</tr>
+</tbody></table>
+<p>Be clear about what cannot be measured too. <strong>Your ranking score, a C-Rank value or an &quot;index&quot; appears on no official screen.</strong> Values shown by outside tools are estimates. Stat item names follow the 2026-09 screens and may change.</p>
+<h2>Common Misconceptions</h2>
+<ul>
+<li><strong>&quot;On Naver you compete for one top slot&quot;</strong> — Results split into intent Smart Blocks, the blog tab and AI Briefing sources.</li>
+<li><strong>&quot;You can check your C-Rank score&quot;</strong> — Naver explained the concept only and does not publish scores.</li>
+<li><strong>&quot;Posts written with AI are always dropped from search&quot;</strong> — No such official document was found. The problem is repetitive, mass, low-value patterns.</li>
+<li><strong>&quot;The index sites stopped, so Naver abolished the index&quot;</strong> — It was never a Naver index.</li>
+<li><strong>&quot;Being cited in AI Briefing brings more visitors&quot;</strong> — Citation and clicks are separate. Check with traffic sources in Blog Stats.</li>
+</ul>
+<h2>Self-Check Questions</h2>
+<ol>
+<li>Which of &quot;who&quot; and &quot;what&quot; do C-Rank and D.I.A.+ each evaluate? Which one hurts a blog with scattered topics?</li>
+<li>After the 2024-02 VIEW tab change, name three places where a blog post can appear in search results.</li>
+<li>Connect J&#39;s choice to align categories with the topic tree&#39;s clusters to the C-Rank description.</li>
+<li>When you feel &quot;hit by low quality&quot;, what two things do you check first in Blog Stats, and what three causes do you examine instead of folklore?</li>
+<li>Why does J postpone applying to Naver Influencer until after the first 90 days?</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li><a href="https://navercorp.com/media/pressReleasesDetail?seq=30604">Naver unveils &quot;AiRSearch&quot;, a new search experience (Korean)</a> — NAVER Corp. press release, 2021-10, confirmed via search results (2026-09-30)</li>
+<li><a href="https://byline.network/2021/10/26-173/">Naver overhauls search for the first time in 20 years (Korean)</a> — Byline Network, 2021-10-26, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.etnews.com/20240201000022">Naver VIEW becomes the &quot;Popular Posts&quot; Smart Block; blog and cafe tabs split (Korean)</a> — Electronic Times, 2024-02-01, confirmed via search results (2026-09-30)</li>
+<li><a href="https://biz.newdaily.co.kr/site/data/html/2025/03/24/2025032400067.html">Naver introduces &quot;AI Briefing&quot; in the search box on the 27th (Korean)</a> — NewDaily, 2025-03-24, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.sentv.co.kr/article/view/sentv202602060034">Naver: &quot;AI Briefing to double by year end&quot; (Korean)</a> — Seoul Economic TV, 2026-02-06, confirmed via search results (2026-09-30)</li>
+<li><a href="https://blog.nasmedia.co.kr/entry/2604naspick">Naver AI Briefing extends search from summary to exploration (Korean)</a> — Nasmedia, 2026-04, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.newsis.com/view/NISX20260507_0003620731">&quot;Can I trust this?&quot; Naver AI tells you who is behind a blog (Korean)</a> — Newsis, 2026-05-07, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.news1.kr/it-science/general-it/6164096">Naver focuses on search trust, using AI to pick trustworthy sources (Korean)</a> — News1, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.edaily.co.kr/News/Read?newsId=03466966645478440">Naver names 3,000 creators cited by AI and launches Naver Mate (Korean)</a> — Edaily, 2026-06, confirmed via search results (2026-09-30)</li>
+<li><a href="https://v.daum.net/v/6X1XvAe4cP">Which content does AI choose? A look at Naver Mate selection criteria (Korean)</a> — Daum News, report on the content principles, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.twinword.co.kr/blog/naver-seo-d-i-a/">Naver&#39;s latest ranking logic: D.I.A. (Korean)</a> — Twinword, confirmed via search results (2026-09-30). Commentary quoting Naver Search&#39;s official blog</li>
+<li><a href="https://www.ascentkorea.com/naver_seo_strategies_2/">Naver SEO part 2: algorithms and search engine systems (Korean)</a> — Ascent Korea, confirmed via search results (2026-09-30). Quotes the C-Rank and D.I.A.+ descriptions</li>
+<li><a href="https://news.nate.com/view/20250520n29594">&quot;This content was made with AI&quot;: Naver introduces the &quot;AI used&quot; label (Korean)</a> — Nate News, 2025-05-20, confirmed via search results (2026-09-30)</li>
+<li><a href="https://news.mtn.co.kr/news-detail/2026072417015682342">Naver&#39;s double standard on AI labels: mandatory for shopping, voluntary for blogs (Korean)</a> — MTN, 2026-07-24, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.i-boss.co.kr/ab-6141-68793">Blogdex shutdown and refunds: fact check on &quot;Naver abolished the optimal index?&quot; (Korean)</a> — i-boss, confirmed via search results (2026-09-30)</li>
+<li><a href="https://gobooki.net/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%9D%B8%ED%94%8C%EB%A3%A8%EC%96%B8%EC%84%9C-%EA%B2%80%EC%83%89-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%B3%80%EA%B2%BD/">Naver changes the influencer search algorithm; document quality now matters (Korean)</a> — Gobooki Media Strategy Lab, confirmed via search results (2026-09-30)</li>
+<li><a href="https://www.ajunews.com/view/20241115102251443">Paid blog posts and reviews must state &quot;ad&quot; or &quot;sponsored&quot; in the title or opening (Korean)</a> — Aju Business Daily, 2024-11-15, confirmed via search results (2026-09-30)</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="Previous / Next"><a class="page-link previous" href="../../../en/creator/01-niche-audience/"><img src="../../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>Previous</small>Choosing a Topic and Audience</span></a><a class="page-link next" href="../../../en/creator/03-blog-writing/"><span><small>Next</small>Writing and Running a Blog</span><img src="../../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="Site information"><a href="../../../en/">Home</a><a href="../../../en/about/">About</a><a href="../../../en/privacy/">Privacy Policy</a><a href="../../../en/contact/">Contact</a></nav>
+        <span>© 2026 MyAI</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="Document reading position"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

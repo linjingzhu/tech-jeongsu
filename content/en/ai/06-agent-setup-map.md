@@ -116,7 +116,7 @@ tech-jeongsu/
 | Layer | In this repository | Observation |
 |---|---|---|
 | Instructions | `CLAUDE.md` and `AGENTS.md` point into `.ai/` | Entry files are short contracts; the body loads on demand by trigger |
-| Subagents | two Claude agents, three Codex agents | Read-only when the parent is in default, plan or dontAsk: `permissionMode: plan`, `sandbox_mode = "read-only"`. Under an acceptEdits, auto or bypassPermissions parent the Claude agents follow the parent's mode, and a parent runtime override can win over the Codex agents too |
+| Subagents | two Claude agents, three Codex agents | `permissionMode: plan` (plan mode: mostly reads, plus classifier-approved commands when auto mode is available), `sandbox_mode = "read-only"`. The parent's mode or a runtime override can supersede these (see "Subagents, Skills and Plugins") |
 | Skills | two editions of `auto-dev` | The Codex edition sets `allow_implicit_invocation: false`, so it never starts itself |
 | Model | only the Codex dispatcher and fast-explorer pin a model in TOML | The Codex reviewer and both Claude agents leave it unset; the reviewer so that a model different from the implementer's can be chosen at spawn time |
 | Permissions · hooks · MCP | no committed files | HARNESS.md says "commit them", yet the enforced layer is still empty |

@@ -193,6 +193,7 @@ window.AI_MAP_DATA = {
         "웹"
       ],
       "plans": [
+        "무료",
         "유료"
       ]
     },
@@ -534,8 +535,7 @@ window.AI_MAP_DATA = {
       "downloadUrl": null,
       "platforms": [],
       "plans": [
-        "무료",
-        "유료"
+        "유료(엔터프라이즈)"
       ]
     },
     {
@@ -683,14 +683,13 @@ window.AI_MAP_DATA = {
       "id": "media-dall-e-3",
       "name": "DALL-E 3",
       "publisher": "OpenAI",
-      "description": "ChatGPT Plus/Enterprise에 통합된 텍스트-투-이미지 모델. API로도 제공.",
+      "description": "OpenAI의 이전 세대 텍스트-투-이미지 모델. ChatGPT의 이미지 생성은 이제 GPT Image를 사용한다.",
       "category": "media",
       "sourceUrl": "https://openai.com/",
       "webUrl": null,
       "downloadUrl": null,
       "platforms": [],
       "plans": [
-        "무료",
         "유료"
       ]
     },
@@ -1149,7 +1148,7 @@ window.AI_MAP_DATA = {
       "id": "models-hugging-face",
       "name": "Hugging Face",
       "publisher": "Hugging Face",
-      "description": "수만 개의 모델·데이터셋·통합을 호스팅하는 모델 허브.",
+      "description": "100만 개 이상의 모델과 데이터셋·통합을 호스팅하는 모델 허브.",
       "category": "models",
       "sourceUrl": "https://huggingface.co/",
       "webUrl": null,
@@ -1668,7 +1667,9 @@ window.AI_MAP_DATA = {
       "sourceUrl": "https://ai.meta.com/muse/",
       "webUrl": "https://ai.meta.com/muse/",
       "downloadUrl": "https://ai.meta.com/muse/download/",
-      "platforms": [],
+      "platforms": [
+        "웹"
+      ],
       "plans": [
         "무료",
         "Power $20/월",
@@ -2314,7 +2315,7 @@ window.AI_MAP_DATA = {
     {
       "id": "midjourney-v8-news",
       "title": "V8 Before 2026? | Midjourney News",
-      "summary": "Midjourney V8 출시 전망을 다루는 뉴스 영상.",
+      "summary": "Midjourney V8 출시 전에 나온 추측성 전망 영상. 출시 시기와 기능에 대한 예측이며 확정 정보가 아니다.",
       "url": "https://www.youtube.com/watch?v=t7Tv1PGB-KE",
       "source": "YouTube",
       "date": ""

@@ -67,7 +67,7 @@ flowchart TD
 |---|---|---|
 | Criterion | Individuals with prior-year gross supply below KRW 104 million (threshold applied from 2024-07-01) | All other individuals, every corporation |
 | VAT payment exemption | No VAT payable if gross supply for the period is below KRW 48 million (tax periods starting 2021 onward) | None |
-| Filings per year | One final return (January). But if you issued tax invoices in January to June, a preliminary return is due by July 25 (VAT Act Article 66(3)) | Twice (final returns, individuals) |
+| Filings per year | One final return (January). For the July preliminary return when you issued tax invoices, see "VAT · Zero Rate · Tax Invoices" | Twice (final returns, individuals) |
 | Tax invoices | Must issue if prior-year gross supply is KRW 48 million or more; new or smaller businesses issue receipts | Issues invoices |
 | Input VAT | 0.5% of invoiced purchase amounts credited (supplies from 2021-07-01) | Full input VAT credit, refunds possible |
 
@@ -84,7 +84,7 @@ Simplified status is not always better.
 |---|---|
 | New business | If first-year gross supply is expected to stay below the threshold, **report simplified status together with the business registration application** (VAT Act Article 61) |
 | Threshold exceeded | If gross supply for a calendar year reaches the threshold, you become a general taxpayer **from July 1 of the next year**. Check the tax office's notice of the change in taxpayer type |
-| Just before a July 1 switch | A business switching from simplified to general files and pays for January 1 to June 30 as a tax period **by July 25** |
+| Just before a July 1 switch | For filing and paying January 1 to June 30 when switching from simplified to general, see "VAT · Zero Rate · Tax Invoices" |
 | Exclusion regardless of sales | Excluded industries under Enforcement Decree Article 109(2), such as manufacturing and wholesale, and the **Simplified Taxation Exclusion Criteria** notified by the NTS Commissioner (regions and industries, notice applied from 2024-07-01) bar simplified status even with small sales |
 | Real estate rental, taxable entertainment venues | Not excluded industries, but a separate threshold of **KRW 48 million** applies |
 

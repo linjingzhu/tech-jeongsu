@@ -4,6 +4,7 @@ I welcome error reports, content suggestions and privacy questions.
 
 ## How to reach me
 
+- Questions and corrections: open a new issue on this site's repository at [GitHub Issues](https://github.com/linjingzhu/tech-jeongsu/issues). Issues are public, so do not include personal information.
 {{contact}}
 
 ## What helps in a report

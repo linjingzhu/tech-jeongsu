@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>CI 기초와 테스트 전략: 자주 합치고 빨리 알기 | MyAI(마이아이)</title>
+    <meta name="description" content="CI(Continuous Integration)는 CI 서버를 켜 두는 일이 아니라 작은 변경을 자주 합치고, 합칠 때마다 몇 분 안에 &quot;합쳐도 되는가&quot;를 기계가 답하게 하는 습관이다. 이 문서는 그 답을 믿을 만하게 만드는 테스트 배치, Flaky test 정책, 속도, 필…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03a-ci-testing/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="CI 기초와 테스트 전략: 자주 합치고 빨리 알기 | MyAI(마이아이)" />
+    <meta property="og:description" content="CI(Continuous Integration)는 CI 서버를 켜 두는 일이 아니라 작은 변경을 자주 합치고, 합칠 때마다 몇 분 안에 &quot;합쳐도 되는가&quot;를 기계가 답하게 하는 습관이다. 이 문서는 그 답을 믿을 만하게 만드는 테스트 배치, Flaky test 정책, 속도, 필…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/platform/03a-ci-testing/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/platform/03a-ci-testing.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link active" aria-current="page" href="../../platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI 기초와 테스트 전략</a><a class="tree-link" href="../../platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions 실전</a><a class="tree-link" href="../../platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">배포 자동화와 버전 관리</a><a class="tree-link" href="../../platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">AI 시대의 CI/CD</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div><div class="tree-group closed" data-group="8"><button aria-expanded="false" aria-controls="group-8"><img src="../../assets/icons/video.svg" alt="" aria-hidden="true"><span>블로그·유튜브 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../creator/00-overview/" data-path="content/creator/00-overview.md">블로그·유튜브 수익화 전체 개요</a><a class="tree-link" href="../../creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">주제 선정과 독자 설계</a><a class="tree-link" href="../../creator/02-naver-search/" data-path="content/creator/02-naver-search.md">네이버 블로그와 검색 구조</a><a class="tree-link" href="../../creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">블로그 글쓰기와 운영</a><a class="tree-link" href="../../creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">유튜브 추천 구조와 채널 설계</a><a class="tree-link" href="../../creator/05-longform/" data-path="content/creator/05-longform.md">롱폼 영상 기획과 제작</a><a class="tree-link" href="../../creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts와 얼굴 없는 채널</a><a class="tree-link" href="../../creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI 활용 제작과 플랫폼 정책</a><a class="tree-link" href="../../creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">AI로 블로그 글 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">AI로 유튜브 영상 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">AI 제작 방법론: 프롬프트·검수·자동화</a><a class="tree-link" href="../../creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">광고 수익: 애드포스트와 YouTube 파트너 프로그램</a><a class="tree-link" href="../../creator/09-own-products/" data-path="content/creator/09-own-products.md">자체 상품 수익: 강의·전자책·템플릿</a><a class="tree-link" href="../../creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">표시 의무·저작권·세금</a><a class="tree-link" href="../../creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">원소스 멀티유즈(OSMU) 전략</a><a class="tree-link" href="../../creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">채널 90일 실행 계획</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Platform 배포와 서비스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>CI 기초와 테스트 전략</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>CI 기초와 테스트 전략: 자주 합치고 빨리 알기</h1>
+<p>CI(Continuous Integration)는 CI 서버를 켜 두는 일이 아니라 <strong>작은 변경을 자주 합치고, 합칠 때마다 몇 분 안에 &quot;합쳐도 되는가&quot;를 기계가 답하게 하는 습관</strong>이다. 이 문서는 그 답을 믿을 만하게 만드는 테스트 배치, Flaky test 정책, 속도, 필수 검사를 다룬다. 용어, 전체 흐름, Artifact 승격, DORA 지표는 허브 문서 「CI/CD · OIDC · GitOps」에 있다. 사실은 2026-09 기준으로 확인했다.</p>
+<h2>CI는 &quot;자주 합치기&quot;다</h2>
+<p>Martin Fowler는 2024-01에 고쳐 쓴 Continuous Integration 글에서 <strong>모두가 매일 Mainline에 Commit을 Push하기</strong>와 <strong>Build를 빠르게 유지하기</strong>를 핵심 실천으로 든다. CI 도구를 쓰면서 Branch를 몇 주씩 따로 키우면 이름만 CI다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>Trunk-based Development</th>
+<th>오래 사는 Feature Branch</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Merge 주기</td>
+<td>하루 한 번 이상</td>
+<td>기능이 끝날 때(며칠에서 몇 주)</td>
+</tr>
+<tr>
+<td>충돌</td>
+<td>작고 자주, 바로 풀림</td>
+<td>크고 드물게, Merge 날 몰아서</td>
+</tr>
+<tr>
+<td>CI 결과의 의미</td>
+<td>&quot;지금 Main과 합친 상태&quot;를 검증</td>
+<td>&quot;몇 주 전 Main 기준&quot;을 검증</td>
+</tr>
+<tr>
+<td>미완성 기능</td>
+<td>Feature Flag로 숨긴 채 Merge</td>
+<td>Branch에 숨겨 둠</td>
+</tr>
+</tbody></table>
+<p>DORA는 2016–2017년 조사 Data를 근거로, 활성 Branch가 세 개 이하이고 하루 한 번 이상 Trunk에 합치는 팀의 성과가 더 높았다고 정리한다. 미완성 기능을 숨기는 Feature Flag는 「Canary · Blue-Green · Flag · Rollback」에서 다룬다. <strong>빠른 피드백 원칙</strong>: 결과를 기다리다 다른 일로 넘어가면, 실패를 알았을 때 이미 맥락을 잃었다. Fowler의 CI 점검 질문 중 하나는 &quot;Build가 깨지면 보통 10분 안에 다시 Green이 되는가&quot;다. PR Check는 몇 분 안에 끝나야 하고, Main이 깨지면 새 기능보다 복구가 먼저다.</p>
+<h2>Pipeline 단계와 순서: 빨리 실패하기</h2>
+<pre><code class="language-mermaid">flowchart LR
+    C[Commit / PR] --&gt; F[Format · Lint]
+    F --&gt; TY[Typecheck]
+    TY --&gt; U[Unit Test]
+    U --&gt; B[Build]
+    B --&gt; I[Integration Test]
+    I --&gt; G{필수 검사 통과?}
+    G --&gt;|예| M[Merge queue / Main]
+    G --&gt;|아니오| X[작성자에게 즉시 알림]
+    M --&gt; E[E2E · 성능 · Nightly]
+</code></pre>
+<ul>
+<li><strong>싸고 자주 실패하는 검사를 앞에</strong> 둔다. Format · Lint는 수십 초, Unit은 수 분, E2E는 수십 분이 흔하다. Lint 실패를 20분짜리 E2E 뒤에 알게 하지 않는다.</li>
+<li>서로 독립인 검사(Lint, Unit)는 <strong>병렬 Job</strong>으로 나눈다. 순서를 강제하면 첫 실패만 보이고 나머지는 다음 Push에서야 보인다.</li>
+<li>같은 단계 안에서는 <strong>모든 실패를 한 번에</strong> 보여 준다. Test를 여러 Runner로 나눴다면 Matrix에 <code>fail-fast: false</code>를 두어 한 조각이 실패해도 나머지를 끝까지 돌린다.</li>
+</ul>
+<h2>테스트 수준: Pyramid와 Trophy</h2>
+<table>
+<thead>
+<tr>
+<th>수준</th>
+<th>검증 대상</th>
+<th>속도</th>
+<th>흔들림 위험</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static</td>
+<td>실행 없이 형식 · 타입</td>
+<td>매우 빠름</td>
+<td>거의 없음</td>
+<td>ESLint, <code>tsc --noEmit</code></td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>함수 · Class 하나</td>
+<td>빠름</td>
+<td>낮음</td>
+<td>가격 계산, Parser</td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>여러 단위 + 실제 DB 같은 경계</td>
+<td>중간</td>
+<td>중간</td>
+<td>Repository 계층 + PostgreSQL Container</td>
+</tr>
+<tr>
+<td>Contract</td>
+<td>두 Service 사이의 요청 · 응답 약속</td>
+<td>빠름–중간</td>
+<td>낮음</td>
+<td>Pact의 Consumer-driven Contract</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>사용자 흐름 전체</td>
+<td>느림</td>
+<td>높음</td>
+<td>Browser로 가입 → 결제</td>
+</tr>
+</tbody></table>
+<p><strong>Test Pyramid</strong>는 Mike Cohn이 2009년 책 <em>Succeeding with Agile</em>에서 소개하고 Martin Fowler의 2012년 글로 퍼졌다. 빠르고 안정적인 Unit Test를 가장 많이, 느리고 흔들리는 UI Test를 가장 적게 둔다. <strong>Testing Trophy</strong>는 Kent C. Dodds가 JavaScript Application을 위해 제안한 모양으로, 바닥에 Static 검사를 두고 가장 큰 몫을 Integration에 준다(&quot;Write tests. Not too many. Mostly integration.&quot;). 둘의 차이는 <strong>버그가 어디서 나는가</strong>에 대한 판단이다. 어느 쪽이든 E2E는 꼭 지킬 핵심 흐름 몇 개로 줄인다. Service가 여럿이면 <strong>Contract Test</strong>로 &quot;Provider가 Consumer의 기대를 깨지 않았는가&quot;를 E2E 환경 없이 각자 CI에서 확인한다.</p>
+<h3>언제 무엇을 돌리나</h3>
+<table>
+<thead>
+<tr>
+<th>시점</th>
+<th>돌리는 것</th>
+<th>Merge를 막는가</th>
+<th>원칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PR (Push마다)</td>
+<td>Format, Lint, Typecheck, Unit, 영향받은 Integration</td>
+<td>예</td>
+<td>10분 안쪽. 작성자가 기다릴 수 있는 시간</td>
+</tr>
+<tr>
+<td>Merge queue</td>
+<td>PR과 같은 필수 검사를 &quot;최신 Main + 앞선 PR&quot; 위에서</td>
+<td>예</td>
+<td>합친 결과를 다시 검증</td>
+</tr>
+<tr>
+<td>Main Merge 후</td>
+<td>전체 Integration, Build, Staging 배포(「배포 자동화와 버전 관리」)</td>
+<td>아니오(알림)</td>
+<td>깨지면 Revert가 먼저</td>
+</tr>
+<tr>
+<td>Nightly</td>
+<td>전체 E2E, 성능, 의존성 · Link 검사</td>
+<td>아니오(Issue 생성)</td>
+<td>느리거나 외부에 의존하는 검사</td>
+</tr>
+</tbody></table>
+<h2>Flaky test: 재시도는 버그를 숨긴다</h2>
+<p>Google은 <strong>같은 코드에서 통과와 실패가 모두 나오는 Test</strong>를 Flaky test라 부른다. 2016년 Google Testing Blog 글은 전체 Test 실행의 약 1.5%가 Flaky 결과를 냈고 Test의 약 16%에 어느 정도 흔들림이 있었다고 적었다. 빨간불이 자주 거짓이면 사람들은 &quot;또 그거겠지&quot; 하고 넘기고, 진짜 실패도 함께 묻힌다. Luo 외(FSE 2014)는 오픈소스 51개 Project에서 Flaky test를 고친 Commit 201개를 분석해 아래 표의 앞 세 원인을 가장 흔한 원인으로 꼽았다(각 약 45%, 20%, 12%로 인용된다).</p>
+<table>
+<thead>
+<tr>
+<th>원인</th>
+<th>증상</th>
+<th>고치는 방향</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>비동기 대기</td>
+<td><code>sleep(1000)</code> 뒤 확인, 느린 Runner에서만 실패</td>
+<td>고정 대기 대신 조건을 기다린다</td>
+</tr>
+<tr>
+<td>동시성</td>
+<td>병렬 실행 시에만 실패</td>
+<td>공유 상태 제거, Test별 Resource 분리</td>
+</tr>
+<tr>
+<td>실행 순서 의존</td>
+<td>단독 실행은 통과, 전체 실행은 실패</td>
+<td>Test마다 Data를 만들고 치운다. 순서를 섞어 돌린다</td>
+</tr>
+<tr>
+<td>시간 · 날짜</td>
+<td>자정, 월말, Time zone에서 실패</td>
+<td>시계를 주입(Fake clock)한다</td>
+</tr>
+<tr>
+<td>외부 Network</td>
+<td>외부 API 지연 · 장애 때 실패</td>
+<td>Contract Test나 가짜 Server로 대체</td>
+</tr>
+</tbody></table>
+<p><strong>탐지</strong>: 실패한 Test를 <strong>같은 Commit에서</strong> 다시 돌려 통과하면 Flaky로 기록한다. Playwright는 재시도에서 통과한 Test를 &quot;flaky&quot;로 따로 분류하고, <code>--fail-on-flaky-tests</code>로 그런 Test가 있으면 실행을 실패시킨다. Node.js Test Runner는 v26.1.0 · v24.16.0부터 <code>--test-randomize</code>로 실행 순서를 섞어 순서 의존을 드러낸다. Test별 통과 · 실패 이력을 남겨야 &quot;이번 주에 세 번 흔들린 Test&quot;를 찾을 수 있다.</p>
+<p><strong>정책</strong></p>
+<ol>
+<li>Flaky test는 <strong>실제 버그</strong>다. Test의 버그일 수도, 제품의 Race condition일 수도 있다. Issue를 열고 담당자와 기한을 정한다.</li>
+<li>Quarantine(필수 검사에서 잠시 제외)은 <strong>기한 있는 임시 조치</strong>다. 격리한 Test도 계속 돌려 결과를 기록한다. Fowler도 격리는 피해를 줄이는 첫 단계일 뿐 곧 고쳐야 한다고 말한다.</li>
+<li>자동 재시도는 <strong>탐지 도구</strong>로만 쓴다. 재시도로 통과한 결과를 조용히 &quot;통과&quot;로 세지 않는다. <code>sleep</code>을 늘리거나 Assertion을 느슨하게 하거나 <code>skip</code>을 붙여 Green을 만드는 것은 수정이 아니다.</li>
+</ol>
+<h2>Test Data와 일회용 Service</h2>
+<ul>
+<li><strong>Test마다 자기 Data를 만든다.</strong> 공유 Staging DB나 고정 계정에 기대면 실행 순서와 동시 실행에 따라 결과가 바뀐다. Production Data를 복사하지 않는 이유는 허브 문서의 &quot;Production 같은 Data의 함정&quot;에 있다.</li>
+<li><strong>실제 DB를 일회용으로 띄운다.</strong> GitHub Actions의 Service Container는 Job마다 새 Container를 만들고 Job이 끝나면 없앤다(Linux Runner 전용). Test 코드 안에서 Container를 띄우려면 Testcontainers(2023-12 Docker가 운영사 AtomicJar를 인수)를 쓴다.</li>
+</ul>
+<pre><code class="language-yaml">jobs:
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: &gt;-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: npm ci
+      - run: npm run test:integration
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+</code></pre>
+<p>Health check가 통과해야 Step이 시작되므로 &quot;DB가 뜨기 전에 Test가 돌아 실패&quot;하는 Flaky 원인이 사라진다. 여기 Password는 Job과 함께 사라지는 Container 전용 값이라 Secret이 아니다.</p>
+<h2>정적 검사와 Coverage</h2>
+<table>
+<thead>
+<tr>
+<th>검사</th>
+<th>CI에서 하는 일</th>
+<th>관문인가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Format</td>
+<td><code>--check</code> 모드로 차이만 보고한다. CI가 고쳐서 Commit하지 않는다</td>
+<td>예</td>
+</tr>
+<tr>
+<td>Lint · Typecheck</td>
+<td>위반을 실패로 처리한다. 경고는 쌓이기만 하므로 끄거나 오류로 올린다. Build와 별도 Job으로 돌린다</td>
+<td>예</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>변경된 줄 중 Test가 닿지 않은 곳을 Review에 보여 준다</td>
+<td>신호. 목표치로 쓰지 않는다</td>
+</tr>
+</tbody></table>
+<p>Coverage는 Test가 <strong>실행한</strong> 줄을 셀 뿐 <strong>검증한</strong> 줄을 세지 않는다. Assertion 없는 Test로도 숫자는 오르고, 숫자를 목표로 삼으면 그런 Test가 늘어난다. 2020-08 Google Testing Blog의 &quot;Code Coverage Best Practices&quot;는 60%를 acceptable, 75%를 commendable, 90%를 exemplary로 보는 사내 기준을 소개하면서도 일괄 강제보다 팀별 판단을 권한다. 0.1% 하락으로 Build를 실패시키지 말고, &quot;이 분기는 왜 Test가 없나&quot;를 Review에서 묻는 근거로 쓴다.</p>
+<h2>속도: PR Check를 10분 안쪽으로</h2>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th>효과</th>
+<th>주의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache</td>
+<td>의존성 설치 시간 단축</td>
+<td>Key는 Lock 파일 Hash로. 설정은 「GitHub Actions 실전」</td>
+</tr>
+<tr>
+<td>Test 분할(Sharding)</td>
+<td>Node.js <code>--test-shard=1/3</code>(v20.5.0 · v18.19.0부터), Playwright <code>--shard=1/3</code></td>
+<td>가장 느린 조각이 전체 시간을 정한다</td>
+</tr>
+<tr>
+<td>Test Impact Analysis</td>
+<td>Jest <code>--changedSince=&lt;branch&gt;</code>, Playwright <code>--only-changed=&lt;ref&gt;</code>로 관련 Test만</td>
+<td>설정 · Data 변경을 놓친다. Main과 Nightly에서는 전체를 돌린다</td>
+</tr>
+</tbody></table>
+<h2>필수 검사, Branch 보호, Ruleset, Merge queue</h2>
+<p>CI가 빨간불을 켜도 Merge 버튼이 눌리면 소용없다. GitHub에서는 다음 기능으로 <strong>통과해야만 합칠 수 있게</strong> 만든다(2026-09 기준).</p>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>하는 일</th>
+<th>쓸 수 있는 곳</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Branch 보호 규칙</td>
+<td>필수 Status check, Review, Force push 금지. Strict 모드는 Branch가 최신 Base를 포함해야 Merge 허용</td>
+<td>Free는 공개 Repository, Pro · Team · Enterprise Cloud는 비공개 포함</td>
+</tr>
+<tr>
+<td>Ruleset</td>
+<td>여러 Ruleset이 겹치면 모두 적용되고 가장 엄격한 규칙이 이긴다. 읽기 권한만 있어도 적용 중인 규칙을 볼 수 있다</td>
+<td>Branch 보호와 같음</td>
+</tr>
+<tr>
+<td>Merge queue</td>
+<td>PR을 &quot;최신 Base + 앞선 PR&quot; 위에서 다시 검증한 뒤 합친다</td>
+<td>Organization 소유 공개 Repository, Enterprise Cloud Organization의 비공개 Repository</td>
+</tr>
+</tbody></table>
+<p><strong>자주 막히는 곳</strong></p>
+<ul>
+<li>Merge queue를 켜면 Workflow에 <code>merge_group</code> Trigger가 있어야 한다. 없으면 필수 검사가 보고되지 않아 Merge가 실패한다.</li>
+<li>Path · Branch 필터로 <strong>Workflow 전체가 건너뛰어지면</strong> 그 Check는 &quot;Pending&quot;에 머물러 Merge를 막는다. <code>if</code> 조건으로 <strong>Job이 건너뛰어지면</strong> &quot;Success&quot;로 보고된다.</li>
+<li>실패한 Job에 <code>needs</code>로 매달린 Job은 Skipped가 되어 Merge를 막지 못할 수 있다. 그래서 아래처럼(<code>lint</code> · <code>test</code> 정의는 생략) <code>if: always()</code>인 관문 Job 하나를 두고 그것만 필수 검사로 등록한다. Job을 추가 · 삭제해도 보호 규칙을 고칠 필요가 없다. 필수 검사로 쓰는 Job 이름은 Workflow끼리 겹치지 않게 한다. <code>workflow_dispatch</code>로 돌린 결과는 필수 검사를 채우지 못한다.</li>
+</ul>
+<pre><code class="language-yaml">on:
+  pull_request:
+  merge_group:
+    types: [checks_requested]
+jobs:
+  ci-ok:
+    if: always()
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(needs.*.result, &#39;failure&#39;) || contains(needs.*.result, &#39;cancelled&#39;)
+        run: exit 1
+</code></pre>
+<h2>예시: 이 사이트에 필요한 CI</h2>
+<p>이 사이트(<code>stable</code> Branch를 GitHub Pages로 내보내는 정적 사이트, 지금은 CI 없음)의 PR 관문은 아래 두 검사이고, 이 검사를 돌리는 Workflow 설계는 「GitHub Actions 실전」의 &quot;예시 설계: 이 사이트에 CI를 붙인다면&quot;에 한 곳으로 모아 두었다.</p>
+<table>
+<thead>
+<tr>
+<th>검사</th>
+<th>시점</th>
+<th>Merge를 막는가</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>node --test tests/*.cjs</code></td>
+<td>PR, <code>stable</code> Push</td>
+<td>예</td>
+<td>영문 짝이 빠진 문서, 깨진 Diagram을 막는다</td>
+</tr>
+<tr>
+<td><code>node tools/build-site.mjs --check</code></td>
+<td>PR, <code>stable</code> Push</td>
+<td>예</td>
+<td>Markdown만 고치고 HTML 재생성을 잊은 변경을 막는다</td>
+</tr>
+</tbody></table>
+<h2>지표: CI가 건강한가</h2>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>정의</th>
+<th>보는 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CI Duration</td>
+<td>PR 필수 검사의 시작부터 끝까지(p50 · p90)</td>
+<td>10분을 넘기면 사람들이 기다리지 않고 딴 일로 넘어간다</td>
+</tr>
+<tr>
+<td>Flake rate</td>
+<td>같은 Commit 재실행에서 결과가 바뀐 실행의 비율</td>
+<td>오르면 빨간불을 믿지 않게 된다</td>
+</tr>
+<tr>
+<td>Time to Green</td>
+<td>Main이 깨진 시점부터 다시 통과할 때까지</td>
+<td>Main을 얼마나 빨리 복구하는가</td>
+</tr>
+</tbody></table>
+<p>이 지표는 DORA 지표(「CI/CD · OIDC · GitOps」)의 앞단이다. CI가 느리고 흔들리면 Change Lead Time이 늘고, 검사를 우회하는 사람이 생기면서 Change Fail Rate도 오른다.</p>
+<h2>나쁜 예 / 좋은 예</h2>
+<pre><code class="language-text">나쁜 예: 흔들리는 E2E Test에 retries: 3을 걸고 결과에 &quot;통과&quot;만 남긴다.
+좋은 예: 재시도로 통과한 Test를 flaky로 기록하고 Issue와 담당자를 붙인다.
+        격리한 Test는 기한 안에 고치거나 지운다.
+</code></pre>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>팀의 Feature Branch는 평균 며칠 사는가? 하루 안쪽으로 줄이려면 무엇(Feature Flag, 작은 PR)이 필요한가?</li>
+<li>지금 PR Check에서 가장 느린 단계를 Merge queue나 Nightly로 옮기면 어떤 버그를 늦게 알게 되는가?</li>
+<li>재시도로 통과한 Test를 &quot;통과&quot;로 세면 어떤 종류의 제품 버그가 숨는가?</li>
+<li>Path 필터로 Workflow가 건너뛰어질 때와 <code>if</code>로 Job이 건너뛰어질 때 필수 검사는 각각 어떻게 보이는가?</li>
+<li>이 사이트의 <code>build-site.mjs --check</code>는 어떤 실수를 막고, 왜 그것을 PR 관문에 두는가?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a>(2024-01-18 개정) · <a href="https://martinfowler.com/bliki/ContinuousIntegrationCertification.html">Continuous Integration Certification</a> · <a href="https://martinfowler.com/bliki/TestPyramid.html">Test Pyramid</a>(2012) · <a href="https://martinfowler.com/articles/nonDeterminism.html">Eradicating Non-Determinism in Tests</a>(2011) — martinfowler.com, 2026-09-30 검색 결과로 확인</li>
+<li><a href="https://dora.dev/capabilities/trunk-based-development/">Capabilities: Trunk-based development</a> — DORA, 2026-09-30 검색 결과로 확인</li>
+<li><a href="https://kentcdodds.com/blog/the-testing-trophy-and-testing-classifications">The Testing Trophy and Testing Classifications</a> — Kent C. Dodds, 2021-06-03 · <a href="https://docs.pact.io/">Pact Docs</a> — Pact · <a href="https://www.docker.com/blog/docker-whale-comes-atomicjar-maker-of-testcontainers/">Docker acquires AtomicJar, maker of Testcontainers</a> — Docker, 2023-12-11. 모두 2026-09-30 검색 결과로 확인</li>
+<li><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html">Flaky Tests at Google and How We Mitigate Them</a>(2016-05, John Micco) · <a href="https://testing.googleblog.com/2020/08/code-coverage-best-practices.html">Code Coverage Best Practices</a>(2020-08) — Google Testing Blog · <a href="https://dl.acm.org/doi/10.1145/2635868.2635920">An Empirical Analysis of Flaky Tests</a> — Luo 외, FSE 2014. 모두 2026-09-30 검색 결과로 확인</li>
+<li><a href="https://playwright.dev/docs/test-retries">Retries</a> · <a href="https://playwright.dev/docs/test-cli">Command line</a> — Playwright Docs, 2026-09-30 확인(GitHub의 문서 원본) · <a href="https://jestjs.io/docs/cli">Jest CLI Options</a> — Jest, 2026-09-30 검색 결과로 확인 · <a href="https://nodejs.org/api/cli.html">Command-line API</a> — Node.js v26.10.0 Docs, 2026-09-30 확인</li>
+<li><a href="https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers">Communicating with Docker service containers</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#merge_group">Events that trigger workflows: merge_group</a> — GitHub Docs, 2026-09-30 확인(github/docs 원본)</li>
+<li><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches">About protected branches</a> · <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets">About rulesets</a> · <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue">Managing a merge queue</a> — GitHub Docs, 2026-09-30 확인(github/docs 원본)</li>
+<li><a href="https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks">Troubleshooting required status checks</a> · <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">Configuring a publishing source for your GitHub Pages site</a> — GitHub Docs, 2026-09-30 확인(github/docs 원본)</li>
+<li><a href="https://github.com/actions/checkout">actions/checkout</a> v7.0.1 · <a href="https://github.com/actions/setup-node">actions/setup-node</a> v7.0.0 — GitHub, Tag의 Commit SHA를 2026-09-30 확인</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../platform/03-ci-cd-pipeline/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>CI/CD · OIDC · GitOps</span></a><a class="page-link next" href="../../platform/03b-github-actions/"><span><small>다음 문서</small>GitHub Actions 실전</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

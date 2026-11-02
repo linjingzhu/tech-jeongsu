@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fcfcfd" />
+    <title>GitHub Actions 실전: Workflow 구조 · 권한 · 캐시 · 비용 | MyAI(마이아이)</title>
+    <meta name="description" content="Trigger와 기본 문법은 「GitHub Actions · Hook · Cron」, 전체 흐름과 OIDC는 「CI/CD · OIDC · GitOps」에서 다뤘다. 이 문서는 그다음 단계인 Workflow를 안전하고 싸고 빠르게 운영하는 법을 다룬다. Job 의존, 재사용,…" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="ko" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="en" href="https://linjingzhu.github.io/tech-jeongsu/en/platform/03b-github-actions/" />
+    <link rel="alternate" hreflang="x-default" href="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="MyAI(마이아이)" />
+    <meta property="og:title" content="GitHub Actions 실전: Workflow 구조 · 권한 · 캐시 · 비용 | MyAI(마이아이)" />
+    <meta property="og:description" content="Trigger와 기본 문법은 「GitHub Actions · Hook · Cron」, 전체 흐름과 OIDC는 「CI/CD · OIDC · GitOps」에서 다뤘다. 이 문서는 그다음 단계인 Workflow를 안전하고 싸고 빠르게 운영하는 법을 다룬다. Job 의존, 재사용,…" />
+    <meta property="og:url" content="https://linjingzhu.github.io/tech-jeongsu/platform/03b-github-actions/" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="site-root" content="../../" />
+    <meta name="doc-path" content="content/platform/03b-github-actions.md" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/vendor/highlight.css" />
+    <link rel="stylesheet" href="../../assets/style.css?v=site-pages-1" />
+    <script defer src="../../assets/vendor/marked.min.js"></script>
+    <script defer src="../../assets/vendor/purify.min.js"></script>
+    <script defer src="../../assets/vendor/mermaid.min.js"></script>
+    <script defer src="../../assets/vendor/highlight.min.js"></script>
+    <script defer src="../../assets/ai-map-data.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/ai-map-data.en.js?v=workflow-flow-1"></script>
+    <script defer src="../../assets/i18n.js?v=ai-method-1"></script>
+    <script defer src="../../assets/search.js?v=site-pages-1"></script>
+    <script defer src="../../assets/app.js?v=ai-method-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">본문으로 이동</a>
+    <header id="topbar">
+      <button
+        id="menuBtn"
+        class="icon-button"
+        aria-label="문서 메뉴 열기"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <img src="../../assets/icons/menu-2.svg" alt="" />
+      </button>
+      <a class="brand" href="../../">MyAI(마이아이)</a
+      ><span class="brand-note" data-i18n="tagline">개발 · 제품 · 운영 학습 노트</span>
+      <div id="siteSearch" role="search">
+        <div class="document-search">
+          <img src="../../assets/icons/search.svg" alt="" />
+          <input
+            id="documentSearch"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="문서와 내용 검색"
+            placeholder="문서와 내용 검색"
+            aria-controls="searchResults"
+            aria-expanded="false"
+            aria-describedby="searchStatus"
+          />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <section id="searchPanel" hidden aria-label="검색 결과">
+          <p id="searchStatus" role="status"></p>
+          <button id="retrySearch" class="text-button" type="button" hidden data-i18n="retry">
+            다시 시도
+          </button>
+          <nav id="searchResults" aria-label="검색 결과"></nav>
+        </section>
+      </div>
+      <div class="header-actions">
+        <button
+          id="tocBtn"
+          class="icon-button"
+          aria-label="내부 목차 열기"
+          aria-expanded="false"
+          aria-controls="tocPanel"
+        >
+          <img src="../../assets/icons/list.svg" alt="" />
+        </button>
+        <div class="language-switch" role="group" aria-label="언어 / Language">
+          <button type="button" data-language="ko" lang="ko" aria-pressed="true">한</button
+          ><span aria-hidden="true">/</span
+          ><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <aside id="sidebar" aria-label="문서 탐색">
+      <nav id="tree" aria-label="문서 트리"><div class="tree-group closed" data-group="0"><button aria-expanded="false" aria-controls="group-0"><img src="../../assets/icons/book.svg" alt="" aria-hidden="true"><span>AI 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-0"><a class="tree-link" href="../../ai/00-overview/" data-path="content/ai/00-overview.md">AI 개발 운영 개요</a><a class="tree-link" href="../../ai/01-shared-repository/" data-path="content/ai/01-shared-repository.md">Claude Code + Codex 공동 개발</a><a class="tree-link" href="../../ai/02-session-agent/" data-path="content/ai/02-session-agent.md">Session · Agent · Subagent</a><a class="tree-link" href="../../ai/03-multi-agent/" data-path="content/ai/03-multi-agent.md">Multi-Agent 역할과 모델 라우팅</a><a class="tree-link" href="../../ai/04-self-improving/" data-path="content/ai/04-self-improving.md">스스로 개선되는 개발 프로세스</a><a class="tree-link" href="../../ai/05-git-operator/" data-path="content/ai/05-git-operator.md">Claude Code를 Git Client처럼 쓰기</a><a class="tree-link" href="../../ai/06-agent-setup-map/" data-path="content/ai/06-agent-setup-map.md">AI Agent 세팅 지도</a><a class="tree-link" href="../../ai/07-instructions-memory/" data-path="content/ai/07-instructions-memory.md">지시문과 메모리</a><a class="tree-link" href="../../ai/08-permissions-sandbox-hooks/" data-path="content/ai/08-permissions-sandbox-hooks.md">권한 · Sandbox · Hook</a><a class="tree-link" href="../../ai/09-subagents-skills/" data-path="content/ai/09-subagents-skills.md">Subagent · Skill · Plugin</a><a class="tree-link" href="../../ai/10-mcp-tools/" data-path="content/ai/10-mcp-tools.md">MCP와 외부 도구</a><a class="tree-link" href="../../ai/11-headless-ci-cloud/" data-path="content/ai/11-headless-ci-cloud.md">Headless · CI · Cloud 실행</a><a class="tree-link" href="../../ai/12-token-efficiency/" data-path="content/ai/12-token-efficiency.md">AI 토큰 효율화의 원리</a><a class="tree-link" href="../../ai/13-token-saving-practice/" data-path="content/ai/13-token-saving-practice.md">토큰 절약 실전: 도구별 방법</a><a class="tree-link" href="../../ai/14-engineering-layers/" data-path="content/ai/14-engineering-layers.md">AI 엔지니어링의 층: 프롬프트 · 컨텍스트 · 하네스</a><a class="tree-link" href="../../ai/15-loop-engineering/" data-path="content/ai/15-loop-engineering.md">루프 엔지니어링</a><a class="tree-link" href="../../ai/16-reverse-engineering/" data-path="content/ai/16-reverse-engineering.md">리버스 엔지니어링: 법과 합법적 활용</a></div></div><div class="tree-group closed" data-group="1"><button aria-expanded="false" aria-controls="group-1"><img src="../../assets/icons/cube.svg" alt="" aria-hidden="true"><span>GIT 사용방법</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-1"><a class="tree-link" href="../../git/00-overview/" data-path="content/git/00-overview.md">Git 전체 구조</a><a class="tree-link" href="../../git/01-repository-object/" data-path="content/git/01-repository-object.md">Repository · Object · Branch</a><a class="tree-link" href="../../git/02-head-checkout/" data-path="content/git/02-head-checkout.md">HEAD · Checkout · Detached HEAD</a><a class="tree-link" href="../../git/03-worktree/" data-path="content/git/03-worktree.md">Worktree 완전 이해</a><a class="tree-link" href="../../git/04-remote-sync/" data-path="content/git/04-remote-sync.md">Remote · Fetch · Pull · Push</a><a class="tree-link" href="../../git/05-recovery/" data-path="content/git/05-recovery.md">Stash · Restore · Revert · Discard</a><a class="tree-link" href="../../git/06-history-operations/" data-path="content/git/06-history-operations.md">Merge · Rebase · Cherry-pick</a><a class="tree-link" href="../../git/07-collaboration-pr/" data-path="content/git/07-collaboration-pr.md">협업 · Push · PR · Code Review</a><a class="tree-link" href="../../git/08-actions-hook-cron/" data-path="content/git/08-actions-hook-cron.md">GitHub Actions · Hook · Cron</a><a class="tree-link" href="../../git/09-build-directory/" data-path="content/git/09-build-directory.md">Build Directory와 Worktree 용량</a><a class="tree-link" href="../../git/10-practical-workflows/" data-path="content/git/10-practical-workflows.md">실전 작업 흐름 모음</a></div></div><div class="tree-group closed" data-group="2"><button aria-expanded="false" aria-controls="group-2"><img src="../../assets/icons/layout-grid.svg" alt="" aria-hidden="true"><span>AI Map</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-2"><a class="tree-link" href="../../ai-map/00-overview/" data-path="content/ai-map/00-overview.md">AI Map 개요</a><a class="tree-link" href="../../ai-map/catalog/" data-path="@ai-map:catalog">전체 AI 도구</a><a class="tree-link" href="../../ai-map/category/chat/" data-path="@ai-map:category:chat">챗봇 / 어시스턴트</a><a class="tree-link" href="../../ai-map/category/coding/" data-path="@ai-map:category:coding">코딩 도구 &amp; 에이전트</a><a class="tree-link" href="../../ai-map/category/media/" data-path="@ai-map:category:media">생성형 미디어</a><a class="tree-link" href="../../ai-map/category/models/" data-path="@ai-map:category:models">모델 &amp; 모델 허브</a><a class="tree-link" href="../../ai-map/category/frameworks/" data-path="@ai-map:category:frameworks">에이전트 프레임워크</a><a class="tree-link" href="../../ai-map/category/community/" data-path="@ai-map:category:community">커뮤니티 &amp; 토론</a><a class="tree-link" href="../../ai-map/category/resources/" data-path="@ai-map:category:resources">학습자료 &amp; 뉴스 리소스</a><a class="tree-link" href="../../ai-map/guides/" data-path="@ai-map:guides">AI 활용 가이드</a><a class="tree-link" href="../../ai-map/news/" data-path="@ai-map:news">AI 소식</a></div></div><div class="tree-group closed" data-group="3"><button aria-expanded="false" aria-controls="group-3"><img src="../../assets/icons/users.svg" alt="" aria-hidden="true"><span>제품 기획과 운영</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-3"><a class="tree-link" href="../../po/00-overview/" data-path="content/po/00-overview.md">Product Owner 전체 개요</a><a class="tree-link" href="../../po/01-qualification/" data-path="content/po/01-qualification.md">PO의 자격과 핵심 역량</a><a class="tree-link" href="../../po/02-role-comparison/" data-path="content/po/02-role-comparison.md">PO · PM · Project Manager 차이</a><a class="tree-link" href="../../po/03-knowledge-map/" data-path="content/po/03-knowledge-map.md">PO가 알아야 할 지식 지도</a><a class="tree-link" href="../../po/04-discovery-strategy/" data-path="content/po/04-discovery-strategy.md">문제 발견 · 전략 · Roadmap</a><a class="tree-link" href="../../po/05-backlog-prioritization/" data-path="content/po/05-backlog-prioritization.md">Backlog · 우선순위 · 요구사항</a><a class="tree-link" href="../../po/06-delivery-workflow/" data-path="content/po/06-delivery-workflow.md">Delivery Work Process</a><a class="tree-link" href="../../po/07-collaboration-artifacts/" data-path="content/po/07-collaboration-artifacts.md">협업 · 회의 · 산출물</a><a class="tree-link" href="../../po/08-metrics-decisions/" data-path="content/po/08-metrics-decisions.md">성과 측정 · 의사결정 · Metrics</a><a class="tree-link" href="../../po/09-ai-product-owner/" data-path="content/po/09-ai-product-owner.md">AI 시대의 Product Owner</a></div></div><div class="tree-group closed" data-group="4"><button aria-expanded="false" aria-controls="group-4"><img src="../../assets/icons/speakerphone.svg" alt="" aria-hidden="true"><span>Marketing</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-4"><a class="tree-link" href="../../marketing/00-overview/" data-path="content/marketing/00-overview.md">Marketing 전체 개요</a><a class="tree-link" href="../../marketing/01-customer-research/" data-path="content/marketing/01-customer-research.md">시장·고객 리서치 · Segmentation</a><a class="tree-link" href="../../marketing/02-positioning-messaging/" data-path="content/marketing/02-positioning-messaging.md">Positioning · Messaging · Brand</a><a class="tree-link" href="../../marketing/03-go-to-market/" data-path="content/marketing/03-go-to-market.md">Go-to-Market · Launch · PLG/SLG</a><a class="tree-link" href="../../marketing/04-channels/" data-path="content/marketing/04-channels.md">채널 · Content · Paid · Lifecycle</a><a class="tree-link" href="../../marketing/05-ai-search-geo/" data-path="content/marketing/05-ai-search-geo.md">AI 검색 · GEO/AEO</a><a class="tree-link" href="../../marketing/06-measurement-privacy/" data-path="content/marketing/06-measurement-privacy.md">측정 · Attribution · Privacy</a><a class="tree-link" href="../../marketing/07-metrics/" data-path="content/marketing/07-metrics.md">Marketing Metrics · Unit Economics</a><a class="tree-link" href="../../marketing/08-ai-workflows/" data-path="content/marketing/08-ai-workflows.md">AI 활용 Workflow · 리스크</a><a class="tree-link" href="../../marketing/09-legal-ethics/" data-path="content/marketing/09-legal-ethics.md">법 · 윤리 · 광고 표시</a></div></div><div class="tree-group" data-group="5"><button aria-expanded="true" aria-controls="group-5"><img src="../../assets/icons/cloud-upload.svg" alt="" aria-hidden="true"><span>Platform 배포와 서비스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-5"><a class="tree-link" href="../../platform/00-overview/" data-path="content/platform/00-overview.md">Platform 배포 전체 개요</a><a class="tree-link" href="../../platform/01-deployment-targets/" data-path="content/platform/01-deployment-targets.md">배포 대상 · Static · Serverless</a><a class="tree-link" href="../../platform/02-cloud-kubernetes/" data-path="content/platform/02-cloud-kubernetes.md">Cloud · Kubernetes · 국내 Cloud</a><a class="tree-link" href="../../platform/03-ci-cd-pipeline/" data-path="content/platform/03-ci-cd-pipeline.md">CI/CD · OIDC · GitOps</a><a class="tree-link" href="../../platform/03a-ci-testing/" data-path="content/platform/03a-ci-testing.md">CI 기초와 테스트 전략</a><a class="tree-link active" aria-current="page" href="../../platform/03b-github-actions/" data-path="content/platform/03b-github-actions.md">GitHub Actions 실전</a><a class="tree-link" href="../../platform/03c-cd-release-automation/" data-path="content/platform/03c-cd-release-automation.md">배포 자동화와 버전 관리</a><a class="tree-link" href="../../platform/03d-ai-cicd/" data-path="content/platform/03d-ai-cicd.md">AI 시대의 CI/CD</a><a class="tree-link" href="../../platform/04-release-strategies/" data-path="content/platform/04-release-strategies.md">Canary · Blue-Green · Flag · Rollback</a><a class="tree-link" href="../../platform/05-mobile-app-stores/" data-path="content/platform/05-mobile-app-stores.md">App Store · Google Play</a><a class="tree-link" href="../../platform/06-domain-dns-tls-cdn/" data-path="content/platform/06-domain-dns-tls-cdn.md">Domain · DNS · TLS · CDN</a><a class="tree-link" href="../../platform/07-observability-incident/" data-path="content/platform/07-observability-incident.md">SLO · On-call · Postmortem</a><a class="tree-link" href="../../platform/08-security-supply-chain/" data-path="content/platform/08-security-supply-chain.md">Secret · SBOM · SLSA</a><a class="tree-link" href="../../platform/09-finops-platform-engineering/" data-path="content/platform/09-finops-platform-engineering.md">FinOps · Platform Engineering</a><a class="tree-link" href="../../platform/10-small-team-playbook/" data-path="content/platform/10-small-team-playbook.md">작은 팀 실전 가이드</a></div></div><div class="tree-group closed" data-group="6"><button aria-expanded="false" aria-controls="group-6"><img src="../../assets/icons/briefcase.svg" alt="" aria-hidden="true"><span>비즈니스</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-6"><a class="tree-link" href="../../business/00-overview/" data-path="content/business/00-overview.md">비즈니스 트랙 개요</a><a class="tree-link" href="../../business/01-entity-choice/" data-path="content/business/01-entity-choice.md">개인 · 법인 · 과세유형</a><a class="tree-link" href="../../business/02-registration/" data-path="content/business/02-registration.md">사업자 등록 · 통신판매업</a><a class="tree-link" href="../../business/03-online-service-law/" data-path="content/business/03-online-service-law.md">약관 · 개인정보 · 전자상거래</a><a class="tree-link" href="../../business/04-contracts-ip/" data-path="content/business/04-contracts-ip.md">계약 · 지식재산 · 오픈소스</a><a class="tree-link" href="../../business/05-hiring-freelancers/" data-path="content/business/05-hiring-freelancers.md">채용 · 4대보험 · 프리랜서</a><a class="tree-link" href="../../business/06-vat-invoices/" data-path="content/business/06-vat-invoices.md">부가세 · 영세율 · 세금계산서</a><a class="tree-link" href="../../business/07-income-tax-books/" data-path="content/business/07-income-tax-books.md">소득세 · 법인세 · 원천징수 · 장부</a><a class="tree-link" href="../../business/08-tax-benefits-calendar/" data-path="content/business/08-tax-benefits-calendar.md">창업 감면 · 세무 달력 · 세무사</a><a class="tree-link" href="../../business/09-startup-support/" data-path="content/business/09-startup-support.md">창업 지원사업</a></div></div><div class="tree-group closed" data-group="7"><button aria-expanded="false" aria-controls="group-7"><img src="../../assets/icons/coins.svg" alt="" aria-hidden="true"><span>1인 스튜디오 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-7"><a class="tree-link" href="../../studio/00-overview/" data-path="content/studio/00-overview.md">1인 스튜디오 수익화 전체 개요</a><a class="tree-link" href="../../studio/01-studio-economics/" data-path="content/studio/01-studio-economics.md">1인 스튜디오의 경제학</a><a class="tree-link" href="../../studio/02-portfolio-theory/" data-path="content/studio/02-portfolio-theory.md">제품 포트폴리오 이론</a><a class="tree-link" href="../../studio/03-opportunity-validation/" data-path="content/studio/03-opportunity-validation.md">기회 선택과 수요 검증</a><a class="tree-link" href="../../studio/04-revenue-models/" data-path="content/studio/04-revenue-models.md">수익 모델 개론</a><a class="tree-link" href="../../studio/05-ad-revenue/" data-path="content/studio/05-ad-revenue.md">광고 수익 심화</a><a class="tree-link" href="../../studio/06-paid-and-subscription/" data-path="content/studio/06-paid-and-subscription.md">유료 판매·구독과 가격 설계</a><a class="tree-link" href="../../studio/07-game-monetization/" data-path="content/studio/07-game-monetization.md">게임 수익화</a><a class="tree-link" href="../../studio/08-shipping-system/" data-path="content/studio/08-shipping-system.md">출시 시스템</a><a class="tree-link" href="../../studio/09-portfolio-decisions/" data-path="content/studio/09-portfolio-decisions.md">측정과 포트폴리오 의사결정</a><a class="tree-link" href="../../studio/10-90-day-plan/" data-path="content/studio/10-90-day-plan.md">90일 실행 계획 사례</a></div></div><div class="tree-group closed" data-group="8"><button aria-expanded="false" aria-controls="group-8"><img src="../../assets/icons/video.svg" alt="" aria-hidden="true"><span>블로그·유튜브 수익화</span><img class="chevron" src="../../assets/icons/chevron-down.svg" alt=""></button><div class="tree-items" id="group-8"><a class="tree-link" href="../../creator/00-overview/" data-path="content/creator/00-overview.md">블로그·유튜브 수익화 전체 개요</a><a class="tree-link" href="../../creator/01-niche-audience/" data-path="content/creator/01-niche-audience.md">주제 선정과 독자 설계</a><a class="tree-link" href="../../creator/02-naver-search/" data-path="content/creator/02-naver-search.md">네이버 블로그와 검색 구조</a><a class="tree-link" href="../../creator/03-blog-writing/" data-path="content/creator/03-blog-writing.md">블로그 글쓰기와 운영</a><a class="tree-link" href="../../creator/04-youtube-system/" data-path="content/creator/04-youtube-system.md">유튜브 추천 구조와 채널 설계</a><a class="tree-link" href="../../creator/05-longform/" data-path="content/creator/05-longform.md">롱폼 영상 기획과 제작</a><a class="tree-link" href="../../creator/06-shorts-faceless/" data-path="content/creator/06-shorts-faceless.md">Shorts와 얼굴 없는 채널</a><a class="tree-link" href="../../creator/07-ai-production-policy/" data-path="content/creator/07-ai-production-policy.md">AI 활용 제작과 플랫폼 정책</a><a class="tree-link" href="../../creator/07a-ai-blog-workflow/" data-path="content/creator/07a-ai-blog-workflow.md">AI로 블로그 글 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07b-ai-video-workflow/" data-path="content/creator/07b-ai-video-workflow.md">AI로 유튜브 영상 만들기: 도구와 튜토리얼</a><a class="tree-link" href="../../creator/07c-ai-method/" data-path="content/creator/07c-ai-method.md">AI 제작 방법론: 프롬프트·검수·자동화</a><a class="tree-link" href="../../creator/08-ad-revenue/" data-path="content/creator/08-ad-revenue.md">광고 수익: 애드포스트와 YouTube 파트너 프로그램</a><a class="tree-link" href="../../creator/09-own-products/" data-path="content/creator/09-own-products.md">자체 상품 수익: 강의·전자책·템플릿</a><a class="tree-link" href="../../creator/10-disclosure-tax/" data-path="content/creator/10-disclosure-tax.md">표시 의무·저작권·세금</a><a class="tree-link" href="../../creator/11-one-source-multi-use/" data-path="content/creator/11-one-source-multi-use.md">원소스 멀티유즈(OSMU) 전략</a><a class="tree-link" href="../../creator/12-90-day-plan/" data-path="content/creator/12-90-day-plan.md">채널 90일 실행 계획</a></div></div></nav>
+    </aside>
+    <aside id="tocPanel" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="onThisPage">이 페이지</h2>
+      <nav id="toc" aria-label="내부 목차"></nav>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="breadcrumb" aria-label="현재 문서"><span>Platform 배포와 서비스</span><img src="../../assets/icons/chevron-right.svg" alt="" aria-hidden="true"><span>GitHub Actions 실전</span></div>
+      <article id="content" aria-busy="false" data-prerendered="true"><h1>GitHub Actions 실전: Workflow 구조 · 권한 · 캐시 · 비용</h1>
+<p>Trigger와 기본 문법은 「GitHub Actions · Hook · Cron」, 전체 흐름과 OIDC는 「CI/CD · OIDC · GitOps」에서 다뤘다. 이 문서는 그다음 단계인 <strong>Workflow를 안전하고 싸고 빠르게 운영하는 법</strong>을 다룬다. Job 의존, 재사용, 캐시, 배포 승인, 최소 권한, Action 고정, 신뢰할 수 없는 입력, Runner, 요금, 디버깅을 보고, 마지막에 이 사이트에 CI를 붙인다면 어떤 Workflow가 되는지 설계한다. 모든 사실은 2026-09 기준이다. 요금과 제공 범위는 자주 바뀌므로 도입 전에 참고 자료의 원문을 다시 확인한다.</p>
+<h2>Workflow 해부</h2>
+<p>Workflow는 <strong>Event → Job → Step</strong> 순서로 읽는다. Job은 기본적으로 병렬로 돌고, <code>needs</code>를 쓰면 순서와 값 전달이 생긴다. 아래는 이 문서 끝의 예시 설계를 그린 것이다.</p>
+<pre><code class="language-mermaid">flowchart LR
+    E1[pull_request: stable] --&gt; C[check: Test와 Build 검사]
+    E2[push: stable] --&gt; C
+    C --&gt;|push일 때만| D[deploy: Pages 배포]
+    D --&gt; ENV[environment: github-pages]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>키</th>
+<th>하는 일</th>
+<th>자주 하는 실수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>on</code></td>
+<td>실행할 Event와 Branch · Path Filter</td>
+<td>Filter 없이 <code>push</code>와 <code>pull_request</code>를 둘 다 걸어 같은 변경을 두 번 검사</td>
+</tr>
+<tr>
+<td><code>needs</code></td>
+<td>앞 Job이 성공해야 실행, <code>needs.&lt;id&gt;.outputs</code>로 값 전달</td>
+<td>실패해도 돌아야 할 알림 · 정리 Job에 <code>if: failure()</code>나 <code>always()</code>를 빠뜨림</td>
+</tr>
+<tr>
+<td><code>strategy.matrix</code></td>
+<td>같은 Job을 OS · Version 조합별로 복제</td>
+<td>조합이 곱으로 늘어 분 단위 요금이 폭증</td>
+</tr>
+<tr>
+<td><code>if</code></td>
+<td>Job · Step 실행 조건</td>
+<td>Expression 안 문자열에 <code>&quot;</code>를 씀. 문자열은 <code>&#39;</code>만 쓴다</td>
+</tr>
+</tbody></table>
+<p><strong>Context</strong>는 Expression에서 읽는 값의 묶음이다. <code>github</code>(Event · Ref · Actor), <code>env</code>, <code>vars</code>, <code>secrets</code>, <code>matrix</code>, <code>needs</code>, <code>runner</code>, <code>inputs</code>를 자주 쓴다. 상태 함수 <code>success()</code>(기본), <code>failure()</code>, <code>always()</code>, <code>cancelled()</code>로 실패 알림과 정리 Job을 만든다. 모든 Job에 <code>timeout-minutes</code>를 둔다. 기본값 360분이면 멈춘 Job이 6시간 동안 분을 쓴다.</p>
+<h2>재사용: Reusable Workflow와 Composite Action</h2>
+<table>
+<thead>
+<tr>
+<th>기준</th>
+<th>Reusable Workflow (<code>workflow_call</code>)</th>
+<th>Composite Action (<code>action.yml</code>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>단위 · 호출</td>
+<td>Job 여러 개를 담은 Workflow. Job 수준 <code>uses:</code></td>
+<td>Step 묶음. Step 수준 <code>uses:</code></td>
+</tr>
+<tr>
+<td>Runner</td>
+<td>자기 Job마다 지정</td>
+<td>호출한 Job의 Runner를 그대로 사용</td>
+</tr>
+<tr>
+<td>Secret</td>
+<td><code>secrets:</code>로 받거나 <code>secrets: inherit</code></td>
+<td>직접 못 씀. 입력으로 넘긴다</td>
+</tr>
+<tr>
+<td>Log · 중첩</td>
+<td>Job · Step별 Log, 최대 10단계</td>
+<td>한 Step으로 묶인 Log, 최대 10개 중첩</td>
+</tr>
+</tbody></table>
+<p>기준: <strong>배포 절차처럼 Job과 Environment가 필요한 것은 Reusable Workflow, &quot;Setup + 설치 + 캐시&quot;처럼 반복되는 Step 몇 줄은 Composite Action</strong>이다. 다른 저장소의 Reusable Workflow도 <code>owner/repo/.github/workflows/deploy.yml@&lt;commit-sha&gt;</code>처럼 SHA로 부른다.</p>
+<h2>캐시와 Artifact</h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Cache</th>
+<th>Artifact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>목적</td>
+<td>다음 실행을 <strong>빠르게</strong>(의존성, Build 중간물)</td>
+<td>Job 사이 · 사람에게 <strong>결과 전달</strong>(Build 산출물, Test 보고서)</td>
+</tr>
+<tr>
+<td>수명</td>
+<td>7일 넘게 안 쓰면 삭제, 저장소당 기본 10 GB를 넘으면 오래된 것부터 삭제</td>
+<td>기본 90일, <code>retention-days</code>로 줄인다</td>
+</tr>
+<tr>
+<td>범위</td>
+<td>현재 Branch, 기본 Branch, PR의 Base Branch 캐시만 복원</td>
+<td>같은 Run의 다른 Job, 또는 UI · API로 다운로드</td>
+</tr>
+</tbody></table>
+<pre><code class="language-yaml">      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with: { node-version: 22, cache: npm }
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .build-cache
+          key: build-${{ runner.os }}-${{ hashFiles(&#39;package-lock.json&#39;) }}
+</code></pre>
+<p><code>setup-*</code> Action의 내장 캐시가 먼저다. <code>actions/cache</code>는 그 밖의 경로에만 쓴다. 캐시에는 Secret을 넣지 않는다. 읽기 권한만 있어도 PR로 캐시 내용을 볼 수 있다. <strong>Cache Poisoning 방어</strong>: <code>pull_request_target</code>, <code>issue_comment</code>, <code>workflow_run</code>처럼 외부인이 일으킬 수 있는 Event는 기본 Branch 범위 캐시를 읽기만 한다. 기본 Branch 캐시는 <code>push</code>로 도는 신뢰할 수 있는 Workflow가 갱신한다.</p>
+<h2>Environment와 배포 보호 규칙</h2>
+<p>Job에 <code>environment:</code>를 적으면 보호 규칙을 통과해야 Job이 시작되고, 그 뒤에야 Environment Secret을 읽는다(「CI/CD · OIDC · GitOps」의 &quot;Environment 설계&quot;). <strong>요금제 제약</strong>: Free · Pro · Team에서는 Required reviewers, Wait timer, Custom protection rules, 관리자 우회 설정을 <strong>Public 저장소에서만</strong> 쓰고, Free의 Private 저장소는 Environment Secret도 못 쓴다. Private 저장소에 승인 관문이 필요하면 Enterprise 요금제를 검토하거나, 보호된 Branch와 수동 <code>workflow_dispatch</code>로 대신한다.</p>
+<table>
+<thead>
+<tr>
+<th>규칙</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Required reviewers</td>
+<td>사람 · 팀 최대 6개, 그중 한 명이 승인하면 진행. 배포를 시작한 사람의 자기 승인을 막을 수 있다</td>
+</tr>
+<tr>
+<td>Wait timer</td>
+<td>1–43,200분(30일) 대기. 대기 시간은 과금되지 않는다</td>
+</tr>
+<tr>
+<td>Deployment branches and tags</td>
+<td>보호된 Branch만, 또는 이름 Pattern이 맞는 Branch · Tag만 배포</td>
+</tr>
+<tr>
+<td>Custom protection rules</td>
+<td>GitHub App이 외부 시스템(관측, 변경 관리)의 판단으로 승인 · 거부. 관리자 우회는 끌 수 있다</td>
+</tr>
+</tbody></table>
+<h2>concurrency: 겹치는 실행 정리</h2>
+<p>같은 <code>concurrency.group</code>에서는 하나만 돌고, 대기 중인 실행은 기본적으로 최신 하나만 남는다. PR 검사는 <code>cancel-in-progress</code>로 이전 실행을 취소하고, <strong>배포 Job은 <code>cancel-in-progress: false</code></strong> 로 진행 중인 배포를 끝까지 마친다. 중간에 끊긴 배포는 반쯤 바뀐 상태를 남긴다. 두 설정을 함께 쓰는 모양은 아래 예시 설계에 있다. 2026-09 문서에는 대기열을 최대 100개까지 쌓는 <code>queue: max</code>도 있다(<code>cancel-in-progress: true</code>와는 함께 못 쓴다).</p>
+<h2>권한: 최소 GITHUB_TOKEN</h2>
+<p><code>GITHUB_TOKEN</code>은 Job마다 발급되고 Job이 끝나면 만료되는 저장소 한정 Token이다. 기본 권한은 Enterprise · Organization · 저장소 설정에서 오고, 2023-02 이후 새로 만든 Organization과 개인 저장소는 읽기 전용이 기본이다. 설정에 기대지 말고 Workflow에 적는다.</p>
+<ul>
+<li>최상위는 <code>permissions: {}</code>로 닫고 필요한 Job에서만 연다(예: <code>permissions: { contents: read, pull-requests: write }</code>). <code>id-token: write</code>는 OIDC가 필요한 Job에만 준다. <code>GITHUB_TOKEN</code>으로 일으킨 Event(Push, Tag · Release 생성 등)는 새 Workflow run을 만들지 않는다(<code>workflow_dispatch</code> · <code>repository_dispatch</code> 제외). 무한 반복을 막는 장치다. 예외: 이 Token으로 만든 PR에서는 <code>pull_request</code>의 <code>opened</code> · <code>synchronize</code> · <code>reopened</code> Event가 Workflow run을 만들되, 쓰기 권한이 있는 사람이 승인해야 도는 상태로 만든다(2026-09 GitHub 문서 기준, 순차 적용). Dependabot이 연 PR의 실행은 Fork처럼 읽기 전용 Token을 받고 Secret을 못 읽는다.</li>
+<li><strong>Secret과 Variable</strong>: <code>secrets.NAME</code>은 Log에서 가려지고 <code>vars.NAME</code>은 그대로 보인다. Key는 Secret, Region · 공개 URL은 Variable에 두고, 둘 다 Organization · 저장소 · Environment 중 가장 좁은 곳에 둔다. Cloud 자격 증명은 저장하지 말고 OIDC로 받는다(「CI/CD · OIDC · GitOps」).</li>
+</ul>
+<h2>외부 Action 고정과 Dependabot</h2>
+<p>Tag(<code>@v7</code>)는 소유자나 공격자가 다른 Commit으로 옮길 수 있다. 2025-03 <code>tj-actions/changed-files</code> 사고가 이 경로였다(「Secret · SBOM · SLSA」). <strong>전체 40자 Commit SHA로 고정하고 Version을 주석으로 붙인다.</strong> Organization 정책으로 SHA 고정을 강제할 수도 있다(2025-08부터). SHA는 <code>git ls-remote https://github.com/actions/checkout refs/tags/v7.0.1 &#39;refs/tags/v7.0.1^{}&#39;</code>로 얻는다. 결과가 두 줄이면 Annotated Tag이고 <code>^{}</code> 줄의 SHA가 실제 Commit이다. 받은 SHA가 그 저장소 Release 화면의 Commit과 같은지도 본다. 고정한 SHA는 Dependabot이 SHA와 Version 주석을 함께 올리는 PR로 갱신한다.</p>
+<pre><code class="language-yaml">version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    cooldown: { default-days: 7 }
+</code></pre>
+<p><code>cooldown</code>은 새 Version이 나온 뒤 며칠 기다렸다가 PR을 열어 막 변조된 Release를 바로 받지 않게 한다. 2026-09 문서 기준 Version Update에는 설정하지 않아도 기본 3일이 적용된다. GitHub는 2026-03 Workflow 수준 의존성 잠금(Dependency Locking)을 로드맵으로 발표했다. 2026-09-30 확인한 Workflow 문법 문서에는 아직 없으므로 그전까지는 SHA 고정 + Dependabot이 기본이다.</p>
+<h2>신뢰할 수 없는 입력: Injection과 pull_request_target</h2>
+<p><code>${{ }}</code>는 Shell이 실행되기 <strong>전에</strong> 문자열로 치환된다. PR 제목, Branch 이름, Issue 본문처럼 외부인이 쓴 값을 <code>run:</code>에 바로 넣으면 그 값이 명령이 된다.</p>
+<pre><code class="language-yaml">      # 나쁜 예: 제목에 따옴표와 명령을 넣으면 그대로 실행된다
+      - run: echo &quot;PR title is ${{ github.event.pull_request.title }}&quot;
+      # 좋은 예: 환경 변수로 넘기고 따옴표 안의 Shell 변수로 읽는다
+      - env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: echo &quot;PR title is $TITLE&quot;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>무엇이 어떤 권한으로 도는가</th>
+<th>원칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pull_request</code></td>
+<td>PR의 Merge Commit. Fork PR은 읽기 전용 Token, Secret 없음</td>
+<td>Build · Test는 여기서</td>
+</tr>
+<tr>
+<td><code>pull_request_target</code></td>
+<td>기본 Branch의 Workflow. 쓰기 가능한 Token과 Secret 보유</td>
+<td>PR 코드를 Checkout · 실행하지 않는다</td>
+</tr>
+<tr>
+<td><code>workflow_run</code></td>
+<td>앞 Workflow가 끝난 뒤 기본 Branch 맥락</td>
+<td>앞 Run의 Artifact를 신뢰하지 않는다</td>
+</tr>
+</tbody></table>
+<p>2025-12-08부터 <code>pull_request_target</code>은 Base Branch와 관계없이 <strong>항상 기본 Branch의 Workflow 파일</strong>로 돈다. <code>actions/checkout</code> v7은 이 Event와 <code>workflow_run</code>에서 Fork PR 코드를 기본적으로 Checkout하지 않는다. CI 안의 AI Agent가 PR · Issue 내용을 읽을 때의 Prompt Injection은 「AI 시대의 CI/CD」에서 다룬다.</p>
+<h2>Runner 선택</h2>
+<table>
+<thead>
+<tr>
+<th>Runner</th>
+<th>특징</th>
+<th>비용 (2026-09)</th>
+<th>쓰지 말 곳</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub-hosted 표준</td>
+<td>Job마다 새 VM. <code>ubuntu-latest</code>는 Ubuntu 24.04</td>
+<td>Public 무료, Private은 포함 분 차감 후 과금</td>
+<td>사내망 접근이 필요한 Job</td>
+</tr>
+<tr>
+<td>Larger runner</td>
+<td>더 많은 CPU · RAM, 고정 IP, GPU. Team · Enterprise Cloud만</td>
+<td><strong>항상 과금</strong>. Public도, 포함 분 사용 불가</td>
+<td>표준으로 충분한 Job</td>
+</tr>
+<tr>
+<td>Self-hosted</td>
+<td>내 서버 · Cluster, 사내망. Job 사이 격리가 없으니 일회용(Ephemeral)으로</td>
+<td>GitHub 요금 없음, Infra는 내 비용</td>
+<td><strong>Public 저장소</strong>. 누구나 PR로 내 Runner에서 코드를 돌린다</td>
+</tr>
+</tbody></table>
+<h2>비용: 2026-09 기준</h2>
+<p>Public 저장소의 표준 Runner, GitHub Pages, Dependabot 실행은 무료다. Private 저장소는 계정 요금제의 포함량을 쓰고, 넘으면 과금된다.</p>
+<table>
+<thead>
+<tr>
+<th>요금제</th>
+<th>포함 분(월)</th>
+<th>Artifact 저장</th>
+<th>Cache (저장소당)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Free (개인 · Organization)</td>
+<td>2,000</td>
+<td>500 MB</td>
+<td>10 GB</td>
+</tr>
+<tr>
+<td>Pro / Team</td>
+<td>3,000</td>
+<td>1 GB / 2 GB</td>
+<td>10 GB</td>
+</tr>
+<tr>
+<td>Enterprise Cloud</td>
+<td>50,000</td>
+<td>50 GB</td>
+<td>10 GB</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>표준 Runner</th>
+<th>Linux 1-core</th>
+<th>Linux 2-core x64 / arm64</th>
+<th>Windows 2-core</th>
+<th>macOS 3 · 4-core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>분당 USD</td>
+<td>$0.002</td>
+<td>$0.006 / $0.005</td>
+<td>$0.010</td>
+<td>$0.062</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>2026-01-01 인하</strong>: GitHub-hosted 요금이 기종에 따라 내렸다(예: Linux 2-core $0.008 → $0.006, 25% 인하). Changelog 제목의 &#39;최대 39%&#39;는 검색 결과로만 확인했다.</li>
+<li><strong>Self-hosted 과금은 보류</strong>: GitHub는 2025-12-16 Changelog에서 2026-03-01부터 Private 저장소의 Self-hosted 사용에 분당 $0.002를 받겠다고 발표했다가 2025-12-17 보류했다. 2026-09-30 확인한 요금 문서에는 &quot;Self-hosted 사용은 무료&quot;로 남아 있다. 다시 도입될 수 있으니 Changelog를 지켜본다.</li>
+<li>Job마다 분 단위로 <strong>올림</strong>하고, 실패 후 재실행한 시간도 센다. 저장 초과분은 Artifact · Packages GB-월당 $0.25, Cache $0.07이며 시간 단위로 누적된다. 예전의 OS별 배수(Windows 2배, macOS 10배)는 현재 요금 문서에서 사라지고 기종별 분당 요금이 되었다. 포함 분이 Windows · macOS에서 어떻게 차감되는지는 Billing 화면에서 확인한다. 결제 수단이 없으면 포함량을 다 쓰는 순간 실행이 막힌다. 결제 수단이 있으면 <strong>Budget</strong>으로 상한을 건다. Private 저장소의 Copilot code review도 Actions 분을 쓴다.</li>
+</ul>
+<h2>디버깅</h2>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>왜 실패하는지 모른다</td>
+<td>Secret 또는 Variable <code>ACTIONS_STEP_DEBUG=true</code>(Runner 진단은 <code>ACTIONS_RUNNER_DEBUG</code>). 이번만이면 &quot;Enable debug logging&quot;으로 재실행, <code>gh run rerun RUN_ID --debug</code></td>
+</tr>
+<tr>
+<td>일부 Job만 실패</td>
+<td>&quot;Re-run failed jobs&quot; 또는 <code>gh run rerun RUN_ID --failed</code>. 30일 안, 최대 50회</td>
+</tr>
+<tr>
+<td>Push 없이 시험</td>
+<td><code>act</code>(nektos/act)로 Docker에서 로컬 실행. <code>act -l</code>로 목록, <code>act pull_request -j check</code>로 Job 하나</td>
+</tr>
+</tbody></table>
+<p>재실행은 원래 Event의 <code>GITHUB_SHA</code>와 <strong>처음 실행한 사람의 권한</strong>으로 돈다. 코드를 고쳤다면 새 Push가 필요하고, 간헐적 실패를 재실행으로 덮지 않는다(「CI 기초와 테스트 전략」). <code>act</code>의 Image는 GitHub-hosted Runner와 같지 않다. 로컬 성공은 문법과 흐름까지만 보여 준다. Secret은 <code>--secret-file</code>로 주되 Production 값은 쓰지 않는다.</p>
+<h2>예시 설계: 이 사이트에 CI를 붙인다면</h2>
+<p>이 사이트는 <code>stable</code> Branch에서 GitHub Pages로 제공되는 정적 Site이고 2026-09-30 현재 CI가 <strong>없다</strong>. Test는 <code>node --test tests/*.cjs</code>, 생성 Page가 최신인지는 <code>node tools/build-site.mjs --check</code>로 검사한다. 아래는 저장소에 추가하지 않은 <strong>설계 예시</strong>이며, SHA는 2026-09-30 <code>git ls-remote</code>로 확인한 값이다.</p>
+<pre><code class="language-yaml">name: site
+on:
+  pull_request:
+    branches: [stable]
+  push:
+    branches: [stable]
+permissions: {}
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == &#39;pull_request&#39; }}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with: { node-version: 22 }
+      - run: node --test tests/*.cjs
+      - run: node tools/build-site.mjs --check
+  deploy:
+    needs: check
+    if: github.event_name == &#39;push&#39;
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: read, pages: write, id-token: write }
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency: { group: pages, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with: { path: . }
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+</code></pre>
+<p>의존성이 없는 Node Script라 캐시는 넣지 않았다. Public 저장소의 표준 Runner라 요금도 없다. <code>deploy</code>를 쓰려면 Pages Source를 &quot;Deploy from a branch&quot;에서 <strong>&quot;GitHub Actions&quot;</strong> 로 바꾼다. Branch 배포를 유지한다면 <code>check</code>만 두고 Branch 보호의 필수 Status Check로 지정한다. <code>path: .</code>은 <code>.git</code> · <code>.github</code>와 숨김 파일을 뺀 저장소 전체를 올린다. <code>tests/</code> · <code>tools/</code>까지 공개하기 싫다면 공개할 파일만 모은 Directory를 올린다.</p>
+<h2>나쁜 예 / 좋은 예</h2>
+<pre><code class="language-text">나쁜 예: 외부 Action을 @v2 Tag로 쓰고 permissions 선언이 없으며, run: 에 PR 제목을 그대로 넣는다.
+좋은 예: 최상위 permissions: {}, Job별 최소 권한, 외부 Action은 SHA + Version 주석, 외부 입력은 env로 넘긴다.
+나쁜 예: pull_request_target에서 PR Head를 Checkout해 Test를 돌린다. Fork 코드가 Secret과 쓰기 Token을 얻는다.
+좋은 예: Build · Test는 pull_request에서, 코드를 실행하지 않는 Label · 댓글만 pull_request_target에서 한다.
+</code></pre>
+<h2>자기 점검 질문</h2>
+<ol>
+<li>여러분 저장소의 Workflow 하나에서 최상위 <code>permissions</code>를 <code>{}</code>로 바꾸면 어느 Step이 실패하는가? 그 Job에 어떤 권한만 주면 되는가?</li>
+<li><code>run: echo &quot;${{ github.head_ref }}&quot;</code>는 왜 위험한가? 같은 일을 안전하게 하도록 고쳐 보라.</li>
+<li>Team 요금제의 Private 저장소에서 Production 배포 전에 사람의 승인을 받고 싶다. Required reviewers를 쓸 수 있는가? 없다면 무엇으로 대신하겠는가?</li>
+<li>Private 저장소에서 Linux 2-core로 하루 40회, 한 번에 6분 걸리는 CI를 30일 돌리면 몇 분을 쓰는가? Pro 요금제의 포함 분을 넘는 부분의 요금은 얼마인가?</li>
+<li>예시 Workflow에서 <code>deploy</code> Job의 <code>concurrency</code>를 지우고 Workflow 수준 설정을 <code>cancel-in-progress: true</code>로 바꾸면 연속 Merge 때 무슨 일이 생길 수 있는가?</li>
+</ol>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://docs.github.com/en/billing/concepts/product-billing/github-actions">GitHub Actions billing</a> · <a href="https://docs.github.com/en/billing/reference/actions-runner-pricing">Actions runner pricing</a> — GitHub Docs, 2026-09-30 확인(github/docs 저장소 원문)</li>
+<li><a href="https://github.blog/changelog/2025-12-16-coming-soon-simpler-pricing-and-a-better-experience-for-github-actions/">Update to GitHub Actions pricing</a> (2025-12-16) · <a href="https://github.blog/changelog/2026-01-01-reduced-pricing-for-github-hosted-runners-usage/">Reduced pricing for GitHub-hosted runners usage</a> (2026-01-01) — GitHub Changelog, 검색 결과로 확인</li>
+<li><a href="https://github.com/resources/insights/2026-pricing-changes-for-github-actions">Pricing changes for GitHub Actions</a> · <a href="https://github.com/orgs/community/discussions/182186">Updates to GitHub Actions pricing</a> (2025-12-17) — GitHub, 2026-09-30 확인</li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax">Workflow syntax</a> · <a href="https://docs.github.com/en/actions/concepts/workflows-and-actions/reusing-workflow-configurations">Reusing workflow configurations</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching">Dependency caching reference</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments">Deployments and environments</a> · <a href="https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency">Control the concurrency of workflows and jobs</a> — GitHub Docs, 2026-09-30 확인(github/docs 저장소 원문)</li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/github_token">GITHUB_TOKEN</a> · <a href="https://docs.github.com/en/actions/reference/security/secure-use">Secure use reference</a> · <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request_target">Events that trigger workflows</a> — GitHub Docs, 2026-09-30 확인(github/docs 저장소 원문)</li>
+<li><a href="https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/">Updating the default GITHUB_TOKEN permissions to read-only</a> (2023-02-02) · <a href="https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/">Actions pull_request_target and environment branch protections changes</a> (2025-11-07) — GitHub Changelog, 검색 결과로 확인</li>
+<li><a href="https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference">Dependabot options reference</a> — GitHub Docs, 2026-09-30 확인(github/docs 저장소 원문) · <a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/keeping-your-actions-up-to-date-with-dependabot">Keeping your actions up to date with Dependabot</a> — GitHub Docs, 검색 결과로 확인</li>
+<li><a href="https://github.com/orgs/community/discussions/190621">What&#39;s coming to our GitHub Actions 2026 security roadmap</a> — GitHub Community, 2026-03-26, 2026-09-30 확인</li>
+<li><a href="https://docs.github.com/en/actions/reference/limits">Actions limits</a> · <a href="https://docs.github.com/en/actions/how-tos/monitor-workflows/enable-debug-logging">Enable debug logging</a> · <a href="https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs">Re-run workflows and jobs</a> — GitHub Docs, 2026-09-30 확인(github/docs 저장소 원문)</li>
+<li><a href="https://github.com/actions/checkout">actions/checkout</a> · <a href="https://github.com/actions/runner-images">actions/runner-images</a> · <a href="https://github.com/nektos/act">nektos/act</a> · <a href="https://github.com/actions/starter-workflows/blob/main/pages/static.yml">Pages starter workflow</a> — GitHub, 2026-09-30 확인</li>
+</ul>
+</article>
+      <nav id="pageNav" aria-label="이전 문서 / 다음 문서"><a class="page-link previous" href="../../platform/03a-ci-testing/"><img src="../../assets/icons/arrow-left.svg" alt="" aria-hidden="true"><span><small>이전 문서</small>CI 기초와 테스트 전략</span></a><a class="page-link next" href="../../platform/03c-cd-release-automation/"><span><small>다음 문서</small>배포 자동화와 버전 관리</span><img src="../../assets/icons/arrow-right.svg" alt="" aria-hidden="true"></a></nav>
+      <footer class="site-footer">
+        <nav aria-label="사이트 정보"><a href="../../">홈</a><a href="../../about/">사이트 소개</a><a href="../../privacy/">개인정보처리방침</a><a href="../../contact/">문의</a></nav>
+        <span>© 2026 MyAI(마이아이)</span>
+      </footer>
+    </main>
+    <nav id="readingNav" aria-label="문서 읽기 위치"><div id="readingTicks"></div></nav>
+    <div id="overlay" hidden></div>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>

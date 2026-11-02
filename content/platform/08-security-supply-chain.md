@@ -82,7 +82,7 @@ steps:
 ```
 
 - `npm sbom`은 설치된 의존성으로 CycloneDX 또는 SPDX 형식 SBOM을 만든다. 언어가 섞여 있거나 Container Image가 대상이면 syft(`syft <image> -o spdx-json`) 같은 도구를 쓴다.
-- `attest-build-provenance`는 OIDC Token(`id-token: write`)으로 서명하고 `attestations: write` 권한으로 Attestation을 저장한다.
+- `attest-build-provenance`는 OIDC Token(`id-token: write`)으로 서명하고 `attestations: write` 권한으로 Attestation을 저장한다. v4부터 이 Action은 `actions/attest`를 감싼 것이므로, 새로 설정한다면 `actions/attest`를 쓰는 것이 GitHub 문서의 권장이다(「배포 자동화와 버전 관리」).
 
 받는 쪽은 배포 전에 검증한다.
 

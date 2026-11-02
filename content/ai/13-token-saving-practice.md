@@ -92,7 +92,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 
 - **Caching 설계**: 렌더 순서는 `tools` → `system` → `messages`이고, 바이트 하나만 달라도 그 뒤가 전부 무효가 된다. 안 바뀌는 것을 앞에, 턴마다 바뀌는 것을 뒤에 둔다. Breakpoint는 최대 4개이고 top-level `cache_control`로 자동 배치할 수도 있다. 최소 cache 길이는 모델마다 다르며(512~4,096 token), 짧으면 오류 없이 cache되지 않는다.
 - **조용한 무효화 요인**: system prompt의 현재 시각·UUID, 정렬하지 않은 JSON 직렬화, 사용자별로 달라지는 도구 목록, 조건에 따라 붙는 system 문단. 동적 지시는 `messages` 뒤쪽에 넣는다.
-- **Batch API**: 기다려도 되는 일은 모든 token 50% 할인이고 cache 할인과 중첩된다. 결과는 24시간 안에 온다.
+- **Batch API**: 기다려도 되는 일은 모든 token 50% 할인이고 cache 할인과 중첩된다. 대부분 1시간 안에 끝나고, 24시간 안에 처리되지 않은 요청은 만료된다.
 - **Context editing과 compaction(beta)**: context editing은 오래된 도구 결과를 지워 창을 비우는 도구이지 절약 레버가 아니다. 지울 때마다 cache가 다시 써진다. 드물게, 크게 정리한다.
 - **출력 형식**: Anthropic 측정에서 메모 형식 답은 한 줄 답보다 출력 token이 6배, 비용이 2.8배였고 정확도 차이는 측정 오차 안이었다. 형식과 예시를 지정하고, `max_tokens`는 안전장치로만 둔다.
 - **넣지 말고 찾게 하기**: 큰 참고 문서는 도구나 Skill 뒤로 옮기고, 도구 정의가 약 10K token을 넘으면 tool search(`defer_loading`)를 쓴다. Anthropic 측정에서 도구 502개일 때 비용이 45% 적었다. 사용자 입력은 `count_tokens`로 먼저 재서 자른다.
@@ -104,7 +104,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 | 방식 | `cache_control` 명시 또는 top-level 자동 | 자동(1,024 token 이상 prefix) | Implicit 자동 + explicit 수동 |
 | Cache 읽기 | 입력의 0.1×(Opus 5.5 0.05×, Fable 5.1 0.025×) | 최대 90% 할인(모델별 cached input 단가) | Gemini 2.5 이상 90% 할인 |
 | Cache 쓰기 | 1.25×(5분), 2×(1시간) | 확인 필요(2차 출처는 write 배수를 확인해 주지 않는다) | 일반 입력 단가, explicit는 시간당 저장 비용 추가 |
-| 수명 | 5분 또는 1시간 | GPT-6 계열(Sol · Luna) 30분 창(2026-09-22 발표, 2차 출처로만 확인) | Explicit는 TTL 지정 |
+| 수명 | 5분 또는 1시간 | 최신 모델 30분 창(2026-09-22 발표, 2차 출처로만 확인. 모델 이름은 출처마다 GPT-6 Sol·Luna와 GPT-5.6 Sol로 엇갈린다) | Explicit는 TTL 지정 |
 | Batch | 50% | 50% | 50% |
 
 ## 적용: 1인 스튜디오의 하루

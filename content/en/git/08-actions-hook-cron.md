@@ -27,9 +27,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: cmake -S . -B build
       - run: cmake --build build
 ```
+
+The long string after `uses:` pins the action to a commit SHA instead of a tag; the reasons and method are in "GitHub Actions in Practice".
 
 ## The Most Common Triggers
 
@@ -78,6 +81,8 @@ on:
   schedule:
     - cron: '0 18 * * *'
 ```
+
+GitHub Actions `schedule` runs on UTC, so 03:00 KST every day is `'0 18 * * *'`.
 
 In other words:
 

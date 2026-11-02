@@ -92,7 +92,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 
 - **Caching design**: render order is `tools` → `system` → `messages`, and a single differing byte invalidates everything after it. Put what never changes first and what changes per turn last. There are at most 4 breakpoints, or a top-level `cache_control` can place them automatically. The minimum cacheable length varies by model (512 to 4,096 tokens); anything shorter silently does not cache.
 - **Silent invalidators**: the current time or a UUID in the system prompt, unsorted JSON serialization, per-user tool lists, conditionally appended system sections. Put dynamic instructions late in `messages`.
-- **Batch API**: work that can wait gets 50% off every token, stacking with cache discounts. Results arrive within 24 hours.
+- **Batch API**: work that can wait gets 50% off every token, stacking with cache discounts. Most batches finish within an hour; requests still unprocessed after 24 hours expire.
 - **Context editing and compaction (beta)**: context editing clears old tool results to free the window; it is not a savings lever. Every clear rewrites the cache. Prune rarely and in large batches.
 - **Output shape**: in Anthropic's measurements, a memo-style answer used six times the output tokens and cost 2.8 times a one-line answer, with accuracy within run-to-run noise. Specify the shape with an example, and keep `max_tokens` only as a backstop.
 - **Let the model look things up instead of stuffing**: move large reference docs behind a tool or skill, and use tool search (`defer_loading`) once tool definitions pass roughly 10K tokens. In Anthropic's measurements it cost 45% less at 502 tools. Measure user input with `count_tokens` first and trim it.
@@ -104,7 +104,7 @@ jq -s '[.[] | select(.type=="turn.completed") | .usage] | {input: (map(.input_to
 | Mechanism | Explicit `cache_control` or top-level automatic | Automatic (prefixes of 1,024 tokens or more) | Implicit automatic + explicit manual |
 | Cache read | 0.1x input (0.05x Opus 5.5, 0.025x Fable 5.1) | Up to 90% off (per-model cached-input price) | 90% off on Gemini 2.5 and later |
 | Cache write | 1.25x (5 minutes), 2x (1 hour) | Needs checking (secondary sources do not confirm a write multiplier) | Standard input price; explicit adds hourly storage cost |
-| Lifetime | 5 minutes or 1 hour | 30-minute window on the GPT-6 family (Sol · Luna) (announced 2026-09-22, confirmed only by secondary sources) | Explicit caches take a set TTL |
+| Lifetime | 5 minutes or 1 hour | 30-minute window on the newest models (announced 2026-09-22, confirmed only by secondary sources; sources disagree on the names, GPT-6 Sol · Luna vs GPT-5.6 Sol) | Explicit caches take a set TTL |
 | Batch | 50% | 50% | 50% |
 
 ## Applied: A Day in a Solo Studio
